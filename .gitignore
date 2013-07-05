@@ -10,3 +10,4 @@ local_settings.py
 # Tools
 node_modules
 *.sublime-*
+/reform_tn/development.sqlite3
