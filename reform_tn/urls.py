@@ -5,8 +5,7 @@ from django.contrib import admin
 admin.autodiscover()
 
 import reform_tn
-import base
-import reports
+
 
 urlpatterns = patterns('',
     # Examples:
@@ -21,7 +20,8 @@ urlpatterns = patterns('',
 
     url(r'^test$', 'base.views.test', name='test'),
 
-    url(r'^home$', 'base.views.home', name='home'),
+    url(r'^$', 'base.views.home', name='home'),
 
+    url(r'^categories/', include('categories.urls')),
 
 )

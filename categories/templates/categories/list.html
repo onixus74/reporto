@@ -1,0 +1,23 @@
+{% extends "layouts/base.html" %}
+
+{% block view_title %}Categories | {% endblock %}
+
+{% block view_content %}
+
+<table>
+	<th>
+		<td>Id</td>
+		<td>Slug</td>
+		<td>Definition</td>
+		<td>Actions</td>
+	</th>
+	{% for item in items %}
+	<tr>
+		<td>{{item.id}}</td>
+		<td>{{item.slug}}</td>
+		<td>{{item.definition}}</td>
+	</tr>
+	{% endfor %}
+</table>
+
+{% endblock %}

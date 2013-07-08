@@ -130,7 +130,9 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
     'base',
-    'reports'
+    'reports',
+    'categories',
+    'features',
 )
 
 #from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS as TCP
