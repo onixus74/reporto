@@ -1,2 +1,4 @@
 Django==1.5.1
 SQLAlchemy==0.8.2
+django-admin-bootstrapped==0.4.1
+django-suit==0.2.2
