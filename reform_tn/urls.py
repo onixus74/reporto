@@ -22,6 +22,9 @@ urlpatterns = patterns('',
 
     url(r'^$', 'base.views.home', name='home'),
 
+    url(r'^reports/', include('reports.urls')),
+    url(r'^reports-dashboard/', include('reports_dashboard.urls')),
+    url(r'^report-submission/', include('report_submission.urls')),
     url(r'^categories/', include('categories.urls')),
 
 )

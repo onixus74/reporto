@@ -11,6 +11,10 @@
     "angular-cookies": "~1.0.7",
     "angular-sanitize": "~1.0.7",
     "modernizr": "~2.6.2",
-    "angular-strap": "~0.7.4"
+    "angular-strap": "~0.7.4",
+    "angular-ui-bootstrap": "~0.4.0",
+    "angular-ui-utils": "~0.0.4",
+    "angular-bootstrap": "~0.4.0",
+    "angular-ui": "~0.4.0"
   }
 }

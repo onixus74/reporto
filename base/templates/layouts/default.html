@@ -12,17 +12,19 @@
 	<meta name="viewport" content="width=device-width">
 	<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
-<!--
+	<!--
 	<link rel="stylesheet" href="//cdn-ensitn.herokuapp.com/themes/default/components/bootstrap/bootstrap/css/bootstrap.min.css" type="text/css">
 	<link rel="stylesheet" href="//cdn-ensitn.herokuapp.com/themes/default/components/bootstrap/bootstrap/css/bootstrap-responsive.min.css" type="text/css">
 	<link rel="stylesheet" href="//cdn-ensitn.herokuapp.com/themes/default/components/font-awesome/css/font-awesome.min.css" type="text/css">
 	<link rel="stylesheet" href="//cdn-ensitn.herokuapp.com/themes/default/main.css" type="text/css">
--->
+	-->
 
+	<link rel="stylesheet" href="{% static 'components/sass-bootstrap/bootstrap-2.3.2.css' %}">
+	<link rel="stylesheet" href="{% static 'components/sass-bootstrap/bootstrap-responsive-2.3.2.css' %}">
 
 	<link rel="stylesheet" href="{% static 'styles/main.css' %}">
 
-		{% block view_styles %}{% endblock %}
+	{% block view_styles %}{% endblock %}
 
 </head>
 <body ng-app="reformPlatform">

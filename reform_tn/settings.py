@@ -131,6 +131,8 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
     'base',
     'reports',
+    'reports_dashboard',
+    'report_submission',
     'categories',
     'features',
 )
