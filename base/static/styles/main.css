@@ -1,14 +1,14 @@
 /* GLOBAL STYLES
 -------------------------------------------------- */
 /* Padding below the footer and lighter body text */
-/* line 10, ../../app/styles/main.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/media\/DataOpt\/Workspace\/Reform\/reform-platform-front\/app\/styles\/main\.scss}line{font-family:\0000310}}
 body {
   padding-top: 100px;
-  padding-bottom: 40px;
+  padding-bottom: 60px;
   color: #5a5a5a;
 }
 
-/* line 16, ../../app/styles/main.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/media\/DataOpt\/Workspace\/Reform\/reform-platform-front\/app\/styles\/main\.scss}line{font-family:\0000316}}
 #footer {
   position: fixed;
   bottom: 0;
@@ -18,7 +18,7 @@ body {
   background-color: whitesmoke;
 }
 
-/* line 25, ../../app/styles/main.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/media\/DataOpt\/Workspace\/Reform\/reform-platform-front\/app\/styles\/main\.scss}line{font-family:\0000325}}
 .container .credit {
   margin: 10px 0;
 }
@@ -26,7 +26,7 @@ body {
 /* CUSTOMIZE THE NAVBAR
 -------------------------------------------------- */
 /* Special class on .container surrounding .navbar, used for positioning it into place. */
-/* line 33, ../../app/styles/main.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/media\/DataOpt\/Workspace\/Reform\/reform-platform-front\/app\/styles\/main\.scss}line{font-family:\0000333}}
 .navbar-wrapper {
   position: fixed;
   top: 0;
@@ -39,7 +39,7 @@ body {
 }
 
 /* Remove border and change up box shadow for more contrast */
-/* line 47, ../../app/styles/main.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/media\/DataOpt\/Workspace\/Reform\/reform-platform-front\/app\/styles\/main\.scss}line{font-family:\0000347}}
 .navbar .navbar-inner {
   border: 0;
   -webkit-box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
@@ -48,7 +48,7 @@ body {
 }
 
 /* Downsize the brand/project name a bit */
-/* line 55, ../../app/styles/main.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/media\/DataOpt\/Workspace\/Reform\/reform-platform-front\/app\/styles\/main\.scss}line{font-family:\0000355}}
 .navbar .brand {
   padding: 14px 20px 16px;
   /* Increase vertical padding to match navbar links */
@@ -58,13 +58,13 @@ body {
 }
 
 /* Navbar links: increase padding for taller navbar */
-/* line 63, ../../app/styles/main.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/media\/DataOpt\/Workspace\/Reform\/reform-platform-front\/app\/styles\/main\.scss}line{font-family:\0000363}}
 .navbar .nav > li > a {
   padding: 15px 20px;
 }
 
 /* Offset the responsive button for proper vertical alignment */
-/* line 68, ../../app/styles/main.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/media\/DataOpt\/Workspace\/Reform\/reform-platform-front\/app\/styles\/main\.scss}line{font-family:\0000368}}
 .navbar .btn-navbar {
   margin-top: 10px;
 }
@@ -74,19 +74,18 @@ body {
 /* Large desktop */
 /* Portrait tablet to landscape and desktop */
 @media (min-width: 768px) and (max-width: 979px) {
-  /* line 84, ../../app/styles/main.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/media\/DataOpt\/Workspace\/Reform\/reform-platform-front\/app\/styles\/main\.scss}line{font-family:\0000384}}
   body {
     padding-top: 90px;
-    padding-bottom: 40px;
   }
 
-  /* line 89, ../../app/styles/main.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/media\/DataOpt\/Workspace\/Reform\/reform-platform-front\/app\/styles\/main\.scss}line{font-family:\0000388}}
   .container.navbar-wrapper {
     margin-bottom: 0;
     width: auto;
   }
 
-  /* line 94, ../../app/styles/main.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/media\/DataOpt\/Workspace\/Reform\/reform-platform-front\/app\/styles\/main\.scss}line{font-family:\0000393}}
   #footer {
     padding-left: 20px;
     padding-right: 20px;
@@ -94,30 +93,30 @@ body {
 }
 /* Landscape phone to portrait tablet */
 @media (max-width: 767px) {
-  /* line 104, ../../app/styles/main.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/media\/DataOpt\/Workspace\/Reform\/reform-platform-front\/app\/styles\/main\.scss}line{font-family:\00003103}}
   body {
     padding-top: 70px;
-    padding-bottom: 30px;
+    padding-bottom: 50px;
   }
 
-  /* line 109, ../../app/styles/main.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/media\/DataOpt\/Workspace\/Reform\/reform-platform-front\/app\/styles\/main\.scss}line{font-family:\00003108}}
   .container.navbar-wrapper {
     margin-bottom: 0;
     width: auto;
   }
 
-  /* line 114, ../../app/styles/main.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/media\/DataOpt\/Workspace\/Reform\/reform-platform-front\/app\/styles\/main\.scss}line{font-family:\00003113}}
   #footer {
     padding-left: 20px;
     padding-right: 20px;
   }
 
-  /* line 119, ../../app/styles/main.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/media\/DataOpt\/Workspace\/Reform\/reform-platform-front\/app\/styles\/main\.scss}line{font-family:\00003118}}
   .navbar-inner {
     margin: -20px;
   }
 
-  /* line 123, ../../app/styles/main.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/media\/DataOpt\/Workspace\/Reform\/reform-platform-front\/app\/styles\/main\.scss}line{font-family:\00003122}}
   #footer {
     padding-left: 20px;
     padding-right: 20px;
@@ -125,24 +124,24 @@ body {
 }
 /* Landscape phones and down */
 @media (max-width: 480px) {
-  /* line 133, ../../app/styles/main.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/media\/DataOpt\/Workspace\/Reform\/reform-platform-front\/app\/styles\/main\.scss}line{font-family:\00003132}}
   .container.navbar-wrapper {
     margin-bottom: 0;
     width: auto;
   }
 
-  /* line 138, ../../app/styles/main.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/media\/DataOpt\/Workspace\/Reform\/reform-platform-front\/app\/styles\/main\.scss}line{font-family:\00003137}}
   #footer {
     padding-left: 20px;
     padding-right: 20px;
   }
 
-  /* line 143, ../../app/styles/main.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/media\/DataOpt\/Workspace\/Reform\/reform-platform-front\/app\/styles\/main\.scss}line{font-family:\00003142}}
   .navbar-inner {
     margin: -20px;
   }
 
-  /* line 147, ../../app/styles/main.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/media\/DataOpt\/Workspace\/Reform\/reform-platform-front\/app\/styles\/main\.scss}line{font-family:\00003146}}
   #footer {
     padding-left: 20px;
     padding-right: 20px;
@@ -181,7 +180,7 @@ body {
 
 }
 */
-/* line 190, ../../app/styles/main.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/media\/DataOpt\/Workspace\/Reform\/reform-platform-front\/app\/styles\/main\.scss}line{font-family:\00003189}}
 #mainView {
   position: fixed;
   z-index: 99999;
@@ -196,7 +195,7 @@ body {
   overflow: auto;
 }
 
-/* line 205, ../../app/styles/main.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/media\/DataOpt\/Workspace\/Reform\/reform-platform-front\/app\/styles\/main\.scss}line{font-family:\00003204}}
 .report-incident-dialog {
   top: 10%;
   left: 10%;
@@ -204,7 +203,7 @@ body {
   margin-left: auto;
 }
 
-/* line 222, ../../app/styles/main.scss */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/media\/DataOpt\/Workspace\/Reform\/reform-platform-front\/app\/styles\/main\.scss}line{font-family:\00003221}}
 .report-incident-form .row-fluid {
   margin-top: 20px;
   margin-bottom: 20px;

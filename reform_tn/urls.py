@@ -4,6 +4,8 @@ from django.conf.urls import patterns, include, url
 from django.contrib import admin
 admin.autodiscover()
 
+from django.views.generic import TemplateView
+
 import reform_tn
 
 
@@ -16,15 +18,17 @@ urlpatterns = patterns('',
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
     # Uncomment the next line to enable the admin:
-    url(r'^admin/', include(admin.site.urls)),
+    url(r'^admin/', include(admin.site.urls), name='admin'),
 
-    url(r'^test$', 'base.views.test', name='test'),
+    #url(r'^test/$', 'base.views.test', name='test'),
+    url(r'^test/$', TemplateView.as_view(template_name="test.html"), name='test'),
 
     url(r'^$', 'base.views.home', name='home'),
+    #url(r'^home/$', TemplateView.as_view(template_name="home.html"), name='home'),
 
-    url(r'^reports/', include('reports.urls')),
-    url(r'^reports-dashboard/', include('reports_dashboard.urls')),
-    url(r'^report-submission/', include('report_submission.urls')),
-    url(r'^categories/', include('categories.urls')),
+    url(r'^reports/', include('reports.urls'), name='reports'),
+    url(r'^reports-dashboard/', include('reports_dashboard.urls'), name='reports-dashboard'),
+    url(r'^report-submission/', include('report_submission.urls'), name='eport-submission'),
+    url(r'^categories/', include('categories.urls', namespace="categories")),
 
 )

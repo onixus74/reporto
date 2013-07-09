@@ -11,11 +11,3 @@ def home(request, *args, **kwargs):
 	return render_to_response(template_name, context)
 
 
-def test(request, *args, **kwargs):
-	template_name = "test.html"
-	context = {
-		"message": "Hello!"
-	}
-	return render_to_response(template_name, context)
-
-

@@ -1,11 +1,11 @@
 from django.db import models
 
 class Category(models.Model):
-    slug = models.CharField(max_length=100)
+    slug = models.SlugField(max_length=100)
     definition = models.CharField(max_length=300)
 
 class Feature(models.Model):
-    slug = models.CharField(max_length=200)
+    slug = models.SlugField(max_length=200)
     definition = models.CharField(max_length=300)
 
 class Media(models.Model):
