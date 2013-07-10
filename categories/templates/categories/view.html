@@ -3,38 +3,40 @@
 {% block view_title %}Category Details | {% endblock %}
 
 {% block view_content %}
+<div class="container">
 
-<div class="page-header">
-	<h1>Category<small>Detail</small></h1>
-</div>
+	<div class="page-header">
+		<h1>Category<small>Detail</small></h1>
+	</div>
 
-<div class="container-fluid">
-	<div class="row-fluid">
-		<div class="offset2 span8">
+	<div class="container-fluid">
+		<div class="row-fluid">
+			<div class="offset2 span8">
 
-			<form class="form-horizontal">
+				<form class="form-horizontal">
 
-				<div class="control-group">
-					<div class="controls">
-						<dl>
-							<dt>Slug</dt>
-							<dd>{{object.slug}}</dd>
-							<dt>Definition</dt>
-							<dd>{{object.definition}}</dd>
-						</dl>
+					<div class="control-group">
+						<div class="controls">
+							<dl>
+								<dt>Slug</dt>
+								<dd>{{object.slug}}</dd>
+								<dt>Definition</dt>
+								<dd>{{object.definition}}</dd>
+							</dl>
+						</div>
 					</div>
-				</div>
 
-				<div class="form-actions">
-					<a href="{% url 'categories:list' %}" class="btn"><i class="icon-back"></i> Back</a>
-					<a href="{% url 'categories:edit' object.id %}" class="btn btn-warning"><i class="icon-pencil"></i> Edit</a>
-					<a href="{% url 'categories:delete' object.id %}" class="btn btn-danger"><i class="icon-trash"></i> Delete</a>
-				</div>
+					<div class="form-actions">
+						<a href="{% url 'categories:edit' object.id %}" class="btn btn-warning"><i class="icon-pencil"></i> Edit</a>
+						<a href="{% url 'categories:delete' object.id %}" class="btn btn-danger"><i class="icon-trash"></i> Delete</a>
+						<a href="{% url 'categories:list' %}" class="btn"><i class="icon-back"></i> Back</a>
+					</div>
 
-			</form>
+				</form>
 
+			</div>
 		</div>
 	</div>
-</div>
 
+</div>
 {% endblock %}
