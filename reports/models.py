@@ -20,7 +20,6 @@ class Feature(models.Model):
 	def get_absolute_url(self):
 		return reverse('features:view', args=[str(self.id)])
 
-
 class Media(models.Model):
 	title = models.CharField(max_length=200)
 	description = models.CharField(max_length=300)
