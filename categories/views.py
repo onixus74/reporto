@@ -26,28 +26,26 @@ def list(request, *args, **kwargs):
 
 class CategoryListView(ListView):
   model = Category
-  template_name = "categories/index.html"
-  context_object_name = "items"
+  template_name = "categories/list.html"
 
 
 class CategoryDetailView(DetailView):
   model = Category
   template_name = "categories/view.html"
-  context_object_name = "item"
 
-  # def get_context_data(self, **kwargs):
-  #     context = super(CategoryDetailView, self).get_context_data(**kwargs)
-  #     context['now'] = timezone.now()
-  #     return context
 
 class CategoryCreateView(CreateView):
   model = Category
   template_name = "categories/new.html"
+  #success_url = '/categories/'
+
 
 class CategoryUpdateView(UpdateView):
   model = Category
   template_name = "categories/edit.html"
 
+
 class CategoryDeleteView(DeleteView):
   model = Category
   template_name = "categories/delete.html"
+  success_url = '/categories/'

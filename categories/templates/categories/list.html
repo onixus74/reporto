@@ -24,18 +24,19 @@
 						<th>Category</th>
 						<th>Actions</th>
 					</tr>
-					{% for item in items %}
+					{% for object in object_list %}
 					<tr>
 						<!--
-						<td>{{item.id}}</td>
-						<td>{{item.slug}}</td>
-						<td>{{item.definition}}</td>
+						<td>{{object.id}}</td>
+						<td>{{object.slug}}</td>
+						<td>{{object.definition}}</td>
 						-->
-						<td><a href="{% url 'categories:view' item.id %}">{{item.definition}}</a></td>
+						<!--<td><a href="{% url 'categories:view' object.id %}">{{object.definition}}</a></td>-->
+						<td><a href="{{ object.get_absolute_url }}">{{object.definition}}</a></td>
 						<td>
-							<!--<a href="/categories/{{item.id}}" class="btn"><i class="icon-file-text-alt"></i> View</a>-->
-							<a href="{% url 'categories:edit' item.id %}" class="btn btn-warning"><i class="icon-pencil"></i> Edit</a>
-							<a href="{% url 'categories:delete' item.id %}" class="btn btn-danger"><i class="icon-trash"></i> Delete</a>
+							<!--<a href="/categories/{{object.id}}" class="btn"><i class="icon-file-text-alt"></i> View</a>-->
+							<a href="{% url 'categories:edit' object.id %}" class="btn btn-warning"><i class="icon-pencil"></i> Edit</a>
+							<a href="{% url 'categories:delete' object.id %}" class="btn btn-danger"><i class="icon-trash"></i> Delete</a>
 						</td>
 					</tr>
 					{% endfor %}
