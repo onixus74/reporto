@@ -1,7 +1,30 @@
 {% extends "layouts/default.html" %}
 
+{% load staticfiles %}
+
 {% block view_title %}Reports Dashboard | {% endblock %}
 
 {% block view_content %}
-Reports Dashboard
+
+	<div class="container" ng-controller="ReportsDashboardCtrl">
+
+		<div class="page-header">
+			<h1>Reports Dashboard <small>((message))</small></h1>
+		</div>
+
+		<div class="well">
+
+      map + timeline + search + ...
+
+    </div>
+
+	</div>
+
+{% endblock %}
+
+{% block view_styles %}
+{% endblock %}
+
+{% block view_scripts %}
+	<script src="{% static 'reports_dashboard/scripts/reports-dashboard.js' %}"></script>
 {% endblock %}

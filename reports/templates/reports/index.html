@@ -1,7 +1,34 @@
 {% extends "layouts/default.html" %}
 
+{% load staticfiles %}
+
 {% block view_title %}Reports Dashboard | {% endblock %}
 
 {% block view_content %}
-Reports Dashboard + Report Submission
+	<div class="container" ng-controller="ReportsDashboardCtrl">
+
+		<div class="hero-unit">
+			<h1>Incidents Reporting</h1>
+			<p>let us help you by reporting incidence you witnessed or happened to you</p>
+			<p class="clearfix_">
+			<a class="btn btn-danger btn-large pull-right_" ng-click="reportIncident()">
+				Report Indecent Now!
+			</a>
+			</p>
+		</div>
+
+		<div class="well">
+
+      map + timeline + search + ...
+
+    </div>
+
+	</div>
+{% endblock %}
+
+{% block view_styles %}
+{% endblock %}
+
+{% block view_scripts %}
+	<script src="{% static 'reports/scripts/reports.js' %}"></script>
 {% endblock %}

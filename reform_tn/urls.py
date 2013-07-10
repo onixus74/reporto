@@ -23,8 +23,8 @@ urlpatterns = patterns('',
     #url(r'^test/$', 'base.views.test', name='test'),
     url(r'^test/$', TemplateView.as_view(template_name="test.html"), name='test'),
 
-    url(r'^$', 'base.views.home', name='home'),
-    #url(r'^home/$', TemplateView.as_view(template_name="home.html"), name='home'),
+    #url(r'^$', 'base.views.home', name='home'),
+    url(r'^$', TemplateView.as_view(template_name="home.html"), name='home'),
 
     url(r'^reports/', include('reports.urls'), name='reports'),
     url(r'^reports-dashboard/', include('reports_dashboard.urls'), name='reports-dashboard'),
