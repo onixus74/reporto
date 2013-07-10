@@ -30,5 +30,5 @@ urlpatterns = patterns('',
     url(r'^reports-dashboard/', include('reports_dashboard.urls'), name='reports-dashboard'),
     url(r'^report-submission/', include('report_submission.urls'), name='eport-submission'),
     url(r'^categories/', include('categories.urls', namespace="categories")),
-
+    url(r'^features/', include('features.urls', namespace="features")),
 )

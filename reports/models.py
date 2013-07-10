@@ -16,6 +16,9 @@ class Feature(models.Model):
 	slug = models.SlugField(max_length=200)
 	definition = models.CharField(max_length=300)
 
+	def get_absolute_url(self):
+		return reverse('features:view', args=[str(self.id)])
+
 class Media(models.Model):
 	title = models.CharField(max_length=200)
 	description = models.CharField(max_length=300)
