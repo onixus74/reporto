@@ -1,5 +1,4 @@
-{% load staticfiles %}
-<!doctype html>
+{% load staticfiles %}<!doctype html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
@@ -10,21 +9,13 @@
 	<title>{% block view_title %}{% endblock %}Reform</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width">
-	<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-
-	<!--
-	<link rel="stylesheet" href="//cdn-ensitn.herokuapp.com/themes/default/components/bootstrap/bootstrap/css/bootstrap.min.css" type="text/css">
-	<link rel="stylesheet" href="//cdn-ensitn.herokuapp.com/themes/default/components/bootstrap/bootstrap/css/bootstrap-responsive.min.css" type="text/css">
-	<link rel="stylesheet" href="//cdn-ensitn.herokuapp.com/themes/default/components/font-awesome/css/font-awesome.min.css" type="text/css">
-	<link rel="stylesheet" href="//cdn-ensitn.herokuapp.com/themes/default/main.css" type="text/css">
-	-->
 
 	<link rel="stylesheet" href="{% static 'components/sass-bootstrap/bootstrap-2.3.2.css' %}">
 	<link rel="stylesheet" href="{% static 'components/sass-bootstrap/bootstrap-responsive-2.3.2.css' %}">
 
 	<link rel="stylesheet" href="{% static 'styles/main.css' %}">
 
-	{% block view_styles %}{% endblock %}
+{% block view_styles %}{% endblock %}
 
 </head>
 <body ng-app="reformPlatform">
@@ -92,16 +83,12 @@
 		</div>
 	</div>
 
-	<div class="container">
+{% block view_content %}{% endblock %}
+<!--<div class="container" ng-view=""></div>-->
 
-		{% block view_content %}{% endblock %}
-		<!--<div class="container" ng-view=""></div>-->
+{#% <pre>{% debug %}</pre> %#}
 
-		<!--<pre>{#% debug %#}</pre>-->
-
-	</div>
-
-	<!--<div id="mainView" ng-view="" ng-show="state.showMainView"></div>-->
+{#% <div id="mainView" ng-view="" ng-show="state.showMainView"></div> %#}
 
 	<div id="footer">
 		<!--<hr style="margin-bottom: 5px;" />-->
@@ -121,14 +108,13 @@
 		</div>
 	</div>
 
+	<!-- View Addons: dialogs, client-side templates, .... -->
+	{% block view_addons %}{% endblock %}
 
 	<script src="{% static 'components/jquery/jquery.js' %}"></script>
 	<script src="{% static 'components/sass-bootstrap/bootstrap/js/bootstrap.js' %}"></script>
 
-
-
 	<script src="{% static 'components/angular/angular.js' %}"></script>
-
 
 	<script src="{% static 'components/angular-resource/angular-resource.js' %}"></script>
 	<script src="{% static 'components/angular-cookies/angular-cookies.js' %}"></script>
@@ -136,18 +122,11 @@
   <script src="{% static 'components/ui-router/release/angular-ui-router.js' %}"></script>
   <script src="{% static 'components/angular-bootstrap/ui-bootstrap-tpls.js' %}"></script>
 
-	<script src="{% static 'scripts/app.js' %}"></script>
-	<!-- ... -->
-
   <script src="{% static 'components/html-inspector/dist/html-inspector.js' %}"></script>
   <script> HTMLInspector.inspect() </script>
 
-	<div>
-	<!-- View Addons: dialogs, client-side templates, .... -->
-	{% block view_addons %}{% endblock %}
-	<div>
-
 	<!-- View Scripts -->
+	<script src="{% static 'scripts/app.js' %}"></script>
 	{% block view_scripts %}{% endblock %}
 
 </body>

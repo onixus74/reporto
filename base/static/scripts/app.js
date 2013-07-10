@@ -42,3 +42,8 @@ app.run(function($rootScope){
 		showMainview: false
 	};
 });
+
+app.config(function($interpolateProvider) {
+  $interpolateProvider.startSymbol('((');
+  $interpolateProvider.endSymbol('))');
+});
