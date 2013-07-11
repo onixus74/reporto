@@ -9,5 +9,9 @@ local_settings.py
 
 # Tools
 node_modules
+
 *.sublime-*
 /reform_tn/development.sqlite3
+/reform_tn/static
+components
+.sass-cache

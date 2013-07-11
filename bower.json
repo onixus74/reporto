@@ -2,21 +2,28 @@
   "name": "reform-platform",
   "version": "0.0.0",
   "dependencies": {
-    "font-awesome": "~3.2.1",
     "angular": "~1.0.7",
-    "sass-bootstrap": "~2.3.2",
-    "json3": "~3.2.5",
-    "es5-shim": "~2.1.0",
+    "json3": "~3.2.4",
+    "jquery": "~1.9.1",
+    "bootstrap-sass": "~2.3.1",
+    "es5-shim": "~2.0.8",
     "angular-resource": "~1.0.7",
     "angular-cookies": "~1.0.7",
     "angular-sanitize": "~1.0.7",
-    "modernizr": "~2.6.2",
-    "angular-strap": "~0.7.4",
     "angular-ui-bootstrap": "~0.4.0",
     "angular-ui-utils": "~0.0.4",
     "angular-bootstrap": "~0.4.0",
     "angular-ui": "~0.4.0",
-    "html-inspector": "~0.3.0",
-    "ui-router": "~0.0.1"
+    "modernizr": "~2.6.2",
+    "font-awesome": "~3.2.1",
+    "angular-strap": "~0.7.4",
+    "angular-google-maps": "latest",
+    "leaflet": "~0.6.2",
+    "angular-leaflet": "~0.3.3",
+    "mapbox.js": "~1.2.0",
+    "animate.css": "latest"
+  },
+  "devDependencies": {
+    "html-inspector": "~0.3.0"
   }
 }

@@ -2,130 +2,161 @@
 
 module.exports = function(grunt) {
 
-  // Project configuration.
-  grunt.initConfig({
+	// Project configuration.
+	grunt.initConfig({
 
-    pkg: grunt.file.readJSON('package.json'),
+		pkg: grunt.file.readJSON('package.json'),
 
-    cssmin: {
+		cssmin: {
 
-      static: {
-        expand: true,
-        cwd: 'static',
-        src: ['**/*.css', '!*.min.css', '!*.dist.css'],
-        dest: 'static',
-        ext: '.min.css'
-      },
+			components: {
+				expand: true,
+				cwd: 'base/static/components',
+				src: ['**/*.css', '!*.min.css', '!*.dist.css'],
+				dest: 'base/static/components',
+				ext: '.min.css'
+			},
 
-      base: {
-        expand: true,
-        cwd: 'base',
-        src: ['**/*.css', '!*.min.css', '!*.dist.css'],
-        dest: 'base',
-        ext: '.min.css'
-      },
+			base: {
+				expand: true,
+				cwd: 'base/static/styles',
+				src: ['**/*.css', '!*.min.css', '!*.dist.css'],
+				dest: 'base/static/styles',
+				ext: '.min.css'
+			},
 
-      reports: {
-        expand: true,
-        cwd: 'reports/static',
-        src: ['**/*.css', '!*.min.css', '!*.dist.css'],
-        dest: 'reports/static',
-        ext: '.min.css'
-      }
+			reports: {
+				expand: true,
+				cwd: 'reports/static/styles',
+				src: ['**/*.css', '!*.min.css', '!*.dist.css'],
+				dest: 'reports/static/styles',
+				ext: '.min.css'
+			}
 
-    },
+		},
 
-    uglify: {
 
-      static: {
-        options: {
-          sourceMap: function(dst) {
-            return dst + '.map';
-          },
-          sourceMappingURL: function(dst) {
-            return '/' + dst.substr(dst.indexOf('static')) + '.map';
-          },
-          sourceMapPrefix: 4
-        },
-        expand: true,
-        cwd: 'static',
-        src: ['**/*.js', '!*.min.js', '!*.dist.js'],
-        dest: 'static',
-        ext: '.min.js'
-      },
+		compass: {
 
-      base: {
-        options: {
-          sourceMap: function(dst) {
-            return dst + '.map';
-          },
-          sourceMappingURL: function(dst) {
-            return '/' + dst.substr(dst.indexOf('static')) + '.map';
-          },
-          sourceMapPrefix: 4
-        },
-        expand: true,
-        cwd: 'base',
-        src: ['**/*.js', '!*.min.js', '!*.dist.js'],
-        dest: 'base',
-        ext: '.min.js'
-      },
+			base: {
+				options: {
+					basePath: 'base/static/',
+					sassDir: 'styles',
+					cssDir: 'styles',
+					force: true
+				}
+			},
 
-      reports: {
-        options: {
-          sourceMap: function(dst) {
-            return dst + '.map';
-          },
-          sourceMappingURL: function(dst) {
-            return '/' + dst.substr(dst.indexOf('static')) + '.map';
-          },
-          sourceMapPrefix: 4
-        },
-        files: {
-          'reports/static/reports/scripts/reports': ['reports/static/reports/scripts/reprots.js'],
-          'reports/static/reports/scripts/reprots-all.dist.js': [
-            'base/static/scripts/app.js',
-            'reports/static/reports/scripts/reports.js']
-        }
-      }
+			reprots: {
+				options: {
+					basePath: 'reprots/static/',
+					sassDir: 'styles',
+					cssDir: 'styles',
+					force: true
+				}
+			},
 
-    },
+		},
 
-    concat: {
-      options: {
-        // define a string to put between each file in the concatenated output
-        separator: ';'
-      },
-      jsdist: {
-        // the files to concatenate
-        src: ['reports/static/reports/scripts/**/*.min.js'],
-        // the location of the resulting JS file
-        dest: 'reports/static/reports/scripts/reprots-all.dist.js'
-      }
-    },
+		uglify: {
 
-    watch: {
-      scripts: {
-        files: ['reports/static/reports/scripts/**/*.js', '!*.min.js', '!*.dist.js'],
-        tasks: ['uglify:reports'],
-        options: {
-          nospawn: true
-        }
-      }
-    }
+			components: {
+				options: {
+					sourceMap: function(dst) {
+						return dst + '.map';
+					},
+					sourceMappingURL: function(dst) {
+						return '/' + dst.substr(dst.indexOf('static')) + '.map';
+					},
+					sourceMapPrefix: 4
+				},
+				expand: true,
+				cwd: 'base/static/components',
+				src: ['**/*.js', '!*.min.js', '!*.dist.js'],
+				dest: 'base/static/components',
+				ext: '.min.js'
+			},
 
-  });
+			base: {
+				options: {
+					sourceMap: function(dst) {
+						return dst + '.map';
+					},
+					sourceMappingURL: function(dst) {
+						return '/' + dst.substr(dst.indexOf('static')) + '.map';
+					},
+					sourceMapPrefix: 4
+				},
+				expand: true,
+				cwd: 'base/static/scripts',
+				src: ['**/*.js', '!*.min.js', '!*.dist.js'],
+				dest: 'base/static/scripts',
+				ext: '.min.js'
+			},
 
-  // Load the plugin.
-  grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-contrib-cssmin');
-  grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-contrib-concat');
+			reports: {
+				options: {
+					sourceMap: function(dst) {
+						return dst + '.map';
+					},
+					sourceMappingURL: function(dst) {
+						return '/' + dst.substr(dst.indexOf('static')) + '.map';
+					},
+					sourceMapPrefix: 4
+				},
+				expand: true,
+				cwd: 'base/static/scripts',
+				src: ['**/*.js', '!*.min.js', '!*.dist.js'],
+				dest: 'base/static/scripts',
+				ext: '.min.js'
+				/*
+				files: {
+					'reports/static/reports/scripts/reports': ['reports/static/reports/scripts/reprots.js'],
+					'reports/static/reports/scripts/reprots-all.dist.js': [
+						'base/static/scripts/app.js',
+						'reports/static/reports/scripts/reports.js']
+				}
+				*/
+			}
 
-  // Register default task
-  grunt.registerTask('static', ['uglify:static', 'cssmin:static']);
-  grunt.registerTask('base', ['uglify:base', 'cssmin:base']);
-  grunt.registerTask('reports', ['uglify:reports', 'cssmin:reports']);
-  grunt.registerTask('default', ['base', 'reports']);
+		},
+
+		concat: {
+			options: {
+				// define a string to put between each file in the concatenated output
+				separator: ';'
+			},
+			jsdist: {
+				// the files to concatenate
+				src: ['reports/static/reports/scripts/**/*.min.js'],
+				// the location of the resulting JS file
+				dest: 'reports/static/reports/scripts/reprots-all.dist.js'
+			}
+		},
+
+		watch: {
+			scripts: {
+				files: ['reports/static/reports/scripts/**/*.js', '!*.min.js', '!*.dist.js'],
+				tasks: ['uglify:reports'],
+				options: {
+					nospawn: true
+				}
+			}
+		}
+
+	});
+
+	// Load the plugin.
+	grunt.loadNpmTasks('grunt-contrib-uglify');
+	grunt.loadNpmTasks('grunt-contrib-cssmin');
+	grunt.loadNpmTasks('grunt-contrib-watch');
+	grunt.loadNpmTasks('grunt-contrib-concat');
+	grunt.loadNpmTasks('grunt-contrib-compass');
+
+	// Register default task
+	grunt.registerTask('static', ['cssmin:static'], 'uglify:static');
+	grunt.registerTask('base', ['compass:base', 'cssmin:base', 'uglify:base']);
+	grunt.registerTask('reports', ['cssmin:reports', 'uglify:reports']);
+	grunt.registerTask('default', ['base', 'reports']);
 
 };
