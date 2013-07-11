@@ -25,8 +25,7 @@ app.log = function(){
 	logger.log.apply(logger, arguments);
 };
 
-app.config(function ($logProvider, $routeProvider) {
-	//$logProvider.debugEnable(false);
+app.config(function ($routeProvider) {
 	$routeProvider
 		.when('/', {
 			templateUrl: 'views/main.html',

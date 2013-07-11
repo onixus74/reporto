@@ -1,0 +1,58 @@
+{% extends "layouts/default.html" %}
+
+{% load staticfiles %}
+
+{% block view_title %}Reports Dashboard | {% endblock %}
+
+{% block view_content %}
+
+	<div class="container" ng-controller="ReportsDashboardCtrl">
+
+		<div class="page-header">
+			<h1>Reports Dashboard <small>((message))</small></h1>
+		</div>
+
+		<div class="well">
+
+			<div class="container-fluid">
+
+				<div class="row-fluid">
+					<div class="span6" ng-controller="ReportsMapCtrl">
+
+						<div class="google-map"
+							center="position.coords"
+							zoom="zoomProperty"
+							markers="markersProperty"
+							latitude="clickedLatitudeProperty"
+							longitude="clickedLongitudeProperty"
+							mark-click="true"
+							draggable="true"
+							fit="false"
+							events="eventsProperty"
+							style="height: 300px; width: 100%">
+						</div>
+
+					</div>
+					<div class="span6">Timeline</div>
+				</div>
+
+				<div class="row-fluid">
+					<div class="span6">Stats</div>
+					<div class="span6">Search</div>
+				</div>
+
+    </div>
+
+	</div>
+
+{% endblock %}
+
+{% block view_styles %}
+{% endblock %}
+
+{% block view_scripts %}
+	<script src="http://maps.googleapis.com/maps/api/js?sensor=false&language=en"></script>
+	<script src="/static/components/angular-google-maps/src/angular-google-maps.js"></script>
+	<script src="{% static 'scripts/app.js' %}"></script>
+	<script src="{% static 'reports/scripts/reports-dashboard.js' %}"></script>
+{% endblock %}

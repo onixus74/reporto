@@ -217,26 +217,27 @@ body {
 .natural-language-form input, .natural-language-form .natural-language-input {
   background: none;
   border: none;
+  text-align: center;
 }
-/* line 240, main.scss */
+/* line 241, main.scss */
 .natural-language-form ::-webkit-input-placeholder {
   /* WebKit browsers */
   color: #999;
   text-align: center;
 }
-/* line 243, main.scss */
+/* line 244, main.scss */
 .natural-language-form :-moz-placeholder {
   /* Mozilla Firefox 4 to 18 */
   color: #999;
   text-align: center;
 }
-/* line 246, main.scss */
+/* line 247, main.scss */
 .natural-language-form ::-moz-placeholder {
   /* Mozilla Firefox 19+ */
   color: #999;
   text-align: center;
 }
-/* line 249, main.scss */
+/* line 250, main.scss */
 .natural-language-form :-ms-input-placeholder {
   /* Internet Explorer 10+ */
   color: #999;

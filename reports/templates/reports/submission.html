@@ -5,14 +5,15 @@
 {% block view_title %}Report Submission | {% endblock %}
 
 {% block view_content %}
-<div class="container" ng-controller="ReportIncidentCtrl">
+
+	<div class="container" ng-controller="ReportIncidentCtrl">
 
 		<div class="well report-incident-form">
 
 			<div class="container-fluid" ng-controller="ReportIncidentCtrl">
 
 				<div class="row-fluid">
-					<div class="span12"><h1 class="text-center">You're</h1></div>
+					<div class="span12"><h1 class="text-center">I'm a ...</h1></div>
 				</div>
 
 				<div class="row-fluid">
@@ -25,11 +26,26 @@
 				</div>
 
 				<div class="row-fluid">
-					<div class="span6">
-						You have been a victim of CATEGORY that happened at LOCATION on DATETIME
+					<div class="span6 natural-language-form">
+
+						I've been a victim of <input placeholder="Incedent Category"> that happened at <input placeholder="Location"> on <input placeholder="Time">
+
 					</div>
-					<div class="span6">
-						MAP
+					<div class="span6" ng-controller="ReportsMapCtrl">
+
+						<div class="google-map"
+							center="position.coords"
+							zoom="zoomProperty"
+							markers="markersProperty"
+							latitude="clickedLatitudeProperty"
+							longitude="clickedLongitudeProperty"
+							mark-click="true"
+							draggable="true"
+							fit="false"
+							events="eventsProperty"
+							style="height: 300px; width: 100%">
+						</div>
+
 					</div>
 				</div>
 
@@ -65,11 +81,15 @@
 		</div>
 
 	</div>
+
 {% endblock %}
 
 {% block view_styles %}
 {% endblock %}
 
 {% block view_scripts %}
-	<script src="{% static 'report_submission/scripts/report-submission.js' %}"></script>
+	<script src="http://maps.googleapis.com/maps/api/js?sensor=false&language=en"></script>
+	<script src="/static/components/angular-google-maps/src/angular-google-maps.js"></script>
+	<script src="{% static 'scripts/app.js' %}"></script>
+	<script src="{% static 'reports/scripts/report-submission.js' %}"></script>
 {% endblock %}

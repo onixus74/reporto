@@ -10,12 +10,18 @@
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width">
 
+<!-- Layout Styles Dependencies -->
 	<link rel="stylesheet" href="{% static 'components/sass-bootstrap/bootstrap-2.3.2.css' %}">
 	<link rel="stylesheet" href="{% static 'components/sass-bootstrap/bootstrap-responsive-2.3.2.css' %}">
 
 	<link rel="stylesheet" href="{% static 'styles/main.css' %}">
+<!-- Layout Styles Dependencies -END -->
 
+<!-- View Styles Dependencies -->
 {% block view_styles %}{% endblock %}
+<!-- View Styles Dependencies - END -->
+
+	<script type="text/javascript">var reform = {}</script>
 
 </head>
 <body ng-app="reformPlatform">
@@ -83,7 +89,9 @@
 		</div>
 	</div>
 
+<!-- View -->
 {% block view_content %}{% endblock %}
+<!-- View - END -->
 <!--<div class="container" ng-view=""></div>-->
 
 {#% <pre>{% debug %}</pre> %#}
@@ -108,9 +116,11 @@
 		</div>
 	</div>
 
-	<!-- View Addons: dialogs, client-side templates, .... -->
-	{% block view_addons %}{% endblock %}
+<!-- View Addons: dialogs, client-side templates, .... -->
+{% block view_addons %}{% endblock %}
+<!-- View Addons - END -->
 
+<!-- Layout Scripts Dependencies -->
 	<script src="{% static 'components/jquery/jquery.js' %}"></script>
 	<script src="{% static 'components/sass-bootstrap/bootstrap/js/bootstrap.js' %}"></script>
 
@@ -121,13 +131,14 @@
 	<script src="{% static 'components/angular-sanitize/angular-sanitize.js' %}"></script>
   <script src="{% static 'components/ui-router/release/angular-ui-router.js' %}"></script>
   <script src="{% static 'components/angular-bootstrap/ui-bootstrap-tpls.js' %}"></script>
+<!-- Layout Scripts Dependencies - END -->
+
+<!-- View Scripts -->
+	{% block view_scripts %}{% endblock %}
+<!-- View Scripts - END -->
 
   <script src="{% static 'components/html-inspector/dist/html-inspector.js' %}"></script>
   <script> HTMLInspector.inspect() </script>
-
-	<!-- View Scripts -->
-	<script src="{% static 'scripts/app.js' %}"></script>
-	{% block view_scripts %}{% endblock %}
 
 </body>
 </html>
