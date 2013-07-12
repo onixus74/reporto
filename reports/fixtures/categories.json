@@ -1,42 +1,34 @@
 [
 {
+  "pk": 1, 
+  "model": "reports.category", 
+  "fields": {
+    "definition": "Verbal Vilence", 
+    "slug": "verbal-vilence"
+  }
+},
+{
+  "pk": 2, 
+  "model": "reports.category", 
+  "fields": {
+    "definition": "Violence", 
+    "slug": "violence"
+  }
+},
+{
   "pk": 3, 
   "model": "reports.category", 
   "fields": {
-    "definition": "Category 3", 
-    "slug": "cat-3"
+    "definition": "Rape", 
+    "slug": "rape"
   }
 },
 {
   "pk": 4, 
   "model": "reports.category", 
   "fields": {
-    "definition": "Category 4", 
-    "slug": "cat-4"
-  }
-},
-{
-  "pk": 5, 
-  "model": "reports.category", 
-  "fields": {
-    "definition": "Category 5", 
-    "slug": "cat-5"
-  }
-},
-{
-  "pk": 6, 
-  "model": "reports.category", 
-  "fields": {
-    "definition": "Category #1", 
-    "slug": "cat-1"
-  }
-},
-{
-  "pk": 7, 
-  "model": "reports.category", 
-  "fields": {
-    "definition": "Category #2", 
-    "slug": "cat-2"
+    "definition": "Lack of Investigation and Prosecution", 
+    "slug": "lack-of-investigation-and-rosecution"
   }
 }
 ]

@@ -31,4 +31,6 @@ urlpatterns = patterns('',
     #url(r'^report-submission/', include('report_submission.urls'), name='eport-submission'),
     url(r'^categories/', include('categories.urls', namespace="categories")),
     url(r'^features/', include('features.urls', namespace="features")),
+    url(r'^victims/', include('victims.urls', namespace="victims")),
+
 )

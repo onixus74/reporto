@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, url
-from features.views import FeatureListView ,FeatureDetailView,FeatureCreateView,FeatureUpdateView,FeatureDeleteView
+from features.views import FeatureListView, FeatureDetailView, FeatureCreateView, FeatureUpdateView, FeatureDeleteView
 
 urlpatterns = patterns('',
   url(r'^$', FeatureListView.as_view(), name='list'),

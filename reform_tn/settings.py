@@ -134,10 +134,9 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
     'base',
     'reports',
-    'reports_dashboard',
-    'report_submission',
     'categories',
     'features',
+    'victims',
 )
 
 #from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS as TCP

@@ -10,7 +10,7 @@ class Category(models.Model):
 		return reverse('categories:view', args=[str(self.id)])
 
 	def __unicode__(self):
-		return u"Slug:%s; Definition: %s" % (self.slug, self.definition)
+		return self.definition
 
 
 class Feature(models.Model):
@@ -20,22 +20,72 @@ class Feature(models.Model):
 	def get_absolute_url(self):
 		return reverse('features:view', args=[str(self.id)])
 
+	def __unicode__(self):
+		return self.definition
 
 class Media(models.Model):
 	title = models.CharField(max_length=200)
-	description = models.CharField(max_length=300)
+	description = models.TextField()
 	url = models.CharField(max_length=300)
 	external_url = models.CharField(max_length=300)
 
 
 class Victim(models.Model):
-	fullname = models.CharField(max_length=200)
 
+	MALE = 'M'
+	FEMALE = 'F'
+	GENDER = (
+		(MALE, 'Male'),
+		(FEMALE, 'Female')
+	)
+
+	fullname    = models.CharField(max_length=200)
+	gender      = models.CharField(max_length=1, choices=GENDER, default=MALE)
+	age         = models.PositiveIntegerField()
+	education   = models.CharField(max_length=200)
+	profession  = models.CharField(max_length=200)
+	phone       = models.CharField(max_length=20)
+	email       = models.EmailField()
+	description = models.TextField()
+
+	def get_absolute_url(self):
+		return reverse('victims:view', args=[str(self.id)])
+
+	def __unicode__(self):
+		return self.fullname
 
 class Report(models.Model):
-	# ...
-	pub_date = models.DateTimeField('date published')
-	category = models.ForeignKey(Category)
-	feature = models.ForeignKey(Feature)
-	media = models.ForeignKey(Media)
 
+	datetime = models.DateTimeField('date and time')
+	location = models.CharField(max_length=100)
+	location_text = models.CharField(max_length=300)
+	category = models.ForeignKey(Category)
+
+	victim = models.ForeignKey(Victim)
+
+	# MALE = 'M'
+	# FEMALE = 'F'
+	# GENDER = (
+	# 	(MALE, 'Male'),
+	# 	(FEMALE, 'Female')
+	# )
+
+	# victim_fullname    = models.CharField(max_length=200)
+	# victim_gender      = models.CharField(max_length=1, choices=GENDER, default=MALE)
+	# victim_age         = models.PositiveIntegerField()
+	# victim_education   = models.CharField(max_length=200)
+	# victim_profession  = models.CharField(max_length=200)
+	# victim_phone       = models.CharField(max_length=20)
+	# victim_email       = models.EmailField()
+	# victim_description = models.TextField()
+
+	aggressor_info = models.TextField()
+	description = models.TextField()
+	#media = models.ForeignKey(Media)
+	features = models.ManyToManyField(Feature)
+	is_verified = models.BooleanField()
+	is_closed = models.BooleanField()
+
+
+	def get_absolute_url(self):
+		return reverse('reports:view', args=[str(self.id)])
