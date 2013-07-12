@@ -85,6 +85,7 @@ class Report(models.Model):
 	features = models.ManyToManyField(Feature)
 	is_verified = models.BooleanField()
 	is_closed = models.BooleanField()
+	#Ministry Response:
 
 
 	def get_absolute_url(self):

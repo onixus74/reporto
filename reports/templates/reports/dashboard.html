@@ -19,18 +19,7 @@
 				<div class="row-fluid">
 					<div class="span6" ng-controller="ReportsMapCtrl">
 
-						<div class="google-map"
-							center="position.coords"
-							zoom="zoomProperty"
-							markers="markersProperty"
-							latitude="clickedLatitudeProperty"
-							longitude="clickedLongitudeProperty"
-							mark-click="true"
-							draggable="true"
-							fit="false"
-							events="eventsProperty"
-							style="height: 300px; width: 100%">
-						</div>
+						<div id="map" style="width:100%; height: 300px"></div>
 
 					</div>
 					<div class="span6">Timeline</div>
@@ -41,26 +30,34 @@
 					<div class="span6">Search</div>
 				</div>
 
-    </div>
+		</div>
 
 	</div>
 
 {% endblock %}
 
 {% block view_styles %}
+	<style>
+		body { margin:0; padding:0; }
+		#map { width:100%; height: 300px}
+	</style>
+	<link href='http://api.tiles.mapbox.com/mapbox.js/v1.2.0/mapbox.css' rel='stylesheet' />
 {% endblock %}
 
 {% block view_scripts %}
+	<!--
 	<script src="{% static 'components/angular/angular.js' %}"></script>
 
 	<script src="{% static 'components/angular-resource/angular-resource.js' %}"></script>
 	<script src="{% static 'components/angular-cookies/angular-cookies.js' %}"></script>
 	<script src="{% static 'components/angular-sanitize/angular-sanitize.js' %}"></script>
-  <script src="{% static 'components/ui-router/release/angular-ui-router.js' %}"></script>
-  <script src="{% static 'components/angular-bootstrap/ui-bootstrap-tpls.js' %}"></script>
+	<script src="{% static 'components/ui-router/release/angular-ui-router.js' %}"></script>
+	<script src="{% static 'components/angular-bootstrap/ui-bootstrap-tpls.js' %}"></script>
 
-	<script src="http://maps.googleapis.com/maps/api/js?sensor=false&language=en"></script>
-	<script src="/static/components/angular-google-maps/src/angular-google-maps.js"></script>
 	<script src="{% static 'scripts/app.js' %}"></script>
+	<script src="{% static 'reports/scripts/reports-dashboard-ng.js' %}"></script>
+	-->
+
+	<script src='http://api.tiles.mapbox.com/mapbox.js/v1.2.0/mapbox.js'></script>
 	<script src="{% static 'reports/scripts/reports-dashboard.js' %}"></script>
 {% endblock %}

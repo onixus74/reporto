@@ -97,10 +97,10 @@
 {% block view_content %}{% endblock %}
 <!-- View - END -->
 <!--<div class="container" ng-view=""></div>-->
-
+<!--<div id="mainView" ng-view="" ng-show="state.showMainView"></div>-->
 {#% <pre>{% debug %}</pre> %#}
 
-{#% <div id="mainView" ng-view="" ng-show="state.showMainView"></div> %#}
+
 
 	<div id="footer">
 		<!--<hr style="margin-bottom: 5px;" />-->
@@ -133,8 +133,8 @@
 	{% block view_scripts %}{% endblock %}
 <!-- View Scripts - END -->
 
-  <script src="{% static 'components/html-inspector/dist/html-inspector.js' %}"></script>
-  <script> HTMLInspector.inspect() </script>
+	<script src="{% static 'components/html-inspector/dist/html-inspector.js' %}"></script>
+	<script> HTMLInspector.inspect() </script>
 
 </body>
 </html>

@@ -28,25 +28,15 @@
 				<div class="row-fluid">
 					<div class="span6 natural-language-form">
 
-						I've been a victim of <input placeholder="Incedent Category"> that happened at <input placeholder="Location"> on <input placeholder="Time">
+						<p class="lead">
+							I've been a victim of <input placeholder="Incedent Category"> that happened at <input placeholder="Location"> on <input placeholder="Time">
+						</p>
 
 					</div>
-					<div class="span6" ng-controller="ReportsMapCtrl">
+					<div class="span6">
 
-						<!--<div class="google-map"
-							center="position.coords"
-							zoom="zoomProperty"
-							markers="markersProperty"
-							latitude="clickedLatitudeProperty"
-							longitude="clickedLongitudeProperty"
-							mark-click="true"
-							draggable="true"
-							fit="false"
-							events="eventsProperty"
-							style="height: 300px; width: 100%">
-						</div> -->
-						<div id='map'></div>
-						<input type"text" name="location" id="id_location">
+						<div id="map" style="width:100%; height: 300px"></div>
+						<input type="text" name="location" id="id_location">
 
 					</div>
 				</div>
@@ -87,26 +77,25 @@
 {% endblock %}
 
 {% block view_styles %}
-  <style>
-    body { margin:0; padding:0; }
-    #map { width:100%; height: 300px}
-  </style>
-  <link href='http://api.tiles.mapbox.com/mapbox.js/v1.2.0/mapbox.css' rel='stylesheet' />
+	<link href='http://api.tiles.mapbox.com/mapbox.js/v1.2.0/mapbox.css' rel='stylesheet' />
 {% endblock %}
 
 {% block view_scripts %}
+	<!--
 	<script src="{% static 'components/angular/angular.js' %}"></script>
 
 	<script src="{% static 'components/angular-resource/angular-resource.js' %}"></script>
 	<script src="{% static 'components/angular-cookies/angular-cookies.js' %}"></script>
 	<script src="{% static 'components/angular-sanitize/angular-sanitize.js' %}"></script>
-  <script src="{% static 'components/ui-router/release/angular-ui-router.js' %}"></script>
-  <script src="{% static 'components/angular-bootstrap/ui-bootstrap-tpls.js' %}"></script>
+	<script src="{% static 'components/ui-router/release/angular-ui-router.js' %}"></script>
+	<script src="{% static 'components/angular-bootstrap/ui-bootstrap-tpls.js' %}"></script>
 
-	<script src="http://maps.googleapis.com/maps/api/js?sensor=false&language=en"></script>
-	<script src="/static/components/angular-google-maps/src/angular-google-maps.js"></script>
+	<script src="{% static 'scripts/app.js' %}"></script>
+	<script src="{% static 'reports/scripts/report-submission-ng.js' %}"></script>
+	-->
 
 	<script src='http://api.tiles.mapbox.com/mapbox.js/v1.2.0/mapbox.js'></script>
-	<script src="{% static 'scripts/app.js' %}"></script>
+
 	<script src="{% static 'reports/scripts/report-submission.js' %}"></script>
+
 {% endblock %}
