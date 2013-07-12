@@ -33,7 +33,7 @@
 					</div>
 					<div class="span6" ng-controller="ReportsMapCtrl">
 
-						<div class="google-map"
+						<!--<div class="google-map"
 							center="position.coords"
 							zoom="zoomProperty"
 							markers="markersProperty"
@@ -44,7 +44,9 @@
 							fit="false"
 							events="eventsProperty"
 							style="height: 300px; width: 100%">
-						</div>
+						</div> -->
+						<div id='map'></div>
+						<input type"text" name="location" id="id_location">
 
 					</div>
 				</div>
@@ -85,6 +87,11 @@
 {% endblock %}
 
 {% block view_styles %}
+  <style>
+    body { margin:0; padding:0; }
+    #map { width:100%; height: 300px}
+  </style>
+  <link href='http://api.tiles.mapbox.com/mapbox.js/v1.2.0/mapbox.css' rel='stylesheet' />
 {% endblock %}
 
 {% block view_scripts %}
@@ -98,6 +105,8 @@
 
 	<script src="http://maps.googleapis.com/maps/api/js?sensor=false&language=en"></script>
 	<script src="/static/components/angular-google-maps/src/angular-google-maps.js"></script>
+
+	<script src='http://api.tiles.mapbox.com/mapbox.js/v1.2.0/mapbox.js'></script>
 	<script src="{% static 'scripts/app.js' %}"></script>
 	<script src="{% static 'reports/scripts/report-submission.js' %}"></script>
 {% endblock %}
