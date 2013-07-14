@@ -26,8 +26,8 @@
 						{% for object in object_list %}
 						<tr>
 							<td><a href="{{ object.get_absolute_url }}">{{object.datetime}}</a></td>
-							<td><a href="/location/{{object.location}}">{{object.location_text}}</a></td>
-							<td><a href="{{ object.category.get_absolute_url }}">{{object.category}}</a></td>
+							<td>{{object.location_text}}</td>
+							<td>{{object.category}}</td>
 							<td><a href="{{ object.victim.get_absolute_url }}">{{object.victim}}</a></td>
 							<td>
 								<a href="{% url 'reports:edit' object.id %}" class="btn btn-warning"><i class="icon-pencil"></i> Edit</a>

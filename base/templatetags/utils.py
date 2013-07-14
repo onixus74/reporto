@@ -20,5 +20,5 @@ from django.utils import simplejson
 register = template.Library()
 
 @register.filter
-def json(o):
+def jsonn(o):
     return mark_safe(simplejson.dumps(o))

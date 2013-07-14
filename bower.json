@@ -29,7 +29,8 @@
     "cosmo-bootstrap-scss": "7Ds7/cosmo-bootstrap-scss",
     "select2-bootstrap-css": "t0m/select2-bootstrap-css#~1.1.0",
     "x-editable": "~1.4.5",
-    "Effeckt.css": "h5bp/Effeckt.css"
+    "Effeckt.css": "h5bp/Effeckt.css",
+    "L.GeoSearch": "smeijer/L.GeoSearch"
   },
   "devDependencies": {
     "html-inspector": "~0.3.0"

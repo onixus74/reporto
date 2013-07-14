@@ -19,7 +19,10 @@ urlpatterns = patterns('',
 	url(r'new$', ReportCreateView.as_view(), name='create'),
 	url(r'(?P<pk>\d+)(\.(?P<extension>(json)))?$', ReportDetailMultiView.as_view(), name='view'),
 	url(r'(?P<pk>\d+)/edit$', ReportUpdateView.as_view(), name='edit'),
-	url(r'(?P<pk>\d+)/delete$', ReportDeleteView.as_view(), name='delete')
+	url(r'(?P<pk>\d+)/delete$', ReportDeleteView.as_view(), name='delete'),
+
+	url(r'(?P<pk>\d+)/verify$', ReportDetailView.as_view(), name='verify'),
+	url(r'(?P<pk>\d+)/close$', ReportDetailView.as_view(), name='close'),
 
 )
 

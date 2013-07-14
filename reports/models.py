@@ -60,26 +60,8 @@ class Report(models.Model):
 	location = models.CharField(max_length=100)
 	location_text = models.CharField(max_length=300)
 	category = models.ForeignKey(Category)
-
 	victim = models.ForeignKey(Victim)
-
-	# MALE = 'M'
-	# FEMALE = 'F'
-	# GENDER = (
-	# 	(MALE, 'Male'),
-	# 	(FEMALE, 'Female')
-	# )
-
-	# victim_fullname    = models.CharField(max_length=200)
-	# victim_gender      = models.CharField(max_length=1, choices=GENDER, default=MALE)
-	# victim_age         = models.PositiveIntegerField()
-	# victim_education   = models.CharField(max_length=200)
-	# victim_profession  = models.CharField(max_length=200)
-	# victim_phone       = models.CharField(max_length=20)
-	# victim_email       = models.EmailField()
-	# victim_description = models.TextField()
-
-	aggressor_info = models.TextField()
+	aggressor = models.TextField()
 	description = models.TextField()
 	#media = models.ForeignKey(Media)
 	features = models.ManyToManyField(Feature)

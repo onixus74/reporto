@@ -18,8 +18,34 @@
 					<div class="control-group">
 						<div class="controls">
 							<dl>
+
 								<dt>Date and time</dt>
 								<dd>{{object.datetime}}</dd>
+								<dt>Location</dt>
+								<dd>{{object.location}}</dd>
+								<dt>Location text</dt>
+								<dd>{{object.location_text}}</dd>
+								<dt>Category</dt>
+								<dd><a href="{{object.category.get_absolute_url}}">{{object.category}}</a></dd>
+								<dt>Victim</dt>
+								<dd><a href="{{object.victim.get_absolute_url}}">{{object.victim}}</a></dd>
+								<dt>Aggressor</dt>
+								<dd>{{object.aggressor}}</dd>
+								<dt>Description</dt>
+								<dd>{{object.description}}</dd>
+								<dt>Features</dt>
+								<dd>
+									<ul>
+									{% for feature in object.features.all  %}
+										<li><a href="{{feature.get_absolute_url}}">{{feature}}</a></li>
+									{% endfor %}
+									</ul>
+								</dd>
+								<dt>Is verified</dt>
+								<dd>{{object.is_verified}}</dd>
+								<dt>Is closed</dt>
+								<dd>{{object.is_closed}}</dd>
+
 							</dl>
 						</div>
 					</div>
