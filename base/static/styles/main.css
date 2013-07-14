@@ -255,7 +255,16 @@ body {
 /*-------------------------------------------------
 | FIXES
 \*/
-/* line 268, main.scss */
+/* fix boostrap-select width */
+/* line 269, main.scss */
 .bootstrap-select:not([class*="span"]) {
   width: 100%;
+}
+
+/* fix boostrap-select colors in natural language form */
+/* line 274, main.scss */
+.boostrap-select-colors-fix {
+  background-color: transparent;
+  color: darkgray;
+  text-align: center;
 }

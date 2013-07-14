@@ -235,7 +235,7 @@ body {
 		line-height: 2em;
 		vertical-align: middle;
 	}
-	
+
 	input, .natural-language-input {
 		background: none;
 		border: none;
@@ -265,7 +265,14 @@ body {
 | FIXES
 \*/
 
+/* fix boostrap-select width */
 .bootstrap-select:not([class*="span"]) {
 	width: 100%;
 }
 
+/* fix boostrap-select colors in natural language form */
+.boostrap-select-colors-fix {
+	background-color: transparent;
+	color: darkgray;
+	text-align: center;
+}
