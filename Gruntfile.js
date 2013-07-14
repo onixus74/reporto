@@ -7,6 +7,28 @@ module.exports = function(grunt) {
 
 		pkg: grunt.file.readJSON('package.json'),
 
+		compass: {
+
+			base: {
+				options: {
+					basePath: 'base/static/',
+					sassDir: 'styles',
+					cssDir: 'styles',
+					force: true
+				}
+			},
+
+			reports: {
+				options: {
+					basePath: 'reports/static/',
+					sassDir: 'styles',
+					cssDir: 'styles',
+					force: true
+				}
+			},
+
+		},
+
 		cssmin: {
 
 			components: {
@@ -32,29 +54,6 @@ module.exports = function(grunt) {
 				dest: 'reports/static/styles',
 				ext: '.min.css'
 			}
-
-		},
-
-
-		compass: {
-
-			base: {
-				options: {
-					basePath: 'base/static/',
-					sassDir: 'styles',
-					cssDir: 'styles',
-					force: true
-				}
-			},
-
-			reprots: {
-				options: {
-					basePath: 'reprots/static/',
-					sassDir: 'styles',
-					cssDir: 'styles',
-					force: true
-				}
-			},
 
 		},
 
@@ -111,8 +110,8 @@ module.exports = function(grunt) {
 				ext: '.min.js'
 				/*
 				files: {
-					'reports/static/reports/scripts/reports': ['reports/static/reports/scripts/reprots.js'],
-					'reports/static/reports/scripts/reprots-all.dist.js': [
+					'reports/static/reports/scripts/reports': ['reports/static/reports/scripts/reports.js'],
+					'reports/static/reports/scripts/reports-all.dist.js': [
 						'base/static/scripts/app.js',
 						'reports/static/reports/scripts/reports.js']
 				}
@@ -130,7 +129,7 @@ module.exports = function(grunt) {
 				// the files to concatenate
 				src: ['reports/static/reports/scripts/**/*.min.js'],
 				// the location of the resulting JS file
-				dest: 'reports/static/reports/scripts/reprots-all.dist.js'
+				dest: 'reports/static/reports/scripts/reports-all.dist.js'
 			}
 		},
 

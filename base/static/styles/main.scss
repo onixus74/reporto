@@ -1,10 +1,8 @@
-//@import "bootstrap-sass/lib/bootstrap";
-//@import "bootstrap-sass/lib/responsive";
 
+/*-------------------------------------------------
+| GLOBAL STYLES
+\*/
 
-
-/* GLOBAL STYLES
--------------------------------------------------- */
 /* Padding below the footer and lighter body text */
 
 body {
@@ -26,8 +24,9 @@ body {
   margin: 10px 0;
 }
 
-/* CUSTOMIZE THE NAVBAR
--------------------------------------------------- */
+/*-------------------------------------------------
+| CUSTOMIZE THE NAVBAR
+\*/
 
 /* Special class on .container surrounding .navbar, used for positioning it into place. */
 .navbar-wrapper {
@@ -70,8 +69,9 @@ body {
 }
 
 
-/* RESPONSIVE CSS
--------------------------------------------------- */
+/*-------------------------------------------------
+| RESPONSIVE CSS
+\*/
 
 /* Large desktop */
 @media (min-width: 1200px) {
@@ -231,6 +231,11 @@ body {
 
 .natural-language-form {
 
+	p.text {
+		line-height: 2em;
+		vertical-align: middle;
+	}
+	
 	input, .natural-language-input {
 		background: none;
 		border: none;
@@ -254,4 +259,13 @@ body {
 }
 
 
+
+
+/*-------------------------------------------------
+| FIXES
+\*/
+
+.bootstrap-select:not([class*="span"]) {
+	width: 100%;
+}
 

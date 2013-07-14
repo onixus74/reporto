@@ -105,6 +105,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 )
 
 ROOT_URLCONF = 'reform_tn.urls'
@@ -132,11 +133,25 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
+
+    # project components
     'base',
     'reports',
     'categories',
     'features',
     'victims',
+
+    # dev dependencies
+    'debug_toolbar',
+
+		# project dependencies
+    'form_utils',
+    'widget_tweaks',
+    'floppyforms',
+    'crispy_forms',
+
+
+    'jsonify',
 )
 
 #from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS as TCP
@@ -173,3 +188,6 @@ LOGGING = {
         },
     }
 }
+
+INTERNAL_IPS = ('127.0.0.1',)
+

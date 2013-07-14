@@ -8,7 +8,9 @@
 	var marker = null,
 		geocoder = L.mapbox.geocoder('examples.map-4l7djmvo'),
 		map = L.mapbox.map('map', 'examples.map-4l7djmvo')
-		.addControl(L.mapbox.geocoderControl('examples.map-4l7djmvo')); geocoder.query('Tunisia', showMap);
+		.addControl(L.mapbox.geocoderControl('examples.map-4l7djmvo'));
+
+	geocoder.query('Tunisia', showMap);
 
 	function showMap(err, data) {
 		map.fitBounds(data.lbounds);
@@ -34,14 +36,12 @@
 			marker.setLatLng(e.latlng);
 
 		}
-		// document.getElementById('loc').value = '' + e.latlng.lat + ':' + e.latlng.lng;
+
 		document.getElementById('id_location').value = e.latlng;
 		marker.on('dragend', function(e) {
 			window.eee = e;
 			document.getElementById('id_location').value = e.target._latlng;
 		});
-		//document.getElementById('loc').value = e.latlng;
-
 
 	}
 

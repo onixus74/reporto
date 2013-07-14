@@ -22,7 +22,14 @@
     "angular-leaflet": "~0.3.3",
     "mapbox.js": "~1.2.0",
     "animate.css": "latest",
-    "ui-router": "~0.0.1"
+    "ui-router": "~0.0.1",
+    "select2": "~3.4.1",
+    "bootstrap-wysihtml5": "latest",
+    "sass-bootstrap": "~2.3.2",
+    "cosmo-bootstrap-scss": "7Ds7/cosmo-bootstrap-scss",
+    "select2-bootstrap-css": "t0m/select2-bootstrap-css#~1.1.0",
+    "x-editable": "~1.4.5",
+    "Effeckt.css": "h5bp/Effeckt.css"
   },
   "devDependencies": {
     "html-inspector": "~0.3.0"
