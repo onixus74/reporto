@@ -13,17 +13,12 @@
 		<div class="row-fluid">
 			<div class="offset2 span8">
 
-				<form class="form-horizontal" action="{% url 'victims:delete' object.id %}" method="post">
+				<form class="form-horizontal" action="{% url 'victims:delete' victim.id %}" method="post">
 					{% csrf_token %}
 
 					<div class="control-group">
 						<div class="controls">
-							<dl>
-								<dt>Slug</dt>
-								<dd>{{object.slug}}</dd>
-								<dt>Definition</dt>
-								<dd>{{object.definition}}</dd>
-							</dl>
+							{{victim}}
 						</div>
 					</div>
 

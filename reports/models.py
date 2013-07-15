@@ -69,6 +69,8 @@ class Report(models.Model):
 	is_closed = models.BooleanField()
 	#Ministry Response:
 
-
 	def get_absolute_url(self):
 		return reverse('reports:view', args=[str(self.id)])
+
+	def __unicode__(self):
+		return str(self.datetime)

@@ -23,15 +23,15 @@
 							<th>Victim</th>
 							<th>Actions</th>
 						</tr>
-						{% for object in object_list %}
+						{% for report in report_list %}
 						<tr>
-							<td><a href="{{ object.get_absolute_url }}">{{object.datetime}}</a></td>
-							<td>{{object.location_text}}</td>
-							<td>{{object.category}}</td>
-							<td><a href="{{ object.victim.get_absolute_url }}">{{object.victim}}</a></td>
+							<td><a href="{{ report.get_absolute_url }}">{{report.datetime}}</a></td>
+							<td>{{report.location_text}}</td>
+							<td>{{report.category}}</td>
+							<td><a href="{{ report.victim.get_absolute_url }}">{{report.victim}}</a></td>
 							<td>
-								<a href="{% url 'reports:edit' object.id %}" class="btn btn-warning"><i class="icon-pencil"></i> Edit</a>
-								<a href="{% url 'reports:delete' object.id %}" class="btn btn-danger"><i class="icon-trash"></i> Delete</a>
+								<a href="{% url 'reports:edit' report.id %}" class="btn btn-warning"><i class="icon-pencil"></i> Edit</a>
+								<a href="{% url 'reports:delete' report.id %}" class="btn btn-danger"><i class="icon-trash"></i> Delete</a>
 							</td>
 						</tr>
 						{% endfor %}

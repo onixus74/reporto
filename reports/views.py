@@ -12,7 +12,7 @@ from django import forms
 from django.views.decorators.csrf import csrf_exempt
 
 from base.utils import *
-from base.utils.utils import JSONResponseMixin, MultiResponseMixin, ListMultiResponseMixin, DetailMultiResponseMixin
+from base.utils.utils import *
 
 from django.views.generic.base import View
 from django.views.generic import ListView, DetailView
@@ -90,30 +90,16 @@ class ReportListView(ListView):
 	template_name = "reports/list.html"
 
 
-#class ReportListMultiView(MultiResponseMixin, ReportListView):
-#	default_view = ReportListView
-#
-#	def convert_context_to_json(self, context):
-#		return serializers.serialize('json', context['object_list'])
-
-
-class ReportListMultiView(ListMultiResponseMixin, ReportListView):
+class ReportListMultiView(ListMultiResponseMixin, PaginatedJSONListView, ReportListView):
 	pass
+
 
 class ReportDetailView(DetailView):
 	model = Report
 	template_name = "reports/view.html"
 
 
-#class ReportDetailMultiView(MultiResponseMixin, ReportDetailView):
-#	default_view = ReportDetailView
-#
-#	def convert_context_to_json(self, context):
-#		return serializers.serialize('json', [context['object']])
-#		#return json.dumps(context['object'])
-
-
-class ReportDetailMultiView(DetailMultiResponseMixin, ReportDetailView):
+class ReportDetailMultiView(DetailMultiResponseMixin, JSONDetailView, ReportDetailView):
 	pass
 
 

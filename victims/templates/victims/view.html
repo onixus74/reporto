@@ -19,28 +19,28 @@
 						<div class="controls">
 							<dl>
 								<dt>Fullname</dt>
-								<dd>{{object.fullname}}</dd>
+								<dd>{{victim.fullname}}</dd>
 								<dt>Gender</dt>
-								<dd>{{object.gender}}</dd>
+								<dd>{{victim.gender}}</dd>
 								<dt>Age</dt>
-								<dd>{{object.age}}</dd>
+								<dd>{{victim.age}}</dd>
 								<dt>Education</dt>
-								<dd>{{object.education}}</dd>
+								<dd>{{victim.education}}</dd>
 								<dt>Profession</dt>
-								<dd>{{object.profession}}</dd>
+								<dd>{{victim.profession}}</dd>
 								<dt>Phone</dt>
-								<dd>{{object.phone}}</dd>
+								<dd>{{victim.phone}}</dd>
 								<dt>Email</dt>
-								<dd>{{object.email}}</dd>
+								<dd>{{victim.email}}</dd>
 								<dt>Description</dt>
-								<dd>{{object.description}}</dd>
+								<dd>{{victim.description}}</dd>
 							</dl>
 						</div>
 					</div>
 
 					<div class="form-actions">
-						<a href="{% url 'victims:edit' object.id %}" class="btn btn-warning"><i class="icon-pencil"></i> Edit</a>
-						<a href="{% url 'victims:delete' object.id %}" class="btn btn-danger"><i class="icon-trash"></i> Delete</a>
+						<a href="{% url 'victims:edit' victim.id %}" class="btn btn-warning"><i class="icon-pencil"></i> Edit</a>
+						<a href="{% url 'victims:delete' victim.id %}" class="btn btn-danger"><i class="icon-trash"></i> Delete</a>
 						<a href="{% url 'victims:list' %}" class="btn"><i class="icon-back"></i> Back</a>
 					</div>
 

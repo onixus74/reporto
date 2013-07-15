@@ -40,8 +40,15 @@
 	location_text.on('change', function(e){
 		console.log(this, e);
 		geocoder.query(location_text.val() + ', Tunisia', showMap);
-		textTolatlng(location_text.val());
-	})
+		textTolatlng(location_text.val()).done(function(data){
+			/*
+			var southWest = new L.LatLng(40.712, -74.227),
+			northEast = new L.LatLng(40.774, -74.125),
+			bounds = new L.LatLngBounds(southWest, northEast);
+			map.setBounds(bounds());
+			*/
+		});
+	});
 
 	$(function(){
 		var location = $('#id_location');

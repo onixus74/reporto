@@ -20,12 +20,12 @@
 							<th>Feature</th>
 							<th>Actions</th>
 						</tr>
-						{% for object in object_list %}
+						{% for feature in feature_list %}
 						<tr>
-							<td><a href="{{ object.get_absolute_url }}">{{object.definition}}</a></td>
+							<td><a href="{{ feature.get_absolute_url }}">{{feature.definition}}</a></td>
 							<td>
-								<a href="{% url 'features:edit' object.id %}" class="btn btn-warning"><i class="icon-pencil"></i> Edit</a>
-								<a href="{% url 'features:delete' object.id %}" class="btn btn-danger"><i class="icon-trash"></i> Delete</a>
+								<a href="{% url 'features:edit' feature.id %}" class="btn btn-warning"><i class="icon-pencil"></i> Edit</a>
+								<a href="{% url 'features:delete' feature.id %}" class="btn btn-danger"><i class="icon-trash"></i> Delete</a>
 							</td>
 						</tr>
 						{% endfor %}
