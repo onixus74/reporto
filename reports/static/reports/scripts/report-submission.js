@@ -18,8 +18,8 @@
 	}
 
 	var marker = null,
-		geocoder = L.mapbox.geocoder('examples.map-4l7djmvo'),
-		map = L.mapbox.map('map', 'examples.map-4l7djmvo', {attributionControl: false})
+		geocoder = L.mapbox.geocoder('examples.map-vyofok3q'),
+		map = L.mapbox.map('map', 'examples.map-vyofok3q', {attributionControl: false})
 		//.addControl(L.mapbox.geocoderControl('examples.map-4l7djmvo'));
 
 	L.control.scale().addTo(map);

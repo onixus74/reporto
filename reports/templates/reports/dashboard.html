@@ -29,7 +29,7 @@
 				    <table class="table table-hover">
 						{% for report in report_list %}
 						<tr>
-							<td >
+							<td class="ui-timeline-story" data-latlng="{{report.location}}">
 								<a href="{{ report.victim.get_absolute_url }}">{{report.victim}}</a>
 								has been a victim of
 								<a href="{{ report.category.get_absolute_url }}">{{report.category}}</a>
@@ -37,6 +37,9 @@
 								<a href="/reports/by-location/{{report.location}}">{{report.location_text}}</a>
 								on
 								<a href="{{ report.get_absolute_url }}">{{report.datetime}}</a>
+								{% if report.is_verified %}
+								<span class="badge badge-success">Verified <i class="icon-ok"></i></span>
+								{% endif %}
 							</td>
 						</tr>
 						{% endfor %}
