@@ -1,105 +1,81 @@
 /* jshint strict: true, browser: true, devel: true */
-/* global angular, $ */
+/* global angular, $, reform */
 'use strict';
 
 
-!(function() {
+reform.widgets.map = function() {
 
-	function latlngToText(lat, lng){
-		var p = $.getJSON('//maps.googleapis.com/maps/api/geocode/json?latlng=' + lat + ',' + lng + '&sensor=false');
-		p.done(function(data){console.log(data);});
-		return p;
-	}
+	// create a map in the "map" div, set the view to a given place and zoom
+	var map = L.map('map');
 
-	function textTolatlng(text){
-		var p = $.getJSON('//maps.googleapis.com/maps/api/geocode/json?address=' + text + '&region=tn&sensor=false');
-		p.done(function(data){console.log(data);});
-		return p;
-	}
+	map.setView([34.161818161230386, 9.3603515625], 5);
 
-	var marker = null,
-		geocoder = L.mapbox.geocoder('examples.map-vyofok3q'),
-		map = L.mapbox.map('map', 'examples.map-vyofok3q', {attributionControl: false})
-		//.addControl(L.mapbox.geocoderControl('examples.map-4l7djmvo'));
+	//L.control.scale().addTo(map);
 
-	L.control.scale().addTo(map);
-	map.legendControl.addLegend("Incident location");
-	//geocoder.query('TN', showMap);
-	//map.setView([36.80006721245233,10.184755325317383], 10);
-	map.setView([34.161818161230386,9.3603515625], 5);
+	//map.legendControl.addLegend("Incident location");
+
 	map.setMaxBounds(map.getBounds());
 
-	function showMap(err, data) {
-		console.log(data);
-		if (data) {
-			map.fitBounds(data.lbounds);
-		}
-	}
+	// add an OpenStreetMap tile layer
+	L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+		//attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+	}).addTo(map);
 
-	var location_text = $('#id_location_text');
-	location_text.on('change', function(e){
-		console.log(this, e);
-		geocoder.query(location_text.val() + ', Tunisia', showMap);
-		textTolatlng(location_text.val()).done(function(data){
-			/*
-			var southWest = new L.LatLng(40.712, -74.227),
-			northEast = new L.LatLng(40.774, -74.125),
-			bounds = new L.LatLngBounds(southWest, northEast);
-			map.setBounds(bounds());
-			*/
+	// Popup
+	var popup = L.popup()
+		.setLatLng([51.5, -0.09])
+		.setContent("I am a standalone popup.")
+		.openOn(map);
+
+	// add a marker in the given location, attach some popup content to it and open the popup
+	/*
+	L.marker([51.5, -0.09]).addTo(map)
+		.bindPopup('A pretty CSS3 popup. <br> Easily customizable.')
+		.openPopup();
+	*/
+
+	var marker;
+
+	var location = $('#id_location');
+	var loc = location.val();
+	console.log(loc);
+	if (loc) {
+		loc = loc.split(',')
+		var lat = parseFloat(loc[0]), lng = parseFloat(loc[1]);
+		console.log(loc, lat, lng);
+		var latlng = new L.LatLng(lat, lng);
+		console.log(latlng);
+		marker = L.marker(latlng, {
+			draggable: true
 		});
-	});
-
-	$(function(){
-		var location = $('#id_location');
-		var loc = location.val();
-		console.log(loc);
-		if(loc){
-			loc = loc.split(',')
-			var lat = parseFloat(loc[0]), lng = parseFloat(loc[1]);
-			console.log(loc, lat, lng);
-			var latlng = new L.LatLng(lat, lng);
-			console.log(latlng);
-			marker = L.marker(latlng, {
-				icon: L.mapbox.marker.icon({
-					'marker-color': 'CC0033'
-				}),
-				draggable: true
-			});
-			marker.addTo(map);
-		}
-	})
-
-	function DragPos(e) {
-		document.getElementById('id_location').value = '' + e.latlng.lat + ',' + e.latlng.lng;
+		marker.addTo(map);
 	}
 
-	function onMapClick(e) {
+	map.on('click ', function map_click(e) {
 		console.log(e.latlng);;
 		if (!marker) {
 			marker = L.marker(e.latlng, {
-				icon: L.mapbox.marker.icon({
-					'marker-color': 'CC0033'
-				}),
 				draggable: true
 			});
 			marker.addTo(map);
+			marker.on('dragend', function(e) {
+				//window.eee = e;
+				var value = '' + e.target._latlng.lat + ',' + e.target._latlng.lng;
+				console.log(e.target._latlng, value);
+				document.getElementById('id_location').value = value;
+			});
 		} else {
 			console.log(marker);
 			marker.setLatLng(e.latlng);
 		}
-
 		document.getElementById('id_location').value = '' + e.latlng.lat + ',' + e.latlng.lng;
+	});
 
-		marker.on('dragend', function(e) {
-			//window.eee = e;
-			var value = '' + e.target._latlng.lat + ',' + e.target._latlng.lng;
-			console.log(e.target._latlng, value);
-			document.getElementById('id_location').value = value;
-		});
+};
 
-	}
+$(reform.widgets.map);
 
-	map.on('click ', onMapClick);
 
-})();
+reform.widgets.geosearch = function() {};
+
+$(reform.widgets.geosearch);

@@ -20,7 +20,7 @@ module.exports = function(grunt) {
 
 			reports: {
 				options: {
-					basePath: 'reports/static/',
+					basePath: 'reports/static/reports',
 					sassDir: 'styles',
 					cssDir: 'styles',
 					force: true
