@@ -4,7 +4,7 @@
 
 !(function() {
 	var geocoder = L.mapbox.geocoder('examples.map-vyofok3q'),
-		map = reform.map = L.mapbox.map('map', 'examples.map-vyofok3q')
+	  map = reform.map = L.mapbox.map('map', 'examples.map-vyofok3q')
 		.addControl(L.mapbox.geocoderControl('examples.map-vyofok3q'));
 
 		geocoder.query('Tunisia', 	function showMap(err, data) {
