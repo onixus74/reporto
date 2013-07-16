@@ -18,8 +18,8 @@
 	}
 
 	var marker = null,
-		geocoder = L.mapbox.geocoder('examples.map-4l7djmvo'),
-		map = L.mapbox.map('map', 'examples.map-4l7djmvo', {attributionControl: false})
+		geocoder = L.mapbox.geocoder('examples.map-vyofok3q'),
+		map = L.mapbox.map('map', 'examples.map-vyofok3q', {attributionControl: false})
 		//.addControl(L.mapbox.geocoderControl('examples.map-4l7djmvo'));
 
 	L.control.scale().addTo(map);
@@ -40,8 +40,15 @@
 	location_text.on('change', function(e){
 		console.log(this, e);
 		geocoder.query(location_text.val() + ', Tunisia', showMap);
-		textTolatlng(location_text.val());
-	})
+		textTolatlng(location_text.val()).done(function(data){
+			/*
+			var southWest = new L.LatLng(40.712, -74.227),
+			northEast = new L.LatLng(40.774, -74.125),
+			bounds = new L.LatLngBounds(southWest, northEast);
+			map.setBounds(bounds());
+			*/
+		});
+	});
 
 	$(function(){
 		var location = $('#id_location');

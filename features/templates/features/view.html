@@ -19,16 +19,16 @@
 						<div class="controls">
 							<dl>
 								<dt>Slug</dt>
-								<dd>{{object.slug}}</dd>
+								<dd>{{feature.slug}}</dd>
 								<dt>Definition</dt>
-								<dd>{{object.definition}}</dd>
+								<dd>{{feature.definition}}</dd>
 							</dl>
 						</div>
 					</div>
 
 					<div class="form-actions">
-						<a href="{% url 'features:edit' object.id %}" class="btn btn-warning"><i class="icon-pencil"></i> Edit</a>
-						<a href="{% url 'features:delete' object.id %}" class="btn btn-danger"><i class="icon-trash"></i> Delete</a>
+						<a href="{% url 'features:edit' feature.id %}" class="btn btn-warning"><i class="icon-pencil"></i> Edit</a>
+						<a href="{% url 'features:delete' feature.id %}" class="btn btn-danger"><i class="icon-trash"></i> Delete</a>
 						<a href="{% url 'features:list' %}" class="btn"><i class="icon-back"></i> Back</a>
 					</div>
 

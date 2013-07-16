@@ -1,5 +1,7 @@
 {% extends "layouts/default.html" %}
 
+{% load crispy_forms_tags %}
+
 {% block view_title %}New Victim | {% endblock %}
 
 {% block view_content %}
@@ -9,8 +11,6 @@
 		<h1>Victim <small>Add</small></h1>
 	</div>
 
-	{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
-
 	<div class="container-fluid">
 		<div class="row-fluid">
 			<div class="offset2 span8">
@@ -18,41 +18,7 @@
 				<form class="form-horizontal" action="{% url 'victims:create' %}" method="post">
 					{% csrf_token %}
 
-					{% if form.errors %}
-					<div class="alert alert-error">
-						<button type="button" class="close" data-dismiss="alert">&times;</button>
-						{% for field, errors in form.errors.items %}
-							<div>{{field}}:{% for error in errors %} {{error}}{% endfor %}</div>
-						{% endfor %}
-					</div>
-					{% endif %}
-
-					{#% comment %#}
-					{% for field in form %}
-						<div class="control-group">
-							<label class="control-label" for="{{ field.id }}">{{ field.label }}</label>
-							<div class="controls">
-								{{ field }}
-								<span class="help-block">
-									<p class="text-error">{{ field.errors }}</p>
-								</span>
-							</div>
-
-						</div>
-					{% endfor %}
-					{#% endcomment %#}
-
-					<!--
-					<div class="control-group">
-						<label class="control-label" for="input_slug">Slug</label>
-						<div class="controls">
-							<input type="text" id="input_slug" placeholder="Slug" name="slug">
-							<span class="help-block">
-								<p class="text-error">{{ object.slug.errors }}</p>
-							</span>
-						</div>
-					</div>
-					-->
+					{{form|crispy}}
 
 					<div class="form-actions">
 						<button type="submit" class="btn btn-primary">Submit</button>

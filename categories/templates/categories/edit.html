@@ -1,5 +1,8 @@
 {% extends "layouts/default.html" %}
 
+{% load crispy_forms_tags %}
+{% load widget_tweaks %}
+
 {% block view_title %}Edit Category | {% endblock %}
 
 {% block view_content %}
@@ -15,8 +18,10 @@
 		<div class="row-fluid">
 			<div class="offset2 span8">
 
-				<form class="form-horizontal" action="{% url 'categories:edit' object.id %}" method="post">
+				<form class="form-horizontal" action="{% url 'categories:edit' category.id %}" method="post">
 					{% csrf_token %}
+
+					{#% {{form|crispy}} %#}
 
 					{% if form.errors %}
 					<div class="alert alert-error">
@@ -30,9 +35,9 @@
 					<div class="control-group">
 						<label class="control-label" for="input_slug">Slug</label>
 						<div class="controls">
-							<input type="text" id="input_slug" placeholder="Slug" name="slug" value="{{object.slug}}">
+							<input type="text" id="input_slug" placeholder="Slug" name="slug" value="{{category.slug}}">
 							<span class="help-block">
-								<p class="text-error">{{ object.slug.errors }}</p>
+								<p class="text-error">{{ category.slug.errors }}</p>
 							</span>
 						</div>
 					</div>
@@ -40,7 +45,7 @@
 					<div class="control-group">
 						<label class="control-label" for="input_definition">Definition</label>
 						<div class="controls">
-							<input type="text" id="input_definition" placeholder="Definition" name="definition" value="{{object.definition}}">
+							<input type="text" id="input_definition" placeholder="Definition" name="definition" value="{{category.definition}}">
 						</div>
 					</div>
 

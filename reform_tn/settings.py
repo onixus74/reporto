@@ -38,7 +38,15 @@ TIME_ZONE = 'Africa/Tunis'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'en'
+
+
+LANGUAGES = (
+	('en', 'English'),
+	('fr', 'French'),
+	('ar', 'Arabic'),
+	('ar-tn', 'Tounsi'),
+)
 
 SITE_ID = 1
 
@@ -48,10 +56,29 @@ USE_I18N = True
 
 # If you set this to False, Django will not format dates, numbers and
 # calendars according to the current locale.
-USE_L10N = True
+USE_L10N = False
 
 # If you set this to False, Django will not use timezone-aware datetimes.
-USE_TZ = True
+USE_TZ = False
+
+
+DATETIME_INPUT_FORMATS = (
+	'%Y-%m-%dT%H:%M:%S',     # '2006-10-25T14:30:59'
+	'%Y-%m-%dT%H:%M',        # '2006-10-25T14:30'
+	'%Y-%m-%d %H:%M:%S',     # '2006-10-25 14:30:59'
+	'%Y-%m-%d %H:%M:%S.%f',  # '2006-10-25 14:30:59.000200'
+	'%Y-%m-%d %H:%M',        # '2006-10-25 14:30'
+	'%Y-%m-%d',              # '2006-10-25'
+	'%m/%d/%Y %H:%M:%S',     # '10/25/2006 14:30:59'
+	'%m/%d/%Y %H:%M:%S.%f',  # '10/25/2006 14:30:59.000200'
+	'%m/%d/%Y %H:%M',        # '10/25/2006 14:30'
+	'%m/%d/%Y',              # '10/25/2006'
+	'%m/%d/%y %H:%M:%S',     # '10/25/06 14:30:59'
+	'%m/%d/%y %H:%M:%S.%f',  # '10/25/06 14:30:59.000200'
+	'%m/%d/%y %H:%M',        # '10/25/06 14:30'
+	'%m/%d/%y',              # '10/25/06'
+)
+
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/var/www/example.com/media/"

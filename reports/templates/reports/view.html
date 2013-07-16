@@ -20,39 +20,39 @@
 							<dl>
 
 								<dt>Date and time</dt>
-								<dd>{{object.datetime}}</dd>
+								<dd>{{report.datetime}}</dd>
 								<dt>Location</dt>
-								<dd>{{object.location}}</dd>
+								<dd>{{report.location}}</dd>
 								<dt>Location text</dt>
-								<dd>{{object.location_text}}</dd>
+								<dd>{{report.location_text}}</dd>
 								<dt>Category</dt>
-								<dd><a href="{{object.category.get_absolute_url}}">{{object.category}}</a></dd>
+								<dd><a href="{{report.category.get_absolute_url}}">{{report.category}}</a></dd>
 								<dt>Victim</dt>
-								<dd><a href="{{object.victim.get_absolute_url}}">{{object.victim}}</a></dd>
+								<dd><a href="{{report.victim.get_absolute_url}}">{{report.victim}}</a></dd>
 								<dt>Aggressor</dt>
-								<dd>{{object.aggressor}}</dd>
+								<dd>{{report.aggressor}}</dd>
 								<dt>Description</dt>
-								<dd>{{object.description}}</dd>
+								<dd>{{report.description}}</dd>
 								<dt>Features</dt>
 								<dd>
 									<ul>
-									{% for feature in object.features.all  %}
+									{% for feature in report.features.all  %}
 										<li><a href="{{feature.get_absolute_url}}">{{feature}}</a></li>
 									{% endfor %}
 									</ul>
 								</dd>
 								<dt>Is verified</dt>
-								<dd>{{object.is_verified}}</dd>
+								<dd>{{report.is_verified}}</dd>
 								<dt>Is closed</dt>
-								<dd>{{object.is_closed}}</dd>
+								<dd>{{report.is_closed}}</dd>
 
 							</dl>
 						</div>
 					</div>
 
 					<div class="form-actions">
-						<a href="{% url 'reports:edit' object.id %}" class="btn btn-warning"><i class="icon-pencil"></i> Edit</a>
-						<a href="{% url 'reports:delete' object.id %}" class="btn btn-danger"><i class="icon-trash"></i> Delete</a>
+						<a href="{% url 'reports:edit' report.id %}" class="btn btn-warning"><i class="icon-pencil"></i> Edit</a>
+						<a href="{% url 'reports:delete' report.id %}" class="btn btn-danger"><i class="icon-trash"></i> Delete</a>
 						<a href="{% url 'reports:list' %}" class="btn"><i class="icon-back"></i> Back</a>
 					</div>
 
