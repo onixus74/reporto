@@ -113,21 +113,7 @@
 	<!--[if lte IE 8]>
 	<link rel="stylesheet" href="{% static 'components/leaflet/dist/leaflet.ie.css'%}" />
 	<![endif]-->
-	<style type="text/css">
-
-	#wizard-1-header {
-
-	}
-
-	#wizard-2-victim {
-
-	}
-
-	#wizard-2-witness {
-
-	}
-
-	</style>
+	<link rel="stylesheet" href="{% static 'reports/styles/submission.css'%}" />
 {% endblock %}
 
 {% block view_scripts %}
@@ -146,8 +132,6 @@
 
 	<!-- Map -->
 	<script src="{% static 'components/leaflet/dist/leaflet.js' %}"></script>
-
-	<!-- Features -->
 
 	<script src="{% static 'reports/scripts/report-submission.js' %}"></script>
 	<script type="text/javascript">

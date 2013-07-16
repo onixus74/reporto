@@ -11,13 +11,11 @@ from reports.models import Report
 from django import forms
 from django.views.decorators.csrf import csrf_exempt
 
-from base.utils import *
-from base.utils.utils import *
 
 from django.views.generic.base import View
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-
+from base.utils.views import ListMultiResponseMixin, DetailMultiResponseMixin
 
 def index(request, *args, **kwargs):
 	template_name = "reports/index.html"
@@ -90,7 +88,7 @@ class ReportListView(ListView):
 	template_name = "reports/list.html"
 
 
-class ReportListMultiView(ListMultiResponseMixin, PaginatedJSONListView, ReportListView):
+class ReportListMultiView(ListMultiResponseMixin, ReportListView):
 	pass
 
 
@@ -99,7 +97,7 @@ class ReportDetailView(DetailView):
 	template_name = "reports/view.html"
 
 
-class ReportDetailMultiView(DetailMultiResponseMixin, JSONDetailView, ReportDetailView):
+class ReportDetailMultiView(DetailMultiResponseMixin, ReportDetailView):
 	pass
 
 

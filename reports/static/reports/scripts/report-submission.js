@@ -22,10 +22,12 @@ reform.widgets.map = function() {
 	}).addTo(map);
 
 	// Popup
+	/*
 	var popup = L.popup()
 		.setLatLng([51.5, -0.09])
 		.setContent("I am a standalone popup.")
 		.openOn(map);
+		*/
 
 	// add a marker in the given location, attach some popup content to it and open the popup
 	/*

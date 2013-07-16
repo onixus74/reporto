@@ -49,9 +49,9 @@ module.exports = function(grunt) {
 
 			reports: {
 				expand: true,
-				cwd: 'reports/static/styles',
+				cwd: 'reports/static/reports/styles',
 				src: ['**/*.css', '!*.min.css', '!*.dist.css'],
-				dest: 'reports/static/styles',
+				dest: 'reports/static/reports/styles',
 				ext: '.min.css'
 			}
 
@@ -104,9 +104,9 @@ module.exports = function(grunt) {
 					sourceMapPrefix: 4
 				},
 				expand: true,
-				cwd: 'base/static/scripts',
+				cwd: 'reprots/static/reports/scripts',
 				src: ['**/*.js', '!*.min.js', '!*.dist.js'],
-				dest: 'base/static/scripts',
+				dest: 'reports/static/reports/scripts',
 				ext: '.min.js'
 				/*
 				files: {

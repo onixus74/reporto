@@ -336,11 +336,13 @@ class MultiResponseMixin(JSONResponseMixin):
 			return self.default_view.render_to_response(self, context)
 
 
-class ListMultiResponseMixin(MultiResponseMixin):
+class ListMultiResponseMixin(MultiResponseMixin, JSONListView):
 	default_view = ListView
 
+class PaginatedListMultiResponseMixin(MultiResponseMixin, PaginatedJSONListView):
+	default_view = ListView
 
-class DetailMultiResponseMixin(MultiResponseMixin):
+class DetailMultiResponseMixin(MultiResponseMixin, JSONDetailView):
 	default_view = DetailView
 
 

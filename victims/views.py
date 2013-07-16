@@ -1,5 +1,6 @@
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from base.utils.views import ListMultiResponseMixin, DetailMultiResponseMixin
 
 from reports.models import Victim
 
@@ -9,9 +10,17 @@ class VictimListView(ListView):
 	template_name = "victims/list.html"
 
 
+class VictimListMultiView(ListMultiResponseMixin, VictimListView):
+	pass
+
+
 class VictimDetailView(DetailView):
 	model = Victim
 	template_name = "victims/view.html"
+
+
+class VictimDetailMultiView(DetailMultiResponseMixin, VictimDetailView):
+	pass
 
 
 class VictimCreateView(CreateView):

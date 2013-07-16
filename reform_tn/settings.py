@@ -177,6 +177,7 @@ INSTALLED_APPS = (
     'floppyforms',
     'crispy_forms',
 
+    'rest_framework',
 
     'jsonify',
 )
@@ -217,4 +218,10 @@ LOGGING = {
 }
 
 INTERNAL_IPS = ('127.0.0.1',)
+
+
+REST_FRAMEWORK = {
+    #'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAdminUser',),
+    'PAGINATE_BY': 10
+}
 

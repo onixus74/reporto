@@ -7,9 +7,10 @@ body {
   padding-top: 100px;
   padding-bottom: 60px;
   color: #5a5a5a;
+  background: url("../theme/cream_pixels.png");
 }
 
-/* line 14, main.scss */
+/* line 15, main.scss */
 #footer {
   position: fixed;
   bottom: 0;
@@ -19,7 +20,7 @@ body {
   background-color: whitesmoke;
 }
 
-/* line 23, main.scss */
+/* line 24, main.scss */
 .container .credit {
   margin: 10px 0;
 }
@@ -28,7 +29,7 @@ body {
 | CUSTOMIZE THE NAVBAR
 \*/
 /* Special class on .container surrounding .navbar, used for positioning it into place. */
-/* line 32, main.scss */
+/* line 33, main.scss */
 .navbar-wrapper {
   position: fixed;
   top: 0;
@@ -41,7 +42,7 @@ body {
 }
 
 /* Remove border and change up box shadow for more contrast */
-/* line 46, main.scss */
+/* line 47, main.scss */
 .navbar .navbar-inner {
   border: 0;
   -webkit-box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
@@ -50,7 +51,7 @@ body {
 }
 
 /* Downsize the brand/project name a bit */
-/* line 54, main.scss */
+/* line 55, main.scss */
 .navbar .brand {
   padding: 14px 20px 16px;
   /* Increase vertical padding to match navbar links */
@@ -60,13 +61,13 @@ body {
 }
 
 /* Navbar links: increase padding for taller navbar */
-/* line 62, main.scss */
+/* line 63, main.scss */
 .navbar .nav > li > a {
   padding: 15px 20px;
 }
 
 /* Offset the responsive button for proper vertical alignment */
-/* line 67, main.scss */
+/* line 68, main.scss */
 .navbar .btn-navbar {
   margin-top: 10px;
 }
@@ -77,18 +78,18 @@ body {
 /* Large desktop */
 /* Portrait tablet to landscape and desktop */
 @media (min-width: 768px) and (max-width: 979px) {
-  /* line 84, main.scss */
+  /* line 85, main.scss */
   body {
     padding-top: 90px;
   }
 
-  /* line 88, main.scss */
+  /* line 89, main.scss */
   .container.navbar-wrapper {
     margin-bottom: 0;
     width: auto;
   }
 
-  /* line 93, main.scss */
+  /* line 94, main.scss */
   #footer {
     padding-left: 20px;
     padding-right: 20px;
@@ -96,30 +97,30 @@ body {
 }
 /* Landscape phone to portrait tablet */
 @media (max-width: 767px) {
-  /* line 103, main.scss */
+  /* line 104, main.scss */
   body {
     padding-top: 70px;
     padding-bottom: 50px;
   }
 
-  /* line 108, main.scss */
+  /* line 109, main.scss */
   .container.navbar-wrapper {
     margin-bottom: 0;
     width: auto;
   }
 
-  /* line 113, main.scss */
+  /* line 114, main.scss */
   #footer {
     padding-left: 20px;
     padding-right: 20px;
   }
 
-  /* line 118, main.scss */
+  /* line 119, main.scss */
   .navbar-inner {
     margin: -20px;
   }
 
-  /* line 122, main.scss */
+  /* line 123, main.scss */
   #footer {
     padding-left: 20px;
     padding-right: 20px;
@@ -127,24 +128,24 @@ body {
 }
 /* Landscape phones and down */
 @media (max-width: 480px) {
-  /* line 132, main.scss */
+  /* line 133, main.scss */
   .container.navbar-wrapper {
     margin-bottom: 0;
     width: auto;
   }
 
-  /* line 137, main.scss */
+  /* line 138, main.scss */
   #footer {
     padding-left: 20px;
     padding-right: 20px;
   }
 
-  /* line 142, main.scss */
+  /* line 143, main.scss */
   .navbar-inner {
     margin: -20px;
   }
 
-  /* line 146, main.scss */
+  /* line 147, main.scss */
   #footer {
     padding-left: 20px;
     padding-right: 20px;
@@ -183,7 +184,7 @@ body {
 
 }
 */
-/* line 189, main.scss */
+/* line 190, main.scss */
 #mainView {
   position: fixed;
   z-index: 99999;
@@ -198,7 +199,7 @@ body {
   overflow: auto;
 }
 
-/* line 204, main.scss */
+/* line 205, main.scss */
 .report-incident-dialog {
   top: 10%;
   left: 10%;
@@ -206,46 +207,46 @@ body {
   margin-left: auto;
 }
 
-/* line 221, main.scss */
+/* line 222, main.scss */
 .report-incident-form .row-fluid {
   margin-top: 20px;
   margin-bottom: 20px;
 }
 
-/* line 232, main.scss */
+/* line 233, main.scss */
 .natural-language-form {
   /* placeholder */
 }
-/* line 234, main.scss */
+/* line 235, main.scss */
 .natural-language-form p.text {
   line-height: 2em;
   vertical-align: middle;
 }
-/* line 239, main.scss */
+/* line 240, main.scss */
 .natural-language-form input, .natural-language-form .natural-language-input {
   background: none;
   border: none;
   text-align: center;
 }
-/* line 246, main.scss */
+/* line 247, main.scss */
 .natural-language-form ::-webkit-input-placeholder {
   /* WebKit browsers */
   color: #999;
   text-align: center;
 }
-/* line 249, main.scss */
+/* line 250, main.scss */
 .natural-language-form :-moz-placeholder {
   /* Mozilla Firefox 4 to 18 */
   color: #999;
   text-align: center;
 }
-/* line 252, main.scss */
+/* line 253, main.scss */
 .natural-language-form ::-moz-placeholder {
   /* Mozilla Firefox 19+ */
   color: #999;
   text-align: center;
 }
-/* line 255, main.scss */
+/* line 256, main.scss */
 .natural-language-form :-ms-input-placeholder {
   /* Internet Explorer 10+ */
   color: #999;
@@ -256,13 +257,13 @@ body {
 | FIXES
 \*/
 /* fix boostrap-select width */
-/* line 269, main.scss */
+/* line 270, main.scss */
 .bootstrap-select:not([class*="span"]) {
   width: 100%;
 }
 
 /* fix boostrap-select colors in natural language form */
-/* line 274, main.scss */
+/* line 275, main.scss */
 .boostrap-select-colors-fix {
   background-color: transparent;
   color: darkgray;

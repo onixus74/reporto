@@ -2,75 +2,42 @@
 /* global angular, $ */
 'use strict';
 
-!(function() {
-	var geocoder = L.mapbox.geocoder('examples.map-vyofok3q'),
-		map = reform.map = L.mapbox.map('map', 'examples.map-vyofok3q')
-		.addControl(L.mapbox.geocoderControl('examples.map-vyofok3q'));
+reform.widgets.map = function() {
 
-		geocoder.query('Tunisia', 	function showMap(err, data) {
-			map.fitBounds(data.lbounds);
-		});
+	// create a map in the "map" div, set the view to a given place and zoom
+	var map = reform.widgets.map = L.map('map');
 
-	/*
-	var marker = null,
-		geocoder = L.mapbox.geocoder('examples.map-vyofok3q'),
-		map = L.mapbox.map('map', 'examples.map-4l7djmvo')
-		.addControl(L.mapbox.geocoderControl('examples.map-4l7djmvo')); geocoder.query('Tunisia', showMap);
+	map.setView([34.161818161230386, 9.3603515625], 5);
 
-	function DragPos(e) {
-		document.getElementById('loc').value = '' + e.latlng.lat + ':' + e.latlng.lng;;
-	}
+	map.setMaxBounds(map.getBounds());
 
-	function onMapClick(e) {
-		console.log(e.latlng);
-		// alert("You clicked the map at " + e.latlng);
+	// add an OpenStreetMap tile layer
+	L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png').addTo(map);
+
+};
+
+$(reform.widgets.map);
+
+
+reform.widgets.geosearch = function() {};
+
+$(reform.widgets.geosearch);
+
+$(function() {
+	var marker;
+	$('.ui-timeline-story').on('mouseover', function(e) {
+		e.stopPropagation();
+		console.log(marker, e.target, e.currentTarget, e.relatedTarget, e.delegateTarget);
+		var loc = $(e.target).closest('td').data('latlng').split(',');
+		loc = new L.LatLng(loc[0], loc[1]);
 		if (!marker) {
-			marker = L.marker(e.latlng, {
-				icon: L.mapbox.marker.icon({
-					'marker-color': 'CC0033'
-				}),
-				draggable: true
-			});
-			marker.addTo(map);
-		} else {
+			console.log(loc);
+			marker = L.marker(loc);
 			console.log(marker);
-			marker.setLatLng(e.latlng);
-
+			marker.addTo(reform.widgets.map);
+		} else {
+			marker.setLatLng(loc);
 		}
-		// document.getElementById('loc').value = '' + e.latlng.lat + ':' + e.latlng.lng;
-		document.getElementById('id_location').value = e.latlng;
-		marker.on('dragend', function(e) {
-			window.eee = e;
-			document.getElementById('id_location').value = e.target._latlng;
-		});
-		//document.getElementById('loc').value = e.latlng;
-
-
-	}
-
-	map.on('click ', onMapClick);
-	*/
-	$(function(){
-		$('.ui-timeline-story').off('mouseover').off('mouseout').on('mouseover', function(e){
-			e.stopPropagation();
-			e.stopImmediatePropagation();
-			e.preventDefault();
-			console.log(e.target, e.currentTarget, e.relatedTarget, e.delegateTarget);
-			var loc = $(e.target).data('latlng').split(',');
-			if(!reform.marker){
-				console.log(loc)
-				reform.marker = L.marker(new L.LatLng(loc[0], loc[1]), {
-					icon: L.mapbox.marker.icon({
-						'marker-color': 'CC0033'
-					})
-				});
-				console.log(reform.marker)
-				reform.marker.addTo(reform.map);
-			} else {
-				reform.marker.setLatLng(new L.LatLng(loc[0], loc[1]))
-			}
-		}).on('mouseover', function(e){
-			e.target.marker
-		});
+		reform.widgets.map.setView(loc, 12);
 	})
-})();
+});
