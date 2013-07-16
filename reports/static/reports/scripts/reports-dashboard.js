@@ -2,10 +2,9 @@
 /* global angular, $ */
 'use strict';
 
-
 !(function() {
 	var geocoder = L.mapbox.geocoder('examples.map-4l7djmvo'),
-	    map = L.mapbox.map('map', 'examples.map-4l7djmvo')
+	  map = reform.map = L.mapbox.map('map', 'examples.map-4l7djmvo')
 		.addControl(L.mapbox.geocoderControl('examples.map-4l7djmvo'));
 
 		geocoder.query('Tunisia', 	function showMap(err, data) {

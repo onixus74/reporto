@@ -22,7 +22,6 @@
     "angular-leaflet": "~0.3.3",
     "mapbox.js": "~1.2.0",
     "animate.css": "latest",
-    "ui-router": "~0.0.1",
     "select2": "~3.4.1",
     "bootstrap-wysihtml5": "latest",
     "sass-bootstrap": "~2.3.2",
