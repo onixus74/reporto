@@ -1146,7 +1146,7 @@
   .navbar-inverse .nav-collapse .nav > li > a:focus,
   .navbar-inverse .nav-collapse .dropdown-menu a:hover,
   .navbar-inverse .nav-collapse .dropdown-menu a:focus {
-    background-color: #1f26b6;
+    background-color: #006682;
   }
 
   .nav-collapse.in .btn-group {
@@ -1204,8 +1204,8 @@
 
   .navbar-inverse .nav-collapse .navbar-form,
   .navbar-inverse .nav-collapse .navbar-search {
-    border-top-color: #1f26b6;
-    border-bottom-color: #1f26b6;
+    border-top-color: #006682;
+    border-bottom-color: #006682;
   }
 
   .navbar .nav-collapse .nav.pull-right {

@@ -4,7 +4,7 @@
 
 !(function() {
 	var geocoder = L.mapbox.geocoder('examples.map-vyofok3q'),
-	  map = reform.map = L.mapbox.map('map', 'examples.map-vyofok3q')
+		map = reform.map = L.mapbox.map('map', 'examples.map-vyofok3q')
 		.addControl(L.mapbox.geocoderControl('examples.map-vyofok3q'));
 
 		geocoder.query('Tunisia', 	function showMap(err, data) {
@@ -52,22 +52,25 @@
 	*/
 	$(function(){
 		$('.ui-timeline-story').off('mouseover').off('mouseout').on('mouseover', function(e){
-		  e.stopPropagation()
-		  var loc = $(e.target).data('latlng').split(',');
-		  if(!reform.marker){
-		    console.log(loc)
-		    reform.marker = L.marker(new L.LatLng(loc[0], loc[1]), {
-		  	  icon: L.mapbox.marker.icon({
-				'marker-color': 'CC0033'
-			  })
-		    });
-		    console.log(reform.marker)
-		    reform.marker.addTo(reform.map);
-		  } else {
-		    reform.marker.setLatLng(new L.LatLng(loc[0], loc[1]))
-		  }
+			e.stopPropagation();
+			e.stopImmediatePropagation();
+			e.preventDefault();
+			console.log(e.target, e.currentTarget, e.relatedTarget, e.delegateTarget);
+			var loc = $(e.target).data('latlng').split(',');
+			if(!reform.marker){
+				console.log(loc)
+				reform.marker = L.marker(new L.LatLng(loc[0], loc[1]), {
+					icon: L.mapbox.marker.icon({
+						'marker-color': 'CC0033'
+					})
+				});
+				console.log(reform.marker)
+				reform.marker.addTo(reform.map);
+			} else {
+				reform.marker.setLatLng(new L.LatLng(loc[0], loc[1]))
+			}
 		}).on('mouseover', function(e){
-		  e.target.marker
+			e.target.marker
 		});
 	})
 })();

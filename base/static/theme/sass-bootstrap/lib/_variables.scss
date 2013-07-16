@@ -11,7 +11,7 @@
 // -------------------------
 $black:                 #000;
 $grayDarker:            #080808;
-$grayDark:              #999;
+$grayDark:              #666;//#999;
 $gray:                  #bbb;
 $grayLight:             #dfdfdf;
 $grayLighter:           #eee;
@@ -20,20 +20,20 @@ $white:                 #fff;
 
 // Accent colors
 // -------------------------
-$blue:                  #007FFF;
-$blueDark:              #1F26B6;
+$blue:                  #A4CBD6;//#007FFF;
+$blueDark:              #006682;//#1F26B6;
 $green:                 #3FB618;
-$red:                   #FF0039;
+$red:                   #FF0000;//#FF0039;
 $yellow:                #FFA500;
-$orange:                #FF7518;
-$pink:                  #E671B8;
-$purple:                #9954BB;
+$orange:                #FF750F;//#FF7518;
+$pink:                  #E671B8;// ignore
+$purple:                #9954BB;// ignore
 
 
 // Scaffolding
 // -------------------------
 $bodyBackground:        $white;
-$textColor:             #555;
+$textColor:             $grayDarker;
 
 
 // Links
@@ -55,7 +55,7 @@ $altFontFamily:         $serifFontFamily;
 
 $headingsFontFamily:    inherit; // empty to use BS default, $baseFontFamily
 $headingsFontWeight:    300;    // instead of browser default, bold
-$headingsColor:         $grayDarker; // empty to use BS default, $textColor
+$headingsColor:         $textColor;//$grayDarker; // empty to use BS default, $textColor
 
 
 // Component sizing
@@ -91,8 +91,8 @@ $btnBorder:                         #bbb;
 $btnPrimaryBackground:              lighten($blueDark, 5%);
 $btnPrimaryBackgroundHighlight:     darken($blueDark, 5%);
 
-$btnInfoBackground:                 lighten($purple, 5%);
-$btnInfoBackgroundHighlight:        darken($purple, 5%);
+$btnInfoBackground:                 lighten($blue, 5%);
+$btnInfoBackgroundHighlight:        darken($blue, 5%);
 
 $btnSuccessBackground:              lighten($green, 5%);
 $btnSuccessBackgroundHighlight:     darken($green, 5%);
@@ -243,21 +243,21 @@ $successBackground:       $green;
 $successBorder:           transparent;
 
 $infoText:                $white;
-$infoBackground:          $purple;
+$infoBackground:          $blue;
 $infoBorder:              transparent;
 
 
 // Tooltips and popovers
 // -------------------------
-$tooltipColor:            #fff;
-$tooltipBackground:       #000;
+$tooltipColor:            $white;
+$tooltipBackground:       $black;
 $tooltipArrowWidth:       5px;
 $tooltipArrowColor:       $tooltipBackground;
 
-$popoverBackground:       $orange;
+$popoverBackground:       $gray;
 $popoverArrowWidth:       15px;
-$popoverArrowColor:       $orange;
-$popoverTitleBackground:  $orange;
+$popoverArrowColor:       $popoverBackground;
+$popoverTitleBackground:  $gray;
 
 // Special enhancement for popovers
 $popoverArrowOuterWidth:  $popoverArrowWidth + 1;
