@@ -2,20 +2,20 @@
 
 {% load crispy_forms_tags %}
 
-{% block view_title %}Edit Report | {% endblock %}
+{% block view_title %}New Report | {% endblock %}
 
 {% block view_content %}
 <div class="container">
 
 	<div class="page-header">
-		<h1>Report <small>Edit</small></h1>
+		<h1>Report <small>Add</small></h1>
 	</div>
 
 	<div class="container-fluid">
 		<div class="row-fluid">
 			<div class="offset2 span8">
 
-				<form class="form-horizontal" action="{% url 'reports:manage-edit' report.id %}" method="post">
+				<form class="form-horizontal" action="{% url 'reports:manage-create' %}" method="post">
 					{% csrf_token %}
 
 					{{form|crispy}}
@@ -32,10 +32,4 @@
 	</div>
 
 </div>
-{% endblock %}
-
-{% block view_styles %}
-{% endblock %}
-
-{% block view_scripts %}
 {% endblock %}

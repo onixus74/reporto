@@ -35,8 +35,8 @@
 							<td><a href="{{ category.get_absolute_url }}">{{category.definition}}</a></td>
 							<td>
 								<!--<a href="/categories/{{category.id}}" class="btn"><i class="icon-file-text-alt"></i> View</a>-->
-								<a href="{% url 'categories:edit' category.id %}" class="btn btn-warning"><i class="icon-pencil"></i> Edit</a>
-								<a href="{% url 'categories:delete' category.id %}" class="btn btn-danger"><i class="icon-trash"></i> Delete</a>
+								<a href="{% url 'categories:edit' category.id %}" class="btn btn-info"><i class="icon-pencil"></i> Edit</a>
+								<a href="{% url 'categories:delete' category.id %}" class="btn btn-warning"><i class="icon-trash"></i> Delete</a>
 							</td>
 						</tr>
 						{% endfor %}

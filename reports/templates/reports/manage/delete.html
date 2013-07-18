@@ -13,7 +13,7 @@
 		<div class="row-fluid">
 			<div class="offset2 span8">
 
-				<form class="form-horizontal" action="{% url 'reports:delete' report.id %}" method="post">
+				<form class="form-horizontal" action="{% url 'reports:manage-delete' report.id %}" method="post">
 					{% csrf_token %}
 
 					<div class="control-group">
@@ -30,7 +30,7 @@
 
 					<div class="form-actions">
 						<button type="submit" class="btn btn-danger">Yes</button>
-						<a href="{% url 'reports:list' %}" class="btn">Cancel</a>
+						<a href="{% url 'reports:manage-list' %}" class="btn">Cancel</a>
 					</div>
 
 				</form>

@@ -1,6 +1,6 @@
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from base.utils.views import ListMultiResponseMixin, DetailMultiResponseMixin
+from base.utils.views import ListHybridResponseMixin, DetailHybridResponseMixin
 
 from reports.models import Victim
 
@@ -10,7 +10,7 @@ class VictimListView(ListView):
 	template_name = "victims/list.html"
 
 
-class VictimListMultiView(ListMultiResponseMixin, VictimListView):
+class VictimListHybridView(ListHybridResponseMixin, VictimListView):
 	pass
 
 
@@ -19,7 +19,7 @@ class VictimDetailView(DetailView):
 	template_name = "victims/view.html"
 
 
-class VictimDetailMultiView(DetailMultiResponseMixin, VictimDetailView):
+class VictimDetailHybridView(DetailHybridResponseMixin, VictimDetailView):
 	pass
 
 

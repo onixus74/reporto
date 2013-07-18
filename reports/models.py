@@ -23,6 +23,7 @@ class Feature(models.Model):
 	def __unicode__(self):
 		return self.definition
 
+
 class Media(models.Model):
 	title = models.CharField(max_length=200)
 	description = models.TextField()
@@ -54,8 +55,8 @@ class Victim(models.Model):
 	def __unicode__(self):
 		return self.fullname
 
-class Report(models.Model):
 
+class Report(models.Model):
 	datetime = models.DateTimeField('date and time')
 	location = models.CharField(max_length=100)
 	location_text = models.CharField(max_length=300)
@@ -68,6 +69,8 @@ class Report(models.Model):
 	is_verified = models.BooleanField()
 	is_closed = models.BooleanField()
 	#Ministry Response:
+	created_at = models.DateTimeField(auto_now_add = True)
+	updated_at = models.DateTimeField(auto_now = True)
 
 	def get_absolute_url(self):
 		return reverse('reports:view', args=[str(self.id)])

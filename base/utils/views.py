@@ -92,9 +92,13 @@ class LazyJSONEncoder(simplejson.JSONEncoder):
 		tmp = { }
 		many = [f.name for f in obj._meta.many_to_many]
 		for field in obj._meta.get_all_field_names( ):
+			print field
+			print getattr(obj, field, None)
 			if len(many) > 0 and field in many:
 				many.remove(field)
 				tmp[field] = getattr(obj, field).all( )
+			#elif :
+			#	tmp[field] = getattr(obj, field, None)
 			else:
 				tmp[field] = getattr(obj, field, None)
 		return tmp
@@ -322,7 +326,7 @@ class JSONFormView(JSONResponseMixin, BaseFormView):
 
 
 
-class MultiResponseMixin(JSONResponseMixin):
+class HybridResponseMixin(JSONResponseMixin):
 	default_view = None
 	def render_to_response(self, context):
 		print self.request.META['CONTENT_TYPE']
@@ -336,13 +340,13 @@ class MultiResponseMixin(JSONResponseMixin):
 			return self.default_view.render_to_response(self, context)
 
 
-class ListMultiResponseMixin(MultiResponseMixin, JSONListView):
+class ListHybridResponseMixin(HybridResponseMixin, JSONListView):
 	default_view = ListView
 
-class PaginatedListMultiResponseMixin(MultiResponseMixin, PaginatedJSONListView):
+class PaginatedListHybridResponseMixin(HybridResponseMixin, PaginatedJSONListView):
 	default_view = ListView
 
-class DetailMultiResponseMixin(MultiResponseMixin, JSONDetailView):
+class DetailHybridResponseMixin(HybridResponseMixin, JSONDetailView):
 	default_view = DetailView
 
 
@@ -377,93 +381,137 @@ register.filter('jsonify', jsonify)
 
 
 
-class MultiFormatResponseMixin(TemplateResponseMixin):
+class HybridFormatResponseMixin(TemplateResponseMixin):
+		"""
+		Render http response in in either in HTML (default), HTML snippet or any serializer that is supported format.
+		The rendering output is determined by ``output`` request GET variable  as follows:
+
+		``?output=serialzier_<serializer_name> OR <html> OR <inc.html>`` - OPTIONAL: defaults to html
+
+		<serializer_name> part of the GET variable is passed to the Django serialzier frame with additional ``serializer_options``
+		defined on your custom class views. Hence if one has added additional serialziers they are fully supported.
+
+		If <serializer_name> dosen't exist or output serializer format is not supported or serializer_options are missing
+		 a 404 response is generated.
+
+		To use simple define your class based view as follows and based on ?output=<value> different format is returned:
+
+		```
+		class AdCategoryListView(HybridFormatResponseMixin, ListView):
+
+		context_object_name="adcategories_list"
+		serializer_options = {
+										'json': {
+														'fields': ['locations'],
+														'extras': ['get_firstmedia_url']
+														},
+										'geojson': {
+														'fields': ['locations'],
+														}
+										}
+
+		def get_queryset(self):
+				return AdCategory.objects.filter(parent_category__isnull = True)
+
+		...
+		...
+
+		```
+
+		Template naming convention for different outputs:
+
+		```?output=serialzier_json``` = NO TEMPLATE - response is output of calling json serialzier on the query
+		```?output=serialzier_foobar``` = NO TEMPLATE - response is output of calling foobar serialzier on the query
+
+
+		```?output=html``` = <templates>/<app_label>/<model name><template_name_suffix>.html
+		```?output=inc.html``` = <templates>/<app_label>/<model name><template_name_suffix>.inc.html
+
+		Suggested aditional serialziers:
+				GEOJSON - http://djangosnippets.org/snippets/2434/)
+				DjangoFullSerializers http://code.google.com/p/wadofstuff/wiki/DjangoFullSerializers
+
+		"""
+		def render_to_response(self, context):
+				# Look for a 'format=<foo>' GET argument if dosen't exist then do normal html Template Response mixin response
+				if self.request.GET.get('output','html') == 'html':
+						return super(HybridFormatResponseMixin, self).render_to_response(context) # call original ListView.render_to_response()
+				elif self.request.GET.get('output','') == 'inc.html':
+						opts = self.get_queryset().model._meta
+						self.template_name = "%s/%s%s.inc.html" % (opts.app_label, opts.object_name.lower(), self.template_name_suffix)
+						return super(HybridFormatResponseMixin, self).render_to_response(context) # call original ListView.render_to_response()
+
+				output = self.request.GET.get('output')
+				if not 'serializer_' in output:
+						raise Http404
+
+				"""
+				Check we are configured properly first - we do the check here so that adding this mixin
+				dosen't prevent original view logic from executing
+				"""
+				if not hasattr(self, 'serializer_options'):
+						raise ImproperlyConfigured(u"'%s' must define 'serializer_options'" % self.__class__.__name__)
+
+				serializer = output.split('_')[1] # grap serialzier name
+
+				""" if serialzier is not supported or it's options not specified in view's serializer_options raise 404"""
+				if not serializer in serializers.get_serializer_formats() or serializer not in self.serializer_options:
+						raise Http404
+
+				output = self.request.GET.get('output','')
+				query = self.get_queryset()
+				if hasattr(self, 'get_object'): # if get_object attribute exists than we should filter to that object only
+						query = query.filter(pk=self.get_object().pk)
+
+				content = serializers.serialize(serializer, query, **self.serializer_options[serializer])
+				#return HttpResponse(content, content_type='application/%s' % serializer)
+				return HttpResponse(content)
+
+
+
+
+
+
+
+
+
+
+
+import json
+
+from django.http import HttpResponse
+from django.views.generic.edit import CreateView
+
+class AjaxableResponseMixin(object):
     """
-    Render http response in in either in HTML (default), HTML snippet or any serializer that is supported format.
-    The rendering output is determined by ``output`` request GET variable  as follows:
-
-    ``?output=serialzier_<serializer_name> OR <html> OR <inc.html>`` - OPTIONAL: defaults to html
-
-    <serializer_name> part of the GET variable is passed to the Django serialzier frame with additional ``serializer_options``
-    defined on your custom class views. Hence if one has added additional serialziers they are fully supported.
-
-    If <serializer_name> dosen't exist or output serializer format is not supported or serializer_options are missing
-     a 404 response is generated.
-
-    To use simple define your class based view as follows and based on ?output=<value> different format is returned:
-
-    ```
-    class AdCategoryListView(MultiFormatResponseMixin, ListView):
-
-    context_object_name="adcategories_list"
-    serializer_options = {
-                    'json': {
-                            'fields': ['locations'],
-                            'extras': ['get_firstmedia_url']
-                            },
-                    'geojson': {
-                            'fields': ['locations'],
-                            }
-                    }
-
-    def get_queryset(self):
-        return AdCategory.objects.filter(parent_category__isnull = True)
-
-    ...
-    ...
-
-    ```
-
-    Template naming convention for different outputs:
-
-    ```?output=serialzier_json``` = NO TEMPLATE - response is output of calling json serialzier on the query
-    ```?output=serialzier_foobar``` = NO TEMPLATE - response is output of calling foobar serialzier on the query
-
-
-    ```?output=html``` = <templates>/<app_label>/<model name><template_name_suffix>.html
-    ```?output=inc.html``` = <templates>/<app_label>/<model name><template_name_suffix>.inc.html
-
-    Suggested aditional serialziers:
-        GEOJSON - http://djangosnippets.org/snippets/2434/)
-        DjangoFullSerializers http://code.google.com/p/wadofstuff/wiki/DjangoFullSerializers
-
+    Mixin to add AJAX support to a form.
+    Must be used with an object-based FormView (e.g. CreateView)
     """
-    def render_to_response(self, context):
-        # Look for a 'format=<foo>' GET argument if dosen't exist then do normal html Template Response mixin response
-        if self.request.GET.get('output','html') == 'html':
-            return super(MultiFormatResponseMixin, self).render_to_response(context) # call original ListView.render_to_response()
-        elif self.request.GET.get('output','') == 'inc.html':
-            opts = self.get_queryset().model._meta
-            self.template_name = "%s/%s%s.inc.html" % (opts.app_label, opts.object_name.lower(), self.template_name_suffix)
-            return super(MultiFormatResponseMixin, self).render_to_response(context) # call original ListView.render_to_response()
+    def render_to_json_response(self, context, **response_kwargs):
+        data = json.dumps(context)
+        response_kwargs['content_type'] = 'application/json'
+        return HttpResponse(data, **response_kwargs)
 
-        output = self.request.GET.get('output')
-        if not 'serializer_' in output:
-            raise Http404
+    def form_invalid(self, form):
+        response = super(AjaxableResponseMixin, self).form_invalid(form)
+        if self.request.is_ajax():
+            return self.render_to_json_response(form.errors, status=400)
+        else:
+            return response
 
-        """
-        Check we are configured properly first - we do the check here so that adding this mixin
-        dosen't prevent original view logic from executing
-        """
-        if not hasattr(self, 'serializer_options'):
-            raise ImproperlyConfigured(u"'%s' must define 'serializer_options'" % self.__class__.__name__)
+    def form_valid(self, form):
+        # We make sure to call the parent's form_valid() method because
+        # it might do some processing (in the case of CreateView, it will
+        # call form.save() for example).
+        response = super(AjaxableResponseMixin, self).form_valid(form)
+        if self.request.is_ajax():
+            data = {
+                'pk': self.object.pk,
+            }
+            return self.render_to_json_response(data)
+        else:
+            return response
 
-        serializer = output.split('_')[1] # grap serialzier name
-
-        """ if serialzier is not supported or it's options not specified in view's serializer_options raise 404"""
-        if not serializer in serializers.get_serializer_formats() or serializer not in self.serializer_options:
-            raise Http404
-
-        output = self.request.GET.get('output','')
-        query = self.get_queryset()
-        if hasattr(self, 'get_object'): # if get_object attribute exists than we should filter to that object only
-            query = query.filter(pk=self.get_object().pk)
-
-        content = serializers.serialize(serializer, query, **self.serializer_options[serializer])
-        #return HttpResponse(content, content_type='application/%s' % serializer)
-        return HttpResponse(content)
-
-
-
-
+# class AuthorCreate(AjaxableResponseMixin, CreateView):
+#     model = Author
 

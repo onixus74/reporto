@@ -2,7 +2,7 @@ from django.shortcuts import render_to_response
 
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from base.utils.views import ListMultiResponseMixin, DetailMultiResponseMixin
+from base.utils.views import ListHybridResponseMixin, DetailHybridResponseMixin
 
 from reports.models import Category
 
@@ -12,7 +12,7 @@ class CategoryListView(ListView):
 	template_name = "categories/list.html"
 
 
-class CategoryListMultiView(ListMultiResponseMixin, CategoryListView):
+class CategoryListHybridView(ListHybridResponseMixin, CategoryListView):
 	pass
 
 
@@ -21,7 +21,7 @@ class CategoryDetailView(DetailView):
 	template_name = "categories/view.html"
 
 
-class CategoryDetailMultiView(DetailMultiResponseMixin, CategoryDetailView):
+class CategoryDetailHybridView(DetailHybridResponseMixin, CategoryDetailView):
 	pass
 
 

@@ -11,7 +11,7 @@ source .env/bin/activate # activate virtual environment
 
 pip install -r requirements.txt # install requirements including Django, ...
 
-pip freeze > requirements.txt # dump installed requirements
+pip freeze --local > requirements.txt # dump installed requirements
 
 python manage.py syncdb # sync database
 

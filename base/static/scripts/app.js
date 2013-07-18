@@ -17,7 +17,7 @@ var logger = {
 	}
 };
 
-var ReformPlatform = angular.module('reformPlatform', ['ui.router', 'ui.bootstrap', 'google-maps']);
+var ReformPlatform = angular.module('reformPlatform', ['ui.router', 'ui.bootstrap']);
 
 var app = ReformPlatform;
 

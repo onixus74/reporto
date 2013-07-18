@@ -25,13 +25,13 @@
 						</tr>
 						{% for report in report_list %}
 						<tr>
-							<td><a href="{{ report.get_absolute_url }}">{{report.datetime}}</a></td>
+							<td><a href="{% url 'reports:manage-view' report.id %}">{{report.datetime}}</a></td>
 							<td>{{report.location_text}}</td>
 							<td>{{report.category}}</td>
 							<td><a href="{{ report.victim.get_absolute_url }}">{{report.victim}}</a></td>
 							<td>
-								<a href="{% url 'reports:edit' report.id %}" class="btn btn-warning"><i class="icon-pencil"></i> Edit</a>
-								<a href="{% url 'reports:delete' report.id %}" class="btn btn-danger"><i class="icon-trash"></i> Delete</a>
+								<a href="{% url 'reports:manage-edit' report.id %}" class="btn btn-info"><i class="icon-pencil"></i> Edit</a>
+								<a href="{% url 'reports:manage-delete' report.id %}" class="btn btn-warning"><i class="icon-trash"></i> Delete</a>
 							</td>
 						</tr>
 						{% endfor %}
@@ -41,7 +41,7 @@
 		</div>
 		<div class="row-fluid">
 			<div class="span12 text-center">
-				<a href="{% url 'reports:create' %}" class="btn btn-large btn-primary"><i class="icon-plus icon-large"></i> Add Report</a>
+				<a href="{% url 'reports:manage-create' %}" class="btn btn-large btn-primary"><i class="icon-plus icon-large"></i> Add Report</a>
 			</div>
 		</div>
 	</div>

@@ -734,13 +734,13 @@ cite {
 
 /* line 31, ../theme/sass-bootstrap/lib/_type.scss */
 .muted {
-  color: #dfdfdf;
+  color: #bdc3c7;
 }
 
 /* line 33, ../theme/sass-bootstrap/lib/_type.scss */
 a.muted:hover,
 a.muted:focus {
-  color: #c6c6c6;
+  color: #a1aab0;
 }
 
 /* line 35, ../theme/sass-bootstrap/lib/_type.scss */
@@ -815,7 +815,7 @@ h1, h2, h3, h4, h5, h6 {
 h1 small, h2 small, h3 small, h4 small, h5 small, h6 small {
   font-weight: normal;
   line-height: 1;
-  color: #dfdfdf;
+  color: #bdc3c7;
 }
 
 /* line 75, ../theme/sass-bootstrap/lib/_type.scss */
@@ -879,7 +879,7 @@ h4 small {
 .page-header {
   padding-bottom: 9px;
   margin: 20px 0 30px;
-  border-bottom: 1px solid #eeeeee;
+  border-bottom: 1px solid #ecf0f1;
 }
 
 /* line 105, ../theme/sass-bootstrap/lib/_type.scss */
@@ -979,7 +979,7 @@ dd {
 hr {
   margin: 20px 0;
   border: 0;
-  border-top: 1px solid #eeeeee;
+  border-top: 1px solid #ecf0f1;
   border-bottom: 1px solid white;
 }
 
@@ -987,7 +987,7 @@ hr {
 abbr[title],
 abbr[data-original-title] {
   cursor: help;
-  border-bottom: 1px dotted #dfdfdf;
+  border-bottom: 1px dotted #bdc3c7;
 }
 
 /* line 186, ../theme/sass-bootstrap/lib/_type.scss */
@@ -1000,7 +1000,7 @@ abbr.initialism {
 blockquote {
   padding: 0 0 0 15px;
   margin: 0 0 20px;
-  border-left: 5px solid #eeeeee;
+  border-left: 5px solid #ecf0f1;
 }
 /* line 196, ../theme/sass-bootstrap/lib/_type.scss */
 blockquote p {
@@ -1013,7 +1013,7 @@ blockquote p {
 blockquote small {
   display: block;
   line-height: 20px;
-  color: #dfdfdf;
+  color: #bdc3c7;
 }
 /* line 206, ../theme/sass-bootstrap/lib/_type.scss */
 blockquote small:before {
@@ -1024,7 +1024,7 @@ blockquote.pull-right {
   float: right;
   padding-right: 15px;
   padding-left: 0;
-  border-right: 5px solid #eeeeee;
+  border-right: 5px solid #ecf0f1;
   border-left: 0;
 }
 /* line 219, ../theme/sass-bootstrap/lib/_type.scss */
@@ -1063,7 +1063,7 @@ pre {
   padding: 0 3px 2px;
   font-family: Monaco, Menlo, Consolas, "Courier New", monospace;
   font-size: 12px;
-  color: #666666;
+  color: #6f7c7d;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
@@ -1136,14 +1136,14 @@ legend {
   margin-bottom: 20px;
   font-size: 21px;
   line-height: 40px;
-  color: #666666;
+  color: #6f7c7d;
   border: 0;
   border-bottom: 1px solid #e5e5e5;
 }
 /* line 33, ../theme/sass-bootstrap/lib/_forms.scss */
 legend small {
   font-size: 15px;
-  color: #dfdfdf;
+  color: #bdc3c7;
 }
 
 /* line 44, ../theme/sass-bootstrap/lib/_forms.scss */
@@ -1195,7 +1195,7 @@ input[type="color"],
   margin-bottom: 10px;
   font-size: 14px;
   line-height: 20px;
-  color: #bbbbbb;
+  color: #95a5a6;
   -webkit-border-radius: 0px;
   -moz-border-radius: 0px;
   border-radius: 0px;
@@ -1232,7 +1232,7 @@ input[type="tel"],
 input[type="color"],
 .uneditable-input {
   background-color: white;
-  border: 1px solid #bbbbbb;
+  border: 1px solid #95a5a6;
   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
@@ -1302,7 +1302,7 @@ input[type="file"] {
 /* line 163, ../theme/sass-bootstrap/lib/_forms.scss */
 select {
   width: 220px;
-  border: 1px solid #bbbbbb;
+  border: 1px solid #95a5a6;
   background-color: white;
 }
 
@@ -1325,9 +1325,9 @@ input[type="checkbox"]:focus {
 /* line 189, ../theme/sass-bootstrap/lib/_forms.scss */
 .uneditable-input,
 .uneditable-textarea {
-  color: #dfdfdf;
+  color: #bdc3c7;
   background-color: #fcfcfc;
-  border-color: #bbbbbb;
+  border-color: #95a5a6;
   -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.025);
   -moz-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.025);
   box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.025);
@@ -1349,17 +1349,17 @@ input[type="checkbox"]:focus {
 /* line 83, ../theme/sass-bootstrap/lib/_mixins.scss */
 input:-moz-placeholder,
 textarea:-moz-placeholder {
-  color: #bbbbbb;
+  color: #95a5a6;
 }
 /* line 86, ../theme/sass-bootstrap/lib/_mixins.scss */
 input:-ms-input-placeholder,
 textarea:-ms-input-placeholder {
-  color: #bbbbbb;
+  color: #95a5a6;
 }
 /* line 89, ../theme/sass-bootstrap/lib/_mixins.scss */
 input::-webkit-input-placeholder,
 textarea::-webkit-input-placeholder {
-  color: #bbbbbb;
+  color: #95a5a6;
 }
 
 /* line 225, ../theme/sass-bootstrap/lib/_forms.scss */
@@ -1585,7 +1585,7 @@ input[readonly],
 select[readonly],
 textarea[readonly] {
   cursor: not-allowed;
-  background-color: #eeeeee;
+  background-color: #ecf0f1;
 }
 
 /* line 340, ../theme/sass-bootstrap/lib/_forms.scss */
@@ -1672,7 +1672,7 @@ input[type="checkbox"][readonly] {
 .control-group.error .input-prepend .add-on,
 .control-group.error .input-append .add-on {
   color: white;
-  background-color: red;
+  background-color: #c0392b;
   border-color: white;
 }
 
@@ -1712,7 +1712,7 @@ input[type="checkbox"][readonly] {
 .control-group.success .input-prepend .add-on,
 .control-group.success .input-append .add-on {
   color: white;
-  background-color: #3fb618;
+  background-color: #27ae60;
   border-color: white;
 }
 
@@ -1874,7 +1874,7 @@ select:focus:invalid:focus {
   line-height: 20px;
   text-align: center;
   text-shadow: 0 1px 0 white;
-  background-color: #eeeeee;
+  background-color: #ecf0f1;
   border: 1px solid #ccc;
 }
 /* line 468, ../theme/sass-bootstrap/lib/_forms.scss */
@@ -1892,8 +1892,8 @@ select:focus:invalid:focus {
 /* line 472, ../theme/sass-bootstrap/lib/_forms.scss */
 .input-append .active,
 .input-prepend .active {
-  background-color: #96ed7a;
-  border-color: #3fb618;
+  background-color: #89e5b0;
+  border-color: #27ae60;
 }
 
 /* line 480, ../theme/sass-bootstrap/lib/_forms.scss */
@@ -2418,11 +2418,11 @@ table th[class*="span"],
 
 /* line 207, ../theme/sass-bootstrap/lib/_tables.scss */
 .table tbody tr.success > td {
-  background-color: #3fb618;
+  background-color: #27ae60;
 }
 /* line 210, ../theme/sass-bootstrap/lib/_tables.scss */
 .table tbody tr.error > td {
-  background-color: red;
+  background-color: #c0392b;
 }
 /* line 213, ../theme/sass-bootstrap/lib/_tables.scss */
 .table tbody tr.warning > td {
@@ -2435,11 +2435,11 @@ table th[class*="span"],
 
 /* line 223, ../theme/sass-bootstrap/lib/_tables.scss */
 .table-hover tbody tr.success:hover > td {
-  background-color: #379f15;
+  background-color: #229955;
 }
 /* line 226, ../theme/sass-bootstrap/lib/_tables.scss */
 .table-hover tbody tr.error:hover > td {
-  background-color: #e60000;
+  background-color: #ab3326;
 }
 /* line 229, ../theme/sass-bootstrap/lib/_tables.scss */
 .table-hover tbody tr.warning:hover > td {
@@ -4829,7 +4829,7 @@ a .icon-rotate-90:before, a .icon-rotate-180:before, a .icon-rotate-270:before, 
   clear: both;
   font-weight: normal;
   line-height: 20px;
-  color: #666666;
+  color: #6f7c7d;
   white-space: nowrap;
 }
 
@@ -4871,7 +4871,7 @@ a .icon-rotate-90:before, a .icon-rotate-180:before, a .icon-rotate-270:before, 
 .dropdown-menu > .disabled > a,
 .dropdown-menu > .disabled > a:hover,
 .dropdown-menu > .disabled > a:focus {
-  color: #dfdfdf;
+  color: #bdc3c7;
 }
 
 /* line 118, ../theme/sass-bootstrap/lib/_dropdowns.scss */
@@ -5009,8 +5009,8 @@ a .icon-rotate-90:before, a .icon-rotate-180:before, a .icon-rotate-270:before, 
   min-height: 20px;
   padding: 19px;
   margin-bottom: 20px;
-  background-color: #eeeeee;
-  border: 1px solid gainsboro;
+  background-color: #ecf0f1;
+  border: 1px solid #d7e0e2;
   -webkit-border-radius: 0px;
   -moz-border-radius: 0px;
   border-radius: 0px;
@@ -5110,19 +5110,19 @@ button.close {
   text-align: center;
   vertical-align: middle;
   cursor: pointer;
-  color: #666666;
+  color: #6f7c7d;
   text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
-  background-color: #dedede;
-  background-image: -moz-linear-gradient(top, #eeeeee, #c8c8c8);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#eeeeee), to(#c8c8c8));
-  background-image: -webkit-linear-gradient(top, #eeeeee, #c8c8c8);
-  background-image: -o-linear-gradient(top, #eeeeee, #c8c8c8);
-  background-image: linear-gradient(to bottom, #eeeeee, #c8c8c8);
+  background-color: #dae2e4;
+  background-image: -moz-linear-gradient(top, #ecf0f1, #c0cdd1);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ecf0f1), to(#c0cdd1));
+  background-image: -webkit-linear-gradient(top, #ecf0f1, #c0cdd1);
+  background-image: -o-linear-gradient(top, #ecf0f1, #c0cdd1);
+  background-image: linear-gradient(to bottom, #ecf0f1, #c0cdd1);
   background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFEEEEEE', endColorstr='#FFC8C8C8', GradientType=0);
-  border-color: #c8c8c8 #c8c8c8 #a2a2a2;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFECF0F1', endColorstr='#FFC0CDD1', GradientType=0);
+  border-color: #c0cdd1 #c0cdd1 #94aab0;
   border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-  *background-color: #c8c8c8;
+  *background-color: #c0cdd1;
   /* Darken IE7 buttons by default so they stand out more given they won't have borders */
   filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
   border: 1px solid #bbbbbb;
@@ -5138,13 +5138,13 @@ button.close {
 }
 /* line 513, ../theme/sass-bootstrap/lib/_mixins.scss */
 .btn:hover, .btn:focus, .btn:active, .btn.active, .btn.disabled, .btn[disabled] {
-  color: #666666;
-  background-color: #c8c8c8;
-  *background-color: #bbbbbb;
+  color: #6f7c7d;
+  background-color: #c0cdd1;
+  *background-color: #b1c2c6;
 }
 /* line 521, ../theme/sass-bootstrap/lib/_mixins.scss */
 .btn:active, .btn.active {
-  background-color: #aeaeae \9;
+  background-color: #a3b6bb \9;
 }
 /* line 61, ../theme/sass-bootstrap/lib/_mixins.scss */
 .btn:first-child {
@@ -5152,7 +5152,7 @@ button.close {
 }
 /* line 30, ../theme/sass-bootstrap/lib/_buttons.scss */
 .btn:hover, .btn:focus {
-  color: #666666;
+  color: #6f7c7d;
   text-decoration: none;
   background-position: 0 -15px;
   -webkit-transition: background-position 0.1s linear;
@@ -5325,58 +5325,58 @@ input[type="button"].btn-block {
 .btn-danger {
   color: white;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-  background-color: #f50f0f;
-  background-image: -moz-linear-gradient(top, #ff1a1a, #e60000);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ff1a1a), to(#e60000));
-  background-image: -webkit-linear-gradient(top, #ff1a1a, #e60000);
-  background-image: -o-linear-gradient(top, #ff1a1a, #e60000);
-  background-image: linear-gradient(to bottom, #ff1a1a, #e60000);
+  background-color: #c13c2d;
+  background-image: -moz-linear-gradient(top, #d14233, #ab3326);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#d14233), to(#ab3326));
+  background-image: -webkit-linear-gradient(top, #d14233, #ab3326);
+  background-image: -o-linear-gradient(top, #d14233, #ab3326);
+  background-image: linear-gradient(to bottom, #d14233, #ab3326);
   background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFFF1A1A', endColorstr='#FFE60000', GradientType=0);
-  border-color: #e60000 #e60000 #990000;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFD14233', endColorstr='#FFAB3326', GradientType=0);
+  border-color: #ab3326 #ab3326 #6d2018;
   border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-  *background-color: #e60000;
+  *background-color: #ab3326;
   /* Darken IE7 buttons by default so they stand out more given they won't have borders */
   filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
 }
 /* line 513, ../theme/sass-bootstrap/lib/_mixins.scss */
 .btn-danger:hover, .btn-danger:focus, .btn-danger:active, .btn-danger.active, .btn-danger.disabled, .btn-danger[disabled] {
   color: white;
-  background-color: #e60000;
-  *background-color: #cc0000;
+  background-color: #ab3326;
+  *background-color: #962d22;
 }
 /* line 521, ../theme/sass-bootstrap/lib/_mixins.scss */
 .btn-danger:active, .btn-danger.active {
-  background-color: #b30000 \9;
+  background-color: #81261d \9;
 }
 
 /* line 157, ../theme/sass-bootstrap/lib/_buttons.scss */
 .btn-success {
   color: white;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-  background-color: #40ba18;
-  background-image: -moz-linear-gradient(top, #47cd1b, #379f15);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#47cd1b), to(#379f15));
-  background-image: -webkit-linear-gradient(top, #47cd1b, #379f15);
-  background-image: -o-linear-gradient(top, #47cd1b, #379f15);
-  background-image: linear-gradient(to bottom, #47cd1b, #379f15);
+  background-color: #28b262;
+  background-image: -moz-linear-gradient(top, #2cc36b, #229955);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#2cc36b), to(#229955));
+  background-image: -webkit-linear-gradient(top, #2cc36b, #229955);
+  background-image: -o-linear-gradient(top, #2cc36b, #229955);
+  background-image: linear-gradient(to bottom, #2cc36b, #229955);
   background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF47CD1B', endColorstr='#FF379F15', GradientType=0);
-  border-color: #379f15 #379f15 #205c0c;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF2CC36B', endColorstr='#FF229955', GradientType=0);
+  border-color: #229955 #229955 #145b32;
   border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-  *background-color: #379f15;
+  *background-color: #229955;
   /* Darken IE7 buttons by default so they stand out more given they won't have borders */
   filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
 }
 /* line 513, ../theme/sass-bootstrap/lib/_mixins.scss */
 .btn-success:hover, .btn-success:focus, .btn-success:active, .btn-success.active, .btn-success.disabled, .btn-success[disabled] {
   color: white;
-  background-color: #379f15;
-  *background-color: #2f8912;
+  background-color: #229955;
+  *background-color: #1e8449;
 }
 /* line 521, ../theme/sass-bootstrap/lib/_mixins.scss */
 .btn-success:active, .btn-success.active {
-  background-color: #28720f \9;
+  background-color: #19703e \9;
 }
 
 /* line 161, ../theme/sass-bootstrap/lib/_buttons.scss */
@@ -5500,7 +5500,7 @@ input[type="submit"].btn.btn-mini {
 /* line 225, ../theme/sass-bootstrap/lib/_buttons.scss */
 .btn-link[disabled]:hover,
 .btn-link[disabled]:focus {
-  color: #666666;
+  color: #6f7c7d;
   text-decoration: none;
 }
 
@@ -5674,7 +5674,7 @@ input[type="submit"].btn.btn-mini {
 }
 /* line 137, ../theme/sass-bootstrap/lib/_button-groups.scss */
 .btn-group.open .btn.dropdown-toggle {
-  background-color: #c8c8c8;
+  background-color: #c0cdd1;
 }
 /* line 140, ../theme/sass-bootstrap/lib/_button-groups.scss */
 .btn-group.open .btn-primary.dropdown-toggle {
@@ -5686,11 +5686,11 @@ input[type="submit"].btn.btn-mini {
 }
 /* line 146, ../theme/sass-bootstrap/lib/_button-groups.scss */
 .btn-group.open .btn-danger.dropdown-toggle {
-  background-color: #e60000;
+  background-color: #ab3326;
 }
 /* line 149, ../theme/sass-bootstrap/lib/_button-groups.scss */
 .btn-group.open .btn-success.dropdown-toggle {
-  background-color: #379f15;
+  background-color: #229955;
 }
 /* line 152, ../theme/sass-bootstrap/lib/_button-groups.scss */
 .btn-group.open .btn-info.dropdown-toggle {
@@ -5826,7 +5826,7 @@ input[type="submit"].btn.btn-mini {
 
 /* line 38, ../theme/sass-bootstrap/lib/_alerts.scss */
 .alert-success {
-  background-color: #3fb618;
+  background-color: #27ae60;
   border-color: transparent;
   color: white;
 }
@@ -5839,7 +5839,7 @@ input[type="submit"].btn.btn-mini {
 /* line 47, ../theme/sass-bootstrap/lib/_alerts.scss */
 .alert-danger,
 .alert-error {
-  background-color: red;
+  background-color: #c0392b;
   border-color: transparent;
   color: white;
 }
@@ -5895,7 +5895,7 @@ input[type="submit"].btn.btn-mini {
 .nav > li > a:hover,
 .nav > li > a:focus {
   text-decoration: none;
-  background-color: #eeeeee;
+  background-color: #ecf0f1;
 }
 
 /* line 27, ../theme/sass-bootstrap/lib/_navs.scss */
@@ -5915,7 +5915,7 @@ input[type="submit"].btn.btn-mini {
   font-size: 11px;
   font-weight: bold;
   line-height: 20px;
-  color: #dfdfdf;
+  color: #bdc3c7;
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
   text-transform: uppercase;
 }
@@ -6027,14 +6027,14 @@ input[type="submit"].btn.btn-mini {
 }
 /* line 128, ../theme/sass-bootstrap/lib/_navs.scss */
 .nav-tabs > li > a:hover, .nav-tabs > li > a:focus {
-  border-color: #eeeeee #eeeeee #dddddd;
+  border-color: #ecf0f1 #ecf0f1 #dddddd;
 }
 
 /* line 135, ../theme/sass-bootstrap/lib/_navs.scss */
 .nav-tabs > .active > a,
 .nav-tabs > .active > a:hover,
 .nav-tabs > .active > a:focus {
-  color: #bbbbbb;
+  color: #95a5a6;
   background-color: white;
   border: 1px solid #ddd;
   border-bottom-color: transparent;
@@ -6162,8 +6162,8 @@ input[type="submit"].btn.btn-mini {
 
 /* line 241, ../theme/sass-bootstrap/lib/_navs.scss */
 .nav-tabs .active .dropdown-toggle .caret {
-  border-top-color: #bbbbbb;
-  border-bottom-color: #bbbbbb;
+  border-top-color: #95a5a6;
+  border-bottom-color: #95a5a6;
 }
 
 /* line 249, ../theme/sass-bootstrap/lib/_navs.scss */
@@ -6178,8 +6178,8 @@ input[type="submit"].btn.btn-mini {
 .nav > li.dropdown.open.active > a:hover,
 .nav > li.dropdown.open.active > a:focus {
   color: white;
-  background-color: #dfdfdf;
-  border-color: #dfdfdf;
+  background-color: #bdc3c7;
+  border-color: #bdc3c7;
 }
 
 /* line 266, ../theme/sass-bootstrap/lib/_navs.scss */
@@ -6196,7 +6196,7 @@ input[type="submit"].btn.btn-mini {
 /* line 274, ../theme/sass-bootstrap/lib/_navs.scss */
 .tabs-stacked .open > a:hover,
 .tabs-stacked .open > a:focus {
-  border-color: #dfdfdf;
+  border-color: #bdc3c7;
 }
 
 /* line 288, ../theme/sass-bootstrap/lib/_navs.scss */
@@ -6300,7 +6300,7 @@ input[type="submit"].btn.btn-mini {
 /* line 363, ../theme/sass-bootstrap/lib/_navs.scss */
 .tabs-left > .nav-tabs > li > a:hover,
 .tabs-left > .nav-tabs > li > a:focus {
-  border-color: #eeeeee #dddddd #eeeeee #eeeeee;
+  border-color: #ecf0f1 #dddddd #ecf0f1 #ecf0f1;
 }
 
 /* line 368, ../theme/sass-bootstrap/lib/_navs.scss */
@@ -6329,7 +6329,7 @@ input[type="submit"].btn.btn-mini {
 /* line 384, ../theme/sass-bootstrap/lib/_navs.scss */
 .tabs-right > .nav-tabs > li > a:hover,
 .tabs-right > .nav-tabs > li > a:focus {
-  border-color: #eeeeee #eeeeee #eeeeee #dddddd;
+  border-color: #ecf0f1 #ecf0f1 #ecf0f1 #dddddd;
 }
 
 /* line 389, ../theme/sass-bootstrap/lib/_navs.scss */
@@ -6342,7 +6342,7 @@ input[type="submit"].btn.btn-mini {
 
 /* line 400, ../theme/sass-bootstrap/lib/_navs.scss */
 .nav > .disabled > a {
-  color: #dfdfdf;
+  color: #bdc3c7;
 }
 
 /* line 405, ../theme/sass-bootstrap/lib/_navs.scss */
@@ -6434,7 +6434,7 @@ input[type="submit"].btn.btn-mini {
 }
 /* line 78, ../theme/sass-bootstrap/lib/_navbar.scss */
 .navbar-link:hover, .navbar-link:focus {
-  color: #bbbbbb;
+  color: #95a5a6;
 }
 
 /* line 85, ../theme/sass-bootstrap/lib/_navbar.scss */
@@ -6639,7 +6639,7 @@ input[type="submit"].btn.btn-mini {
 .navbar .nav > li > a:focus,
 .navbar .nav > li > a:hover {
   background-color: rgba(0, 0, 0, 0.05);
-  color: #bbbbbb;
+  color: #95a5a6;
   text-decoration: none;
 }
 
@@ -6908,20 +6908,20 @@ input[type="submit"].btn.btn-mini {
 }
 /* line 83, ../theme/sass-bootstrap/lib/_mixins.scss */
 .navbar-inverse .navbar-search .search-query:-moz-placeholder {
-  color: #dfdfdf;
+  color: #bdc3c7;
 }
 /* line 86, ../theme/sass-bootstrap/lib/_mixins.scss */
 .navbar-inverse .navbar-search .search-query:-ms-input-placeholder {
-  color: #dfdfdf;
+  color: #bdc3c7;
 }
 /* line 89, ../theme/sass-bootstrap/lib/_mixins.scss */
 .navbar-inverse .navbar-search .search-query::-webkit-input-placeholder {
-  color: #dfdfdf;
+  color: #bdc3c7;
 }
 /* line 480, ../theme/sass-bootstrap/lib/_navbar.scss */
 .navbar-inverse .navbar-search .search-query:focus, .navbar-inverse .navbar-search .search-query.focused {
   padding: 5px 15px;
-  color: #666666;
+  color: #6f7c7d;
   text-shadow: 0 1px 0 white;
   background-color: white;
   border: 0;
@@ -6984,7 +6984,7 @@ input[type="submit"].btn.btn-mini {
 }
 /* line 21, ../theme/sass-bootstrap/lib/_breadcrumbs.scss */
 .breadcrumb .active {
-  color: #dfdfdf;
+  color: #bdc3c7;
 }
 
 /* line 6, ../theme/sass-bootstrap/lib/_pagination.scss */
@@ -7020,7 +7020,7 @@ input[type="submit"].btn.btn-mini {
   padding: 4px 12px;
   line-height: 20px;
   text-decoration: none;
-  background-color: #dfdfdf;
+  background-color: #bdc3c7;
   border: 1px solid transparent;
   border-left-width: 0;
 }
@@ -7036,7 +7036,7 @@ input[type="submit"].btn.btn-mini {
 /* line 41, ../theme/sass-bootstrap/lib/_pagination.scss */
 .pagination ul > .active > a,
 .pagination ul > .active > span {
-  color: #dfdfdf;
+  color: #bdc3c7;
   cursor: default;
 }
 
@@ -7045,7 +7045,7 @@ input[type="submit"].btn.btn-mini {
 .pagination ul > .disabled > a,
 .pagination ul > .disabled > a:hover,
 .pagination ul > .disabled > a:focus {
-  color: #dfdfdf;
+  color: #bdc3c7;
   background-color: transparent;
   cursor: default;
 }
@@ -7208,7 +7208,7 @@ input[type="submit"].btn.btn-mini {
 .pager .disabled > a:hover,
 .pager .disabled > a:focus,
 .pager .disabled > span {
-  color: #dfdfdf;
+  color: #bdc3c7;
   background-color: #fff;
   cursor: default;
 }
@@ -7441,7 +7441,7 @@ input[type="submit"].btn.btn-mini {
   max-width: 276px;
   padding: 1px;
   text-align: left;
-  background-color: #bbbbbb;
+  background-color: #95a5a6;
   -webkit-background-clip: padding-box;
   -moz-background-clip: padding;
   background-clip: padding-box;
@@ -7479,8 +7479,8 @@ input[type="submit"].btn.btn-mini {
   font-size: 14px;
   font-weight: normal;
   line-height: 18px;
-  background-color: #bbbbbb;
-  border-bottom: 1px solid #aeaeae;
+  background-color: #95a5a6;
+  border-bottom: 1px solid #87999a;
   -webkit-border-radius: 5px 5px 0 0;
   -moz-border-radius: 5px 5px 0 0;
   border-radius: 5px 5px 0 0;
@@ -7531,7 +7531,7 @@ input[type="submit"].btn.btn-mini {
   bottom: 1px;
   margin-left: -15px;
   border-bottom-width: 0;
-  border-top-color: #bbbbbb;
+  border-top-color: #95a5a6;
 }
 /* line 89, ../theme/sass-bootstrap/lib/_popovers.scss */
 .popover.right .arrow {
@@ -7547,7 +7547,7 @@ input[type="submit"].btn.btn-mini {
   left: 1px;
   bottom: -15px;
   border-left-width: 0;
-  border-right-color: #bbbbbb;
+  border-right-color: #95a5a6;
 }
 /* line 103, ../theme/sass-bootstrap/lib/_popovers.scss */
 .popover.bottom .arrow {
@@ -7563,7 +7563,7 @@ input[type="submit"].btn.btn-mini {
   top: 1px;
   margin-left: -15px;
   border-top-width: 0;
-  border-bottom-color: #bbbbbb;
+  border-bottom-color: #95a5a6;
 }
 /* line 118, ../theme/sass-bootstrap/lib/_popovers.scss */
 .popover.left .arrow {
@@ -7578,7 +7578,7 @@ input[type="submit"].btn.btn-mini {
 .popover.left .arrow:after {
   right: 1px;
   border-right-width: 0;
-  border-left-color: #bbbbbb;
+  border-left-color: #95a5a6;
   bottom: -15px;
 }
 
@@ -7649,7 +7649,7 @@ a.thumbnail:focus {
 /* line 50, ../theme/sass-bootstrap/lib/_thumbnails.scss */
 .thumbnail .caption {
   padding: 9px;
-  color: #bbbbbb;
+  color: #95a5a6;
 }
 
 /* line 11, ../theme/sass-bootstrap/lib/_media.scss */
@@ -7709,7 +7709,7 @@ a.thumbnail:focus {
   vertical-align: baseline;
   white-space: nowrap;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-  background-color: #dfdfdf;
+  background-color: #bdc3c7;
 }
 
 /* line 21, ../theme/sass-bootstrap/lib/_labels-badges.scss */
@@ -7783,12 +7783,12 @@ a.label:hover, a.label:focus, a.badge:hover, a.badge:focus {
 
 /* line 66, ../theme/sass-bootstrap/lib/_labels-badges.scss */
 .label-inverse {
-  background-color: #666666;
+  background-color: #6f7c7d;
 }
 
 /* line 67, ../theme/sass-bootstrap/lib/_labels-badges.scss */
 .label-inverse[href] {
-  background-color: #4d4d4d;
+  background-color: #576162;
 }
 
 /* line 54, ../theme/sass-bootstrap/lib/_labels-badges.scss */
@@ -7833,12 +7833,12 @@ a.label:hover, a.label:focus, a.badge:hover, a.badge:focus {
 
 /* line 66, ../theme/sass-bootstrap/lib/_labels-badges.scss */
 .badge-inverse {
-  background-color: #666666;
+  background-color: #6f7c7d;
 }
 
 /* line 67, ../theme/sass-bootstrap/lib/_labels-badges.scss */
 .badge-inverse[href] {
-  background-color: #4d4d4d;
+  background-color: #576162;
 }
 
 /* line 73, ../theme/sass-bootstrap/lib/_labels-badges.scss */
@@ -8253,7 +8253,7 @@ a.label:hover, a.label:focus, a.badge:hover, a.badge:focus {
   right: 0;
   bottom: 0;
   padding: 15px;
-  background: #666666;
+  background: #6f7c7d;
   background: rgba(0, 0, 0, 0.75);
 }
 
@@ -8282,7 +8282,7 @@ a.label:hover, a.label:focus, a.badge:hover, a.badge:focus {
   font-weight: 200;
   line-height: 30px;
   color: inherit;
-  background-color: #eeeeee;
+  background-color: #ecf0f1;
   -webkit-border-radius: 6px;
   -moz-border-radius: 6px;
   border-radius: 6px;
@@ -8392,22 +8392,22 @@ h5, h6 {
 /* line 98, ../theme/sass-bootstrap/lib/bootstrap.scss */
 blockquote {
   padding: 10px 15px;
-  background-color: #eeeeee;
-  border-left-color: #bbbbbb;
+  background-color: #ecf0f1;
+  border-left-color: #95a5a6;
 }
 /* line 104, ../theme/sass-bootstrap/lib/bootstrap.scss */
 blockquote.pull-right {
   padding: 10px 15px;
-  border-right-color: #bbbbbb;
+  border-right-color: #95a5a6;
 }
 /* line 109, ../theme/sass-bootstrap/lib/bootstrap.scss */
 blockquote small {
-  color: #bbbbbb;
+  color: #95a5a6;
 }
 
 /* line 114, ../theme/sass-bootstrap/lib/bootstrap.scss */
 .muted {
-  color: #bbbbbb;
+  color: #95a5a6;
 }
 
 /* line 118, ../theme/sass-bootstrap/lib/bootstrap.scss */
@@ -8422,12 +8422,12 @@ a.text-warning:hover {
 
 /* line 121, ../theme/sass-bootstrap/lib/bootstrap.scss */
 .text-error {
-  color: red;
+  color: #c0392b;
 }
 
 /* line 122, ../theme/sass-bootstrap/lib/bootstrap.scss */
 a.text-error:hover {
-  color: #cc0000;
+  color: #962d22;
 }
 
 /* line 124, ../theme/sass-bootstrap/lib/bootstrap.scss */
@@ -8442,12 +8442,12 @@ a.text-info:hover {
 
 /* line 127, ../theme/sass-bootstrap/lib/bootstrap.scss */
 .text-success {
-  color: #3fb618;
+  color: #27ae60;
 }
 
 /* line 128, ../theme/sass-bootstrap/lib/bootstrap.scss */
 a.text-success:hover {
-  color: #2f8912;
+  color: #1e8449;
 }
 
 /* line 138, ../theme/sass-bootstrap/lib/bootstrap.scss */
@@ -8462,7 +8462,7 @@ a.text-success:hover {
 }
 /* line 146, ../theme/sass-bootstrap/lib/bootstrap.scss */
 .navbar .brand:hover {
-  color: #bbbbbb;
+  color: #95a5a6;
 }
 /* line 153, ../theme/sass-bootstrap/lib/bootstrap.scss */
 .navbar .nav > .active > a,
@@ -8483,7 +8483,7 @@ a.text-success:hover {
 .navbar .nav li.dropdown.open > .dropdown-toggle:hover,
 .navbar .nav li.dropdown.active > .dropdown-toggle:hover,
 .navbar .nav li.dropdown.open.active > .dropdown-toggle:hover {
-  color: #eeeeee;
+  color: #ecf0f1;
 }
 /* line 168, ../theme/sass-bootstrap/lib/bootstrap.scss */
 .navbar .navbar-search .search-query {
@@ -8513,7 +8513,7 @@ a.text-success:hover {
 /* line 194, ../theme/sass-bootstrap/lib/bootstrap.scss */
 div.subnav {
   margin: 0 1px;
-  background: #dfdfdf none;
+  background: #bdc3c7 none;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
@@ -8565,7 +8565,7 @@ div.subnav[class$=-fixed] {
 /* line 249, ../theme/sass-bootstrap/lib/bootstrap.scss */
 .nav-tabs.nav-stacked > .active > a, .nav-tabs.nav-stacked > .active > a:hover {
   background-color: white;
-  color: #bbbbbb;
+  color: #95a5a6;
 }
 /* line 255, ../theme/sass-bootstrap/lib/bootstrap.scss */
 .nav-tabs.nav-stacked > li:first-child > a, .nav-tabs.nav-stacked > li:last-child > a {
@@ -8585,7 +8585,7 @@ div.subnav[class$=-fixed] {
 
 /* line 272, ../theme/sass-bootstrap/lib/bootstrap.scss */
 .nav-pills > li > a {
-  background-color: #dfdfdf;
+  background-color: #bdc3c7;
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
   border-radius: 0;
@@ -8598,8 +8598,8 @@ div.subnav[class$=-fixed] {
 }
 /* line 284, ../theme/sass-bootstrap/lib/bootstrap.scss */
 .nav-pills > .disabled > a, .nav-pills > .disabled > a:hover {
-  background-color: #eeeeee;
-  color: #666666;
+  background-color: #ecf0f1;
+  color: #6f7c7d;
 }
 
 /* line 292, ../theme/sass-bootstrap/lib/bootstrap.scss */
@@ -8618,7 +8618,7 @@ div.subnav[class$=-fixed] {
 }
 /* line 306, ../theme/sass-bootstrap/lib/bootstrap.scss */
 .nav-list .divider {
-  background-color: #bbbbbb;
+  background-color: #95a5a6;
   border-bottom: none;
 }
 
@@ -8631,7 +8631,7 @@ div.subnav[class$=-fixed] {
 /* line 319, ../theme/sass-bootstrap/lib/bootstrap.scss */
 .pagination ul > li > a, .pagination ul > li > span {
   margin-right: 6px;
-  color: #666666;
+  color: #6f7c7d;
 }
 /* line 323, ../theme/sass-bootstrap/lib/bootstrap.scss */
 .pagination ul > li > a:hover, .pagination ul > li > span:hover {
@@ -8648,14 +8648,14 @@ div.subnav[class$=-fixed] {
 }
 /* line 341, ../theme/sass-bootstrap/lib/bootstrap.scss */
 .pagination ul > .disabled > span, .pagination ul > .disabled > a, .pagination ul > .disabled > a:hover {
-  background-color: #eeeeee;
-  color: #bbbbbb;
+  background-color: #ecf0f1;
+  color: #95a5a6;
 }
 
 /* line 351, ../theme/sass-bootstrap/lib/bootstrap.scss */
 .pager li > a,
 .pager li > span {
-  background-color: #dfdfdf;
+  background-color: #bdc3c7;
   border: none;
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
@@ -8672,13 +8672,13 @@ div.subnav[class$=-fixed] {
 .pager .disabled > a,
 .pager .disabled > a:hover,
 .pager .disabled > span {
-  background-color: #eeeeee;
-  color: #666666;
+  background-color: #ecf0f1;
+  color: #6f7c7d;
 }
 
 /* line 372, ../theme/sass-bootstrap/lib/bootstrap.scss */
 .breadcrumb {
-  background-color: #dfdfdf;
+  background-color: #bdc3c7;
 }
 /* line 375, ../theme/sass-bootstrap/lib/bootstrap.scss */
 .breadcrumb li {
@@ -8798,26 +8798,26 @@ input[type="search"], input[type="tel"], input[type="color"] {
 .control-group.error .control-label,
 .control-group.error .help-block,
 .control-group.error .help-inline {
-  color: red;
+  color: #c0392b;
 }
 /* line 498, ../theme/sass-bootstrap/lib/bootstrap.scss */
 .control-group.error input,
 .control-group.error select,
 .control-group.error textarea {
-  border-color: red;
+  border-color: #c0392b;
   color: #080808;
 }
 /* line 508, ../theme/sass-bootstrap/lib/bootstrap.scss */
 .control-group.success .control-label,
 .control-group.success .help-block,
 .control-group.success .help-inline {
-  color: #3fb618;
+  color: #27ae60;
 }
 /* line 514, ../theme/sass-bootstrap/lib/bootstrap.scss */
 .control-group.success input,
 .control-group.success select,
 .control-group.success textarea {
-  border-color: #3fb618;
+  border-color: #27ae60;
   color: #080808;
 }
 
@@ -8830,7 +8830,7 @@ legend {
 /* line 526, ../theme/sass-bootstrap/lib/bootstrap.scss */
 .form-actions {
   border-top: none;
-  background-color: #eeeeee;
+  background-color: #ecf0f1;
 }
 
 /* line 534, ../theme/sass-bootstrap/lib/bootstrap.scss */
@@ -8862,11 +8862,11 @@ legend {
 }
 /* line 557, ../theme/sass-bootstrap/lib/bootstrap.scss */
 .label[class$=-success] {
-  background-color: #3fb618;
+  background-color: #27ae60;
 }
 /* line 561, ../theme/sass-bootstrap/lib/bootstrap.scss */
 .label[class$=-important] {
-  background-color: red;
+  background-color: #c0392b;
 }
 /* line 565, ../theme/sass-bootstrap/lib/bootstrap.scss */
 .label[class$=-info] {
@@ -8887,11 +8887,11 @@ legend {
 }
 /* line 580, ../theme/sass-bootstrap/lib/bootstrap.scss */
 .badge[class$=-success] {
-  background-color: #3fb618;
+  background-color: #27ae60;
 }
 /* line 584, ../theme/sass-bootstrap/lib/bootstrap.scss */
 .badge[class$=-important] {
-  background-color: red;
+  background-color: #c0392b;
 }
 /* line 588, ../theme/sass-bootstrap/lib/bootstrap.scss */
 .badge[class$=-info] {
@@ -8932,12 +8932,12 @@ legend {
 
 /* line 617, ../theme/sass-bootstrap/lib/bootstrap.scss */
 a.thumbnail {
-  background-color: #dfdfdf;
+  background-color: #bdc3c7;
   color: #080808;
 }
 /* line 620, ../theme/sass-bootstrap/lib/bootstrap.scss */
 a.thumbnail:hover {
-  background-color: #bbbbbb;
+  background-color: #95a5a6;
   border-color: transparent;
 }
 
@@ -8950,7 +8950,7 @@ a.thumbnail:hover {
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
-  background-color: #eeeeee;
+  background-color: #ecf0f1;
   background-image: none;
 }
 /* line 633, ../theme/sass-bootstrap/lib/bootstrap.scss */
@@ -8964,7 +8964,7 @@ a.thumbnail:hover {
 }
 /* line 642, ../theme/sass-bootstrap/lib/bootstrap.scss */
 .progress[class$=-success] {
-  background-color: #3fb618;
+  background-color: #27ae60;
 }
 /* line 646, ../theme/sass-bootstrap/lib/bootstrap.scss */
 .progress[class$=-warning] {
@@ -8972,7 +8972,7 @@ a.thumbnail:hover {
 }
 /* line 650, ../theme/sass-bootstrap/lib/bootstrap.scss */
 .progress[class$=-danger] {
-  background-color: red;
+  background-color: #c0392b;
 }
 
 /* line 655, ../theme/sass-bootstrap/lib/bootstrap.scss */

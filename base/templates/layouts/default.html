@@ -11,7 +11,7 @@
 	<meta name="viewport" content="width=device-width">
 
 <!-- Layout Styles Dependencies -->
-	<link rel="stylesheet" href="{% static 'styles/deps.css' %}">
+	<!--<link rel="stylesheet" href="{% static 'styles/deps.css' %}">-->
 	<link rel="stylesheet" href="{% static 'styles/main.css' %}">
 <!-- Layout Styles Dependencies -END -->
 
@@ -19,7 +19,10 @@
 {% block view_styles %}{% endblock %}
 <!-- View Styles Dependencies - END -->
 
-	<script type="text/javascript">var reform = {data: {}, widgets: {}}</script>
+	<script type="text/javascript">
+	var reform = {data: {}, widgets: {}};
+	var csrf_token = "{{ csrf_token }}";
+	</script>
 
 </head>
 <body ng-app="reformPlatform">
