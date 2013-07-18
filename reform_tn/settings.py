@@ -154,12 +154,12 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # Uncomment the next line to enable the admin:
+
     # 'suit', # theme for admin
+    'admin_theme',
     'django_admin_bootstrapped', # theme for admin
     'django.contrib.admin',
-    # Uncomment the next line to enable admin documentation:
-    # 'django.contrib.admindocs',
+    #'django.contrib.admindocs',
 
     # project components
     'base',
@@ -180,6 +180,7 @@ INSTALLED_APPS = (
     'rest_framework',
 
     'jsonify',
+
 )
 
 #from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS as TCP
