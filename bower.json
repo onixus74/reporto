@@ -29,7 +29,8 @@
     "select2-bootstrap-css": "t0m/select2-bootstrap-css#~1.1.0",
     "x-editable": "~1.4.5",
     "Effeckt.css": "h5bp/Effeckt.css",
-    "L.GeoSearch": "smeijer/L.GeoSearch"
+    "L.GeoSearch": "smeijer/L.GeoSearch",
+    "bootstrap-wysiwyg": "latest"
   },
   "devDependencies": {
     "html-inspector": "~0.3.0"

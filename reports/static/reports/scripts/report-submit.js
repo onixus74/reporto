@@ -36,6 +36,12 @@ reform.widgets.map = function() {
 		.openPopup();
 	*/
 
+	new L.Control.GeoSearch({
+		provider: new L.GeoSearch.Provider.Google({
+			region: 'tn'
+		})
+	}).addTo(map);
+
 	var marker;
 
 	var location = $('#id_location');
@@ -77,7 +83,29 @@ reform.widgets.map = function() {
 
 $(reform.widgets.map);
 
+Dropzone.autoDiscover = false;
 
-reform.widgets.geosearch = function() {};
+Dropzone.options.assets = {
+	paramName: "asset", // The name that will be used to transfer the file
+	headers: { "X-CSRFToken": csrf_token },
+	maxFilesize: 10, // MB
+	accept: function(file, done) {
+		/*
+		if (file.name == "justinbieber.jpg") {
+			done("Naha, you don't.");
+		}
+		else { done(); }
+		*/
+		done();
+	},
+	dictDefaultMessage: "Drag files or click to upload evidence photos/videos"
+};
 
-$(reform.widgets.geosearch);
+reform.widgets.dropzone = function() {
+	//var dopzone = new Dropzone("div#assets", { url: "/reports/submit/upload"});
+	var dopzone = new Dropzone("div#assets", { url: "/test/"});
+};
+
+$(reform.widgets.dropzone);
+
+

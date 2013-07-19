@@ -82,6 +82,20 @@ class ReportView(DetailHybridResponseMixin, DetailView):
 # 		#fields = [...]
 
 
+@csrf_exempt
+def submit_upload(request, *args, **kwargs):
+	print request.session.items()
+	print request.method
+	#print request.body
+	#print request.META['CONTENT_TYPE']
+	print request.COOKIES
+	print request.REQUEST
+	print request.GET
+	print request.POST
+	print request.FILES
+	return JSONResponse({'done': True})
+
+
 class ReportSubmitView(CreateView):
 	model = Report
 	template_name = "reports/submit.html"
@@ -95,28 +109,31 @@ class ReportSubmitPublicView(CreateView):
 
 
 class ReportVerifyView(View):
-	message = "verified"
+	http_method_names = ['get', 'post']
 
 	def get(self, request, pk, *args, **kwargs):
-		print kwargs
 		report = Report.objects.get(pk=pk)
-		return JSONResponse({'message': self.message, 'verified': report.is_verified})
+		return JSONResponse({'message': "done", 'verified': report.is_verified})
 
 	def post(self, request, pk, *args, **kwargs):
 		report = Report.objects.get(pk=pk)
 		report.is_verified = True
 		report.save()
-		return JSONResponse({'message': self.message, 'verified': report.is_verified})
+		return JSONResponse({'message': "done", 'verified': report.is_verified})
 
 
 class ReportCloseView(View):
-	message = "closed"
+	http_method_names = ['get', 'post']
 
-	def get(self, request, *args, **kwargs):
-		return JSONResponse({'message': self.message})
+	def get(self, request, pk, *args, **kwargs):
+		report = Report.objects.get(pk=pk)
+		return JSONResponse({'message': "done", 'closed': report.is_closed})
 
-	def post(self, request, *args, **kwargs):
-		return JSONResponse({'message': self.message})
+	def post(self, request, pk, *args, **kwargs):
+		report = Report.objects.get(pk=pk)
+		report.is_closed = True
+		report.save()
+		return JSONResponse({'message': "done", 'closed': report.is_closed})
 
 
 
