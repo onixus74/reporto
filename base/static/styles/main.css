@@ -4,6 +4,9 @@
 @import url(../components/bootstrap-select/bootstrap-select.css);
 @import url(../components/bootstrap-wysihtml5/dist/bootstrap-wysihtml5-0.0.2.css);
 @import url(../components/animate.css/animate.css);
+/*-------------------------------------------------
+| DEPENDENCIES
+\*/
 /*
  * Bootstrap v2.3.2
  *
@@ -10500,14 +10503,14 @@ a.thumbnail:hover {
 | GLOBAL STYLES
 \*/
 /* Padding below the footer and lighter body text */
-/* line 8, main.scss */
+/* line 37, main.scss */
 body {
   padding-top: 100px;
   padding-bottom: 60px;
   color: #5a5a5a;
 }
 
-/* line 15, main.scss */
+/* line 44, main.scss */
 #footer {
   position: fixed;
   bottom: 0;
@@ -10517,7 +10520,7 @@ body {
   background-color: whitesmoke;
 }
 
-/* line 24, main.scss */
+/* line 53, main.scss */
 .container .credit {
   margin: 10px 0;
 }
@@ -10526,7 +10529,7 @@ body {
 | CUSTOMIZE THE NAVBAR
 \*/
 /* Special class on .container surrounding .navbar, used for positioning it into place. */
-/* line 33, main.scss */
+/* line 62, main.scss */
 .navbar-wrapper {
   position: fixed;
   top: 0;
@@ -10539,7 +10542,7 @@ body {
 }
 
 /* Remove border and change up box shadow for more contrast */
-/* line 47, main.scss */
+/* line 76, main.scss */
 .navbar .navbar-inner {
   border: 0;
   -webkit-box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
@@ -10548,7 +10551,7 @@ body {
 }
 
 /* Downsize the brand/project name a bit */
-/* line 55, main.scss */
+/* line 84, main.scss */
 .navbar .brand {
   padding: 14px 20px 16px;
   /* Increase vertical padding to match navbar links */
@@ -10558,13 +10561,13 @@ body {
 }
 
 /* Navbar links: increase padding for taller navbar */
-/* line 63, main.scss */
+/* line 92, main.scss */
 .navbar .nav > li > a {
   padding: 15px 20px;
 }
 
 /* Offset the responsive button for proper vertical alignment */
-/* line 68, main.scss */
+/* line 97, main.scss */
 .navbar .btn-navbar {
   margin-top: 10px;
 }
@@ -10575,46 +10578,15 @@ body {
 /* Large desktop */
 /* Portrait tablet to landscape and desktop */
 @media (min-width: 768px) and (max-width: 979px) {
-  /* line 85, main.scss */
+  /* line 114, main.scss */
   body {
     padding-top: 90px;
   }
 
-  /* line 89, main.scss */
+  /* line 118, main.scss */
   .container.navbar-wrapper {
     margin-bottom: 0;
     width: auto;
-  }
-
-  /* line 94, main.scss */
-  #footer {
-    padding-left: 20px;
-    padding-right: 20px;
-  }
-}
-/* Landscape phone to portrait tablet */
-@media (max-width: 767px) {
-  /* line 104, main.scss */
-  body {
-    padding-top: 70px;
-    padding-bottom: 50px;
-  }
-
-  /* line 109, main.scss */
-  .container.navbar-wrapper {
-    margin-bottom: 0;
-    width: auto;
-  }
-
-  /* line 114, main.scss */
-  #footer {
-    padding-left: 20px;
-    padding-right: 20px;
-  }
-
-  /* line 119, main.scss */
-  .navbar-inner {
-    margin: -20px;
   }
 
   /* line 123, main.scss */
@@ -10623,26 +10595,57 @@ body {
     padding-right: 20px;
   }
 }
-/* Landscape phones and down */
-@media (max-width: 480px) {
+/* Landscape phone to portrait tablet */
+@media (max-width: 767px) {
   /* line 133, main.scss */
+  body {
+    padding-top: 70px;
+    padding-bottom: 50px;
+  }
+
+  /* line 138, main.scss */
   .container.navbar-wrapper {
     margin-bottom: 0;
     width: auto;
   }
 
-  /* line 138, main.scss */
+  /* line 143, main.scss */
   #footer {
     padding-left: 20px;
     padding-right: 20px;
   }
 
-  /* line 143, main.scss */
+  /* line 148, main.scss */
   .navbar-inner {
     margin: -20px;
   }
 
-  /* line 147, main.scss */
+  /* line 152, main.scss */
+  #footer {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+/* Landscape phones and down */
+@media (max-width: 480px) {
+  /* line 162, main.scss */
+  .container.navbar-wrapper {
+    margin-bottom: 0;
+    width: auto;
+  }
+
+  /* line 167, main.scss */
+  #footer {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  /* line 172, main.scss */
+  .navbar-inner {
+    margin: -20px;
+  }
+
+  /* line 176, main.scss */
   #footer {
     padding-left: 20px;
     padding-right: 20px;
@@ -10681,7 +10684,7 @@ body {
 
 }
 */
-/* line 190, main.scss */
+/* line 219, main.scss */
 #mainView {
   position: fixed;
   z-index: 99999;
@@ -10696,7 +10699,7 @@ body {
   overflow: auto;
 }
 
-/* line 205, main.scss */
+/* line 234, main.scss */
 .report-incident-dialog {
   top: 10%;
   left: 10%;
@@ -10704,46 +10707,46 @@ body {
   margin-left: auto;
 }
 
-/* line 222, main.scss */
+/* line 251, main.scss */
 .report-incident-form .row-fluid {
   margin-top: 20px;
   margin-bottom: 20px;
 }
 
-/* line 233, main.scss */
+/* line 262, main.scss */
 .natural-language-form {
   /* placeholder */
 }
-/* line 235, main.scss */
+/* line 264, main.scss */
 .natural-language-form p.text {
   line-height: 2em;
   vertical-align: middle;
 }
-/* line 240, main.scss */
+/* line 269, main.scss */
 .natural-language-form input, .natural-language-form .natural-language-input {
   background: none;
   border: none;
   text-align: center;
 }
-/* line 247, main.scss */
+/* line 276, main.scss */
 .natural-language-form ::-webkit-input-placeholder {
   /* WebKit browsers */
   color: #999;
   text-align: center;
 }
-/* line 250, main.scss */
+/* line 279, main.scss */
 .natural-language-form :-moz-placeholder {
   /* Mozilla Firefox 4 to 18 */
   color: #999;
   text-align: center;
 }
-/* line 253, main.scss */
+/* line 282, main.scss */
 .natural-language-form ::-moz-placeholder {
   /* Mozilla Firefox 19+ */
   color: #999;
   text-align: center;
 }
-/* line 256, main.scss */
+/* line 285, main.scss */
 .natural-language-form :-ms-input-placeholder {
   /* Internet Explorer 10+ */
   color: #999;
@@ -10754,13 +10757,13 @@ body {
 | FIXES
 \*/
 /* fix boostrap-select width */
-/* line 270, main.scss */
+/* line 299, main.scss */
 .bootstrap-select:not([class*="span"]) {
   width: 100%;
 }
 
 /* fix boostrap-select colors in natural language form */
-/* line 275, main.scss */
+/* line 304, main.scss */
 .boostrap-select-colors-fix {
   background-color: transparent;
   color: darkgray;
@@ -10792,52 +10795,34 @@ body::-webkit-scrollbar-thumb { background-clip: padding-box; border-width: 1px 
 body::-webkit-scrollbar-thumb:horizontal { border-width: 5px 1px 1px; }
 body::-webkit-scrollbar-corner { background-clip: padding-box; background-color: #f5f5f5; border: solid #fff; border-width: 3px 0 0 3px; box-shadow: inset 1px 1px 0 rgba(0,0,0,.14) }
 */
-/* line 309, main.scss */
+/*
+::-webkit-scrollbar { background:transparent;overflow:visible; width:15px; }
+::-webkit-scrollbar-thumb { background-color:rgba(0,0,0,0.2); border:solid #fff; }
+::-webkit-scrollbar-thumb:hover { background:rgba(0,0,0,0.4); }
+::-webkit-scrollbar-thumb:horizontal { border-width:4px 6px;min-width:40px; }
+::-webkit-scrollbar-thumb:vertical { border-width:6px 4px;min-height:40px; }
+::-webkit-scrollbar-track-piece{ background-color:#fff; }
+::-webkit-scrollbar-corner { background:transparent; }
+::-webkit-scrollbar-thumb { background-color: #DDD; }
+::-webkit-scrollbar-thumb:hover { background-color: #999; }
+*/
+/* line 350, main.scss */
 ::-webkit-scrollbar {
-  background: transparent;
-  overflow: visible;
-  width: 15px;
+  width: 4px;
 }
 
-/* line 310, main.scss */
+/* line 351, main.scss */
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+/* line 352, main.scss */
 ::-webkit-scrollbar-thumb {
-  background-color: rgba(0, 0, 0, 0.2);
-  border: solid #fff;
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 2px;
 }
 
-/* line 311, main.scss */
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(0, 0, 0, 0.4);
-}
-
-/* line 312, main.scss */
-::-webkit-scrollbar-thumb:horizontal {
-  border-width: 4px 6px;
-  min-width: 40px;
-}
-
-/* line 313, main.scss */
-::-webkit-scrollbar-thumb:vertical {
-  border-width: 6px 4px;
-  min-height: 40px;
-}
-
-/* line 314, main.scss */
-::-webkit-scrollbar-track-piece {
-  background-color: #fff;
-}
-
-/* line 315, main.scss */
-::-webkit-scrollbar-corner {
-  background: transparent;
-}
-
-/* line 316, main.scss */
-::-webkit-scrollbar-thumb {
-  background-color: #DDD;
-}
-
-/* line 317, main.scss */
-::-webkit-scrollbar-thumb:hover {
-  background-color: #999;
+/* line 353, main.scss */
+::-webkit-scrollbar:horizontal {
+  height: 4px;
 }

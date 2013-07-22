@@ -1,4 +1,33 @@
-@import "deps";
+/*-------------------------------------------------
+| DEPENDENCIES
+\*/
+
+//@import "deps";
+
+
+//@import "../components/sass-bootstrap/lib/bootstrap";
+//@import "../components/sass-bootstrap/lib/responsive";
+//@import "../components/font-awesome/scss/font-awesome";
+
+@import "../theme/sass-bootstrap/lib/bootstrap";
+@import "../theme/sass-bootstrap/lib/responsive";
+//@import "../theme/font-awesome/scss/font-awesome";
+
+@import "../components/select2/select2.css";
+
+@import "../components/select2-bootstrap-css/select2-bootstrap.css";
+//@import "../components/select2-bootstrap-css/lib/select2-bootstrap";
+
+
+
+@import "../components/bootstrap-select/bootstrap-select.css";
+
+@import "../components/bootstrap-wysihtml5/dist/bootstrap-wysihtml5-0.0.2.css";
+
+@import "../components/animate.css/animate.css";
+
+
+
 /*-------------------------------------------------
 | GLOBAL STYLES
 \*/
@@ -306,6 +335,7 @@ body::-webkit-scrollbar-thumb:horizontal { border-width: 5px 1px 1px; }
 body::-webkit-scrollbar-corner { background-clip: padding-box; background-color: #f5f5f5; border: solid #fff; border-width: 3px 0 0 3px; box-shadow: inset 1px 1px 0 rgba(0,0,0,.14) }
 */
 
+/*
 ::-webkit-scrollbar { background:transparent;overflow:visible; width:15px; }
 ::-webkit-scrollbar-thumb { background-color:rgba(0,0,0,0.2); border:solid #fff; }
 ::-webkit-scrollbar-thumb:hover { background:rgba(0,0,0,0.4); }
@@ -315,3 +345,10 @@ body::-webkit-scrollbar-corner { background-clip: padding-box; background-color:
 ::-webkit-scrollbar-corner { background:transparent; }
 ::-webkit-scrollbar-thumb { background-color: #DDD; }
 ::-webkit-scrollbar-thumb:hover { background-color: #999; }
+*/
+
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:rgba(0,0,0,0.1)}
+::-webkit-scrollbar-thumb{background:rgba(0,0,0,0.6);border-radius:2px}
+::-webkit-scrollbar:horizontal{height:4px}
+
