@@ -73,7 +73,7 @@ reform.widgets.map.init = function() {
 			marker.on('dragend', function(e) {
 				var value = '' + e.target._latlng.lat + ',' + e.target._latlng.lng;
 				console.log(e.target._latlng, value);
-				location.val(value);
+				location.val(value).change();
 			});
 		} else {
 			console.log(marker);

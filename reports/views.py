@@ -6,16 +6,15 @@ import json
 
 from django.contrib.auth.decorators import login_required, permission_required
 
-from reports.models import Report
+from reports.models import *
 
 from django import forms
 from django.views.decorators.csrf import csrf_exempt
 
-
 from django.views.generic.base import View
-from django.views.generic import ListView, DetailView
+from django.views.generic import FormView, ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from base.utils.views import JSONResponse, ListHybridResponseMixin, DetailHybridResponseMixin
+from base.utils.views import JSONResponse, JSONDataView, ListHybridResponseMixin, DetailHybridResponseMixin
 
 def index(request, *args, **kwargs):
 	template_name = "reports/index.html"
@@ -32,14 +31,37 @@ def dashboard(request, template_name = "reports/dashboard.html", *args, **kwargs
 	return render_to_response(template_name, context)
 
 
+class ReportForm(forms.ModelForm):
+	class Meta:
+		model = Report
+
+class ReportXView(FormView):
+		template_name = 'reports/new.html'
+		form_class = ReportForm
+		success_url = '/'
+
+		def form_valid(self, form):
+				# This method is called when valid form data has been POSTed.
+				# It should return an HttpResponse.
+				form.send_email()
+				return super(ContactView, self).form_valid(form)
+
+
 class ReportsDashboard(ListHybridResponseMixin, ListView):
+	""" """
 	model = Report
 	template_name = "reports/dashboard.html"
 
+	# def get_context_data(self, **kwargs):
+	# 	context = super(PublisherDetail, self).get_context_data(**kwargs)
+	# 	context['something'] = Something.objects.all()
+	# 	return context
 
 class ReportView(DetailHybridResponseMixin, DetailView):
+	""" """
 	model = Report
 	template_name = "reports/view.html"
+
 
 
 # def item(request, id, *args, **kwargs):
@@ -81,6 +103,9 @@ class ReportView(DetailHybridResponseMixin, DetailView):
 # 		model = Report
 # 		#fields = [...]
 
+from django.core.files.storage import default_storage
+from django.core.files.base import ContentFile
+
 
 @csrf_exempt
 def submit_upload(request, *args, **kwargs):
@@ -96,11 +121,25 @@ def submit_upload(request, *args, **kwargs):
 	return JSONResponse({'done': True})
 
 
+def stats_xxx(request, *args, **kwargs):
+	#data = Report.objects.get() # data request
+	response = {
+	 #'reports': data,
+	 'Verbal Vilence': 15,
+	 'Vilance': 10,
+	}
+	return JSONResponse(response)
+
+
 class ReportSubmitView(CreateView):
+	""" """
 	model = Report
 	template_name = "reports/submit.html"
 
-
+	def form_valid(self, form):
+		print self.request.user
+		form.instance.created_by = self.request.user
+		return super(ReportSubmitView, self).form_valid(form)
 
 
 class ReportSubmitPublicView(CreateView):
@@ -134,6 +173,12 @@ class ReportCloseView(View):
 		report.is_closed = True
 		report.save()
 		return JSONResponse({'message': "done", 'closed': report.is_closed})
+
+
+
+class CommentForm(forms.ModelForm):
+	class Meta:
+		model = Comment
 
 
 

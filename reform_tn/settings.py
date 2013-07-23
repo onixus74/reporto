@@ -181,6 +181,8 @@ INSTALLED_APPS = (
 
     'jsonify',
 
+		#'django_youtube',
+
 )
 
 #from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS as TCP
@@ -226,3 +228,9 @@ REST_FRAMEWORK = {
     'PAGINATE_BY': 10
 }
 
+
+
+YOUTUBE_AUTH_EMAIL = 'yourmail@gmail.com'
+YOUTUBE_AUTH_PASSWORD = 'yourpassword'
+YOUTUBE_DEVELOPER_KEY = 'developer key, get one from http://code.google.com/apis/youtube/dashboard/'
+YOUTUBE_CLIENT_ID = 'client-id'
