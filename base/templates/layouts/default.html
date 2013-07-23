@@ -88,6 +88,16 @@
 		</div>
 	</div>
 
+	{% if messages %}
+	<div class="container">
+		<div class="alert">
+			{% for message in messages %}
+			<div class="{{message.tags}}">{{message}}</div>
+			{% endfor %}
+		</div>
+	</div>
+	{% endif %}
+
 <!-- View -->
 {% block view_content %}{% endblock %}
 <!-- View - END -->

@@ -88,7 +88,7 @@ class Report(models.Model):
 
 	datetime           = models.DateTimeField('date and time')
 	location           = models.CharField(max_length=100)
-	location_text      = models.CharField(max_length=300, blank=True, null=True)
+	location_text      = models.CharField(max_length=300)
 	category           = models.ForeignKey(Category)
 	victim             = models.ForeignKey(Victim)
 	aggressor          = models.TextField()
@@ -102,7 +102,7 @@ class Report(models.Model):
 	is_verified        = models.BooleanField()
 	is_closed          = models.BooleanField()
 	#Ministry Response?
-	created_by         = models.ForeignKey(User, blank=True, null=True)
+	created_by         = models.ForeignKey(User)
 	created_at         = models.DateTimeField(auto_now_add=True)
 	updated_at         = models.DateTimeField(auto_now=True)
 
@@ -120,5 +120,5 @@ class Comment(models.Model):
 	content    = models.TextField()
 	report     = models.ForeignKey(Report)
 	created_by = models.ForeignKey(User)
-	created_at = models.DateTimeField(auto_now_add = True)
-	#updated_at = models.DateTimeField(auto_now = True)
+	created_at = models.DateTimeField(auto_now_add=True)
+	#updated_at = models.DateTimeField(auto_now=True)

@@ -131,13 +131,22 @@ def stats_xxx(request, *args, **kwargs):
 	return JSONResponse(response)
 
 
+class ReportCreateForm(forms.ModelForm):
+    class Meta:
+        model = Report
+        #fields = ('x', 'y)
+        exclude = ('created_by','location_text')
+
+
 class ReportSubmitView(CreateView):
 	""" """
 	model = Report
+	form_class = ReportCreateForm
 	template_name = "reports/submit.html"
 
+
 	def form_valid(self, form):
-		print self.request.user
+		form.instance.location_text = form.instance.location
 		form.instance.created_by = self.request.user
 		return super(ReportSubmitView, self).form_valid(form)
 

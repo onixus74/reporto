@@ -234,3 +234,7 @@ YOUTUBE_AUTH_EMAIL = 'yourmail@gmail.com'
 YOUTUBE_AUTH_PASSWORD = 'yourpassword'
 YOUTUBE_DEVELOPER_KEY = 'developer key, get one from http://code.google.com/apis/youtube/dashboard/'
 YOUTUBE_CLIENT_ID = 'client-id'
+
+
+MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
+
