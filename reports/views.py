@@ -6,7 +6,7 @@ import json
 
 from django.contrib.auth.decorators import login_required, permission_required
 
-from reports.models import Report
+from reports.models import *
 
 from django import forms
 from django.views.decorators.csrf import csrf_exempt
@@ -35,6 +35,46 @@ def dashboard(request, template_name = "reports/dashboard.html", *args, **kwargs
 class ReportsDashboard(ListHybridResponseMixin, ListView):
 	model = Report
 	template_name = "reports/dashboard.html"
+
+	def get_context_data(self, **kwargs):
+		"""
+			Prepare context parameter 'category_donut_data' with the following structure
+			category_donut_data = [
+				{ 'label': 'Verbal Violence', 'value': 20 },
+				{ 'label': 'Violence', 'value': 10 },
+				{ 'label': 'Rape', 'value': 20 },
+				{ 'label': 'Lack of Investigation and Prosecution', 'value': 50 }
+			]
+		"""
+		context = super(ReportsDashboard, self).get_context_data(**kwargs)
+
+		category_donut_data = []
+		categories = Category.objects.all()
+		sum_category=Category.objects.count()
+		for category in categories:
+			category_donut_data.append({
+				'label': category.definition,
+				'value': int(float(Report.objects.filter(category=category).count())/sum_category*100)
+			})
+		context['category_donut_data'] = category_donut_data
+
+
+		feature_donut_data = []
+		features = Feature.objects.all()
+		sum_features=Feature.objects.count()
+		for feature in features:
+
+			feature_donut_data.append({
+				'label': feature.definition,
+				'value': int(float(Report.objects.filter(features=feature).count()) / sum_features *100)
+			})
+		context['feature_donut_data'] = feature_donut_data
+
+
+
+
+		return context
+
 
 
 class ReportView(DetailHybridResponseMixin, DetailView):
