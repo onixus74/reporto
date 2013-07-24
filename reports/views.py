@@ -52,10 +52,12 @@ class ReportsDashboard(ListHybridResponseMixin, ListView):
 		categories = Category.objects.all()
 		sum_category=Category.objects.count()
 		for category in categories:
-			category_donut_data.append({
-				'label': category.definition,
-				'value': int(float(Report.objects.filter(category=category).count())/sum_category*100)
-			})
+			val=int(float(Report.objects.filter(category=category).count())/sum_category*100)
+			if val != 0:
+				category_donut_data.append({
+					'label': category.definition,
+					'value': val
+				})
 		context['category_donut_data'] = category_donut_data
 
 
@@ -63,11 +65,12 @@ class ReportsDashboard(ListHybridResponseMixin, ListView):
 		features = Feature.objects.all()
 		sum_features=Feature.objects.count()
 		for feature in features:
-
-			feature_donut_data.append({
+			val = int(float(Report.objects.filter(features=feature).count()) / sum_features *100)
+			if val != 0:
+				feature_donut_data.append({
 				'label': feature.definition,
-				'value': int(float(Report.objects.filter(features=feature).count()) / sum_features *100)
-			})
+				'value': val
+				})
 		context['feature_donut_data'] = feature_donut_data
 
 
