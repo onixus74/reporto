@@ -34,10 +34,10 @@
 
 				<div class="row-fluid ui-wizard-row" id="ui-wizard-victim-witness-buttons">
 					<div class="span6" id="ui-wizard-victim-button-container">
-						<a class="btn btn-large btn-block btn-warning" id="ui-wizard-victim-button" data-value="victim" data-class="text-warning">Victim</a>
+						<a href="javascript:void(0)" class="btn btn-large btn-block btn-warning" id="ui-wizard-victim-button" data-value="victim" data-class="text-warning">Victim</a>
 					</div>
 					<div class="span6" id="ui-wizard-witness-button-container">
-						<a class="btn btn-large btn-block btn-success" id="ui-wizard-witness-button" data-value="witness" data-class="text-success">Witness</a>
+						<a href="javascript:void(0)" class="btn btn-large btn-block btn-success" id="ui-wizard-witness-button" data-value="witness" data-class="text-success" tabindex="0">Witness</a>
 					</div>
 				</div>
 
@@ -151,10 +151,14 @@
 					</div>
 					<div class="span6">
 						<h2>Evidence</h2>
-						<button type="button" class="input-block-level input-area">
-							<div id="assets" class="dropzone" style="background-color: #FFF;">
+						<input type="hidden" name="rsid" valeu="{{report_submit_id}}">
+						<div id="assets" tabindex="0" class="dropzone input-area" style="background-color: #FFF; border: 1px solid #999;"></div>
+						<!--
+						<button type="button" class="input-block-level input-area" style="padding: 0;">
+							<div id="assets" class="dropzone" style="background-color: #FFF; height: 100%">
 							</div>
 						</button>
+						-->
 						</a>
 					</div>
 				</div>
@@ -196,6 +200,7 @@
 	<![endif]-->
 
 	<link rel="stylesheet" href="{% static 'reports/styles/report-submit.css'%}" />
+	{% if debug %}
 	<style type="text/css">
 
 .animated {
@@ -213,6 +218,7 @@
 }
 
 	</style>
+	{% endif %}
 
 {% endblock %}
 
@@ -236,7 +242,9 @@
 	<script src="{% static 'components-mod/L.GeoSearch/src/js/l.geosearch.provider.google.js' %}"></script>
 
 	<script src="{% static 'components/dropzone/downloads/dropzone.js' %}"></script>
-
+	<script type="text/javascript">
+		var report_submit_id = "{{report_submit_id|escapejs}}"
+	</script>
 	<script src="{% static 'reports/scripts/report-submit.js' %}"></script>
 	<script type="text/javascript">
 		$(function(){

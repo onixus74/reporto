@@ -90,9 +90,14 @@ reform.widgets.map.init = function() {
 Dropzone.autoDiscover = false;
 
 Dropzone.options.assets = {
-	paramName: "asset", // The name that will be used to transfer the file
-	headers: { "X-CSRFToken": csrf_token },
+	paramName: "files", // The name that will be used to transfer the file
+	headers: {
+		'X-CSRFToken': csrf_token,
+		'X-RSID': report_submit_id
+	},
 	maxFilesize: 10, // MB
+	uploadMultiple: true,
+	addRemoveLinks: true,
 	accept: function(file, done) {
 		/*
 		if (file.name == "justinbieber.jpg") {
@@ -109,8 +114,7 @@ reform.widgets.dropzone = {};
 reform.widgets.dropzone.init = function() {
 
 	var widget = reform.widgets.dropzone;
-	//var dropzone = new Dropzone("div#assets", { url: "/reports/submit/upload"});
-	var dropzone = new Dropzone("div#assets", { url: "/test/"});
+	var dropzone = new Dropzone("div#assets", { url: "/reports/submit/upload"});
 	widget.e = dropzone;
 
 };

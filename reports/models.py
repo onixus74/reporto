@@ -25,12 +25,12 @@ class Feature(models.Model):
 
 
 class Media(models.Model):
-	title        = models.CharField(max_length=200)
-	description  = models.TextField()
-	url          = models.CharField(max_length=300)
-	external_url = models.CharField(max_length=300)
-	folder       = models.CharField(max_length=300)
-
+	#title        = models.CharField(max_length=200)
+	#description  = models.TextField()
+	#url          = models.CharField(max_length=300)
+	#external_url = models.CharField(max_length=300)
+	#folder       = models.CharField(max_length=300)
+	file          = models.FileField(upload_to='uploads')
 
 	#COMMENT = 'C'
 	#CATEGORY = (
@@ -39,7 +39,7 @@ class Media(models.Model):
 	#category = models.CharField(max_length=1, choices=CATEGORY, default=COMMENT, blank=True)
 
 	def __unicode__(self):
-		return self.definition
+		return self.file.name
 
 
 class Victim(models.Model):

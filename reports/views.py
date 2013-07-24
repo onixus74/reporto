@@ -1,30 +1,34 @@
+import logging
+
+import uuid
+import os
+import json
+import logging
+
+from django.conf import settings
 from django.shortcuts import render_to_response, redirect
 from django.http import HttpResponse
 from django.core import serializers
 from django.utils import simplejson
-import json
-
-from django.contrib.auth.decorators import login_required, permission_required
-
-from reports.models import *
 
 from django import forms
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.decorators import login_required, permission_required
 
 from django.views.generic.base import View
 from django.views.generic import FormView, ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+
 from base.utils.views import JSONResponse, JSONDataView, ListHybridResponseMixin, DetailHybridResponseMixin
 
-def index(request, *args, **kwargs):
-	template_name = "reports/index.html"
-	context = {
-		"object_list": Report.objects.all()
-	}
-	return render_to_response(template_name, context)
+from django.core.files.storage import default_storage
+
+from reports.models import *
+
+logger = logging.getLogger(__name__)
 
 
-def dashboard(request, template_name = "reports/dashboard.html", *args, **kwargs):
+def index(request, template_name = "reports/index.html", *args, **kwargs):
 	context = {
 		"object_list": Report.objects.all()
 	}
@@ -34,17 +38,6 @@ def dashboard(request, template_name = "reports/dashboard.html", *args, **kwargs
 class ReportForm(forms.ModelForm):
 	class Meta:
 		model = Report
-
-class ReportXView(FormView):
-		template_name = 'reports/new.html'
-		form_class = ReportForm
-		success_url = '/'
-
-		def form_valid(self, form):
-				# This method is called when valid form data has been POSTed.
-				# It should return an HttpResponse.
-				form.send_email()
-				return super(ContactView, self).form_valid(form)
 
 
 class ReportsDashboard(ListHybridResponseMixin, ListView):
@@ -103,39 +96,13 @@ class ReportView(DetailHybridResponseMixin, DetailView):
 # 		model = Report
 # 		#fields = [...]
 
-from django.core.files.storage import default_storage
-from django.core.files.base import ContentFile
-
-
-@csrf_exempt
-def submit_upload(request, *args, **kwargs):
-	print request.session.items()
-	print request.method
-	#print request.body
-	#print request.META['CONTENT_TYPE']
-	print request.COOKIES
-	print request.REQUEST
-	print request.GET
-	print request.POST
-	print request.FILES
-	return JSONResponse({'done': True})
-
-
-def stats_xxx(request, *args, **kwargs):
-	#data = Report.objects.get() # data request
-	response = {
-	 #'reports': data,
-	 'Verbal Vilence': 15,
-	 'Vilance': 10,
-	}
-	return JSONResponse(response)
 
 
 class ReportCreateForm(forms.ModelForm):
-    class Meta:
-        model = Report
-        #fields = ('x', 'y)
-        exclude = ('created_by','location_text')
+		class Meta:
+				model = Report
+				#fields = ('x', 'y)
+				exclude = ('created_by','location_text')
 
 
 class ReportSubmitView(CreateView):
@@ -144,16 +111,87 @@ class ReportSubmitView(CreateView):
 	form_class = ReportCreateForm
 	template_name = "reports/submit.html"
 
+	def get_context_data(self, **kwargs):
+		logger.debug(kwargs)
+		rsid = uuid.uuid1().hex
+		RSIDs = self.request.session.get('RSIDs', [])
+		RSIDs.append(rsid)
+		self.request.session['RSIDs'] = RSIDs
+		kwargs['report_submit_id'] = rsid
+		logger.debug(kwargs)
+		return kwargs
 
 	def form_valid(self, form):
 		form.instance.location_text = form.instance.location
 		form.instance.created_by = self.request.user
+		logger.debug(self.request.POST)
 		return super(ReportSubmitView, self).form_valid(form)
 
 
 class ReportSubmitPublicView(CreateView):
-	model = Report
 	template_name = "reports/submit-public.html"
+
+
+
+class MediaForm(forms.ModelForm):
+	class Meta:
+		model = Media
+
+class UploadFileForm(forms.Form):
+	file = forms.FileField()
+
+
+#@csrf_exempt
+def submit_upload(request, *args, **kwargs):
+
+	logger.debug(request.session.items())
+	#logger.debug(request.method)
+	#logger.debug(request.body)
+	#logger.debug(request.META['CONTENT_TYPE'])
+	#logger.debug(request.COOKIES)
+	#logger.debug(request.REQUEST)
+	#logger.debug(request.GET)
+	#logger.debug(request.POST)
+	logger.debug(request.FILES)
+
+
+	#logger.debug("condition:")
+	#logger.debug(request.META.has_key('HTTP_X_RSID'))
+	#logger.debug(request.META['HTTP_X_RSID'])
+	#logger.debug(request.session.get('RSIDs', None))
+	#logger.debug(request.META['HTTP_X_RSID'] in request.session.get('RSIDs', []))
+
+	if request.method == 'POST' and request.META.has_key('HTTP_X_RSID') and request.META['HTTP_X_RSID'] in request.session.get('RSIDs', []):
+
+		report_submit_id = request.META['HTTP_X_RSID']
+		logger.debug(report_submit_id)
+
+		media_path = os.path.join('reports', report_submit_id)
+		logger.debug(media_path)
+
+		media_files_key = 'report_submit_' + report_submit_id + '_files'
+		media_files = request.session.get(media_files_key, [])
+
+		logger.debug(media_files)
+
+		files = request.FILES.getlist('files[]')
+		logger.debug(files)
+
+		for f in files:
+			logger.debug(f)
+			file_path = os.path.join(media_path, f.name)
+			logger.debug(file_path)
+			media_files.append(file_path)
+			default_storage.save(file_path, f)
+
+		logger.debug(media_files)
+
+		request.session[media_files_key] = media_files
+
+		return JSONResponse({'done': True})
+
+	return JSONResponse({'done': False}, status=400)
+
 
 
 class ReportVerifyView(View):
@@ -185,9 +223,25 @@ class ReportCloseView(View):
 
 
 
+def stats_xxx(request, *args, **kwargs):
+	#data = Report.objects.get() # data request
+	response = {
+	 #'reports': data,
+	 'Verbal Vilence': 15,
+	 'Vilance': 10,
+	}
+	return JSONResponse(response)
+
+
+
 class CommentForm(forms.ModelForm):
 	class Meta:
 		model = Comment
+
+
+
+
+
 
 
 
@@ -225,3 +279,4 @@ class ReportDeleteView(DeleteView):
 	model = Report
 	template_name = "reports/manage/delete.html"
 	success_url = '/reports/manage/'
+
