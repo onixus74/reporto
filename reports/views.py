@@ -45,10 +45,45 @@ class ReportsDashboard(ListHybridResponseMixin, ListView):
 	model = Report
 	template_name = "reports/dashboard.html"
 
-	# def get_context_data(self, **kwargs):
-	# 	context = super(PublisherDetail, self).get_context_data(**kwargs)
-	# 	context['something'] = Something.objects.all()
-	# 	return context
+	def get_context_data(self, **kwargs):
+		"""
+			Prepare context parameter 'category_donut_data' with the following structure
+			category_donut_data = [
+				{ 'label': 'Verbal Violence', 'value': 20 },
+				{ 'label': 'Violence', 'value': 10 },
+				{ 'label': 'Rape', 'value': 20 },
+				{ 'label': 'Lack of Investigation and Prosecution', 'value': 50 }
+			]
+		"""
+		context = super(ReportsDashboard, self).get_context_data(**kwargs)
+
+		category_donut_data = []
+		categories = Category.objects.all()
+		sum_category=Category.objects.count()
+		for category in categories:
+			val=int(float(Report.objects.filter(category=category).count())/sum_category*100)
+			if val != 0:
+				category_donut_data.append({
+					'label': category.definition,
+					'value': val
+				})
+		context['category_donut_data'] = category_donut_data
+
+
+		feature_donut_data = []
+		features = Feature.objects.all()
+		sum_features=Feature.objects.count()
+		for feature in features:
+			val = int(float(Report.objects.filter(features=feature).count()) / sum_features *100)
+			if val != 0:
+				feature_donut_data.append({
+				'label': feature.definition,
+				'value': val
+				})
+		context['feature_donut_data'] = feature_donut_data
+
+		return context
+
 
 class ReportView(DetailHybridResponseMixin, DetailView):
 	""" """
