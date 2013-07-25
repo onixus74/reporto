@@ -27,8 +27,4 @@ urlpatterns = patterns('',
     url(r'^features/', include('features.urls', namespace="features")),
     url(r'^victims/', include('victims.urls', namespace="victims")),
 
-
-    #url(r'^fu1$', 'base.views.fu1', name='fu1'),
-    #url(r'^fu2$', 'base.views.fu2', name='fu2'),
-
 )

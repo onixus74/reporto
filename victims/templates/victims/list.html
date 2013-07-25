@@ -22,7 +22,7 @@
 						</tr>
 						{% for victim in victim_list %}
 						<tr>
-							<td><a href="{{ victim.get_absolute_url }}">{{victim.fullname}}</a></td>
+							<td><a href="{{ victim.get_absolute_url }}">{{victim}}</a></td>
 							<td>
 								<a href="{% url 'victims:edit' victim.id %}" class="btn btn-info"><i class="icon-pencil"></i> Edit</a>
 								<a href="{% url 'victims:delete' victim.id %}" class="btn btn-warning"><i class="icon-trash"></i> Delete</a>
