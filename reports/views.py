@@ -1,5 +1,3 @@
-import logging
-
 import uuid
 import os
 import json
@@ -137,7 +135,7 @@ class ReportCreateForm(forms.ModelForm):
 		class Meta:
 				model = Report
 				#fields = ('x', 'y)
-				exclude = ('created_by','location_text')
+				exclude = ('created_by')
 
 
 class ReportSubmitView(CreateView):
@@ -148,16 +146,22 @@ class ReportSubmitView(CreateView):
 
 	def get_context_data(self, **kwargs):
 		logger.debug(kwargs)
+
+		# create report submit id for files upload
 		rsid = uuid.uuid1().hex
 		RSIDs = self.request.session.get('RSIDs', [])
 		RSIDs.append(rsid)
 		self.request.session['RSIDs'] = RSIDs
 		kwargs['report_submit_id'] = rsid
+
+		#
+		kwargs['victims'] = Victim.objects.all()
+		kwargs['reports'] = Report.objects.all()
+
 		logger.debug(kwargs)
 		return kwargs
 
 	def form_valid(self, form):
-		form.instance.location_text = form.instance.location
 		form.instance.created_by = self.request.user
 		logger.debug(self.request.POST)
 		return super(ReportSubmitView, self).form_valid(form)
@@ -201,7 +205,7 @@ def submit_upload(request, *args, **kwargs):
 		report_submit_id = request.META['HTTP_X_RSID']
 		logger.debug(report_submit_id)
 
-		media_path = os.path.join('reports', report_submit_id)
+		media_path = os.path.join('reports', 'tmp', report_submit_id)
 		logger.debug(media_path)
 
 		media_files_key = 'report_submit_' + report_submit_id + '_files'

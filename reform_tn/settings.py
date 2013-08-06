@@ -112,6 +112,7 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
+    'compressor.finders.CompressorFinder',
 )
 
 # Make this unique, and don't share it with anybody.
@@ -179,7 +180,7 @@ INSTALLED_APPS = (
 
     'rest_framework',
 
-    'jsonify',
+    'compressor',
 
 		#'django_youtube',
 

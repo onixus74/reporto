@@ -1,4 +1,4 @@
-{% load static %}<!doctype html>
+{% load static %}{% load compress %}<!doctype html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
@@ -11,6 +11,13 @@
 	<meta name="viewport" content="width=device-width">
 
 <!-- Layout Styles Dependencies -->
+	{% compress css %}
+	<link rel="stylesheet" href="{% static 'components/select2/select2.css' %}">
+	<link rel="stylesheet" href="{% static 'components/select2-bootstrap-css/select2-bootstrap.css' %}">
+	<link rel="stylesheet" href="{% static 'components/bootstrap-select/bootstrap-select.css' %}">
+	<link rel="stylesheet" href="{% static 'components/bootstrap-wysihtml5/dist/bootstrap-wysihtml5-0.0.2.css' %}">
+	<link rel="stylesheet" href="{% static 'components/animate.css/animate.css' %}">
+	{% endcompress %}
 	<!--<link rel="stylesheet" href="{% static 'styles/deps.css' %}">-->
 	<link rel="stylesheet" href="{% static 'styles/main.css' %}">
 <!-- Layout Styles Dependencies -END -->
@@ -20,11 +27,12 @@
 <!-- View Styles Dependencies - END -->
 
 	<script type="text/javascript">
-	var reform = {data: {}, widgets: {}};
+	var reform = {
+		data: {},
+		widgets: {}
+	};
 	var csrf_token = "{{ csrf_token|escapejs }}";
 	</script>
-
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
 
 </head>
 <body ng-app="reformPlatform">
@@ -131,12 +139,14 @@
 <!-- View Addons - END -->
 
 <!-- Layout Scripts Dependencies -->
+	{% compress js %}
 	<script src="{% static 'components/jquery/jquery.js' %}"></script>
 	<!--<script src="{% static 'components/sass-bootstrap/bootstrap/js/bootstrap.js' %}"></script>-->
 	<script src="{% static 'scripts/bootstrap.js' %}"></script>
 
 	<script src="{% static 'components/select2/select2.js' %}"></script>
 	<script src="{% static 'components/bootstrap-select/bootstrap-select.js' %}"></script>
+	{% endcompress %}
 
 	<script type="text/javascript">
 		$(function(){

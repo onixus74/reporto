@@ -1,7 +1,7 @@
 {% extends "layouts/default.html" %}
 
 {% load static %}
-{% load jsonify %}
+{% load json %}
 
 {% block view_title %}Reports Dashboard | {% endblock %}
 
@@ -106,11 +106,12 @@
 	<!-- Map -->
 	<script src="{% static 'components/leaflet/dist/leaflet.js' %}"></script>
 
-	 <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
- <script src="http://cdn.oesmith.co.uk/morris-0.4.3.min.js"></script>
+	<script src="{% static 'components/raphael/raphael.js' %}"></script>
+	<script src="{% static 'components/morris.js/morris.js' %}"></script>
+
 	<script type="text/javascript">
-		reform.data.categoryDonut = {{category_donut_data|jsonify}}
-		reform.data.featureDonut = {{feature_donut_data|jsonify}}
+		reform.data.categoryDonut = {{category_donut_data|json}}
+		reform.data.featureDonut = {{feature_donut_data|json}}
 	</script>
 	<script src="{% static 'reports/scripts/reports-dashboard.js' %}"></script>
 {% endblock %}

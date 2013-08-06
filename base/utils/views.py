@@ -8,33 +8,6 @@ from django.utils import simplejson
 
 from django.views.generic import ListView, DetailView
 
-
-# class JSONResponseMixin(object):
-# 	def render_to_response(self, context):
-# 		"Returns a JSON response containing 'context' as payload"
-# 		return self.get_json_response(self.convert_context_to_json(context))
-
-# 	def get_json_response(self, content, **httpresponse_kwargs):
-# 		"Construct an `HttpResponse` object."
-# 		return HttpResponse(content, content_type='application/json', **httpresponse_kwargs)
-
-# 	def convert_context_to_json(self, context):
-# 		"Convert the context dictionary into a JSON object"
-# 		# Note: This is *EXTREMELY* naive; in reality, you'll need
-# 		# to do much more complex handling to ensure that arbitrary
-# 		# objects -- such as Django model instances or querysets
-# 		# -- can be serialized as JSON.
-
-# 		try:
-# 			return serializers.serialize('json', context)
-# 		except Exception, e:
-# 			try:
-# 				#return simplejson.dumps(context)
-# 				return json.dumps(context)
-# 			except Exception, e:
-# 				raise e
-
-
 from django.views.generic import View
 from django.views.generic.detail import BaseDetailView
 from django.views.generic.list import BaseListView
@@ -350,22 +323,6 @@ class DetailHybridResponseMixin(HybridResponseMixin, JSONDetailView):
 	default_view = DetailView
 
 
-
-
-
-from django.core.serializers import serialize
-from django.db.models.query import QuerySet
-from django.utils import simplejson
-from django.template import Library
-
-register = Library()
-
-def jsonify(object):
-	if isinstance(object, QuerySet):
-		return serialize('json', object)
-	return simplejson.dumps(object)
-
-register.filter('jsonify', jsonify)
 # class SFH_Get_Region_View(JSONResponseMixin, BaseDetailView):
 #     def get(self, request, *args, **kwargs):
 #         #do some queries here to collect your data for the response
@@ -483,34 +440,34 @@ from django.http import HttpResponse
 from django.views.generic.edit import CreateView
 
 class AjaxableResponseMixin(object):
-    """
-    Mixin to add AJAX support to a form.
-    Must be used with an object-based FormView (e.g. CreateView)
-    """
-    def render_to_json_response(self, context, **response_kwargs):
-        data = json.dumps(context)
-        response_kwargs['content_type'] = 'application/json'
-        return HttpResponse(data, **response_kwargs)
+	"""
+	Mixin to add AJAX support to a form.
+	Must be used with an object-based FormView (e.g. CreateView)
+	"""
+	def render_to_json_response(self, context, **response_kwargs):
+		data = json.dumps(context)
+		response_kwargs['content_type'] = 'application/json'
+		return HttpResponse(data, **response_kwargs)
 
-    def form_invalid(self, form):
-        response = super(AjaxableResponseMixin, self).form_invalid(form)
-        if self.request.is_ajax():
-            return self.render_to_json_response(form.errors, status=400)
-        else:
-            return response
+	def form_invalid(self, form):
+		response = super(AjaxableResponseMixin, self).form_invalid(form)
+		if self.request.is_ajax():
+			return self.render_to_json_response(form.errors, status=400)
+		else:
+			return response
 
-    def form_valid(self, form):
-        # We make sure to call the parent's form_valid() method because
-        # it might do some processing (in the case of CreateView, it will
-        # call form.save() for example).
-        response = super(AjaxableResponseMixin, self).form_valid(form)
-        if self.request.is_ajax():
-            data = {
-                'pk': self.object.pk,
-            }
-            return self.render_to_json_response(data)
-        else:
-            return response
+	def form_valid(self, form):
+		# We make sure to call the parent's form_valid() method because
+		# it might do some processing (in the case of CreateView, it will
+		# call form.save() for example).
+		response = super(AjaxableResponseMixin, self).form_valid(form)
+		if self.request.is_ajax():
+			data = {
+				'pk': self.object.pk,
+			}
+			return self.render_to_json_response(data)
+		else:
+			return response
 
 # class AuthorCreate(AjaxableResponseMixin, CreateView):
 #     model = Author

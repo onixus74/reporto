@@ -1,5 +1,5 @@
 /* jshint strict: true, browser: true, devel: true */
-/* global angular, $, reform */
+/* global angular, $, L, Dropzone, reform */
 'use strict';
 
 
@@ -10,7 +10,7 @@ reform.widgets.map.init = function() {
 
 	// create a map in the "map" div, set the view to a given place and zoom
 	var map = L.map('map');
-	widget.e = map;
+	widget.object = map;
 
 	map.setView([34.161818161230386, 9.3603515625], 5);
 
@@ -40,19 +40,24 @@ reform.widgets.map.init = function() {
 		.openPopup();
 	*/
 
-	new L.Control.GeoSearch({
+	var geoSearch = new L.Control.GeoSearch({
 		provider: new L.GeoSearch.Provider.Google({
 			region: 'tn'
 		})
-	}).addTo(map);
+	});//.addTo(map);
+	map.addControl(geoSearch);
+	widget.geoSearch = geoSearch;
+
+	map.scrollWheelZoom.disable();
 
 	var marker;
 
 	var location = $('#id_location');
+	var location_text = $('#id_location_text');
 	var loc = location.val();
 	console.log(loc);
 	if (loc) {
-		loc = loc.split(',')
+		loc = loc.split(',');
 		var lat = parseFloat(loc[0]), lng = parseFloat(loc[1]);
 		console.log(loc, lat, lng);
 		var latlng = new L.LatLng(lat, lng);
@@ -115,7 +120,7 @@ reform.widgets.dropzone.init = function() {
 
 	var widget = reform.widgets.dropzone;
 	var dropzone = new Dropzone("div#assets", { url: "/reports/submit/upload"});
-	widget.e = dropzone;
+	widget.object = dropzone;
 
 };
 
@@ -124,9 +129,19 @@ $(reform.widgets.dropzone.init);
 
 reform.widgets.wizard = {};
 reform.widgets.wizard.init = function() {
+
+	//$('.select2').select2()
+	$('.select2').selectpicker();
+	/*
+	$('.datetimepicker').datetimepicker({
+		//language: 'en',
+		pick12HourFormat: true
+	});
+	*/
+
 	var widget = reform.widgets.wizard;
 	//var wizard =
-	//widget.e = wizard;
+	//widget.object = wizard;
 
 	widget.reporterState = $('#ui-wizard-reporter-state');
 	console.log(widget.reporterState);
@@ -173,7 +188,7 @@ reform.widgets.wizard.init = function() {
 		widget.progressBar.css({width: "10%"});
 		el.off('click');
 		*/
-		victimWitnessButtonsAction.call(this, e)
+		victimWitnessButtonsAction.call(this, e);
 	});
 
 	widget.witnessButton.on('click', function(e){
@@ -185,54 +200,54 @@ reform.widgets.wizard.init = function() {
 		widget.progressBar.css({width: "10%"});
 		el.off('click');
 		*/
-		victimWitnessButtonsAction.call(this, e)
+		victimWitnessButtonsAction.call(this, e);
 	});
 
 	widget.category = $('#id_category');
 	console.log(widget.category);
 
-	widget.category.on('change', function(e){
+	widget.category.on('change.show', function(e){
 		widget.sections.location.addClass('animated fadeIn').show();
 		reform.widgets.map.init();
 		widget.progressBar.css({width: "20%"});
-		widget.category.off('change');
+		widget.category.off('change.show');
 	});
 
 	widget.location = $('#id_location');
 	console.log(widget.location);
 
-	widget.location.on('change', function(e){
+	widget.location.on('change.show', function(e){
 		console.log('changed', e);
 		widget.sections.victimAggressor.addClass('animated fadeIn').show();
 		widget.progressBar.css({width: "30%"});
-		widget.location.off('change');
+		widget.location.off('change.show');
 	});
 
 	widget.victim = $('#id_victim');
 	console.log(widget.victim);
 
-	widget.victim.on('change', function(e){
+	widget.victim.on('change.show', function(e){
 		widget.sections.descriptionEvidence.addClass('animated fadeIn').show();
 		widget.progressBar.css({width: "40%"});
-		widget.victim.off('change');
+		widget.victim.off('change.show');
 	});
 
 	widget.description = $('#id_description');
 	console.log(widget.description);
 
-	widget.description.on('change', function(e){
+	widget.description.on('change.show', function(e){
 		widget.sections.features.addClass('animated fadeIn').show();
 		widget.progressBar.css({width: "50%"});
-		widget.description.off('change');
+		widget.description.off('change.show');
 	});
 
 	widget.features = $('#id_features');
 	console.log(widget.features);
 
-	widget.features.on('change', function(e){
+	widget.features.on('change.show', function(e){
 		widget.sections.submit.addClass('animated fadeIn').show();
 		widget.progressBar.css({width: "100%"});
-		widget.features.off('change');
+		widget.features.off('change.show');
 	});
 
 
@@ -259,7 +274,8 @@ reform.widgets.xxx = {};
 reform.widgets.xxx.init = function() {
 	var widget = reform.widgets.xxx;
 	var xxx =
-	widget.e = xxx;
+	widget.object = xxx;
+	widget.element = xxx;
 };
 
 $(reform.widgets.xxx.init);

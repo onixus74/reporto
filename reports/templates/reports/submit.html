@@ -1,9 +1,10 @@
 {% extends "layouts/default.html" %}
 
 {% load static %}
-{% load jsonify %}
+{% load json %}
 {% load crispy_forms_tags %}
 {% load widget_tweaks %}
+{% load compress %}
 
 {% block view_title %}Report Submission | {% endblock %}
 
@@ -65,7 +66,8 @@
 						<div id="map" style="width:100%; height: 300px"></div>
 						<!--<input type="text" name="location" id="id_location">-->
 						{% render_field form.location type="hidden" %}
-						{% render_field form.location_text type="hidden" %}
+
+						{% render_field form.location_text type="text" placeholder="Location" class="input-block-level" data-provide="typeahead" data-source="reform.data.locations" autocomplete="off" %}
 
 					</div>
 				</div>
@@ -194,12 +196,18 @@
 
 {% block view_styles %}
 	<!-- Map -->
-	<link rel="stylesheet" href="{% static 'components/leaflet/dist/leaflet.css'%}" />
+
+	{% compress css %}
+	<link rel="stylesheet" href="{% static 'components/leaflet/dist/leaflet.css' %}" />
 	<!--[if lte IE 8]>
-	<link rel="stylesheet" href="{% static 'components/leaflet/dist/leaflet.ie.css'%}" />
+	<link rel="stylesheet" href="{% static 'components/leaflet/dist/leaflet.ie.css' %}" />
 	<![endif]-->
+	<link rel="stylesheet" href="{% static 'dependencies/L.GeoSearch/src/css/l.geosearch.css' %}" />
+	<link rel="stylesheet" href="{% static 'components/dropzone/downloads/css/basic.css' %}" />
+	{% endcompress %}
 
 	<link rel="stylesheet" href="{% static 'reports/styles/report-submit.css'%}" />
+
 	{% if debug %}
 	<style type="text/css">
 
@@ -235,29 +243,21 @@
 	<script src="{% static 'scripts/app.js' %}"></script>
 	<script src="{% static 'reports/scripts/report-submit-ng.js' %}"></script>
 	-->
-
+	{% compress js %}
 	<!-- Map -->
 	<script src="{% static 'components/leaflet/dist/leaflet.js' %}"></script>
-	<script src="{% static 'components-mod/L.GeoSearch/src/js/l.control.geosearch.js' %}"></script>
-	<script src="{% static 'components-mod/L.GeoSearch/src/js/l.geosearch.provider.google.js' %}"></script>
+	<script src="{% static 'dependencies/L.GeoSearch/src/js/l.control.geosearch.js' %}"></script>
+	<script src="{% static 'dependencies/L.GeoSearch/src/js/l.geosearch.provider.google.js' %}"></script>
 
 	<script src="{% static 'components/dropzone/downloads/dropzone.js' %}"></script>
+	<script src="{% static 'components/typeahead.js/dist/typeahead.js' %}"></script>
+	{% endcompress %}
+
 	<script type="text/javascript">
-		var report_submit_id = "{{report_submit_id|escapejs}}"
+		var report_submit_id = {{report_submit_id|json}};
+		reform.data.victims = {{victims|json}};
+		reform.data.reports = {{reports|json}};
 	</script>
 	<script src="{% static 'reports/scripts/report-submit.js' %}"></script>
-	<script type="text/javascript">
-		$(function(){
-			//$('select').addClass('input-block-level').select2()
-			//$('.select2').select2()
-			$('.select2').selectpicker()
-			/*
-			$('.datetimepicker').datetimepicker({
-				//language: 'en',
-				pick12HourFormat: true
-			});
-			*/
-		});
-	</script>
 
 {% endblock %}
