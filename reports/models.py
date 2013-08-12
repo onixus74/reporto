@@ -30,7 +30,8 @@ class Media(models.Model):
 	#url          = models.CharField(max_length=300)
 	#external_url = models.CharField(max_length=300)
 	#folder       = models.CharField(max_length=300)
-	file          = models.FileField(upload_to='uploads')
+	#file          = models.FileField(upload_to='reports/tmp')
+	file          = models.FileField(upload_to='reports/tmp')
 
 	#COMMENT = 'C'
 	#CATEGORY = (

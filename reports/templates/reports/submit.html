@@ -48,13 +48,13 @@
 						<p class="lead text text-center">
 							<span id="ui-wizard-victim">I've been a victim of</span>
 							<span id="ui-wizard-witness" hidden>I've witnessed a</span>
-							{% render_field form.category placeholder="Location" class+="select2 span4" data-style="boostrap-select-colors-fix" %}
+							{% render_field form.category placeholder="Location" class+="select2 span4" data-style="boostrap-select-colors-fix" required="required" %}
 							<!--
 							that happened at
 							{% render_field form.location_text placeholder="Location" class+="span4" %}
 							-->
 							on
-							{% render_field form.datetime type="datetime-local" class+="span4" %}
+							{% render_field form.datetime type="datetime-local" class+="span4" required="required" %}
 						</p>
 
 					</div>
@@ -67,7 +67,7 @@
 						<!--<input type="text" name="location" id="id_location">-->
 						{% render_field form.location type="hidden" %}
 
-						{% render_field form.location_text type="text" placeholder="Location" class="input-block-level" data-provide="typeahead" data-source="reform.data.locations" autocomplete="off" %}
+						{% render_field form.location_text type="text" placeholder="Location" class="input-block-level" _data-provide="typeahead" _data-source="reform.data.locations" _autocomplete="off" %}
 
 					</div>
 				</div>

@@ -171,6 +171,31 @@ class ReportSubmitPublicView(CreateView):
 	template_name = "reports/submit-public.html"
 
 
+def submit_ajax(request, *args, **kwargs):
+
+	logger.debug(request.session.items())
+	#logger.debug(request.method)
+	#logger.debug(request.body)
+	#logger.debug(request.META['CONTENT_TYPE'])
+	#logger.debug(request.COOKIES)
+	#logger.debug(request.REQUEST)
+	logger.debug(request.GET)
+	logger.debug(request.POST)
+	#logger.debug(request.FILES)
+
+
+	#logger.debug("condition:")
+	#logger.debug(request.META.has_key('HTTP_X_RSID'))
+	#logger.debug(request.META['HTTP_X_RSID'])
+	#logger.debug(request.session.get('RSIDs', None))
+	#logger.debug(request.META['HTTP_X_RSID'] in request.session.get('RSIDs', []))
+
+	if request.method == 'POST':
+
+		return JSONResponse({'done': True})
+
+	return JSONResponse({'done': False}, status=400)
+
 
 class MediaForm(forms.ModelForm):
 	class Meta:
@@ -180,7 +205,6 @@ class UploadFileForm(forms.Form):
 	file = forms.FileField()
 
 
-#@csrf_exempt
 def submit_upload(request, *args, **kwargs):
 
 	logger.debug(request.session.items())

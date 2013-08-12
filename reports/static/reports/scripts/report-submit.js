@@ -41,10 +41,10 @@ reform.widgets.map.init = function() {
 	*/
 
 	var geoSearch = new L.Control.GeoSearch({
-		provider: new L.GeoSearch.Provider.Google({
-			region: 'tn'
-		})
-	});//.addTo(map);
+		provider: new L.GeoSearch.Provider.Google({ region: 'tn' }),
+		//country: "tn",
+		zoomLevel: 16
+	});
 	map.addControl(geoSearch);
 	widget.geoSearch = geoSearch;
 
@@ -143,112 +143,188 @@ reform.widgets.wizard.init = function() {
 	//var wizard =
 	//widget.object = wizard;
 
-	widget.reporterState = $('#ui-wizard-reporter-state');
-	console.log(widget.reporterState);
+	var elements = widget.elements = {};
 
-	widget.sections = {};
+	elements.reporterState = $('#ui-wizard-reporter-state');
+	console.log(elements.reporterState);
 
-	widget.sections.victimWitnessButtons = $('#ui-wizard-victim-witness-buttons');
-	widget.sections.categoryDatetime = $('#ui-wizard-category-datetime');
-	widget.sections.location = $('#ui-wizard-location');
-	widget.sections.victimAggressor = $('#ui-wizard-victim-aggressor');
-	widget.sections.descriptionEvidence = $('#ui-wizard-description-evidence');
-	widget.sections.features = $('#ui-wizard-features');
-	widget.sections.submit = $('#ui-wizard-submit');
-	console.log(widget.sections);
+	var sections = widget.sections = {
+		'victim-witness': $('#ui-wizard-victim-witness-buttons'),
+		'category-datetime': $('#ui-wizard-category-datetime'),
+		'location' : $('#ui-wizard-location'),
+		'victim-aggressor' : $('#ui-wizard-victim-aggressor'),
+		'description-evidence' : $('#ui-wizard-description-evidence'),
+		'features' : $('#ui-wizard-features'),
+		'submit' : $('#ui-wizard-submit')
+	}
 
-	widget.progressBar = $('#ui-wizard-progress');
+	console.log(sections);
 
+	elements.progressBar = $('#ui-wizard-progress');
 
-	widget.victimButton = $('#ui-wizard-victim-button');
-	console.log(widget.victimButton);
-	widget.victimButtonContainer = $('#ui-wizard-victim-button-container');
-	console.log(widget.victimButtonContainer);
-	widget.witnessButton = $('#ui-wizard-witness-button');
-	console.log(widget.witnessButton);
-	widget.witnessButtonContainer = $('#ui-wizard-witness-button-container');
-	console.log(widget.witnessButtonContainer);
+	/* victim-witness section */
+
+	elements.victimButton = $('#ui-wizard-victim-button');
+	console.log(elements.victimButton);
+	elements.victimButtonContainer = $('#ui-wizard-victim-button-container');
+	console.log(elements.victimButtonContainer);
+	elements.witnessButton = $('#ui-wizard-witness-button');
+	console.log(elements.witnessButton);
+	elements.witnessButtonContainer = $('#ui-wizard-witness-button-container');
+	console.log(elements.witnessButtonContainer);
 
 	function victimWitnessButtonsAction(e){
 		var el = $(this);
-		widget.reporterState.html(el.data('value')).addClass(el.data('class')).addClass('animated pulse');
-		widget.sections.categoryDatetime.addClass('animated fadeIn').show();
-		widget.sections.victimWitnessButtons.addClass('animated fadeOut');
-		widget.progressBar.css({width: "10%"});
-		widget.victimButton.off('click');
-		widget.witnessButton.off('click');
+		elements.reporterState.html(el.data('value')).addClass(el.data('class')).addClass('animated pulse');
+		sections['category-datetime'].addClass('animated fadeIn').show();
+		sections['victim-witness'].addClass('animated fadeOut');
+		elements.progressBar.css({width: "10%"});
+		elements.victimButton.off('click');
+		elements.witnessButton.off('click');
 	}
 
-	widget.victimButton.on('click', function(e){
-		/*
-		var el = $(this);
-		widget.reporterState.html(el.data('value')).addClass(el.data('class')).addClass('animated pulse');
-		widget.sections.categoryDatetime.addClass('animated fadeIn').show();
-		widget.sections.victimWitnessButtons.addClass('animated fadeOut');
-		widget.progressBar.css({width: "10%"});
-		el.off('click');
-		*/
+	elements.victimButton.on('click', function(e){
 		victimWitnessButtonsAction.call(this, e);
 	});
 
-	widget.witnessButton.on('click', function(e){
-		/*
-		var el = $(this);
-		widget.reporterState.html(el.data('value')).addClass(el.data('class')).addClass('animated pulse');
-		widget.sections.categoryDatetime.addClass('animated fadeIn').show();
-		widget.sections.victimWitnessButtons.addClass('animated fadeOut');
-		widget.progressBar.css({width: "10%"});
-		el.off('click');
-		*/
+	elements.witnessButton.on('click', function(e){
 		victimWitnessButtonsAction.call(this, e);
 	});
 
-	widget.category = $('#id_category');
-	console.log(widget.category);
+	function showSection(section, fields, callback, progress){
 
-	widget.category.on('change.show', function(e){
-		widget.sections.location.addClass('animated fadeIn').show();
-		reform.widgets.map.init();
-		widget.progressBar.css({width: "20%"});
-		widget.category.off('change.show');
+		function showSectionClosure(e){
+
+			console.log(this);
+			console.log(e.target);
+			//console.log(this.name);
+			//console.log(e.target.name);
+
+			var fields = showSectionClosure.fields;
+			console.log(fields);
+
+			fields[this.name] = true;
+			console.log(fields);
+
+			var ready = Object.keys(fields).reduce(function (previous, key) {
+				return previous && fields[key];
+			}, true);
+
+			console.log(ready);
+
+			if(ready){
+				sections[section].addClass('animated fadeIn').show();
+				if(callback)
+					callback();
+				if(progress)
+					elements.progressBar.css({width: progress + "%"});
+			}
+
+			$(this).off('change.showSection');
+
+		}
+		showSectionClosure.fields = {};
+		fields.forEach(function(name){
+			showSectionClosure.fields[name] = false;
+		})
+
+		return showSectionClosure;
+
+	}
+
+
+	/* category-datetime section */
+
+	elements.category = $('#id_category');
+	console.log(elements.category);
+
+	elements.datetime = $('#id_datetime');
+	console.log(elements.datetime);
+
+	var showLocationSection = showSection('location', ['category', 'datetime'], reform.widgets.map.init, 20);
+	elements.category.on('change.showSection', showLocationSection);
+	elements.datetime.on('change.showSection', showLocationSection);
+
+	/* location section */
+
+	elements.location = $('#id_location');
+	console.log(elements.location);
+
+	elements.location_text = $('#id_location_text');
+	console.log(elements.location_text);
+
+	var showVictimAggressorSection = showSection('victim-aggressor', ['location', 'location_text'], null, 30);
+	elements.location.on('change.showSection', showVictimAggressorSection);
+	elements.location_text.on('change.showSection', showVictimAggressorSection);
+
+	elements.location.on('change', function(e){
+		var location_text = elements.location_text;
+		console.log(this.value);
+		var latlng = this.value.split(',');
+		console.log(latlng);
+		var lat = parseFloat(latlng[0], 10), lng = parseFloat(latlng[1], 10);
+		var geocoder = new google.maps.Geocoder();
+		//var geocoder = L.GeoSearch.Provider.Google.Geocoder;
+		geocoder.geocode({location: new google.maps.LatLng(lat, lng), region: 'tn'}, function(data, status){
+			console.log(arguments);
+			try { location_text.typeahead('destroy'); } catch(e) {};
+			if (status == google.maps.GeocoderStatus.OK) {
+				var results = [];
+				for (var i = 0; i < data.length; i++)
+					results.push(data[i].formatted_address);
+				console.log(results);
+				if(results.length > 0){
+					location_text.typeahead({
+						//name: 'location_text',
+						local: results
+					});
+					location_text.val(results[0]);
+				}
+			}
+		});
 	});
 
-	widget.location = $('#id_location');
-	console.log(widget.location);
+	/* victim-aggressor section */
 
-	widget.location.on('change.show', function(e){
-		console.log('changed', e);
-		widget.sections.victimAggressor.addClass('animated fadeIn').show();
-		widget.progressBar.css({width: "30%"});
-		widget.location.off('change.show');
+	elements.victim = $('#id_victim');
+	console.log(elements.victim);
+
+	elements.aggressor = $('#id_aggressor');
+	console.log(elements.aggressor);
+
+	var showDescriptionEvidenceSection = showSection('description-evidence', ['victim', 'aggressor'], null, 40);
+	elements.victim.on('change.showSection', showDescriptionEvidenceSection);
+	elements.aggressor.on('change.showSection', showDescriptionEvidenceSection);
+
+	/* description-evidence section */
+
+	elements.description = $('#id_description');
+	console.log(elements.description);
+
+	var showFeaturesSection = showSection('features', ['description'], null, 50);
+	elements.description.on('change.showSection', showFeaturesSection);
+
+	/*
+	elements.description.on('change.showSection', function(e){
+		sections['features'].addClass('animated fadeIn').show();
+		elements.progressBar.css({width: "50%"});
+		elements.description.off('change.showSection');
 	});
+	*/
 
-	widget.victim = $('#id_victim');
-	console.log(widget.victim);
+	elements.features = $('#id_features');
+	console.log(elements.features);
 
-	widget.victim.on('change.show', function(e){
-		widget.sections.descriptionEvidence.addClass('animated fadeIn').show();
-		widget.progressBar.css({width: "40%"});
-		widget.victim.off('change.show');
+	var showSubmitSection = showSection('submit', ['features'], null, 100);
+	elements.features.on('change.showSection', showSubmitSection);
+
+	/*
+	elements.features.on('change.showSection', function(e){
+		sections['submit'].addClass('animated fadeIn').show();
+		elements.progressBar.css({width: "100%"});
+		elements.features.off('change.showSection');
 	});
-
-	widget.description = $('#id_description');
-	console.log(widget.description);
-
-	widget.description.on('change.show', function(e){
-		widget.sections.features.addClass('animated fadeIn').show();
-		widget.progressBar.css({width: "50%"});
-		widget.description.off('change.show');
-	});
-
-	widget.features = $('#id_features');
-	console.log(widget.features);
-
-	widget.features.on('change.show', function(e){
-		widget.sections.submit.addClass('animated fadeIn').show();
-		widget.progressBar.css({width: "100%"});
-		widget.features.off('change.show');
-	});
+	*/
 
 
 	/*
@@ -259,11 +335,28 @@ reform.widgets.wizard.init = function() {
 	});
 	*/
 
-/*
+
 $('#report-form').on('submit', function(e){
+	var data = {};
+	$(this).serializeArray().forEach(function(e){
+		if(e.name != 'csrfmiddlewaretoken')
+			data[e.name] = e.value;
+	})
+	console.log(data);
+
+	$.ajax({
+		type: "POST",
+		url: '/reports/submit/ajax',
+		data: data,
+		//success: success,
+		//dataType: dataType
+		headers: {"X-CSRFToken": csrf_token}
+	}).done(function(){
+	//$.post('/reports/submit/ajax', data).done(function(){
+		console.log(arguments);
+	});
   return false;
 })
-*/
 
 };
 
