@@ -49,9 +49,10 @@ def login_view(request, *args, **kwargs):
 			else:
 				return redirect('home')
 		else:
-			return render(request, "login-error.html")
+			#return render(request, "login-error.html")
+			return render(request, "login.html")
 	else:
-		return redirect('home')
+		return render(request, "login.html")
 
 
 def logout_view(request, *args, **kwargs):

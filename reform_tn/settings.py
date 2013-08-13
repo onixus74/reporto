@@ -80,6 +80,14 @@ DATETIME_INPUT_FORMATS = (
 )
 
 
+
+LOGIN_URL = '/login'
+
+LOGOUT_URL = '/logout'
+
+LOGIN_REDIRECT_URL = '/'
+
+
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/var/www/example.com/media/"
 MEDIA_ROOT = os.path.join(PROJECT_DIR,'media/')
