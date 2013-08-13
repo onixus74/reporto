@@ -17,14 +17,6 @@ urlpatterns = patterns('',
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls), name='admin'),
 
-    url(r'^test/$', 'base.views.test', name='test'),
-
-    #url(r'^$', 'base.views.home', name='home'),
-    url(r'^$', TemplateView.as_view(template_name="home.html"), name='home'),
-
-    url(r'^reports/', include('reports.urls', namespace='reports')),
-    url(r'^categories/', include('categories.urls', namespace="categories")),
-    url(r'^features/', include('features.urls', namespace="features")),
-    url(r'^victims/', include('victims.urls', namespace="victims")),
+    url(r'', include('base.urls')),
 
 )

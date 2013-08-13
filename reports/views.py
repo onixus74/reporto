@@ -4,7 +4,7 @@ import json
 import logging
 
 from django.conf import settings
-from django.shortcuts import render_to_response, redirect
+from django.shortcuts import render, redirect, render_to_response
 from django.http import HttpResponse
 from django.core import serializers
 from django.utils import simplejson
@@ -30,7 +30,7 @@ def index(request, template_name = "reports/index.html", *args, **kwargs):
 	context = {
 		"object_list": Report.objects.all()
 	}
-	return render_to_response(template_name, context)
+	return render(request, template_name, context)
 
 
 class ReportForm(forms.ModelForm):
@@ -95,7 +95,7 @@ class ReportView(DetailHybridResponseMixin, DetailView):
 # 	context = {
 # 		"object": Report.objects.get(id=id)
 # 	}
-# 	return render_to_response(template_name, context)
+# 	return render(request, template_name, context)
 
 
 # @csrf_exempt
@@ -113,7 +113,7 @@ class ReportView(DetailHybridResponseMixin, DetailView):
 # 		"message": "Hello!",
 # 		"form": form
 # 	}
-# 	return render_to_response(template_name, context)
+# 	return render(request, template_name, context)
 
 
 # def submission_json(request, *args, **kwargs):
