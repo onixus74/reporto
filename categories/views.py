@@ -41,7 +41,7 @@ class CategoryDeleteView(DeleteView):
 	success_url = '/categories/'
 
 
-def list(request, *args, **kwargs):
+def list_categories(request, *args, **kwargs):
 	template_name = "categories/index.html"
 	context = {
 		"items": Category.objects.all()
