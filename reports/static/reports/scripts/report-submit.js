@@ -102,16 +102,20 @@ Dropzone.options.assets = {
 	},
 	maxFilesize: 10, // MB
 	uploadMultiple: true,
+	/*
 	addRemoveLinks: true,
 	accept: function(file, done) {
-		/*
-		if (file.name == "justinbieber.jpg") {
-			done("Naha, you don't.");
-		}
-		else { done(); }
-		*/
+		console.log(file);
 		done();
 	},
+	*/
+	/*
+	removedfile: function(file){
+		console.log(file);
+		window.file = file;
+		return true;
+	},
+	*/
 	dictDefaultMessage: "Drop files or click to upload evidence photos/videos"
 };
 
@@ -119,7 +123,7 @@ reform.widgets.dropzone = {};
 reform.widgets.dropzone.init = function() {
 
 	var widget = reform.widgets.dropzone;
-	var dropzone = new Dropzone("div#assets", { url: "/reports/submit/upload"});
+	var dropzone = new Dropzone("div#assets", { url: reform.urls.upload });
 	widget.object = dropzone;
 
 };
@@ -185,10 +189,12 @@ reform.widgets.wizard.init = function() {
 
 	elements.victimButton.on('click', function(e){
 		victimWitnessButtonsAction.call(this, e);
+		$('#ui-wizard-victim').show();
 	});
 
 	elements.witnessButton.on('click', function(e){
 		victimWitnessButtonsAction.call(this, e);
+		$('#ui-wizard-witness').show();
 	});
 
 	function showSection(section, fields, callback, progress){
@@ -266,19 +272,20 @@ reform.widgets.wizard.init = function() {
 		var geocoder = new google.maps.Geocoder();
 		//var geocoder = L.GeoSearch.Provider.Google.Geocoder;
 		geocoder.geocode({location: new google.maps.LatLng(lat, lng), region: 'tn'}, function(data, status){
-			console.log(arguments);
-			try { location_text.typeahead('destroy'); } catch(e) {};
+			//try { location_text.typeahead('destroy'); } catch(e) {};
 			if (status == google.maps.GeocoderStatus.OK) {
 				var results = [];
 				for (var i = 0; i < data.length; i++)
 					results.push(data[i].formatted_address);
 				console.log(results);
 				if(results.length > 0){
+					/*
 					location_text.typeahead({
 						//name: 'location_text',
 						local: results
 					});
-					location_text.val(results[0]);
+					*/
+					location_text.val(results[0]).change();
 				}
 			}
 		});
@@ -346,7 +353,7 @@ $('#report-form').on('submit', function(e){
 
 	$.ajax({
 		type: "POST",
-		url: '/reports/submit/ajax',
+		url: reform.urls.submit,
 		data: data,
 		//success: success,
 		//dataType: dataType

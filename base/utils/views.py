@@ -19,6 +19,7 @@ from django.db.models import ManyToManyField
 from django.http import HttpResponseNotAllowed, HttpResponse
 from django.core.exceptions import ImproperlyConfigured
 
+#from django.core.serializers.json import DjangoJSONEncoder
 
 def dumps(content, json_opts={}):
 	"""
@@ -425,34 +426,18 @@ class HybridFormatResponseMixin(TemplateResponseMixin):
 				return HttpResponse(content)
 
 
-
-
-
-
-
-
-
-
-
-import json
-
-from django.http import HttpResponse
-from django.views.generic.edit import CreateView
-
 class AjaxableResponseMixin(object):
 	"""
 	Mixin to add AJAX support to a form.
 	Must be used with an object-based FormView (e.g. CreateView)
 	"""
 	def render_to_json_response(self, context, **response_kwargs):
-		data = json.dumps(context)
-		response_kwargs['content_type'] = 'application/json'
-		return HttpResponse(data, **response_kwargs)
+		return JSONResponse(context, **response_kwargs)
 
 	def form_invalid(self, form):
 		response = super(AjaxableResponseMixin, self).form_invalid(form)
 		if self.request.is_ajax():
-			return self.render_to_json_response(form.errors, status=400)
+			return self.render_to_json_response({'success': False, 'errors': form.errors}, status=400)
 		else:
 			return response
 
@@ -463,9 +448,10 @@ class AjaxableResponseMixin(object):
 		response = super(AjaxableResponseMixin, self).form_valid(form)
 		if self.request.is_ajax():
 			data = {
-				'pk': self.object.pk,
+				'success': True,
+				'data': self.object,
 			}
-			return self.render_to_json_response(data)
+			return self.render_to_json_response(data, status=201)
 		else:
 			return response
 

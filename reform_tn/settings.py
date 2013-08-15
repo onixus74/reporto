@@ -167,6 +167,8 @@ INSTALLED_APPS = (
     # 'suit', # theme for admin
     'admin_theme',
     'django_admin_bootstrapped', # theme for admin
+    'grappelli',
+    'filebrowser',
     'django.contrib.admin',
     #'django.contrib.admindocs',
 

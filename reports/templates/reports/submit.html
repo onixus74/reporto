@@ -46,15 +46,12 @@
 					<div class="span8 offset2 natural-language-form">
 
 						<p class="lead text text-center">
-							<span id="ui-wizard-victim">I've been a victim of</span>
+							<span id="ui-wizard-victim" hidden>I've been a victim of</span>
 							<span id="ui-wizard-witness" hidden>I've witnessed a</span>
 							{% render_field form.category placeholder="Location" class+="select2 span4" data-style="boostrap-select-colors-fix" required="required" %}
-							<!--
-							that happened at
-							{% render_field form.location_text placeholder="Location" class+="span4" %}
-							-->
-							on
+							<!--that happened -->on
 							{% render_field form.datetime type="datetime-local" class+="span4" required="required" %}
+							<!--at-->
 						</p>
 
 					</div>
@@ -76,22 +73,23 @@
 					<div class="span6">
 						<h2>Victim</h2>
 
-						<input id="id_victim_" name="victim_" type="hidden">
+						<input id="id_victim" name="victim" type="hidden" value="0">
+						{#% {{form.victim.as_hidden}} %#}
 
-						<div class="form-horizontal input-area">
+						<div class="form-horizontal input-area" style="height: auto;">
 
-							{% render_field form.victim placeholder="Victim" class+="select2 input-block-level" %}
+							<!--{% render_field form.victim placeholder="Victim" class+="select2 input-block-level" %}-->
 
 							<div id="div_id_victim_fullname" class="control-group">
 								<label for="id_victim_fullname" class="control-label requiredField">Fullname</label>
 								<div class="controls">
-									<input class="textinput textInput" id="id_victim_fullname" maxlength="200" name="victim[fullname]" type="text">
+									<input class="textinput textInput" id="id_victim_fullname" maxlength="200" name="victim[new][fullname]" type="text">
 								</div>
 							</div>
 							<div id="div_id_victim_gender" class="control-group">
 								<label for="id_victim_gender" class="control-label requiredField">Gender</label>
 								<div class="controls">
-									<select class="select" id="id_victim_gender" name="victim[gender]">
+									<select class="select" id="id_victim_gender" name="victim[new][gender]">
 										<option value="M" selected="selected">
 											Male
 										</option>
@@ -104,37 +102,37 @@
 							<div id="div_id_victim_age" class="control-group">
 								<label for="id_victim_age" class="control-label requiredField">Age</label>
 								<div class="controls">
-									<input class="textinput textInput" id="id_victim_age" name="victim[age]" type="text">
+									<input class="textinput textInput" id="id_victim_age" name="victim[new][age]" type="text">
 								</div>
 							</div>
 							<div id="div_id_victim_education" class="control-group">
 								<label for="id_victim_education" class="control-label requiredField">Education</label>
 								<div class="controls">
-									<input class="textinput textInput" id="id_victim_education" maxlength="200" name="victim[education]" type="text">
+									<input class="textinput textInput" id="id_victim_education" maxlength="200" name="victim[new][education]" type="text">
 								</div>
 							</div>
 							<div id="div_id_victim_profession" class="control-group">
 								<label for="id_victim_profession" class="control-label requiredField">Profession</label>
 								<div class="controls">
-									<input class="textinput textInput" id="id_victim_profession" maxlength="200" name="victim[profession]" type="text">
+									<input class="textinput textInput" id="id_victim_profession" maxlength="200" name="victim[new][profession]" type="text">
 								</div>
 							</div>
 							<div id="div_id_victim_phone" class="control-group">
 								<label for="id_victim_phone" class="control-label requiredField">Phone</label>
 								<div class="controls">
-									<input class="textinput textInput" id="id_victim_phone" maxlength="20" name="victim[phone]" type="text">
+									<input class="textinput textInput" id="id_victim_phone" maxlength="20" name="victim[new][phone]" type="text">
 								</div>
 							</div>
 							<div id="div_id_victim_email" class="control-group">
 								<label for="id_victim_email" class="control-label requiredField">Email</label>
 								<div class="controls">
-									<input class="textinput textInput" id="id_victim_email" maxlength="75" name="victim[email]" type="text">
+									<input class="textinput textInput" id="id_victim_email" maxlength="75" name="victim[new][email]" type="text">
 								</div>
 							</div>
 							<div id="div_id_victim_description" class="control-group">
 								<label for="id_victim_description" class="control-label requiredField">Description</label>
 								<div class="controls">
-									<textarea class="textarea" cols="40" id="id_victim_description" name="victim[description]" rows="10"></textarea>
+									<textarea class="textarea" cols="40" id="id_victim_description" name="victim[new][description]" rows="10"></textarea>
 								</div>
 							</div>
 						</div>
@@ -153,7 +151,7 @@
 					</div>
 					<div class="span6">
 						<h2>Evidence</h2>
-						<input type="hidden" name="rsid" valeu="{{report_submit_id}}">
+						<input type="hidden" name="rsid" value="{{report_submit_id}}">
 						<div id="assets" tabindex="0" class="dropzone input-area" style="background-color: #FFF; border: 1px solid #999;"></div>
 						<!--
 						<button type="button" class="input-block-level input-area" style="padding: 0;">
@@ -257,6 +255,8 @@
 		var report_submit_id = {{report_submit_id|json}};
 		reform.data.victims = {{victims|json}};
 		reform.data.reports = {{reports|json}};
+		reform.urls.submit = {% url 'reports:submit' as submit_url %}{{submit_url|json}};
+		reform.urls.upload = {% url 'reports:submit-upload' as upload_url %}{{upload_url|json}};
 	</script>
 	<script src="{% static 'reports/scripts/report-submit.js' %}"></script>
 

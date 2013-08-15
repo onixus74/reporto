@@ -2,6 +2,7 @@ import uuid
 import os
 import json
 import logging
+import shutil
 
 from django.conf import settings
 from django.shortcuts import render, redirect, render_to_response
@@ -17,7 +18,7 @@ from django.views.generic.base import View
 from django.views.generic import FormView, ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
-from base.utils.views import JSONResponse, JSONDataView, ListHybridResponseMixin, DetailHybridResponseMixin
+from base.utils.views import JSONResponse, JSONDataView, ListHybridResponseMixin, DetailHybridResponseMixin, AjaxableResponseMixin
 
 from django.core.files.storage import default_storage
 
@@ -132,13 +133,13 @@ class ReportView(DetailHybridResponseMixin, DetailView):
 
 
 class ReportCreateForm(forms.ModelForm):
-		class Meta:
-				model = Report
-				#fields = ('x', 'y)
-				exclude = ('created_by')
+	class Meta:
+		model = Report
+		#fields = ('x', 'y)
+		exclude = ('created_by','victim')
 
 
-class ReportSubmitView(CreateView):
+class ReportSubmitView(AjaxableResponseMixin, CreateView):
 	""" """
 	model = Report
 	form_class = ReportCreateForm
@@ -149,12 +150,11 @@ class ReportSubmitView(CreateView):
 
 		# create report submit id for files upload
 		rsid = uuid.uuid1().hex
-		RSIDs = self.request.session.get('RSIDs', [])
-		RSIDs.append(rsid)
-		self.request.session['RSIDs'] = RSIDs
+		#RSIDs = self.request.session.get('RSIDs', [])
+		#RSIDs.append(rsid)
+		#self.request.session['RSIDs'] = RSIDs
 		kwargs['report_submit_id'] = rsid
 
-		#
 		kwargs['victims'] = Victim.objects.all()
 		kwargs['reports'] = Report.objects.all()
 
@@ -162,52 +162,98 @@ class ReportSubmitView(CreateView):
 		return kwargs
 
 	def form_valid(self, form):
-		form.instance.created_by = self.request.user
 		logger.debug(self.request.POST)
-		return super(ReportSubmitView, self).form_valid(form)
+
+		victim = self.request.POST['victim_']
+		logger.debug(victim)
+
+		if victim != '0':
+			victim = Victim.objects.get(pk=victim)
+			logger.debug(victim)
+		else:
+			#victim = self.request.POST.getlist('victim')
+			#logger.debug(victim)
+			#victim = self.request.POST.getlist('victim[new]')
+			#logger.debug(victim)
+			#victim_get = lambda *keys: request.POST[ 'victim[new]' + ''.join(['[%s]' % key for key in keys])]
+			#victim = victim_get()
+			#victim = [ key for key in self.request.POST.keys() if key.startswith('victim[new]') ]
+			victim = { key.split('][')[1][:-1]: value for key, value in self.request.POST.items() if key.startswith('victim[new]') }
+			logger.debug(victim)
+			victim = Victim(**victim)
+			logger.debug(victim)
+			victim.save()
+
+		#form.instance.victim = victim
+
+		form.instance.created_by = self.request.user
+
+		form = super(ReportSubmitView, self).form_valid(form)
+
+		logger.debug(str(self.object.pk))
+		logger.debug(self.request.POST['rsid'])
+
+		report_submit_id = self.request.POST['rsid']
+		#report_submit_id in request.session.get('RSIDs', [])
+		logger.debug(report_submit_id)
+
+		media_path = os.path.join('reports', 'tmp', report_submit_id)
+		logger.debug(media_path)
+
+		#media_files_key = 'report_submit_' + report_submit_id + '_files'
+		#media_files = self.request.session.get(media_files_key, [])
+		#logger.debug(media_files)
+
+		persistant_media_path = os.path.join('reports', str(self.object.pk))
+		logger.debug(persistant_media_path)
+
+		if default_storage.exists(media_path):
+			shutil.move(default_storage.path(media_path), default_storage.path(persistant_media_path))
+
+		return form
 
 
-class ReportSubmitPublicView(CreateView):
-	template_name = "reports/submit-public.html"
+# class ReportSubmitPublicView(CreateView):
+# 	template_name = "reports/submit-public.html"
 
 
-def submit_ajax(request, *args, **kwargs):
+# def submit_ajax(request, *args, **kwargs):
 
-	logger.debug(request.session.items())
-	#logger.debug(request.method)
-	#logger.debug(request.body)
-	#logger.debug(request.META['CONTENT_TYPE'])
-	#logger.debug(request.COOKIES)
-	#logger.debug(request.REQUEST)
-	logger.debug(request.GET)
-	logger.debug(request.POST)
-	#logger.debug(request.FILES)
-
-
-	#logger.debug("condition:")
-	#logger.debug(request.META.has_key('HTTP_X_RSID'))
-	#logger.debug(request.META['HTTP_X_RSID'])
-	#logger.debug(request.session.get('RSIDs', None))
-	#logger.debug(request.META['HTTP_X_RSID'] in request.session.get('RSIDs', []))
-
-	if request.method == 'POST':
-
-		return JSONResponse({'done': True})
-
-	return JSONResponse({'done': False}, status=400)
+# 	logger.debug(request.session.items())
+# 	#logger.debug(request.method)
+# 	#logger.debug(request.body)
+# 	#logger.debug(request.META['CONTENT_TYPE'])
+# 	#logger.debug(request.COOKIES)
+# 	#logger.debug(request.REQUEST)
+# 	logger.debug(request.GET)
+# 	logger.debug(request.POST)
+# 	#logger.debug(request.FILES)
 
 
-class MediaForm(forms.ModelForm):
-	class Meta:
-		model = Media
+# 	#logger.debug("condition:")
+# 	#logger.debug(request.META.has_key('HTTP_X_RSID'))
+# 	#logger.debug(request.META['HTTP_X_RSID'])
+# 	#logger.debug(request.session.get('RSIDs', None))
+# 	#logger.debug(request.META['HTTP_X_RSID'] in request.session.get('RSIDs', []))
 
-class UploadFileForm(forms.Form):
-	file = forms.FileField()
+# 	if request.method == 'POST':
+
+# 		return JSONResponse({'success': True})
+
+# 	return JSONResponse({'success': False}, status=400)
+
+
+# class MediaForm(forms.ModelForm):
+# 	class Meta:
+# 		model = Media
+
+# class UploadFileForm(forms.Form):
+# 	file = forms.FileField()
 
 
 def submit_upload(request, *args, **kwargs):
 
-	logger.debug(request.session.items())
+	#logger.debug(request.session.items())
 	#logger.debug(request.method)
 	#logger.debug(request.body)
 	#logger.debug(request.META['CONTENT_TYPE'])
@@ -215,8 +261,7 @@ def submit_upload(request, *args, **kwargs):
 	#logger.debug(request.REQUEST)
 	#logger.debug(request.GET)
 	#logger.debug(request.POST)
-	logger.debug(request.FILES)
-
+	#logger.debug(request.FILES)
 
 	#logger.debug("condition:")
 	#logger.debug(request.META.has_key('HTTP_X_RSID'))
@@ -224,7 +269,8 @@ def submit_upload(request, *args, **kwargs):
 	#logger.debug(request.session.get('RSIDs', None))
 	#logger.debug(request.META['HTTP_X_RSID'] in request.session.get('RSIDs', []))
 
-	if request.method == 'POST' and request.META.has_key('HTTP_X_RSID') and request.META['HTTP_X_RSID'] in request.session.get('RSIDs', []):
+	if request.method == 'POST' and request.META.has_key('HTTP_X_RSID'):
+		#and request.META['HTTP_X_RSID'] in request.session.get('RSIDs', []):
 
 		report_submit_id = request.META['HTTP_X_RSID']
 		logger.debug(report_submit_id)
@@ -232,10 +278,9 @@ def submit_upload(request, *args, **kwargs):
 		media_path = os.path.join('reports', 'tmp', report_submit_id)
 		logger.debug(media_path)
 
-		media_files_key = 'report_submit_' + report_submit_id + '_files'
-		media_files = request.session.get(media_files_key, [])
-
-		logger.debug(media_files)
+		#media_files_key = 'report_submit_' + report_submit_id + '_files'
+		#media_files = request.session.get(media_files_key, [])
+		#logger.debug(media_files)
 
 		files = request.FILES.getlist('files[]')
 		logger.debug(files)
@@ -244,16 +289,16 @@ def submit_upload(request, *args, **kwargs):
 			logger.debug(f)
 			file_path = os.path.join(media_path, f.name)
 			logger.debug(file_path)
-			media_files.append(file_path)
+			#media_files.append(file_path)
 			default_storage.save(file_path, f)
 
-		logger.debug(media_files)
+		#logger.debug(media_files)
 
-		request.session[media_files_key] = media_files
+		#request.session[media_files_key] = media_files
 
-		return JSONResponse({'done': True})
+		return JSONResponse({'success': True})
 
-	return JSONResponse({'done': False}, status=400)
+	return JSONResponse({'success': False}, status=400)
 
 
 
@@ -262,13 +307,13 @@ class ReportVerifyView(View):
 
 	def get(self, request, pk, *args, **kwargs):
 		report = Report.objects.get(pk=pk)
-		return JSONResponse({'message': "done", 'verified': report.is_verified})
+		return JSONResponse({'success': True, 'verified': report.is_verified})
 
 	def post(self, request, pk, *args, **kwargs):
 		report = Report.objects.get(pk=pk)
 		report.is_verified = True
 		report.save()
-		return JSONResponse({'message': "done", 'verified': report.is_verified})
+		return JSONResponse({'success': True, 'verified': report.is_verified})
 
 
 class ReportCloseView(View):
@@ -276,13 +321,13 @@ class ReportCloseView(View):
 
 	def get(self, request, pk, *args, **kwargs):
 		report = Report.objects.get(pk=pk)
-		return JSONResponse({'message': "done", 'closed': report.is_closed})
+		return JSONResponse({'success': True, 'closed': report.is_closed})
 
 	def post(self, request, pk, *args, **kwargs):
 		report = Report.objects.get(pk=pk)
 		report.is_closed = True
 		report.save()
-		return JSONResponse({'message': "done", 'closed': report.is_closed})
+		return JSONResponse({'success': True, 'closed': report.is_closed})
 
 
 
