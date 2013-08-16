@@ -190,11 +190,15 @@ reform.widgets.wizard.init = function() {
 	elements.victimButton.on('click', function(e){
 		victimWitnessButtonsAction.call(this, e);
 		$('#ui-wizard-victim').show();
+		$('#id_victim').val('user').change();
+		$('#ui-wizard-victim-area').hide();
+		$('#ui-wizard-aggressor-area').removeClass('span6').addClass('span12');
 	});
 
 	elements.witnessButton.on('click', function(e){
 		victimWitnessButtonsAction.call(this, e);
 		$('#ui-wizard-witness').show();
+		$('#id_victim').val('0').change();
 	});
 
 	function showSection(section, fields, callback, progress){

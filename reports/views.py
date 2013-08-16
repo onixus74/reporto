@@ -135,8 +135,13 @@ class ReportView(DetailHybridResponseMixin, DetailView):
 class ReportCreateForm(forms.ModelForm):
 	class Meta:
 		model = Report
-		#fields = ('x', 'y)
 		exclude = ('created_by','victim')
+
+
+class VictimCreateForm(forms.ModelForm):
+	class Meta:
+		model = Victim
+		exclude = ('user',)
 
 
 class ReportSubmitView(AjaxableResponseMixin, CreateView):
@@ -154,23 +159,29 @@ class ReportSubmitView(AjaxableResponseMixin, CreateView):
 		#RSIDs.append(rsid)
 		#self.request.session['RSIDs'] = RSIDs
 		kwargs['report_submit_id'] = rsid
-
+		kwargs['victim_form'] = VictimCreateForm()
 		kwargs['victims'] = Victim.objects.all()
 		kwargs['reports'] = Report.objects.all()
 
 		logger.debug(kwargs)
 		return kwargs
 
+	#def form_invalid(self, form):
+
 	def form_valid(self, form):
 		logger.debug(self.request.POST)
 
-		victim = self.request.POST['victim_']
+		victim = self.request.POST['victim']
 		logger.debug(victim)
 
-		if victim != '0':
+		if victim == 'user':
+			# the user is the victim
+			victim = Victim.objects.get(user=self.request.user)
+		elif victim != '0':
+			# existent victim
 			victim = Victim.objects.get(pk=victim)
-			logger.debug(victim)
 		else:
+			# new victim
 			#victim = self.request.POST.getlist('victim')
 			#logger.debug(victim)
 			#victim = self.request.POST.getlist('victim[new]')
@@ -180,11 +191,15 @@ class ReportSubmitView(AjaxableResponseMixin, CreateView):
 			#victim = [ key for key in self.request.POST.keys() if key.startswith('victim[new]') ]
 			victim = { key.split('][')[1][:-1]: value for key, value in self.request.POST.items() if key.startswith('victim[new]') }
 			logger.debug(victim)
+			#victim = Victim(**victim)
+			#victim.save()
 			victim = Victim(**victim)
-			logger.debug(victim)
-			victim.save()
+			#victim.save()
+			victimForm = VictimCreateForm(instance=victim)
+			victim = victimForm.save()
+		logger.debug(victim)
 
-		#form.instance.victim = victim
+		form.instance.victim = victim
 
 		form.instance.created_by = self.request.user
 

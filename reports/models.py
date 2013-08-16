@@ -43,6 +43,9 @@ class Media(models.Model):
 		return self.file.name
 
 
+from django.contrib.auth.models import User
+
+
 class Victim(models.Model):
 
 	MALE = 'M'
@@ -69,7 +72,7 @@ class Victim(models.Model):
 	email       = models.EmailField()
 	description = models.TextField()
 	category    = models.CharField(max_length=3, choices=CATEGORY, default=CITIZEN, blank=True)
-
+	user        = models.ForeignKey(User, blank=True, null=True)
 
 	def get_absolute_url(self):
 		return reverse('victims:view', args=[str(self.id)])
