@@ -5,11 +5,10 @@
 local_settings.py
 
 # Virtual environment
-.env
+.env*
 
 # Tools
 node_modules
-
 *.sublime-*
 /reform_tn/development.sqlite3
 /reform_tn/static
@@ -18,3 +17,4 @@ components
 .sass-cache
 /.project
 /.pydevproject
+Procfile
