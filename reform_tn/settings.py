@@ -16,7 +16,9 @@ MANAGERS = ADMINS
 
 DATABASES = {}
 import dj_database_url
-DATABASES['default'] =  dj_database_url.config()
+DATABASES['default'] = dj_database_url.config()
+
+print DATABASES
 
 # DATABASES = {
 #     'default': {
