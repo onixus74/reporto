@@ -303,7 +303,7 @@ class JSONFormView(JSONResponseMixin, BaseFormView):
 class HybridResponseMixin(JSONResponseMixin):
 	default_view = None
 	def render_to_response(self, context):
-		print self.request.META['CONTENT_TYPE']
+		#print self.request.META['CONTENT_TYPE']
 		print context
 		# Look for '.json' URL extension, 'format=json' GET argument or 'application/json' accept header in request
 		is_json = self.kwargs.get('extension', None) == "json" or self.request.GET.get('format', None) == "json"

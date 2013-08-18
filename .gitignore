@@ -17,4 +17,5 @@ components
 .sass-cache
 /.project
 /.pydevproject
-Procfile
+
+staticfiles
