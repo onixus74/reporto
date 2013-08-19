@@ -139,9 +139,14 @@ class ReportCreateForm(forms.ModelForm):
 
 
 class VictimCreateForm(forms.ModelForm):
+	#prefix = 'victim_1'
 	class Meta:
+		#prefix = 'victim_2'
 		model = Victim
 		exclude = ('user',)
+
+	#def __init__(self, prefix='victim_', *args, **kwargs):
+	#	super(VictimCreateForm, self).__init__(self, prefix=prefix, *args, **kwargs)
 
 
 class ReportSubmitView(AjaxableResponseMixin, CreateView):
@@ -151,7 +156,7 @@ class ReportSubmitView(AjaxableResponseMixin, CreateView):
 	template_name = "reports/submit.html"
 
 	def get_context_data(self, **kwargs):
-		logger.debug(kwargs)
+		#logger.debug(kwargs)
 
 		# create report submit id for files upload
 		rsid = uuid.uuid1().hex
@@ -159,11 +164,11 @@ class ReportSubmitView(AjaxableResponseMixin, CreateView):
 		#RSIDs.append(rsid)
 		#self.request.session['RSIDs'] = RSIDs
 		kwargs['report_submit_id'] = rsid
-		kwargs['victim_form'] = VictimCreateForm()
+		kwargs['victim_form'] = VictimCreateForm(prefix = 'victim')
 		kwargs['victims'] = Victim.objects.all()
 		kwargs['reports'] = Report.objects.all()
 
-		logger.debug(kwargs)
+		#logger.debug(kwargs)
 		return kwargs
 
 	#def form_invalid(self, form):
@@ -181,22 +186,10 @@ class ReportSubmitView(AjaxableResponseMixin, CreateView):
 			# existent victim
 			victim = Victim.objects.get(pk=victim)
 		else:
-			# new victim
-			#victim = self.request.POST.getlist('victim')
-			#logger.debug(victim)
-			#victim = self.request.POST.getlist('victim[new]')
-			#logger.debug(victim)
-			#victim_get = lambda *keys: request.POST[ 'victim[new]' + ''.join(['[%s]' % key for key in keys])]
-			#victim = victim_get()
-			#victim = [ key for key in self.request.POST.keys() if key.startswith('victim[new]') ]
-			victim = { key.split('][')[1][:-1]: value for key, value in self.request.POST.items() if key.startswith('victim[new]') }
-			logger.debug(victim)
-			#victim = Victim(**victim)
-			#victim.save()
-			victim = Victim(**victim)
-			#victim.save()
-			victimForm = VictimCreateForm(instance=victim)
+			# create new user
+			victimForm = VictimCreateForm(self.request.POST, prefix = 'victim')
 			victim = victimForm.save()
+
 		logger.debug(victim)
 
 		form.instance.victim = victim

@@ -191,6 +191,7 @@ reform.widgets.wizard.init = function() {
 		victimWitnessButtonsAction.call(this, e);
 		$('#ui-wizard-victim').show();
 		$('#id_victim').val('user').change();
+		//$('#ui-wizard-victim-area').remove();
 		$('#ui-wizard-victim-area').hide();
 		$('#ui-wizard-aggressor-area').removeClass('span6').addClass('span12');
 	});
