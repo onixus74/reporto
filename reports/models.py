@@ -1,9 +1,11 @@
 from django.db import models
 from django.core.urlresolvers import reverse
-from django.contrib.auth.models import User, Group, Permission
+from django.contrib.auth.models import User
+from django.template.defaultfilters import slugify
+
 
 class Category(models.Model):
-	slug       = models.SlugField(max_length=100)
+	slug       = models.SlugField(max_length=100, blank=True, null=True)
 	definition = models.CharField(max_length=300)
 
 	def get_absolute_url(self):
@@ -12,9 +14,13 @@ class Category(models.Model):
 	def __unicode__(self):
 		return self.definition
 
+	def save(self, *args, **kwargs):
+		self.s = slugify(self.definition)
+		super(Category, self).save(*args, **kwargs)
+
 
 class Feature(models.Model):
-	slug       = models.SlugField(max_length=200)
+	slug       = models.SlugField(max_length=200, blank=True, null=True)
 	definition = models.CharField(max_length=300)
 
 	def get_absolute_url(self):
@@ -22,6 +28,10 @@ class Feature(models.Model):
 
 	def __unicode__(self):
 		return self.definition
+
+	def save(self, *args, **kwargs):
+		self.s = slugify(self.definition)
+		super(Feature, self).save(*args, **kwargs)
 
 
 class Media(models.Model):

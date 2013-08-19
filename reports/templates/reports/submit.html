@@ -9,7 +9,7 @@
 {% block view_title %}Report Submission | {% endblock %}
 
 {% block view_content %}
-	<form id="report-form" action="{% url 'reports:submit' %}" method="post">
+	<form id="report-form" action="{% url 'reports:submit' %}" method="post" enctype="multipart/form-data">
 		{% csrf_token %}
 
 	<div class="container">
@@ -155,6 +155,7 @@
 					</div>
 					<div class="span6">
 						<h2>Evidence</h2>
+						<input id="fileupload" type="file" name="files[]" data-url="{% url 'reports:submit-upload' %}" multiple>
 						<input type="hidden" name="rsid" value="{{report_submit_id}}">
 						<div id="assets" tabindex="0" class="dropzone input-area" style="background-color: #FFF; border: 1px solid #999;"></div>
 						<!--

@@ -347,19 +347,33 @@ reform.widgets.wizard.init = function() {
 	});
 	*/
 
-
 $('#report-form').on('submit', function(e){
+	e.preventDefault();
 	var data = {};
+	var formdata = new FormData();
 	$(this).serializeArray().forEach(function(e){
-		if(e.name != 'csrfmiddlewaretoken')
+		if(e.name != 'csrfmiddlewaretoken') {
+			console.log(e.name, e.value)
 			data[e.name] = e.value;
+			formdata.append(e.name, e.value);
+			//formdata.append("images[]", file);
+		}
 	})
+	var files = $('#fileupload').get(0).files;
+	for(var i = 0; i < files.length; i++) {
+		var file = files[i];
+		console.log(file);
+		formdata.append('files[]', file);
+	}
 	console.log(data);
-
+	//var data = new FormData();
+	//FileReader
 	$.ajax({
 		type: "POST",
 		url: reform.urls.submit,
-		data: data,
+		data: formdata,
+		processData: false,
+		contentType: false,
 		//success: success,
 		//dataType: dataType
 		headers: {"X-CSRFToken": csrf_token}

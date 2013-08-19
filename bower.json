@@ -34,7 +34,8 @@
     "typeahead.js": "~0.9.3",
     "raphael": "~2.1.0",
     "morris.js": "~0.4.3",
-    "dropzone": "~3.6.2"
+    "dropzone": "~3.6.2",
+    "jquery-file-upload": "~8.7.1"
   },
   "devDependencies": {
     "html-inspector": "~0.3.0"

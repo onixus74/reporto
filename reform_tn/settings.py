@@ -253,6 +253,8 @@ REST_FRAMEWORK = {
 
 INSTALLED_APPS += ('compressor',)
 
+INSTALLED_APPS += ('south' ,)
+
 # INSTALLED_APPS += ('django_youtube',)
 # YOUTUBE_AUTH_EMAIL = 'yourmail@gmail.com'
 # YOUTUBE_AUTH_PASSWORD = 'yourpassword'

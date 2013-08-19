@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 import uuid
 import os
 import json
@@ -23,8 +26,6 @@ from base.utils.views import JSONResponse, JSONDataView, ListHybridResponseMixin
 from django.core.files.storage import default_storage
 
 from reports.models import *
-
-logger = logging.getLogger(__name__)
 
 
 def index(request, template_name = "reports/index.html", *args, **kwargs):
@@ -108,7 +109,7 @@ class ReportView(DetailHybridResponseMixin, DetailView):
 # 	form = SubmissionForm(request.POST or None)
 # 	#form = SubmissionForm(request.POST or None, request.FILES or None)
 # 	if form.is_valid():
-# 		print "form valid"
+# 		logger.debug("form valid")
 # 		return redirect("home")
 # 	context = {
 # 		"message": "Hello!",
@@ -156,7 +157,7 @@ class ReportSubmitView(AjaxableResponseMixin, CreateView):
 	template_name = "reports/submit.html"
 
 	def get_context_data(self, **kwargs):
-		#logger.debug(kwargs)
+		logger.debug(kwargs)
 
 		# create report submit id for files upload
 		rsid = uuid.uuid1().hex
@@ -168,13 +169,14 @@ class ReportSubmitView(AjaxableResponseMixin, CreateView):
 		kwargs['victims'] = Victim.objects.all()
 		kwargs['reports'] = Report.objects.all()
 
-		#logger.debug(kwargs)
+		logger.debug(kwargs)
 		return kwargs
 
 	#def form_invalid(self, form):
 
 	def form_valid(self, form):
-		logger.debug(self.request.POST)
+		logger.debug('POST %s', self.request.POST)
+		logger.debug('FILES %s', self.request.FILES)
 
 		victim = self.request.POST['victim']
 		logger.debug(victim)
@@ -190,7 +192,7 @@ class ReportSubmitView(AjaxableResponseMixin, CreateView):
 			victimForm = VictimCreateForm(self.request.POST, prefix = 'victim')
 			victim = victimForm.save()
 
-		logger.debug(victim)
+		#logger.debug(victim)
 
 		form.instance.victim = victim
 
@@ -199,7 +201,6 @@ class ReportSubmitView(AjaxableResponseMixin, CreateView):
 		form = super(ReportSubmitView, self).form_valid(form)
 
 		logger.debug(str(self.object.pk))
-		logger.debug(self.request.POST['rsid'])
 
 		report_submit_id = self.request.POST['rsid']
 		#report_submit_id in request.session.get('RSIDs', [])

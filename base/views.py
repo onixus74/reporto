@@ -1,19 +1,23 @@
+import logging
+logger = logging.getLogger(__name__)
+
 from django.shortcuts import render, redirect, render_to_response
 from django.views.decorators.csrf import csrf_exempt
 from django.core.context_processors import csrf
 from django.contrib.auth import authenticate, login, logout
 
+
 @csrf_exempt
 def test(request, *args, **kwargs):
-	print "session:", request.session.items()
-	print "method:", request.method
-	#print "body:", request.body
-	print "content-type:", request.META['CONTENT_TYPE']
-	print "cookies:", request.COOKIES
-	print "request:", request.REQUEST
-	print "get:", request.GET
-	print "post:", request.POST
-	print "files:", request.FILES
+	logger.debug("session:", request.session.items())
+	logger.debug("method:", request.method)
+	#logger.debug("body:", request.body)
+	logger.debug("content-type:", request.META['CONTENT_TYPE'])
+	logger.debug("cookies:", request.COOKIES)
+	logger.debug("request:", request.REQUEST)
+	logger.debug("get:", request.GET)
+	logger.debug("post:", request.POST)
+	logger.debug("files:", request.FILES)
 	#return HttpResponse({'done': True})
 	return render(request, 'test.html', {'done': True})
 
