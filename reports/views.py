@@ -179,7 +179,7 @@ class ReportSubmitView(AjaxableResponseMixin, CreateView):
 		logger.debug('FILES %s', self.request.FILES)
 
 		victim = self.request.POST['victim']
-		logger.debug(victim)
+		logger.debug('VICTIM %s', victim)
 
 		if victim == 'user':
 			# the user is the victim
@@ -192,7 +192,7 @@ class ReportSubmitView(AjaxableResponseMixin, CreateView):
 			victimForm = VictimCreateForm(self.request.POST, prefix = 'victim')
 			victim = victimForm.save()
 
-		#logger.debug(victim)
+		logger.debug('VICTIM %s', victim)
 
 		form.instance.victim = victim
 
@@ -200,24 +200,47 @@ class ReportSubmitView(AjaxableResponseMixin, CreateView):
 
 		form = super(ReportSubmitView, self).form_valid(form)
 
-		logger.debug(str(self.object.pk))
+		#logger.debug('FORM %s', form.instance)
 
-		report_submit_id = self.request.POST['rsid']
-		#report_submit_id in request.session.get('RSIDs', [])
-		logger.debug(report_submit_id)
+		logger.debug('REPORT %s', self.object.pk)
 
-		media_path = os.path.join('reports', 'tmp', report_submit_id)
-		logger.debug(media_path)
+		files = self.request.FILES.getlist('files[]')
+		logger.debug('FILES %s', files)
 
-		#media_files_key = 'report_submit_' + report_submit_id + '_files'
-		#media_files = self.request.session.get(media_files_key, [])
-		#logger.debug(media_files)
+		media_path = os.path.join('reports', str(self.object.pk))
+		logger.debug('MEDIA PATH %s', media_path)
 
-		persistant_media_path = os.path.join('reports', str(self.object.pk))
-		logger.debug(persistant_media_path)
+		logger.debug('OBJECT %s', self.object)
 
-		if default_storage.exists(media_path):
-			shutil.move(default_storage.path(media_path), default_storage.path(persistant_media_path))
+		medias = []
+
+		for f in files:
+			logger.debug('FILE %s', f)
+			file_path = os.path.join(media_path, f.name)
+			logger.debug('FILE PATH %s', file_path)
+			file_path = default_storage.save(file_path, f)
+			self.object.media.create(url= '/' + os.path.join('media', file_path))
+			#media = Media(url=file_path)
+			#self.object.media.add(media)
+
+		self.object.save()
+
+		# report_submit_id = self.request.POST['rsid']
+		# #report_submit_id in request.session.get('RSIDs', [])
+		# logger.debug(report_submit_id)
+
+		# media_path = os.path.join('reports', 'tmp', report_submit_id)
+		# logger.debug(media_path)
+
+		# #media_files_key = 'report_submit_' + report_submit_id + '_files'
+		# #media_files = self.request.session.get(media_files_key, [])
+		# #logger.debug(media_files)
+
+		# persistant_media_path = os.path.join('reports', str(self.object.pk))
+		# logger.debug(persistant_media_path)
+
+		# if default_storage.exists(media_path):
+		# 	shutil.move(default_storage.path(media_path), default_storage.path(persistant_media_path))
 
 		return form
 

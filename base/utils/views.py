@@ -453,7 +453,8 @@ class AjaxableResponseMixin(object):
 		if self.request.is_ajax():
 			data = {
 				'success': True,
-				'data': self.object,
+				'object': self.object,
+				'url': self.object.get_absolute_url(),
 			}
 			return self.render_to_json_response(data, status=201)
 		else:

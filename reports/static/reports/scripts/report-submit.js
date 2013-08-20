@@ -96,14 +96,18 @@ Dropzone.autoDiscover = false;
 
 Dropzone.options.assets = {
 	paramName: "files", // The name that will be used to transfer the file
+	/*
 	headers: {
 		'X-CSRFToken': csrf_token,
 		'X-RSID': report_submit_id
 	},
+	*/
 	maxFilesize: 10, // MB
 	uploadMultiple: true,
-	/*
+	autoProcessQueue: false,
 	addRemoveLinks: true,
+	/*
+
 	accept: function(file, done) {
 		console.log(file);
 		done();
@@ -123,7 +127,7 @@ reform.widgets.dropzone = {};
 reform.widgets.dropzone.init = function() {
 
 	var widget = reform.widgets.dropzone;
-	var dropzone = new Dropzone("div#assets", { url: reform.urls.upload });
+	var dropzone = new Dropzone("#assets", { url: reform.urls.upload });
 	widget.object = dropzone;
 
 };
@@ -347,42 +351,41 @@ reform.widgets.wizard.init = function() {
 	});
 	*/
 
-$('#report-form').on('submit', function(e){
-	e.preventDefault();
-	var data = {};
-	var formdata = new FormData();
-	$(this).serializeArray().forEach(function(e){
-		if(e.name != 'csrfmiddlewaretoken') {
-			console.log(e.name, e.value)
-			data[e.name] = e.value;
-			formdata.append(e.name, e.value);
-			//formdata.append("images[]", file);
+	$('#report-form').on('submit', function(e){
+		e.preventDefault();
+		var data = {};
+		var formdata = new FormData();
+		$(this).serializeArray().forEach(function(e){
+			if(e.name != 'csrfmiddlewaretoken') {
+				console.log(e.name, e.value);
+				data[e.name] = e.value;
+				formdata.append(e.name, e.value);
+			}
+		});
+		var files = reform.widgets.dropzone.object.files;
+		for(var i = 0; i < files.length; i++) {
+			var file = files[i];
+			console.log(file);
+			formdata.append('files[]', file);
 		}
+		$.ajax({
+			type: "POST",
+			url: reform.urls.submit,
+			data: formdata,
+			processData: false,
+			contentType: false,
+			//dataType: dataType
+			headers: {"X-CSRFToken": csrf_token}
+		}).done(function(data){
+			console.log(arguments);
+			//window.location = 'reports/' + data.object.id + '/view';
+			//window.location = reform.urls.view.replace('0', data.object.id);
+			window.location = data.url;
+		}).fail(function(){
+			console.log(arguments);
+		});
+	  return false;
 	})
-	var files = $('#fileupload').get(0).files;
-	for(var i = 0; i < files.length; i++) {
-		var file = files[i];
-		console.log(file);
-		formdata.append('files[]', file);
-	}
-	console.log(data);
-	//var data = new FormData();
-	//FileReader
-	$.ajax({
-		type: "POST",
-		url: reform.urls.submit,
-		data: formdata,
-		processData: false,
-		contentType: false,
-		//success: success,
-		//dataType: dataType
-		headers: {"X-CSRFToken": csrf_token}
-	}).done(function(){
-	//$.post('/reports/submit/ajax', data).done(function(){
-		console.log(arguments);
-	});
-  return false;
-})
 
 };
 

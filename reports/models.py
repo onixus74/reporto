@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 from django.db import models
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
@@ -35,22 +38,22 @@ class Feature(models.Model):
 
 
 class Media(models.Model):
+
 	#title        = models.CharField(max_length=200)
 	#description  = models.TextField()
-	#url          = models.CharField(max_length=300)
-	#external_url = models.CharField(max_length=300)
-	#folder       = models.CharField(max_length=300)
-	#file          = models.FileField(upload_to='reports/tmp')
-	file          = models.FileField(upload_to='reports/tmp')
-
-	#COMMENT = 'C'
-	#CATEGORY = (
-	#	(COMMENT, "Comment"),
-	#)
-	#category = models.CharField(max_length=1, choices=CATEGORY, default=COMMENT, blank=True)
+	url  = models.URLField(max_length=300)
+	#file = models.FileField(upload_to='reports/tmp', null=True)
 
 	def __unicode__(self):
-		return self.file.name
+		return self.url
+
+	# def save(self, *args, **kwargs):
+	# 	if self.file:
+	# 		self.url = self.file.url
+	# 	super(Media, self).save(*args, **kwargs)
+
+	# def get_url(self):
+	# 	return self.url or self.file.url
 
 
 from django.contrib.auth.models import User
@@ -91,6 +94,20 @@ class Victim(models.Model):
 		return self.firstname + " " + self.lastname
 
 
+class Comment(models.Model):
+	content    = models.TextField()
+	#report     = models.ForeignKey(Report)
+	created_by = models.ForeignKey(User)
+	created_at = models.DateTimeField(auto_now_add=True)
+	#updated_at = models.DateTimeField(auto_now=True)
+
+	#COMMENT = 'C'
+	#CATEGORY = (
+	#	(COMMENT, "Comment"),
+	#)
+	#category = models.CharField(max_length=1, choices=CATEGORY, default=COMMENT, blank=True)
+
+
 class Report(models.Model):
 
 	CITIZEN = 'CIT'
@@ -108,14 +125,13 @@ class Report(models.Model):
 	aggressor          = models.TextField()
 	aggressor_category = models.CharField(max_length=3, choices=CATEGORY, default=COP, blank=True)
 	description        = models.TextField()
-	media_folder       = models.CharField(max_length=300, blank=True, null=True)
-	media_urls         = models.TextField(blank=True, null=True)
-	#media              = models.ManyToManyField(Media)
+	#media_folder       = models.CharField(max_length=300, blank=True, null=True)
+	#media_urls         = models.TextField(blank=True, null=True)
+	media              = models.ManyToManyField(Media, blank=True, null=True)
 	features           = models.ManyToManyField(Feature)
-	#comments           = models.ManyToManyField(Comment)
 	is_verified        = models.BooleanField()
 	is_closed          = models.BooleanField()
-	#Ministry Response?
+	comments           = models.ManyToManyField(Comment, blank=True, null=True)
 	created_by         = models.ForeignKey(User)
 	created_at         = models.DateTimeField(auto_now_add=True)
 	updated_at         = models.DateTimeField(auto_now=True)
@@ -129,10 +145,3 @@ class Report(models.Model):
 	class Meta:
 		ordering = ["datetime"]
 
-
-class Comment(models.Model):
-	content    = models.TextField()
-	report     = models.ForeignKey(Report)
-	created_by = models.ForeignKey(User)
-	created_at = models.DateTimeField(auto_now_add=True)
-	#updated_at = models.DateTimeField(auto_now=True)
