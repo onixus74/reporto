@@ -3,10 +3,10 @@
 import os
 PROJECT_DIR=os.path.dirname(__file__)
 
-DEBUG = True
-#DEBUG = False # for production
-TEMPLATE_DEBUG = DEBUG
-#TEMPLATE_DEBUG = False # for production
+DEBUG = True # !DEV!
+#DEBUG = False # !PROD!
+TEMPLATE_DEBUG = DEBUG # !DEV!
+#TEMPLATE_DEBUG # !PROD!
 
 ADMINS = (
     ('Nader Toukabri', 'nader.toukabri@gmail.com'),
@@ -14,27 +14,20 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': 'reform_tn/development.sqlite3',
+#     }
+# }
+
 DATABASES = {}
 import dj_database_url
 DATABASES['default'] = dj_database_url.config()
 
-print DATABASES
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',  # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-#         'NAME': 'reform_tn/development.sqlite3', # Or path to database file if using sqlite3.
-#         # The following settings are not used with sqlite3:
-#         #'USER': '',
-#         #'PASSWORD': '',
-#         #'HOST': '',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
-#         #'PORT': '',                      # Set to empty string for default.
-#     }
-# }
-
 # # Hosts/domain names that are valid for this site; required if DEBUG is False
 # # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
-# ALLOWED_HOSTS = ['localhost', 'reform.tn', 'www.reform.tn']
+# ALLOWED_HOSTS = ['localhost', 'reform.tn', 'www.reform.tn', 'reporting.reform.tn']
 
 ALLOWED_HOSTS = ['*']
 
@@ -88,14 +81,6 @@ DATETIME_INPUT_FORMATS = (
 )
 
 
-
-LOGIN_URL = '/login'
-
-LOGOUT_URL = '/logout'
-
-LOGIN_REDIRECT_URL = '/'
-
-
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/var/www/example.com/media/"
 MEDIA_ROOT = os.path.join(PROJECT_DIR,'media/')
@@ -115,10 +100,6 @@ MEDIA_URL = '/media/'
 # # Example: "http://example.com/static/", "http://static.example.com/"
 # STATIC_URL = '/static/'
 
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-STATIC_ROOT = 'staticfiles'
-STATIC_URL = '/static/'
-
 # # Additional locations of static files
 # STATICFILES_DIRS = (
 #     # Put strings here, like "/home/html/static" or "C:/www/django/static".
@@ -126,6 +107,9 @@ STATIC_URL = '/static/'
 #     # Don't forget to use absolute paths, not relative paths.
 # )
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+STATIC_ROOT = 'staticfiles'
+STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
@@ -138,6 +122,12 @@ STATICFILES_FINDERS = (
 #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
     'compressor.finders.CompressorFinder',
 )
+
+LOGIN_URL = '/login'
+
+LOGOUT_URL = '/logout'
+
+LOGIN_REDIRECT_URL = '/'
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = 'g#t3tki%zbnynjn1qlkqn#jlulv9!w*=l0e_n7j^%mm7%5@jr%'
@@ -155,9 +145,8 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    # Uncomment the next line for simple clickjacking protection:
-    # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware', # !debug_toolbar!
 )
 
 ROOT_URLCONF = 'reform_tn.urls'
@@ -171,7 +160,6 @@ TEMPLATE_DIRS = (
     # Don't forget to use absolute paths, not relative paths.
 )
 
-
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -181,8 +169,8 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
 
     # 'suit', # theme for admin
-    'admin_theme',
-    'django_admin_bootstrapped', # theme for admin
+    #'admin_theme',
+    #'django_admin_bootstrapped', # theme for admin
     'grappelli',
     'filebrowser',
     'django.contrib.admin',
@@ -195,28 +183,17 @@ INSTALLED_APPS = (
     'features',
     'victims',
 
-    # dev dependencies
-    'debug_toolbar',
-
 		# project dependencies
     'form_utils',
     'widget_tweaks',
     'floppyforms',
     'crispy_forms',
 
-    'rest_framework',
-
-    'compressor',
-
-		#'django_youtube',
-
 )
 
-#from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS as TCP
+MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 
-#TEMPLATE_CONTEXT_PROCESSORS = TCP + (
-#    'django.core.context_processors.request',
-#)
+FILE_UPLOAD_MAX_MEMORY_SIZE = -1
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
@@ -253,7 +230,7 @@ LOGGING = {
             'level': 'ERROR',
             'filters': ['require_debug_false'],
             'class': 'django.utils.log.AdminEmailHandler'
-        },
+        }
     },
     'loggers': {
         'django.request': {
@@ -278,28 +255,21 @@ LOGGING = {
     }
 }
 
+INSTALLED_APPS += ('debug_toolbar',) # !DEV!
 INTERNAL_IPS = ('127.0.0.1',)
 
-
+INSTALLED_APPS += ('rest_framework',)
 REST_FRAMEWORK = {
     #'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAdminUser',),
     'PAGINATE_BY': 10
 }
 
+INSTALLED_APPS += ('compressor',)
 
+INSTALLED_APPS += ('south' ,)
 
-YOUTUBE_AUTH_EMAIL = 'yourmail@gmail.com'
-YOUTUBE_AUTH_PASSWORD = 'yourpassword'
-YOUTUBE_DEVELOPER_KEY = 'developer key, get one from http://code.google.com/apis/youtube/dashboard/'
-YOUTUBE_CLIENT_ID = 'client-id'
-
-
-MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
-
-FILE_UPLOAD_MAX_MEMORY_SIZE = -1
-
-
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-
-COMPRESS_ENABLED = True
-COMPRESS_OFFLINE = True
+# INSTALLED_APPS += ('django_youtube',)
+# YOUTUBE_AUTH_EMAIL = 'yourmail@gmail.com'
+# YOUTUBE_AUTH_PASSWORD = 'yourpassword'
+# YOUTUBE_DEVELOPER_KEY = 'developer key, get one from http://code.google.com/apis/youtube/dashboard/'
+# YOUTUBE_CLIENT_ID = 'client-id'

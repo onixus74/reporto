@@ -1,6 +1,7 @@
 Django==1.5.2
 Pillow==2.1.0
 SQLAlchemy==0.8.2
+South==0.8.2
 argparse==1.2.1
 distribute==0.6.34
 dj-database-url==0.2.2

@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 import uuid
 import os
 import json
@@ -23,8 +26,6 @@ from base.utils.views import JSONResponse, JSONDataView, ListHybridResponseMixin
 from django.core.files.storage import default_storage
 
 from reports.models import *
-
-logger = logging.getLogger(__name__)
 
 
 def index(request, template_name = "reports/index.html", *args, **kwargs):
@@ -108,7 +109,7 @@ class ReportView(DetailHybridResponseMixin, DetailView):
 # 	form = SubmissionForm(request.POST or None)
 # 	#form = SubmissionForm(request.POST or None, request.FILES or None)
 # 	if form.is_valid():
-# 		print "form valid"
+# 		logger.debug("form valid")
 # 		return redirect("home")
 # 	context = {
 # 		"message": "Hello!",
@@ -139,9 +140,14 @@ class ReportCreateForm(forms.ModelForm):
 
 
 class VictimCreateForm(forms.ModelForm):
+	#prefix = 'victim_1'
 	class Meta:
+		#prefix = 'victim_2'
 		model = Victim
 		exclude = ('user',)
+
+	#def __init__(self, prefix='victim_', *args, **kwargs):
+	#	super(VictimCreateForm, self).__init__(self, prefix=prefix, *args, **kwargs)
 
 
 class ReportSubmitView(AjaxableResponseMixin, CreateView):
@@ -159,7 +165,7 @@ class ReportSubmitView(AjaxableResponseMixin, CreateView):
 		#RSIDs.append(rsid)
 		#self.request.session['RSIDs'] = RSIDs
 		kwargs['report_submit_id'] = rsid
-		kwargs['victim_form'] = VictimCreateForm()
+		kwargs['victim_form'] = VictimCreateForm(prefix = 'victim')
 		kwargs['victims'] = Victim.objects.all()
 		kwargs['reports'] = Report.objects.all()
 
@@ -169,10 +175,11 @@ class ReportSubmitView(AjaxableResponseMixin, CreateView):
 	#def form_invalid(self, form):
 
 	def form_valid(self, form):
-		logger.debug(self.request.POST)
+		logger.debug('POST %s', self.request.POST)
+		logger.debug('FILES %s', self.request.FILES)
 
 		victim = self.request.POST['victim']
-		logger.debug(victim)
+		logger.debug('VICTIM %s', victim)
 
 		if victim == 'user':
 			# the user is the victim
@@ -181,23 +188,11 @@ class ReportSubmitView(AjaxableResponseMixin, CreateView):
 			# existent victim
 			victim = Victim.objects.get(pk=victim)
 		else:
-			# new victim
-			#victim = self.request.POST.getlist('victim')
-			#logger.debug(victim)
-			#victim = self.request.POST.getlist('victim[new]')
-			#logger.debug(victim)
-			#victim_get = lambda *keys: request.POST[ 'victim[new]' + ''.join(['[%s]' % key for key in keys])]
-			#victim = victim_get()
-			#victim = [ key for key in self.request.POST.keys() if key.startswith('victim[new]') ]
-			victim = { key.split('][')[1][:-1]: value for key, value in self.request.POST.items() if key.startswith('victim[new]') }
-			logger.debug(victim)
-			#victim = Victim(**victim)
-			#victim.save()
-			victim = Victim(**victim)
-			#victim.save()
-			victimForm = VictimCreateForm(instance=victim)
+			# create new user
+			victimForm = VictimCreateForm(self.request.POST, prefix = 'victim')
 			victim = victimForm.save()
-		logger.debug(victim)
+
+		logger.debug('VICTIM %s', victim)
 
 		form.instance.victim = victim
 
@@ -205,25 +200,47 @@ class ReportSubmitView(AjaxableResponseMixin, CreateView):
 
 		form = super(ReportSubmitView, self).form_valid(form)
 
-		logger.debug(str(self.object.pk))
-		logger.debug(self.request.POST['rsid'])
+		#logger.debug('FORM %s', form.instance)
 
-		report_submit_id = self.request.POST['rsid']
-		#report_submit_id in request.session.get('RSIDs', [])
-		logger.debug(report_submit_id)
+		logger.debug('REPORT %s', self.object.pk)
 
-		media_path = os.path.join('reports', 'tmp', report_submit_id)
-		logger.debug(media_path)
+		files = self.request.FILES.getlist('files[]')
+		logger.debug('FILES %s', files)
 
-		#media_files_key = 'report_submit_' + report_submit_id + '_files'
-		#media_files = self.request.session.get(media_files_key, [])
-		#logger.debug(media_files)
+		media_path = os.path.join('reports', str(self.object.pk))
+		logger.debug('MEDIA PATH %s', media_path)
 
-		persistant_media_path = os.path.join('reports', str(self.object.pk))
-		logger.debug(persistant_media_path)
+		logger.debug('OBJECT %s', self.object)
 
-		if default_storage.exists(media_path):
-			shutil.move(default_storage.path(media_path), default_storage.path(persistant_media_path))
+		medias = []
+
+		for f in files:
+			logger.debug('FILE %s', f)
+			file_path = os.path.join(media_path, f.name)
+			logger.debug('FILE PATH %s', file_path)
+			file_path = default_storage.save(file_path, f)
+			self.object.media.create(url= '/' + os.path.join('media', file_path))
+			#media = Media(url=file_path)
+			#self.object.media.add(media)
+
+		self.object.save()
+
+		# report_submit_id = self.request.POST['rsid']
+		# #report_submit_id in request.session.get('RSIDs', [])
+		# logger.debug(report_submit_id)
+
+		# media_path = os.path.join('reports', 'tmp', report_submit_id)
+		# logger.debug(media_path)
+
+		# #media_files_key = 'report_submit_' + report_submit_id + '_files'
+		# #media_files = self.request.session.get(media_files_key, [])
+		# #logger.debug(media_files)
+
+		# persistant_media_path = os.path.join('reports', str(self.object.pk))
+		# logger.debug(persistant_media_path)
+
+		# if default_storage.exists(media_path):
+		# 	shutil.move(default_storage.path(media_path), default_storage.path(persistant_media_path))
 
 		return form
 

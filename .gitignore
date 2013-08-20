@@ -17,3 +17,6 @@ components
 .sass-cache
 /.project
 /.pydevproject
+/.checkstyle
+/.settings
+staticfiles

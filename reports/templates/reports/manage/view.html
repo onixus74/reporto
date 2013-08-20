@@ -31,8 +31,18 @@
 								<dd><a href="{{report.victim.get_absolute_url}}">{{report.victim}}</a></dd>
 								<dt>Aggressor</dt>
 								<dd>{{report.aggressor}}</dd>
+								<dt>Aggressor Category</dt>
+								<dd>{{report.aggressor_category}}</dd>
 								<dt>Description</dt>
 								<dd>{{report.description}}</dd>
+								<dt>Media</dt>
+								<dd>
+									<ul>
+									{% for media in report.media.all  %}
+										<li><a href="{{media.url}}">{{media}}</a></li>
+									{% endfor %}
+									</ul>
+								</dd>
 								<dt>Features</dt>
 								<dd>
 									<ul>
@@ -45,7 +55,14 @@
 								<dd>{{report.is_verified}}</dd>
 								<dt>Is closed</dt>
 								<dd>{{report.is_closed}}</dd>
-
+								<dt>Comments</dt>
+								<dd>
+									<ul>
+									{% for comment in report.comments.all  %}
+										<li><a href="{{comment.get_absolute_url}}">{{comment}}</a></li>
+									{% endfor %}
+									</ul>
+								</dd>
 							</dl>
 						</div>
 					</div>

@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 from django.shortcuts import render_to_response
 
 from django.views.generic import ListView, DetailView

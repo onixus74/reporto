@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 from django.http import HttpResponse, Http404
 from django.core import serializers
 from django.views.generic.base import TemplateResponseMixin
@@ -20,6 +23,7 @@ from django.http import HttpResponseNotAllowed, HttpResponse
 from django.core.exceptions import ImproperlyConfigured
 
 #from django.core.serializers.json import DjangoJSONEncoder
+
 
 def dumps(content, json_opts={}):
 	"""
@@ -66,8 +70,8 @@ class LazyJSONEncoder(simplejson.JSONEncoder):
 		tmp = { }
 		many = [f.name for f in obj._meta.many_to_many]
 		for field in obj._meta.get_all_field_names( ):
-			print field
-			print getattr(obj, field, None)
+			#logger.debug(field)
+			#logger.debug(getattr(obj, field, None))
 			if len(many) > 0 and field in many:
 				many.remove(field)
 				tmp[field] = getattr(obj, field).all( )
@@ -303,11 +307,11 @@ class JSONFormView(JSONResponseMixin, BaseFormView):
 class HybridResponseMixin(JSONResponseMixin):
 	default_view = None
 	def render_to_response(self, context):
-		#print self.request.META['CONTENT_TYPE']
-		print context
+		#logger.debug(self.request.META['CONTENT_TYPE'])
+		logger.debug(context)
 		# Look for '.json' URL extension, 'format=json' GET argument or 'application/json' accept header in request
 		is_json = self.kwargs.get('extension', None) == "json" or self.request.GET.get('format', None) == "json"
-		#print format
+		#logger.debug(format)
 		if is_json:
 			return JSONResponseMixin.render_to_response(self, context)
 		else:
@@ -449,7 +453,8 @@ class AjaxableResponseMixin(object):
 		if self.request.is_ajax():
 			data = {
 				'success': True,
-				'data': self.object,
+				'object': self.object,
+				'url': self.object.get_absolute_url(),
 			}
 			return self.render_to_json_response(data, status=201)
 		else:

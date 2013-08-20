@@ -9,7 +9,7 @@
 {% block view_title %}Report Submission | {% endblock %}
 
 {% block view_content %}
-	<form id="report-form" action="{% url 'reports:submit' %}" method="post">
+	<form id="report-form" action="{% url 'reports:submit' %}" method="post" enctype="multipart/form-data">
 		{% csrf_token %}
 
 	<div class="container">
@@ -155,7 +155,8 @@
 					</div>
 					<div class="span6">
 						<h2>Evidence</h2>
-						<input type="hidden" name="rsid" value="{{report_submit_id}}">
+						<!--<input name="files[]" type="file" multiple />-->
+						<!--<input type="hidden" name="rsid" value="{{report_submit_id}}">-->
 						<div id="assets" tabindex="0" class="dropzone input-area" style="background-color: #FFF; border: 1px solid #999;"></div>
 						<!--
 						<button type="button" class="input-block-level input-area" style="padding: 0;">
@@ -163,7 +164,6 @@
 							</div>
 						</button>
 						-->
-						</a>
 					</div>
 				</div>
 
@@ -261,6 +261,7 @@
 		reform.data.reports = {{reports|json}};
 		reform.urls.submit = {% url 'reports:submit' as submit_url %}{{submit_url|json}};
 		reform.urls.upload = {% url 'reports:submit-upload' as upload_url %}{{upload_url|json}};
+		reform.urls.view = {% url 'reports:view' 0 as view_url %}{{view_url|json}};
 	</script>
 	<script src="{% static 'reports/scripts/report-submit.js' %}"></script>
 
