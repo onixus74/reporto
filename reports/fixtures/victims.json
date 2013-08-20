@@ -28,7 +28,7 @@
     "education": "ESPRIT",
     "email": "marwen@reform.tn"
   }
-}
+},
 {
   "pk": 3,
   "model": "reports.victim",
