@@ -273,3 +273,8 @@ INSTALLED_APPS += ('south' ,)
 # YOUTUBE_AUTH_PASSWORD = 'yourpassword'
 # YOUTUBE_DEVELOPER_KEY = 'developer key, get one from http://code.google.com/apis/youtube/dashboard/'
 # YOUTUBE_CLIENT_ID = 'client-id'
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+COMPRESS_ENABLED = True
+COMPRESS_OFFLINE = True
