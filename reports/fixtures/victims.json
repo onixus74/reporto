@@ -6,12 +6,12 @@
     "description": "Something ...",
     "gender": "M",
     "age": 26,
-    "profession": "Engineer",
-    "phone": "21 894 209",
+    "profession": "IT Engineer",
+    "phone": "21 000 000",
     "firstname": "Nader",
-    "lastname": "Toukabri",
+    "lastname": "T.",
     "education": "Engineering",
-    "email": "nader.toukabri@gmail.com"
+    "email": "nader@reform.tn"
   }
 },
 {
@@ -24,9 +24,24 @@
     "profession": "Intern",
     "phone": "20 000 000",
     "firstname": "Marwen",
-    "lastname": "Ounis",
+    "lastname": "O.",
     "education": "ESPRIT",
-    "email": "marwen.ounis@esprit.tn"
+    "email": "marwen@reform.tn"
+  }
+}
+{
+  "pk": 3,
+  "model": "reports.victim",
+  "fields": {
+    "description": "...",
+    "gender": "M",
+    "age": 30,
+    "profession": "Reform Boss",
+    "phone": "20 000 000",
+    "firstname": "Bassem",
+    "lastname": "O.",
+    "education": "?",
+    "email": "bassem@reform.tn"
   }
 }
 ]
