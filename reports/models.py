@@ -18,7 +18,7 @@ class Category(models.Model):
 		return self.definition
 
 	def save(self, *args, **kwargs):
-		self.s = slugify(self.definition)
+		self.slug = slugify(self.definition)
 		super(Category, self).save(*args, **kwargs)
 
 
@@ -33,7 +33,7 @@ class Feature(models.Model):
 		return self.definition
 
 	def save(self, *args, **kwargs):
-		self.s = slugify(self.definition)
+		self.slug = slugify(self.definition)
 		super(Feature, self).save(*args, **kwargs)
 
 

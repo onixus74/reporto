@@ -19,9 +19,9 @@ python manage.py runserver # run development server
 
 python manage.py runserver 0.0.0.0:8000 # run development server in network
 
-python manage.py dumpdata APP.ENTITY --indent 2 > APP/fixtures/ENTITY.json # dump current db data to fixture file
+python manage.py dumpdata APP.ENTITY --indent 2 > APP/data/ENTITY.json # dump current db data to fixture file
 
-python manage.py loaddata APP/fixtures/* # load fixture files to db
+python manage.py loaddata APP/data/* # load fixture files to db
 
 python manage.py startapp APPNAME # create a n ew application/module
 

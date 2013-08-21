@@ -261,7 +261,6 @@
 		reform.data.reports = {{reports|json}};
 		reform.urls.submit = {% url 'reports:submit' as submit_url %}{{submit_url|json}};
 		reform.urls.upload = {% url 'reports:submit-upload' as upload_url %}{{upload_url|json}};
-		reform.urls.view = {% url 'reports:view' 0 as view_url %}{{view_url|json}};
 	</script>
 	<script src="{% static 'reports/scripts/report-submit.js' %}"></script>
 
