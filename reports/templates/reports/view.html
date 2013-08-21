@@ -1,5 +1,7 @@
 {% extends "layouts/default.html" %}
 
+{% load static %}
+
 {% block view_title %}Report Details | {% endblock %}
 
 {% block view_content %}
@@ -37,9 +39,9 @@
 								<dd>{{report.description}}</dd>
 								<dt>Media</dt>
 								<dd>
-									<ul>
+									<ul>{% get_media_prefix as MEDIA_PREFIX %}
 									{% for media in report.media.all  %}
-										<li><a href="{{media.url}}">{{media}}</a></li>
+										<li><a href="{{MEDIA_PREFIX}}{{media.url}}">{{media}}</a></li>
 									{% endfor %}
 									</ul>
 								</dd>

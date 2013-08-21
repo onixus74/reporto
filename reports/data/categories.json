@@ -28,7 +28,7 @@
   "model": "reports.category", 
   "fields": {
     "definition": "Lack of Investigation and Prosecution", 
-    "slug": "lack-of-investigation-and-rosecution"
+    "slug": "lack-of-investigation-and-prosecution"
   }
 }
 ]

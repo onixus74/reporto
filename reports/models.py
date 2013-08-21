@@ -42,7 +42,7 @@ class Media(models.Model):
 	#title        = models.CharField(max_length=200)
 	#description  = models.TextField()
 	url  = models.URLField(max_length=300)
-	#file = models.FileField(upload_to='reports/tmp', null=True)
+	#file = models.FileField(upload_to='reports/', null=True)
 
 	def __unicode__(self):
 		return self.url

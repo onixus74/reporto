@@ -4,7 +4,7 @@
   "model": "reports.feature", 
   "fields": {
     "definition": "Got help with NGO", 
-    "slug": "ngo-help"
+    "slug": "got-help-with-ngo"
   }
 },
 {
@@ -12,7 +12,7 @@
   "model": "reports.feature", 
   "fields": {
     "definition": "Hired a lawyer", 
-    "slug": "lawyer-hired"
+    "slug": "hired-a-lawyer"
   }
 },
 {
@@ -20,7 +20,7 @@
   "model": "reports.feature", 
   "fields": {
     "definition": "Incident during a protest", 
-    "slug": "protest-incident"
+    "slug": "incident-during-a-protest"
   }
 },
 {
@@ -28,7 +28,7 @@
   "model": "reports.feature", 
   "fields": {
     "definition": "Incident in a police station", 
-    "slug": "in-police-station"
+    "slug": "incident-in-a-police-station"
   }
 },
 {
@@ -36,7 +36,7 @@
   "model": "reports.feature", 
   "fields": {
     "definition": "Policeman wearing a uniform", 
-    "slug": "uniform"
+    "slug": "policeman-wearing-a-uniform"
   }
 },
 {
@@ -44,7 +44,7 @@
   "model": "reports.feature", 
   "fields": {
     "definition": "Reported and satisfied", 
-    "slug": "statisfied"
+    "slug": "reported-and-satisfied"
   }
 },
 {
