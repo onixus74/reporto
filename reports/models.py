@@ -5,6 +5,7 @@ from django.db import models
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 from django.template.defaultfilters import slugify
+from django.utils.html import strip_tags
 
 
 class Category(models.Model):
@@ -45,7 +46,7 @@ class Media(models.Model):
 	#file = models.FileField(upload_to='reports/', null=True)
 
 	def __unicode__(self):
-	 	return self.url
+		return self.url
 
 	# def save(self, *args, **kwargs):
 	# 	if self.file:
@@ -54,9 +55,6 @@ class Media(models.Model):
 
 	# def get_url(self):
 	# 	return self.url or self.file.url
-
-
-from django.contrib.auth.models import User
 
 
 class Victim(models.Model):
@@ -106,6 +104,14 @@ class Comment(models.Model):
 	#	(COMMENT, "Comment"),
 	#)
 	#category = models.CharField(max_length=1, choices=CATEGORY, default=COMMENT, blank=True)
+
+
+	def __unicode__(self):
+		return self.content
+
+	def save(self, *args, **kwargs):
+		self.content = strip_tags(self.content)
+		super(Comment, self).save(*args, **kwargs)
 
 
 class Report(models.Model):

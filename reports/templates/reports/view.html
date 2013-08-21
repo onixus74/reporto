@@ -61,7 +61,7 @@
 								<dd>
 									<ul>
 									{% for comment in report.comments.all  %}
-										<li><a href="{{comment.get_absolute_url}}">{{comment}}</a></li>
+										<li><pre>{{comment}}</pre></li>
 									{% endfor %}
 									</ul>
 								</dd>

@@ -160,7 +160,9 @@ reform.widgets.wizard.init = function() {
 		'victim-witness': $('#ui-wizard-victim-witness-buttons'),
 		'category-datetime': $('#ui-wizard-category-datetime'),
 		'location' : $('#ui-wizard-location'),
-		'victim-aggressor' : $('#ui-wizard-victim-aggressor'),
+		//'victim-aggressor' : $('#ui-wizard-victim-aggressor'),
+		'victim' : $('#ui-wizard-victim'),
+		'aggressor' : $('#ui-wizard-aggressor'),
 		'description-evidence' : $('#ui-wizard-description-evidence'),
 		'features' : $('#ui-wizard-features'),
 		'submit' : $('#ui-wizard-submit')
@@ -193,20 +195,32 @@ reform.widgets.wizard.init = function() {
 
 	elements.victimButton.on('click', function(e){
 		victimWitnessButtonsAction.call(this, e);
-		$('#ui-wizard-victim').show();
+		$('#ui-wizard-victim-text').show();
 		$('#id_victim').val('user').change();
 		//$('#ui-wizard-victim-area').remove();
-		$('#ui-wizard-victim-area').hide();
-		$('#ui-wizard-aggressor-area').removeClass('span6').addClass('span12');
+		//$('#ui-wizard-victim-area').hide();
+		//$('#ui-wizard-aggressor-area').removeClass('span6').addClass('span12');
 	});
 
 	elements.witnessButton.on('click', function(e){
 		victimWitnessButtonsAction.call(this, e);
-		$('#ui-wizard-witness').show();
+		$('#ui-wizard-witness-text').show();
 		$('#id_victim').val('0').change();
 	});
 
-	function showSection(section, fields, callback, progress){
+	/*
+	 *  showSection	: show sections after all fields changed
+	 *
+	 *		@sections_list		String OR Array		list of sections to show
+	 *		@fields_list			Array							fields tow	watch
+	 *		@callback					Function					callback to call after change
+	 *		@progress					String						value of progress indicator
+	 */
+	function showSection(sections_list, fields_list, callback, progress){
+
+		if(!(sections_list instanceof Array)) {
+			sections_list = [ sections_list ];
+		}
 
 		function showSectionClosure(e){
 
@@ -228,7 +242,10 @@ reform.widgets.wizard.init = function() {
 			console.log(ready);
 
 			if(ready){
-				sections[section].addClass('animated fadeIn').show();
+				sections_list.forEach(function(section){
+					sections[section].addClass('animated fadeIn').show();
+				})
+
 				if(callback)
 					callback();
 				if(progress)
@@ -239,7 +256,7 @@ reform.widgets.wizard.init = function() {
 
 		}
 		showSectionClosure.fields = {};
-		fields.forEach(function(name){
+		fields_list.forEach(function(name){
 			showSectionClosure.fields[name] = false;
 		})
 
@@ -268,7 +285,8 @@ reform.widgets.wizard.init = function() {
 	elements.location_text = $('#id_location_text');
 	console.log(elements.location_text);
 
-	var showVictimAggressorSection = showSection('victim-aggressor', ['location', 'location_text'], null, 30);
+	//var showVictimAggressorSection = showSection('victim-aggressor', ['location', 'location_text'], null, 30);
+	var showVictimAggressorSection = showSection(['victim', 'aggressor'], ['location', 'location_text'], null, 30);
 	elements.location.on('change.showSection', showVictimAggressorSection);
 	elements.location_text.on('change.showSection', showVictimAggressorSection);
 
@@ -308,8 +326,17 @@ reform.widgets.wizard.init = function() {
 	elements.aggressor = $('#id_aggressor');
 	console.log(elements.aggressor);
 
+	/*
 	var showDescriptionEvidenceSection = showSection('description-evidence', ['victim', 'aggressor'], null, 40);
 	elements.victim.on('change.showSection', showDescriptionEvidenceSection);
+	elements.aggressor.on('change.showSection', showDescriptionEvidenceSection);
+	*/
+
+	/*
+	var showAggressorSection = showSection('aggressor', ['victim'], null, 35);
+	elements.victim.on('change.showSection', showAggressorSection);
+	*/
+	var showDescriptionEvidenceSection = showSection('description-evidence', ['aggressor'], null, 40);
 	elements.aggressor.on('change.showSection', showDescriptionEvidenceSection);
 
 	/* description-evidence section */

@@ -1,5 +1,6 @@
 
 *.log
+*.old
 *.pot
 *.pyc
 local_settings.py
