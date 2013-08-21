@@ -216,10 +216,11 @@ class ReportSubmitView(AjaxableResponseMixin, CreateView):
 
 		for f in files:
 			logger.debug('FILE %s', f)
+			#self.object.media.create(file=f)
 			file_path = os.path.join(media_path, f.name)
 			logger.debug('FILE PATH %s', file_path)
 			file_path = default_storage.save(file_path, f)
-			self.object.media.create(url= '/' + os.path.join('media', file_path))
+			self.object.media.create(url=file_path)
 			#media = Media(url=file_path)
 			#self.object.media.add(media)
 
