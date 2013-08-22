@@ -5,7 +5,7 @@
 reform.widgets.map = function() {
 
 	// create a map in the "map" div, set the view to a given place and zoom
-	var map = reform.widgets.map = L.map('map');
+	var map = reform.widgets.map = L.map('map')
 
 	map.setView([34.161818161230386, 9.3603515625], 5);
 

@@ -260,3 +260,10 @@ INSTALLED_APPS += ('south' ,)
 # YOUTUBE_AUTH_PASSWORD = 'yourpassword'
 # YOUTUBE_DEVELOPER_KEY = 'developer key, get one from http://code.google.com/apis/youtube/dashboard/'
 # YOUTUBE_CLIENT_ID = 'client-id'
+
+INSTALLED_APPS += ('easy_thumbnails' ,)
+THUMBNAIL_ALIASES = {
+    '': {
+        'media': {'size': (50, 50), 'crop': True},
+    },
+}

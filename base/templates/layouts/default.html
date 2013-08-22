@@ -18,6 +18,27 @@
 	<link rel="stylesheet" href="{% static 'components/bootstrap-wysihtml5/dist/bootstrap-wysihtml5-0.0.2.css' %}">
 	<link rel="stylesheet" href="{% static 'components/animate.css/animate.css' %}">
 	{% endcompress %}
+
+	{% if debug %}
+	<style type="text/css">
+
+.animated {
+	-webkit-animation-duration: 2s;
+	-moz-animation-duration: 2s;
+	-ms-animation-duration: 2s;
+	-o-animation-duration: 2s;
+	animation-duration: 2s;
+
+	-webkit-animation-delay: 0.2s;
+	-moz-animation-delay: 0.2s;
+	-ms-animation-delay: 0.2s;
+	-o-animation-delay: 0.2s;
+	animation-delay: 0.2s;
+}
+
+	</style>
+	{% endif %}
+
 	<!--<link rel="stylesheet" href="{% static 'styles/deps.css' %}">-->
 	<link rel="stylesheet" href="{% static 'styles/main.css' %}">
 <!-- Layout Styles Dependencies -END -->
