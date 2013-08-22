@@ -291,12 +291,12 @@
 	        border-radius: 5px;
 	}
 .leaflet-control-layers-toggle {
-	background-image: url('/static/components/leaflet/dist/images/layers.png?1545c503a7e2');
+	background-image: url('/static/components/leaflet/dist/images/layers.png?e1ccfbac7f82');
 	width: 36px;
 	height: 36px;
 	}
 .leaflet-retina .leaflet-control-layers-toggle {
-	background-image: url('/static/components/leaflet/dist/images/layers-2x.png?1545c503a7e2');
+	background-image: url('/static/components/leaflet/dist/images/layers-2x.png?e1ccfbac7f82');
 	background-size: 26px 26px;
 	}
 .leaflet-touch .leaflet-control-layers-toggle {

@@ -276,14 +276,14 @@ INSTALLED_APPS += ('south' ,)
 # YOUTUBE_DEVELOPER_KEY = 'developer key, get one from http://code.google.com/apis/youtube/dashboard/'
 # YOUTUBE_CLIENT_ID = 'client-id'
 
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-
-#COMPRESS_ENABLED = True
-#COMPRESS_OFFLINE = True
-
 INSTALLED_APPS += ('easy_thumbnails' ,)
 THUMBNAIL_ALIASES = {
     '': {
         'media': {'size': (50, 50), 'crop': True},
     },
 }
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+COMPRESS_ENABLED = True
+COMPRESS_OFFLINE = True
