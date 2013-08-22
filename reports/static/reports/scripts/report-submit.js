@@ -9,14 +9,11 @@ reform.widgets.map.init = function() {
 	var widget = reform.widgets.map;
 
 	// create a map in the "map" div, set the view to a given place and zoom
-	var map = L.map('map');
-	widget.object = map;
+	var map = widget.object = L.map('map');
 
 	map.setView([34.161818161230386, 9.3603515625], 5);
 
-	//L.control.scale().addTo(map);
-
-	//map.legendControl.addLegend("Incident location");
+	L.control.scale().addTo(map);
 
 	map.setMaxBounds(map.getBounds());
 
@@ -24,21 +21,6 @@ reform.widgets.map.init = function() {
 	L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
 		//attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 	}).addTo(map);
-
-	// Popup
-	/*
-	var popup = L.popup()
-		.setLatLng([51.5, -0.09])
-		.setContent("I am a standalone popup.")
-		.openOn(map);
-		*/
-
-	// add a marker in the given location, attach some popup content to it and open the popup
-	/*
-	L.marker([51.5, -0.09]).addTo(map)
-		.bindPopup('A pretty CSS3 popup. <br> Easily customizable.')
-		.openPopup();
-	*/
 
 	var geoSearch = new L.Control.GeoSearch({
 		provider: new L.GeoSearch.Provider.Google({ region: 'tn' }),
@@ -127,7 +109,12 @@ reform.widgets.dropzone = {};
 reform.widgets.dropzone.init = function() {
 
 	var widget = reform.widgets.dropzone;
+<<<<<<< HEAD
 	var dropzone = new Dropzone("#assets", { url: reform.urls.upload });
+=======
+	//var dropzone = new Dropzone("#assets", { url: reform.urls.upload });
+	var dropzone = new Dropzone("#assets", { url: '/' });
+>>>>>>> nader
 	widget.object = dropzone;
 
 };
@@ -160,15 +147,24 @@ reform.widgets.wizard.init = function() {
 		'victim-witness': $('#ui-wizard-victim-witness-buttons'),
 		'category-datetime': $('#ui-wizard-category-datetime'),
 		'location' : $('#ui-wizard-location'),
-		'victim-aggressor' : $('#ui-wizard-victim-aggressor'),
+		//'victim-aggressor' : $('#ui-wizard-victim-aggressor'),
+		'victim' : $('#ui-wizard-victim'),
+		'aggressor' : $('#ui-wizard-aggressor'),
 		'description-evidence' : $('#ui-wizard-description-evidence'),
 		'features' : $('#ui-wizard-features'),
 		'submit' : $('#ui-wizard-submit')
 	}
+	var order = widget.order = ['victim-witness', 'category-datetime', 'location', 'victim', 'aggressor', 'description-evidence', 'features', 'submit'];
 
 	console.log(sections);
 
 	elements.progressBar = $('#ui-wizard-progress');
+
+	function progress(index){
+		var progress =  (index + 1) * 100 / (order.length - 1);
+		console.log('progress', progress, index, order.length);
+		elements.progressBar.css({width: progress + "%"});
+	}
 
 	/* victim-witness section */
 
@@ -186,65 +182,90 @@ reform.widgets.wizard.init = function() {
 		elements.reporterState.html(el.data('value')).addClass(el.data('class')).addClass('animated pulse');
 		sections['category-datetime'].addClass('animated fadeIn').show();
 		sections['victim-witness'].addClass('animated fadeOut');
-		elements.progressBar.css({width: "10%"});
+		progress(0);
 		elements.victimButton.off('click');
 		elements.witnessButton.off('click');
 	}
 
 	elements.victimButton.on('click', function(e){
+		order.splice(order.indexOf('victim'), 1);
 		victimWitnessButtonsAction.call(this, e);
-		$('#ui-wizard-victim').show();
+		$('#ui-wizard-victim-text').show();
 		$('#id_victim').val('user').change();
 		//$('#ui-wizard-victim-area').remove();
+<<<<<<< HEAD
 		$('#ui-wizard-victim-area').hide();
 		$('#ui-wizard-aggressor-area').removeClass('span6').addClass('span12');
+=======
+		//$('#ui-wizard-victim-area').hide();
+		//$('#ui-wizard-aggressor-area').removeClass('span6').addClass('span12');
+>>>>>>> nader
 	});
 
 	elements.witnessButton.on('click', function(e){
 		victimWitnessButtonsAction.call(this, e);
-		$('#ui-wizard-witness').show();
+		$('#ui-wizard-witness-text').show();
 		$('#id_victim').val('0').change();
 	});
 
-	function showSection(section, fields, callback, progress){
+	/*
+	 *  showNextSection	: show sections after all fields changed
+	 *
+	 *		@section					String						current section, precedes the one to show
+	 *		@fields_list			Array							fields to watch
+	 *		@callback					Function					callback to call after change
+	 */
+	function showNextSection(section, fields_list, callback){
 
-		function showSectionClosure(e){
+		function showNextSectionClosure(e){
 
-			console.log(this);
-			console.log(e.target);
+			console.log('element', this);
+			console.log('target', e.target);
 			//console.log(this.name);
 			//console.log(e.target.name);
 
-			var fields = showSectionClosure.fields;
-			console.log(fields);
+			var fields = showNextSectionClosure.fields;
+			console.log('fields', fields);
 
 			fields[this.name] = true;
-			console.log(fields);
+			console.log('fields', fields);
 
 			var ready = Object.keys(fields).reduce(function (previous, key) {
 				return previous && fields[key];
 			}, true);
 
-			console.log(ready);
+			console.log('ready', ready);
 
 			if(ready){
-				sections[section].addClass('animated fadeIn').show();
+				var index = order.indexOf(section);
+				var next_index = order[index + 1];
+				var next_section = sections[next_index];
+				console.log('section', section, sections[section]);
+				console.log('next section', next_index, next_section);
+				if(next_section)
+					next_section.addClass('animated fadeIn').show();
+				progress(index);
 				if(callback)
 					callback();
-				if(progress)
-					elements.progressBar.css({width: progress + "%"});
 			}
 
-			$(this).off('change.showSection');
+			$(this).off('change.showNextSection');
 
 		}
-		showSectionClosure.fields = {};
-		fields.forEach(function(name){
-			showSectionClosure.fields[name] = false;
+		showNextSectionClosure.fields = {};
+		fields_list.forEach(function(name){
+			showNextSectionClosure.fields[name] = false;
 		})
 
-		return showSectionClosure;
+		return showNextSectionClosure;
 
+	}
+
+	function handleShowNextSection(section, fields_list, callback){
+		var handler = showNextSection(section, fields_list, callback);
+		fields_list.forEach(function(field){
+			elements[field].on('change.showNextSection', handler);
+		})
 	}
 
 
@@ -256,9 +277,12 @@ reform.widgets.wizard.init = function() {
 	elements.datetime = $('#id_datetime');
 	console.log(elements.datetime);
 
-	var showLocationSection = showSection('location', ['category', 'datetime'], reform.widgets.map.init, 20);
-	elements.category.on('change.showSection', showLocationSection);
-	elements.datetime.on('change.showSection', showLocationSection);
+	/*
+	var showLocationSection = showNextSection('category-datetime', ['category', 'datetime'], reform.widgets.map.init);
+	elements.category.on('change.showNextSection', showLocationSection);
+	elements.datetime.on('change.showNextSection', showLocationSection);
+	*/
+	handleShowNextSection('category-datetime', ['category', 'datetime'], reform.widgets.map.init);
 
 	/* location section */
 
@@ -268,9 +292,12 @@ reform.widgets.wizard.init = function() {
 	elements.location_text = $('#id_location_text');
 	console.log(elements.location_text);
 
-	var showVictimAggressorSection = showSection('victim-aggressor', ['location', 'location_text'], null, 30);
-	elements.location.on('change.showSection', showVictimAggressorSection);
-	elements.location_text.on('change.showSection', showVictimAggressorSection);
+	/*
+	var showVictimAggressorSection = showNextSection('location', ['location', 'location_text']);
+	elements.location.on('change.showNextSection', showVictimAggressorSection);
+	elements.location_text.on('change.showNextSection', showVictimAggressorSection);
+	*/
+	handleShowNextSection('location', ['location', 'location_text']);
 
 	elements.location.on('change', function(e){
 		var location_text = elements.location_text;
@@ -305,42 +332,45 @@ reform.widgets.wizard.init = function() {
 	elements.victim = $('#id_victim');
 	console.log(elements.victim);
 
+	var els = Array.prototype.slice.apply(document.getElementById('ui-victim-fieldset').elements);
+	els.forEach(function(e){
+		elements[e.name] = $(e);
+	});
+
 	elements.aggressor = $('#id_aggressor');
 	console.log(elements.aggressor);
 
-	var showDescriptionEvidenceSection = showSection('description-evidence', ['victim', 'aggressor'], null, 40);
-	elements.victim.on('change.showSection', showDescriptionEvidenceSection);
-	elements.aggressor.on('change.showSection', showDescriptionEvidenceSection);
+	/*
+	var showAggressorSection = showNextSection('victim', ['victim-firstname']);
+	elements.victim.on('change.showNextSection', showAggressorSection);
+	*/
+	handleShowNextSection('victim', ['victim-firstname']);
+
+	/*
+	var showDescriptionEvidenceSection = showNextSection('aggressor', ['aggressor']);
+	elements.aggressor.on('change.showNextSection', showDescriptionEvidenceSection);
+	*/
+	handleShowNextSection('aggressor', ['aggressor']);
 
 	/* description-evidence section */
 
 	elements.description = $('#id_description');
 	console.log(elements.description);
 
-	var showFeaturesSection = showSection('features', ['description'], null, 50);
-	elements.description.on('change.showSection', showFeaturesSection);
-
 	/*
-	elements.description.on('change.showSection', function(e){
-		sections['features'].addClass('animated fadeIn').show();
-		elements.progressBar.css({width: "50%"});
-		elements.description.off('change.showSection');
-	});
+	var showFeaturesSection = showNextSection('description-evidence', ['description']);
+	elements.description.on('change.showNextSection', showFeaturesSection);
 	*/
+	handleShowNextSection('description-evidence', ['description']);
 
 	elements.features = $('#id_features');
 	console.log(elements.features);
 
-	var showSubmitSection = showSection('submit', ['features'], null, 100);
-	elements.features.on('change.showSection', showSubmitSection);
-
 	/*
-	elements.features.on('change.showSection', function(e){
-		sections['submit'].addClass('animated fadeIn').show();
-		elements.progressBar.css({width: "100%"});
-		elements.features.off('change.showSection');
-	});
+	var showSubmitSection = showNextSection('features', ['features']);
+	elements.features.on('change.showNextSection', showSubmitSection);
 	*/
+<<<<<<< HEAD
 
 
 	/*
@@ -351,6 +381,11 @@ reform.widgets.wizard.init = function() {
 	});
 	*/
 
+=======
+	handleShowNextSection('features', ['features']);
+
+
+>>>>>>> nader
 	$('#report-form').on('submit', function(e){
 		e.preventDefault();
 		var data = {};

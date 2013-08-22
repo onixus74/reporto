@@ -132,7 +132,6 @@ class ReportView(DetailHybridResponseMixin, DetailView):
 # 		#fields = [...]
 
 
-
 class ReportCreateForm(forms.ModelForm):
 	class Meta:
 		model = Report
@@ -146,104 +145,194 @@ class VictimCreateForm(forms.ModelForm):
 		model = Victim
 		exclude = ('user',)
 
-	#def __init__(self, prefix='victim_', *args, **kwargs):
-	#	super(VictimCreateForm, self).__init__(self, prefix=prefix, *args, **kwargs)
 
 
-class ReportSubmitView(AjaxableResponseMixin, CreateView):
-	""" """
-	model = Report
-	form_class = ReportCreateForm
-	template_name = "reports/submit.html"
+def report_submit(request, template_name = "reports/submit.html", *args, **kwargs):
+	logger.debug('POST %s', request.POST)
+	logger.debug('FILES %s', request.FILES)
 
-	def get_context_data(self, **kwargs):
-		logger.debug(kwargs)
+	context = {}
+	form = ReportCreateForm(request.POST or None, request.FILES or None)
+	context['form'] = form
+	victim_form = VictimCreateForm(request.POST or None, prefix = 'victim')
+	context['victim_form'] = victim_form
 
+	if request.method == 'GET':
 		# create report submit id for files upload
 		rsid = uuid.uuid1().hex
-		#RSIDs = self.request.session.get('RSIDs', [])
+		#RSIDs = request.session.get('RSIDs', [])
 		#RSIDs.append(rsid)
 		#self.request.session['RSIDs'] = RSIDs
 		kwargs['report_submit_id'] = rsid
-		kwargs['victim_form'] = VictimCreateForm(prefix = 'victim')
+		kwargs['victim_form'] = VictimCreateForm()
 		kwargs['victims'] = Victim.objects.all()
 		kwargs['reports'] = Report.objects.all()
 
-		logger.debug(kwargs)
-		return kwargs
+	victim = request.POST.get('victim', None)
+	logger.debug('VICTIM %s', victim)
 
 	#def form_invalid(self, form):
 
 	def form_valid(self, form):
-		logger.debug('POST %s', self.request.POST)
-		logger.debug('FILES %s', self.request.FILES)
+		logger.debug(self.request.POST)
 
 		victim = self.request.POST['victim']
-		logger.debug('VICTIM %s', victim)
+		logger.debug(victim)
 
 		if victim == 'user':
 			# the user is the victim
-			victim = Victim.objects.get(user=self.request.user)
+			victim = Victim.objects.get(user=request.user)
 		elif victim != '0':
 			# existent victim
 			victim = Victim.objects.get(pk=victim)
 		else:
-			# create new user
-			victimForm = VictimCreateForm(self.request.POST, prefix = 'victim')
+			# new victim
+			#victim = self.request.POST.getlist('victim')
+			#logger.debug(victim)
+			#victim = self.request.POST.getlist('victim[new]')
+			#logger.debug(victim)
+			#victim_get = lambda *keys: request.POST[ 'victim[new]' + ''.join(['[%s]' % key for key in keys])]
+			#victim = victim_get()
+			#victim = [ key for key in self.request.POST.keys() if key.startswith('victim[new]') ]
+			victim = { key.split('][')[1][:-1]: value for key, value in self.request.POST.items() if key.startswith('victim[new]') }
+			logger.debug(victim)
+			#victim = Victim(**victim)
+			#victim.save()
+			victim = Victim(**victim)
+			#victim.save()
+			victimForm = VictimCreateForm(instance=victim)
 			victim = victimForm.save()
+		logger.debug(victim)
 
-		logger.debug('VICTIM %s', victim)
-
+		#victim = victim_form.save()
 		form.instance.victim = victim
+		form.instance.created_by = request.user
+		report = form.save()
 
-		form.instance.created_by = self.request.user
-
-		form = super(ReportSubmitView, self).form_valid(form)
-
-		#logger.debug('FORM %s', form.instance)
-
-		logger.debug('REPORT %s', self.object.pk)
-
-		files = self.request.FILES.getlist('files[]')
+		files = request.FILES.getlist('files[]')
 		logger.debug('FILES %s', files)
 
-		media_path = os.path.join('reports', str(self.object.pk))
+		media_path = os.path.join('reports', str(report.pk))
 		logger.debug('MEDIA PATH %s', media_path)
 
-		logger.debug('OBJECT %s', self.object)
+		logger.debug(str(self.object.pk))
+		logger.debug(self.request.POST['rsid'])
 
-		medias = []
+		report_submit_id = self.request.POST['rsid']
+		#report_submit_id in request.session.get('RSIDs', [])
+		logger.debug(report_submit_id)
 
-		for f in files:
-			logger.debug('FILE %s', f)
-			#self.object.media.create(file=f)
-			file_path = os.path.join(media_path, f.name)
-			logger.debug('FILE PATH %s', file_path)
-			file_path = default_storage.save(file_path, f)
-			self.object.media.create(url=file_path)
-			#media = Media(url=file_path)
-			#self.object.media.add(media)
+		media_path = os.path.join('reports', 'tmp', report_submit_id)
+		logger.debug(media_path)
 
-		self.object.save()
+		#media_files_key = 'report_submit_' + report_submit_id + '_files'
+		#media_files = self.request.session.get(media_files_key, [])
+		#logger.debug(media_files)
 
-		# report_submit_id = self.request.POST['rsid']
-		# #report_submit_id in request.session.get('RSIDs', [])
-		# logger.debug(report_submit_id)
+		persistant_media_path = os.path.join('reports', str(self.object.pk))
+		logger.debug(persistant_media_path)
 
-		# media_path = os.path.join('reports', 'tmp', report_submit_id)
-		# logger.debug(media_path)
+		if default_storage.exists(media_path):
+			shutil.move(default_storage.path(media_path), default_storage.path(persistant_media_path))
 
-		# #media_files_key = 'report_submit_' + report_submit_id + '_files'
-		# #media_files = self.request.session.get(media_files_key, [])
-		# #logger.debug(media_files)
 
-		# persistant_media_path = os.path.join('reports', str(self.object.pk))
-		# logger.debug(persistant_media_path)
+# class ReportSubmitView(AjaxableResponseMixin, CreateView):
+# 	""" """
+# 	model = Report
+# 	form_class = ReportCreateForm
+# 	template_name = "reports/submit.html"
 
-		# if default_storage.exists(media_path):
-		# 	shutil.move(default_storage.path(media_path), default_storage.path(persistant_media_path))
+# 	def get_context_data(self, **kwargs):
+# 		logger.debug(kwargs)
 
-		return form
+# 		# create report submit id for files upload
+# 		rsid = uuid.uuid1().hex
+# 		#RSIDs = self.request.session.get('RSIDs', [])
+# 		#RSIDs.append(rsid)
+# 		#self.request.session['RSIDs'] = RSIDs
+# 		kwargs['report_submit_id'] = rsid
+# 		kwargs['victim_form'] = VictimCreateForm(prefix = 'victim')
+# 		kwargs['victims'] = Victim.objects.all()
+# 		kwargs['reports'] = Report.objects.all()
+
+# 		logger.debug(kwargs)
+# 		return kwargs
+
+# 	#def form_invalid(self, form):
+
+# 	def form_valid(self, form):
+# 		logger.debug('POST %s', self.request.POST)
+# 		logger.debug('FILES %s', self.request.FILES)
+
+# 		victim = self.request.POST['victim']
+# 		logger.debug('VICTIM %s', victim)
+
+# 		if victim == 'user':
+# 			# the user is the victim
+# 			victim = Victim.objects.get(user=self.request.user)
+# 		elif victim != '0':
+# 			# existent victim
+# 			victim = Victim.objects.get(pk=victim)
+# 		else:
+# 			# create new user
+# 			victimForm = VictimCreateForm(self.request.POST, prefix = 'victim')
+# 			if victimForm.is_valid():
+# 				victim = victimForm.save()
+# 			else:
+# 				form = super(ReportSubmitView, self).form_invalid(victimForm)
+# 				logger.debug('FORM VICTIM INVALID %s %s', form, victimForm)
+# 				return form
+
+# 		logger.debug('VICTIM %s', victim)
+
+# 		form.instance.victim = victim
+
+# 		form.instance.created_by = self.request.user
+
+# 		form = super(ReportSubmitView, self).form_valid(form)
+
+# 		#logger.debug('FORM %s', form.instance)
+
+# 		logger.debug('REPORT %s', self.object.pk)
+
+# 		files = self.request.FILES.getlist('files[]')
+# 		logger.debug('FILES %s', files)
+
+# 		media_path = os.path.join('reports', str(self.object.pk))
+# 		logger.debug('MEDIA PATH %s', media_path)
+
+# 		logger.debug('OBJECT %s', self.object)
+
+# 		for f in files:
+# 			logger.debug('FILE %s', f)
+# 			#self.object.media.create(file=f)
+# 			file_path = os.path.join(media_path, f.name)
+# 			logger.debug('FILE PATH %s', file_path)
+# 			file_path = default_storage.save(file_path, f)
+# 			self.object.media.create(url=file_path)
+# 			#media = Media(url=file_path)
+# 			#self.object.media.add(media)
+
+# 		self.object.save()
+
+# 		# report_submit_id = self.request.POST['rsid']
+# 		# #report_submit_id in request.session.get('RSIDs', [])
+# 		# logger.debug(report_submit_id)
+
+# 		# media_path = os.path.join('reports', 'tmp', report_submit_id)
+# 		# logger.debug(media_path)
+
+# 		# #media_files_key = 'report_submit_' + report_submit_id + '_files'
+# 		# #media_files = self.request.session.get(media_files_key, [])
+# 		# #logger.debug(media_files)
+
+# 		# persistant_media_path = os.path.join('reports', str(self.object.pk))
+# 		# logger.debug(persistant_media_path)
+
+# 		# if default_storage.exists(media_path):
+# 		# 	shutil.move(default_storage.path(media_path), default_storage.path(persistant_media_path))
+
+# 		return form
 
 
 # class ReportSubmitPublicView(CreateView):
@@ -284,84 +373,107 @@ class ReportSubmitView(AjaxableResponseMixin, CreateView):
 # 	file = forms.FileField()
 
 
-def submit_upload(request, *args, **kwargs):
+# def submit_upload(request, *args, **kwargs):
 
-	#logger.debug(request.session.items())
-	#logger.debug(request.method)
-	#logger.debug(request.body)
-	#logger.debug(request.META['CONTENT_TYPE'])
-	#logger.debug(request.COOKIES)
-	#logger.debug(request.REQUEST)
-	#logger.debug(request.GET)
-	#logger.debug(request.POST)
-	#logger.debug(request.FILES)
+# 	#logger.debug(request.session.items())
+# 	#logger.debug(request.method)
+# 	#logger.debug(request.body)
+# 	#logger.debug(request.META['CONTENT_TYPE'])
+# 	#logger.debug(request.COOKIES)
+# 	#logger.debug(request.REQUEST)
+# 	#logger.debug(request.GET)
+# 	#logger.debug(request.POST)
+# 	#logger.debug(request.FILES)
 
-	#logger.debug("condition:")
-	#logger.debug(request.META.has_key('HTTP_X_RSID'))
-	#logger.debug(request.META['HTTP_X_RSID'])
-	#logger.debug(request.session.get('RSIDs', None))
-	#logger.debug(request.META['HTTP_X_RSID'] in request.session.get('RSIDs', []))
+# 	#logger.debug("condition:")
+# 	#logger.debug(request.META.has_key('HTTP_X_RSID'))
+# 	#logger.debug(request.META['HTTP_X_RSID'])
+# 	#logger.debug(request.session.get('RSIDs', None))
+# 	#logger.debug(request.META['HTTP_X_RSID'] in request.session.get('RSIDs', []))
 
-	if request.method == 'POST' and request.META.has_key('HTTP_X_RSID'):
-		#and request.META['HTTP_X_RSID'] in request.session.get('RSIDs', []):
+# 	if request.method == 'POST' and request.META.has_key('HTTP_X_RSID'):
+# 		#and request.META['HTTP_X_RSID'] in request.session.get('RSIDs', []):
 
-		report_submit_id = request.META['HTTP_X_RSID']
-		logger.debug(report_submit_id)
+# 		report_submit_id = request.META['HTTP_X_RSID']
+# 		logger.debug(report_submit_id)
 
-		media_path = os.path.join('reports', 'tmp', report_submit_id)
-		logger.debug(media_path)
+# 		media_path = os.path.join('reports', 'tmp', report_submit_id)
+# 		logger.debug(media_path)
 
-		#media_files_key = 'report_submit_' + report_submit_id + '_files'
-		#media_files = request.session.get(media_files_key, [])
-		#logger.debug(media_files)
+# 		#media_files_key = 'report_submit_' + report_submit_id + '_files'
+# 		#media_files = request.session.get(media_files_key, [])
+# 		#logger.debug(media_files)
 
-		files = request.FILES.getlist('files[]')
-		logger.debug(files)
+# 		files = request.FILES.getlist('files[]')
+# 		logger.debug(files)
 
-		for f in files:
-			logger.debug(f)
-			file_path = os.path.join(media_path, f.name)
-			logger.debug(file_path)
-			#media_files.append(file_path)
-			default_storage.save(file_path, f)
+# 		for f in files:
+# 			logger.debug(f)
+# 			file_path = os.path.join(media_path, f.name)
+# 			logger.debug(file_path)
+# 			#media_files.append(file_path)
+# 			default_storage.save(file_path, f)
 
-		#logger.debug(media_files)
+# 		#logger.debug(media_files)
 
-		#request.session[media_files_key] = media_files
+# 		#request.session[media_files_key] = media_files
 
-		return JSONResponse({'success': True})
+# 		return JSONResponse({'success': True})
 
-	return JSONResponse({'success': False}, status=400)
+# 	return JSONResponse({'success': False}, status=400)
 
 
 
-class ReportVerifyView(View):
-	http_method_names = ['get', 'post']
+# class ReportVerifyView(View):
+# 	http_method_names = ['get', 'post']
 
-	def get(self, request, pk, *args, **kwargs):
-		report = Report.objects.get(pk=pk)
-		return JSONResponse({'success': True, 'verified': report.is_verified})
+# 	def get(self, request, pk, *args, **kwargs):
+# 		report = Report.objects.get(pk=pk)
+# 		return JSONResponse({'success': True, 'verified': report.is_verified})
 
-	def post(self, request, pk, *args, **kwargs):
-		report = Report.objects.get(pk=pk)
+# 	def post(self, request, pk, *args, **kwargs):
+# 		report = Report.objects.get(pk=pk)
+# 		report.is_verified = True
+# 		report.save()
+# 		return JSONResponse({'success': True, 'verified': report.is_verified})
+
+
+def report_verify(request, pk, *args, **kwargs):
+	logger.debug('POST %s', request.POST)
+	report = Report.objects.get(pk=pk)
+	if request.method == 'POST':
 		report.is_verified = True
 		report.save()
-		return JSONResponse({'success': True, 'verified': report.is_verified})
+	return JSONResponse({'success': True, 'verified': report.is_verified})
 
 
-class ReportCloseView(View):
-	http_method_names = ['get', 'post']
-
-	def get(self, request, pk, *args, **kwargs):
-		report = Report.objects.get(pk=pk)
-		return JSONResponse({'success': True, 'closed': report.is_closed})
-
-	def post(self, request, pk, *args, **kwargs):
-		report = Report.objects.get(pk=pk)
+def report_close(request, pk, *args, **kwargs):
+	logger.debug('POST %s', request.POST)
+	report = Report.objects.get(pk=pk)
+	if request.method == 'POST':
 		report.is_closed = True
 		report.save()
-		return JSONResponse({'success': True, 'closed': report.is_closed})
+	return JSONResponse({'success': True, 'closed': report.is_closed})
 
+
+class CommentForm(forms.ModelForm):
+	class Meta:
+		model = Comment
+		exclude = ('created_by')
+
+
+def report_comment(request, pk, *args, **kwargs):
+	logger.debug('POST %s', request.POST)
+	form = CommentForm(request.POST or None, request.FILES or None)
+	if form.is_valid():
+		form.instance.created_by = request.user
+		comment = form.save()
+		report = Report.objects.get(pk=pk)
+		report.comments.add(comment)
+		#report.save()
+		return JSONResponse({ 'success': True, 'object': comment })
+	else:
+		return JSONResponse({'success': False, 'errors': form.errors}, status=400)
 
 
 def stats_xxx(request, *args, **kwargs):
@@ -372,16 +484,6 @@ def stats_xxx(request, *args, **kwargs):
 	 'Vilance': 10,
 	}
 	return JSONResponse(response)
-
-
-
-class CommentForm(forms.ModelForm):
-	class Meta:
-		model = Comment
-
-
-
-
 
 
 

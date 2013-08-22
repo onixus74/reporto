@@ -1,5 +1,6 @@
 
 *.log
+*.old
 *.pot
 *.pyc
 local_settings.py
@@ -19,3 +20,7 @@ components
 /.pydevproject
 /.checkstyle
 /.settings
+<<<<<<< HEAD
+=======
+staticfiles
+>>>>>>> nader

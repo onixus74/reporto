@@ -4,8 +4,11 @@ SQLAlchemy==0.8.2
 South==0.8.2
 argparse==1.2.1
 distribute==0.6.34
+<<<<<<< HEAD
 dj-database-url==0.2.2
 dj-static==0.0.5
+=======
+>>>>>>> nader
 django-admin-bootstrapped==0.4.1
 django-appconf==0.6
 django-compressor==1.3

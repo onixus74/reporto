@@ -14,6 +14,7 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
+<<<<<<< HEAD
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.sqlite3',
@@ -30,6 +31,18 @@ DATABASES['default'] = dj_database_url.config()
 # ALLOWED_HOSTS = ['localhost', 'reform.tn', 'www.reform.tn', 'reporting.reform.tn']
 
 ALLOWED_HOSTS = ['*']
+=======
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'reform_tn/development.sqlite3',
+    }
+}
+
+# Hosts/domain names that are valid for this site; required if DEBUG is False
+# See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
+ALLOWED_HOSTS = ['localhost', 'reform.tn', 'www.reform.tn', 'reporting.reform.tn']
+>>>>>>> nader
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -273,8 +286,18 @@ INSTALLED_APPS += ('south' ,)
 # YOUTUBE_AUTH_PASSWORD = 'yourpassword'
 # YOUTUBE_DEVELOPER_KEY = 'developer key, get one from http://code.google.com/apis/youtube/dashboard/'
 # YOUTUBE_CLIENT_ID = 'client-id'
+<<<<<<< HEAD
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 COMPRESS_ENABLED = True
 COMPRESS_OFFLINE = True
+=======
+
+INSTALLED_APPS += ('easy_thumbnails' ,)
+THUMBNAIL_ALIASES = {
+    '': {
+        'media': {'size': (50, 50), 'crop': True},
+    },
+}
+>>>>>>> nader

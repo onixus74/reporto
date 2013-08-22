@@ -39,5 +39,8 @@
   },
   "devDependencies": {
     "html-inspector": "~0.3.0"
+  },
+  "resolutions": {
+    "jquery": "2.0.3"
   }
 }
