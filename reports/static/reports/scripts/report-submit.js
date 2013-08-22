@@ -23,7 +23,9 @@ reform.widgets.map.init = function() {
 	}).addTo(map);
 
 	var geoSearch = new L.Control.GeoSearch({
-		provider: new L.GeoSearch.Provider.Google({ region: 'tn' }),
+		provider: new L.GeoSearch.Provider.Google({
+			region: 'tn'
+		}),
 		//country: "tn",
 		zoomLevel: 16
 	});
@@ -40,7 +42,8 @@ reform.widgets.map.init = function() {
 	console.log(loc);
 	if (loc) {
 		loc = loc.split(',');
-		var lat = parseFloat(loc[0]), lng = parseFloat(loc[1]);
+		var lat = parseFloat(loc[0]),
+			lng = parseFloat(loc[1]);
 		console.log(loc, lat, lng);
 		var latlng = new L.LatLng(lat, lng);
 		console.log(latlng);
@@ -110,7 +113,9 @@ reform.widgets.dropzone.init = function() {
 
 	var widget = reform.widgets.dropzone;
 	//var dropzone = new Dropzone("#assets", { url: reform.urls.upload });
-	var dropzone = new Dropzone("#assets", { url: '/' });
+	var dropzone = new Dropzone("#assets", {
+		url: '/'
+	});
 	widget.object = dropzone;
 
 };
@@ -142,13 +147,13 @@ reform.widgets.wizard.init = function() {
 	var sections = widget.sections = {
 		'victim-witness': $('#ui-wizard-victim-witness-buttons'),
 		'category-datetime': $('#ui-wizard-category-datetime'),
-		'location' : $('#ui-wizard-location'),
+		'location': $('#ui-wizard-location'),
 		//'victim-aggressor' : $('#ui-wizard-victim-aggressor'),
-		'victim' : $('#ui-wizard-victim'),
-		'aggressor' : $('#ui-wizard-aggressor'),
-		'description-evidence' : $('#ui-wizard-description-evidence'),
-		'features' : $('#ui-wizard-features'),
-		'submit' : $('#ui-wizard-submit')
+		'victim': $('#ui-wizard-victim'),
+		'aggressor': $('#ui-wizard-aggressor'),
+		'description-evidence': $('#ui-wizard-description-evidence'),
+		'features': $('#ui-wizard-features'),
+		'submit': $('#ui-wizard-submit')
 	}
 	var order = widget.order = ['victim-witness', 'category-datetime', 'location', 'victim', 'aggressor', 'description-evidence', 'features', 'submit'];
 
@@ -156,10 +161,12 @@ reform.widgets.wizard.init = function() {
 
 	elements.progressBar = $('#ui-wizard-progress');
 
-	function progress(index){
-		var progress =  (index + 1) * 100 / (order.length - 1);
+	function progress(index) {
+		var progress = (index + 1) * 100 / (order.length - 1);
 		console.log('progress', progress, index, order.length);
-		elements.progressBar.css({width: progress + "%"});
+		elements.progressBar.css({
+			width: progress + "%"
+		});
 	}
 
 	/* victim-witness section */
@@ -173,7 +180,7 @@ reform.widgets.wizard.init = function() {
 	elements.witnessButtonContainer = $('#ui-wizard-witness-button-container');
 	console.log(elements.witnessButtonContainer);
 
-	function victimWitnessButtonsAction(e){
+	function victimWitnessButtonsAction(e) {
 		var el = $(this);
 		elements.reporterState.html(el.data('value')).addClass(el.data('class')).addClass('animated pulse');
 		sections['category-datetime'].addClass('animated fadeIn').show();
@@ -183,7 +190,7 @@ reform.widgets.wizard.init = function() {
 		elements.witnessButton.off('click');
 	}
 
-	elements.victimButton.on('click', function(e){
+	elements.victimButton.on('click', function(e) {
 		order.splice(order.indexOf('victim'), 1);
 		victimWitnessButtonsAction.call(this, e);
 		$('#ui-wizard-victim-text').show();
@@ -193,7 +200,7 @@ reform.widgets.wizard.init = function() {
 		//$('#ui-wizard-aggressor-area').removeClass('span6').addClass('span12');
 	});
 
-	elements.witnessButton.on('click', function(e){
+	elements.witnessButton.on('click', function(e) {
 		victimWitnessButtonsAction.call(this, e);
 		$('#ui-wizard-witness-text').show();
 		$('#id_victim').val('0').change();
@@ -206,9 +213,10 @@ reform.widgets.wizard.init = function() {
 	 *		@fields_list			Array							fields to watch
 	 *		@callback					Function					callback to call after change
 	 */
-	function showNextSection(section, fields_list, callback){
 
-		function showNextSectionClosure(e){
+	function showNextSection(section, fields_list, callback) {
+
+		function showNextSectionClosure(e) {
 
 			console.log('element', this);
 			console.log('target', e.target);
@@ -221,22 +229,22 @@ reform.widgets.wizard.init = function() {
 			fields[this.name] = true;
 			console.log('fields', fields);
 
-			var ready = Object.keys(fields).reduce(function (previous, key) {
+			var ready = Object.keys(fields).reduce(function(previous, key) {
 				return previous && fields[key];
 			}, true);
 
 			console.log('ready', ready);
 
-			if(ready){
+			if (ready) {
 				var index = order.indexOf(section);
 				var next_index = order[index + 1];
 				var next_section = sections[next_index];
 				console.log('section', section, sections[section]);
 				console.log('next section', next_index, next_section);
-				if(next_section)
+				if (next_section)
 					next_section.addClass('animated fadeIn').show();
 				progress(index);
-				if(callback)
+				if (callback)
 					callback();
 			}
 
@@ -244,7 +252,7 @@ reform.widgets.wizard.init = function() {
 
 		}
 		showNextSectionClosure.fields = {};
-		fields_list.forEach(function(name){
+		fields_list.forEach(function(name) {
 			showNextSectionClosure.fields[name] = false;
 		})
 
@@ -252,9 +260,9 @@ reform.widgets.wizard.init = function() {
 
 	}
 
-	function handleShowNextSection(section, fields_list, callback){
+	function handleShowNextSection(section, fields_list, callback) {
 		var handler = showNextSection(section, fields_list, callback);
-		fields_list.forEach(function(field){
+		fields_list.forEach(function(field) {
 			elements[field].on('change.showNextSection', handler);
 		})
 	}
@@ -290,22 +298,26 @@ reform.widgets.wizard.init = function() {
 	*/
 	handleShowNextSection('location', ['location', 'location_text']);
 
-	elements.location.on('change', function(e){
+	elements.location.on('change', function(e) {
 		var location_text = elements.location_text;
 		console.log(this.value);
 		var latlng = this.value.split(',');
 		console.log(latlng);
-		var lat = parseFloat(latlng[0], 10), lng = parseFloat(latlng[1], 10);
+		var lat = parseFloat(latlng[0], 10),
+			lng = parseFloat(latlng[1], 10);
 		var geocoder = new google.maps.Geocoder();
 		//var geocoder = L.GeoSearch.Provider.Google.Geocoder;
-		geocoder.geocode({location: new google.maps.LatLng(lat, lng), region: 'tn'}, function(data, status){
+		geocoder.geocode({
+			location: new google.maps.LatLng(lat, lng),
+			region: 'tn'
+		}, function(data, status) {
 			//try { location_text.typeahead('destroy'); } catch(e) {};
 			if (status == google.maps.GeocoderStatus.OK) {
 				var results = [];
 				for (var i = 0; i < data.length; i++)
 					results.push(data[i].formatted_address);
 				console.log(results);
-				if(results.length > 0){
+				if (results.length > 0) {
 					/*
 					location_text.typeahead({
 						//name: 'location_text',
@@ -324,7 +336,7 @@ reform.widgets.wizard.init = function() {
 	console.log(elements.victim);
 
 	var els = Array.prototype.slice.apply(document.getElementById('ui-victim-fieldset').elements);
-	els.forEach(function(e){
+	els.forEach(function(e) {
 		elements[e.name] = $(e);
 	});
 
@@ -364,19 +376,19 @@ reform.widgets.wizard.init = function() {
 	handleShowNextSection('features', ['features']);
 
 
-	$('#report-form').on('submit', function(e){
+	$('#report-form').on('submit', function(e) {
 		e.preventDefault();
 		var data = {};
 		var formdata = new FormData();
-		$(this).serializeArray().forEach(function(e){
-			if(e.name != 'csrfmiddlewaretoken') {
+		$(this).serializeArray().forEach(function(e) {
+			if (e.name != 'csrfmiddlewaretoken') {
 				console.log(e.name, e.value);
 				data[e.name] = e.value;
 				formdata.append(e.name, e.value);
 			}
 		});
 		var files = reform.widgets.dropzone.object.files;
-		for(var i = 0; i < files.length; i++) {
+		for (var i = 0; i < files.length; i++) {
 			var file = files[i];
 			console.log(file);
 			formdata.append('files[]', file);
@@ -388,16 +400,18 @@ reform.widgets.wizard.init = function() {
 			processData: false,
 			contentType: false,
 			//dataType: dataType
-			headers: {"X-CSRFToken": csrf_token}
-		}).done(function(data){
+			headers: {
+				"X-CSRFToken": csrf_token
+			}
+		}).done(function(data) {
 			console.log(arguments);
 			//window.location = 'reports/' + data.object.id + '/view';
 			//window.location = reform.urls.view.replace('0', data.object.id);
 			window.location = data.url;
-		}).fail(function(){
+		}).fail(function() {
 			console.log(arguments);
 		});
-	  return false;
+		return false;
 	})
 
 };
