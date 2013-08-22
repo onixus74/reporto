@@ -109,12 +109,8 @@ reform.widgets.dropzone = {};
 reform.widgets.dropzone.init = function() {
 
 	var widget = reform.widgets.dropzone;
-<<<<<<< HEAD
-	var dropzone = new Dropzone("#assets", { url: reform.urls.upload });
-=======
 	//var dropzone = new Dropzone("#assets", { url: reform.urls.upload });
 	var dropzone = new Dropzone("#assets", { url: '/' });
->>>>>>> nader
 	widget.object = dropzone;
 
 };
@@ -193,13 +189,8 @@ reform.widgets.wizard.init = function() {
 		$('#ui-wizard-victim-text').show();
 		$('#id_victim').val('user').change();
 		//$('#ui-wizard-victim-area').remove();
-<<<<<<< HEAD
-		$('#ui-wizard-victim-area').hide();
-		$('#ui-wizard-aggressor-area').removeClass('span6').addClass('span12');
-=======
 		//$('#ui-wizard-victim-area').hide();
 		//$('#ui-wizard-aggressor-area').removeClass('span6').addClass('span12');
->>>>>>> nader
 	});
 
 	elements.witnessButton.on('click', function(e){
@@ -370,22 +361,9 @@ reform.widgets.wizard.init = function() {
 	var showSubmitSection = showNextSection('features', ['features']);
 	elements.features.on('change.showNextSection', showSubmitSection);
 	*/
-<<<<<<< HEAD
-
-
-	/*
-	var el = $(this);	widget.location = $('#id_location');
-	widget.reporterState.html(el.data('value'));
-	widget.location.on('change', function(e){
-		console.log(e);
-	});
-	*/
-
-=======
 	handleShowNextSection('features', ['features']);
 
 
->>>>>>> nader
 	$('#report-form').on('submit', function(e){
 		e.preventDefault();
 		var data = {};

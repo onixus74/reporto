@@ -145,6 +145,8 @@ class VictimCreateForm(forms.ModelForm):
 		model = Victim
 		exclude = ('user',)
 
+	#def __init__(self, prefix='victim_', *args, **kwargs):
+	#	super(VictimCreateForm, self).__init__(self, prefix=prefix, *args, **kwargs)
 
 
 def report_submit(request, template_name = "reports/submit.html", *args, **kwargs):
@@ -162,22 +164,17 @@ def report_submit(request, template_name = "reports/submit.html", *args, **kwarg
 		rsid = uuid.uuid1().hex
 		#RSIDs = request.session.get('RSIDs', [])
 		#RSIDs.append(rsid)
-		#self.request.session['RSIDs'] = RSIDs
-		kwargs['report_submit_id'] = rsid
-		kwargs['victim_form'] = VictimCreateForm()
-		kwargs['victims'] = Victim.objects.all()
-		kwargs['reports'] = Report.objects.all()
+		#request.session['RSIDs'] = RSIDs
+		context['report_submit_id'] = rsid
+		victims = Victim.objects.all()
+		context['victims'] = victims
+		reports = Report.objects.all()
+		context['reports'] = reports
 
 	victim = request.POST.get('victim', None)
 	logger.debug('VICTIM %s', victim)
 
-	#def form_invalid(self, form):
-
-	def form_valid(self, form):
-		logger.debug(self.request.POST)
-
-		victim = self.request.POST['victim']
-		logger.debug(victim)
+	if form.is_valid() and (victim != '0' or victim_form.is_valid()):
 
 		if victim == 'user':
 			# the user is the victim
@@ -186,23 +183,9 @@ def report_submit(request, template_name = "reports/submit.html", *args, **kwarg
 			# existent victim
 			victim = Victim.objects.get(pk=victim)
 		else:
-			# new victim
-			#victim = self.request.POST.getlist('victim')
-			#logger.debug(victim)
-			#victim = self.request.POST.getlist('victim[new]')
-			#logger.debug(victim)
-			#victim_get = lambda *keys: request.POST[ 'victim[new]' + ''.join(['[%s]' % key for key in keys])]
-			#victim = victim_get()
-			#victim = [ key for key in self.request.POST.keys() if key.startswith('victim[new]') ]
-			victim = { key.split('][')[1][:-1]: value for key, value in self.request.POST.items() if key.startswith('victim[new]') }
-			logger.debug(victim)
-			#victim = Victim(**victim)
-			#victim.save()
-			victim = Victim(**victim)
-			#victim.save()
-			victimForm = VictimCreateForm(instance=victim)
-			victim = victimForm.save()
-		logger.debug(victim)
+			# create new user
+			victim = victim_form.save()
+		logger.debug('VICTIM %s', victim)
 
 		#victim = victim_form.save()
 		form.instance.victim = victim
@@ -215,25 +198,35 @@ def report_submit(request, template_name = "reports/submit.html", *args, **kwarg
 		media_path = os.path.join('reports', str(report.pk))
 		logger.debug('MEDIA PATH %s', media_path)
 
-		logger.debug(str(self.object.pk))
-		logger.debug(self.request.POST['rsid'])
+		logger.debug('OBJECT %s', report)
 
-		report_submit_id = self.request.POST['rsid']
-		#report_submit_id in request.session.get('RSIDs', [])
-		logger.debug(report_submit_id)
+		for f in files:
+			logger.debug('FILE %s', f)
+			#report.media.create(file=f)
+			file_path = os.path.join(media_path, f.name)
+			logger.debug('FILE PATH %s', file_path)
+			file_path = default_storage.save(file_path, f)
+			report.media.create(url=file_path)
+			#media = Media(url=file_path)
+			#report.media.add(media)
 
-		media_path = os.path.join('reports', 'tmp', report_submit_id)
-		logger.debug(media_path)
+		report.save()
 
-		#media_files_key = 'report_submit_' + report_submit_id + '_files'
-		#media_files = self.request.session.get(media_files_key, [])
-		#logger.debug(media_files)
+		if request.is_ajax():
+			return JSONResponse({
+				'success': True,
+				'object': report,
+				'url': report.get_absolute_url(),
+			})
+		else:
+			return redirect(report.get_absolute_url())
 
-		persistant_media_path = os.path.join('reports', str(self.object.pk))
-		logger.debug(persistant_media_path)
+	else:
+		if request.is_ajax():
+			form.errors['victim'] = victim_form.errors
+			return JSONResponse({'success': False, 'errors': form.errors}, status=400)
 
-		if default_storage.exists(media_path):
-			shutil.move(default_storage.path(media_path), default_storage.path(persistant_media_path))
+	return render(request, template_name, context)
 
 
 # class ReportSubmitView(AjaxableResponseMixin, CreateView):
