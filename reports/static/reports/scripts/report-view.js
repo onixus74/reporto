@@ -43,14 +43,17 @@ reform.widgets.comment.init = function() {
 	var button = $('#ui-add-comment-button');
 	var comments = $('#ui-comments');
 	var comments_formset = document.getElementById('ui-comments-area');
-	button.on('click', function(e){
+	button.on('click', function(e) {
 		comments_formset.disabled = true;
-		$.post(reform.urls.comment, {'csrfmiddlewaretoken': csrf_token, content: input.val()}).done(function(data){
+		$.post(reform.urls.comment, {
+			'csrfmiddlewaretoken': csrf_token,
+			content: input.val()
+		}).done(function(data) {
 			//location.reload();
 			comments.append('<li>' + data.object.content + '</li>');
 			input.val('');
 			comments_formset.disabled = false;
-		}).fail(function(err){
+		}).fail(function(err) {
 			console.log(err)
 		});
 	})

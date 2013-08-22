@@ -44,13 +44,12 @@ $(function() {
 
 
 
-
 new Morris.Donut({
-  // ID of the element in which to drawPthe chart.
-  element: 'categoryDonutChart',
-  // Chart data records -- each entry in this array corresponds to a point on
-  // the chart.
-  /*
+	// ID of the element in which to drawPthe chart.
+	element: 'categoryDonutChart',
+	// Chart data records -- each entry in this array corresponds to a point on
+	// the chart.
+	/*
   data: [
     { label: 'Verbal Violence', value: 20 },
     { label: 'Violence', value: 10 },
@@ -59,33 +58,41 @@ new Morris.Donut({
 
   ],
   */
-  data: reform.data.categoryDonut,
+	data: reform.data.categoryDonut,
 
 });
 
 new Morris.Donut({
-  // ID of the element in which to draw the chart.
-  element: 'featureDonutChart',
-  // Chart data records -- each entry in this array corresponds to a point on
-  // the chart.
-  data: reform.data.featureDonut,
+	// ID of the element in which to draw the chart.
+	element: 'featureDonutChart',
+	// Chart data records -- each entry in this array corresponds to a point on
+	// the chart.
+	data: reform.data.featureDonut,
 
 });
 
 
 
-
 new Morris.Donut({
-  // ID of the element in which to draw the chart.
-  element: 'myfirstchart3',
-  // Chart data records -- each entry in this array corresponds to a point on
-  // the chart.
-  data: [
-    { label: '2008', value: 20 },
-    { label: '2009', value: 10 },
-    { label: '2010', value: 5 },
-    { label: '2011', value: 5 },
-    { label: '2012', value: 20 }
-  ],
+	// ID of the element in which to draw the chart.
+	element: 'myfirstchart3',
+	// Chart data records -- each entry in this array corresponds to a point on
+	// the chart.
+	data: [{
+		label: '2008',
+		value: 20
+	}, {
+		label: '2009',
+		value: 10
+	}, {
+		label: '2010',
+		value: 5
+	}, {
+		label: '2011',
+		value: 5
+	}, {
+		label: '2012',
+		value: 20
+	}],
 
 });

@@ -8,11 +8,6 @@ urlpatterns = patterns('',
 
 	url(r'^$', 'reports.views.index', name='reports'),
 
-	#url(r'^dashboard$', 'reports.views.dashboard', name='dashboard'),
-	#url(r'^submission$', 'reports.views.submission', name='submission'),
-	#url(r'^submission_json$', 'reports.views.submission_json', name='submission'),
-	#url(r'^submission$', ReportSubmission.as_view(), name='submission'),
-
 	url(r'^dashboard$',           login_required(ReportsDashboard.as_view()),       name='dashboard'),
 	#url(r'^submit$',             login_required(ReportSubmitView.as_view()),       name='submit'),
 	url(r'^submit$',              login_required(report_submit),       name='submit'),
