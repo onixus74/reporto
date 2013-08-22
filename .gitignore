@@ -14,7 +14,7 @@ node_modules
 /reform_tn/development.sqlite3
 /reform_tn/static
 /reform_tn/media
-components
+/base/static/components
 .sass-cache
 /.project
 /.pydevproject
