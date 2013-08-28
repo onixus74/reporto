@@ -83,15 +83,16 @@
 				<div class="offset1 span10">
 					<hr>
 					<h2>Comments</h2>
-					{% if report.comments.count %}
-					<ul id="ui-comments">
-					{% for comment in report.comments.all  %}
-						<li>{{comment}}</li>
-					{% endfor %}
+
+					<ul id="ui-comments" class="unstyled">
+						{% if report.comments.count %}
+						{% for comment in report.comments.all  %}
+							<li{% if comment.type = 'C' %} class="text-error"{% endif%}>{{comment}}</li>
+						{% endfor %}
+						{% else %}
+						<li id="ui-no-comments">No comments!</li>
+						{% endif %}
 					</ul>
-					{% else %}
-					No comments!
-					{% endif %}
 				</div>
 			</div>
 			<div class="row-fluid">
@@ -100,7 +101,8 @@
 						<textarea id="ui-add-comment" class="input-block-level" placeholder="Add new comment" required></textarea>
 					</div>
 					<div class="span2">
-						<button id="ui-add-comment-button" class="btn-block btn btn-large btn-primary" type="button"><i class="icon-plus"></i></button>
+						<button id="ui-add-update-comment-button" class="btn-block btn btn-primary" type="button"><i class="icon-plus"></i> Update</button>
+						<button id="ui-add-correction-comment-button" class="btn-block btn btn-danger" type="button"><i class="icon-plus"></i> Correction</button>
 					</div>
 				</fieldset>
 			</div>

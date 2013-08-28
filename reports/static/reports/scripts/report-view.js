@@ -40,23 +40,35 @@ reform.widgets.comment.init = function() {
 	var widget = reform.widgets.comment;
 
 	var input = $('#ui-add-comment');
-	var button = $('#ui-add-comment-button');
+	var updateButton = $('#ui-add-update-comment-button');
+	var correctionButton = $('#ui-add-correction-comment-button');
 	var comments = $('#ui-comments');
 	var comments_formset = document.getElementById('ui-comments-area');
-	button.on('click', function(e) {
+	function handleClick(e) {
+
+		var type = 'U';
+		console.log(e.target);
+		if(e.target.id == 'ui-add-correction-comment-button')
+			type = 'C';
+
 		comments_formset.disabled = true;
 		$.post(reform.urls.comment, {
 			'csrfmiddlewaretoken': csrf_token,
+			type: type,
 			content: input.val()
 		}).done(function(data) {
 			//location.reload();
-			comments.append('<li>' + data.object.content + '</li>');
+			$('#ui-no-comments').remove();
+			comments.append('<li' + (data.object.type == 'C' ? ' class="text-error"' : '') + '>' + data.object.content + '</li>');
 			input.val('');
 			comments_formset.disabled = false;
 		}).fail(function(err) {
-			console.log(err)
+			console.log(err);
+			comments_formset.disabled = false;
 		});
-	})
+	}
+	updateButton.on('click', handleClick);
+	correctionButton.on('click', handleClick);
 
 }
 

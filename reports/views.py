@@ -458,10 +458,16 @@ class CommentForm(forms.ModelForm):
 def report_comment(request, pk, *args, **kwargs):
 	logger.debug('POST %s', request.POST)
 	form = CommentForm(request.POST or None, request.FILES or None)
+	# logger.debug('form.instance.type %s', form.instance.type)
+	# if not form.instance.type:
+	# 	form.instance.type = Comment.UPDATE
+	# logger.debug('form.instance.type %s', form.instance.type)
+
 	if form.is_valid():
 		form.instance.created_by = request.user
 		comment = form.save()
 		report = Report.objects.get(pk=pk)
+		#comment.report = report
 		report.comments.add(comment)
 		#report.save()
 		return JSONResponse({ 'success': True, 'object': comment })

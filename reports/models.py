@@ -93,17 +93,19 @@ class Victim(models.Model):
 
 
 class Comment(models.Model):
+	UPDATE = 'U'
+	CORRECTION = 'C'
+	TYPE = (
+		(UPDATE, "Update"),
+		(CORRECTION, "Correction"),
+	)
+	type       = models.CharField(max_length=1, choices=TYPE, default=UPDATE)
 	content    = models.TextField()
 	#report     = models.ForeignKey(Report)
 	created_by = models.ForeignKey(User)
 	created_at = models.DateTimeField(auto_now_add=True)
-	#updated_at = models.DateTimeField(auto_now=True)
 
-	#COMMENT = 'C'
-	#CATEGORY = (
-	#	(COMMENT, "Comment"),
-	#)
-	#category = models.CharField(max_length=1, choices=CATEGORY, default=COMMENT, blank=True)
+
 
 
 	def __unicode__(self):
