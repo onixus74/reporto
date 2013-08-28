@@ -59,7 +59,7 @@ reform.widgets.comment.init = function() {
 		}).done(function(data) {
 			//location.reload();
 			$('#ui-no-comments').remove();
-			comments.append('<li' + (data.object.type == 'C' ? ' class="text-error"' : '') + '>' + data.object.content + '</li>');
+			comments.append('<li class="ui-comment' + (data.object.type == 'C' ? ' text-error' : '') + '"">' + data.object.content + '</li>');
 			input.val('');
 			comments_formset.disabled = false;
 		}).fail(function(err) {

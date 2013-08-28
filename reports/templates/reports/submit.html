@@ -218,7 +218,7 @@
 	<link rel="stylesheet" href="{% static 'components/dropzone/downloads/css/basic.css' %}" />
 	{% endcompress %}
 
-	<link rel="stylesheet" href="{% static 'reports/styles/report-submit.css'%}" />
+	<link rel="stylesheet" href="{% static 'reports/styles/submit.css'%}" />
 
 {% endblock %}
 
@@ -233,7 +233,7 @@
 	<script src="{% static 'components/angular-bootstrap/ui-bootstrap-tpls.js' %}"></script>
 
 	<script src="{% static 'scripts/app.js' %}"></script>
-	<script src="{% static 'reports/scripts/report-submit-ng.js' %}"></script>
+	<script src="{% static 'reports/scripts/submit-ng.js' %}"></script>
 	-->
 	{% compress js %}
 	<!-- Map -->
@@ -253,6 +253,6 @@
 		reform.urls.upload = {% url 'reports:submit-upload' as upload_url %}{{upload_url|json}};
 	</script>
 
-	<script src="{% static 'reports/scripts/report-submit.js' %}"></script>
+	<script src="{% static 'reports/scripts/submit.js' %}"></script>
 
 {% endblock %}

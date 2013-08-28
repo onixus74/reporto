@@ -87,7 +87,7 @@
 					<ul id="ui-comments" class="unstyled">
 						{% if report.comments.count %}
 						{% for comment in report.comments.all  %}
-							<li{% if comment.type = 'C' %} class="text-error"{% endif%}>{{comment}}</li>
+							<li class="ui-comment{% if comment.type = 'C' %} text-error{% endif%}">{{comment}}</li>
 						{% endfor %}
 						{% else %}
 						<li id="ui-no-comments">No comments!</li>
@@ -124,7 +124,7 @@
 	<![endif]-->
 	{% endcompress %}
 
-	<link rel="stylesheet" href="{% static 'reports/styles/report-view.css'%}" />
+	<link rel="stylesheet" href="{% static 'reports/styles/view.css'%}" />
 
 {% endblock %}
 
@@ -152,6 +152,6 @@
 		*/
 	</script>
 
-	<script src="{% static 'reports/scripts/report-view.js' %}"></script>
+	<script src="{% static 'reports/scripts/view.js' %}"></script>
 
 {% endblock %}
