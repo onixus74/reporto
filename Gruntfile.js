@@ -155,7 +155,7 @@ module.exports = function(grunt) {
 	// Register default task
 	grunt.registerTask('static', ['cssmin:static'], 'uglify:static');
 	grunt.registerTask('base', ['compass:base', 'cssmin:base', 'uglify:base']);
-	grunt.registerTask('reports', ['cssmin:reports', 'uglify:reports']);
+	grunt.registerTask('reports', ['compass:base', 'cssmin:reports', 'uglify:reports']);
 	grunt.registerTask('default', ['base', 'reports']);
 
 };
