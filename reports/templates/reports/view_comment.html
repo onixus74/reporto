@@ -1,0 +1,6 @@
+							<li class="ui-comment{% if comment.type = 'C' %} text-error{% endif%}">
+							<blockquote>
+								<p>{{comment}}</p>
+								<small>by <cite title="User"><a href="{{comment.created_by.url}}">@{{comment.created_by}}</a></cite> on {{comment.created_at}}</small>
+							</blockquote>
+							</li>

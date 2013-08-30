@@ -14,6 +14,33 @@
 //@import "../theme/font-awesome/scss/font-awesome";
 
 
+//@import "../theme/new/sass-bootstrap/lib/bootstrap";
+
+/*-------------------------------------------------
+| BOOTSTRAP MOD
+\*/
+
+ul.list,
+ol.list {
+  margin-left: 0;
+  margin-bottom: $baseLineHeight;
+  list-style: none;
+  li {
+  	padding: 8px;
+    line-height: $baseLineHeight;
+    text-align: left;
+    vertical-align: top;
+  }
+}
+
+.list-hover {
+	li:hover {
+	  background-color: $tableBackgroundHover;
+	}
+}
+
+
+
 /*-------------------------------------------------
 | GLOBAL STYLES
 \*/

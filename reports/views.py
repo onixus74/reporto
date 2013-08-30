@@ -9,6 +9,7 @@ import shutil
 
 from django.conf import settings
 from django.shortcuts import render, redirect, render_to_response
+from django.template.loader import render_to_string
 from django.http import HttpResponse
 from django.core import serializers
 from django.utils import simplejson
@@ -470,7 +471,7 @@ def report_comment(request, pk, *args, **kwargs):
 		#comment.report = report
 		report.comments.add(comment)
 		#report.save()
-		return JSONResponse({ 'success': True, 'object': comment })
+		return JSONResponse({ 'success': True, 'object': comment, 'html': render_to_string("reports/view_comment.html", {'comment': comment}) })
 	else:
 		return JSONResponse({'success': False, 'errors': form.errors}, status=400)
 

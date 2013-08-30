@@ -1,7 +1,6 @@
 {% extends "layouts/default.html" %}
 
-{% load static %}
-{% load json %}
+{% load static json %}
 
 {% block view_title %}Reports Dashboard | {% endblock %}
 
@@ -27,10 +26,9 @@
 					<div class="span6">
 						<h2>Timeline</h2>
 
-				    <table class="table table-hover">
+				    <ul class="list list-hover">
 						{% for report in report_list %}
-						<tr>
-							<td class="ui-timeline-story" data-latlng="{{report.location}}">
+							<li class="ui-timeline-story" data-latlng="{{report.location}}">
 								<a href="{{ report.victim.get_absolute_url }}">{{report.victim}}</a>
 								has been a victim of
 								<a href="{{ report.category.get_absolute_url }}">{{report.category}}</a>
@@ -40,10 +38,9 @@
 								<a href="{% url 'reports:view' report.id %}">{{report.datetime}}</a>
 								{% if report.is_verified %}<span class="badge badge-success">Verified <i class="icon-ok"></i></span>{% endif %}
 								{% if report.is_closed %}<span class="badge badge-important">Closed <i class="icon-lock"></i></span>{% endif %}
-							</td>
-						</tr>
+							</li>
 						{% endfor %}
-					</table>
+					</ul>
 
 					</div>
 				</div>

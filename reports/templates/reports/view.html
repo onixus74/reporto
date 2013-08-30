@@ -1,9 +1,6 @@
 {% extends "layouts/default.html" %}
 
-{% load static %}
-{% load json %}
-{% load thumbnail %}
-{% load compress %}
+{% load static json thumbnail compress %}
 
 {% block view_title %}Report Details | {% endblock %}
 
@@ -84,10 +81,10 @@
 					<hr>
 					<h2>Comments</h2>
 
-					<ul id="ui-comments" class="unstyled">
+					<ul id="ui-comments" class="list">
 						{% if report.comments.count %}
 						{% for comment in report.comments.all  %}
-							<li class="ui-comment{% if comment.type = 'C' %} text-error{% endif%}">{{comment}}</li>
+							{% include "reports/view_comment.html" %}
 						{% endfor %}
 						{% else %}
 						<li id="ui-no-comments">No comments!</li>

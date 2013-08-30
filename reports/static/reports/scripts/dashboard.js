@@ -28,7 +28,7 @@ $(function() {
 	$('.ui-timeline-story').on('mouseover', function(e) {
 		e.stopPropagation();
 		console.log(marker, e.target, e.currentTarget, e.relatedTarget, e.delegateTarget);
-		var loc = $(e.target).closest('td').data('latlng').split(',');
+		var loc = $(e.target).closest('li').data('latlng').split(',');
 		loc = new L.LatLng(loc[0], loc[1]);
 		if (!marker) {
 			console.log(loc);
