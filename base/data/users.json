@@ -1,7 +1,7 @@
 [
 {
   "pk": 1,
-  "model": "auth.user",
+  "model": "base.user",
   "fields": {
     "username": "admin",
     "first_name": "",
@@ -19,7 +19,7 @@
 },
 {
   "pk": 2,
-  "model": "auth.user",
+  "model": "base.user",
   "fields": {
     "username": "marwen",
     "first_name": "",
@@ -37,7 +37,7 @@
 },
 {
   "pk": 3,
-  "model": "auth.user",
+  "model": "base.user",
   "fields": {
     "username": "bassem",
     "first_name": "",
@@ -55,7 +55,7 @@
 },
 {
   "pk": 4,
-  "model": "auth.user",
+  "model": "base.user",
   "fields": {
     "username": "nader",
     "first_name": "",

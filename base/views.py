@@ -73,3 +73,12 @@ def login_view(request, *args, **kwargs):
 def logout_view(request, *args, **kwargs):
 	logout(request)
 	return redirect('home')
+
+
+from base.utils.views import JSONResponse
+from base.models import *
+from django.shortcuts import get_object_or_404
+
+def user_view(request, pk):
+	user = get_object_or_404(User, pk=pk)
+	return JSONResponse({'user': user})

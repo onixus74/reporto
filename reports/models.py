@@ -3,9 +3,9 @@ logger = logging.getLogger(__name__)
 
 from django.db import models
 from django.core.urlresolvers import reverse
-from django.contrib.auth.models import User
 from django.template.defaultfilters import slugify
 from django.utils.html import strip_tags
+from django.conf import settings
 
 
 class Category(models.Model):
@@ -83,7 +83,7 @@ class Victim(models.Model):
 	email       = models.EmailField()
 	description = models.TextField()
 	category    = models.CharField(max_length=3, choices=CATEGORY, default=CITIZEN, blank=True)
-	user        = models.ForeignKey(User, blank=True, null=True)
+	user        = models.ForeignKey(settings.AUTH_USER_MODEL, blank=True, null=True)
 
 	def get_absolute_url(self):
 		return reverse('victims:view', args=[str(self.id)])
@@ -102,7 +102,7 @@ class Comment(models.Model):
 	type       = models.CharField(max_length=1, choices=TYPE, default=UPDATE)
 	content    = models.TextField()
 	#report     = models.ForeignKey(Report)
-	created_by = models.ForeignKey(User)
+	created_by = models.ForeignKey(settings.AUTH_USER_MODEL)
 	created_at = models.DateTimeField(auto_now_add=True)
 
 
@@ -140,7 +140,7 @@ class Report(models.Model):
 	is_verified        = models.BooleanField()
 	is_closed          = models.BooleanField()
 	comments           = models.ManyToManyField(Comment, blank=True, null=True)
-	created_by         = models.ForeignKey(User)
+	created_by         = models.ForeignKey(settings.AUTH_USER_MODEL)
 	created_at         = models.DateTimeField(auto_now_add=True)
 	updated_at         = models.DateTimeField(auto_now=True)
 

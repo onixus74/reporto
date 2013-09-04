@@ -15,6 +15,7 @@ from django.core import serializers
 from django.utils import simplejson
 
 from django import forms
+from django.forms.models import model_to_dict
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required, permission_required
 
