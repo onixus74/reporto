@@ -8,6 +8,15 @@ from django.contrib.auth.models import AbstractBaseUser, AbstractUser
 
 class User(AbstractUser):
 
+	REPORTER  = "R"
+	MODERATOR = "M"
+	ADMIN     = "A"
+	ROLE = (
+		(REPORTER, "Reporter"),
+		(MODERATOR, "Moderator"),
+		(ADMIN, "Administrator"),
+	)
+
 	def get_absolute_url(self):
 		return reverse('users:view', args=[str(self.id)])
 
@@ -15,4 +24,13 @@ class User(AbstractUser):
 		return self.first_name + ' ' + self.last_name
 
 	def __unicode__(self):
-		return self.fullname() + ' (' + self.username + ')'
+		return self.fullname() + ' (@' + self.username + ')'
+
+	def serialize(self):
+		return {
+			'id': self.id,
+			'username': self.username,
+			'firstname': self.first_name,
+			'lastname': self.last_name,
+			'fullname': self.fullname(),
+		}
