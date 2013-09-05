@@ -17,6 +17,8 @@ class User(AbstractUser):
 		(ADMIN, "Administrator"),
 	)
 
+	role = models.CharField(max_length=1, choices=ROLE, default=REPORTER, blank=True)
+
 	def get_absolute_url(self):
 		return reverse('users:view', args=[str(self.id)])
 
