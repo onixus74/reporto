@@ -1,11 +1,12 @@
 import logging
 logger = logging.getLogger(__name__)
 
+from django.conf import settings
 from django.db import models
 from django.core.urlresolvers import reverse
 from django.template.defaultfilters import slugify
 from django.utils.html import strip_tags
-from django.conf import settings
+from django.forms.models import model_to_dict
 
 
 class Category(models.Model):
@@ -91,6 +92,13 @@ class Victim(models.Model):
 	def __unicode__(self):
 		return self.firstname + " " + self.lastname
 
+	def serialize(self):
+		data = model_to_dict(self)
+		data['gender_display'] = self.get_gender_display()
+		data['category_display'] = self.get_category_display()
+		data['user'] = self.user
+		return data
+
 
 class Comment(models.Model):
 	UPDATE = 'U'
@@ -105,11 +113,15 @@ class Comment(models.Model):
 	created_by = models.ForeignKey(settings.AUTH_USER_MODEL)
 	created_at = models.DateTimeField(auto_now_add=True)
 
-
-
-
 	def __unicode__(self):
 		return self.content
+
+	def serialize(self):
+		data = model_to_dict(self)
+		data['type_display'] = self.get_type_display()
+		data['created_by'] = self.created_by
+		data['created_at'] = self.created_at
+		return data
 
 	def save(self, *args, **kwargs):
 		self.content = strip_tags(self.content)
@@ -149,6 +161,19 @@ class Report(models.Model):
 
 	def __unicode__(self):
 		return str(self.datetime)
+
+	def serialize(self):
+		data = model_to_dict(self)
+		data['created_by'] = self.created_by
+		data['created_at'] = self.created_at
+		data['updated_at'] = self.updated_at
+		data['category'] = self.category
+		data['features'] = self.features.all()
+		data['victim'] = self.victim
+		data['media'] = self.media.all()
+		data['comments'] = self.comments.all()
+		data['aggressor_category_display'] = self.get_aggressor_category_display()
+		return data
 
 	class Meta:
 		ordering = ["datetime"]
