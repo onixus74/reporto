@@ -35,7 +35,8 @@
     "raphael": "~2.1.0",
     "morris.js": "~0.4.3",
     "dropzone": "~3.6.2",
-    "jquery-file-upload": "~8.7.1"
+    "jquery-file-upload": "~8.7.1",
+    "bootstrap": "~3.0.0"
   },
   "devDependencies": {
     "html-inspector": "~0.3.0"

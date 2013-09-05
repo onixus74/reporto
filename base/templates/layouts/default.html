@@ -1,4 +1,4 @@
-{% load static %}{% load widget_tweaks %}{% load compress %}<!doctype html>
+{% load static widget_tweaks compress %}<!doctype html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
@@ -11,17 +11,20 @@
 	<meta name="viewport" content="width=device-width">
 
 <!-- Layout Styles Dependencies -->
+{% block layout_styles %}
 	{% compress css %}
 	<link rel="stylesheet" href="{% static 'components/select2/select2.css' %}">
 	<link rel="stylesheet" href="{% static 'components/select2-bootstrap-css/select2-bootstrap.css' %}">
 	<link rel="stylesheet" href="{% static 'components/bootstrap-select/bootstrap-select.css' %}">
 	<link rel="stylesheet" href="{% static 'components/bootstrap-wysihtml5/dist/bootstrap-wysihtml5-0.0.2.css' %}">
 	<link rel="stylesheet" href="{% static 'components/animate.css/animate.css' %}">
+
+	<!--<link rel="stylesheet" href="{% static 'styles/deps.css' %}">-->
+	<link rel="stylesheet" href="{% static 'styles/main.css' %}">
 	{% endcompress %}
 
 	{% if debug %}
 	<style type="text/css">
-
 .animated {
 	-webkit-animation-duration: 2s;
 	-moz-animation-duration: 2s;
@@ -35,12 +38,10 @@
 	-o-animation-delay: 0.2s;
 	animation-delay: 0.2s;
 }
-
 	</style>
 	{% endif %}
 
-	<!--<link rel="stylesheet" href="{% static 'styles/deps.css' %}">-->
-	<link rel="stylesheet" href="{% static 'styles/main.css' %}">
+{% endblock %}
 <!-- Layout Styles Dependencies -END -->
 
 <!-- View Styles Dependencies -->
@@ -84,15 +85,15 @@
 						<li><a href="/" target="_blank">Home</a></li>
 					</ul>
 
-					<ul class="nav pull-right" data-ng-init="app.state.loggedin = false; app.state.username = '';">
+					<ul class="nav pull-right">
 
-						<li class="dropdown" data-ng-cloak>
+						<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 							<i class="icon-user"></i>
 							{% if user.is_authenticated %}
-							<span><span data-ch-i18n>Logged in as</span> {{user.username}}</span>
+							<span>{{user.get_short_name}}</span>
 							{% else %}
-							<span><span data-ch-i18n>Not logged in</span></span>
+							<span>No body!</span>
 							{% endif %}
 							<b class="caret"></b>
 						</a>
@@ -117,7 +118,7 @@
 							</form>
 						</div>
 						{% else %}
-						<ul class="dropdown-menu" data-ng-show="app.state.loggedin">
+						<ul class="dropdown-menu">
 							<li><a href="/logout"><i class="icon-off"></i> <span data-ch-i18n="">Logout</span></a></li>
 						</ul>
 						{% endif %}
@@ -176,6 +177,7 @@
 <!-- View Addons - END -->
 
 <!-- Layout Scripts Dependencies -->
+{% block layout_scripts %}
 	{% compress js %}
 	<script src="{% static 'components/jquery/jquery.js' %}"></script>
 	<!--<script src="{% static 'components/sass-bootstrap/bootstrap/js/bootstrap.js' %}"></script>-->
@@ -190,7 +192,7 @@
 			//$('select').selectpicker();
 		});
 	</script>
-
+{% endblock %}
 <!-- Layout Scripts Dependencies - END -->
 
 <!-- View Scripts -->

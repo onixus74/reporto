@@ -257,6 +257,8 @@ LOGGING = {
     }
 }
 
+AUTH_USER_MODEL = 'base.User'
+
 INSTALLED_APPS += ('debug_toolbar',) # !DEV!
 INTERNAL_IPS = ('127.0.0.1',)
 

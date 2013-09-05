@@ -1,0 +1,18 @@
+/* line 2, submit.scss */
+.input-area {
+  display: block;
+  width: 100%;
+  min-height: 30px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  height: 180px;
+  overflow: auto;
+}
+
+/* line 13, submit.scss */
+#ui-wizard-progress-bar {
+  position: fixed;
+  bottom: 20px;
+  width: 100%;
+}

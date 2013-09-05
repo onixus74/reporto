@@ -16,6 +16,7 @@ node_modules
 /reform_tn/media
 /base/static/components
 .sass-cache
+*.orig
 /.project
 /.pydevproject
 /.checkstyle
