@@ -11,12 +11,12 @@ class User(AbstractUser):
 	MODERATOR = "M"
 	ADMIN     = "A"
 	ROLE = (
-		(REPORTER, "Reporter"),
+		(REPORTER,  "Reporter"),
 		(MODERATOR, "Moderator"),
-		(ADMIN, "Administrator"),
+		(ADMIN,     "Administrator"),
 	)
 
-	role = models.CharField(max_length=1, choices=ROLE, default=REPORTER, blank=True)
+	role = models.CharField(max_length=1, choices=ROLE, default=REPORTER)
 
 	def get_absolute_url(self):
 		return reverse('users:view', args=[str(self.id)])
