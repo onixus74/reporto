@@ -1,4 +1,4 @@
-/* line 2, submit.scss */
+/* line 14, report-submit.scss */
 .input-area {
   display: block;
   width: 100%;
@@ -8,11 +8,4 @@
   box-sizing: border-box;
   height: 180px;
   overflow: auto;
-}
-
-/* line 13, submit.scss */
-#ui-wizard-progress-bar {
-  position: fixed;
-  bottom: 20px;
-  width: 100%;
 }

@@ -24,7 +24,7 @@ L.GeoSearch.Provider.Google = L.Class.extend({
 
     GetLocations: function(qry, callback) {
         var geocoder = L.GeoSearch.Provider.Google.Geocoder;
-
+        
         var parameters = L.Util.extend({
             address: qry
         }, this.options);
@@ -38,8 +38,8 @@ L.GeoSearch.Provider.Google = L.Class.extend({
             var results = [];
             for (var i = 0; i < data.results.length; i++)
                 results.push(new L.GeoSearch.Result(
-                    data.results[i].geometry.location.lng(),
-                    data.results[i].geometry.location.lat(),
+                    data.results[i].geometry.location.lng(), 
+                    data.results[i].geometry.location.lat(), 
                     data.results[i].formatted_address
                 ));
 
@@ -47,5 +47,4 @@ L.GeoSearch.Provider.Google = L.Class.extend({
                 callback(results);
         });
     },
-
 });
