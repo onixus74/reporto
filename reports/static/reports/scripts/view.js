@@ -39,7 +39,8 @@ reform.widgets.comment = {};
 reform.widgets.comment.init = function() {
 	var widget = reform.widgets.comment;
 
-	var input = $('#ui-add-comment');
+	var content = $('#ui-add-comment-content');
+	var attachment = $('#ui-add-comment-attachment');
 	var updateButton = $('#ui-add-update-comment-button');
 	var correctionButton = $('#ui-add-correction-comment-button');
 	var comments = $('#ui-comments');
@@ -51,17 +52,29 @@ reform.widgets.comment.init = function() {
 		if(e.target.id == 'ui-add-correction-comment-button')
 			type = 'C';
 
+		var formdata = new FormData();
+		//formdata.append('csrfmiddlewaretoken': csrf_token);
+		formdata.append('content', content.val());
+		formdata.append('type', type);
+		formdata.append('file', attachment.get(0).files.item(0));
+
 		comments_formset.disabled = true;
-		$.post(reform.urls.comment, {
-			'csrfmiddlewaretoken': csrf_token,
-			type: type,
-			content: input.val()
+		$.ajax({
+			type: "POST",
+			url: reform.urls.comment,
+			data: formdata,
+			processData: false,
+			contentType: false,
+			//dataType: dataType
+			headers: {
+				"X-CSRFToken": csrf_token
+			}
 		}).done(function(data) {
 			//location.reload();
 			$('#ui-no-comments').remove();
-			//comments.append('<li class="ui-comment' + (data.object.type == 'C' ? ' text-error' : '') + '"">' + data.object.content + '</li>');
 			comments.append(data.html);
-			input.val('');
+			content.val('');
+			attachment.val(null);
 			comments_formset.disabled = false;
 		}).fail(function(err) {
 			console.log(err);

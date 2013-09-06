@@ -266,6 +266,7 @@ INSTALLED_APPS += ('south' ,)
 INSTALLED_APPS += ('easy_thumbnails' ,)
 THUMBNAIL_ALIASES = {
     '': {
-        'media': {'size': (50, 50), 'crop': True},
+        'media': {'size': (100, 100), 'crop': True},
+        'report_comment': {'size': (150, 150), 'crop': False},
     },
 }

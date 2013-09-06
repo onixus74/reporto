@@ -109,6 +109,7 @@ class Comment(models.Model):
 	)
 	type       = models.CharField(max_length=1, choices=TYPE, default=UPDATE)
 	content    = models.TextField()
+	file       = models.FileField(upload_to='reports/comments/', null=True, blank=True)
 	#report     = models.ForeignKey(Report)
 	created_by = models.ForeignKey(settings.AUTH_USER_MODEL)
 	created_at = models.DateTimeField(auto_now_add=True)
@@ -119,6 +120,7 @@ class Comment(models.Model):
 	def serialize(self):
 		data = model_to_dict(self)
 		data['type_display'] = self.get_type_display()
+		data['file'] = self.file.url if self.file else None
 		data['created_by'] = self.created_by
 		data['created_at'] = self.created_at
 		return data

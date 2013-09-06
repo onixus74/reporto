@@ -53,13 +53,15 @@
 				</div>
 				<div class="span6">
 					<hr>
-					<h2>Evidence</h2>
-					<ul>{% get_media_prefix as MEDIA_PREFIX %}
-					{% for media in report.media.all  %}
-						<li>
-							<a href="{{MEDIA_PREFIX}}{{media.url}}">{{media}}</a>
+					<h2>Evidence</h2>{% get_media_prefix as MEDIA_PREFIX %}
+					<ul class="thumbnails">
+						{% for media in report.media.all  %}
+						<li class="span4_" style="display: inline-block; width: auto;">
+							<a class="thumbnail" href="{{MEDIA_PREFIX}}{{media.url}}" target="_blank">
+								<img src="{{ media.url|thumbnail_url:'report_comment' }}" alt="" style="height: 150px; width: auto;">
+							</a>
 						</li>
-					{% endfor %}
+						{% endfor %}
 					</ul>
 				</div>
 			</div>
@@ -95,7 +97,8 @@
 			<div class="row-fluid">
 				<fieldset id="ui-comments-area">
 					<div class="offset1 span8">
-						<textarea id="ui-add-comment" class="input-block-level" placeholder="Add new comment" required></textarea>
+						<textarea id="ui-add-comment-content" class="input-block-level" placeholder="Add new comment" required></textarea>
+						<input id="ui-add-comment-attachment" type="file">
 					</div>
 					<div class="span2">
 						<button id="ui-add-update-comment-button" class="btn-block btn btn-primary" type="button"><i class="icon-plus"></i> Update</button>
