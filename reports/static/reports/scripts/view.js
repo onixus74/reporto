@@ -73,6 +73,7 @@ reform.widgets.comment.init = function() {
 			//location.reload();
 			$('#ui-no-comments').remove();
 			comments.append(data.html);
+			comments.find(".fancybox").fancybox();
 			content.val('');
 			attachment.val(null);
 			comments_formset.disabled = false;

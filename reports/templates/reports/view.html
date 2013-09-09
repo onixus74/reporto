@@ -57,8 +57,8 @@
 					<ul class="thumbnails">
 						{% for media in report.media.all  %}
 						<li class="span4_" style="display: inline-block; width: auto;">
-							<a class="thumbnail" href="{{MEDIA_PREFIX}}{{media.url}}" target="_blank">
-								<img src="{{ media.url|thumbnail_url:'report_comment' }}" alt="" style="height: 150px; width: auto;">
+							<a class="thumbnail fancybox" href="{{MEDIA_PREFIX}}{{media.url}}" target="_blank" rel="group">
+								<img src="{{ media.url|thumbnail_url:'report_comment' }}" data-src="{{MEDIA_PREFIX}}{{media.url}}" alt="" style="height: 150px; width: auto;">
 							</a>
 						</li>
 						{% endfor %}
@@ -119,9 +119,8 @@
 	{% compress css %}
 	<!-- Map -->
 	<link rel="stylesheet" href="{% static 'components/leaflet/dist/leaflet.css' %}" />
-	<!--[if lte IE 8]>
-	<link rel="stylesheet" href="{% static 'components/leaflet/dist/leaflet.ie.css' %}" />
-	<![endif]-->
+	<!-- Lightbox -->
+	<link rel="stylesheet" href="{% static 'components/fancybox/source/jquery.fancybox.css' %}" type="text/css" media="screen" />
 	{% endcompress %}
 
 	<link rel="stylesheet" href="{% static 'reports/styles/view.css'%}" />
@@ -133,6 +132,8 @@
 	{% compress js %}
 	<!-- Map -->
 	<script src="{% static 'components/leaflet/dist/leaflet.js' %}"></script>
+	<!-- Lightbox -->
+	<script type="text/javascript" src="{% static 'components/fancybox/source/jquery.fancybox.js' %}"></script>
 	{% endcompress %}
 
 	<script type="text/javascript">
@@ -150,6 +151,9 @@
 			}
 		});
 		*/
+		$(function(){
+			$(".fancybox").fancybox();
+		})
 	</script>
 
 	<script src="{% static 'reports/scripts/view.js' %}"></script>
