@@ -54,15 +54,19 @@
 				<div class="span6">
 					<hr>
 					<h2>Evidence</h2>{% get_media_prefix as MEDIA_PREFIX %}
+					{% if report.media.count %}
 					<ul class="thumbnails">
-						{% for media in report.media.all  %}
+						{% for media in report.media.all %}
 						<li class="span4_" style="display: inline-block; width: auto;">
-							<a class="thumbnail fancybox" href="{{MEDIA_PREFIX}}{{media.url}}" target="_blank" rel="group">
-								<img src="{{ media.url|thumbnail_url:'report_comment' }}" data-src="{{MEDIA_PREFIX}}{{media.url}}" alt="" style="height: 150px; width: auto;">
+							<a class="thumbnail fancybox" href="{{media.file.url}}" target="_blank" rel="group">
+								<img src="{{ media.file|thumbnail_url:'report_comment' }}" data-src="{{media.file.url}}" alt="" style="height: 150px; width: auto;">
 							</a>
 						</li>
 						{% endfor %}
 					</ul>
+					{% else %}
+					<span>No attachments!</span>
+					{% endif %}
 				</div>
 			</div>
 

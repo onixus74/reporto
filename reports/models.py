@@ -43,11 +43,11 @@ class Media(models.Model):
 
 	#title        = models.CharField(max_length=200)
 	#description  = models.TextField()
-	url  = models.URLField(max_length=300)
-	#file = models.FileField(upload_to='reports/', null=True)
+	#url  = models.URLField(max_length=300)
+	file = models.FileField(upload_to='reports/')
 
 	def __unicode__(self):
-		return self.url
+		return self.file.url
 
 	# def save(self, *args, **kwargs):
 	# 	if self.file:
@@ -56,6 +56,11 @@ class Media(models.Model):
 
 	# def get_url(self):
 	# 	return self.url or self.file.url
+
+	def serialize(self):
+		data = model_to_dict(self)
+		data['file'] = { 'url': self.file.url }
+		return data
 
 
 class Victim(models.Model):
@@ -147,8 +152,6 @@ class Report(models.Model):
 	aggressor          = models.TextField()
 	aggressor_category = models.CharField(max_length=3, choices=CATEGORY, default=COP, blank=True)
 	description        = models.TextField()
-	#media_folder       = models.CharField(max_length=300, blank=True, null=True)
-	#media_urls         = models.TextField(blank=True, null=True)
 	media              = models.ManyToManyField(Media, blank=True, null=True)
 	features           = models.ManyToManyField(Feature)
 	is_verified        = models.BooleanField()

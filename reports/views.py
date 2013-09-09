@@ -197,20 +197,18 @@ def report_submit(request, template_name = "reports/submit.html", *args, **kwarg
 		files = request.FILES.getlist('files[]')
 		logger.debug('FILES %s', files)
 
-		media_path = os.path.join('reports', str(report.pk))
-		logger.debug('MEDIA PATH %s', media_path)
+		#media_path = os.path.join('reports', str(report.pk))
+		#logger.debug('MEDIA PATH %s', media_path)
 
 		logger.debug('OBJECT %s', report)
 
 		for f in files:
 			logger.debug('FILE %s', f)
-			#report.media.create(file=f)
-			file_path = os.path.join(media_path, f.name)
-			logger.debug('FILE PATH %s', file_path)
-			file_path = default_storage.save(file_path, f)
-			report.media.create(url=file_path)
-			#media = Media(url=file_path)
-			#report.media.add(media)
+			report.media.create(file=f)
+			#file_path = os.path.join(media_path, f.name)
+			#logger.debug('FILE PATH %s', file_path)
+			#file_path = default_storage.save(file_path, f)
+			#report.media.create(url=file_path)
 
 		report.save()
 
