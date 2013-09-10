@@ -59,7 +59,7 @@
 						{% for media in report.media.all %}
 						<li class="span4_" style="display: inline-block; width: auto;">
 							<a class="thumbnail fancybox" href="{{media.file.url}}" target="_blank" rel="group">
-								<img src="{{ media.file|thumbnail_url:'report_comment' }}" data-src="{{media.file.url}}" alt="" style="height: 150px; width: auto;">
+								<img src="{{ media.file|thumbnail_url:'report_comment' }}" alt="" style="height: 100px; width: auto;">
 							</a>
 						</li>
 						{% endfor %}

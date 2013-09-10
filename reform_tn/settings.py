@@ -263,10 +263,10 @@ INSTALLED_APPS += ('south' ,)
 # YOUTUBE_DEVELOPER_KEY = 'developer key, get one from http://code.google.com/apis/youtube/dashboard/'
 # YOUTUBE_CLIENT_ID = 'client-id'
 
-INSTALLED_APPS += ('easy_thumbnails' ,)
+INSTALLED_APPS += ('easy_thumbnails',)
 THUMBNAIL_ALIASES = {
     '': {
-        'media': {'size': (100, 100), 'crop': True},
-        'report_comment': {'size': (150, 150), 'crop': False},
+        'media': {'size': (200, 150), 'crop': True, 'quality': 100},
+        'report_comment': {'size': (150, 150), 'crop': False, 'quality': 100},
     },
 }
