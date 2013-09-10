@@ -8,8 +8,8 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        # Adding model 'Userr'
-        db.create_table(u'base_userr', (
+        # Adding model 'User'
+        db.create_table(u'base_user', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('password', self.gf('django.db.models.fields.CharField')(max_length=128)),
             ('last_login', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime.now)),
@@ -21,37 +21,38 @@ class Migration(SchemaMigration):
             ('is_staff', self.gf('django.db.models.fields.BooleanField')(default=False)),
             ('is_active', self.gf('django.db.models.fields.BooleanField')(default=True)),
             ('date_joined', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime.now)),
+            ('role', self.gf('django.db.models.fields.CharField')(default='R', max_length=1)),
         ))
-        db.send_create_signal(u'base', ['Userr'])
+        db.send_create_signal(u'base', ['User'])
 
-        # Adding M2M table for field groups on 'Userr'
-        m2m_table_name = db.shorten_name(u'base_userr_groups')
+        # Adding M2M table for field groups on 'User'
+        m2m_table_name = db.shorten_name(u'base_user_groups')
         db.create_table(m2m_table_name, (
             ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
-            ('userr', models.ForeignKey(orm[u'base.userr'], null=False)),
+            ('user', models.ForeignKey(orm[u'base.user'], null=False)),
             ('group', models.ForeignKey(orm[u'auth.group'], null=False))
         ))
-        db.create_unique(m2m_table_name, ['userr_id', 'group_id'])
+        db.create_unique(m2m_table_name, ['user_id', 'group_id'])
 
-        # Adding M2M table for field user_permissions on 'Userr'
-        m2m_table_name = db.shorten_name(u'base_userr_user_permissions')
+        # Adding M2M table for field user_permissions on 'User'
+        m2m_table_name = db.shorten_name(u'base_user_user_permissions')
         db.create_table(m2m_table_name, (
             ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
-            ('userr', models.ForeignKey(orm[u'base.userr'], null=False)),
+            ('user', models.ForeignKey(orm[u'base.user'], null=False)),
             ('permission', models.ForeignKey(orm[u'auth.permission'], null=False))
         ))
-        db.create_unique(m2m_table_name, ['userr_id', 'permission_id'])
+        db.create_unique(m2m_table_name, ['user_id', 'permission_id'])
 
 
     def backwards(self, orm):
-        # Deleting model 'Userr'
-        db.delete_table(u'base_userr')
+        # Deleting model 'User'
+        db.delete_table(u'base_user')
 
-        # Removing M2M table for field groups on 'Userr'
-        db.delete_table(db.shorten_name(u'base_userr_groups'))
+        # Removing M2M table for field groups on 'User'
+        db.delete_table(db.shorten_name(u'base_user_groups'))
 
-        # Removing M2M table for field user_permissions on 'Userr'
-        db.delete_table(db.shorten_name(u'base_userr_user_permissions'))
+        # Removing M2M table for field user_permissions on 'User'
+        db.delete_table(db.shorten_name(u'base_user_user_permissions'))
 
 
     models = {
@@ -68,8 +69,8 @@ class Migration(SchemaMigration):
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '50'})
         },
-        u'base.userr': {
-            'Meta': {'object_name': 'Userr'},
+        u'base.user': {
+            'Meta': {'object_name': 'User'},
             'date_joined': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
             'email': ('django.db.models.fields.EmailField', [], {'max_length': '75', 'blank': 'True'}),
             'first_name': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
@@ -81,6 +82,7 @@ class Migration(SchemaMigration):
             'last_login': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
             'last_name': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
             'password': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
+            'role': ('django.db.models.fields.CharField', [], {'default': "'R'", 'max_length': '1'}),
             'user_permissions': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['auth.Permission']", 'symmetrical': 'False', 'blank': 'True'}),
             'username': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '30'})
         },

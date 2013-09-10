@@ -44,9 +44,20 @@ class Migration(SchemaMigration):
             ('email', self.gf('django.db.models.fields.EmailField')(max_length=75)),
             ('description', self.gf('django.db.models.fields.TextField')()),
             ('category', self.gf('django.db.models.fields.CharField')(default='CIT', max_length=3, blank=True)),
-            ('user', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'], null=True, blank=True)),
+            ('user', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['base.User'], null=True, blank=True)),
         ))
         db.send_create_signal(u'reports', ['Victim'])
+
+        # Adding model 'Comment'
+        db.create_table(u'reports_comment', (
+            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('type', self.gf('django.db.models.fields.CharField')(default='U', max_length=1)),
+            ('content', self.gf('django.db.models.fields.TextField')()),
+            ('file', self.gf('django.db.models.fields.files.FileField')(max_length=100, null=True, blank=True)),
+            ('created_by', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['base.User'])),
+            ('created_at', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
+        ))
+        db.send_create_signal(u'reports', ['Comment'])
 
         # Adding model 'Report'
         db.create_table(u'reports_report', (
@@ -59,15 +70,22 @@ class Migration(SchemaMigration):
             ('aggressor', self.gf('django.db.models.fields.TextField')()),
             ('aggressor_category', self.gf('django.db.models.fields.CharField')(default='COP', max_length=3, blank=True)),
             ('description', self.gf('django.db.models.fields.TextField')()),
-            ('media_folder', self.gf('django.db.models.fields.CharField')(max_length=300, null=True, blank=True)),
-            ('media_urls', self.gf('django.db.models.fields.TextField')(null=True, blank=True)),
             ('is_verified', self.gf('django.db.models.fields.BooleanField')(default=False)),
             ('is_closed', self.gf('django.db.models.fields.BooleanField')(default=False)),
-            ('created_by', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'])),
+            ('created_by', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['base.User'])),
             ('created_at', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
             ('updated_at', self.gf('django.db.models.fields.DateTimeField')(auto_now=True, blank=True)),
         ))
         db.send_create_signal(u'reports', ['Report'])
+
+        # Adding M2M table for field media on 'Report'
+        m2m_table_name = db.shorten_name(u'reports_report_media')
+        db.create_table(m2m_table_name, (
+            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
+            ('report', models.ForeignKey(orm[u'reports.report'], null=False)),
+            ('media', models.ForeignKey(orm[u'reports.media'], null=False))
+        ))
+        db.create_unique(m2m_table_name, ['report_id', 'media_id'])
 
         # Adding M2M table for field features on 'Report'
         m2m_table_name = db.shorten_name(u'reports_report_features')
@@ -78,15 +96,14 @@ class Migration(SchemaMigration):
         ))
         db.create_unique(m2m_table_name, ['report_id', 'feature_id'])
 
-        # Adding model 'Comment'
-        db.create_table(u'reports_comment', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('content', self.gf('django.db.models.fields.TextField')()),
-            ('report', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['reports.Report'])),
-            ('created_by', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'])),
-            ('created_at', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
+        # Adding M2M table for field comments on 'Report'
+        m2m_table_name = db.shorten_name(u'reports_report_comments')
+        db.create_table(m2m_table_name, (
+            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
+            ('report', models.ForeignKey(orm[u'reports.report'], null=False)),
+            ('comment', models.ForeignKey(orm[u'reports.comment'], null=False))
         ))
-        db.send_create_signal(u'reports', ['Comment'])
+        db.create_unique(m2m_table_name, ['report_id', 'comment_id'])
 
 
     def backwards(self, orm):
@@ -102,14 +119,20 @@ class Migration(SchemaMigration):
         # Deleting model 'Victim'
         db.delete_table(u'reports_victim')
 
+        # Deleting model 'Comment'
+        db.delete_table(u'reports_comment')
+
         # Deleting model 'Report'
         db.delete_table(u'reports_report')
+
+        # Removing M2M table for field media on 'Report'
+        db.delete_table(db.shorten_name(u'reports_report_media'))
 
         # Removing M2M table for field features on 'Report'
         db.delete_table(db.shorten_name(u'reports_report_features'))
 
-        # Deleting model 'Comment'
-        db.delete_table(u'reports_comment')
+        # Removing M2M table for field comments on 'Report'
+        db.delete_table(db.shorten_name(u'reports_report_comments'))
 
 
     models = {
@@ -126,7 +149,7 @@ class Migration(SchemaMigration):
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '50'})
         },
-        u'auth.user': {
+        u'base.user': {
             'Meta': {'object_name': 'User'},
             'date_joined': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
             'email': ('django.db.models.fields.EmailField', [], {'max_length': '75', 'blank': 'True'}),
@@ -139,6 +162,7 @@ class Migration(SchemaMigration):
             'last_login': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
             'last_name': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
             'password': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
+            'role': ('django.db.models.fields.CharField', [], {'default': "'R'", 'max_length': '1'}),
             'user_permissions': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['auth.Permission']", 'symmetrical': 'False', 'blank': 'True'}),
             'username': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '30'})
         },
@@ -159,9 +183,10 @@ class Migration(SchemaMigration):
             'Meta': {'object_name': 'Comment'},
             'content': ('django.db.models.fields.TextField', [], {}),
             'created_at': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
-            'created_by': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['auth.User']"}),
+            'created_by': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['base.User']"}),
+            'file': ('django.db.models.fields.files.FileField', [], {'max_length': '100', 'null': 'True', 'blank': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'report': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['reports.Report']"})
+            'type': ('django.db.models.fields.CharField', [], {'default': "'U'", 'max_length': '1'})
         },
         u'reports.feature': {
             'Meta': {'object_name': 'Feature'},
@@ -179,8 +204,9 @@ class Migration(SchemaMigration):
             'aggressor': ('django.db.models.fields.TextField', [], {}),
             'aggressor_category': ('django.db.models.fields.CharField', [], {'default': "'COP'", 'max_length': '3', 'blank': 'True'}),
             'category': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['reports.Category']"}),
+            'comments': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'to': u"orm['reports.Comment']", 'null': 'True', 'blank': 'True'}),
             'created_at': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
-            'created_by': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['auth.User']"}),
+            'created_by': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['base.User']"}),
             'datetime': ('django.db.models.fields.DateTimeField', [], {}),
             'description': ('django.db.models.fields.TextField', [], {}),
             'features': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['reports.Feature']", 'symmetrical': 'False'}),
@@ -189,8 +215,7 @@ class Migration(SchemaMigration):
             'is_verified': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'location': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'location_text': ('django.db.models.fields.CharField', [], {'max_length': '300'}),
-            'media_folder': ('django.db.models.fields.CharField', [], {'max_length': '300', 'null': 'True', 'blank': 'True'}),
-            'media_urls': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
+            'media': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'to': u"orm['reports.Media']", 'null': 'True', 'blank': 'True'}),
             'updated_at': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'}),
             'victim': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['reports.Victim']"})
         },
@@ -207,7 +232,7 @@ class Migration(SchemaMigration):
             'lastname': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'phone': ('django.db.models.fields.CharField', [], {'max_length': '20'}),
             'profession': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
-            'user': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['auth.User']", 'null': 'True', 'blank': 'True'})
+            'user': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['base.User']", 'null': 'True', 'blank': 'True'})
         }
     }
 
