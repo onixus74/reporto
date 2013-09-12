@@ -50,14 +50,14 @@ new Morris.Donut({
 	// Chart data records -- each entry in this array corresponds to a point on
 	// the chart.
 	/*
-  data: [
-    { label: 'Verbal Violence', value: 20 },
-    { label: 'Violence', value: 10 },
-    { label: 'Rape', value: 20 },
-    { label: 'Lack of Investigation and Prosecution', value: 50 },
+	data: [
+		{ label: 'Verbal Violence', value: 20 },
+		{ label: 'Violence', value: 10 },
+		{ label: 'Rape', value: 20 },
+		{ label: 'Lack of Investigation and Prosecution', value: 50 },
 
-  ],
-  */
+	],
+	*/
 	data: reform.data.categoryDonut,
 
 });
@@ -96,3 +96,4 @@ new Morris.Donut({
 	}],
 
 });
+

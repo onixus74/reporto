@@ -2,7 +2,6 @@
 /* global angular, $, L, Dropzone, reform */
 'use strict';
 
-
 reform.widgets.map = {};
 reform.widgets.map.init = function() {
 
