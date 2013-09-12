@@ -26,7 +26,7 @@
 					<div class="span6">
 						<h2>Timeline</h2>
 
-				    <ul class="list list-hover">
+						<ul class="list list-hover">
 						{% for report in report_list %}
 							<li class="ui-timeline-story" data-latlng="{{report.location}}">
 								<a href="{{ report.victim.get_absolute_url }}">{{report.victim}}</a>
@@ -51,12 +51,12 @@
 						<div id="categoryDonutChart" style="height :300px;"></div>
 						<div id="featureDonutChart" style="height :300px;"></div>
 						<!--<div id="myfirstchart3" style="height :500px;"></div>!-->
-            <div>
-            	<span>Male victim</span>
+						<div>
+							<span>Male victim</span>
 							<div class="progress progress-info progress-striped" style ="height:40px">
 								<div class="bar" style="width: 80%"></div>
 							</div><hr>
-            </div>
+						</div>
 
 
 

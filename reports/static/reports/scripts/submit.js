@@ -2,6 +2,14 @@
 /* global angular, $, L, Dropzone, reform */
 'use strict';
 
+if(!reform) {
+	var reform = {
+		data: {},
+		urls: {},
+		widgets: {}
+	};
+}
+
 
 reform.widgets.map = {};
 reform.widgets.map.init = function() {
@@ -39,14 +47,14 @@ reform.widgets.map.init = function() {
 	var location = $('#id_location');
 	var location_text = $('#id_location_text');
 	var loc = location.val();
-	console.log(loc);
+	console.log('widget', 'map', 'location', loc);
 	if (loc) {
 		loc = loc.split(',');
 		var lat = parseFloat(loc[0]),
 			lng = parseFloat(loc[1]);
-		console.log(loc, lat, lng);
+		console.log('widget', 'map', 'latlng', loc, lat, lng);
 		var latlng = new L.LatLng(lat, lng);
-		console.log(latlng);
+		console.log('widget', 'map', 'latlng', latlng);
 		marker = L.marker(latlng, {
 			draggable: true
 		});
@@ -54,7 +62,7 @@ reform.widgets.map.init = function() {
 	}
 
 	map.on('click ', function map_click(e) {
-		console.log(e.latlng);
+		console.log('widget', 'map', 'latlng', e.latlng);
 		if (!marker) {
 			marker = L.marker(e.latlng, {
 				draggable: true
@@ -62,11 +70,11 @@ reform.widgets.map.init = function() {
 			marker.addTo(map);
 			marker.on('dragend', function(e) {
 				var value = '' + e.target._latlng.lat + ',' + e.target._latlng.lng;
-				console.log(e.target._latlng, value);
+				console.log('widget', 'map', 'latlng', e.target._latlng, value);
 				location.val(value).change();
 			});
 		} else {
-			console.log(marker);
+			console.log('widget', 'map', 'marker', marker);
 			marker.setLatLng(e.latlng);
 		}
 
@@ -146,8 +154,8 @@ reform.widgets.wizard.init = function() {
 
 	var sections = widget.sections = {
 		'victim-witness': $('#ui-wizard-victim-witness-buttons'),
-		'category-datetime': $('#ui-wizard-category-datetime'),
-		'location': $('#ui-wizard-location'),
+		'category': $('#ui-wizard-category'),
+		'location-datetime': $('#ui-wizard-location-datetime'),
 		//'victim-aggressor' : $('#ui-wizard-victim-aggressor'),
 		'victim': $('#ui-wizard-victim'),
 		'aggressor': $('#ui-wizard-aggressor'),
@@ -155,7 +163,7 @@ reform.widgets.wizard.init = function() {
 		'features': $('#ui-wizard-features'),
 		'submit': $('#ui-wizard-submit')
 	}
-	var order = widget.order = ['victim-witness', 'category-datetime', 'location', 'victim', 'aggressor', 'description-evidence', 'features', 'submit'];
+	var order = widget.order = ['victim-witness', 'category', 'location-datetime', 'victim', 'aggressor', 'description-evidence', 'features', 'submit'];
 
 	console.log(sections);
 
@@ -183,7 +191,7 @@ reform.widgets.wizard.init = function() {
 	function victimWitnessButtonsAction(e) {
 		var el = $(this);
 		elements.reporterState.html(el.data('value')).addClass(el.data('class')).addClass('animated pulse');
-		sections['category-datetime'].addClass('animated fadeIn').show();
+		sections['category'].addClass('animated fadeIn').show();
 		sections['victim-witness'].addClass('animated fadeOut');
 		progress(0);
 		elements.victimButton.off('click');
@@ -268,22 +276,19 @@ reform.widgets.wizard.init = function() {
 	}
 
 
-	/* category-datetime section */
+	/* category section */
 
 	elements.category = $('#id_category');
 	console.log(elements.category);
-
-	elements.datetime = $('#id_datetime');
-	console.log(elements.datetime);
 
 	/*
 	var showLocationSection = showNextSection('category-datetime', ['category', 'datetime'], reform.widgets.map.init);
 	elements.category.on('change.showNextSection', showLocationSection);
 	elements.datetime.on('change.showNextSection', showLocationSection);
 	*/
-	handleShowNextSection('category-datetime', ['category', 'datetime'], reform.widgets.map.init);
+	handleShowNextSection('category', ['category'], reform.widgets.map.init);
 
-	/* location section */
+	/* location-datetime section */
 
 	elements.location = $('#id_location');
 	console.log(elements.location);
@@ -291,12 +296,15 @@ reform.widgets.wizard.init = function() {
 	elements.location_text = $('#id_location_text');
 	console.log(elements.location_text);
 
+	elements.datetime = $('#id_datetime');
+	console.log(elements.datetime);
+
 	/*
 	var showVictimAggressorSection = showNextSection('location', ['location', 'location_text']);
 	elements.location.on('change.showNextSection', showVictimAggressorSection);
 	elements.location_text.on('change.showNextSection', showVictimAggressorSection);
 	*/
-	handleShowNextSection('location', ['location', 'location_text']);
+	handleShowNextSection('location-datetime', ['location', 'location_text', 'datetime']);
 
 	elements.location.on('change', function(e) {
 		var location_text = elements.location_text;
@@ -404,12 +412,11 @@ reform.widgets.wizard.init = function() {
 				"X-CSRFToken": csrf_token
 			}
 		}).done(function(data) {
-			console.log(arguments);
 			//window.location = 'reports/' + data.object.id + '/view';
 			//window.location = reform.urls.view.replace('0', data.object.id);
 			window.location = data.url;
 		}).fail(function() {
-			console.log(arguments);
+			//...
 		});
 		return false;
 	})
@@ -417,6 +424,67 @@ reform.widgets.wizard.init = function() {
 };
 
 $(reform.widgets.wizard.init);
+
+
+reform.widgets.similarReports = {};
+reform.widgets.similarReports.init = function() {
+	var widget = reform.widgets.similarReports;
+	/*
+	var similarReports =
+	widget.object = similarReports;
+	widget.element = similarReports;
+	*/
+
+	var similar = false,
+			latestReportsLabel = $('#ui-latest-reports-label'),
+			similarReportsLabel = $('#ui-similar-reports-label'),
+			noSimilarReportsNotification = $('#ui-no-similar-reports'),
+			reportsList = $('#ui-reports-list'),
+			reportsItems = reportsList.find('.ui-timeline-story');
+
+	noSimilarReportsNotification.addClass('animated');
+
+	window.similarReports = widget;
+
+	widget.reportsList = reportsList;
+	widget.reportsItems = reportsItems;
+
+	widget.isSimilarToInput = function(el){
+		console.log('widget', 'similarReports', 'report record', el);
+		return true;
+	};
+
+	function showSimilarReports(e) {
+		if(!similar) {
+			latestReportsLabel.hide();
+			similarReportsLabel.css({'display': 'inline-block'}).addClass('animated pulse').show();
+			similar = true;
+		}
+		var any = false;
+		reportsItems.each(function(index, el){
+			el = $(el);
+			el.addClass('animated');
+			if(widget.isSimilarToInput(e)) {
+				any = true;
+				el.removeClass('fadeOutRight').addClass('fadeInRight').show();
+			} else {
+				el.removeClass('fadeInRight').addClass('fadeOutRight').hide();
+			}
+		});
+		if (any){
+			noSimilarReportsNotification.removeClass('fadeInUp').addClass('fadeOutDown').hide();
+		} else {
+			noSimilarReportsNotification.removeClass('fadeOutDown').addClass('fadeInUp').show();
+		}
+	}
+
+	var datetime = reform.widgets.wizard.elements.datetime;
+	datetime.on('change', showSimilarReports);
+
+};
+
+$(reform.widgets.similarReports.init);
+
 
 /*
 reform.widgets.xxx = {};
