@@ -93,7 +93,7 @@
 							{% if user.is_authenticated %}
 							<span>{{user.get_short_name}}</span>
 							{% else %}
-							<span>No body!</span>
+							<span>Nobody!</span>
 							{% endif %}
 							<b class="caret"></b>
 						</a>
@@ -119,6 +119,9 @@
 						</div>
 						{% else %}
 						<ul class="dropdown-menu">
+							{% if user.is_authenticated %}
+							<li><a href="{{user.get_absolute_url}}"><i class="icon-user"></i> Profile</a></li>
+							{% endif %}
 							<li><a href="/logout"><i class="icon-off"></i> <span data-ch-i18n="">Logout</span></a></li>
 						</ul>
 						{% endif %}

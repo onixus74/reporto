@@ -19,7 +19,7 @@
 				<div class="offset2 span8">
 					<hr>
 					<h2 class="text-center">
-						{{report.category}} on {{report.datetime}}
+						{{report.category}} on {{report.datetime}} at {{report.location_text}}
 						{% if report.is_verified %}<span class="badge badge-success">Verified <i class="icon-ok"></i></span>{% endif %}
 						{% if report.is_closed %}<span class="badge badge-important">Closed <i class="icon-lock"></i></span>{% endif %}
 					</h2>
@@ -29,6 +29,7 @@
 			<div class="row-fluid">
 				<div class="offset2 span8">
 					<div id="map" style="width:100%; height: 300px"></div>
+					<!--<p class="text-center">{{report.location_text}}</p>-->
 				</div>
 			</div>
 
