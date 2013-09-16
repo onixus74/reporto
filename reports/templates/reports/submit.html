@@ -5,6 +5,24 @@
 {% block view_title %}Report Submission | {% endblock %}
 
 {% block view_content %}
+
+	<div id="ui-wizard-progress-bar">
+		<div class="container progress progress-info progress-striped">
+  		<div class="bar animated" id="ui-wizard-progress"></div>
+  	</div>
+  	<!--
+  	<div class="container">
+			<div class="row-fluid">
+				<div class="span2">Victim or Witness?</div>
+				<div class="span2">Incident Category</div>
+				<div class="span2">When and Where?</div>
+				<div class="span2">Aggressor</div>
+				<div class="span2">Incident Description and Evidence</div>
+			</div>
+  	</div>
+  -->
+  </div>
+
 	<form id="report-form" action="{% url 'reports:submit' %}" method="post" enctype="multipart/form-data">
 		{% csrf_token %}
 
@@ -198,7 +216,7 @@
 				<hr>
 				<ul id="ui-reports-list" class="list list-hover">
 				{% for report in reports %}
-					<li class="ui-timeline-story" data-latlng="{{report.location}}" data-date="{{report.datetime|unlocalize}}">
+					<li class="ui-timeline-story" data-category="{{report.category.id}}" data-location="{{report.location}}" data-datetime="{{report.datetime|unlocalize}}">
 						<a href="{{ report.victim.get_absolute_url }}">{{report.victim}}</a>
 						has been a victim of
 						<a href="{{ report.category.get_absolute_url }}">{{report.category}}</a>
@@ -219,9 +237,6 @@
 
 	</form>
 
-	<div id="ui-wizard-progress-bar" class="progress progress-info progress-striped">
-		<div class="bar animated" id="ui-wizard-progress"></div>
-	</div>
 
 {% endblock %}
 

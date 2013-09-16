@@ -191,8 +191,10 @@ reform.widgets.wizard.init = function() {
 	function victimWitnessButtonsAction(e) {
 		var el = $(this);
 		elements.reporterState.html(el.data('value')).addClass(el.data('class')).addClass('animated pulse');
-		sections['category'].addClass('animated fadeIn').show();
-		sections['victim-witness'].addClass('animated fadeOut');
+		sections['victim-witness'].addClass('animated fadeOut').one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend webkitAnimationEnd oanimationend msAnimationEnd animationend', function(e) {
+			$(this).hide();
+			sections['category'].addClass('animated fadeIn').show();
+		});
 		progress(0);
 		elements.victimButton.off('click');
 		elements.witnessButton.off('click');
@@ -449,10 +451,60 @@ reform.widgets.similarReports.init = function() {
 	widget.reportsList = reportsList;
 	widget.reportsItems = reportsItems;
 
-	widget.isSimilarToInput = function(el){
-		console.log('widget', 'similarReports', 'report record', el);
+	var elements = reform.widgets.wizard.elements;
+
+	function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
+		var R = 6371; // Radius of the earth in km
+		var dLat = deg2rad(lat2-lat1);  // deg2rad below
+		var dLon = deg2rad(lon2-lon1);
+		var a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.sin(dLon/2) * Math.sin(dLon/2);
+		var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+		var d = R * c; // Distance in km
+		return d;
+	}
+
+	function deg2rad(deg) {
+		return deg * (Math.PI/180)
+	}
+
+	widget.isSimilarToInput = function(e, el){
+		var a, b;
+		//console.log('widget', 'similarReports', 'report record', e, el);
+		/* category : check for same value */
+		//console.log('widget', 'similarReports', 'report record', 'category', elements['category'].val(), el.data('category'));
+		if(elements['category'].val() != el.data('category')) // same category
+			return false;
+		/* location: check for near location with distance of 10km at max */
+		console.log('widget', 'similarReports', 'report record', 'location', elements['location'].val(), el.data('location'));
+		a = elements['location'].val();
+		b = el.data('location');
+		if(a) {
+			console.log('widget', 'similarReports', 'report record', 'location', 1, a, b);
+			a = a.split(',');
+			b = b.split(',');
+			console.log('widget', 'similarReports', 'report record', 'location', 2, a, b);
+			var d = getDistanceFromLatLonInKm(+a[0],+a[1],+b[0],+b[1]);
+			console.log('widget', 'similarReports', 'report record', 'location', 3, d);
+			if(d > 10)
+				return false;
+		}
+		/* datetime : check for same date */
+		//console.log('widget', 'similarReports', 'report record', 'datetime', elements['datetime'].val(), el.data('datetime'));
+		a = elements['datetime'].val(),
+		b = el.data('datetime');
+		console.log('widget', 'similarReports', 'report record', 'datetime', 1, a, b);
+		if(a) {
+			a = new Date(a);
+			b = new Date(b);
+			console.log('widget', 'similarReports', 'report record', 'datetime', 2, a, b);
+			if(!a || !b)
+				return false;
+			if(a.getFullYear() != b.getFullYear() || a.getMonth() != b.getMonth() || a.getDate() != b.getDate())
+				return false;
+		}
 		return true;
 	};
+
 
 	function showSimilarReports(e) {
 		if(!similar) {
@@ -464,19 +516,41 @@ reform.widgets.similarReports.init = function() {
 		reportsItems.each(function(index, el){
 			el = $(el);
 			el.addClass('animated');
-			if(widget.isSimilarToInput(e)) {
+			if(widget.isSimilarToInput(e, el)) {
 				any = true;
-				el.removeClass('fadeOutRight').addClass('fadeInRight').show();
+				el.removeClass('fadeOutRight')
+				if(!el.hasClass('fadeInRight')) {
+					el.addClass('fadeInRight').show();
+				}
 			} else {
-				el.removeClass('fadeInRight').addClass('fadeOutRight').hide();
+				el.removeClass('fadeInRight');
+				if(!el.hasClass('fadeOutRight')) {
+					el.addClass('fadeOutRight').hide();/*.one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend webkitAnimationEnd oanimationend msAnimationEnd animationend', function(e) {
+						$(this).hide();
+					});*/
+				}
 			}
 		});
 		if (any){
-			noSimilarReportsNotification.removeClass('fadeInUp').addClass('fadeOutDown').hide();
+			noSimilarReportsNotification.removeClass('fadeInUp');
+			if(!noSimilarReportsNotification.hasClass('fadeOutDown')) {
+				noSimilarReportsNotification.addClass('fadeOutDown').hide();/*.one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend webkitAnimationEnd oanimationend msAnimationEnd animationend', function(e) {
+					$(this).hide();
+				});*/
+			}
 		} else {
-			noSimilarReportsNotification.removeClass('fadeOutDown').addClass('fadeInUp').show();
+			noSimilarReportsNotification.removeClass('fadeOutDown');
+			if(!noSimilarReportsNotification.hasClass('fadeInUp')) {
+				noSimilarReportsNotification.addClass('fadeInUp').show();
+			}
 		}
 	}
+
+	var category = reform.widgets.wizard.elements.category;
+	category.on('change', showSimilarReports);
+
+	var location = reform.widgets.wizard.elements.location;
+	location.on('change', showSimilarReports);
 
 	var datetime = reform.widgets.wizard.elements.datetime;
 	datetime.on('change', showSimilarReports);
