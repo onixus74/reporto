@@ -12,6 +12,11 @@
 
 #ui-wizard-progress-bar {
 	position: fixed;
-	bottom: 20px;
+	top: 80px;
 	width: 100%;
+	z-index: 100;
+}
+
+body {
+  padding-top: 120px;
 }

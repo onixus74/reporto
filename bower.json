@@ -37,7 +37,9 @@
     "dropzone": "~3.6.2",
     "jquery-file-upload": "~8.7.1",
     "bootstrap": "~3.0.0",
-    "fancybox": "~2.1.5"
+    "fancybox": "~2.1.5",
+    "momentjs": "~2.2.1",
+    "nprogress": "~0.1.2"
   },
   "devDependencies": {
     "html-inspector": "~0.3.0"
