@@ -39,7 +39,12 @@
     "bootstrap": "~3.0.0",
     "fancybox": "~2.1.5",
     "momentjs": "~2.2.1",
-    "nprogress": "~0.1.2"
+    "nprogress": "~0.1.2",
+    "bootstrap-datepicker": "~1.2.0",
+    "CLNDR": "kylestetz/CLNDR#~1.0.3",
+    "underscore": "~1.5.2",
+    "lodash": "~2.0.0",
+    "pines-notify": "~1.2.0"
   },
   "devDependencies": {
     "html-inspector": "~0.3.0"

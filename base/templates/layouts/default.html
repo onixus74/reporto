@@ -18,7 +18,7 @@
 	<link rel="stylesheet" href="{% static 'components/bootstrap-select/bootstrap-select.css' %}">
 	<link rel="stylesheet" href="{% static 'components/bootstrap-wysihtml5/dist/bootstrap-wysihtml5-0.0.2.css' %}">
 	<link rel="stylesheet" href="{% static 'components/animate.css/animate.css' %}">
-
+	<link rel="stylesheet" href="{% static 'components/pines-notify/jquery.pnotify.default.css' %}">
 	<!--<link rel="stylesheet" href="{% static 'styles/deps.css' %}">-->
 	<link rel="stylesheet" href="{% static 'styles/main.css' %}">
 	{% endcompress %}
@@ -69,7 +69,7 @@
 		<script src="{% static 'components/json3/lib/json3.min.js' %}"></script>
 	<![endif]-->
 
-	<div class="navbar-wrapper" style="z-index: 10000;">
+	<div class="navbar-wrapper" style="z-index: 1100;">
 		<div class="container">
 			<div class="navbar">
 				<div class="navbar-inner">
@@ -188,9 +188,16 @@
 
 	<script src="{% static 'components/select2/select2.js' %}"></script>
 	<script src="{% static 'components/bootstrap-select/bootstrap-select.js' %}"></script>
+
+	<script src="{% static 'components/pines-notify/jquery.pnotify.js' %}"></script>
 	{% endcompress %}
 
 	<script type="text/javascript">
+		$.pnotify.defaults.styling = "bootstrap";
+		$.pnotify.defaults.opacity = 0.9;
+		//$.pnotify.defaults.nonblock = true;
+		$.pnotify.defaults.nonblock_opacity = 0.3;
+		//$.pnotify.defaults.history = false;
 		$(function(){
 			//$('select').selectpicker();
 		});
