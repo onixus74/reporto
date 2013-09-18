@@ -457,6 +457,7 @@ class CommentForm(forms.ModelForm):
 
 def report_comment(request, pk, *args, **kwargs):
 	logger.debug('POST %s', request.POST)
+	logger.debug('FILES %s', request.FILES)
 	form = CommentForm(request.POST or None, request.FILES or None)
 	# logger.debug('form.instance.type %s', form.instance.type)
 	# if not form.instance.type:

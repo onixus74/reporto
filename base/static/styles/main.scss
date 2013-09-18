@@ -314,6 +314,10 @@ body {
 | FIXES
 \*/
 
+.bootstrap-select {
+	margin: 0px;
+}
+
 /* fix boostrap-select width */
 .bootstrap-select:not([class*="span"]) {
 	width: 100%;
