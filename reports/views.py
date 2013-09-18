@@ -470,7 +470,6 @@ def report_comment(request, pk, *args, **kwargs):
 		report = Report.objects.get(pk=pk)
 		#comment.report = report
 		report.comments.add(comment)
-		#report.save()
 		return JSONResponse({ 'success': True, 'object': comment, 'html': render_to_string("reports/view_comment.html", {'comment': comment}) })
 	else:
 		return JSONResponse({'success': False, 'errors': form.errors}, status=400)

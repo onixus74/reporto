@@ -106,6 +106,9 @@ reform.widgets.comment.init = function() {
 				type: 'success',
 				nonblock: true
 			});
+			attachmentImage.attr('src', '');
+			attachmentIcon.show();
+			attachmentImage.hide();
 			comments_formset.disabled = false;
 		}).fail(function(err) {
 			console.log(err);
