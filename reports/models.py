@@ -106,6 +106,10 @@ class Victim(models.Model):
 
 
 class Comment(models.Model):
+
+	class Meta:
+		ordering = ["created_at"]
+
 	UPDATE = 'U'
 	CORRECTION = 'C'
 	TYPE = (
@@ -136,6 +140,9 @@ class Comment(models.Model):
 
 
 class Report(models.Model):
+
+	class Meta:
+		ordering = ["datetime"]
 
 	CITIZEN = 'CIT'
 	COP = 'COP'
@@ -179,7 +186,3 @@ class Report(models.Model):
 		data['comments'] = self.comments.all()
 		data['aggressor_category_display'] = self.get_aggressor_category_display()
 		return data
-
-	class Meta:
-		ordering = ["datetime"]
-

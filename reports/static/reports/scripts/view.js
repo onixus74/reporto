@@ -40,10 +40,36 @@ reform.widgets.comment.init = function() {
 
 	var content = $('#ui-add-comment-content');
 	var attachment = $('#ui-add-comment-attachment');
+	var attachmentButton = $('#ui-add-comment-attachment-button');
+	var attachmentIcon = $('#ui-comment-attachment-icon');
+	var attachmentImage = $('#ui-comment-attachment-image');
 	var updateButton = $('#ui-add-update-comment-button');
 	var correctionButton = $('#ui-add-correction-comment-button');
 	var comments = $('#ui-comments');
 	var comments_formset = document.getElementById('ui-comments-area');
+
+	attachment.on('change', function(e){
+		console.log('CHANGEEEEEEEEEEEEEEEEEEEEEEEEED', e)
+		var files = e.target.files;
+		var f = files[0];
+		var reader = new FileReader();
+
+		reader.onload = (function(theFile) {
+			return function(e) {
+				attachmentImage.attr('src', e.target.result);
+				attachmentIcon.hide();
+				attachmentImage.show();
+			};
+		})(f);
+
+		reader.readAsDataURL(f);
+	})
+
+	attachmentButton.on('click', function(e){
+		attachment.click();
+		// ...
+	});
+
 	function handleClick(e) {
 
 		var type = 'U';
@@ -75,9 +101,21 @@ reform.widgets.comment.init = function() {
 			comments.find(".fancybox").fancybox();
 			content.val('');
 			attachment.val(null);
+			$.pnotify({
+				title: 'Adding Comment - Done',
+				text: 'Comment added',
+				type: 'success',
+				nonblock: true
+			});
 			comments_formset.disabled = false;
 		}).fail(function(err) {
 			console.log(err);
+			$.pnotify({
+				title: 'Adding Comment - Failure',
+				text: 'Failed to add comment',
+				type: 'error',
+				//nonblock: true
+			});
 			comments_formset.disabled = false;
 		});
 	}

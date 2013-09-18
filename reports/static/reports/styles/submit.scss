@@ -1,4 +1,8 @@
 
+
+@import "../../../../base/static/theme/sass-bootstrap/lib/_variables.scss";
+
+
 .input-area {
 	display: block;
 	width: 100%;
@@ -18,5 +22,127 @@
 }
 
 body {
-  padding-top: 120px;
+	padding-top: 120px;
+}
+
+
+
+#dateinput
+{
+	max-width: 400px;
+	margin: 0 auto;
+	background-color: #f4f4f4;
+	/*
+	-moz-box-shadow: 4px 4px 0 darken(darkGray, 5%);
+	-webkit-box-shadow: 4px 4px 0 darken(darkGray, 5%);
+	box-shadow: 4px 4px 0 darken(darkGray, 5%);
+	*/
+
+	padding-bottom: 12px;
+
+	$time: 0.5s;
+
+	.noselect
+	{
+		-webkit-user-select: none; /* Chrome/Safari */
+		-moz-user-select: none; /* Firefox */
+		-ms-user-select: none; /* IE10+ */
+	}
+
+	@mixin transition($props)
+	{
+		-webkit-transition: $props;
+		-moz-transition: $props;
+		-ms-transition: $props;
+		-o-transition: $props;
+		transition: $props;
+	}
+
+	@mixin vertical-padding($size: 4px)
+	{
+		padding-top: $size;
+		padding-bottom: $size;
+	}
+
+	.controls
+	{
+		background-color: lightGray;
+		color: white;
+
+		.clndr-previous-button, .clndr-next-button, .clndr-previous-year-button, .clndr-next-year-button
+		{
+			width: 10%;
+			@include vertical-padding;
+			display: inline-block;
+			text-align: center;
+			cursor: pointer;
+			@extend .noselect;
+			@include transition(background-color $time);
+			&:hover
+			{
+				background-color: darken(lightGray, 10%);
+			}
+		}
+		.month,
+		{
+			width: 56%;
+			@include vertical-padding;
+			display: inline-block;
+			text-align: center;
+			text-transform: uppercase;
+			font-weight: 700;
+			letter-spacing: 1px;
+		}
+	}
+
+	.days-of-the-week
+	{
+		width: 100%;
+		// background-color: lightGray;
+		.header-day
+		{
+			//@extend .clearfix;
+			float: left;
+			width: 14.2857%;
+			padding: 12px 0;
+			text-align: center;
+		}
+	}
+
+	.days
+	{
+		.day, .empty
+		{
+			float: left;
+			width: 14.2857%;
+			padding: 12px 0;
+			text-align: center;
+			cursor: pointer;
+
+			&.today
+			{
+				font-weight: bold;
+				/*background-color: lightGray;
+				-moz-box-shadow: inset 0 0 8px #d4d4d4;
+				-webkit-box-shadow: inset 0 0 8px #d4d4d4;
+				box-shadow: inset 0 0 8px #d4d4d4;
+				*/
+			}
+
+			&.event
+			{
+				color: blue
+			}
+
+			&.selected
+			{
+				color: $white;
+				background-color: $btnPrimaryBackground;
+				-moz-box-shadow: inset 0 0 8px #d4d4d4;
+				-webkit-box-shadow: inset 0 0 8px #d4d4d4;
+				box-shadow: inset 0 0 8px #d4d4d4;
+			}
+		}
+	}
+
 }

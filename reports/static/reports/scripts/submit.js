@@ -10,7 +10,6 @@ if(!reform) {
 	};
 }
 
-
 reform.widgets.map = {};
 reform.widgets.map.init = function() {
 
@@ -99,6 +98,7 @@ Dropzone.options.assets = {
 	uploadMultiple: true,
 	autoProcessQueue: false,
 	addRemoveLinks: true,
+	acceptedFiles: 'image/*',
 	/*
 
 	accept: function(file, done) {
@@ -571,3 +571,85 @@ reform.widgets.xxx.init = function() {
 
 $(reform.widgets.xxx.init);
 */
+
+
+reform.widgets.datetime = {};
+reform.widgets.datetime.init = function() {
+	var widget = reform.widgets.datetime;
+	/*
+	var datetime =
+	widget.object = datetime;
+	widget.element = datetime;
+	*/
+	var datetimeInput = $('#id_datetime');
+	var dateInput = $('#id_date');
+	var timeInput = $('#id_time');
+
+	function handleDateOrTimeChange(e){
+		var time = timeInput.val();
+		var date = dateInput.val();
+		if(date && time) {
+			datetimeInput.val(date + 'T' + time).change();
+		}
+	}
+	timeInput.on('change', handleDateOrTimeChange);
+	dateInput.on('change', handleDateOrTimeChange);
+
+	/*
+	// PARDON ME while I do a little magic to keep these events relevant for the rest of time...
+	var currentMonth = moment().format('YYYY-MM');
+	var nextMonth    = moment().add('month', 1).format('YYYY-MM');
+
+	var events = [
+		{ date: currentMonth + '-' + '10', title: 'Persian Kitten Auction', location: 'Center for Beautiful Cats' },
+		{ date: currentMonth + '-' + '19', title: 'Cat Frisbee', location: 'Jefferson Park' },
+		{ date: currentMonth + '-' + '23', title: 'Kitten Demonstration', location: 'Center for Beautiful Cats' },
+		{ date: nextMonth + '-' + '07',    title: 'Small Cat Photo Session', location: 'Center for Cat Photography' }
+	];
+	*/
+
+	var clndr;
+
+	function previousYear(e) {
+		console.log('previousYear', clndr.element.find('.clndr-previous-year-button'), clndr.element.find('.clndr-next-year-button'))
+		clndr.previousYear();
+		clndr.element.find('.clndr-previous-year-button').on('click', previousYear);
+		clndr.element.find('.clndr-next-year-button').on('click', nextYear);
+	}
+	function nextYear(e) {
+		console.log('nextYear', clndr.element.find('.clndr-previous-year-button'), clndr.element.find('.clndr-next-year-button'))
+		clndr.nextYear();
+		clndr.element.find('.clndr-previous-year-button').on('click', previousYear);
+		clndr.element.find('.clndr-next-year-button').on('click', nextYear);
+	}
+
+	clndr = widget.object = $('#dateinput').clndr({
+		template: $('#dateinput-template').html(),
+		//events: events,
+		clickEvents: {
+			click: function(target) {
+				console.log(target)
+				dateInput.val(target.date._i).change();
+				$('#dateinput .day.selected').removeClass('selected');
+				$(target.element).addClass('selected');
+			},
+			onMonthChange: function(month){
+				clndr.element.find('.clndr-previous-year-button').on('click', previousYear);
+				clndr.element.find('.clndr-next-year-button').on('click', nextYear);
+			}
+		},
+		/*
+		doneRendering: function() {
+			console.log(this)
+			this.element.find('.clndr-previous-year-button').on('click', function(){clndr.previousYear();});
+			this.element.find('.clndr-next-year-button').on('click', function(){clndr.nextYear();});
+		}
+		*/
+	});
+
+	clndr.element.find('.clndr-previous-year-button').on('click', previousYear);
+	clndr.element.find('.clndr-next-year-button').on('click', nextYear);
+
+};
+
+$(reform.widgets.datetime.init);

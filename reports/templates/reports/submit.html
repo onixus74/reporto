@@ -8,10 +8,10 @@
 
 	<div id="ui-wizard-progress-bar">
 		<div class="container progress progress-info progress-striped">
-  		<div class="bar animated" id="ui-wizard-progress"></div>
-  	</div>
-  	<!--
-  	<div class="container">
+			<div class="bar animated" id="ui-wizard-progress"></div>
+		</div>
+		<!--
+		<div class="container">
 			<div class="row-fluid">
 				<div class="span2">Victim or Witness?</div>
 				<div class="span2">Incident Category</div>
@@ -19,9 +19,9 @@
 				<div class="span2">Aggressor</div>
 				<div class="span2">Incident Description and Evidence</div>
 			</div>
-  	</div>
-  -->
-  </div>
+		</div>
+	-->
+	</div>
 
 	<form id="report-form" action="{% url 'reports:submit' %}" method="post" enctype="multipart/form-data">
 		{% csrf_token %}
@@ -64,7 +64,7 @@
 							<p class="lead text text-center">
 								<span id="ui-wizard-victim-text" hidden>I've been a victim of</span>
 								<span id="ui-wizard-witness-text" hidden>I've witnessed a</span>
-								{% render_field form.category placeholder="Location" class+="select2 span4" data-style="boostrap-select-colors-fix" required="required" %}
+								{% render_field form.category placeholder="Location" class+="select2 span4" style+="margin: 0;" data-style="boostrap-select-colors-fix" required="required" %}
 								<!--that happened --><!--on
 								{% render_field form.datetime type="datetime-local" class+="span4" required="required" %}-->
 								<!--at-->
@@ -85,7 +85,33 @@
 						</div>
 						<div class="span6">
 							<h2>Date and Time</h2>
-							{% render_field form.datetime type="datetime-local" class+="input-block-level" required="required" %}
+							{% render_field form.datetime type="datetime-local" class+="input-block-level" required="required" style="display: none;" %}
+							{#% render_field form.datetime type="hidden" class+="input-block-level" %#}
+							<div id="dateinput">
+								<script type="text/template" id="dateinput-template">
+									<div class="controls">
+										<div class="clndr-previous-year-button">&lsaquo;&lsaquo;</div>
+										<div class="clndr-previous-button">&lsaquo;</div>
+										<div class="month"><%= month %> <%= year %></div>
+										<div class="clndr-next-button">&rsaquo;</div>
+										<div class="clndr-next-year-button">&rsaquo;&rsaquo;</div>
+									</div>
+									<div class="clndr-grid">
+										<div class="days-of-the-week clearfix">
+											<% _.each(daysOfTheWeek, function(day) { %>
+												<div class="header-day"><%= day %></div>
+											<% }); %>
+										</div>
+										<div class="days clearfix">
+											<% _.each(days, function(day) { %>
+												<div class="<%= day.classes %>" id="<%= day.id %>"><span class="day-number"><%= day.day %></span></div>
+											<% }); %>
+										</div>
+									</div>
+								</script>
+							</div>
+							<input id="id_date" type="hidden">
+							<input id="id_time" type="time" class="input-block-level" style="text-align: center;">
 						</div>
 					</div>
 
@@ -275,9 +301,13 @@
 	<script src="{% static 'components/leaflet/dist/leaflet.js' %}"></script>
 	<script src="{% static 'dependencies/L.GeoSearch/src/js/l.control.geosearch.js' %}"></script>
 	<script src="{% static 'dependencies/L.GeoSearch/src/js/l.geosearch.provider.google.js' %}"></script>
-
+	<!-- file upload -->
 	<script src="{% static 'components/dropzone/downloads/dropzone.js' %}"></script>
-	<script src="{% static 'components/typeahead.js/dist/typeahead.js' %}"></script>
+	<!--<script src="{% static 'components/typeahead.js/dist/typeahead.js' %}"></script>-->
+
+	<script src="{% static 'components/lodash/dist/lodash.js' %}"></script>
+	<script src="{% static 'components/momentjs/moment.js' %}"></script>
+	<script src="{% static 'components/CLNDR/clndr.js' %}"></script>
 	{% endcompress %}
 
 	<script type="text/javascript">

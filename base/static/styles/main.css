@@ -10793,7 +10793,7 @@ body {
 /* line 323, main.scss */
 .boostrap-select-colors-fix {
   background-color: transparent;
-  color: darkgray;
+  color: #080808;
   text-align: center;
 }
 

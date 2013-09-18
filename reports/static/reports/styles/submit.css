@@ -1,4 +1,4 @@
-/* line 2, submit.scss */
+/* line 6, submit.scss */
 .input-area {
   display: block;
   width: 100%;
@@ -10,7 +10,7 @@
   overflow: auto;
 }
 
-/* line 13, submit.scss */
+/* line 17, submit.scss */
 #ui-wizard-progress-bar {
   position: fixed;
   top: 80px;
@@ -18,7 +18,103 @@
   z-index: 100;
 }
 
-/* line 20, submit.scss */
+/* line 24, submit.scss */
 body {
   padding-top: 120px;
+}
+
+/* line 31, submit.scss */
+#dateinput {
+  max-width: 400px;
+  margin: 0 auto;
+  background-color: #f4f4f4;
+  /*
+  -moz-box-shadow: 4px 4px 0 darken(darkGray, 5%);
+  -webkit-box-shadow: 4px 4px 0 darken(darkGray, 5%);
+  box-shadow: 4px 4px 0 darken(darkGray, 5%);
+  */
+  padding-bottom: 12px;
+}
+/* line 46, submit.scss */
+#dateinput .noselect, #dateinput .controls .clndr-previous-button, #dateinput .controls .clndr-next-button, #dateinput .controls .clndr-previous-year-button, #dateinput .controls .clndr-next-year-button {
+  -webkit-user-select: none;
+  /* Chrome/Safari */
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+  /* IE10+ */
+}
+/* line 68, submit.scss */
+#dateinput .controls {
+  background-color: lightGray;
+  color: white;
+}
+/* line 73, submit.scss */
+#dateinput .controls .clndr-previous-button, #dateinput .controls .clndr-next-button, #dateinput .controls .clndr-previous-year-button, #dateinput .controls .clndr-next-year-button {
+  width: 10%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  display: inline-block;
+  text-align: center;
+  cursor: pointer;
+  -webkit-transition: background-color 0.5s;
+  -moz-transition: background-color 0.5s;
+  -ms-transition: background-color 0.5s;
+  -o-transition: background-color 0.5s;
+  transition: background-color 0.5s;
+}
+/* line 82, submit.scss */
+#dateinput .controls .clndr-previous-button:hover, #dateinput .controls .clndr-next-button:hover, #dateinput .controls .clndr-previous-year-button:hover, #dateinput .controls .clndr-next-year-button:hover {
+  background-color: #b9b9b9;
+}
+/* line 87, submit.scss */
+#dateinput .controls .month {
+  width: 56%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  display: inline-block;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+/* line 99, submit.scss */
+#dateinput .days-of-the-week {
+  width: 100%;
+}
+/* line 103, submit.scss */
+#dateinput .days-of-the-week .header-day {
+  float: left;
+  width: 14.2857%;
+  padding: 12px 0;
+  text-align: center;
+}
+/* line 115, submit.scss */
+#dateinput .days .day, #dateinput .days .empty {
+  float: left;
+  width: 14.2857%;
+  padding: 12px 0;
+  text-align: center;
+  cursor: pointer;
+}
+/* line 123, submit.scss */
+#dateinput .days .day.today, #dateinput .days .empty.today {
+  font-weight: bold;
+  /*background-color: lightGray;
+  -moz-box-shadow: inset 0 0 8px #d4d4d4;
+  -webkit-box-shadow: inset 0 0 8px #d4d4d4;
+  box-shadow: inset 0 0 8px #d4d4d4;
+  */
+}
+/* line 133, submit.scss */
+#dateinput .days .day.event, #dateinput .days .empty.event {
+  color: blue;
+}
+/* line 138, submit.scss */
+#dateinput .days .day.selected, #dateinput .days .empty.selected {
+  color: white;
+  background-color: #007a9b;
+  -moz-box-shadow: inset 0 0 8px #d4d4d4;
+  -webkit-box-shadow: inset 0 0 8px #d4d4d4;
+  box-shadow: inset 0 0 8px #d4d4d4;
 }
