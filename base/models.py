@@ -19,7 +19,7 @@ class User(AbstractUser):
 	role = models.CharField(max_length=1, choices=ROLE, default=REPORTER)
 
 	def get_absolute_url(self):
-		return reverse('users:view', args=[str(self.id)])
+		return reverse('users:view', kwargs={'username': self.username})
 
 	def __unicode__(self):
 		return self.get_full_name() + ' (@' + self.username + ')'

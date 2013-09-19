@@ -7,6 +7,7 @@ from django.core.urlresolvers import reverse
 from django.template.defaultfilters import slugify
 from django.utils.html import strip_tags
 from django.forms.models import model_to_dict
+from django.core.exceptions import ValidationError
 
 
 class Category(models.Model):
@@ -117,8 +118,8 @@ class Comment(models.Model):
 		(CORRECTION, "Correction"),
 	)
 	type       = models.CharField(max_length=1, choices=TYPE, default=UPDATE)
-	content    = models.TextField()
-	file       = models.FileField(upload_to='reports/comments/', null=True, blank=True)
+	content    = models.TextField(null=True, blank=True)
+	attachment = models.FileField(upload_to='reports/comments/', null=True, blank=True)
 	#report     = models.ForeignKey(Report)
 	created_by = models.ForeignKey(settings.AUTH_USER_MODEL)
 	created_at = models.DateTimeField(auto_now_add=True)
@@ -126,10 +127,15 @@ class Comment(models.Model):
 	def __unicode__(self):
 		return self.content
 
+	def clean(self):
+		#logger.debug('MODEL Comment clean %s', [self.content, self.content is None, self.attachment, self.attachment is None])
+		if not self.content and not self.attachment:
+			raise ValidationError('Comment content and attachment can not be both empty.')
+
 	def serialize(self):
 		data = model_to_dict(self)
 		data['type_display'] = self.get_type_display()
-		data['file'] = self.file.url if self.file else None
+		data['attachment'] = self.attachment.url if self.attachment else None
 		data['created_by'] = self.created_by
 		data['created_at'] = self.created_at
 		return data

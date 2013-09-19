@@ -2,8 +2,8 @@
 							<li class="ui-comment{% if comment.type = 'C' %} text-error{% endif%}">
 							<blockquote>
 								<p>{{comment}}</p>
-								{% if comment.file %}
-								<p><a href="{{comment.file.url}}" target="_blank" class="fancybox"><img src="{{ comment.file|thumbnail_url:'report_comment' }}" class="img-polaroid"></a></p>
+								{% if comment.attachment %}
+								<p><a href="{{comment.attachment.url}}" target="_blank" class="fancybox"><img src="{{ comment.attachment|thumbnail_url:'report_comment' }}" class="img-polaroid"></a></p>
 								{% endif %}
 								<small>{{comment.get_type_display}} on {{comment.created_at}} by <cite title="User"><a href="{{comment.created_by.get_absolute_url}}">{{comment.created_by}}</a></cite>, {{comment.created_by.get_role_display|lower}}.</small>
 							</blockquote>

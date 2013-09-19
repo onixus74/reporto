@@ -49,7 +49,6 @@ reform.widgets.comment.init = function() {
 	var comments_formset = document.getElementById('ui-comments-area');
 
 	attachment.on('change', function(e){
-		console.log('CHANGEEEEEEEEEEEEEEEEEEEEEEEEED', e)
 		var files = e.target.files;
 		var f = files[0];
 		var reader = new FileReader();
@@ -67,7 +66,6 @@ reform.widgets.comment.init = function() {
 
 	attachmentButton.on('click', function(e){
 		attachment.click();
-		// ...
 	});
 
 	function handleClick(e) {
@@ -81,7 +79,8 @@ reform.widgets.comment.init = function() {
 		//formdata.append('csrfmiddlewaretoken': csrf_token);
 		formdata.append('content', content.val());
 		formdata.append('type', type);
-		formdata.append('file', attachment.get(0).files.item(0));
+		formdata.append('attachment', attachment.get(0).files[0]);
+		console.log(attachment.get(0).files[0])
 
 		comments_formset.disabled = true;
 		$.ajax({
@@ -102,17 +101,21 @@ reform.widgets.comment.init = function() {
 			content.val('');
 			attachment.val(null);
 			$.pnotify({
-				title: 'Adding Comment - Done',
-				text: 'Comment added',
+				title: data.notification.title,
+				text: data.notification.body,
 				type: 'success',
 				nonblock: true
 			});
+			attachmentImage.attr('src', '');
+			attachmentIcon.show();
+			attachmentImage.hide();
 			comments_formset.disabled = false;
 		}).fail(function(err) {
 			console.log(err);
+			var data = err.responseJSON;
 			$.pnotify({
-				title: 'Adding Comment - Failure',
-				text: 'Failed to add comment',
+				title: data.notification.title,
+				text: data.errors['__all_'] ? data.errors['__all__'].join("<br>") : data.notification.body,
 				type: 'error',
 				//nonblock: true
 			});
