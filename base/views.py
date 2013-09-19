@@ -79,9 +79,9 @@ from base.utils.views import JSONResponse
 from base.models import *
 from django.shortcuts import get_object_or_404
 
-def user_view(request, id=None, username=None, extension=None):
-	if id:
-		user = get_object_or_404(User, id=id)
+def user_view(request, pk=None, username=None, extension=None):
+	if pk:
+		user = get_object_or_404(User, pk=pk)
 	elif username:
 		user = get_object_or_404(User, username=username)
 	else:

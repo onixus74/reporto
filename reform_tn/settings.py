@@ -110,12 +110,6 @@ STATICFILES_FINDERS = (
     'compressor.finders.CompressorFinder',
 )
 
-LOGIN_URL = '/login'
-
-LOGOUT_URL = '/logout'
-
-LOGIN_REDIRECT_URL = '/'
-
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = 'g#t3tki%zbnynjn1qlkqn#jlulv9!w*=l0e_n7j^%mm7%5@jr%'
 
@@ -270,3 +264,65 @@ THUMBNAIL_ALIASES = {
         'report_comment': {'size': (150, 150), 'crop': False, 'quality': 100},
     },
 }
+
+INSTALLED_APPS += ('social_auth',)
+AUTHENTICATION_BACKENDS = (
+	'social_auth.backends.twitter.TwitterBackend',
+	'social_auth.backends.facebook.FacebookBackend',
+	'social_auth.backends.google.GoogleOAuthBackend',
+	'social_auth.backends.google.GoogleOAuth2Backend',
+	'social_auth.backends.google.GoogleBackend',
+	#'social_auth.backends.yahoo.YahooBackend',
+	#'social_auth.backends.browserid.BrowserIDBackend',
+	#'social_auth.backends.OpenIDBackend',
+	'django.contrib.auth.backends.ModelBackend',
+)
+TWITTER_CONSUMER_KEY         = '3JUk9ltCW3UsEjeBdfFsg'
+TWITTER_CONSUMER_SECRET      = 'cm1fwhYAAIqkVOqPsMPTC5cGDDpDNSimHmLzrd753dU'
+FACEBOOK_APP_ID              = '365981540199699'
+FACEBOOK_API_SECRET          = '0582b7411bd999db01e6c739d93451bd'
+# GOOGLE_CONSUMER_KEY          = ''
+# GOOGLE_CONSUMER_SECRET       = ''
+GOOGLE_OAUTH2_CLIENT_ID      = '1083020802599.apps.googleusercontent.com'
+GOOGLE_OAUTH2_CLIENT_SECRET  = 'H4S_8BHCGsEbx5maus_9oZFe'
+# YAHOO_CONSUMER_KEY           = ''
+# YAHOO_CONSUMER_SECRET        = ''
+#LOGIN_URL          = '/login-form/'
+#LOGIN_REDIRECT_URL = '/logged-in/'
+#LOGIN_ERROR_URL    = '/login-error/'
+LOGIN_URL = '/login'
+LOGOUT_URL = '/logout'
+LOGIN_REDIRECT_URL = '/'
+LOGIN_ERROR_URL    = '/login'
+
+SOCIAL_AUTH_COMPLETE_URL_NAME  = 'socialauth_complete'
+SOCIAL_AUTH_ASSOCIATE_URL_NAME = 'socialauth_associate_complete'
+
+SOCIAL_AUTH_USER_MODEL = 'base.User'
+
+
+
+# TEMPLATE_CONTEXT_PROCESSORS = (
+#     'django.contrib.auth.context_processors.auth',
+#     'django.core.context_processors.debug',
+#     'django.core.context_processors.i18n',
+#     'django.core.context_processors.media',
+#     'django.contrib.messages.context_processors.messages',
+#     'social_auth.context_processors.social_auth_by_type_backends',
+# )
+
+# SOCIAL_AUTH_PIPELINE = (
+#     'social_auth.backends.pipeline.social.social_auth_user',
+#     'social_auth.backends.pipeline.associate.associate_by_email',
+#     'social_auth.backends.pipeline.misc.save_status_to_session',
+#     'app.pipeline.redirect_to_form',
+#     'app.pipeline.username',
+#     'social_auth.backends.pipeline.user.create_user',
+#     'social_auth.backends.pipeline.social.associate_user',
+#     'social_auth.backends.pipeline.social.load_extra_data',
+#     'social_auth.backends.pipeline.user.update_user_details',
+#     'social_auth.backends.pipeline.misc.save_status_to_session',
+#     'app.pipeline.redirect_to_form2',
+#     'app.pipeline.first_name',
+# )
+
