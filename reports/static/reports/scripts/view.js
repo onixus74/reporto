@@ -101,17 +101,21 @@ reform.widgets.comment.init = function() {
 			content.val('');
 			attachment.val(null);
 			$.pnotify({
-				title: 'Adding Comment - Done',
-				text: 'Comment added',
+				title: data.notification.title,
+				text: data.notification.body,
 				type: 'success',
 				nonblock: true
 			});
+			attachmentImage.attr('src', '');
+			attachmentIcon.show();
+			attachmentImage.hide();
 			comments_formset.disabled = false;
 		}).fail(function(err) {
 			console.log(err);
+			var data = err.responseJSON;
 			$.pnotify({
-				title: 'Adding Comment - Failure',
-				text: 'Failed to add comment',
+				title: data.notification.title,
+				text: data.errors['__all_'] ? data.errors['__all__'].join("<br>") : data.notification.body,
 				type: 'error',
 				//nonblock: true
 			});

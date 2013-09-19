@@ -9,6 +9,7 @@ urlpatterns = patterns('',
 	url(r'^$', 'base.views.home', name='home'),
 	# url(r'^$', TemplateView.as_view(template_name="home.html"), name='home'),
 
+	url(r'', include('social_auth.urls')),
 	url(r'^login$',    'base.views.login_view',    name='login'),
 	url(r'^logout$',   'base.views.logout_view',   name='logout'),
 	#url(r'^register$', 'base.views.register_view', name='register'),
