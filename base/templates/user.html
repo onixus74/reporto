@@ -1,0 +1,30 @@
+{% extends "layouts/default.html" %}
+
+{% load static json thumbnail compress %}
+
+{% block view_title %}{{user}} | User Profile | {% endblock %}
+
+{% block view_content %}
+<div class="container">
+
+	<div class="page-header">
+		<h1>User Profile<small></small></h1>
+	</div>
+
+	<div class="well">
+
+		<div class="container-fluid">
+
+			<div class="row-fluid">
+				<div class="offset2 span8">
+					{{user}}, {{user.get_role_display}}
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+
+</div>
+{% endblock %}
+

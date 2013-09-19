@@ -217,6 +217,7 @@ def report_submit(request, template_name = "reports/submit.html", *args, **kwarg
 				'success': True,
 				'object': report,
 				'url': report.get_absolute_url(),
+				'notification': { 'title': "Adding Report", 'body': "Report added." }
 			})
 		else:
 			return redirect(report.get_absolute_url())
@@ -224,7 +225,11 @@ def report_submit(request, template_name = "reports/submit.html", *args, **kwarg
 	else:
 		if request.is_ajax():
 			form.errors['victim'] = victim_form.errors
-			return JSONResponse({'success': False, 'errors': form.errors}, status=400)
+			return JSONResponse({
+				'success': False,
+				'errors': form.errors,
+				'notification': { 'title': "Adding Report", 'body': form.errors.get('__all__', None) or form.errors.as_ul() or "Failed to add a report" }
+			}, status=400)
 
 	return render(request, template_name, context)
 
@@ -470,10 +475,20 @@ def report_comment(request, pk, *args, **kwargs):
 		report = Report.objects.get(pk=pk)
 		#comment.report = report
 		report.comments.add(comment)
-		return JSONResponse({ 'success': True, 'object': comment, 'html': render_to_string("reports/view_comment.html", {'comment': comment}) })
+		return JSONResponse({
+			'success': True,
+			'object': comment,
+			'html': render_to_string("reports/view_comment.html", {'comment': comment}),
+			'notification': { 'title': "Adding Comment", 'body': "Comment added." }
+			})
 	else:
-		return JSONResponse({'success': False, 'errors': form.errors}, status=400)
-
+		return JSONResponse({
+			'success': False,
+			'errors': form.errors,
+			#'notification': { 'title': "Adding Comment", 'body': "Failed to add comment" }
+			#'notification': { 'title': "Adding Comment", 'body': form.errors.get('__all__', None) or "<br>".join(["<br>".join(errors) for (field,errors) in form.errors.items()]) }
+			'notification': { 'title': "Adding Comment", 'body': form.errors.get('__all__', None) or form.errors.as_ul() or "Failed to add comment" }
+		}, status=400)
 
 def stats_xxx(request, *args, **kwargs):
 	#data = Report.objects.get() # data request
