@@ -43,7 +43,7 @@
 				<input class="btn btn-primary" name="commit" type="submit" value="Login">
 			</form>
 
-			<p class="text-center">or register/login with <a href="/login/facebook">Facebook</a>, <a href="/login/twitter">Twitter</a>, or <a href="/login/google">Google</a></p>
+			<p class="text-center">or register/login with <a href="{% url 'socialauth_begin' 'facebook' %}?next={{next}}">Facebook</a> or with <a href="{% url 'socialauth_begin' 'google' %}?next={{next}}">Google</a></p>
 
 			<!--<p class="text-center">or <a href="/register">create an account</a></p>-->
 

@@ -30,7 +30,6 @@ DATABASES['default'] = dj_database_url.config()
 ALLOWED_HOSTS = ['*']
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
-
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.
@@ -254,17 +253,17 @@ LOGGING = {
 AUTH_USER_MODEL = 'base.User'
 
 INSTALLED_APPS += ('debug_toolbar',) # !DEV!
-INTERNAL_IPS = ('127.0.0.1',)
+INTERNAL_IPS = ('127.0.0.1','127.0.1.1')
 
-INSTALLED_APPS += ('rest_framework',)
-REST_FRAMEWORK = {
-    #'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAdminUser',),
-    'PAGINATE_BY': 10
-}
+# INSTALLED_APPS += ('rest_framework',)
+# REST_FRAMEWORK = {
+#     #'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAdminUser',),
+#     'PAGINATE_BY': 10
+# }
 
 INSTALLED_APPS += ('compressor',)
 
-INSTALLED_APPS += ('south' ,)
+INSTALLED_APPS += ('south',)
 
 # INSTALLED_APPS += ('django_youtube',)
 # YOUTUBE_AUTH_EMAIL = 'yourmail@gmail.com'
@@ -309,12 +308,22 @@ GOOGLE_OAUTH2_CLIENT_SECRET  = 'H4S_8BHCGsEbx5maus_9oZFe'
 LOGIN_URL = '/login'
 LOGOUT_URL = '/logout'
 LOGIN_REDIRECT_URL = '/'
-LOGIN_ERROR_URL    = '/login'
+#LOGIN_ERROR_URL    = '/test'
 
-SOCIAL_AUTH_COMPLETE_URL_NAME  = 'socialauth_complete'
-SOCIAL_AUTH_ASSOCIATE_URL_NAME = 'socialauth_associate_complete'
+#SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/another-login-url/'
+#SOCIAL_AUTH_NEW_USER_REDIRECT_URL = '/new-users-redirect-url/'
+#SOCIAL_AUTH_NEW_ASSOCIATION_REDIRECT_URL = '/new-association-redirect-url/'
+#SOCIAL_AUTH_DISCONNECT_REDIRECT_URL = '/account-disconnected-redirect-url/'
+
+#SOCIAL_AUTH_COMPLETE_URL_NAME  = 'socialauth_complete'
+#SOCIAL_AUTH_ASSOCIATE_URL_NAME = 'socialauth_associate_complete'
 
 SOCIAL_AUTH_USER_MODEL = 'base.User'
+
+SOCIAL_AUTH_USERNAME_IS_FULL_EMAIL = True
+SOCIAL_AUTH_PROTECTED_USER_FIELDS = ['email', 'username', 'first_name', 'last_name']
+SOCIAL_AUTH_FIELDS_STORED_IN_SESSION = ['next',]
+SOCIAL_AUTH_REDIRECT_IS_HTTPS = True
 
 
 
@@ -327,18 +336,12 @@ SOCIAL_AUTH_USER_MODEL = 'base.User'
 #     'social_auth.context_processors.social_auth_by_type_backends',
 # )
 
-# SOCIAL_AUTH_PIPELINE = (
-#     'social_auth.backends.pipeline.social.social_auth_user',
-#     'social_auth.backends.pipeline.associate.associate_by_email',
-#     'social_auth.backends.pipeline.misc.save_status_to_session',
-#     'app.pipeline.redirect_to_form',
-#     'app.pipeline.username',
-#     'social_auth.backends.pipeline.user.create_user',
-#     'social_auth.backends.pipeline.social.associate_user',
-#     'social_auth.backends.pipeline.social.load_extra_data',
-#     'social_auth.backends.pipeline.user.update_user_details',
-#     'social_auth.backends.pipeline.misc.save_status_to_session',
-#     'app.pipeline.redirect_to_form2',
-#     'app.pipeline.first_name',
-# )
-
+SOCIAL_AUTH_PIPELINE = (
+    'social_auth.backends.pipeline.social.social_auth_user',
+    'social_auth.backends.pipeline.associate.associate_by_email',
+    'social_auth.backends.pipeline.user.get_username',
+    'social_auth.backends.pipeline.user.create_user',
+    'social_auth.backends.pipeline.social.associate_user',
+    'social_auth.backends.pipeline.social.load_extra_data',
+    'social_auth.backends.pipeline.user.update_user_details'
+)
