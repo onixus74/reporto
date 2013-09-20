@@ -7,6 +7,12 @@ from django.forms.models import model_to_dict
 
 class User(AbstractUser):
 
+	#class Meta:
+	#	unique_together = ('email', )
+
+	REQUIRED_FIELDS = ['first_name', 'last_name']
+	USERNAME_FIELD = 'email'
+
 	REPORTER  = "R"
 	MODERATOR = "M"
 	ADMIN     = "A"
@@ -22,7 +28,7 @@ class User(AbstractUser):
 		return reverse('users:view', kwargs={'username': self.username})
 
 	def __unicode__(self):
-		return self.get_full_name() + ' (@' + self.username + ')'
+		return self.get_full_name()
 
 	def serialize(self):
 		data = model_to_dict(self, fields=['id', 'username', 'first_name', 'last_name', 'role'])
@@ -30,3 +36,5 @@ class User(AbstractUser):
 		data['full_name'] = self.get_full_name()
 		data['role_display'] = self.get_role_display()
 		return data
+
+User._meta.get_field_by_name('email')[0]._unique = True
