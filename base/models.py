@@ -25,7 +25,7 @@ class User(AbstractUser):
 	role = models.CharField(max_length=1, choices=ROLE, default=REPORTER)
 
 	def get_absolute_url(self):
-		return reverse('users:view', kwargs={'username': self.username})
+		return reverse('users:view', kwargs={'pk': self.pk})
 
 	def __unicode__(self):
 		return self.get_full_name()
@@ -37,4 +37,21 @@ class User(AbstractUser):
 		data['role_display'] = self.get_role_display()
 		return data
 
-User._meta.get_field_by_name('email')[0]._unique = True
+email = User._meta.get_field_by_name('email')[0]
+email.null = False
+email.blank = False
+email._unique = True
+
+username = User._meta.get_field_by_name('username')[0]
+username.null = True
+username.blank = True
+username._unique = False
+
+first_name = User._meta.get_field_by_name('first_name')[0]
+first_name.null = False
+first_name.blank = False
+
+last_name = User._meta.get_field_by_name('last_name')[0]
+last_name.null = False
+last_name.blank = False
+

@@ -1,0 +1,15 @@
+[{
+	"pk": 1,
+	"model": "sites.site",
+	"fields": {
+		"domain": "nader-laptop.local:8000",
+		"name": "Development"
+	}
+}, {
+	"pk": 2,
+	"model": "sites.site",
+	"fields": {
+		"domain": "reform-tn-platform.herokuapp.com",
+		"name": "Staging (Heroku)"
+	}
+}]
