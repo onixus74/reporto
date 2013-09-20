@@ -10,8 +10,9 @@ class User(AbstractUser):
 	#class Meta:
 	#	unique_together = ('email', )
 
-	REQUIRED_FIELDS = ['first_name', 'last_name']
-	USERNAME_FIELD = 'email'
+	REQUIRED_FIELDS = ['email', 'first_name', 'last_name']
+	#REQUIRED_FIELDS = ['first_name', 'last_name']
+	#USERNAME_FIELD = 'email'
 
 	REPORTER  = "R"
 	MODERATOR = "M"
@@ -30,6 +31,10 @@ class User(AbstractUser):
 	def __unicode__(self):
 		return self.get_full_name()
 
+	def save(self, *args, **kwargs):
+		self.username = self.email
+		super(User, self).save(*args, **kwargs)
+
 	def serialize(self):
 		data = model_to_dict(self, fields=['id', 'username', 'first_name', 'last_name', 'role'])
 		data['short_name'] = self.get_short_name()
@@ -43,9 +48,9 @@ email.blank = False
 email._unique = True
 
 username = User._meta.get_field_by_name('username')[0]
-username.null = True
-username.blank = True
-username._unique = False
+#username.null = True
+#username.blank = True
+#username._unique = False
 
 first_name = User._meta.get_field_by_name('first_name')[0]
 first_name.null = False
