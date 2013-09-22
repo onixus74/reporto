@@ -36,13 +36,13 @@ class Migration(SchemaMigration):
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('firstname', self.gf('django.db.models.fields.CharField')(max_length=100)),
             ('lastname', self.gf('django.db.models.fields.CharField')(max_length=100)),
-            ('gender', self.gf('django.db.models.fields.CharField')(default='M', max_length=1)),
-            ('age', self.gf('django.db.models.fields.PositiveIntegerField')()),
-            ('education', self.gf('django.db.models.fields.CharField')(max_length=200)),
-            ('profession', self.gf('django.db.models.fields.CharField')(max_length=200)),
-            ('phone', self.gf('django.db.models.fields.CharField')(max_length=20)),
-            ('email', self.gf('django.db.models.fields.EmailField')(max_length=75)),
-            ('description', self.gf('django.db.models.fields.TextField')()),
+            ('gender', self.gf('django.db.models.fields.CharField')(default='M', max_length=1, null=True, blank=True)),
+            ('age', self.gf('django.db.models.fields.PositiveIntegerField')(null=True, blank=True)),
+            ('education', self.gf('django.db.models.fields.CharField')(max_length=200, null=True, blank=True)),
+            ('profession', self.gf('django.db.models.fields.CharField')(max_length=200, null=True, blank=True)),
+            ('phone', self.gf('django.db.models.fields.CharField')(max_length=20, null=True, blank=True)),
+            ('email', self.gf('django.db.models.fields.EmailField')(max_length=75, null=True, blank=True)),
+            ('description', self.gf('django.db.models.fields.TextField')(null=True, blank=True)),
             ('category', self.gf('django.db.models.fields.CharField')(default='CIT', max_length=3, blank=True)),
             ('user', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['base.User'], null=True, blank=True)),
         ))
@@ -164,7 +164,7 @@ class Migration(SchemaMigration):
             'password': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
             'role': ('django.db.models.fields.CharField', [], {'default': "'R'", 'max_length': '1'}),
             'user_permissions': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['auth.Permission']", 'symmetrical': 'False', 'blank': 'True'}),
-            'username': ('django.db.models.fields.CharField', [], {'max_length': '30', 'null': 'True', 'blank': 'True'})
+            'username': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '30'})
         },
         u'contenttypes.contenttype': {
             'Meta': {'ordering': "('name',)", 'unique_together': "(('app_label', 'model'),)", 'object_name': 'ContentType', 'db_table': "'django_content_type'"},
@@ -221,17 +221,17 @@ class Migration(SchemaMigration):
         },
         u'reports.victim': {
             'Meta': {'object_name': 'Victim'},
-            'age': ('django.db.models.fields.PositiveIntegerField', [], {}),
+            'age': ('django.db.models.fields.PositiveIntegerField', [], {'null': 'True', 'blank': 'True'}),
             'category': ('django.db.models.fields.CharField', [], {'default': "'CIT'", 'max_length': '3', 'blank': 'True'}),
-            'description': ('django.db.models.fields.TextField', [], {}),
-            'education': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
-            'email': ('django.db.models.fields.EmailField', [], {'max_length': '75'}),
+            'description': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
+            'education': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True', 'blank': 'True'}),
+            'email': ('django.db.models.fields.EmailField', [], {'max_length': '75', 'null': 'True', 'blank': 'True'}),
             'firstname': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
-            'gender': ('django.db.models.fields.CharField', [], {'default': "'M'", 'max_length': '1'}),
+            'gender': ('django.db.models.fields.CharField', [], {'default': "'M'", 'max_length': '1', 'null': 'True', 'blank': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'lastname': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
-            'phone': ('django.db.models.fields.CharField', [], {'max_length': '20'}),
-            'profession': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
+            'phone': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True', 'blank': 'True'}),
+            'profession': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True', 'blank': 'True'}),
             'user': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['base.User']", 'null': 'True', 'blank': 'True'})
         }
     }
