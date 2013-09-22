@@ -9,7 +9,7 @@ from django.contrib.auth import authenticate, login, logout
 
 @csrf_exempt
 def test(request, *args, **kwargs):
-	logger.debug("session:", request.session.items())
+	#logger.debug("session:", request.session.items())
 	logger.debug("method:", request.method)
 	#logger.debug("body:", request.body)
 	logger.debug("content-type:", request.META['CONTENT_TYPE'])
@@ -34,7 +34,7 @@ def home(request, *args, **kwargs):
 		return render(request, template_name, context)
 	else:
 		#return redirect_to_login(next[, login_url, redirect_field_name])
-		return redirect_to_login('home')
+		return redirect_to_login('/')
 
 
 from django.contrib.auth.forms import AuthenticationForm
@@ -50,7 +50,7 @@ def login_view(request, *args, **kwargs):
 			login(request, user)
 			messages.success(request, 'Login succeeded.')
 			return redirect(request.REQUEST.get('next', 'home'))
-	return render(request, "login.html", {'form': form, 'next': request.REQUEST.get('next', 'home')})
+	return render(request, "login.html", {'form': form, 'next': request.REQUEST.get('next', '/')})
 
 	# if request.method == 'POST':
 	# 	username = request.POST['username']

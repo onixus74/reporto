@@ -3,10 +3,14 @@ from django.views.generic import TemplateView
 from django.contrib.auth.decorators import login_required, user_passes_test, permission_required
 
 
-urlpatterns = patterns('',
-	url(r'^test/$', 'base.views.test', name='test'),
+from reports.views import ReportsDashboard
 
-	url(r'^$', 'base.views.home', name='home'),
+urlpatterns = patterns('',
+	#url(r'^test/$', 'base.views.test', name='test'),
+
+	#url(r'^$', 'base.views.home', name='home'),
+	url(r'^$',           login_required(ReportsDashboard.as_view()),       name='home'),
+
 	# url(r'^$', TemplateView.as_view(template_name="home.html"), name='home'),
 
 	url(r'', include('social_auth.urls')),

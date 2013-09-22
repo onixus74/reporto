@@ -180,7 +180,11 @@ def report_submit(request, template_name = "reports/submit.html", *args, **kwarg
 
 		if victim == 'user':
 			# the user is the victim
-			victim = Victim.objects.get(user=request.user)
+			try:
+				victim = Victim.objects.get(user=request.user)
+			except Victim.DoesNotExist:
+				victim = Victim(firstname=request.user.first_name, lastname=request.user.last_name, email=request.user.email, user=request.user);
+				victim.save();
 		elif victim != '0':
 			# existent victim
 			victim = Victim.objects.get(pk=victim)
@@ -224,7 +228,8 @@ def report_submit(request, template_name = "reports/submit.html", *args, **kwarg
 
 	else:
 		if request.is_ajax():
-			form.errors['victim'] = victim_form.errors
+			if victim != 'user':
+				form.errors['victim'] = victim_form.errors
 			return JSONResponse({
 				'success': False,
 				'errors': form.errors,

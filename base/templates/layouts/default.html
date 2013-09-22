@@ -82,7 +82,22 @@
 					<a class="brand" href="/">Reform</a>
 					<div class="nav-collapse collapse">
 					<ul class="nav">
-						<li><a href="/" target="_blank">Home</a></li>
+						{% if user.is_authenticated %}
+						<li{% if false %} class="active"{% endif %}><a href="{% url 'reports:dashboard' %}">Dashboard</a></li>
+						<li{% if false %} class="active"{% endif %}><a href="{% url 'reports:submit' %}">Submit Report</a></li>
+						{% if user.role == "A" %}
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Administration<b class="caret"></b></a>
+							<ul class="dropdown-menu">
+								<li><a href="/categories">Categories</a></li>
+								<li><a href="/features">Features</a></li>
+								<li class="divider"></li>
+								<!--<li class="nav-header">Nav header</li>-->
+								<li><a href="/admin">Site Administration</a></li>
+							</ul>
+						</li>
+						{% endif %}
+						{% endif %}
 					</ul>
 
 					<ul class="nav pull-right">
@@ -105,7 +120,7 @@
 								<input type="hidden" name="next" value="{{ next }}" />
 								<div class="input-prepend">
 									<span class="add-on"><i class="icon-envelope"></i></span>
-									{% render_field form.username placeholder="Username" required="required" %}
+									{% render_field form.username placeholder="Email" required="required" %}
 								</div>
 								<div class="input-prepend">
 									<span class="add-on"><i class="icon-key"></i></span>

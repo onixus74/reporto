@@ -17,7 +17,13 @@
 
 			<div class="row-fluid">
 				<div class="offset2 span8">
-					{{user}}, {{user.get_role_display}}
+					<dl>
+						<dt>Full name</dt>
+						<dd>{{user}}</dd>
+						<dt>Role</dt>
+						<dd>{{user.get_role_display}}</dd>
+					</dl>
+					{#%<div>{{user.social_auth.all}}</div> %#}
 				</div>
 			</div>
 
