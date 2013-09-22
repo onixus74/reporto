@@ -39,7 +39,7 @@ reform.widgets.map.init = function() {
 	map.addControl(geoSearch);
 	widget.geoSearch = geoSearch;
 
-	map.scrollWheelZoom.disable();
+	//map.scrollWheelZoom.disable();
 
 	var marker;
 
@@ -146,6 +146,8 @@ reform.widgets.wizard.init = function() {
 	var widget = reform.widgets.wizard;
 	//var wizard =
 	//widget.object = wizard;
+
+	var form = widget.form = $('#report-form');
 
 	var elements = widget.elements = {};
 
@@ -414,11 +416,26 @@ reform.widgets.wizard.init = function() {
 				"X-CSRFToken": csrf_token
 			}
 		}).done(function(data) {
-			//window.location = 'reports/' + data.object.id + '/view';
-			//window.location = reform.urls.view.replace('0', data.object.id);
-			window.location = data.url;
-		}).fail(function() {
-			//...
+			setTimeout(function(){
+				//window.location = 'reports/' + data.object.id + '/view';
+				//window.location = reform.urls.view.replace('0', data.object.id);
+				window.location = data.url;
+			}, 500);
+			$.pnotify({
+				title: data.notification.title,
+				text: data.notification.body,
+				type: 'success',
+				nonblock: true
+			});
+		}).fail(function(err) {
+			console.log(err);
+			var data = err.responseJSON;
+			$.pnotify({
+				title: data.notification.title,
+				text: data.errors['__all_'] ? data.errors['__all__'].join("<br>") : data.notification.body,
+				type: 'error',
+				//nonblock: true
+			});
 		});
 		return false;
 	})

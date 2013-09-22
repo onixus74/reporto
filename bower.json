@@ -27,7 +27,7 @@
     "sass-bootstrap": "~2.3.2",
     "cosmo-bootstrap-scss": "7Ds7/cosmo-bootstrap-scss",
     "select2-bootstrap-css": "t0m/select2-bootstrap-css#~1.1.0",
-    "x-editable": "~1.4.5",
+    "x-editable": "~1.4.6",
     "L.GeoSearch": "smeijer/L.GeoSearch",
     "bootstrap-wysiwyg": "*",
     "html-inspector": "~0.3.0",
@@ -45,7 +45,8 @@
     "underscore": "~1.5.2",
     "lodash": "~2.0.0",
     "pines-notify": "~1.2.0",
-    "medium-editor": "daviferreira/medium-editor#~1.0.0"
+    "medium-editor": "daviferreira/medium-editor#~1.0.0",
+    "pickadate": "~3.2.2"
   },
   "devDependencies": {
     "html-inspector": "~0.3.0"
