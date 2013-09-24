@@ -6,7 +6,7 @@
 
 {% block view_content %}
 
-	<div id="ui-wizard-progress-bar">
+	<div id="ui-wizard-progress-bar" style="z-index: 1101;">
 		<div class="container progress progress-info progress-striped">
 			<div class="bar animated" id="ui-wizard-progress"></div>
 		</div>
@@ -51,20 +51,20 @@
 
 					<div class="row-fluid ui-wizard-row" id="ui-wizard-victim-witness-buttons">
 						<div class="span6" id="ui-wizard-victim-button-container">
-							<a href="javascript:void(0)" class="btn btn-large btn-block btn-warning" id="ui-wizard-victim-button" data-value="victim" data-class="text-warning">Victim</a>
+							<a href="javascript:void(0)" class="btn btn-large btn-block btn-warning" id="ui-wizard-victim-button" data-value="victim" data-class="text-warning"><i class="icon-user icon-2x"></i> Victim</a>
 						</div>
 						<div class="span6" id="ui-wizard-witness-button-container">
-							<a href="javascript:void(0)" class="btn btn-large btn-block btn-success" id="ui-wizard-witness-button" data-value="witness" data-class="text-success" tabindex="0">Witness</a>
+							<a href="javascript:void(0)" class="btn btn-large btn-block btn-success" id="ui-wizard-witness-button" data-value="witness" data-class="text-success" tabindex="0"><i class="icon-eye-open icon-2x"></i> Witness</a>
 						</div>
 					</div>
 
 					<div class="row-fluid ui-wizard-row" id="ui-wizard-category" hidden>
 						<div class="offset2 span8 natural-language-form">
 
-							<p class="lead text text-center">
+							<p class="lead text text-center" style="margin: 0;">
 								<span id="ui-wizard-victim-text" hidden>I've been a victim of</span>
 								<span id="ui-wizard-witness-text" hidden>I've witnessed a</span>
-								{% render_field form.category class+="select2 span4" data-style="boostrap-select-colors-fix" %}
+								{% render_field form.category class+="select2 span4" data-style="btn-large boostrap-select-colors-fix" %}
 								<!--that happened --><!--on
 								{% render_field form.datetime type="datetime-local" class+="span4" required="required" %}-->
 								<!--at-->
@@ -75,42 +75,47 @@
 
 					<div class="row-fluid ui-wizard-row" id="ui-wizard-location-datetime" hidden>
 						<div class="span6">
-							<h2>Location</h2>
+							<h2><i class="icon-map-marker"></i> Location</h2>
 							<div id="map" style="width:100%; height: 300px"></div>
 							<!--<input type="text" name="location" id="id_location">-->
 							{% render_field form.location type="hidden" %}
-
-							{% render_field form.location_text type="text" placeholder="Location" class="input-block-level" _data-provide="typeahead" _data-source="reform.data.locations" _autocomplete="off" %}
+							<div class="input-prepend" style="display: block; margin-top: 10px; margin-bottom: 0; text-align: center;">
+								<span class="add-on" style="width: 20%;"> <i class="icon-map-marker icon-large"></i> </span>
+								{% render_field form.location_text type="text" placeholder="Location" class="input-block-level_" _data-provide="typeahead" _data-source="reform.data.locations" _autocomplete="off" style="width: 70%" %}
+							</div>
 						</div>
 						<div class="span6">
-							<h2>Date and Time</h2>
+							<h2><i class="icon-calendar"></i><i class="icon-time"></i> Date and Time</h2>
 							{% render_field form.datetime type="datetime-local" class+="input-block-level" required="required" style="display: none;" %}
 							{#% render_field form.datetime type="hidden" class+="input-block-level" %#}
-							<div id="dateinput">
-								<script type="text/template" id="dateinput-template">
-									<div class="controls">
-										<div class="clndr-previous-year-button">&lsaquo;&lsaquo;</div>
-										<div class="clndr-previous-button">&lsaquo;</div>
-										<div class="month"><%= month %> <%= year %></div>
-										<div class="clndr-next-button">&rsaquo;</div>
-										<div class="clndr-next-year-button">&rsaquo;&rsaquo;</div>
+							<div id="dateinput" style="height: 300px;">
+							<script type="text/template" id="dateinput-template">
+								<div class="controls">
+									<div class="clndr-previous-year-button">&lsaquo;&lsaquo;</div>
+									<div class="clndr-previous-button">&lsaquo;</div>
+									<div class="month"><%= month %> <%= year %></div>
+									<div class="clndr-next-button">&rsaquo;</div>
+									<div class="clndr-next-year-button">&rsaquo;&rsaquo;</div>
+								</div>
+								<div class="clndr-grid">
+									<div class="days-of-the-week clearfix">
+										<% _.each(daysOfTheWeek, function(day) { %>
+											<div class="header-day"><%= day %></div>
+										<% }); %>
 									</div>
-									<div class="clndr-grid">
-										<div class="days-of-the-week clearfix">
-											<% _.each(daysOfTheWeek, function(day) { %>
-												<div class="header-day"><%= day %></div>
-											<% }); %>
-										</div>
-										<div class="days clearfix">
-											<% _.each(days, function(day) { %>
-												<div class="<%= day.classes %>" id="<%= day.id %>"><span class="day-number"><%= day.day %></span></div>
-											<% }); %>
-										</div>
+									<div class="days clearfix">
+										<% _.each(days, function(day) { %>
+											<div class="<%= day.classes %>" id="<%= day.id %>"><span class="day-number"><%= day.day %></span></div>
+										<% }); %>
 									</div>
-								</script>
+								</div>
+							</script>
 							</div>
 							<input id="id_date" type="hidden">
-							<input id="id_time" type="time" class="input-block-level" style="text-align: center;">
+							<div class="input-prepend" style="display: block; margin-top: 10px; margin-bottom: 0; text-align: center;">
+								<span class="add-on" style="width: 20%;"> <i class="icon-time icon-large"></i> </span>
+								<input id="id_time" type="time" class="input-block-level_" style="text-align: center; width: 70%;">
+							</div>
 						</div>
 					</div>
 
@@ -195,18 +200,18 @@
 
 					<div class="row-fluid ui-wizard-row" id="ui-wizard-aggressor" hidden>
 						<div class="offset2 span8" id="ui-wizard-aggressor-area">
-							<h2>Aggressor</h2>
+							<h2><i class="icon-male"></i> Aggressor</h2>
 							{% render_field form.aggressor placeholder="Aggressor" class+="input-block-level input-area" %}
 						</div>
 					</div>
 
 					<div class="row-fluid ui-wizard-row" id="ui-wizard-description-evidence" hidden>
 						<div class="span6">
-							<h2>Description</h2>
+							<h2><i class="icon-ellipsis-horizontal"></i> Description</h2>
 							{% render_field form.description placeholder="Description" class+="input-block-level input-area" %}
 						</div>
 						<div class="span6">
-							<h2>Evidence</h2>
+							<h2><i class="icon-picture"></i> Evidence</h2>
 							<!--<input name="files[]" type="file" multiple />-->
 							<!--<input type="hidden" name="rsid" value="{{report_submit_id}}">-->
 							<div id="assets" tabindex="0" class="dropzone input-area" style="background-color: #FFF; border: 1px solid #999;"></div>
@@ -221,7 +226,7 @@
 
 					<div class="row-fluid ui-wizard-row" id="ui-wizard-features" hidden>
 						<div class="span12">
-							<h2>Features</h2>
+							<h2><i class="icon-tag"></i> Features</h2>
 							<!--<input type="text" class="input-block-level" placeholder="Features">-->
 							{% render_field form.features placeholder="Features" class+="select2 input-block-level" data-style="btn-large"  %}
 						</div>
@@ -241,14 +246,14 @@
 				<hr>
 				<ul id="ui-reports-list" class="list list-hover">
 				{% for report in reports %}
-					<li class="ui-timeline-story" data-category="{{report.category.id}}" data-location="{{report.location}}" data-datetime="{{report.datetime|unlocalize}}">
-						<a href="{{ report.victim.get_absolute_url }}">{{report.victim}}</a>
+					<li class="ui-similar-report-candidate" data-category="{{report.category.id}}" data-location="{{report.location}}" data-datetime="{{report.datetime|unlocalize}}">
+						<a class="ui-similar-report-victim" href="{{ report.victim.get_absolute_url }}">{{report.victim}}</a>
 						has been a victim of
-						<a href="{{ report.category.get_absolute_url }}">{{report.category}}</a>
+						<a class="ui-similar-report-category" href="{{ report.category.get_absolute_url }}">{{report.category}}</a>
 						happened in
-						<a href="/reports/by-location/{{report.location}}">{{report.location_text}}</a>
+						<a class="ui-similar-report-location">{{report.location_text}}</a>
 						on
-						<a href="{% url 'reports:view' report.id %}">{{report.datetime}}</a>
+						<a class="ui-similar-report-datetime" href="{% url 'reports:view' report.id %}">{{report.datetime}}</a>
 						{% if report.is_verified %}<span class="badge badge-success">Verified <i class="icon-ok"></i></span>{% endif %}
 						{% if report.is_closed %}<span class="badge badge-important">Closed <i class="icon-lock"></i></span>{% endif %}
 					</li>

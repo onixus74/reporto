@@ -46,7 +46,8 @@
     "lodash": "~2.0.0",
     "pines-notify": "~1.2.0",
     "medium-editor": "daviferreira/medium-editor#~1.0.0",
-    "pickadate": "~3.2.2"
+    "pickadate": "~3.2.2",
+    "html5shiv": "~3.7.0"
   },
   "devDependencies": {
     "html-inspector": "~0.3.0"

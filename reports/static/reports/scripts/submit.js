@@ -2,6 +2,8 @@
 /* global angular, $, L, Dropzone, reform */
 'use strict';
 
+window.str = $('#dateinput-template').html();
+
 if(!reform) {
 	var reform = {
 		data: {},
@@ -303,6 +305,13 @@ reform.widgets.wizard.init = function() {
 	elements.datetime = $('#id_datetime');
 	console.log(elements.datetime);
 
+	elements.date = $('#id_date');
+	console.log(elements.date);
+
+	elements.time = $('#id_time');
+
+	console.log(elements.time);
+
 	/*
 	var showVictimAggressorSection = showNextSection('location', ['location', 'location_text']);
 	elements.location.on('change.showNextSection', showVictimAggressorSection);
@@ -459,9 +468,9 @@ reform.widgets.similarReports.init = function() {
 			similarReportsLabel = $('#ui-similar-reports-label'),
 			noSimilarReportsNotification = $('#ui-no-similar-reports'),
 			reportsList = $('#ui-reports-list'),
-			reportsItems = reportsList.find('.ui-timeline-story');
+			reportsItems = reportsList.find('.ui-similar-report-candidate');
 
-	noSimilarReportsNotification.addClass('animated');
+	//noSimilarReportsNotification.addClass('animated');
 
 	window.similarReports = widget;
 
@@ -484,13 +493,14 @@ reform.widgets.similarReports.init = function() {
 		return deg * (Math.PI/180)
 	}
 
-	widget.isSimilarToInput = function(e, el){
+	widget.checkSimilarity = function(e, el){
+		var result = [];
 		var a, b;
 		//console.log('widget', 'similarReports', 'report record', e, el);
 		/* category : check for same value */
 		//console.log('widget', 'similarReports', 'report record', 'category', elements['category'].val(), el.data('category'));
-		if(elements['category'].val() != el.data('category')) // same category
-			return false;
+		if(elements['category'].val() == el.data('category')) // same category
+			result.push('category');
 		/* location: check for near location with distance of 10km at max */
 		console.log('widget', 'similarReports', 'report record', 'location', elements['location'].val(), el.data('location'));
 		a = elements['location'].val();
@@ -502,28 +512,26 @@ reform.widgets.similarReports.init = function() {
 			console.log('widget', 'similarReports', 'report record', 'location', 2, a, b);
 			var d = getDistanceFromLatLonInKm(+a[0],+a[1],+b[0],+b[1]);
 			console.log('widget', 'similarReports', 'report record', 'location', 3, d);
-			if(d > 10)
-				return false;
+			if(d < 10)
+				result.push('location');
 		}
 		/* datetime : check for same date */
 		//console.log('widget', 'similarReports', 'report record', 'datetime', elements['datetime'].val(), el.data('datetime'));
-		a = elements['datetime'].val(),
+		a = elements['date'].val(),
 		b = el.data('datetime');
 		console.log('widget', 'similarReports', 'report record', 'datetime', 1, a, b);
 		if(a) {
 			a = new Date(a);
 			b = new Date(b);
 			console.log('widget', 'similarReports', 'report record', 'datetime', 2, a, b);
-			if(!a || !b)
-				return false;
-			if(a.getFullYear() != b.getFullYear() || a.getMonth() != b.getMonth() || a.getDate() != b.getDate())
-				return false;
+			if(a && b && a.getFullYear() == b.getFullYear() && a.getMonth() == b.getMonth() && a.getDate() == b.getDate())
+				result.push('datetime');
 		}
-		return true;
+		return result;
 	};
 
-
 	function showSimilarReports(e) {
+
 		if(!similar) {
 			latestReportsLabel.hide();
 			similarReportsLabel.css({'display': 'inline-block'}).addClass('animated pulse').show();
@@ -533,97 +541,83 @@ reform.widgets.similarReports.init = function() {
 		reportsItems.each(function(index, el){
 			el = $(el);
 			el.addClass('animated');
-			if(widget.isSimilarToInput(e, el)) {
+
+			//if(widget.isSimilarToInput(e, el)) {
+			var similarities = widget.checkSimilarity(e, el);
+			if(similarities.length > 0) {
 				any = true;
+				el.removeClass().addClass('ui-similar-report-candidate ui-similar-report').addClass(similarities.map(function(field){ return 'ui-similar-' + field;}).join(' ')); //.show();
+				/*
 				el.removeClass('fadeOutRight')
 				if(!el.hasClass('fadeInRight')) {
 					el.addClass('fadeInRight').show();
 				}
+				*/
 			} else {
+				el.removeClass().addClass('ui-similar-report-candidate'); //.hide();
+				/*
 				el.removeClass('fadeInRight');
 				if(!el.hasClass('fadeOutRight')) {
-					el.addClass('fadeOutRight').hide();/*.one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend webkitAnimationEnd oanimationend msAnimationEnd animationend', function(e) {
-						$(this).hide();
-					});*/
+					el.addClass('fadeOutRight').hide();
+					//.one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend webkitAnimationEnd oanimationend msAnimationEnd animationend', function(e) { $(this).hide(); });
 				}
+				*/
 			}
 		});
 		if (any){
+			//noSimilarReportsNotification.hide();
+			/*
 			noSimilarReportsNotification.removeClass('fadeInUp');
 			if(!noSimilarReportsNotification.hasClass('fadeOutDown')) {
-				noSimilarReportsNotification.addClass('fadeOutDown').hide();/*.one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend webkitAnimationEnd oanimationend msAnimationEnd animationend', function(e) {
-					$(this).hide();
-				});*/
+				noSimilarReportsNotification.addClass('fadeOutDown').hide();
+				//.one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend webkitAnimationEnd oanimationend msAnimationEnd animationend', function(e) { $(this).hide(); });
 			}
+			*/
 		} else {
+			//noSimilarReportsNotification.show();
+			/*
 			noSimilarReportsNotification.removeClass('fadeOutDown');
 			if(!noSimilarReportsNotification.hasClass('fadeInUp')) {
 				noSimilarReportsNotification.addClass('fadeInUp').show();
 			}
+			*/
 		}
+
 	}
 
-	var category = reform.widgets.wizard.elements.category;
-	category.on('change', showSimilarReports);
+	var elements = reform.widgets.wizard.elements;
 
-	var location = reform.widgets.wizard.elements.location;
-	location.on('change', showSimilarReports);
+	elements.category.on('change', showSimilarReports);
 
-	var datetime = reform.widgets.wizard.elements.datetime;
-	datetime.on('change', showSimilarReports);
+	elements.location.on('change', showSimilarReports);
+
+	//elements.datetime.on('change', showSimilarReports);
+	elements.date.on('change', showSimilarReports);
 
 };
 
 $(reform.widgets.similarReports.init);
 
-
-/*
-reform.widgets.xxx = {};
-reform.widgets.xxx.init = function() {
-	var widget = reform.widgets.xxx;
-	var xxx =
-	widget.object = xxx;
-	widget.element = xxx;
-};
-
-$(reform.widgets.xxx.init);
-*/
-
-
 reform.widgets.datetime = {};
 reform.widgets.datetime.init = function() {
 	var widget = reform.widgets.datetime;
-	/*
-	var datetime =
-	widget.object = datetime;
-	widget.element = datetime;
-	*/
-	var datetimeInput = $('#id_datetime');
-	var dateInput = $('#id_date');
-	var timeInput = $('#id_time');
+
+	var elements = reform.widgets.wizard.elements;
+	var timeInput = elements.time,
+			dateInput = elements.date,
+			datetimeInput = elements.datetime;
 
 	function handleDateOrTimeChange(e){
 		var time = timeInput.val();
 		var date = dateInput.val();
+
 		if(date && time) {
-			datetimeInput.val(date + 'T' + time).change();
+			datetimeInput.val(date + 'T' + time).trigger('change'); //change();
 		}
 	}
+
 	timeInput.on('change', handleDateOrTimeChange);
 	dateInput.on('change', handleDateOrTimeChange);
-
-	/*
-	// PARDON ME while I do a little magic to keep these events relevant for the rest of time...
-	var currentMonth = moment().format('YYYY-MM');
-	var nextMonth    = moment().add('month', 1).format('YYYY-MM');
-
-	var events = [
-		{ date: currentMonth + '-' + '10', title: 'Persian Kitten Auction', location: 'Center for Beautiful Cats' },
-		{ date: currentMonth + '-' + '19', title: 'Cat Frisbee', location: 'Jefferson Park' },
-		{ date: currentMonth + '-' + '23', title: 'Kitten Demonstration', location: 'Center for Beautiful Cats' },
-		{ date: nextMonth + '-' + '07',    title: 'Small Cat Photo Session', location: 'Center for Cat Photography' }
-	];
-	*/
 
 	var clndr;
 
@@ -641,7 +635,7 @@ reform.widgets.datetime.init = function() {
 	}
 
 	clndr = widget.object = $('#dateinput').clndr({
-		template: $('#dateinput-template').html(),
+		template: $('#dateinput-template').html().split(/\n|\r/gi).map(function(s){return s.trim()}).join(''),
 		//events: events,
 		clickEvents: {
 			click: function(target) {
@@ -670,3 +664,19 @@ reform.widgets.datetime.init = function() {
 };
 
 $(reform.widgets.datetime.init);
+
+
+
+
+/*
+reform.widgets.xxx = {};
+reform.widgets.xxx.init = function() {
+	var widget = reform.widgets.xxx;
+	var xxx =
+	widget.object = xxx;
+	widget.element = xxx;
+};
+
+$(reform.widgets.xxx.init);
+*/
+
