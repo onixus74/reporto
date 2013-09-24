@@ -10,6 +10,12 @@
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width">
 
+	<!--[if lt IE 9]>
+		<script src="{% static 'components/es5-shim/es5-shim.js' %}"></script>
+		<script src="{% static 'components/json3/lib/json3.min.js' %}"></script>
+		<script src="{% static 'components/html5shiv/html5shiv.js' %}"></script>
+	<![endif]-->
+
 <!-- Layout Styles Dependencies -->
 {% block layout_styles %}
 	{% compress css %}
@@ -60,16 +66,15 @@
 </head>
 <body ng-app="reformPlatform">
 
+	{% comment %}
 	<!--[if lt IE 7]>
 		<p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
 	<![endif]-->
+	{% endcomment %}
 
-	<!--[if lt IE 9]>
-		<script src="{% static 'components/es5-shim/es5-shim.js' %}"></script>
-		<script src="{% static 'components/json3/lib/json3.min.js' %}"></script>
-	<![endif]-->
+	<div id="top-bg" style="z-index: 1100;"></div>
 
-	<div class="navbar-wrapper" style="z-index: 1100;">
+	<div class="navbar-wrapper" style="z-index: 1101;">
 		<div class="container">
 			<div class="navbar">
 				<div class="navbar-inner">

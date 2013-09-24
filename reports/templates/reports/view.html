@@ -36,7 +36,7 @@
 			<div class="row-fluid">
 				<div class="span6">
 					<hr>
-					<h2>Victim</h2>
+					<h2><i class="icon-user"></i> Victim</h2>
 					<dl class="dl-horizontal">
 						<dt>Category</dt>
 						<dd>{{report.victim.get_category_display}}</dd>
@@ -58,7 +58,7 @@
 				</div>
 				<div class="span6">
 					<hr>
-					<h2>Aggressor</h2>
+					<h2><i class="icon-male"></i> Aggressor</h2>
 					{{report.aggressor}}
 				</div>
 			</div>
@@ -66,12 +66,12 @@
 			<div class="row-fluid">
 				<div class="span6">
 					<hr>
-					<h2>Description</h2>
+					<h2><i class="icon-ellipsis-horizontal"></i> Description</h2>
 					{{report.description}}
 				</div>
 				<div class="span6">
 					<hr>
-					<h2>Evidence</h2>{% get_media_prefix as MEDIA_PREFIX %}
+					<h2><i class="icon-picture"></i> Evidence</h2>{% get_media_prefix as MEDIA_PREFIX %}
 					{% if report.media.count %}
 					<ul class="thumbnails">
 						{% for media in report.media.all %}
@@ -91,10 +91,10 @@
 			<div class="row-fluid">
 				<div class="offset2 span8">
 					<hr>
-					<h2>Features</h2>
+					<h2><i class="icon-tag"></i> Features</h2>
 					<ul class="inline">
 					{% for feature in report.features.all  %}
-						<li>{{feature}}</li>
+						<li><span class="label">{{feature}}</span></li>
 					{% endfor %}
 					</ul>
 				</div>
@@ -103,7 +103,7 @@
 			<div class="row-fluid">
 				<div class="offset1 span10">
 					<hr>
-					<h2>Comments</h2>
+					<h2><i class="icon-comments"></i> Comments</h2>
 
 					<ul id="ui-comments" class="list">
 						{% for comment in report.comments.all  %}
