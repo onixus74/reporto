@@ -39,7 +39,10 @@ ol.list {
 	}
 }
 
-
+.btn-quiet {
+  //@include buttonBackground(transparent, $btnPrimaryBackgroundHighlight);
+  background-color: transparent;
+}
 
 /*-------------------------------------------------
 | GLOBAL STYLES

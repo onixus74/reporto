@@ -148,9 +148,22 @@ body {
 .ui-similar-report-candidate {
 	margin: 4px;
 	border: 1px transparent solid;
-	&.ui-similar-report {
-		@include box-shadow(0 0 6px rgba(255, 0, 0, 0.5));
+	@include transition(border-color .1s linear);
+	&.ui-similar {
 		border-color: $red;
+		@include box-shadow(0 0 5px rgba($red, 0.5));
+		&.ui-similar-1 {
+			@include box-shadow(0 0 10px rgba($red, 0.6));
+		}
+		&.ui-similar-2 {
+			@include box-shadow(0 0 15px rgba($red, 0.7));;
+		}
+		&.ui-similar-3 {
+			@include box-shadow(0 0 20px rgba($red, 0.8));;
+		}
+		&.ui-similar-4 {
+			@include box-shadow(0 0 25px rgba($red, 0.9));;
+		}
 	}
 }
 
@@ -160,15 +173,11 @@ body {
 
 .ui-similar-datetime {}
 
-.ui-similar-category, .ui-similar-location, .ui-similar-datetime {}
+.ui-similar-victim {}
 
-
-.ui-similar-report .ui-similar-report-item {
-
-}
 
 .ui-similar-category .ui-similar-report-category {
-	color: $red;
+	color: darken($red, 5%);
 	font-weight: bold;
 }
 
@@ -178,10 +187,14 @@ body {
 }
 
 .ui-similar-datetime .ui-similar-report-datetime {
-	color: darken($red, 20%);
+	color: darken($red, 15%);
 	font-weight: bold;
 }
 
+.ui-similar-victim .ui-similar-report-victim {
+	color: $red;
+	font-weight: bold;
+}
 
 @media (max-width: 767px) {
 
