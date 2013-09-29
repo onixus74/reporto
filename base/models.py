@@ -10,9 +10,9 @@ class User(AbstractUser):
 	#class Meta:
 	#	unique_together = ('email', )
 
-	REQUIRED_FIELDS = ['email', 'first_name', 'last_name']
-	#REQUIRED_FIELDS = ['first_name', 'last_name']
-	#USERNAME_FIELD = 'email'
+	#REQUIRED_FIELDS = ['email', 'first_name', 'last_name']
+	REQUIRED_FIELDS = ['first_name', 'last_name']
+	USERNAME_FIELD = 'email'
 
 	REPORTER  = "R"
 	MODERATOR = "M"
@@ -41,6 +41,20 @@ class User(AbstractUser):
 		data['full_name'] = self.get_full_name()
 		data['role_display'] = self.get_role_display()
 		return data
+
+	def is_admin(self):
+		return self.is_superuser or self.role == self.ADMIN
+
+	def is_moderator(self):
+		return self.role == self.MODERATOR
+
+	def is_reporter(self):
+		return self.role == self.REPORTER
+
+	def get_roles(self):
+		#return dict(self.ROLE)
+		return [{'value': v, 'text': t} for v, t in self.ROLE]
+
 
 email = User._meta.get_field_by_name('email')[0]
 email.null = False

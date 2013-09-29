@@ -351,10 +351,16 @@ reform.widgets.wizard.init = function() {
 	elements.victim = $('#id_victim');
 	console.log(elements.victim);
 
-	var els = Array.prototype.slice.apply(document.getElementById('ui-victim-fieldset').elements);
+	Array.prototype.slice.apply(document.querySelector('#report-form').elements).forEach(function(e){
+		elements[e.name] = $(e);
+	});
+
+	/*
+	var els = Array.prototype.slice.apply(document.querySelector('#ui-victim-fieldset').elements);
 	els.forEach(function(e) {
 		elements[e.name] = $(e);
 	});
+	*/
 
 	/*
 	var showAggressorSection = showNextSection('victim', ['victim-firstname']);

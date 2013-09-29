@@ -1,0 +1,83 @@
+{% extends "layouts/default.html" %}
+
+{% block view_title %}Report Details | {% endblock %}
+
+{% block view_content %}
+<div class="container">
+
+	<div class="page-header">
+		<h1>Report <small>Detail</small></h1>
+	</div>
+
+	<div class="container-fluid">
+		<div class="row-fluid">
+			<div class="offset2 span8">
+
+				<form class="form-horizontal">
+
+					<div class="control-group">
+						<div class="controls">
+							<dl>
+
+								<dt>Date and time</dt>
+								<dd>{{report.datetime}}</dd>
+								<dt>Location</dt>
+								<dd>{{report.location}}</dd>
+								<dt>Location text</dt>
+								<dd>{{report.location_text}}</dd>
+								<dt>Category</dt>
+								<dd><a href="{{report.category.get_absolute_url}}">{{report.category}}</a></dd>
+								<dt>Victim</dt>
+								<dd><a href="{{report.victim.get_absolute_url}}">{{report.victim}}</a></dd>
+								<dt>Aggressor</dt>
+								<dd>{{report.aggressor}}</dd>
+								<dt>Aggressor Category</dt>
+								<dd>{{report.aggressor_category}}</dd>
+								<dt>Description</dt>
+								<dd>{{report.description}}</dd>
+								<dt>Media</dt>
+								<dd>
+									<ul>
+									{% for media in report.media.all  %}
+										<li><a href="{{media.url}}">{{media}}</a></li>
+									{% endfor %}
+									</ul>
+								</dd>
+								<dt>Features</dt>
+								<dd>
+									<ul>
+									{% for feature in report.features.all  %}
+										<li><a href="{{feature.get_absolute_url}}">{{feature}}</a></li>
+									{% endfor %}
+									</ul>
+								</dd>
+								<dt>Is verified</dt>
+								<dd>{{report.is_verified}}</dd>
+								<dt>Is closed</dt>
+								<dd>{{report.is_closed}}</dd>
+								<dt>Comments</dt>
+								<dd>
+									<ul>
+									{% for comment in report.comments.all  %}
+										<li><a href="{{comment.get_absolute_url}}">{{comment}}</a></li>
+									{% endfor %}
+									</ul>
+								</dd>
+							</dl>
+						</div>
+					</div>
+
+					<div class="form-actions">
+						<a href="{% url 'reports:crud-edit' report.id %}" class="btn btn-info"><i class="icon-pencil"></i> Edit</a>
+						<a href="{% url 'reports:crud-delete' report.id %}" class="btn btn-warning"><i class="icon-trash"></i> Delete</a>
+						<a href="{% url 'reports:crud-list' %}" class="btn"><i class="icon-back"></i> Back</a>
+					</div>
+
+				</form>
+
+			</div>
+		</div>
+	</div>
+
+</div>
+{% endblock %}

@@ -578,7 +578,7 @@ def report_comment(request, pk, *args, **kwargs):
 			'object': comment,
 			'html': render_to_string("reports/view_comment.html", {'comment': comment}),
 			'notification': { 'title': "Adding Comment", 'body': "Comment added." }
-			})
+		})
 	else:
 		return JSONResponse({
 			'success': False,
@@ -605,7 +605,7 @@ def stats_xxx(request, *args, **kwargs):
 
 class ReportListView(ListView):
 	model = Report
-	template_name = "reports/manage/list.html"
+	template_name = "reports/crud/list.html"
 
 
 class ReportListHybridView(ListHybridResponseMixin, ReportListView):
@@ -614,7 +614,7 @@ class ReportListHybridView(ListHybridResponseMixin, ReportListView):
 
 class ReportDetailView(DetailView):
 	model = Report
-	template_name = "reports/manage/view.html"
+	template_name = "reports/crud/view.html"
 
 
 class ReportDetailHybridView(DetailHybridResponseMixin, ReportDetailView):
@@ -623,16 +623,16 @@ class ReportDetailHybridView(DetailHybridResponseMixin, ReportDetailView):
 
 class ReportCreateView(CreateView):
 	model = Report
-	template_name = "reports/manage/new.html"
+	template_name = "reports/crud/new.html"
 
 
 class ReportUpdateView(UpdateView):
 	model = Report
-	template_name = "reports/manage/edit.html"
+	template_name = "reports/crud/edit.html"
 
 
 class ReportDeleteView(DeleteView):
 	model = Report
-	template_name = "reports/manage/delete.html"
-	success_url = '/reports/manage/'
+	template_name = "reports/crud/delete.html"
+	success_url = '/reports/crud/'
 

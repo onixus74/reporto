@@ -2,28 +2,31 @@ from django.conf.urls import patterns, url, include
 from django.views.generic import TemplateView
 from django.contrib.auth.decorators import login_required, user_passes_test, permission_required
 
+from base.utils.urls import administrator_required
 
+from base.views import *
 from reports.views import ReportsDashboard
 
+
 urlpatterns = patterns('',
-	#url(r'^test/$', 'base.views.test', name='test'),
+	url(r'^test/$', test, name='test'),
 
 	#url(r'^$', 'base.views.home', name='home'),
 	url(r'^$',           login_required(ReportsDashboard.as_view()),       name='home'),
 
 	# url(r'^$', TemplateView.as_view(template_name="home.html"), name='home'),
 
-	url(r'', include('social_auth.urls')),
-	url(r'^login$',    'base.views.login_view',    name='login'),
-	url(r'^logout$',   'base.views.logout_view',   name='logout'),
-	#url(r'^register$', 'base.views.register_view', name='register'),
-	#url(r'^users/', include('django.contrib.auth.urls')),
+	url(r'^login/$',    login_view,    name='login'),
+	url(r'^logout/$',   logout_view,   name='logout'),
+	#url(r'^register/$', register_view, name='register'),
+	url(r'',           include('django.contrib.auth.urls')),
+	url(r'',           include('social_auth.urls')),
+
+	url(r'^users/',      include('users.urls', namespace="users")),
 
 	url(r'^reports/',    include('reports.urls',    namespace='reports')),
 	url(r'^categories/', include('categories.urls', namespace="categories")),
-	url(r'^features/',   include('features.urls',   namespace="features")),
-	url(r'^victims/',    include('victims.urls',    namespace="victims")),
-
-	url(r'^users/',      include('base.users_urls', namespace="users")),
+	url(r'^features/',   include('features.urls', namespace="features")),
+	url(r'^victims/',    include('victims.urls', namespace="victims")),
 
 )
