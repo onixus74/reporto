@@ -3,11 +3,12 @@
 import os
 PROJECT_DIR=os.path.dirname(__file__)
 
-#DEBUG = True # !DEV!
-DEBUG = False # !PROD!
+DEBUG = True # !DEV!
+#DEBUG = False # !PROD!
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
+    ('Administrator', 'admin@reform.tn'),
     ('Nader Toukabri', 'nader.toukabri@gmail.com'),
 )
 
@@ -23,8 +24,8 @@ DATABASES = {}
 import dj_database_url
 DATABASES['default'] = dj_database_url.config()
 
-# # Hosts/domain names that are valid for this site; required if DEBUG is False
-# # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
+# Hosts/domain names that are valid for this site; required if DEBUG is False
+# See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
 # ALLOWED_HOSTS = ['localhost', 'reform.tn', 'www.reform.tn', 'reform-tn-platform.herokuapp.com']
 ALLOWED_HOSTS = ['*']
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
@@ -88,27 +89,23 @@ MEDIA_ROOT = os.path.join(PROJECT_DIR,'media/')
 # Examples: "http://example.com/media/", "http://media.example.com/"
 MEDIA_URL = '/media/'
 
-# # Absolute path to the directory static files should be collected to.
-# # Don't put anything in this directory yourself; store your static files
-# # in apps' "static/" subdirectories and in STATICFILES_DIRS.
-# # Example: "/var/www/example.com/static/"
+# Absolute path to the directory static files should be collected to.
+# Don't put anything in this directory yourself; store your static files
+# in apps' "static/" subdirectories and in STATICFILES_DIRS.
+# Example: "/var/www/example.com/static/"
 # STATIC_ROOT = os.path.join(PROJECT_DIR,'static/')
-
 STATIC_ROOT = 'staticfiles'
 
-# # URL prefix for static files.
-# # Example: "http://example.com/static/", "http://static.example.com/"
+# URL prefix for static files.
+# Example: "http://example.com/static/", "http://static.example.com/"
 STATIC_URL = '/static/'
 
-# # Additional locations of static files
-# STATICFILES_DIRS = (
-#     # Put strings here, like "/home/html/static" or "C:/www/django/static".
-#     # Always use forward slashes, even on Windows.
-#     # Don't forget to use absolute paths, not relative paths.
-# )
-
+# Additional locations of static files
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 STATICFILES_DIRS = (
+    # Put strings here, like "/home/html/static" or "C:/www/django/static".
+    # Always use forward slashes, even on Windows.
+    # Don't forget to use absolute paths, not relative paths.
     os.path.join(BASE_DIR, 'static'),
 )
 
@@ -256,26 +253,14 @@ LOGGING = {
     }
 }
 
-AUTH_USER_MODEL = 'base.User'
+AUTH_USER_MODEL = 'users.User'
 
 INSTALLED_APPS += ('debug_toolbar',) # !DEV!
 INTERNAL_IPS = ('127.0.0.1','127.0.1.1')
 
-# INSTALLED_APPS += ('rest_framework',)
-# REST_FRAMEWORK = {
-#     #'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAdminUser',),
-#     'PAGINATE_BY': 10
-# }
-
-INSTALLED_APPS += ('compressor',)
-
 INSTALLED_APPS += ('south',)
 
-# INSTALLED_APPS += ('django_youtube',)
-# YOUTUBE_AUTH_EMAIL = 'yourmail@gmail.com'
-# YOUTUBE_AUTH_PASSWORD = 'yourpassword'
-# YOUTUBE_DEVELOPER_KEY = 'developer key, get one from http://code.google.com/apis/youtube/dashboard/'
-# YOUTUBE_CLIENT_ID = 'client-id'
+INSTALLED_APPS += ('compressor',)
 
 INSTALLED_APPS += ('easy_thumbnails',)
 THUMBNAIL_ALIASES = {
@@ -315,7 +300,7 @@ LOGIN_REDIRECT_URL = '/'
 #LOGIN_ERROR_URL    = '/login'
 
 
-SOCIAL_AUTH_USER_MODEL = 'base.User'
+SOCIAL_AUTH_USER_MODEL = AUTH_USER_MODEL
 
 SOCIAL_AUTH_USERNAME_IS_FULL_EMAIL = True
 SOCIAL_AUTH_PROTECTED_USER_FIELDS = ['email', 'username', 'first_name', 'last_name']

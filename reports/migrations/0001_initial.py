@@ -34,17 +34,17 @@ class Migration(SchemaMigration):
         # Adding model 'Victim'
         db.create_table(u'reports_victim', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('category', self.gf('django.db.models.fields.CharField')(default='CIT', max_length=3)),
             ('firstname', self.gf('django.db.models.fields.CharField')(max_length=100)),
             ('lastname', self.gf('django.db.models.fields.CharField')(max_length=100)),
-            ('gender', self.gf('django.db.models.fields.CharField')(default='M', max_length=1, null=True, blank=True)),
+            ('gender', self.gf('django.db.models.fields.CharField')(default='M', max_length=1)),
             ('age', self.gf('django.db.models.fields.PositiveIntegerField')(null=True, blank=True)),
             ('education', self.gf('django.db.models.fields.CharField')(max_length=200, null=True, blank=True)),
             ('profession', self.gf('django.db.models.fields.CharField')(max_length=200, null=True, blank=True)),
             ('phone', self.gf('django.db.models.fields.CharField')(max_length=20, null=True, blank=True)),
             ('email', self.gf('django.db.models.fields.EmailField')(max_length=75, null=True, blank=True)),
             ('description', self.gf('django.db.models.fields.TextField')(null=True, blank=True)),
-            ('category', self.gf('django.db.models.fields.CharField')(default='CIT', max_length=3, blank=True)),
-            ('user', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['base.User'], null=True, blank=True)),
+            ('user', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['users.User'], null=True, blank=True)),
         ))
         db.send_create_signal(u'reports', ['Victim'])
 
@@ -54,7 +54,7 @@ class Migration(SchemaMigration):
             ('type', self.gf('django.db.models.fields.CharField')(default='U', max_length=1)),
             ('content', self.gf('django.db.models.fields.TextField')(null=True, blank=True)),
             ('attachment', self.gf('django.db.models.fields.files.FileField')(max_length=100, null=True, blank=True)),
-            ('created_by', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['base.User'])),
+            ('created_by', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['users.User'])),
             ('created_at', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
         ))
         db.send_create_signal(u'reports', ['Comment'])
@@ -67,12 +67,12 @@ class Migration(SchemaMigration):
             ('location_text', self.gf('django.db.models.fields.CharField')(max_length=300)),
             ('category', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['reports.Category'])),
             ('victim', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['reports.Victim'])),
-            ('aggressor', self.gf('django.db.models.fields.TextField')()),
+            ('aggressor', self.gf('django.db.models.fields.TextField')(null=True, blank=True)),
             ('aggressor_category', self.gf('django.db.models.fields.CharField')(default='COP', max_length=3, blank=True)),
             ('description', self.gf('django.db.models.fields.TextField')()),
             ('is_verified', self.gf('django.db.models.fields.BooleanField')(default=False)),
             ('is_closed', self.gf('django.db.models.fields.BooleanField')(default=False)),
-            ('created_by', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['base.User'])),
+            ('created_by', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['users.User'])),
             ('created_at', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
             ('updated_at', self.gf('django.db.models.fields.DateTimeField')(auto_now=True, blank=True)),
         ))
@@ -149,23 +149,6 @@ class Migration(SchemaMigration):
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '50'})
         },
-        u'base.user': {
-            'Meta': {'object_name': 'User'},
-            'date_joined': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
-            'email': ('django.db.models.fields.EmailField', [], {'unique': 'True', 'max_length': '75'}),
-            'first_name': ('django.db.models.fields.CharField', [], {'max_length': '30'}),
-            'groups': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['auth.Group']", 'symmetrical': 'False', 'blank': 'True'}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'is_active': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'is_staff': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'is_superuser': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'last_login': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
-            'last_name': ('django.db.models.fields.CharField', [], {'max_length': '30'}),
-            'password': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
-            'role': ('django.db.models.fields.CharField', [], {'default': "'R'", 'max_length': '1'}),
-            'user_permissions': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['auth.Permission']", 'symmetrical': 'False', 'blank': 'True'}),
-            'username': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '30'})
-        },
         u'contenttypes.contenttype': {
             'Meta': {'ordering': "('name',)", 'unique_together': "(('app_label', 'model'),)", 'object_name': 'ContentType', 'db_table': "'django_content_type'"},
             'app_label': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
@@ -184,7 +167,7 @@ class Migration(SchemaMigration):
             'attachment': ('django.db.models.fields.files.FileField', [], {'max_length': '100', 'null': 'True', 'blank': 'True'}),
             'content': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
             'created_at': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
-            'created_by': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['base.User']"}),
+            'created_by': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['users.User']"}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'type': ('django.db.models.fields.CharField', [], {'default': "'U'", 'max_length': '1'})
         },
@@ -201,12 +184,12 @@ class Migration(SchemaMigration):
         },
         u'reports.report': {
             'Meta': {'ordering': "['datetime']", 'object_name': 'Report'},
-            'aggressor': ('django.db.models.fields.TextField', [], {}),
+            'aggressor': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
             'aggressor_category': ('django.db.models.fields.CharField', [], {'default': "'COP'", 'max_length': '3', 'blank': 'True'}),
             'category': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['reports.Category']"}),
             'comments': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'to': u"orm['reports.Comment']", 'null': 'True', 'blank': 'True'}),
             'created_at': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
-            'created_by': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['base.User']"}),
+            'created_by': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['users.User']"}),
             'datetime': ('django.db.models.fields.DateTimeField', [], {}),
             'description': ('django.db.models.fields.TextField', [], {}),
             'features': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['reports.Feature']", 'symmetrical': 'False'}),
@@ -222,17 +205,34 @@ class Migration(SchemaMigration):
         u'reports.victim': {
             'Meta': {'object_name': 'Victim'},
             'age': ('django.db.models.fields.PositiveIntegerField', [], {'null': 'True', 'blank': 'True'}),
-            'category': ('django.db.models.fields.CharField', [], {'default': "'CIT'", 'max_length': '3', 'blank': 'True'}),
+            'category': ('django.db.models.fields.CharField', [], {'default': "'CIT'", 'max_length': '3'}),
             'description': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
             'education': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True', 'blank': 'True'}),
             'email': ('django.db.models.fields.EmailField', [], {'max_length': '75', 'null': 'True', 'blank': 'True'}),
             'firstname': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
-            'gender': ('django.db.models.fields.CharField', [], {'default': "'M'", 'max_length': '1', 'null': 'True', 'blank': 'True'}),
+            'gender': ('django.db.models.fields.CharField', [], {'default': "'M'", 'max_length': '1'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'lastname': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'phone': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True', 'blank': 'True'}),
             'profession': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True', 'blank': 'True'}),
-            'user': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['base.User']", 'null': 'True', 'blank': 'True'})
+            'user': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['users.User']", 'null': 'True', 'blank': 'True'})
+        },
+        u'users.user': {
+            'Meta': {'object_name': 'User'},
+            'date_joined': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
+            'email': ('django.db.models.fields.EmailField', [], {'unique': 'True', 'max_length': '75'}),
+            'first_name': ('django.db.models.fields.CharField', [], {'max_length': '30'}),
+            'groups': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['auth.Group']", 'symmetrical': 'False', 'blank': 'True'}),
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'is_active': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
+            'is_staff': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+            'is_superuser': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+            'last_login': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
+            'last_name': ('django.db.models.fields.CharField', [], {'max_length': '30'}),
+            'password': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
+            'role': ('django.db.models.fields.CharField', [], {'default': "'R'", 'max_length': '1'}),
+            'user_permissions': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['auth.Permission']", 'symmetrical': 'False', 'blank': 'True'}),
+            'username': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '30'})
         }
     }
 
