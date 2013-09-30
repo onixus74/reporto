@@ -10,9 +10,9 @@ class User(AbstractUser):
 	#class Meta:
 	#	unique_together = ('email', )
 
-	#REQUIRED_FIELDS = ['email', 'first_name', 'last_name']
-	REQUIRED_FIELDS = ['first_name', 'last_name']
-	USERNAME_FIELD = 'email'
+	REQUIRED_FIELDS = ['email', 'first_name', 'last_name']
+	#REQUIRED_FIELDS = ['first_name', 'last_name']
+	#USERNAME_FIELD = 'email'
 
 	REPORTER  = "R"
 	MODERATOR = "M"
