@@ -8,17 +8,17 @@ DEBUG = True # !DEV!
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-    ('Administrator', 'admin@reform.tn'),
-    ('Nader Toukabri', 'nader.toukabri@gmail.com'),
+	('Administrator', 'admin@reform.tn'),
+	('Nader Toukabri', 'nader.toukabri@gmail.com'),
 )
 
 MANAGERS = ADMINS
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'reform_tn/development.sqlite3',
-    }
+	'default': {
+		'ENGINE': 'django.db.backends.sqlite3',
+		'NAME': 'reform_tn/development.sqlite3',
+	}
 }
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
@@ -96,18 +96,18 @@ STATIC_URL = '/static/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
-    # Put strings here, like "/home/html/static" or "C:/www/django/static".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
+	# Put strings here, like "/home/html/static" or "C:/www/django/static".
+	# Always use forward slashes, even on Windows.
+	# Don't forget to use absolute paths, not relative paths.
 )
 
 # List of finder classes that know how to find static files in
 # various locations.
 STATICFILES_FINDERS = (
-    'django.contrib.staticfiles.finders.FileSystemFinder',
-    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-#    'django.contrib.staticfiles.finders.DefaultStorageFinder',
-    'compressor.finders.CompressorFinder',
+	'django.contrib.staticfiles.finders.FileSystemFinder',
+	'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+	# 'django.contrib.staticfiles.finders.DefaultStorageFinder',
+	'compressor.finders.CompressorFinder',
 )
 
 # Make this unique, and don't share it with anybody.
@@ -115,19 +115,19 @@ SECRET_KEY = 'g#t3tki%zbnynjn1qlkqn#jlulv9!w*=l0e_n7j^%mm7%5@jr%'
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
-    'django.template.loaders.filesystem.Loader',
-    'django.template.loaders.app_directories.Loader',
-#     'django.template.loaders.eggs.Loader',
+	'django.template.loaders.filesystem.Loader',
+	'django.template.loaders.app_directories.Loader',
+	# 'django.template.loaders.eggs.Loader',
 )
 
 MIDDLEWARE_CLASSES = (
-    'django.middleware.common.CommonMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware', # !debug_toolbar!
+	'django.middleware.common.CommonMiddleware',
+	'django.contrib.sessions.middleware.SessionMiddleware',
+	'django.middleware.csrf.CsrfViewMiddleware',
+	'django.contrib.auth.middleware.AuthenticationMiddleware',
+	'django.contrib.messages.middleware.MessageMiddleware',
+	'django.middleware.clickjacking.XFrameOptionsMiddleware',
+	'debug_toolbar.middleware.DebugToolbarMiddleware', # !debug_toolbar!
 )
 
 ROOT_URLCONF = 'reform_tn.urls'
@@ -136,40 +136,40 @@ ROOT_URLCONF = 'reform_tn.urls'
 WSGI_APPLICATION = 'reform_tn.wsgi.application'
 
 TEMPLATE_DIRS = (
-    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
+	# Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
+	# Always use forward slashes, even on Windows.
+	# Don't forget to use absolute paths, not relative paths.
 )
 
 INSTALLED_APPS = (
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.sites',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
+	'django.contrib.auth',
+	'django.contrib.contenttypes',
+	'django.contrib.sessions',
+	'django.contrib.sites',
+	'django.contrib.messages',
+	'django.contrib.staticfiles',
 
-    # 'suit', # theme for admin
-    'admin_mod',
-    'django_admin_bootstrapped', # theme for admin
-    #'grappelli',
-    #'filebrowser',
-    'django.contrib.admin',
-    #'django.contrib.admindocs',
+	# 'suit', # theme for admin
+	'admin_mod',
+	'django_admin_bootstrapped', # theme for admin
+	#'grappelli',
+	#'filebrowser',
+	'django.contrib.admin',
+	#'django.contrib.admindocs',
 
-    # project components
-    'base',
-    'users',
-    'reports',
-    'categories',
-    'features',
-    'victims',
+	# project components
+	'base',
+	'users',
+	'reports',
+	'categories',
+	'features',
+	'victims',
 
-		# project dependencies
-    'form_utils',
-    'widget_tweaks',
-    'floppyforms',
-    'crispy_forms',
+	# project dependencies
+	'form_utils',
+	'widget_tweaks',
+	'floppyforms',
+	'crispy_forms',
 
 )
 
@@ -183,72 +183,75 @@ FILE_UPLOAD_MAX_MEMORY_SIZE = -1
 # See http://docs.djangoproject.com/en/dev/topics/logging for
 # more details on how to customize your logging configuration.
 LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'formatters': {
-        'verbose': {
-            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
-        },
-        'simple': {
-            'format': '%(levelname)s %(message)s'
-        },
-    },
-    'filters': {
-        'require_debug_false': {
-            '()': 'django.utils.log.RequireDebugFalse'
-        }
-    },
-    'handlers': {
-        'null': {
-            'level': 'DEBUG',
-            'class': 'django.utils.log.NullHandler',
-        },
-        'console':{
-            'level': 'DEBUG',
-            'class': 'logging.StreamHandler',
-            'formatter': 'simple'
-        },
-        'mail_admins': {
-            'level': 'ERROR',
-            'filters': ['require_debug_false'],
-            'class': 'django.utils.log.AdminEmailHandler'
-        }
-    },
-    'loggers': {
-        'django.request': {
-            'handlers': ['mail_admins'],
-            'level': 'ERROR',
-            'propagate': True,
-        },
-        'django': {
-            'handlers': ['console'],
-            'propagate': True,
-            'level': 'INFO',
-        },
-        'default': {
-            'handlers': ['console'],
-            'propagate': True,
-            'level': 'DEBUG',
-        },
-        'base': {
-            'handlers': ['console'],
-            'level': 'DEBUG',
-        },
-        'users': {
-            'handlers': ['console'],
-            'level': 'DEBUG',
-        },
-        'reports': {
-            'handlers': ['console'],
-            'level': 'DEBUG',
-        }
-    }
+	'version': 1,
+	'disable_existing_loggers': False,
+	'formatters': {
+		'verbose': {
+			'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
+		},
+		'simple': {
+			'format': '%(levelname)s %(message)s'
+		},
+	},
+	'filters': {
+		'require_debug_false': {
+			'()': 'django.utils.log.RequireDebugFalse'
+		}
+	},
+	'handlers': {
+		'null': {
+			'level': 'DEBUG',
+			'class': 'django.utils.log.NullHandler',
+		},
+		'console':{
+			'level': 'DEBUG',
+			'class': 'logging.StreamHandler',
+			'formatter': 'simple'
+		},
+		'mail_admins': {
+			'level': 'ERROR',
+			'filters': ['require_debug_false'],
+			'class': 'django.utils.log.AdminEmailHandler'
+		}
+	},
+	'loggers': {
+		'django.request': {
+			'handlers': ['mail_admins'],
+			'level': 'ERROR',
+			'propagate': True,
+		},
+		'django': {
+			'handlers': ['console'],
+			'propagate': True,
+			'level': 'INFO',
+		},
+		'default': {
+			'handlers': ['console'],
+			'propagate': True,
+			'level': 'DEBUG',
+		},
+		'base': {
+			'handlers': ['console'],
+			'level': 'DEBUG',
+		},
+		'users': {
+			'handlers': ['console'],
+			'level': 'DEBUG',
+		},
+		'reports': {
+			'handlers': ['console'],
+			'level': 'DEBUG',
+		}
+	}
 }
 
 AUTH_USER_MODEL = 'users.User'
 
 INSTALLED_APPS += ('debug_toolbar',) # !DEV!
 INTERNAL_IPS = ('127.0.0.1','127.0.1.1')
+# DEBUG_TOOLBAR_CONFIG = {
+#   'INTERCEPT_REDIRECTS': False
+# }
 
 INSTALLED_APPS += ('south',)
 
@@ -256,10 +259,10 @@ INSTALLED_APPS += ('compressor',)
 
 INSTALLED_APPS += ('easy_thumbnails',)
 THUMBNAIL_ALIASES = {
-    '': {
-        'media': {'size': (200, 150), 'crop': True, 'quality': 100},
-        'report_comment': {'size': (150, 150), 'crop': False, 'quality': 100},
-    },
+	'': {
+		'media': {'size': (200, 150), 'crop': True, 'quality': 100},
+		'report_comment': {'size': (150, 150), 'crop': False, 'quality': 100},
+	},
 }
 
 INSTALLED_APPS += ('social_auth',)
@@ -303,19 +306,19 @@ SOCIAL_AUTH_FIELDS_STORED_IN_SESSION = ['next',]
 from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS
 
 TEMPLATE_CONTEXT_PROCESSORS += (
-    'django.core.context_processors.request',
-    'social_auth.context_processors.social_auth_by_name_backends',
-    # 'social_auth.context_processors.social_auth_backends',
-    'social_auth.context_processors.social_auth_login_redirect',
+	'django.core.context_processors.request',
+	'social_auth.context_processors.social_auth_by_name_backends',
+	# 'social_auth.context_processors.social_auth_backends',
+	'social_auth.context_processors.social_auth_login_redirect',
 )
 
 SOCIAL_AUTH_PIPELINE = (
-    'social_auth.backends.pipeline.social.social_auth_user',
-    'social_auth.backends.pipeline.associate.associate_by_email',
-    'social_auth.backends.pipeline.user.get_username',
-    #'users.pipeline.get_user',
-    'social_auth.backends.pipeline.user.create_user',
-    'social_auth.backends.pipeline.social.associate_user',
-    'social_auth.backends.pipeline.social.load_extra_data',
-    'social_auth.backends.pipeline.user.update_user_details'
+	'social_auth.backends.pipeline.social.social_auth_user',
+	'social_auth.backends.pipeline.associate.associate_by_email',
+	'social_auth.backends.pipeline.user.get_username',
+	#'users.pipeline.get_user',
+	'social_auth.backends.pipeline.user.create_user',
+	'social_auth.backends.pipeline.social.associate_user',
+	'social_auth.backends.pipeline.social.load_extra_data',
+	'social_auth.backends.pipeline.user.update_user_details'
 )
