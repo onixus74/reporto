@@ -5,10 +5,10 @@ PROJECT_DIR=os.path.dirname(__file__)
 
 DEBUG = True # !DEV!
 #DEBUG = False # !PROD!
-TEMPLATE_DEBUG = DEBUG # !DEV!
-#TEMPLATE_DEBUG # !PROD!
+TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
+    ('Administrator', 'admin@reform.tn'),
     ('Nader Toukabri', 'nader.toukabri@gmail.com'),
 )
 
@@ -245,26 +245,14 @@ LOGGING = {
     }
 }
 
-AUTH_USER_MODEL = 'base.User'
+AUTH_USER_MODEL = 'users.User'
 
 INSTALLED_APPS += ('debug_toolbar',) # !DEV!
 INTERNAL_IPS = ('127.0.0.1','127.0.1.1')
 
-# INSTALLED_APPS += ('rest_framework',)
-# REST_FRAMEWORK = {
-#     #'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAdminUser',),
-#     'PAGINATE_BY': 10
-# }
-
-INSTALLED_APPS += ('compressor',)
-
 INSTALLED_APPS += ('south',)
 
-# INSTALLED_APPS += ('django_youtube',)
-# YOUTUBE_AUTH_EMAIL = 'yourmail@gmail.com'
-# YOUTUBE_AUTH_PASSWORD = 'yourpassword'
-# YOUTUBE_DEVELOPER_KEY = 'developer key, get one from http://code.google.com/apis/youtube/dashboard/'
-# YOUTUBE_CLIENT_ID = 'client-id'
+INSTALLED_APPS += ('compressor',)
 
 INSTALLED_APPS += ('easy_thumbnails',)
 THUMBNAIL_ALIASES = {
@@ -304,7 +292,7 @@ LOGIN_REDIRECT_URL = '/'
 #LOGIN_ERROR_URL    = '/login'
 
 
-SOCIAL_AUTH_USER_MODEL = 'base.User'
+SOCIAL_AUTH_USER_MODEL = AUTH_USER_MODEL
 
 SOCIAL_AUTH_USERNAME_IS_FULL_EMAIL = True
 SOCIAL_AUTH_PROTECTED_USER_FIELDS = ['email', 'username', 'first_name', 'last_name']

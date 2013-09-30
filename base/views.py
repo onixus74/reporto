@@ -13,7 +13,7 @@ from django.contrib.auth.decorators import login_required, user_passes_test, per
 from django.contrib import messages
 from base.utils.views import JSONResponse
 
-from base.models import User
+from users.models import User
 
 
 @csrf_exempt

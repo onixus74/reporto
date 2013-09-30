@@ -1,6 +1,6 @@
 [{
 	"pk": 1,
-	"model": "base.user",
+	"model": "users.user",
 	"fields": {
 		"username": "admin@reform.tn",
 		"first_name": "Administrator",
@@ -18,7 +18,7 @@
 	}
 }, {
 	"pk": 2,
-	"model": "base.user",
+	"model": "users.user",
 	"fields": {
 		"username": "bouguerra@reform.tn",
 		"first_name": "Bassem",
@@ -36,7 +36,7 @@
 	}
 }, {
 	"pk": 3,
-	"model": "base.user",
+	"model": "users.user",
 	"fields": {
 		"username": "nader.toukabri@gmail.com",
 		"first_name": "Nader",
@@ -54,7 +54,7 @@
 	}
 }, {
 	"pk": 4,
-	"model": "base.user",
+	"model": "users.user",
 	"fields": {
 		"username": "marwen.ounis@esprit.tn",
 		"first_name": "Marwen",

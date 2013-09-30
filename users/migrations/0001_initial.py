@@ -9,7 +9,7 @@ class Migration(SchemaMigration):
 
     def forwards(self, orm):
         # Adding model 'User'
-        db.create_table(u'base_user', (
+        db.create_table(u'users_user', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('password', self.gf('django.db.models.fields.CharField')(max_length=128)),
             ('last_login', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime.now)),
@@ -23,22 +23,22 @@ class Migration(SchemaMigration):
             ('date_joined', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime.now)),
             ('role', self.gf('django.db.models.fields.CharField')(default='R', max_length=1)),
         ))
-        db.send_create_signal(u'base', ['User'])
+        db.send_create_signal(u'users', ['User'])
 
         # Adding M2M table for field groups on 'User'
-        m2m_table_name = db.shorten_name(u'base_user_groups')
+        m2m_table_name = db.shorten_name(u'users_user_groups')
         db.create_table(m2m_table_name, (
             ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
-            ('user', models.ForeignKey(orm[u'base.user'], null=False)),
+            ('user', models.ForeignKey(orm[u'users.user'], null=False)),
             ('group', models.ForeignKey(orm[u'auth.group'], null=False))
         ))
         db.create_unique(m2m_table_name, ['user_id', 'group_id'])
 
         # Adding M2M table for field user_permissions on 'User'
-        m2m_table_name = db.shorten_name(u'base_user_user_permissions')
+        m2m_table_name = db.shorten_name(u'users_user_user_permissions')
         db.create_table(m2m_table_name, (
             ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
-            ('user', models.ForeignKey(orm[u'base.user'], null=False)),
+            ('user', models.ForeignKey(orm[u'users.user'], null=False)),
             ('permission', models.ForeignKey(orm[u'auth.permission'], null=False))
         ))
         db.create_unique(m2m_table_name, ['user_id', 'permission_id'])
@@ -46,13 +46,13 @@ class Migration(SchemaMigration):
 
     def backwards(self, orm):
         # Deleting model 'User'
-        db.delete_table(u'base_user')
+        db.delete_table(u'users_user')
 
         # Removing M2M table for field groups on 'User'
-        db.delete_table(db.shorten_name(u'base_user_groups'))
+        db.delete_table(db.shorten_name(u'users_user_groups'))
 
         # Removing M2M table for field user_permissions on 'User'
-        db.delete_table(db.shorten_name(u'base_user_user_permissions'))
+        db.delete_table(db.shorten_name(u'users_user_user_permissions'))
 
 
     models = {
@@ -69,7 +69,14 @@ class Migration(SchemaMigration):
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '50'})
         },
-        u'base.user': {
+        u'contenttypes.contenttype': {
+            'Meta': {'ordering': "('name',)", 'unique_together': "(('app_label', 'model'),)", 'object_name': 'ContentType', 'db_table': "'django_content_type'"},
+            'app_label': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'model': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
+            'name': ('django.db.models.fields.CharField', [], {'max_length': '100'})
+        },
+        u'users.user': {
             'Meta': {'object_name': 'User'},
             'date_joined': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
             'email': ('django.db.models.fields.EmailField', [], {'unique': 'True', 'max_length': '75'}),
@@ -85,14 +92,7 @@ class Migration(SchemaMigration):
             'role': ('django.db.models.fields.CharField', [], {'default': "'R'", 'max_length': '1'}),
             'user_permissions': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['auth.Permission']", 'symmetrical': 'False', 'blank': 'True'}),
             'username': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '30'})
-        },
-        u'contenttypes.contenttype': {
-            'Meta': {'ordering': "('name',)", 'unique_together': "(('app_label', 'model'),)", 'object_name': 'ContentType', 'db_table': "'django_content_type'"},
-            'app_label': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'model': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '100'})
         }
     }
 
-    complete_apps = ['base']
+    complete_apps = ['users']
