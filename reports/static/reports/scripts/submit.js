@@ -121,9 +121,7 @@ reform.widgets.dropzone.init = function() {
 
 	var widget = reform.widgets.dropzone;
 	//var dropzone = new Dropzone("#assets", { url: reform.urls.upload });
-	var dropzone = new Dropzone("#assets", {
-		url: '/'
-	});
+	var dropzone = new Dropzone("#assets", { url: '/' });
 	widget.object = dropzone;
 
 };
@@ -134,6 +132,8 @@ $(reform.widgets.dropzone.init);
 reform.widgets.wizard = {};
 reform.widgets.wizard.init = function() {
 
+	var widget = reform.widgets.wizard;
+
 	//$('.select2').select2()
 	$('.select2').selectpicker();
 	/*
@@ -143,13 +143,10 @@ reform.widgets.wizard.init = function() {
 	});
 	*/
 
-	var widget = reform.widgets.wizard;
-	//var wizard =
-	//widget.object = wizard;
-
 	var form = widget.form = $('#report-form');
 
 	var elements = widget.elements = {};
+	var inputs = widget.inputs = {};
 
 	elements.reporterState = $('#ui-wizard-reporter-state');
 	console.log(elements.reporterState);
@@ -164,7 +161,7 @@ reform.widgets.wizard.init = function() {
 		'description-evidence': $('#ui-wizard-description-evidence'),
 		'features': $('#ui-wizard-features'),
 		'submit': $('#ui-wizard-submit')
-	}
+	};
 	var order = widget.order = ['victim-witness', 'category', 'location-datetime', 'victim', 'aggressor', 'description-evidence', 'features', 'submit'];
 
 	console.log(sections);
@@ -303,6 +300,13 @@ reform.widgets.wizard.init = function() {
 	elements.datetime = $('#id_datetime');
 	console.log(elements.datetime);
 
+	elements.date = $('#id_date');
+	console.log(elements.date);
+
+	elements.time = $('#id_time');
+
+	console.log(elements.time);
+
 	/*
 	var showVictimAggressorSection = showNextSection('location', ['location', 'location_text']);
 	elements.location.on('change.showNextSection', showVictimAggressorSection);
@@ -347,13 +351,16 @@ reform.widgets.wizard.init = function() {
 	elements.victim = $('#id_victim');
 	console.log(elements.victim);
 
-	var els = Array.prototype.slice.apply(document.getElementById('ui-victim-fieldset').elements);
-	els.forEach(function(e) {
+	Array.prototype.slice.apply(document.querySelector('#report-form').elements).forEach(function(e){
 		elements[e.name] = $(e);
 	});
 
-	elements.aggressor = $('#id_aggressor');
-	console.log(elements.aggressor);
+	/*
+	var els = Array.prototype.slice.apply(document.querySelector('#ui-victim-fieldset').elements);
+	els.forEach(function(e) {
+		elements[e.name] = $(e);
+	});
+	*/
 
 	/*
 	var showAggressorSection = showNextSection('victim', ['victim-firstname']);
@@ -361,11 +368,21 @@ reform.widgets.wizard.init = function() {
 	*/
 	handleShowNextSection('victim', ['victim-firstname']);
 
+
+	var aggressorInput = elements.aggressor = $('#id_aggressor');
+	console.log(elements.aggressor);
+
 	/*
 	var showDescriptionEvidenceSection = showNextSection('aggressor', ['aggressor']);
 	elements.aggressor.on('change.showNextSection', showDescriptionEvidenceSection);
 	*/
 	handleShowNextSection('aggressor', ['aggressor']);
+
+
+	// show on click
+	$('#ui-aggressor-next').on('click', function(){
+		aggressorInput.trigger('change');
+	});
 
 	/* description-evidence section */
 
@@ -391,24 +408,17 @@ reform.widgets.wizard.init = function() {
 	$('#report-form').on('submit', function(e) {
 		e.preventDefault();
 		var data = {};
-		var formdata = new FormData();
-		$(this).serializeArray().forEach(function(e) {
-			if (e.name != 'csrfmiddlewaretoken') {
-				console.log(e.name, e.value);
-				data[e.name] = e.value;
-				formdata.append(e.name, e.value);
-			}
-		});
+		var formData = new FormData(this);
 		var files = reform.widgets.dropzone.object.files;
 		for (var i = 0; i < files.length; i++) {
 			var file = files[i];
 			console.log(file);
-			formdata.append('files[]', file);
+			formData.append('files[]', file);
 		}
 		$.ajax({
 			type: "POST",
 			url: reform.urls.submit,
-			data: formdata,
+			data: formData,
 			processData: false,
 			contentType: false,
 			//dataType: dataType
@@ -459,9 +469,9 @@ reform.widgets.similarReports.init = function() {
 			similarReportsLabel = $('#ui-similar-reports-label'),
 			noSimilarReportsNotification = $('#ui-no-similar-reports'),
 			reportsList = $('#ui-reports-list'),
-			reportsItems = reportsList.find('.ui-timeline-story');
+			reportsItems = reportsList.find('.ui-similar-report-candidate');
 
-	noSimilarReportsNotification.addClass('animated');
+	//noSimilarReportsNotification.addClass('animated');
 
 	window.similarReports = widget;
 
@@ -470,160 +480,131 @@ reform.widgets.similarReports.init = function() {
 
 	var elements = reform.widgets.wizard.elements;
 
-	function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
-		var R = 6371; // Radius of the earth in km
-		var dLat = deg2rad(lat2-lat1);  // deg2rad below
-		var dLon = deg2rad(lon2-lon1);
-		var a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.sin(dLon/2) * Math.sin(dLon/2);
-		var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-		var d = R * c; // Distance in km
-		return d;
-	}
-
-	function deg2rad(deg) {
-		return deg * (Math.PI/180)
-	}
-
-	widget.isSimilarToInput = function(e, el){
-		var a, b;
-		//console.log('widget', 'similarReports', 'report record', e, el);
-		/* category : check for same value */
-		//console.log('widget', 'similarReports', 'report record', 'category', elements['category'].val(), el.data('category'));
-		if(elements['category'].val() != el.data('category')) // same category
-			return false;
-		/* location: check for near location with distance of 10km at max */
-		console.log('widget', 'similarReports', 'report record', 'location', elements['location'].val(), el.data('location'));
-		a = elements['location'].val();
-		b = el.data('location');
-		if(a) {
-			console.log('widget', 'similarReports', 'report record', 'location', 1, a, b);
-			a = a.split(',');
-			b = b.split(',');
-			console.log('widget', 'similarReports', 'report record', 'location', 2, a, b);
-			var d = getDistanceFromLatLonInKm(+a[0],+a[1],+b[0],+b[1]);
-			console.log('widget', 'similarReports', 'report record', 'location', 3, d);
-			if(d > 10)
-				return false;
-		}
-		/* datetime : check for same date */
-		//console.log('widget', 'similarReports', 'report record', 'datetime', elements['datetime'].val(), el.data('datetime'));
-		a = elements['datetime'].val(),
-		b = el.data('datetime');
-		console.log('widget', 'similarReports', 'report record', 'datetime', 1, a, b);
-		if(a) {
-			a = new Date(a);
-			b = new Date(b);
-			console.log('widget', 'similarReports', 'report record', 'datetime', 2, a, b);
-			if(!a || !b)
-				return false;
-			if(a.getFullYear() != b.getFullYear() || a.getMonth() != b.getMonth() || a.getDate() != b.getDate())
-				return false;
-		}
-		return true;
-	};
-
-
 	function showSimilarReports(e) {
+
 		if(!similar) {
 			latestReportsLabel.hide();
 			similarReportsLabel.css({'display': 'inline-block'}).addClass('animated pulse').show();
 			similar = true;
 		}
+
+		var formData = new FormData(document.querySelector('#report-form'));
+
+		$.ajax({
+			type: "POST",
+			url: reform.urls.similar,
+			data: formData,
+			processData: false,
+			contentType: false,
+			dataType: 'json',
+			headers: {
+				"X-CSRFToken": csrf_token
+			}
+		}).done(function(data) {
+			reportsList.html(data.html).find('#ui-no-similar-reports').addClass('animated fadeInUp').show();;
+		}).fail(function(err) {
+			console.log(err);
+			/*
+			var data = err.responseJSON;
+			$.pnotify({
+				title: data.notification.title,
+				text: data.errors['__all_'] ? data.errors['__all__'].join("<br>") : data.notification.body,
+				type: 'error',
+				//nonblock: true
+			});
+			*/
+		});
+		reportsList.html("Loading ...")
+
+		return;
+
+
 		var any = false;
 		reportsItems.each(function(index, el){
 			el = $(el);
 			el.addClass('animated');
-			if(widget.isSimilarToInput(e, el)) {
+
+			//if(widget.isSimilarToInput(e, el)) {
+			//var similarities = widget.checkSimilarity(e, el);
+			//if(similarities.length > 0) {
+			if(true) {
 				any = true;
+				//el.removeClass().addClass('ui-similar-report-candidate ui-similar').addClass(similarities.map(function(field){ return 'ui-similar-' + field;}).join(' ')); //.show();
+				/*
 				el.removeClass('fadeOutRight')
 				if(!el.hasClass('fadeInRight')) {
 					el.addClass('fadeInRight').show();
 				}
+				*/
 			} else {
+				//el.removeClass().addClass('ui-similar-report-candidate'); //.hide();
+				/*
 				el.removeClass('fadeInRight');
 				if(!el.hasClass('fadeOutRight')) {
-					el.addClass('fadeOutRight').hide();/*.one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend webkitAnimationEnd oanimationend msAnimationEnd animationend', function(e) {
-						$(this).hide();
-					});*/
+					el.addClass('fadeOutRight').hide();
+					//.one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend webkitAnimationEnd oanimationend msAnimationEnd animationend', function(e) { $(this).hide(); });
 				}
+				*/
 			}
 		});
 		if (any){
+			//noSimilarReportsNotification.hide();
+			/*
 			noSimilarReportsNotification.removeClass('fadeInUp');
 			if(!noSimilarReportsNotification.hasClass('fadeOutDown')) {
-				noSimilarReportsNotification.addClass('fadeOutDown').hide();/*.one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend webkitAnimationEnd oanimationend msAnimationEnd animationend', function(e) {
-					$(this).hide();
-				});*/
+				noSimilarReportsNotification.addClass('fadeOutDown').hide();
+				//.one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend webkitAnimationEnd oanimationend msAnimationEnd animationend', function(e) { $(this).hide(); });
 			}
+			*/
 		} else {
+			//noSimilarReportsNotification.show();
+			/*
 			noSimilarReportsNotification.removeClass('fadeOutDown');
 			if(!noSimilarReportsNotification.hasClass('fadeInUp')) {
 				noSimilarReportsNotification.addClass('fadeInUp').show();
 			}
+			*/
 		}
+
 	}
 
-	var category = reform.widgets.wizard.elements.category;
-	category.on('change', showSimilarReports);
+	var elements = reform.widgets.wizard.elements;
 
-	var location = reform.widgets.wizard.elements.location;
-	location.on('change', showSimilarReports);
+	elements.category.on('change', showSimilarReports);
 
-	var datetime = reform.widgets.wizard.elements.datetime;
-	datetime.on('change', showSimilarReports);
+	elements.location.on('change', showSimilarReports);
+
+	//elements.datetime.on('change', showSimilarReports);
+	elements.date.on('change', showSimilarReports);
+
+	elements['victim-firstname'].on('change', showSimilarReports);
+
+	elements['victim-lastname'].on('change', showSimilarReports);
 
 };
 
 $(reform.widgets.similarReports.init);
 
-
-/*
-reform.widgets.xxx = {};
-reform.widgets.xxx.init = function() {
-	var widget = reform.widgets.xxx;
-	var xxx =
-	widget.object = xxx;
-	widget.element = xxx;
-};
-
-$(reform.widgets.xxx.init);
-*/
-
-
 reform.widgets.datetime = {};
 reform.widgets.datetime.init = function() {
 	var widget = reform.widgets.datetime;
-	/*
-	var datetime =
-	widget.object = datetime;
-	widget.element = datetime;
-	*/
-	var datetimeInput = $('#id_datetime');
-	var dateInput = $('#id_date');
-	var timeInput = $('#id_time');
+
+	var elements = reform.widgets.wizard.elements;
+	var timeInput = elements.time,
+			dateInput = elements.date,
+			datetimeInput = elements.datetime;
 
 	function handleDateOrTimeChange(e){
 		var time = timeInput.val();
 		var date = dateInput.val();
+
 		if(date && time) {
-			datetimeInput.val(date + 'T' + time).change();
+			datetimeInput.val(date + 'T' + time).trigger('change'); //change();
 		}
 	}
+
 	timeInput.on('change', handleDateOrTimeChange);
 	dateInput.on('change', handleDateOrTimeChange);
-
-	/*
-	// PARDON ME while I do a little magic to keep these events relevant for the rest of time...
-	var currentMonth = moment().format('YYYY-MM');
-	var nextMonth    = moment().add('month', 1).format('YYYY-MM');
-
-	var events = [
-		{ date: currentMonth + '-' + '10', title: 'Persian Kitten Auction', location: 'Center for Beautiful Cats' },
-		{ date: currentMonth + '-' + '19', title: 'Cat Frisbee', location: 'Jefferson Park' },
-		{ date: currentMonth + '-' + '23', title: 'Kitten Demonstration', location: 'Center for Beautiful Cats' },
-		{ date: nextMonth + '-' + '07',    title: 'Small Cat Photo Session', location: 'Center for Cat Photography' }
-	];
-	*/
 
 	var clndr;
 
@@ -641,7 +622,7 @@ reform.widgets.datetime.init = function() {
 	}
 
 	clndr = widget.object = $('#dateinput').clndr({
-		template: $('#dateinput-template').html(),
+		template: $('#dateinput-template').html().split(/\n|\r/gi).map(function(s){return s.trim()}).join(''),
 		//events: events,
 		clickEvents: {
 			click: function(target) {
@@ -670,3 +651,19 @@ reform.widgets.datetime.init = function() {
 };
 
 $(reform.widgets.datetime.init);
+
+
+
+
+/*
+reform.widgets.xxx = {};
+reform.widgets.xxx.init = function() {
+	var widget = reform.widgets.xxx;
+	var xxx =
+	widget.object = xxx;
+	widget.element = xxx;
+};
+
+$(reform.widgets.xxx.init);
+*/
+

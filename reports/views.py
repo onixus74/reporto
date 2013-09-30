@@ -6,6 +6,7 @@ import os
 import json
 import logging
 import shutil
+from datetime import datetime
 
 from django.conf import settings
 from django.shortcuts import render, redirect, render_to_response
@@ -239,6 +240,128 @@ def report_submit(request, template_name = "reports/submit.html", *args, **kwarg
 	return render(request, template_name, context)
 
 
+# class SimilarReportForm(forms.ModelForm):
+# 	class Meta:
+# 		model = Report
+# 		fields = ('category', 'location', 'datetime')
+
+
+# class SimilarInputForm(forms.Form):
+# 	category = forms.CharField()
+# 	location = forms.CharField()
+# 	datetime = forms.CharField()
+# 	date = forms.CharField()
+# 	victim_firstname = forms.CharField()
+# 	victim_lastname = forms.CharField()
+
+
+def similar_reports(request, *args, **kwargs):
+	logger.debug('POST %s', request.POST)
+
+	if request.method == 'POST':
+		pass
+
+	similars = []
+
+	reports = Report.objects.all()
+
+	# category = request.POST.get('category', None);
+	# if category:
+	# 	reports = reports.filter(category=category)
+
+	input_category = request.POST.get('category', '');
+	if len(input_category) == 0:
+		 input_category = None
+
+	input_location = request.POST.get('location', '');
+	if len(input_location) == 0:
+		input_location = None
+
+	input_datetime = request.POST.get('date', '');
+	if len(input_datetime) == 0:
+		input_datetime = None
+
+	input_victim_firstname = request.POST.get('victim-firstname', '');
+	if len(input_victim_firstname) == 0:
+		 input_victim_firstname = None
+
+	input_victim_lastname = request.POST.get('victim-lastname', '');
+	if len(input_victim_lastname) == 0:
+		  input_victim_lastname = None
+
+	logger.debug('CATEGORY %s', input_category)
+	logger.debug('DATETIME %s', input_datetime)
+	logger.debug('VICTIM FIRSTNAME %s', input_victim_firstname)
+	logger.debug('VICTIM LASTNAME %s', input_victim_lastname)
+
+	for report in reports:
+		#similarity_value = 0
+		similarities = []
+
+		#logger.debug('CATEGORY %s', [input_category, report.category])
+		if input_category and int(input_category) == report.category.id:
+			similarities.append('category')
+
+		#logger.debug('DATATIME %s', [input_datetime, report.datetime])
+		if input_datetime and datetime.strptime(input_datetime, '%Y-%m-%d').date() == report.datetime.date():
+			similarities.append('datetime')
+
+		#logger.debug('LOCATION %s', [input_location, report.location])
+		if input_location:
+			lat1, lan1 = map(float, input_location.split(','))
+			lat2, lan2 = map(float, report.location.split(','))
+			distance = locations_distance(lat1, lan1, lat2, lan2)
+			#logger.debug('LOCATION %s', distance)
+			#if input_location and input_location == report.location:
+			if input_location and distance < 10: # distance lower than 10km
+				similarities.append('location')
+
+		#logger.debug('VICTIM %s', [input_victim_firstname, input_victim_lastname, report.victim])
+		if input_victim_firstname and input_victim_lastname:
+			input_victim_fullname = ("%s %s" % (input_victim_firstname, input_victim_lastname)).strip()
+			if string_distance(input_victim_fullname, report.victim.get_fullname()) > 0.9: # similar string values
+				similarities.append('victim')
+
+		report.similarities = similarities
+		report.similarity = len(similarities)
+
+		if report.similarity > 0:
+			#report.similarities = similarities
+			similars.append(report)
+			#similars_meta.append(similarities)
+
+	exist = len(similars) > 0
+
+	similars = sorted(similars, key=lambda report: report.similarity, reverse=True)[:9]
+
+	return JSONResponse({
+		'success': True,
+		'exist': exist,
+		'list': similars,
+		'html': render_to_string("reports/submit_similar_reports.html", { 'reports': similars })
+	})
+
+from math import radians, cos, sin, asin, sqrt
+
+def locations_distance(lon1, lat1, lon2, lat2):
+	"""
+	Calculate the great circle distance between two points  on the earth (specified in decimal degrees)
+	"""
+	# convert decimal degrees to radians
+	lon1, lat1, lon2, lat2 = map(radians, [lon1, lat1, lon2, lat2])
+	# haversine formula
+	dlon = lon2 - lon1
+	dlat = lat2 - lat1
+	a = sin(dlat/2)**2 + cos(lat1) * cos(lat2) * sin(dlon/2)**2
+	c = 2 * asin(sqrt(a))
+	km = 6367 * c
+	return km
+
+import difflib
+
+def string_distance(str1, str2):
+    return difflib.SequenceMatcher(a=str1.lower(), b=str2.lower()).ratio()
+
 # class ReportSubmitView(AjaxableResponseMixin, CreateView):
 # 	""" """
 # 	model = Report
@@ -336,36 +459,6 @@ def report_submit(request, template_name = "reports/submit.html", *args, **kwarg
 # 		# 	shutil.move(default_storage.path(media_path), default_storage.path(persistant_media_path))
 
 # 		return form
-
-
-# class ReportSubmitPublicView(CreateView):
-# 	template_name = "reports/submit-public.html"
-
-
-# def submit_ajax(request, *args, **kwargs):
-
-# 	logger.debug(request.session.items())
-# 	#logger.debug(request.method)
-# 	#logger.debug(request.body)
-# 	#logger.debug(request.META['CONTENT_TYPE'])
-# 	#logger.debug(request.COOKIES)
-# 	#logger.debug(request.REQUEST)
-# 	logger.debug(request.GET)
-# 	logger.debug(request.POST)
-# 	#logger.debug(request.FILES)
-
-
-# 	#logger.debug("condition:")
-# 	#logger.debug(request.META.has_key('HTTP_X_RSID'))
-# 	#logger.debug(request.META['HTTP_X_RSID'])
-# 	#logger.debug(request.session.get('RSIDs', None))
-# 	#logger.debug(request.META['HTTP_X_RSID'] in request.session.get('RSIDs', []))
-
-# 	if request.method == 'POST':
-
-# 		return JSONResponse({'success': True})
-
-# 	return JSONResponse({'success': False}, status=400)
 
 
 # class MediaForm(forms.ModelForm):
@@ -485,7 +578,7 @@ def report_comment(request, pk, *args, **kwargs):
 			'object': comment,
 			'html': render_to_string("reports/view_comment.html", {'comment': comment}),
 			'notification': { 'title': "Adding Comment", 'body': "Comment added." }
-			})
+		})
 	else:
 		return JSONResponse({
 			'success': False,
@@ -494,6 +587,7 @@ def report_comment(request, pk, *args, **kwargs):
 			#'notification': { 'title': "Adding Comment", 'body': form.errors.get('__all__', None) or "<br>".join(["<br>".join(errors) for (field,errors) in form.errors.items()]) }
 			'notification': { 'title': "Adding Comment", 'body': form.errors.get('__all__', None) or form.errors.as_ul() or "Failed to add comment" }
 		}, status=400)
+
 
 def stats_xxx(request, *args, **kwargs):
 	#data = Report.objects.get() # data request
@@ -511,7 +605,7 @@ def stats_xxx(request, *args, **kwargs):
 
 class ReportListView(ListView):
 	model = Report
-	template_name = "reports/manage/list.html"
+	template_name = "reports/crud/list.html"
 
 
 class ReportListHybridView(ListHybridResponseMixin, ReportListView):
@@ -520,7 +614,7 @@ class ReportListHybridView(ListHybridResponseMixin, ReportListView):
 
 class ReportDetailView(DetailView):
 	model = Report
-	template_name = "reports/manage/view.html"
+	template_name = "reports/crud/view.html"
 
 
 class ReportDetailHybridView(DetailHybridResponseMixin, ReportDetailView):
@@ -529,16 +623,16 @@ class ReportDetailHybridView(DetailHybridResponseMixin, ReportDetailView):
 
 class ReportCreateView(CreateView):
 	model = Report
-	template_name = "reports/manage/new.html"
+	template_name = "reports/crud/new.html"
 
 
 class ReportUpdateView(UpdateView):
 	model = Report
-	template_name = "reports/manage/edit.html"
+	template_name = "reports/crud/edit.html"
 
 
 class ReportDeleteView(DeleteView):
 	model = Report
-	template_name = "reports/manage/delete.html"
-	success_url = '/reports/manage/'
+	template_name = "reports/crud/delete.html"
+	success_url = '/reports/crud/'
 

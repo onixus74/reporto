@@ -1,6 +1,8 @@
 from django.conf.urls import patterns, url, include
 from victims.views import *
-from victims.api import router
+
+from base.utils.urls import administrator_required
+
 
 urlpatterns = patterns('',
 	url(r'^(\.(?P<extension>(json)))?$',            VictimListHybridView.as_view(),   name='list'),
@@ -8,5 +10,4 @@ urlpatterns = patterns('',
 	url(r'^(?P<pk>\d+)(\.(?P<extension>(json)))?$', VictimDetailHybridView.as_view(), name='view'),
 	url(r'^(?P<pk>\d+)/edit$',                      VictimUpdateView.as_view(),       name='edit'),
 	url(r'^(?P<pk>\d+)/delete$',                    VictimDeleteView.as_view(),       name='delete'),
-	url(r'^api', include(router.urls)),
 )

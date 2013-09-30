@@ -10,6 +10,12 @@
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width">
 
+	<!--[if lt IE 9]>
+		<script src="{% static 'components/es5-shim/es5-shim.js' %}"></script>
+		<script src="{% static 'components/json3/lib/json3.min.js' %}"></script>
+		<script src="{% static 'components/html5shiv/html5shiv.js' %}"></script>
+	<![endif]-->
+
 <!-- Layout Styles Dependencies -->
 {% block layout_styles %}
 	{% compress css %}
@@ -21,6 +27,10 @@
 	<link rel="stylesheet" href="{% static 'components/pines-notify/jquery.pnotify.default.css' %}">
 	<!--<link rel="stylesheet" href="{% static 'styles/deps.css' %}">-->
 	<link rel="stylesheet" href="{% static 'styles/main.css' %}">
+	{% endcompress %}
+
+	{% compress js %}
+	<script src="{% static 'components/modernizr/modernizr.js' %}"></script>
 	{% endcompress %}
 
 	{% if debug %}
@@ -58,18 +68,17 @@
 	</script>
 
 </head>
-<body ng-app="reformPlatform">
+<body>
 
+	{% comment %}
 	<!--[if lt IE 7]>
 		<p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
 	<![endif]-->
+	{% endcomment %}
 
-	<!--[if lt IE 9]>
-		<script src="{% static 'components/es5-shim/es5-shim.js' %}"></script>
-		<script src="{% static 'components/json3/lib/json3.min.js' %}"></script>
-	<![endif]-->
+	<div id="top-bg" style="z-index: 1100;"></div>
 
-	<div class="navbar-wrapper" style="z-index: 1100;">
+	<div class="navbar-wrapper" style="z-index: 1101;">
 		<div class="container">
 			<div class="navbar">
 				<div class="navbar-inner">
@@ -89,8 +98,9 @@
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Administration<b class="caret"></b></a>
 							<ul class="dropdown-menu">
-								<li><a href="/categories">Categories</a></li>
-								<li><a href="/features">Features</a></li>
+								<li><a href="{% url 'users:list' %}">Users</a></li>
+								<li><a href="{% url 'categories:list' %}">Categories</a></li>
+								<li><a href="{% url 'features:list' %}">Features</a></li>
 								<li class="divider"></li>
 								<!--<li class="nav-header">Nav header</li>-->
 								<li><a href="/admin">Site Administration</a></li>
@@ -120,7 +130,7 @@
 								<input type="hidden" name="next" value="{{ next }}" />
 								<div class="input-prepend">
 									<span class="add-on"><i class="icon-envelope"></i></span>
-									{% render_field form.username placeholder="Email" required="required" %}
+									{% render_field form.username type="email" placeholder="Email" required="required" %}
 								</div>
 								<div class="input-prepend">
 									<span class="add-on"><i class="icon-key"></i></span>
@@ -135,7 +145,7 @@
 						{% else %}
 						<ul class="dropdown-menu">
 							{% if user.is_authenticated %}
-							<li><a href="{{user.get_absolute_url}}"><i class="icon-user"></i> Profile</a></li>
+							<li><a href="{% url 'users:profile' %}"><i class="icon-user"></i> Profile</a></li>
 							{% endif %}
 							<li><a href="/logout"><i class="icon-off"></i> <span data-ch-i18n="">Logout</span></a></li>
 						</ul>
@@ -165,11 +175,8 @@
 <!-- View -->
 {% block view_content %}{% endblock %}
 <!-- View - END -->
-<!--<div class="container" ng-view=""></div>-->
-<!--<div id="mainView" ng-view="" ng-show="state.showMainView"></div>-->
+
 {#% <pre>{% debug %}</pre> %#}
-
-
 
 	<div id="footer">
 		<!--<hr style="margin-bottom: 5px;" />-->
@@ -184,7 +191,7 @@
 
 			<!--<p class="credit pull-right"><a href="#">Back to top</a></p>-->
 			<p class="muted credit">
-				...
+				<a href="http://reform.tn/" target="_blank">reform.tn</a>
 			</p>
 
 		</div>
