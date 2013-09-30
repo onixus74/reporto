@@ -39,7 +39,10 @@ ol.list {
 	}
 }
 
-
+.btn-quiet {
+  //@include buttonBackground(transparent, $btnPrimaryBackgroundHighlight);
+  background-color: transparent;
+}
 
 /*-------------------------------------------------
 | GLOBAL STYLES
@@ -48,7 +51,7 @@ ol.list {
 /* Padding below the footer and lighter body text */
 
 body {
-  padding-top: 100px;
+  padding-top: 110px;
   padding-bottom: 60px;
   color: #5a5a5a;
   //background: url('../theme/cream_pixels.png');
@@ -123,7 +126,7 @@ body {
 
 
 /*-------------------------------------------------
-| RESPONSIVE CSS
+| RESPONSIVE
 \*/
 
 /* Large desktop */
@@ -133,10 +136,6 @@ body {
 
 /* Portrait tablet to landscape and desktop */
 @media (min-width: 768px) and (max-width: 979px) {
-
-  body {
-    padding-top: 90px;
-  }
 
   .container.navbar-wrapper {
     margin-bottom: 0;
@@ -319,6 +318,8 @@ body {
 /*-------------------------------------------------
 | FIXES
 \*/
+
+[hidden] { display: none; }
 
 .bootstrap-select {
 	margin: 0px;

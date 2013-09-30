@@ -1,27 +1,35 @@
 import logging
 logger = logging.getLogger(__name__)
 
-from django.shortcuts import render, redirect, render_to_response
+from django.shortcuts import render, redirect, render_to_response, get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
 from django.core.context_processors import csrf
+from django.http import HttpResponse, Http404
 from django.contrib.auth import authenticate, login, logout
+from django.views.decorators.http import require_POST
+from django.contrib.auth.views import redirect_to_login
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.decorators import login_required, user_passes_test, permission_required
+from django.contrib import messages
+from base.utils.views import JSONResponse
+
+from users.models import User
 
 
 @csrf_exempt
 def test(request, *args, **kwargs):
-	#logger.debug("session:", request.session.items())
-	logger.debug("method:", request.method)
-	#logger.debug("body:", request.body)
-	logger.debug("content-type:", request.META['CONTENT_TYPE'])
-	logger.debug("cookies:", request.COOKIES)
-	logger.debug("request:", request.REQUEST)
-	logger.debug("get:", request.GET)
-	logger.debug("post:", request.POST)
-	logger.debug("files:", request.FILES)
+	logger.debug("session: %s", request.session.items())
+	logger.debug("method: %s", request.method)
+	#logger.debug("body: %s", request.body)
+	logger.debug("content-type: %s", request.META['CONTENT_TYPE'])
+	logger.debug("cookies: %s", request.COOKIES)
+	logger.debug("request: %s", request.REQUEST)
+	logger.debug("get: %s", request.GET)
+	logger.debug("post: %s", request.POST)
+	logger.debug("files: %s", request.FILES)
 	#return HttpResponse({'done': True})
 	return render(request, 'test.html', {'done': True})
 
-from django.contrib.auth.views import redirect_to_login
 
 def home(request, *args, **kwargs):
 	if request.user.is_authenticated():
@@ -37,9 +45,6 @@ def home(request, *args, **kwargs):
 		return redirect_to_login('/')
 
 
-from django.contrib.auth.forms import AuthenticationForm
-from django.contrib import messages
-
 def login_view(request, *args, **kwargs):
 	if request.user.is_authenticated():
 		return redirect('home')
@@ -49,7 +54,9 @@ def login_view(request, *args, **kwargs):
 		if user.is_active:
 			login(request, user)
 			messages.success(request, 'Login succeeded.')
-			return redirect(request.REQUEST.get('next', 'home'))
+			return redirect(request.REQUEST.get('next', '/'))
+		else:
+			messages.warning(request, 'Sorry, your user account is inactive.')
 	return render(request, "login.html", {'form': form, 'next': request.REQUEST.get('next', '/')})
 
 	# if request.method == 'POST':
@@ -74,19 +81,3 @@ def logout_view(request, *args, **kwargs):
 	logout(request)
 	return redirect('home')
 
-
-from base.utils.views import JSONResponse
-from base.models import *
-from django.shortcuts import get_object_or_404
-
-def user_view(request, pk=None, username=None, extension=None):
-	if pk:
-		user = get_object_or_404(User, pk=pk)
-	elif username:
-		user = get_object_or_404(User, username=username)
-	else:
-		raise django.http.Http404()
-	if extension:
-		return JSONResponse({'user': user})
-	else:
-		return render(request, "user.html", {'user': user})

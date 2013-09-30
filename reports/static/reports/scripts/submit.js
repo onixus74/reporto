@@ -2,8 +2,6 @@
 /* global angular, $, L, Dropzone, reform */
 'use strict';
 
-window.str = $('#dateinput-template').html();
-
 if(!reform) {
 	var reform = {
 		data: {},
@@ -123,9 +121,7 @@ reform.widgets.dropzone.init = function() {
 
 	var widget = reform.widgets.dropzone;
 	//var dropzone = new Dropzone("#assets", { url: reform.urls.upload });
-	var dropzone = new Dropzone("#assets", {
-		url: '/'
-	});
+	var dropzone = new Dropzone("#assets", { url: '/' });
 	widget.object = dropzone;
 
 };
@@ -136,6 +132,8 @@ $(reform.widgets.dropzone.init);
 reform.widgets.wizard = {};
 reform.widgets.wizard.init = function() {
 
+	var widget = reform.widgets.wizard;
+
 	//$('.select2').select2()
 	$('.select2').selectpicker();
 	/*
@@ -145,13 +143,10 @@ reform.widgets.wizard.init = function() {
 	});
 	*/
 
-	var widget = reform.widgets.wizard;
-	//var wizard =
-	//widget.object = wizard;
-
 	var form = widget.form = $('#report-form');
 
 	var elements = widget.elements = {};
+	var inputs = widget.inputs = {};
 
 	elements.reporterState = $('#ui-wizard-reporter-state');
 	console.log(elements.reporterState);
@@ -166,7 +161,7 @@ reform.widgets.wizard.init = function() {
 		'description-evidence': $('#ui-wizard-description-evidence'),
 		'features': $('#ui-wizard-features'),
 		'submit': $('#ui-wizard-submit')
-	}
+	};
 	var order = widget.order = ['victim-witness', 'category', 'location-datetime', 'victim', 'aggressor', 'description-evidence', 'features', 'submit'];
 
 	console.log(sections);
@@ -356,13 +351,16 @@ reform.widgets.wizard.init = function() {
 	elements.victim = $('#id_victim');
 	console.log(elements.victim);
 
-	var els = Array.prototype.slice.apply(document.getElementById('ui-victim-fieldset').elements);
-	els.forEach(function(e) {
+	Array.prototype.slice.apply(document.querySelector('#report-form').elements).forEach(function(e){
 		elements[e.name] = $(e);
 	});
 
-	elements.aggressor = $('#id_aggressor');
-	console.log(elements.aggressor);
+	/*
+	var els = Array.prototype.slice.apply(document.querySelector('#ui-victim-fieldset').elements);
+	els.forEach(function(e) {
+		elements[e.name] = $(e);
+	});
+	*/
 
 	/*
 	var showAggressorSection = showNextSection('victim', ['victim-firstname']);
@@ -370,11 +368,21 @@ reform.widgets.wizard.init = function() {
 	*/
 	handleShowNextSection('victim', ['victim-firstname']);
 
+
+	var aggressorInput = elements.aggressor = $('#id_aggressor');
+	console.log(elements.aggressor);
+
 	/*
 	var showDescriptionEvidenceSection = showNextSection('aggressor', ['aggressor']);
 	elements.aggressor.on('change.showNextSection', showDescriptionEvidenceSection);
 	*/
 	handleShowNextSection('aggressor', ['aggressor']);
+
+
+	// show on click
+	$('#ui-aggressor-next').on('click', function(){
+		aggressorInput.trigger('change');
+	});
 
 	/* description-evidence section */
 
@@ -400,24 +408,17 @@ reform.widgets.wizard.init = function() {
 	$('#report-form').on('submit', function(e) {
 		e.preventDefault();
 		var data = {};
-		var formdata = new FormData();
-		$(this).serializeArray().forEach(function(e) {
-			if (e.name != 'csrfmiddlewaretoken') {
-				console.log(e.name, e.value);
-				data[e.name] = e.value;
-				formdata.append(e.name, e.value);
-			}
-		});
+		var formData = new FormData(this);
 		var files = reform.widgets.dropzone.object.files;
 		for (var i = 0; i < files.length; i++) {
 			var file = files[i];
 			console.log(file);
-			formdata.append('files[]', file);
+			formData.append('files[]', file);
 		}
 		$.ajax({
 			type: "POST",
 			url: reform.urls.submit,
-			data: formdata,
+			data: formData,
 			processData: false,
 			contentType: false,
 			//dataType: dataType
@@ -479,57 +480,6 @@ reform.widgets.similarReports.init = function() {
 
 	var elements = reform.widgets.wizard.elements;
 
-	function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
-		var R = 6371; // Radius of the earth in km
-		var dLat = deg2rad(lat2-lat1);  // deg2rad below
-		var dLon = deg2rad(lon2-lon1);
-		var a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.sin(dLon/2) * Math.sin(dLon/2);
-		var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-		var d = R * c; // Distance in km
-		return d;
-	}
-
-	function deg2rad(deg) {
-		return deg * (Math.PI/180)
-	}
-
-	widget.checkSimilarity = function(e, el){
-		var result = [];
-		var a, b;
-		//console.log('widget', 'similarReports', 'report record', e, el);
-		/* category : check for same value */
-		//console.log('widget', 'similarReports', 'report record', 'category', elements['category'].val(), el.data('category'));
-		if(elements['category'].val() == el.data('category')) // same category
-			result.push('category');
-		/* location: check for near location with distance of 10km at max */
-		console.log('widget', 'similarReports', 'report record', 'location', elements['location'].val(), el.data('location'));
-		a = elements['location'].val();
-		b = el.data('location');
-		if(a) {
-			console.log('widget', 'similarReports', 'report record', 'location', 1, a, b);
-			a = a.split(',');
-			b = b.split(',');
-			console.log('widget', 'similarReports', 'report record', 'location', 2, a, b);
-			var d = getDistanceFromLatLonInKm(+a[0],+a[1],+b[0],+b[1]);
-			console.log('widget', 'similarReports', 'report record', 'location', 3, d);
-			if(d < 10)
-				result.push('location');
-		}
-		/* datetime : check for same date */
-		//console.log('widget', 'similarReports', 'report record', 'datetime', elements['datetime'].val(), el.data('datetime'));
-		a = elements['date'].val(),
-		b = el.data('datetime');
-		console.log('widget', 'similarReports', 'report record', 'datetime', 1, a, b);
-		if(a) {
-			a = new Date(a);
-			b = new Date(b);
-			console.log('widget', 'similarReports', 'report record', 'datetime', 2, a, b);
-			if(a && b && a.getFullYear() == b.getFullYear() && a.getMonth() == b.getMonth() && a.getDate() == b.getDate())
-				result.push('datetime');
-		}
-		return result;
-	};
-
 	function showSimilarReports(e) {
 
 		if(!similar) {
@@ -537,16 +487,49 @@ reform.widgets.similarReports.init = function() {
 			similarReportsLabel.css({'display': 'inline-block'}).addClass('animated pulse').show();
 			similar = true;
 		}
+
+		var formData = new FormData(document.querySelector('#report-form'));
+
+		$.ajax({
+			type: "POST",
+			url: reform.urls.similar,
+			data: formData,
+			processData: false,
+			contentType: false,
+			dataType: 'json',
+			headers: {
+				"X-CSRFToken": csrf_token
+			}
+		}).done(function(data) {
+			reportsList.html(data.html).find('#ui-no-similar-reports').addClass('animated fadeInUp').show();;
+		}).fail(function(err) {
+			console.log(err);
+			/*
+			var data = err.responseJSON;
+			$.pnotify({
+				title: data.notification.title,
+				text: data.errors['__all_'] ? data.errors['__all__'].join("<br>") : data.notification.body,
+				type: 'error',
+				//nonblock: true
+			});
+			*/
+		});
+		reportsList.html("Loading ...")
+
+		return;
+
+
 		var any = false;
 		reportsItems.each(function(index, el){
 			el = $(el);
 			el.addClass('animated');
 
 			//if(widget.isSimilarToInput(e, el)) {
-			var similarities = widget.checkSimilarity(e, el);
-			if(similarities.length > 0) {
+			//var similarities = widget.checkSimilarity(e, el);
+			//if(similarities.length > 0) {
+			if(true) {
 				any = true;
-				el.removeClass().addClass('ui-similar-report-candidate ui-similar-report').addClass(similarities.map(function(field){ return 'ui-similar-' + field;}).join(' ')); //.show();
+				//el.removeClass().addClass('ui-similar-report-candidate ui-similar').addClass(similarities.map(function(field){ return 'ui-similar-' + field;}).join(' ')); //.show();
 				/*
 				el.removeClass('fadeOutRight')
 				if(!el.hasClass('fadeInRight')) {
@@ -554,7 +537,7 @@ reform.widgets.similarReports.init = function() {
 				}
 				*/
 			} else {
-				el.removeClass().addClass('ui-similar-report-candidate'); //.hide();
+				//el.removeClass().addClass('ui-similar-report-candidate'); //.hide();
 				/*
 				el.removeClass('fadeInRight');
 				if(!el.hasClass('fadeOutRight')) {
@@ -593,6 +576,10 @@ reform.widgets.similarReports.init = function() {
 
 	//elements.datetime.on('change', showSimilarReports);
 	elements.date.on('change', showSimilarReports);
+
+	elements['victim-firstname'].on('change', showSimilarReports);
+
+	elements['victim-lastname'].on('change', showSimilarReports);
 
 };
 

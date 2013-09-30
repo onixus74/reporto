@@ -2,7 +2,7 @@
 /*-------------------------------------------------
 | DEPENDENCIES
 \*/
-/*
+/*!
  * Bootstrap v2.3.2
  *
  * Copyright 2012 Twitter, Inc
@@ -2448,7 +2448,7 @@ table th[class*="span"],
   background-color: #92c1ce;
 }
 
-/*
+/*!
  *  Font Awesome 3.2.1
  *  the iconic font designed for Bootstrap
  *  ------------------------------------------------------------------------------
@@ -8925,7 +8925,7 @@ legend {
 /* line 612, ../theme/sass-bootstrap/lib/bootstrap.scss */
 [class^="icon-"], [class*=" icon-"] {
   margin: 0 2px;
-  vertical-align: -2px;
+  /* vertical-align: -2px; */
 }
 
 /* line 617, ../theme/sass-bootstrap/lib/bootstrap.scss */
@@ -9002,7 +9002,7 @@ a.thumbnail:hover {
   color: white;
 }
 
-/*
+/*!
  * Bootstrap Responsive v2.3.2
  *
  * Copyright 2012 Twitter, Inc
@@ -10518,18 +10518,23 @@ ol.list li {
   background-color: #e8f8fd;
 }
 
+/* line 42, main.scss */
+.btn-quiet {
+  background-color: transparent;
+}
+
 /*-------------------------------------------------
 | GLOBAL STYLES
 \*/
 /* Padding below the footer and lighter body text */
-/* line 50, main.scss */
+/* line 53, main.scss */
 body {
-  padding-top: 100px;
+  padding-top: 110px;
   padding-bottom: 60px;
   color: #5a5a5a;
 }
 
-/* line 57, main.scss */
+/* line 60, main.scss */
 #top-bg {
   position: fixed;
   background-color: #f5f5f5;
@@ -10541,7 +10546,7 @@ body {
   top: 0;
 }
 
-/* line 66, main.scss */
+/* line 69, main.scss */
 #footer {
   position: fixed;
   bottom: 0;
@@ -10555,7 +10560,7 @@ body {
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.25);
 }
 
-/* line 77, main.scss */
+/* line 80, main.scss */
 .container .credit {
   margin: 10px 0;
 }
@@ -10564,7 +10569,7 @@ body {
 | CUSTOMIZE THE NAVBAR
 \*/
 /* Special class on .container surrounding .navbar, used for positioning it into place. */
-/* line 87, main.scss */
+/* line 90, main.scss */
 .navbar-wrapper {
   position: fixed;
   top: 0;
@@ -10577,7 +10582,7 @@ body {
 }
 
 /* Remove border and change up box shadow for more contrast */
-/* line 101, main.scss */
+/* line 104, main.scss */
 .navbar .navbar-inner {
   border: 0;
   -webkit-box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
@@ -10586,7 +10591,7 @@ body {
 }
 
 /* Downsize the brand/project name a bit */
-/* line 107, main.scss */
+/* line 110, main.scss */
 .navbar .brand {
   padding: 14px 20px 16px;
   /* Increase vertical padding to match navbar links */
@@ -10596,35 +10601,30 @@ body {
 }
 
 /* Navbar links: increase padding for taller navbar */
-/* line 115, main.scss */
+/* line 118, main.scss */
 .navbar .nav > li > a {
   padding: 15px 20px;
 }
 
 /* Offset the responsive button for proper vertical alignment */
-/* line 120, main.scss */
+/* line 123, main.scss */
 .navbar .btn-navbar {
   margin-top: 10px;
 }
 
 /*-------------------------------------------------
-| RESPONSIVE CSS
+| RESPONSIVE
 \*/
 /* Large desktop */
 /* Portrait tablet to landscape and desktop */
 @media (min-width: 768px) and (max-width: 979px) {
-  /* line 137, main.scss */
-  body {
-    padding-top: 90px;
-  }
-
-  /* line 141, main.scss */
+  /* line 140, main.scss */
   .container.navbar-wrapper {
     margin-bottom: 0;
     width: auto;
   }
 
-  /* line 146, main.scss */
+  /* line 145, main.scss */
   #footer {
     padding-left: 20px;
     padding-right: 20px;
@@ -10632,29 +10632,29 @@ body {
 }
 /* Landscape phone to portrait tablet */
 @media (max-width: 767px) {
-  /* line 156, main.scss */
+  /* line 155, main.scss */
   body {
     padding-top: 70px;
     padding-bottom: 50px;
   }
 
-  /* line 161, main.scss */
+  /* line 160, main.scss */
   .container.navbar-wrapper {
     margin-bottom: 0;
     width: auto;
   }
 
-  /* line 166, main.scss */
+  /* line 165, main.scss */
   .navbar-inner {
     margin: -20px;
   }
 
-  /* line 170, main.scss */
+  /* line 169, main.scss */
   #top-bg {
     display: none;
   }
 
-  /* line 174, main.scss */
+  /* line 173, main.scss */
   #footer {
     padding-left: 20px;
     padding-right: 20px;
@@ -10662,24 +10662,24 @@ body {
 }
 /* Landscape phones and down */
 @media (max-width: 480px) {
-  /* line 184, main.scss */
+  /* line 183, main.scss */
   .container.navbar-wrapper {
     margin-bottom: 0;
     width: auto;
   }
 
-  /* line 189, main.scss */
+  /* line 188, main.scss */
   #footer {
     padding-left: 20px;
     padding-right: 20px;
   }
 
-  /* line 194, main.scss */
+  /* line 193, main.scss */
   .navbar-inner {
     margin: -20px;
   }
 
-  /* line 198, main.scss */
+  /* line 197, main.scss */
   #footer {
     padding-left: 20px;
     padding-right: 20px;
@@ -10718,7 +10718,7 @@ body {
 
 }
 */
-/* line 241, main.scss */
+/* line 240, main.scss */
 #mainView {
   position: fixed;
   z-index: 99999;
@@ -10736,7 +10736,7 @@ body {
 /*-------------------------------------------------
 | report-submit.scss
 \*/
-/* line 260, main.scss */
+/* line 259, main.scss */
 .report-incident-dialog {
   top: 10%;
   left: 10%;
@@ -10753,40 +10753,40 @@ body {
 	margin-bottom: 20px;
 }
 */
-/* line 289, main.scss */
+/* line 288, main.scss */
 .natural-language-form {
   /* placeholder */
 }
-/* line 291, main.scss */
+/* line 290, main.scss */
 .natural-language-form p.text {
   line-height: 2em;
   vertical-align: middle;
 }
-/* line 296, main.scss */
+/* line 295, main.scss */
 .natural-language-form input, .natural-language-form .natural-language-input {
   background: none;
   border: none;
   text-align: center;
 }
-/* line 303, main.scss */
+/* line 302, main.scss */
 .natural-language-form ::-webkit-input-placeholder {
   /* WebKit browsers */
   color: #999;
   text-align: center;
 }
-/* line 306, main.scss */
+/* line 305, main.scss */
 .natural-language-form :-moz-placeholder {
   /* Mozilla Firefox 4 to 18 */
   color: #999;
   text-align: center;
 }
-/* line 309, main.scss */
+/* line 308, main.scss */
 .natural-language-form ::-moz-placeholder {
   /* Mozilla Firefox 19+ */
   color: #999;
   text-align: center;
 }
-/* line 312, main.scss */
+/* line 311, main.scss */
 .natural-language-form :-ms-input-placeholder {
   /* Internet Explorer 10+ */
   color: #999;
@@ -10796,26 +10796,31 @@ body {
 /*-------------------------------------------------
 | FIXES
 \*/
-/* line 323, main.scss */
+/* line 322, main.scss */
+[hidden] {
+  display: none;
+}
+
+/* line 324, main.scss */
 .bootstrap-select {
   margin: 0px;
 }
 
 /* fix boostrap-select width */
-/* line 328, main.scss */
+/* line 329, main.scss */
 .bootstrap-select:not([class*="span"]) {
   width: 100%;
 }
 
 /* fix boostrap-select colors in natural language form */
-/* line 333, main.scss */
+/* line 334, main.scss */
 .boostrap-select-colors-fix {
   background-color: transparent;
   color: #080808;
   text-align: center;
 }
 
-/* line 339, main.scss */
+/* line 340, main.scss */
 .ui-pnotify .alert {
   margin-bottom: 0;
 }
@@ -10856,23 +10861,23 @@ body::-webkit-scrollbar-corner { background-clip: padding-box; background-color:
 ::-webkit-scrollbar-thumb { background-color: #DDD; }
 ::-webkit-scrollbar-thumb:hover { background-color: #999; }
 */
-/* line 384, main.scss */
+/* line 385, main.scss */
 ::-webkit-scrollbar {
   width: 4px;
 }
 
-/* line 385, main.scss */
+/* line 386, main.scss */
 ::-webkit-scrollbar-track {
   background: rgba(0, 0, 0, 0.1);
 }
 
-/* line 386, main.scss */
+/* line 387, main.scss */
 ::-webkit-scrollbar-thumb {
   background: rgba(0, 0, 0, 0.6);
   border-radius: 2px;
 }
 
-/* line 387, main.scss */
+/* line 388, main.scss */
 ::-webkit-scrollbar:horizontal {
   height: 4px;
 }
@@ -10880,7 +10885,7 @@ body::-webkit-scrollbar-corner { background-clip: padding-box; background-color:
 /*-------------------------------------------------
 | typeahead.js
 \*/
-/* line 397, main.scss */
+/* line 398, main.scss */
 .typeahead,
 .tt-query,
 .tt-hint {
@@ -10896,29 +10901,29 @@ body::-webkit-scrollbar-corner { background-clip: padding-box; background-color:
   outline: none;
 }
 
-/* line 410, main.scss */
+/* line 411, main.scss */
 .typeahead {
   background-color: #fff;
 }
 
-/* line 414, main.scss */
+/* line 415, main.scss */
 .typeahead:focus {
   border: 2px solid #0097cf;
 }
 
-/* line 418, main.scss */
+/* line 419, main.scss */
 .tt-query {
   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
 }
 
-/* line 422, main.scss */
+/* line 423, main.scss */
 .tt-hint {
   color: #999999;
 }
 
-/* line 426, main.scss */
+/* line 427, main.scss */
 .tt-dropdown-menu {
   width: 422px;
   margin-top: 12px;
@@ -10934,20 +10939,20 @@ body::-webkit-scrollbar-corner { background-clip: padding-box; background-color:
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
 }
 
-/* line 437, main.scss */
+/* line 438, main.scss */
 .tt-suggestion {
   padding: 3px 20px;
   font-size: 18px;
   line-height: 24px;
 }
 
-/* line 443, main.scss */
+/* line 444, main.scss */
 .tt-suggestion.tt-is-under-cursor {
   color: #fff;
   background-color: #0097cf;
 }
 
-/* line 449, main.scss */
+/* line 450, main.scss */
 .tt-suggestion p {
   margin: 0;
 }

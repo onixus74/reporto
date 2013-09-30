@@ -5,10 +5,10 @@ PROJECT_DIR=os.path.dirname(__file__)
 
 DEBUG = True # !DEV!
 #DEBUG = False # !PROD!
-TEMPLATE_DEBUG = DEBUG # !DEV!
-#TEMPLATE_DEBUG # !PROD!
+TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
+    ('Administrator', 'admin@reform.tn'),
     ('Nader Toukabri', 'nader.toukabri@gmail.com'),
 )
 
@@ -150,7 +150,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
 
     # 'suit', # theme for admin
-    'admin_theme',
+    'admin_mod',
     'django_admin_bootstrapped', # theme for admin
     #'grappelli',
     #'filebrowser',
@@ -159,6 +159,7 @@ INSTALLED_APPS = (
 
     # project components
     'base',
+    'users',
     'reports',
     'categories',
     'features',
@@ -229,6 +230,14 @@ LOGGING = {
             'propagate': True,
             'level': 'DEBUG',
         },
+        'base': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+        },
+        'users': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+        },
         'reports': {
             'handlers': ['console'],
             'level': 'DEBUG',
@@ -236,26 +245,14 @@ LOGGING = {
     }
 }
 
-AUTH_USER_MODEL = 'base.User'
+AUTH_USER_MODEL = 'users.User'
 
 INSTALLED_APPS += ('debug_toolbar',) # !DEV!
 INTERNAL_IPS = ('127.0.0.1','127.0.1.1')
 
-# INSTALLED_APPS += ('rest_framework',)
-# REST_FRAMEWORK = {
-#     #'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAdminUser',),
-#     'PAGINATE_BY': 10
-# }
-
-INSTALLED_APPS += ('compressor',)
-
 INSTALLED_APPS += ('south',)
 
-# INSTALLED_APPS += ('django_youtube',)
-# YOUTUBE_AUTH_EMAIL = 'yourmail@gmail.com'
-# YOUTUBE_AUTH_PASSWORD = 'yourpassword'
-# YOUTUBE_DEVELOPER_KEY = 'developer key, get one from http://code.google.com/apis/youtube/dashboard/'
-# YOUTUBE_CLIENT_ID = 'client-id'
+INSTALLED_APPS += ('compressor',)
 
 INSTALLED_APPS += ('easy_thumbnails',)
 THUMBNAIL_ALIASES = {
@@ -288,44 +285,35 @@ GOOGLE_OAUTH2_CLIENT_ID      = '1083020802599.apps.googleusercontent.com'
 GOOGLE_OAUTH2_CLIENT_SECRET  = 'H4S_8BHCGsEbx5maus_9oZFe'
 # YAHOO_CONSUMER_KEY           = ''
 # YAHOO_CONSUMER_SECRET        = ''
-#LOGIN_URL          = '/login-form/'
-#LOGIN_REDIRECT_URL = '/logged-in/'
-#LOGIN_ERROR_URL    = '/login-error/'
-LOGIN_URL = '/login'
-LOGOUT_URL = '/logout'
+
+LOGIN_URL = '/login/'
+LOGOUT_URL = '/logout/'
 LOGIN_REDIRECT_URL = '/'
-#LOGIN_ERROR_URL    = '/test'
+#LOGIN_ERROR_URL    = '/login'
 
-#SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/another-login-url/'
-#SOCIAL_AUTH_NEW_USER_REDIRECT_URL = '/new-users-redirect-url/'
-#SOCIAL_AUTH_NEW_ASSOCIATION_REDIRECT_URL = '/new-association-redirect-url/'
-#SOCIAL_AUTH_DISCONNECT_REDIRECT_URL = '/account-disconnected-redirect-url/'
 
-#SOCIAL_AUTH_COMPLETE_URL_NAME  = 'socialauth_complete'
-#SOCIAL_AUTH_ASSOCIATE_URL_NAME = 'socialauth_associate_complete'
-
-SOCIAL_AUTH_USER_MODEL = 'base.User'
+SOCIAL_AUTH_USER_MODEL = AUTH_USER_MODEL
 
 SOCIAL_AUTH_USERNAME_IS_FULL_EMAIL = True
 SOCIAL_AUTH_PROTECTED_USER_FIELDS = ['email', 'username', 'first_name', 'last_name']
 SOCIAL_AUTH_FIELDS_STORED_IN_SESSION = ['next',]
+
 #SOCIAL_AUTH_REDIRECT_IS_HTTPS = True
 
+from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS
 
-
-# TEMPLATE_CONTEXT_PROCESSORS = (
-#     'django.contrib.auth.context_processors.auth',
-#     'django.core.context_processors.debug',
-#     'django.core.context_processors.i18n',
-#     'django.core.context_processors.media',
-#     'django.contrib.messages.context_processors.messages',
-#     'social_auth.context_processors.social_auth_by_type_backends',
-# )
+TEMPLATE_CONTEXT_PROCESSORS += (
+    'django.core.context_processors.request',
+    'social_auth.context_processors.social_auth_by_name_backends',
+    # 'social_auth.context_processors.social_auth_backends',
+    'social_auth.context_processors.social_auth_login_redirect',
+)
 
 SOCIAL_AUTH_PIPELINE = (
     'social_auth.backends.pipeline.social.social_auth_user',
     'social_auth.backends.pipeline.associate.associate_by_email',
     'social_auth.backends.pipeline.user.get_username',
+    #'users.pipeline.get_user',
     'social_auth.backends.pipeline.user.create_user',
     'social_auth.backends.pipeline.social.associate_user',
     'social_auth.backends.pipeline.social.load_extra_data',

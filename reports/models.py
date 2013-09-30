@@ -80,10 +80,10 @@ class Victim(models.Model):
 		(COP, "Cop")
 	)
 
-	category    = models.CharField(max_length=3, choices=CATEGORY, default=CITIZEN, blank=True)
+	category    = models.CharField(max_length=3, choices=CATEGORY, default=CITIZEN)
 	firstname   = models.CharField(max_length=100)
 	lastname    = models.CharField(max_length=100)
-	gender      = models.CharField(max_length=1, choices=GENDER, default=MALE, blank=True, null=True)
+	gender      = models.CharField(max_length=1, choices=GENDER, default=MALE)
 	age         = models.PositiveIntegerField(blank=True, null=True)
 	education   = models.CharField(max_length=200, blank=True, null=True)
 	profession  = models.CharField(max_length=200, blank=True, null=True)
@@ -95,8 +95,11 @@ class Victim(models.Model):
 	def get_absolute_url(self):
 		return reverse('victims:view', args=[str(self.id)])
 
+	def get_fullname(self):
+		return "%s %s" % (self.firstname, self.lastname)
+
 	def __unicode__(self):
-		return self.firstname + " " + self.lastname
+		return self.get_fullname()
 
 	def serialize(self):
 		data = model_to_dict(self)
@@ -160,9 +163,11 @@ class Report(models.Model):
 	datetime           = models.DateTimeField('date and time')
 	location           = models.CharField(max_length=100)
 	location_text      = models.CharField(max_length=300)
+	#location_latitude  = models.FloatField()
+	#location_longitude = models.FloatField()
 	category           = models.ForeignKey(Category)
 	victim             = models.ForeignKey(Victim)
-	aggressor          = models.TextField()
+	aggressor          = models.TextField(blank=True, null=True)
 	aggressor_category = models.CharField(max_length=3, choices=CATEGORY, default=COP, blank=True)
 	description        = models.TextField()
 	media              = models.ManyToManyField(Media, blank=True, null=True)
