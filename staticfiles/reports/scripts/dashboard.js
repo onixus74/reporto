@@ -16,19 +16,20 @@ reform.widgets.map = function() {
 
 };
 
-$(reform.widgets.map);
+$(document).ready(reform.widgets.map);
 
 
 reform.widgets.geosearch = function() {};
 
-$(reform.widgets.geosearch);
+$(document).ready(reform.widgets.geosearch);
 
-$(function() {
+
+reform.widgets.timeline = function() {
 	var marker;
 	$('.ui-timeline-story').on('mouseover', function(e) {
 		e.stopPropagation();
 		console.log(marker, e.target, e.currentTarget, e.relatedTarget, e.delegateTarget);
-		var loc = $(e.target).closest('td').data('latlng').split(',');
+		var loc = $(e.target).closest('li').data('latlng').split(',');
 		loc = new L.LatLng(loc[0], loc[1]);
 		if (!marker) {
 			console.log(loc);
@@ -40,59 +41,29 @@ $(function() {
 		}
 		reform.widgets.map.setView(loc, 12);
 	})
-});
+}
+
+$(document).ready(reform.widgets.timeline);
 
 
+reform.widgets.stats = function() {
 
-new Morris.Donut({
-	// ID of the element in which to drawPthe chart.
-	element: 'categoryDonutChart',
-	// Chart data records -- each entry in this array corresponds to a point on
-	// the chart.
-	/*
-  data: [
-    { label: 'Verbal Violence', value: 20 },
-    { label: 'Violence', value: 10 },
-    { label: 'Rape', value: 20 },
-    { label: 'Lack of Investigation and Prosecution', value: 50 },
+	new Morris.Donut({
+		element: 'ui-stats-categories-chart',
+		data: reform.data.reportsByCategory,
+	});
 
-  ],
-  */
-	data: reform.data.categoryDonut,
+	new Morris.Donut({
+		element: 'ui-stats-features-chart',
+		data: reform.data.reportsByFeature,
+	});
 
-});
-
-new Morris.Donut({
-	// ID of the element in which to draw the chart.
-	element: 'featureDonutChart',
-	// Chart data records -- each entry in this array corresponds to a point on
-	// the chart.
-	data: reform.data.featureDonut,
-
-});
+	new Morris.Donut({
+		element: 'ui-stats-victim-gender-chart',
+		data: reform.data.reportsByVictimGender,
+	});
 
 
+};
 
-new Morris.Donut({
-	// ID of the element in which to draw the chart.
-	element: 'myfirstchart3',
-	// Chart data records -- each entry in this array corresponds to a point on
-	// the chart.
-	data: [{
-		label: '2008',
-		value: 20
-	}, {
-		label: '2009',
-		value: 10
-	}, {
-		label: '2010',
-		value: 5
-	}, {
-		label: '2011',
-		value: 5
-	}, {
-		label: '2012',
-		value: 20
-	}],
-
-});
+$(document).ready(reform.widgets.stats);

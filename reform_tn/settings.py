@@ -264,6 +264,8 @@ DEBUG_TOOLBAR_CONFIG = {
 INSTALLED_APPS += ('south',)
 
 INSTALLED_APPS += ('compressor',)
+COMPRESS_ENABLED = True
+COMPRESS_OFFLINE = True
 
 INSTALLED_APPS += ('easy_thumbnails',)
 THUMBNAIL_ALIASES = {
