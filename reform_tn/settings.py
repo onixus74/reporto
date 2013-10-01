@@ -256,6 +256,8 @@ INTERNAL_IPS = ('127.0.0.1','127.0.1.1')
 INSTALLED_APPS += ('south',)
 
 INSTALLED_APPS += ('compressor',)
+#COMPRESS_ENABLED = True
+#COMPRESS_OFFLINE = True
 
 INSTALLED_APPS += ('easy_thumbnails',)
 THUMBNAIL_ALIASES = {

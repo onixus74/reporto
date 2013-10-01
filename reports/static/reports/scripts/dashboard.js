@@ -5,7 +5,7 @@
 reform.widgets.map = function() {
 
 	// create a map in the "map" div, set the view to a given place and zoom
-	var map = reform.widgets.map = L.map('map')
+	var map = reform.widgets.map = L.map('ui-timeline-map')
 
 	map.setView([34.161818161230386, 9.3603515625], 5);
 
@@ -63,7 +63,24 @@ reform.widgets.stats = function() {
 		data: reform.data.reportsByVictimGender,
 	});
 
-
+	new Morris.Line({
+		element: 'ui-reports-dates-chart',
+		data: reform.data.reportsByDate,
+		/*
+		data: [
+			{ date: '2006', reports: 100, b: 90 },
+			{ date: '2007', reports: 75,  b: 65 },
+			{ date: '2008', reports: 50,  b: 40 },
+			{ date: '2009', reports: 75,  b: 65 },
+			{ date: '2010', reports: 50,  b: 40 },
+			{ date: '2011', reports: 75,  b: 65 },
+			{ date: '2012', reports: 100, b: 90 }
+		],
+		*/
+		xkey: 'date',
+		ykeys: ['reports'],
+		labels: ['Reports']
+	});
 };
 
 $(document).ready(reform.widgets.stats);

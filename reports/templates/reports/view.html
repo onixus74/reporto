@@ -147,7 +147,9 @@
 	<link rel="stylesheet" href="{% static 'components/fancybox/source/jquery.fancybox.css' %}" type="text/css" media="screen" />
 	{% endcompress %}
 
+	{% compress css %}
 	<link rel="stylesheet" href="{% static 'reports/styles/view.css'%}" />
+	{% endcompress %}
 
 {% endblock %}
 
@@ -180,6 +182,8 @@
 		})
 	</script>
 
+	{% compress js %}
 	<script src="{% static 'reports/scripts/view.js' %}"></script>
+	{% endcompress %}
 
 {% endblock %}

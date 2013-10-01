@@ -100,6 +100,13 @@ class ReportsDashboard(ListHybridResponseMixin, ListView):
 				})
 		context['reports_by_victim_gender'] = reports_by_victim_gender
 
+		reports_by_date_dict = {}
+		for report in Report.objects.all():
+			date_str = str(report.datetime.date())
+			reports_by_date_dict[date_str] = reports_by_date_dict.get(date_str, 0) + 1
+		reports_by_date = [{'date': key, 'reports': reports_by_date_dict[key]} for key in reports_by_date_dict.keys()]
+		context['reports_by_date'] = reports_by_date
+
 		return context
 
 
