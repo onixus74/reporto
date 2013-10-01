@@ -17,6 +17,8 @@ from django.contrib.auth.decorators import login_required, user_passes_test, per
 from django.contrib import messages
 from base.utils.views import JSONResponse
 
+from django import forms
+
 from users.models import User
 from reports.models import Victim
 
@@ -70,16 +72,37 @@ def user_view(request, pk=None, username=None, extension=None):
 		return render(request, "users/view.html", {'profile': user})
 
 
+class VictimForm(forms.ModelForm):
+	class Meta:
+		model = Victim
+		exclude = ('user','firstname','lastname','email','description')
+
+
 def user_profile_view(request, extension=None):
 	user = request.user
+
 	try:
 		victim = Victim.objects.get(user=user)
 	except Victim.DoesNotExist:
 		victim = None
+
 	if extension:
 		return JSONResponse({'user': user})
 	else:
-		return render(request, "users/profile.html", {'profile': user, 'victim_profile': victim})
+		victim_form = VictimForm(request.POST or None, instance = victim)
+		if request.method == 'POST' and victim_form.is_valid():
+			victim = victim_form.save()
+			victim.user = user
+			victim.firstname = user.first_name
+			victim.lastname = user.last_name
+			victim.email = user.email
+			victim.save()
+
+		return render(request, "users/profile.html", {
+			'profile': user,
+			'victim_profile': victim,
+			'victim_form': victim_form
+		})
 
 
 @require_POST

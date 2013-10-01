@@ -119,18 +119,24 @@
 						</div>
 					</div>
 
-					<div class="row-fluid ui-wizard-row" id="ui-wizard-victim" hidden>
-						<div class="offset2 span8" id="ui-wizard-victim-area">
+					<div class="row-fluid ui-wizard-row" id="ui-wizard-victim-aggressor" hidden>
+
+						<div class="span6" id="ui-wizard-victim-area">
 							<h2><i class="icon-user"></i> Victim</h2>
 
-							<!--{{form.victim.as_hidden}}-->
+							<fieldset id="ui-reporter-victim-fieldset" class="ui-victim-fieldset form-horizontal input-area" style="display: none;" disabled>
 
-							<fieldset id="ui-victim-fieldset" class="form-horizontal input-area" style="height: auto;">
+								{{reporter_victim_form|crispy}}
+
+							</fieldset>
+
+							<fieldset id="ui-witness-victim-fieldset" class="ui-victim-fieldset_ form-horizontal_ input-area_" style="display: none;" disabled>
 
 								<!--{% render_field form.victim placeholder="Victim" class+="select2 input-block-level" %}-->
 
 								<!--{{victim_form|crispy}}-->
 
+								<!--
 								<div id="div_id_victim-category" class="control-group">
 									<label for="id_victim-category" class="control-label ">Category</label>
 									<div class="controls">
@@ -144,11 +150,11 @@
 								</div>
 								<div id="div_id_victim-firstname" class="control-group">
 									<label for="id_victim-firstname" class="control-label requiredField">Firstname</label>
-									<div class="controls"><input class="textinput textInput" id="id_victim-firstname" maxlength="100" name="victim-firstname" type="text" /> </div>
+									<div class="controls"><input class=" " id="id_victim-firstname" maxlength="100" name="victim-firstname" type="text" /> </div>
 								</div>
 								<div id="div_id_victim-lastname" class="control-group">
 									<label for="id_victim-lastname" class="control-label requiredField">Lastname</label>
-									<div class="controls"><input class="textinput textInput" id="id_victim-lastname" maxlength="100" name="victim-lastname" type="text" /> </div>
+									<div class="controls"><input class=" " id="id_victim-lastname" maxlength="100" name="victim-lastname" type="text" /> </div>
 								</div>
 								<div id="div_id_victim-gender" class="control-group">
 									<label for="id_victim-gender" class="control-label requiredField">Gender</label>
@@ -163,43 +169,102 @@
 								</div>
 								<div id="div_id_victim-age" class="control-group">
 									<label for="id_victim-age" class="control-label requiredField">Age</label>
-									<div class="controls"><input class="textinput textInput" id="id_victim-age" name="victim-age" type="number" /> </div>
+									<div class="controls"><input class=" " id="id_victim-age" name="victim-age" type="number" /> </div>
 								</div>
 								<div id="div_id_victim-education" class="control-group">
 									<label for="id_victim-education" class="control-label requiredField">Education</label>
-									<div class="controls"><input class="textinput textInput" id="id_victim-education" maxlength="200" name="victim-education" type="text" /> </div>
+									<div class="controls"><input class=" " id="id_victim-education" maxlength="200" name="victim-education" type="text" /> </div>
 								</div>
 								<div id="div_id_victim-profession" class="control-group">
 									<label for="id_victim-profession" class="control-label requiredField">Profession</label>
-									<div class="controls"><input class="textinput textInput" id="id_victim-profession" maxlength="200" name="victim-profession" type="text" /> </div>
+									<div class="controls"><input class=" " id="id_victim-profession" maxlength="200" name="victim-profession" type="text" /> </div>
 								</div>
 								<div id="div_id_victim-phone" class="control-group">
 									<label for="id_victim-phone" class="control-label requiredField">Phone</label>
-									<div class="controls"><input class="textinput textInput" id="id_victim-phone" maxlength="20" name="victim-phone" type="text" /> </div>
+									<div class="controls"><input class=" " id="id_victim-phone" maxlength="20" name="victim-phone" type="text" /> </div>
 								</div>
 								<div id="div_id_victim-email" class="control-group">
 									<label for="id_victim-email" class="control-label requiredField">Email</label>
-									<div class="controls"><input class="textinput textInput" id="id_victim-email" maxlength="75" name="victim-email" type="text" /> </div>
+									<div class="controls"><input class=" " id="id_victim-email" maxlength="75" name="victim-email" type="text" /> </div>
 								</div>
-								<div id="div_id_victim-description" class="control-group">
-									<label for="id_victim-description" class="control-label requiredField">Description</label>
-									<div class="controls"><textarea class="textarea" cols="40" id="id_victim-description" name="victim-description" rows="10"></textarea></div>
+								-->
+
+
+								<div class="row-fluid">
+									<label for="id_victim-category" class="span4">Category</label>
+									<div class="span8">
+										<label class="radio inline">
+											<input type="radio" name="victim-category" id="id_victim-category_1" value="CIT" checked> Citizen
+										</label>
+										<label class="radio inline">
+											<input type="radio" name="victim-category" id="id_victim-category_2" value="COP"> Cop
+										</label>
+									</div>
 								</div>
+
+								<div class="row-fluid">
+									<label for="id_victim-firstname" class="span4">Firstname</label>
+									<input class="span8" id="id_victim-firstname" maxlength="100" name="victim-firstname" type="text" />
+								</div>
+
+								<div class="row-fluid">
+									<label for="id_victim-lastname" class="span4">Lastname</label>
+									<input class="span8" id="id_victim-lastname" maxlength="100" name="victim-lastname" type="text" />
+								</div>
+
+								<div class="row-fluid">
+									<label for="id_victim-gender" class="span4">Gender</label>
+									<div class="span8">
+										<label class="radio inline">
+											<input type="radio" name="victim-gender" id="id_victim-gender_1" value="M" checked> Male
+										</label>
+										<label class="radio inline">
+											<input type="radio" name="victim-gender" id="id_victim-gender_2" value="F"> Female
+										</label>
+									</div>
+								</div>
+
+								<div class="row-fluid">
+									<label for="id_victim-age" class="span4">Age</label>
+									<input class="span8" id="id_victim-age" name="victim-age" type="number" />
+								</div>
+
+								<div class="row-fluid">
+									<label for="id_victim-education" class="span4">Education</label>
+									<input class="span8" id="id_victim-education" maxlength="200" name="victim-education" type="text" />
+								</div>
+
+								<div class="row-fluid">
+									<label for="id_victim-profession" class="span4">Profession</label>
+									<input class="span8" id="id_victim-profession" maxlength="200" name="victim-profession" type="text" />
+								</div>
+
+								<div class="row-fluid">
+									<label for="id_victim-phone" class="span4">Phone</label>
+									<input class="span8" id="id_victim-phone" maxlength="20" name="victim-phone" type="text" />
+								</div>
+
+								<div class="row-fluid">
+									<label for="id_victim-email" class="span4">Email</label>
+									<input class="span8" id="id_victim-email" maxlength="75" name="victim-email" type="text" />
+								</div>
+
 							</fieldset>
 
 						</div>
-					</div>
 
-					<div class="row-fluid ui-wizard-row" id="ui-wizard-aggressor" hidden>
-						<div class="offset2 span8" id="ui-wizard-aggressor-area">
+						<div class="span6" id="ui-wizard-aggressor-area">
 							<div>
-								<h2 class="pull-left"><i class="icon-male"></i> Aggressor</h2>
+								<h2 class="pull-left_"><i class="icon-male"></i> Aggressor</h2>
+								<!--
 								<h2 class="pull-right">
 									<a id="ui-aggressor-next" class="btn btn-quiet" title="Next"><i class="icon-arrow-right icon-large"></i></a>
 								</h2>
+								-->
 							</div>
 							{% render_field form.aggressor placeholder="Aggressor" class+="input-block-level input-area" %}
 						</div>
+
 					</div>
 
 					<div class="row-fluid ui-wizard-row" id="ui-wizard-description-evidence" hidden>

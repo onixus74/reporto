@@ -82,7 +82,7 @@ reform.widgets.map.init = function() {
 
 };
 
-//$(reform.widgets.map.init);
+//$(document).ready(reform.widgets.map.init);
 
 Dropzone.autoDiscover = false;
 
@@ -126,7 +126,7 @@ reform.widgets.dropzone.init = function() {
 
 };
 
-$(reform.widgets.dropzone.init);
+$(document).ready(reform.widgets.dropzone.init);
 
 
 reform.widgets.wizard = {};
@@ -136,12 +136,6 @@ reform.widgets.wizard.init = function() {
 
 	//$('.select2').select2()
 	$('.select2').selectpicker();
-	/*
-	$('.datetimepicker').datetimepicker({
-		//language: 'en',
-		pick12HourFormat: true
-	});
-	*/
 
 	var form = widget.form = $('#report-form');
 
@@ -155,14 +149,15 @@ reform.widgets.wizard.init = function() {
 		'victim-witness': $('#ui-wizard-victim-witness-buttons'),
 		'category': $('#ui-wizard-category'),
 		'location-datetime': $('#ui-wizard-location-datetime'),
-		//'victim-aggressor' : $('#ui-wizard-victim-aggressor'),
-		'victim': $('#ui-wizard-victim'),
-		'aggressor': $('#ui-wizard-aggressor'),
+		'victim-aggressor' : $('#ui-wizard-victim-aggressor'),
+		//'victim': $('#ui-wizard-victim'),
+		//'aggressor': $('#ui-wizard-aggressor'),
 		'description-evidence': $('#ui-wizard-description-evidence'),
 		'features': $('#ui-wizard-features'),
 		'submit': $('#ui-wizard-submit')
 	};
-	var order = widget.order = ['victim-witness', 'category', 'location-datetime', 'victim', 'aggressor', 'description-evidence', 'features', 'submit'];
+	//var order = widget.order = ['victim-witness', 'category', 'location-datetime', 'victim-aggressor', 'description-evidence', 'features', 'submit'];
+	var order = widget.order = ['victim-witness', 'category', 'location-datetime', ['victim-aggressor', 'description-evidence', 'features', 'submit']];
 
 	console.log(sections);
 
@@ -187,6 +182,11 @@ reform.widgets.wizard.init = function() {
 	elements.witnessButtonContainer = $('#ui-wizard-witness-button-container');
 	console.log(elements.witnessButtonContainer);
 
+	elements.witnessVictimFieldset = $('#ui-witness-victim-fieldset');
+	console.log(elements.witnessVictimFieldset);
+	elements.reporterVictimFieldset = $('#ui-reporter-victim-fieldset');
+	console.log(elements.reporterVictimFieldset);
+
 	function victimWitnessButtonsAction(e) {
 		var el = $(this);
 		elements.reporterState.html(el.data('value')).addClass(el.data('class')).addClass('animated pulse');
@@ -200,19 +200,21 @@ reform.widgets.wizard.init = function() {
 	}
 
 	elements.victimButton.on('click', function(e) {
-		order.splice(order.indexOf('victim'), 1);
+		//order.splice(order.indexOf('victim'), 1);
 		victimWitnessButtonsAction.call(this, e);
 		$('#ui-wizard-victim-text').show();
 		$('#id_victim').val('user').change();
 		//$('#ui-wizard-victim-area').remove();
 		//$('#ui-wizard-victim-area').hide();
 		//$('#ui-wizard-aggressor-area').removeClass('span6').addClass('span12');
+		elements.reporterVictimFieldset.show().removeAttr('disabled');
 	});
 
 	elements.witnessButton.on('click', function(e) {
 		victimWitnessButtonsAction.call(this, e);
 		$('#ui-wizard-witness-text').show();
 		$('#id_victim').val('0').change();
+		elements.witnessVictimFieldset.show().removeAttr('disabled');
 	});
 
 	/*
@@ -247,11 +249,25 @@ reform.widgets.wizard.init = function() {
 			if (ready) {
 				var index = order.indexOf(section);
 				var next_index = order[index + 1];
-				var next_section = sections[next_index];
+				var next_section;
+				if(Array.isArray(next_index)){
+					next_section = next_index.map(function(i){
+						return sections[i];
+					});
+				} else {
+					next_section = sections[next_index];
+				}
 				console.log('section', section, sections[section]);
 				console.log('next section', next_index, next_section);
-				if (next_section)
-					next_section.addClass('animated fadeIn').show();
+				if (next_section) {
+					if(Array.isArray(next_section)) {
+						next_section.forEach(function(e){
+							$(e).addClass('animated fadeIn').show();
+						});
+					} else {
+						next_section.addClass('animated fadeIn').show();
+					}
+				}
 				progress(index);
 				if (callback)
 					callback();
@@ -276,6 +292,11 @@ reform.widgets.wizard.init = function() {
 		})
 	}
 
+	/* */
+
+	Array.prototype.slice.apply(document.querySelector('#report-form').elements).forEach(function(e){
+		elements[e.name] = $(e);
+	});
 
 	/* category section */
 
@@ -351,12 +372,13 @@ reform.widgets.wizard.init = function() {
 	elements.victim = $('#id_victim');
 	console.log(elements.victim);
 
-	Array.prototype.slice.apply(document.querySelector('#report-form').elements).forEach(function(e){
-		elements[e.name] = $(e);
-	});
+	elements.aggressor = $('#id_aggressor');
+	console.log(elements.aggressor);
+
+	//handleShowNextSection('victim', ['victim-firstname']);
 
 	/*
-	var els = Array.prototype.slice.apply(document.querySelector('#ui-victim-fieldset').elements);
+	var els = Array.prototype.slice.apply(document.querySelector('#ui-witness-victim-fieldset').elements);
 	els.forEach(function(e) {
 		elements[e.name] = $(e);
 	});
@@ -366,23 +388,20 @@ reform.widgets.wizard.init = function() {
 	var showAggressorSection = showNextSection('victim', ['victim-firstname']);
 	elements.victim.on('change.showNextSection', showAggressorSection);
 	*/
-	handleShowNextSection('victim', ['victim-firstname']);
-
-
-	var aggressorInput = elements.aggressor = $('#id_aggressor');
-	console.log(elements.aggressor);
+	//handleShowNextSection('victim', ['victim-firstname']);
 
 	/*
 	var showDescriptionEvidenceSection = showNextSection('aggressor', ['aggressor']);
 	elements.aggressor.on('change.showNextSection', showDescriptionEvidenceSection);
 	*/
-	handleShowNextSection('aggressor', ['aggressor']);
-
+	//handleShowNextSection('aggressor', ['aggressor']);
 
 	// show on click
+	/*
 	$('#ui-aggressor-next').on('click', function(){
 		aggressorInput.trigger('change');
 	});
+	*/
 
 	/* description-evidence section */
 
@@ -393,7 +412,7 @@ reform.widgets.wizard.init = function() {
 	var showFeaturesSection = showNextSection('description-evidence', ['description']);
 	elements.description.on('change.showNextSection', showFeaturesSection);
 	*/
-	handleShowNextSection('description-evidence', ['description']);
+	//handleShowNextSection('description-evidence', ['description']);
 
 	elements.features = $('#id_features');
 	console.log(elements.features);
@@ -402,7 +421,7 @@ reform.widgets.wizard.init = function() {
 	var showSubmitSection = showNextSection('features', ['features']);
 	elements.features.on('change.showNextSection', showSubmitSection);
 	*/
-	handleShowNextSection('features', ['features']);
+	//handleShowNextSection('features', ['features']);
 
 
 	$('#report-form').on('submit', function(e) {
@@ -452,7 +471,7 @@ reform.widgets.wizard.init = function() {
 
 };
 
-$(reform.widgets.wizard.init);
+$(document).ready(reform.widgets.wizard.init);
 
 
 reform.widgets.similarReports = {};
@@ -583,7 +602,7 @@ reform.widgets.similarReports.init = function() {
 
 };
 
-$(reform.widgets.similarReports.init);
+$(document).ready(reform.widgets.similarReports.init);
 
 reform.widgets.datetime = {};
 reform.widgets.datetime.init = function() {
@@ -650,7 +669,7 @@ reform.widgets.datetime.init = function() {
 
 };
 
-$(reform.widgets.datetime.init);
+$(document).ready(reform.widgets.datetime.init);
 
 
 
@@ -664,6 +683,6 @@ reform.widgets.xxx.init = function() {
 	widget.element = xxx;
 };
 
-$(reform.widgets.xxx.init);
+$(document).ready(reform.widgets.xxx.init);
 */
 

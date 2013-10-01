@@ -50,8 +50,8 @@ class ReportsDashboard(ListHybridResponseMixin, ListView):
 
 	def get_context_data(self, **kwargs):
 		"""
-			Prepare context parameter 'category_donut_data' with the following structure
-			category_donut_data = [
+			Prepare context parameter 'reports_by_category' with the following structure
+			reports_by_category = [
 				{ 'label': 'Verbal Violence', 'value': 20 },
 				{ 'label': 'Violence', 'value': 10 },
 				{ 'label': 'Rape', 'value': 20 },
@@ -60,30 +60,45 @@ class ReportsDashboard(ListHybridResponseMixin, ListView):
 		"""
 		context = super(ReportsDashboard, self).get_context_data(**kwargs)
 
-		category_donut_data = []
+
+		reports_by_category = []
 		categories = Category.objects.all()
-		sum_category=Category.objects.count()
+		sum_category = Category.objects.count()
 		for category in categories:
-			val=int(float(Report.objects.filter(category=category).count())/sum_category*100)
+			val = Report.objects.filter(category=category).count()
 			if val != 0:
-				category_donut_data.append({
+				reports_by_category.append({
 					'label': category.definition,
 					'value': val
 				})
-		context['category_donut_data'] = category_donut_data
+		context['reports_by_category'] = reports_by_category
 
 
-		feature_donut_data = []
+		reports_by_feature = []
 		features = Feature.objects.all()
-		sum_features=Feature.objects.count()
+		sum_features = Feature.objects.count()
 		for feature in features:
-			val = int(float(Report.objects.filter(features=feature).count()) / sum_features *100)
+			val = Report.objects.filter(features=feature).count()
 			if val != 0:
-				feature_donut_data.append({
-				'label': feature.definition,
-				'value': val
+				reports_by_feature.append({
+					'label': feature.definition,
+					'value': val
 				})
-		context['feature_donut_data'] = feature_donut_data
+		context['reports_by_feature'] = reports_by_feature
+
+
+		reports_by_victim_gender = []
+		victim_genders = [Victim.MALE, Victim.FEMALE]
+		victim_genders_display = dict(Victim.GENDER)
+		sum_victims = Victim.objects.count()
+		for victim_gender in victim_genders:
+			val = Report.objects.filter(victim__gender=victim_gender).count()
+			if val != 0:
+				reports_by_victim_gender.append({
+					'label': victim_genders_display[victim_gender],
+					'value': val
+				})
+		context['reports_by_victim_gender'] = reports_by_victim_gender
 
 		return context
 
@@ -142,14 +157,15 @@ class ReportCreateForm(forms.ModelForm):
 
 
 class VictimCreateForm(forms.ModelForm):
-	#prefix = 'victim_1'
 	class Meta:
-		#prefix = 'victim_2'
 		model = Victim
-		exclude = ('user',)
+		exclude = ('user','description')
 
-	#def __init__(self, prefix='victim_', *args, **kwargs):
-	#	super(VictimCreateForm, self).__init__(self, prefix=prefix, *args, **kwargs)
+class VictimUpdateForm(forms.ModelForm):
+	class Meta:
+		model = Victim
+		exclude = ('user','firstname','lastname','email','description')
+
 
 
 def report_submit(request, template_name = "reports/submit.html", *args, **kwargs):
@@ -159,8 +175,16 @@ def report_submit(request, template_name = "reports/submit.html", *args, **kwarg
 	context = {}
 	form = ReportCreateForm(request.POST or None, request.FILES or None)
 	context['form'] = form
+
 	victim_form = VictimCreateForm(request.POST or None, prefix = 'victim')
 	context['victim_form'] = victim_form
+
+	try:
+		victim = Victim.objects.get(user=request.user)
+	except Victim.DoesNotExist:
+		victim = None
+	reporter_victim_form = VictimUpdateForm(request.POST or None, instance = victim, prefix = 'reporter-victim')
+	context['reporter_victim_form'] = reporter_victim_form
 
 	if request.method == 'GET':
 		# create report submit id for files upload
@@ -174,21 +198,21 @@ def report_submit(request, template_name = "reports/submit.html", *args, **kwarg
 		reports = Report.objects.all()
 		context['reports'] = reports
 
-	victim = request.POST.get('victim', None)
-	logger.debug('VICTIM %s', victim)
+	victim_id = request.POST.get('victim', None)
+	logger.debug('VICTIM %s', victim_id)
 
-	if form.is_valid() and (victim != '0' or victim_form.is_valid()):
+	if form.is_valid() and (victim_id != '0' or victim_form.is_valid()):
 
-		if victim == 'user':
+		if victim_id == 'user':
 			# the user is the victim
 			try:
 				victim = Victim.objects.get(user=request.user)
 			except Victim.DoesNotExist:
 				victim = Victim(firstname=request.user.first_name, lastname=request.user.last_name, email=request.user.email, user=request.user);
 				victim.save();
-		elif victim != '0':
+		elif victim_id != '0':
 			# existent victim
-			victim = Victim.objects.get(pk=victim)
+			victim = Victim.objects.get(pk=victim_id)
 		else:
 			# create new user
 			victim = victim_form.save()

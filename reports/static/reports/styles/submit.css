@@ -208,3 +208,11 @@ body {
     margin: 0;
   }
 }
+/* line 211, submit.scss */
+.ui-victim-fieldset {
+  height: auto;
+}
+/* line 213, submit.scss */
+.ui-victim-fieldset .control-group {
+  margin-bottom: 10px;
+}

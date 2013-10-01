@@ -1,6 +1,6 @@
 {% extends "layouts/default.html" %}
 
-{% load static json thumbnail compress %}
+{% load static json thumbnail compress crispy_forms_tags %}
 
 {% block view_title %}{{profile}} | User Profile | {% endblock %}
 
@@ -17,7 +17,7 @@
 
 			<div class="row-fluid">
 				<div class="offset2 span8">
-					<dl>
+					<dl class="ui-profile">
 						<dt>Full name</dt>
 						<dd>{{profile}}</dd>
 
@@ -62,9 +62,13 @@
 
 						<dt>Victim Profile</dt>
 						<dd>
-
-							{{victim_profile}}
-
+							<form class="ui-profile-victim form-horizontal" method="post">
+								{% csrf_token %}
+								{{victim_form|crispy}}
+								<div class="form-actions">
+									<button type="submit" class="btn btn-primary">Save</button>
+								</div>
+							</form>
 						</dd>
 
 					</dl>
@@ -83,15 +87,16 @@
 
 	{% compress css %}
 	<link rel="stylesheet" href="{% static 'dependencies/x-editable/dist/bootstrap-editable/css/bootstrap-editable.css' %}" />
+	<link rel="stylesheet" href="{% static 'users/styles/profile.css'%}" />
 	{% endcompress %}
-
-	<link rel="stylesheet" href="{% static '.css'%}" />
 
 {% endblock %}
 
 {% block view_scripts %}
+
 	{% compress js %}
 	<script src="{% static 'dependencies/x-editable/dist/bootstrap-editable/js/bootstrap-editable.js' %}"></script>
+	<script src="{% static 'users/scripts/profile.js' %}"></script>
 	{% endcompress %}
 
 	<script type="text/javascript">
@@ -99,21 +104,6 @@
 		//reform.data.victims = {{victims|json}};
 		//reform.data.reports = {{reports|json}};
 		reform.urls.submit = {% url 'reports:submit' as submit_url %}{{submit_url|json}};
-	</script>
-
-	<script src="{% static '.js' %}"></script>
-
-	<script>
-	$.fn.editable.defaults.mode = 'inline';
-	$.fn.editable.defaults.anim = 'fast';
-	$.fn.editable.defaults.ajaxOptions = {
-		headers: {
-			"X-CSRFToken": csrf_token
-		}
-	};
-	$(document).ready(function() {
-		$('.ui-editable').editable();
-	});
 	</script>
 
 {% endblock %}
