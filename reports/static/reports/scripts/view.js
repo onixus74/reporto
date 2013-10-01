@@ -31,7 +31,7 @@ reform.widgets.map.init = function() {
 
 }
 
-$(reform.widgets.map.init);
+$(document).ready(reform.widgets.map.init);
 
 
 reform.widgets.comment = {};
@@ -127,4 +127,4 @@ reform.widgets.comment.init = function() {
 
 }
 
-$(reform.widgets.comment.init);
+$(document).ready(reform.widgets.comment.init);

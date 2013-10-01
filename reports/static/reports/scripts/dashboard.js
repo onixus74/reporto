@@ -16,12 +16,12 @@ reform.widgets.map = function() {
 
 };
 
-$(reform.widgets.map);
+$(document).ready(reform.widgets.map);
 
 
 reform.widgets.geosearch = function() {};
 
-$(reform.widgets.geosearch);
+$(document).ready(reform.widgets.geosearch);
 
 $(function() {
 	var marker;

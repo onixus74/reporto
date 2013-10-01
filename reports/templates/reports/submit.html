@@ -119,13 +119,18 @@
 						</div>
 					</div>
 
-					<div class="row-fluid ui-wizard-row" id="ui-wizard-victim" hidden>
-						<div class="offset2 span8" id="ui-wizard-victim-area">
+					<div class="row-fluid ui-wizard-row" id="ui-wizard-victim-aggressor" hidden>
+
+						<div class="span6" id="ui-wizard-victim-area">
 							<h2><i class="icon-user"></i> Victim</h2>
 
-							<!--{{form.victim.as_hidden}}-->
+							<fieldset id="ui-reporter-victim-fieldset" class="ui-victim-fieldset form-horizontal input-area" style="display: none;" disabled>
 
-							<fieldset id="ui-victim-fieldset" class="form-horizontal input-area" style="height: auto;">
+								{{reporter_victim_form|crispy}}
+
+							</fieldset>
+
+							<fieldset id="ui-witness-victim-fieldset" class="ui-victim-fieldset form-horizontal input-area" style="display: none;" disabled>
 
 								<!--{% render_field form.victim placeholder="Victim" class+="select2 input-block-level" %}-->
 
@@ -181,25 +186,22 @@
 									<label for="id_victim-email" class="control-label requiredField">Email</label>
 									<div class="controls"><input class="textinput textInput" id="id_victim-email" maxlength="75" name="victim-email" type="text" /> </div>
 								</div>
-								<div id="div_id_victim-description" class="control-group">
-									<label for="id_victim-description" class="control-label requiredField">Description</label>
-									<div class="controls"><textarea class="textarea" cols="40" id="id_victim-description" name="victim-description" rows="10"></textarea></div>
-								</div>
 							</fieldset>
 
 						</div>
-					</div>
 
-					<div class="row-fluid ui-wizard-row" id="ui-wizard-aggressor" hidden>
-						<div class="offset2 span8" id="ui-wizard-aggressor-area">
+						<div class="span6" id="ui-wizard-aggressor-area">
 							<div>
-								<h2 class="pull-left"><i class="icon-male"></i> Aggressor</h2>
+								<h2 class="pull-left_"><i class="icon-male"></i> Aggressor</h2>
+								<!--
 								<h2 class="pull-right">
 									<a id="ui-aggressor-next" class="btn btn-quiet" title="Next"><i class="icon-arrow-right icon-large"></i></a>
 								</h2>
+								-->
 							</div>
 							{% render_field form.aggressor placeholder="Aggressor" class+="input-block-level input-area" %}
 						</div>
+
 					</div>
 
 					<div class="row-fluid ui-wizard-row" id="ui-wizard-description-evidence" hidden>

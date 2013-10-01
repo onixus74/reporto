@@ -142,14 +142,15 @@ class ReportCreateForm(forms.ModelForm):
 
 
 class VictimCreateForm(forms.ModelForm):
-	#prefix = 'victim_1'
 	class Meta:
-		#prefix = 'victim_2'
 		model = Victim
-		exclude = ('user',)
+		exclude = ('user','description')
 
-	#def __init__(self, prefix='victim_', *args, **kwargs):
-	#	super(VictimCreateForm, self).__init__(self, prefix=prefix, *args, **kwargs)
+class VictimUpdateForm(forms.ModelForm):
+	class Meta:
+		model = Victim
+		exclude = ('user','firstname','lastname','email','description')
+
 
 
 def report_submit(request, template_name = "reports/submit.html", *args, **kwargs):
@@ -159,8 +160,16 @@ def report_submit(request, template_name = "reports/submit.html", *args, **kwarg
 	context = {}
 	form = ReportCreateForm(request.POST or None, request.FILES or None)
 	context['form'] = form
+
 	victim_form = VictimCreateForm(request.POST or None, prefix = 'victim')
 	context['victim_form'] = victim_form
+
+	try:
+		victim = Victim.objects.get(user=request.user)
+	except Victim.DoesNotExist:
+		victim = None
+	reporter_victim_form = VictimUpdateForm(request.POST or None, instance = victim, prefix = 'reporter-victim')
+	context['reporter_victim_form'] = reporter_victim_form
 
 	if request.method == 'GET':
 		# create report submit id for files upload
@@ -174,12 +183,12 @@ def report_submit(request, template_name = "reports/submit.html", *args, **kwarg
 		reports = Report.objects.all()
 		context['reports'] = reports
 
-	victim = request.POST.get('victim', None)
-	logger.debug('VICTIM %s', victim)
+	victim_type = request.POST.get('victim', None)
+	logger.debug('VICTIM %s', victim_type)
 
-	if form.is_valid() and (victim != '0' or victim_form.is_valid()):
+	if form.is_valid() and (victim_type != '0' or victim_form.is_valid()):
 
-		if victim == 'user':
+		if victim_type == 'user':
 			# the user is the victim
 			try:
 				victim = Victim.objects.get(user=request.user)

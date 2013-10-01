@@ -8,7 +8,7 @@ from users.views import *
 
 
 urlpatterns = patterns('',
-	url(r'^(\.(?P<extension>(json)))?$',            login_required(UserListHybridView.as_view()),   name='list'),
+	url(r'^(\.(?P<extension>(json)))?$',            administrator_required(UserListHybridView.as_view()),   name='list'),
 	url(r'^new$',                                   administrator_required(UserCreateView.as_view()),       name='create'),
 	#url(r'^(?P<pk>\d+)(\.(?P<extension>(json)))?$', login_required(UserDetailHybridView.as_view()), name='view'),
 	#url(r'^(?P<pk>\d+)/edit$',                      login_required(UserUpdateView.as_view()),       name='edit'),
