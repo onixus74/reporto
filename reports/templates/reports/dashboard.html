@@ -1,6 +1,6 @@
 {% extends "layouts/default.html" %}
 
-{% load static json %}
+{% load static custom compress %}
 
 {% block view_title %}Reports Dashboard | {% endblock %}
 
@@ -16,7 +16,7 @@
 
 		<div class="hero-unit clearfix" style="padding: 40px;">
 			<h1 class="pull-left" style="margin-top: 0;">Reports Dashboard</h1>
-			<a class="btn btn-danger btn-large pull-right" href="{% url 'reports:submit' %}"><i class="icon-plus"></i> Report Indecent!</a>
+			<a class="btn btn-danger btn-large pull-right" href="{% url 'reports:submit' %}"><i class="icon-plus"></i> Report Indecent</a>
 		</div>
 
 
@@ -26,29 +26,82 @@
 			<div class="container-fluid">
 
 				<div class="row-fluid">
+					<div class="span12">
+						<div id="ui-reports-dates-chart" style="height: 300px;"></div>
+					</div>
+				</div>
+
+				<div class="row-fluid">
 					<div class="span6">
 						<h2>Map</h2>
 
-						<div id="map" style="width:100%; height: 300px"></div>
+						<div id="ui-timeline-map" style="width:100%; height: 300px"></div>
+
+							<div class="span4_">
+								<div id="ui-stats-features-chart" class=""></div>
+								<h3 class="text-center">Distribution by features</h3>
+							</div>
 
 					</div>
 					<div class="span6">
 						<h2>Timeline</h2>
+						<div id="ui-timeline-reports-list">
+							<div class="row-fluid">
+								<!--
+								<div class="span12">
+									<input type="text" placeholder="Search" class="search input-block-level">
+								</div>
+								-->
+								<div class="span4" style="display: none;">
+									<div class="pagination" style="margin: 0;">
+										<ul>
+											<!--<li class="disabled"><a href="#">&larr;</a></li>-->
+											<li class="previous"><a href="javascript:void(0)" onclick="reform.widgets.timeline.showPreviousPage()">&larr;</a></li>
+											<!--
+											<li class="active"><a href="#">1</a></li>
+											<li><a href="#">2</a></li>
+											<li><a href="#">3</a></li>
+											-->
+											<li><span id="ui-timeline-pagination-indicator_"></span></li>
+											<li class="next"><a href="javascript:void(0)" onclick="reform.widgets.timeline.showNextPage()">&rarr;</a></li>
+										</ul>
+									</div>
+								</div>
+							</div>
 
-						<ul class="list list-hover">
-						{% for report in report_list %}
-							<li class="ui-timeline-story" data-latlng="{{report.location}}">
-								<span class="label">{{report.victim}}</span> has been a victim of <span class="label">{{report.category}}</span>
-								happened in <span class="label">{{report.location_text}}</span>
-								on <span class="label"><a href="{% url 'reports:view' report.id %}">{{report.datetime}}</a><span>
-								{% if report.is_verified %}<span class="badge badge-success">Verified <i class="icon-ok"></i></span>{% endif %}
-								{% if report.is_closed %}<span class="badge badge-important">Closed <i class="icon-lock"></i></span>{% endif %}
-							</li>
-						{% empty %}
-						<li id="ui-no-reports">No reports!</li>
-						{% endfor %}
-					</ul>
+							<ul id="ui-timeline-list" class="list list-hover">
+								{% include "reports/dashbload_reports_list.html" %}
+							</ul>
 
+							<div class="pagination pagination-centered">
+								<ul>
+
+									<li class="{% if current == 1 %}disabled{% endif %}">
+										<a id="ui-timeline-pagination-first" class="ui-timeline-pagination-control" href="{{request.path}}?page=1"><i class="icon-arrow-left"></i> First</a>
+									</li>
+
+									<li class="{% if current == 1 %}disabled{% endif %}">
+										<a id="ui-timeline-pagination-previous" class="ui-timeline-pagination-control" href="{{request.path}}?page={{current}}"><i class="icon-arrow-left"></i> Previous</a>
+									</li>
+
+									{% comment %}
+									{% for page in pages|times %}
+									<li{% if forloop.counter == current  %} class="active"{% endif %}><a href="{{request.path}}?page={{forloop.counter}}">{{forloop.counter}}</a></li>
+									{% endfor %}
+									{% endcomment %}
+
+									<li><span id="ui-timeline-pagination-indicator">{{current}} / {{pages}}</span></li>
+
+									<li class="{% if current == pages %}disabled{% endif %}">
+										<a id="ui-timeline-pagination-next" class="ui-timeline-pagination-control" href="{{request.path}}?page={{ current|add:1 }}">Next <i class="icon-arrow-right"></i></a>
+									</li>
+
+									<li class="{% if current == pages %}disabled{% endif %}">
+										<a id="ui-timeline-pagination-last" class="ui-timeline-pagination-control" href="{{request.path}}?page=last">Last <i class="icon-arrow-right"></i></a>
+									</li>
+								</ul>
+							</div>
+						</div>
 					</div>
 				</div>
 
@@ -62,13 +115,27 @@
 								<div id="ui-stats-categories-chart" class=""></div>
 								<h3 class="text-center">Distribution by incident category</h3>
 							</div>
+							<!--
 							<div class="span4">
 								<div id="ui-stats-features-chart" class=""></div>
 								<h3 class="text-center">Distribution by features</h3>
 							</div>
+							-->
 							<div class="span4">
 								<div id="ui-stats-victim-gender-chart" class=""></div>
 								<h3 class="text-center">Distribution by victim's gender</h3>
+							</div>
+						</div>
+
+						<div class="row-fluid">
+							<div class="span4">
+								<div id="ui-stats-categories-list" class=""></div>
+							</div>
+							<div class="span4">
+								<div id="ui-stats-features-list" class=""></div>
+							</div>
+							<div class="span4">
+								<div id="ui-stats-victim-gender-list" class=""></div>
 							</div>
 						</div>
 
@@ -85,41 +152,38 @@
 {% endblock %}
 
 {% block view_styles %}
-	<!-- Map -->
+	{% compress css %}
 	<link rel="stylesheet" href="{% static 'components/leaflet/dist/leaflet.css'%}" />
+	<link rel="stylesheet" href="{% static 'components/morris.js/morris.css'%}" />
+	<link rel="stylesheet" href="{% static 'components/morris.js/morris.css'%}" />
+	{% endcompress %}
 	<!--[if lte IE 8]>
 	<link rel="stylesheet" href="{% static 'components/leaflet/dist/leaflet.ie.css'%}" />
 	<![endif]-->
-	<link rel="stylesheet" href="http://cdn.oesmith.co.uk/morris-0.4.3.min.css">
-	<style>
-		#map { width:100%; height: 300px}
-	</style>
+	{% compress css %}
+	<link rel="stylesheet" href="{% static 'reports/styles/dashboard.css'%}" />
+	{% endcompress %}
 {% endblock %}
 
 {% block view_scripts %}
-	<!--
-	<script src="{% static 'components/angular/angular.js' %}"></script>
-
-	<script src="{% static 'components/angular-resource/angular-resource.js' %}"></script>
-	<script src="{% static 'components/angular-cookies/angular-cookies.js' %}"></script>
-	<script src="{% static 'components/angular-sanitize/angular-sanitize.js' %}"></script>
-	<script src="{% static 'components/ui-router/release/angular-ui-router.js' %}"></script>
-	<script src="{% static 'components/angular-bootstrap/ui-bootstrap-tpls.js' %}"></script>
-
-	<script src="{% static 'scripts/app.js' %}"></script>
-	<script src="{% static 'reports/scripts/dashboard-ng.js' %}"></script>
-	-->
-
-	<!-- Map -->
+	{% compress js %}
 	<script src="{% static 'components/leaflet/dist/leaflet.js' %}"></script>
-
 	<script src="{% static 'components/raphael/raphael.js' %}"></script>
 	<script src="{% static 'components/morris.js/morris.js' %}"></script>
-
+	<script src="{% static 'components/list.js/src/list.js' %}"></script>
+	{% endcompress %}
 	<script type="text/javascript">
 		reform.data.reportsByCategory = {{reports_by_category|json}}
 		reform.data.reportsByFeature = {{reports_by_feature|json}}
 		reform.data.reportsByVictimGender = {{reports_by_victim_gender|json}}
+		reform.data.reportsByDate = {{reports_by_date|json}}
+		reform.data.timeline = {
+			pages: {{pages|json}},
+			current: {{current|json}},
+			count: {{count|json}},
+		};
 	</script>
+	{% compress js %}
 	<script src="{% static 'reports/scripts/dashboard.js' %}"></script>
+	{% endcompress %}
 {% endblock %}

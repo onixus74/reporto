@@ -1,6 +1,6 @@
 {% extends "layouts/default.html" %}
 
-{% load static json crispy_forms_tags widget_tweaks compress l10n %}
+{% load static custom crispy_forms_tags widget_tweaks compress l10n %}
 
 {% block view_title %}Report Submission | {% endblock %}
 
@@ -307,7 +307,7 @@
 				<h2><span id="ui-latest-reports-label">Latest</span><span id="ui-similar-reports-label" hidden>Similar</span> Reports</h2>
 				<hr>
 				<ul id="ui-reports-list" class="list list-hover">
-					{% include "reports/submit_similar_reports.html" %}
+					{% include "reports/submit_similar_reports_list.html" %}
 				</ul>
 			</div>
 		</div>
@@ -332,23 +332,13 @@
 	<link rel="stylesheet" href="{% static 'components/dropzone/downloads/css/basic.css' %}" />
 	{% endcompress %}
 
+	{% compress css %}
 	<link rel="stylesheet" href="{% static 'reports/styles/submit.css'%}" />
+	{% endcompress %}
 
 {% endblock %}
 
 {% block view_scripts %}
-	<!--
-	<script src="{% static 'components/angular/angular.js' %}"></script>
-
-	<script src="{% static 'components/angular-resource/angular-resource.js' %}"></script>
-	<script src="{% static 'components/angular-cookies/angular-cookies.js' %}"></script>
-	<script src="{% static 'components/angular-sanitize/angular-sanitize.js' %}"></script>
-	<script src="{% static 'components/ui-router/release/angular-ui-router.js' %}"></script>
-	<script src="{% static 'components/angular-bootstrap/ui-bootstrap-tpls.js' %}"></script>
-
-	<script src="{% static 'scripts/app.js' %}"></script>
-	<script src="{% static 'reports/scripts/submit-ng.js' %}"></script>
-	-->
 	{% compress js %}
 	<!-- Map -->
 	<script src="{% static 'components/leaflet/dist/leaflet.js' %}"></script>
@@ -372,6 +362,8 @@
 		reform.urls.upload = {% url 'reports:submit-upload' as upload_url %}{{upload_url|json}};
 	</script>
 
+	{% compress js %}
 	<script src="{% static 'reports/scripts/submit.js' %}"></script>
+	{% endcompress %}
 
 {% endblock %}

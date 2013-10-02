@@ -47,7 +47,8 @@
     "medium-editor": "daviferreira/medium-editor#~1.0.0",
     "pickadate": "~3.2.2",
     "html5shiv": "~3.7.0",
-    "x-editable": "~1.4.6"
+    "x-editable": "~1.4.6",
+    "list.js": "javve/list.js#~0.2.1"
   },
   "devDependencies": {
     "html-inspector": "~0.3.0"

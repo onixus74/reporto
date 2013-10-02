@@ -306,13 +306,15 @@ class JSONFormView(JSONResponseMixin, BaseFormView):
 
 class HybridResponseMixin(JSONResponseMixin):
 	default_view = None
+
+	def is_json(self):
+		"""Look for '.json' URL extension, 'format=json' GET argument or 'application/json' accept header in request"""
+		return self.kwargs.get('extension', None) == "json" or self.request.GET.get('format', None) == "json"
+
 	def render_to_response(self, context):
 		#logger.debug(self.request.META['CONTENT_TYPE'])
-		logger.debug(context)
-		# Look for '.json' URL extension, 'format=json' GET argument or 'application/json' accept header in request
-		is_json = self.kwargs.get('extension', None) == "json" or self.request.GET.get('format', None) == "json"
-		#logger.debug(format)
-		if is_json:
+		#logger.debug(context)
+		if self.is_json():
 			return JSONResponseMixin.render_to_response(self, context)
 		else:
 			return self.default_view.render_to_response(self, context)

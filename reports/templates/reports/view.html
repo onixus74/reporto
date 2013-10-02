@@ -1,6 +1,6 @@
 {% extends "layouts/default.html" %}
 
-{% load static json thumbnail compress %}
+{% load static custom thumbnail compress %}
 
 {% block view_title %}Report Details | {% endblock %}
 
@@ -21,7 +21,9 @@
 					<h2 class="text-center">
 						{{report.category}} on {{report.datetime}} at {{report.location_text}}
 						{% if report.is_verified %}<span class="badge badge-success">Verified <i class="icon-ok"></i></span>{% endif %}
+						{% comment %}
 						{% if report.is_closed %}<span class="badge badge-important">Closed <i class="icon-lock"></i></span>{% endif %}
+						{% endcomment %}
 					</h2>
 				</div>
 			</div>
@@ -147,7 +149,9 @@
 	<link rel="stylesheet" href="{% static 'components/fancybox/source/jquery.fancybox.css' %}" type="text/css" media="screen" />
 	{% endcompress %}
 
+	{% compress css %}
 	<link rel="stylesheet" href="{% static 'reports/styles/view.css'%}" />
+	{% endcompress %}
 
 {% endblock %}
 
@@ -180,6 +184,8 @@
 		})
 	</script>
 
+	{% compress js %}
 	<script src="{% static 'reports/scripts/view.js' %}"></script>
+	{% endcompress %}
 
 {% endblock %}
