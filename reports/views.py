@@ -24,7 +24,7 @@ from django.views.generic.base import View
 from django.views.generic import FormView, ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
-from base.utils.views import JSONResponse, JSONDataView, ListHybridResponseMixin, DetailHybridResponseMixin, AjaxableResponseMixin
+from base.utils.views import JSONResponse, JSONDataView, ListHybridResponseMixin, PaginatedListHybridResponseMixin, DetailHybridResponseMixin, AjaxableResponseMixin
 
 from django.core.files.storage import default_storage
 
@@ -43,7 +43,7 @@ class ReportForm(forms.ModelForm):
 		model = Report
 
 
-class ReportsDashboard(ListHybridResponseMixin, ListView):
+class ReportsDashboard(PaginatedListHybridResponseMixin, ListView):
 	""" """
 	model = Report
 	template_name = "reports/dashboard.html"
@@ -60,61 +60,79 @@ class ReportsDashboard(ListHybridResponseMixin, ListView):
 		"""
 		context = super(ReportsDashboard, self).get_context_data(**kwargs)
 
+		if self.is_json():
 
-		reports_by_category = []
-		categories = Category.objects.all()
-		sum_category = Category.objects.count()
-		for category in categories:
-			val = Report.objects.filter(category=category).count()
-			if val != 0:
-				reports_by_category.append({
-					'label': category.definition,
-					'value': val
-				})
-		context['reports_by_category'] = reports_by_category
+			context['html'] = render_to_string("reports/dashbload_reports_list.html", { 'report_list': context['report_list'] })
+			context['report_list'] = None
 
+		else:
 
-		reports_by_feature = []
-		features = Feature.objects.all()
-		sum_features = Feature.objects.count()
-		for feature in features:
-			val = Report.objects.filter(features=feature).count()
-			if val != 0:
-				reports_by_feature.append({
-					'label': feature.definition,
-					'value': val
-				})
-		context['reports_by_feature'] = reports_by_feature
+			reports_by_category = []
+			categories = Category.objects.all()
+			sum_category = Category.objects.count()
+			for category in categories:
+				val = Report.objects.filter(category=category).count()
+				if val != 0:
+					reports_by_category.append({
+						'label': category.definition,
+						'value': val
+					})
+			context['reports_by_category'] = reports_by_category
 
 
-		reports_by_victim_gender = []
-		victim_genders = [Victim.MALE, Victim.FEMALE]
-		victim_genders_display = dict(Victim.GENDER)
-		sum_victims = Victim.objects.count()
-		for victim_gender in victim_genders:
-			val = Report.objects.filter(victim__gender=victim_gender).count()
-			if val != 0:
-				reports_by_victim_gender.append({
-					'label': victim_genders_display[victim_gender],
-					'value': val
-				})
-		context['reports_by_victim_gender'] = reports_by_victim_gender
+			reports_by_feature = []
+			features = Feature.objects.all()
+			sum_features = Feature.objects.count()
+			for feature in features:
+				val = Report.objects.filter(features=feature).count()
+				if val != 0:
+					reports_by_feature.append({
+						'label': feature.definition,
+						'value': val
+					})
+			context['reports_by_feature'] = reports_by_feature
 
-		reports_by_date_dict = {}
-		for report in Report.objects.all():
-			date_str = str(report.datetime.date())
-			reports_by_date_dict[date_str] = reports_by_date_dict.get(date_str, 0) + 1
-		reports_by_date = [{'date': key, 'reports': reports_by_date_dict[key]} for key in reports_by_date_dict.keys()]
-		context['reports_by_date'] = reports_by_date
+
+			reports_by_victim_gender = []
+			victim_genders = [Victim.MALE, Victim.FEMALE]
+			victim_genders_display = dict(Victim.GENDER)
+			sum_victims = Victim.objects.count()
+			for victim_gender in victim_genders:
+				val = Report.objects.filter(victim__gender=victim_gender).count()
+				if val != 0:
+					reports_by_victim_gender.append({
+						'label': victim_genders_display[victim_gender],
+						'value': val
+					})
+			context['reports_by_victim_gender'] = reports_by_victim_gender
+
+			reports_by_date_dict = {}
+			for report in Report.objects.all():
+				date_str = str(report.datetime.date())
+				reports_by_date_dict[date_str] = reports_by_date_dict.get(date_str, 0) + 1
+
+			reports_by_date = [{'date': key, 'reports': reports_by_date_dict[key]} for key in reports_by_date_dict.keys()]
+
+			context['reports_by_date'] = reports_by_date
 
 		return context
+
+
+
+# def paginated_reports(request, *args, **kwargs):
+
+# 	return JSONResponse({
+# 		'success': True,
+# 		'exist': exist,
+# 		'list': similars,
+# 		'html': render_to_string("reports/submit_similar_reports_list.html", { 'reports': similars })
+# 	})
 
 
 class ReportView(DetailHybridResponseMixin, DetailView):
 	""" """
 	model = Report
 	template_name = "reports/view.html"
-
 
 
 # def item(request, id, *args, **kwargs):
@@ -369,7 +387,7 @@ def similar_reports(request, *args, **kwargs):
 		'success': True,
 		'exist': exist,
 		'list': similars,
-		'html': render_to_string("reports/submit_similar_reports.html", { 'reports': similars })
+		'html': render_to_string("reports/submit_similar_reports_list.html", { 'reports': similars })
 	})
 
 from math import radians, cos, sin, asin, sqrt

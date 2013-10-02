@@ -156,13 +156,13 @@ body {
 			@include box-shadow(0 0 10px rgba($red, 0.6));
 		}
 		&.ui-similar-2 {
-			@include box-shadow(0 0 15px rgba($red, 0.7));;
+			@include box-shadow(0 0 20px rgba($red, 0.7));;
 		}
 		&.ui-similar-3 {
-			@include box-shadow(0 0 20px rgba($red, 0.8));;
+			@include box-shadow(0 0 30px rgba($red, 0.8));;
 		}
 		&.ui-similar-4 {
-			@include box-shadow(0 0 25px rgba($red, 0.9));;
+			@include box-shadow(0 0 40px rgba($red, 0.9));;
 		}
 	}
 }

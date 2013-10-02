@@ -10,7 +10,7 @@ urlpatterns = patterns('',
 
 	url(r'^$', 'reports.views.index', name='reports'),
 
-	url(r'^dashboard$',           login_required(ReportsDashboard.as_view()),       name='dashboard'),
+	url(r'^dashboard(\.(?P<extension>(json)))?$',           login_required(ReportsDashboard.as_view()),       name='dashboard'),
 	#url(r'^submit$',             login_required(ReportSubmitView.as_view()),       name='submit'),
 	url(r'^submit$',              login_required(report_submit),                    name='submit'),
 	url(r'^submit/similar$',      login_required(similar_reports),                  name='similar_reports'),

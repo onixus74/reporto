@@ -1,6 +1,6 @@
 {% extends "layouts/default.html" %}
 
-{% load static json crispy_forms_tags widget_tweaks compress l10n %}
+{% load static custom crispy_forms_tags widget_tweaks compress l10n %}
 
 {% block view_title %}Report Submission | {% endblock %}
 
@@ -307,7 +307,7 @@
 				<h2><span id="ui-latest-reports-label">Latest</span><span id="ui-similar-reports-label" hidden>Similar</span> Reports</h2>
 				<hr>
 				<ul id="ui-reports-list" class="list list-hover">
-					{% include "reports/submit_similar_reports.html" %}
+					{% include "reports/submit_similar_reports_list.html" %}
 				</ul>
 			</div>
 		</div>
