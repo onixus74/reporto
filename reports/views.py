@@ -368,7 +368,7 @@ def similar_reports(request, *args, **kwargs):
 		#logger.debug('VICTIM %s', [input_victim_firstname, input_victim_lastname, report.victim])
 		if input_victim_firstname and input_victim_lastname:
 			input_victim_fullname = ("%s %s" % (input_victim_firstname, input_victim_lastname)).strip()
-			if string_distance(input_victim_fullname, report.victim.get_fullname()) > 0.9: # similar string values
+			if string_distance(input_victim_fullname, report.victim.get_fullname()) > 0.8: # similar string values
 				similarities.append('victim')
 
 		report.similarities = similarities

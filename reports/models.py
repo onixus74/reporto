@@ -15,7 +15,7 @@ class Category(models.Model):
 	definition = models.CharField(max_length=300)
 
 	def get_absolute_url(self):
-		return reverse('categories:view', args=[str(self.id)])
+		return reverse('categories:view', pk=self.id)
 
 	def __unicode__(self):
 		return self.definition
@@ -24,13 +24,16 @@ class Category(models.Model):
 		self.slug = slugify(self.definition)
 		super(Category, self).save(*args, **kwargs)
 
+	class Meta:
+		verbose_name_plural = "categories"
+
 
 class Feature(models.Model):
 	slug       = models.SlugField(max_length=200, blank=True, null=True)
 	definition = models.CharField(max_length=300)
 
 	def get_absolute_url(self):
-		return reverse('features:view', args=[str(self.id)])
+		return reverse('features:view', pk=self.id)
 
 	def __unicode__(self):
 		return self.definition
@@ -80,20 +83,36 @@ class Victim(models.Model):
 		(COP, "Cop")
 	)
 
+	# VALUE1 = 'V1'
+	# VALUE2 = 'V2'
+	# EDUCATION = (
+	# 	(VALUE1, "VALUE1"),
+	# 	(VALUE2, "VALUE2")
+	# )
+
+	# VALUE1 = 'V1'
+	# VALUE2 = 'V2'
+	# SOCIAL_STATUS = (
+	# 	(VALUE1, "VALUE1"),
+	# 	(VALUE2, "VALUE2")
+	# )
+
 	category    = models.CharField(max_length=3, choices=CATEGORY, default=CITIZEN)
 	firstname   = models.CharField(max_length=100)
 	lastname    = models.CharField(max_length=100)
 	gender      = models.CharField(max_length=1, choices=GENDER, default=MALE)
 	age         = models.PositiveIntegerField(blank=True, null=True)
 	education   = models.CharField(max_length=200, blank=True, null=True)
+	# education   = models.CharField(max_length=200, choices=EDUCATION, default=VALUE1)
 	profession  = models.CharField(max_length=200, blank=True, null=True)
-	phone       = models.CharField(max_length=20, blank=True, null=True)
-	email       = models.EmailField(blank=True, null=True)
+	# social_status  = models.CharField(max_length=200, choices=SOCIAL_STATUS, default=VALUE1)
+	phone       = models.CharField(max_length=20, blank=True, null=True, help_text="Victim's email address is a private information, it wont be shared or publicly accessible.")
+	email       = models.EmailField(blank=True, null=True, help_text="Victim's phone number is a private information, it wont be shared or publicly accessible.")
 	description = models.TextField(blank=True, null=True)
 	user        = models.ForeignKey(settings.AUTH_USER_MODEL, blank=True, null=True)
 
 	def get_absolute_url(self):
-		return reverse('victims:view', args=[str(self.id)])
+		return reverse('victims:view', pk=self.id)
 
 	def get_fullname(self):
 		return "%s %s" % (self.firstname, self.lastname)
@@ -106,6 +125,8 @@ class Victim(models.Model):
 		data['gender_display'] = self.get_gender_display()
 		data['category_display'] = self.get_category_display()
 		data['user'] = self.user
+		data.pop('email')
+		data.pop('phone')
 		return data
 
 
@@ -151,7 +172,7 @@ class Comment(models.Model):
 class Report(models.Model):
 
 	class Meta:
-		ordering = ["datetime"]
+		ordering = ["-datetime"]
 
 	CITIZEN = 'CIT'
 	COP = 'COP'
@@ -171,6 +192,7 @@ class Report(models.Model):
 	aggressor_category = models.CharField(max_length=3, choices=CATEGORY, default=COP, blank=True)
 	description        = models.TextField()
 	media              = models.ManyToManyField(Media, blank=True, null=True)
+	#sources            = models.TextField(blank=True, null=True)
 	features           = models.ManyToManyField(Feature)
 	is_verified        = models.BooleanField()
 	is_closed          = models.BooleanField()
@@ -180,10 +202,10 @@ class Report(models.Model):
 	updated_at         = models.DateTimeField(auto_now=True)
 
 	def get_absolute_url(self):
-		return reverse('reports:view', args=[str(self.id)])
+		return reverse('reports:view', pk=self.id)
 
 	def __unicode__(self):
-		return str(self.datetime)
+		return '%s - %s %s' % (self.pk, self.datetime, self.location_text)
 
 	def serialize(self):
 		data = model_to_dict(self)

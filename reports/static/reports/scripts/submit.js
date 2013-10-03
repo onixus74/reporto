@@ -134,8 +134,10 @@ reform.widgets.wizard.init = function() {
 
 	var widget = reform.widgets.wizard;
 
-	//$('.select2').select2()
-	$('.select2').selectpicker();
+	//$('#id_category option[selected]').remove()
+	$('#id_category option[selected]').removeAttr('selected').html('')
+	$('.select2').select2()
+	//$('.select2').selectpicker();
 
 	var form = widget.form = $('#report-form');
 

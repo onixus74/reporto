@@ -1,9 +1,22 @@
 								<li class="ui-timeline-story" data-latlng="{{report.location}}">
-									<span class="label victim">{{report.victim}}</span> has been a victim of <span class="label category">{{report.category}}</span>
-									happened in <span class="label location">{{report.location_text}}</span>
-									on <span class="label datetime"><a href="{% url 'reports:view' report.id %}" target="_blank">{{report.datetime}}</a><span>
-									{% if report.is_verified %}<span class="badge badge-success">Verified <i class="icon-ok"></i></span>{% endif %}
-									{% comment %}
-									{% if report.is_closed %}<span class="badge badge-important">Closed <i class="icon-lock"></i></span>{% endif %}
-									{% endcomment %}
+									<div class="row-fluid">
+										<div class="span2">
+											<a class="btn btn-quiet ui-timeline-story-locator" title="Click to locate incident">
+												<i class="icon-map-marker icon-2x"></i>
+											</a>
+										</div>
+										<div class="span10">
+											<span class="label victim">{{report.victim}}</span>
+											has been a victim of
+											<span class="label category">{{report.category}}</span>
+											happened in
+											<span class="label location">{{report.location_text}}</span>
+											on
+											<span class="label datetime"><a href="{% url 'reports:view' report.id %}" target="_blank">{{report.datetime}}</a></span>
+											{% if report.is_verified %}<span class="badge badge-success">Verified <i class="icon-ok"></i></span>{% endif %}
+											{% comment %}
+											{% if report.is_closed %}<span class="badge badge-important">Closed <i class="icon-lock"></i></span>{% endif %}
+											{% endcomment %}
+										</div>
+									</div>
 								</li>
