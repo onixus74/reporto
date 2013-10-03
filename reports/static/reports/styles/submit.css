@@ -145,15 +145,15 @@ body {
 /* line 152, submit.scss */
 .ui-similar-report-candidate.ui-similar {
   border-color: #c0392b;
-  -webkit-box-shadow: 0 0 5px rgba(192, 57, 43, 0.5);
-  -moz-box-shadow: 0 0 5px rgba(192, 57, 43, 0.5);
-  box-shadow: 0 0 5px rgba(192, 57, 43, 0.5);
+  -webkit-box-shadow: 0 0 5px rgba(214, 85, 72, 0.9);
+  -moz-box-shadow: 0 0 5px rgba(214, 85, 72, 0.9);
+  box-shadow: 0 0 5px rgba(214, 85, 72, 0.9);
 }
 /* line 155, submit.scss */
 .ui-similar-report-candidate.ui-similar.ui-similar-1 {
-  -webkit-box-shadow: 0 0 10px rgba(192, 57, 43, 0.6);
-  -moz-box-shadow: 0 0 10px rgba(192, 57, 43, 0.6);
-  box-shadow: 0 0 10px rgba(192, 57, 43, 0.6);
+  -webkit-box-shadow: 0 0 10px rgba(209, 66, 51, 0.8);
+  -moz-box-shadow: 0 0 10px rgba(209, 66, 51, 0.8);
+  box-shadow: 0 0 10px rgba(209, 66, 51, 0.8);
 }
 /* line 158, submit.scss */
 .ui-similar-report-candidate.ui-similar.ui-similar-2 {
@@ -163,37 +163,37 @@ body {
 }
 /* line 161, submit.scss */
 .ui-similar-report-candidate.ui-similar.ui-similar-3 {
-  -webkit-box-shadow: 0 0 30px rgba(192, 57, 43, 0.8);
-  -moz-box-shadow: 0 0 30px rgba(192, 57, 43, 0.8);
-  box-shadow: 0 0 30px rgba(192, 57, 43, 0.8);
+  -webkit-box-shadow: 0 0 30px rgba(171, 51, 38, 0.7);
+  -moz-box-shadow: 0 0 30px rgba(171, 51, 38, 0.7);
+  box-shadow: 0 0 30px rgba(171, 51, 38, 0.7);
 }
 /* line 164, submit.scss */
 .ui-similar-report-candidate.ui-similar.ui-similar-4 {
-  -webkit-box-shadow: 0 0 40px rgba(192, 57, 43, 0.9);
-  -moz-box-shadow: 0 0 40px rgba(192, 57, 43, 0.9);
-  box-shadow: 0 0 40px rgba(192, 57, 43, 0.9);
+  -webkit-box-shadow: 0 0 40px rgba(150, 45, 34, 0.7);
+  -moz-box-shadow: 0 0 40px rgba(150, 45, 34, 0.7);
+  box-shadow: 0 0 40px rgba(150, 45, 34, 0.7);
 }
 
 /* line 179, submit.scss */
-.ui-similar-category .ui-similar-report-category {
+.ui-similar-category .ui-similar-report-category, .ui-similar-category .ui-similar-report-category a {
   color: #ab3326;
   font-weight: bold;
 }
 
 /* line 184, submit.scss */
-.ui-similar-location .ui-similar-report-location {
+.ui-similar-location .ui-similar-report-location, .ui-similar-location .ui-similar-report-location a {
   color: #962d22;
   font-weight: bold;
 }
 
 /* line 189, submit.scss */
-.ui-similar-datetime .ui-similar-report-datetime {
+.ui-similar-datetime .ui-similar-report-datetime, .ui-similar-datetime .ui-similar-report-datetime a {
   color: #81261d;
   font-weight: bold;
 }
 
 /* line 194, submit.scss */
-.ui-similar-victim .ui-similar-report-victim {
+.ui-similar-victim .ui-similar-report-victim, .ui-similar-victim .ui-similar-report-victim a {
   color: #c0392b;
   font-weight: bold;
 }

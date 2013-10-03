@@ -39,7 +39,7 @@
 
 							<div class="span4_">
 								<div id="ui-stats-features-chart" class=""></div>
-								<h3 class="text-center">Distribution by features</h3>
+								<h3 class="text-center">Features</h3>
 							</div>
 
 					</div>
@@ -170,7 +170,6 @@
 	<script src="{% static 'components/leaflet/dist/leaflet.js' %}"></script>
 	<script src="{% static 'components/raphael/raphael.js' %}"></script>
 	<script src="{% static 'components/morris.js/morris.js' %}"></script>
-	<script src="{% static 'components/list.js/src/list.js' %}"></script>
 	{% endcompress %}
 	<script type="text/javascript">
 		reform.data.reportsByCategory = {{reports_by_category|json}}

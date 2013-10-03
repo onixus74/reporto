@@ -18,6 +18,8 @@
 					<div class="control-group">
 						<div class="controls">
 							<dl>
+								<dt>Category</dt>
+								<dd>{{victim.get_category_display}}</dd>
 								<dt>Firstname</dt>
 								<dd>{{victim.firstname}}</dd>
 								<dt>Lastname</dt>
@@ -30,14 +32,14 @@
 								<dd>{{victim.education}}</dd>
 								<dt>Profession</dt>
 								<dd>{{victim.profession}}</dd>
+								{% comment %}
 								<dt>Phone</dt>
 								<dd>{{victim.phone}}</dd>
 								<dt>Email</dt>
 								<dd>{{victim.email}}</dd>
+								{% endcomment %}
 								<dt>Description</dt>
 								<dd>{{victim.description}}</dd>
-								<dt>Category</dt>
-								<dd>{{victim.get_category_display}}</dd>
 							</dl>
 						</div>
 					</div>

@@ -40,6 +40,8 @@ class User(AbstractUser):
 		data['short_name'] = self.get_short_name()
 		data['full_name'] = self.get_full_name()
 		data['role_display'] = self.get_role_display()
+		#data.pop('email')
+		data.pop('username')
 		return data
 
 	def is_admin(self):

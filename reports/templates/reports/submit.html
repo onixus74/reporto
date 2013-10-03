@@ -64,7 +64,7 @@
 							<p class="lead text text-center" style="margin: 0;">
 								<span id="ui-wizard-victim-text" hidden>I've been a victim of</span>
 								<span id="ui-wizard-witness-text" hidden>I've witnessed a</span>
-								{% render_field form.category class+="select2 span4" data-style="btn-large boostrap-select-colors-fix" %}
+								{% render_field form.category placeholder="Select an incident category" class+="select2 span4_ btn-large" data-style="btn-large boostrap-select-colors-fix" %}
 								<!--that happened --><!--on
 								{% render_field form.datetime type="datetime-local" class+="span4" required="required" %}-->
 								<!--at-->
@@ -290,7 +290,7 @@
 						<div class="span12">
 							<h2><i class="icon-tag"></i> Features</h2>
 							<!--<input type="text" class="input-block-level" placeholder="Features">-->
-							{% render_field form.features placeholder="Features" class+="select2 input-block-level" data-style="btn-large"  %}
+							{% render_field form.features placeholder="Select applicable features" class+="select2 input-block-level btn-large" data-style="btn-large"  %}
 						</div>
 					</div>
 

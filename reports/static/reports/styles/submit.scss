@@ -151,18 +151,18 @@ body {
 	@include transition(border-color .1s linear);
 	&.ui-similar {
 		border-color: $red;
-		@include box-shadow(0 0 5px rgba($red, 0.5));
+		@include box-shadow(0 0 5px rgba(lighten($red, 10%), 0.9));
 		&.ui-similar-1 {
-			@include box-shadow(0 0 10px rgba($red, 0.6));
+			@include box-shadow(0 0 10px rgba(lighten($red, 5%), 0.8));
 		}
 		&.ui-similar-2 {
 			@include box-shadow(0 0 20px rgba($red, 0.7));;
 		}
 		&.ui-similar-3 {
-			@include box-shadow(0 0 30px rgba($red, 0.8));;
+			@include box-shadow(0 0 30px rgba(darken($red, 5%), 0.7));;
 		}
 		&.ui-similar-4 {
-			@include box-shadow(0 0 40px rgba($red, 0.9));;
+			@include box-shadow(0 0 40px rgba(darken($red, 10%), 0.7));;
 		}
 	}
 }
@@ -176,22 +176,22 @@ body {
 .ui-similar-victim {}
 
 
-.ui-similar-category .ui-similar-report-category {
+.ui-similar-category .ui-similar-report-category, .ui-similar-category .ui-similar-report-category a {
 	color: darken($red, 5%);
 	font-weight: bold;
 }
 
-.ui-similar-location .ui-similar-report-location {
+.ui-similar-location .ui-similar-report-location, .ui-similar-location .ui-similar-report-location a {
 	color: darken($red, 10%);
 	font-weight: bold;
 }
 
-.ui-similar-datetime .ui-similar-report-datetime {
+.ui-similar-datetime .ui-similar-report-datetime, .ui-similar-datetime .ui-similar-report-datetime a {
 	color: darken($red, 15%);
 	font-weight: bold;
 }
 
-.ui-similar-victim .ui-similar-report-victim {
+.ui-similar-victim .ui-similar-report-victim, .ui-similar-victim .ui-similar-report-victim a {
 	color: $red;
 	font-weight: bold;
 }
