@@ -218,34 +218,40 @@ def report_submit(request, template_name = "reports/submit.html", *args, **kwarg
 		#RSIDs.append(rsid)
 		#request.session['RSIDs'] = RSIDs
 		context['report_submit_id'] = rsid
-		victims = Victim.objects.all()
-		context['victims'] = victims
-		reports = Report.objects.all()
+		#victims = Victim.objects.all()
+		#context['victims'] = victims
+		reports = Report.objects.all()[:5]
 		context['reports'] = reports
 
 	victim_id = request.POST.get('victim', None)
 	logger.debug('VICTIM %s', victim_id)
 
-	if form.is_valid() and (victim_id != '0' or victim_form.is_valid()):
+	if form.is_valid() and ((victim_id != '0' and victim_id != 'user') or (victim_id == '0' and victim_form.is_valid()) or (victim_id == 'user' and reporter_victim_form.is_valid())):
 
-		if victim_id == 'user':
-			# the user is the victim
+		if victim_id == 'user': # the user is the victim
 			try:
 				victim = Victim.objects.get(user=request.user)
+				# update goes here!
 			except Victim.DoesNotExist:
-				victim = Victim(firstname=request.user.first_name, lastname=request.user.last_name, email=request.user.email, user=request.user);
-				victim.save();
-		elif victim_id != '0':
-			# existent victim
+				#victim = Victim(category=reporter_victim_form.instance.category, firstname=request.user.first_name, lastname=request.user.last_name, gender=reporter_victim_form.instance.gender, email=request.user.email, user=request.user);
+				#victim.save();
+				reporter_victim_form.instance.firstname = request.user.first_name
+				reporter_victim_form.instance.lastname = request.user.last_name
+				reporter_victim_form.instance.email = request.user.email
+				reporter_victim_form.instance.user = request.user
+				victim = reporter_victim_form.save()
+		elif victim_id != '0': # existent victim
 			victim = Victim.objects.get(pk=victim_id)
-		else:
-			# create new user
+		else: # create new user
 			victim = victim_form.save()
+
 		logger.debug('VICTIM %s', victim)
 
 		#victim = victim_form.save()
 		form.instance.victim = victim
 		form.instance.created_by = request.user
+		if request.user.is_moderator():
+			form.instance.is_verified = True
 		report = form.save()
 
 		files = request.FILES.getlist('files[]')
@@ -278,7 +284,9 @@ def report_submit(request, template_name = "reports/submit.html", *args, **kwarg
 
 	else:
 		if request.is_ajax():
-			if victim != 'user':
+			if victim_id == 'user':
+				form.errors['victim'] = reporter_victim_form.errors
+			elif victim_id == '0':
 				form.errors['victim'] = victim_form.errors
 			return JSONResponse({
 				'success': False,

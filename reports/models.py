@@ -15,7 +15,7 @@ class Category(models.Model):
 	definition = models.CharField(max_length=300)
 
 	def get_absolute_url(self):
-		return reverse('categories:view', pk=self.id)
+		return reverse('categories:view', kwargs={'pk': self.id})
 
 	def __unicode__(self):
 		return self.definition
@@ -33,7 +33,7 @@ class Feature(models.Model):
 	definition = models.CharField(max_length=300)
 
 	def get_absolute_url(self):
-		return reverse('features:view', pk=self.id)
+		return reverse('features:view', kwargs={'pk': self.id})
 
 	def __unicode__(self):
 		return self.definition
@@ -112,7 +112,7 @@ class Victim(models.Model):
 	user        = models.ForeignKey(settings.AUTH_USER_MODEL, blank=True, null=True)
 
 	def get_absolute_url(self):
-		return reverse('victims:view', pk=self.id)
+		return reverse('victims:view', kwargs={'pk': self.id})
 
 	def get_fullname(self):
 		return "%s %s" % (self.firstname, self.lastname)
@@ -202,7 +202,7 @@ class Report(models.Model):
 	updated_at         = models.DateTimeField(auto_now=True)
 
 	def get_absolute_url(self):
-		return reverse('reports:view', pk=self.id)
+		return reverse('reports:view', kwargs={'pk': self.id})
 
 	def __unicode__(self):
 		return '%s - %s %s' % (self.pk, self.datetime, self.location_text)
