@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/daviferreira/medium-editor.png?branch=master)](https://travis-ci.org/daviferreira/medium-editor)
 
-This is a clone of [medium.com](medium.com) inline editor toolbar. 
+This is a clone of [medium.com](https://medium.com) inline editor toolbar.
 
 Since I always had problems with bloated editors and I loved the simplicity of medium.com solution I've tried to implement their WYSIWYG approach with this script.
 
@@ -31,6 +31,13 @@ The next step is to reference the editor's script and instantiate a new MediumEd
 
 The above code will transform all the elements with the .editable class into HTML5 editable contents and add the medium editor toolbar to them.
 
+You can also pass a list of HTML elements:
+
+```javascript
+var elements = document.querySelectorAll('.editable'),
+    editor = new MediumEditor(elements);
+```
+
 ## Initialization options
 
 * __excludedActions__: list of actions to be excluded from the toolbar. Default: []
@@ -54,6 +61,11 @@ var editor = new MediumEditor('.editable', {
     delay: 1000
 });
 ```
+
+## API
+
+* __.deactivate()__: disables the editor
+* __.activate()__: re-activates the editor
 
 ## Development
 

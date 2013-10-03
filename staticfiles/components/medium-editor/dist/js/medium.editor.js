@@ -1,6 +1,6 @@
-function MediumEditor(selector, options) {
+function MediumEditor(elements, options) {
     'use strict';
-    return this.init(selector, options);
+    return this.init(elements, options);
 }
 
 (function (window, document) {
@@ -58,6 +58,14 @@ function MediumEditor(selector, options) {
         selection.addRange(range);
     }
 
+    // http://stackoverflow.com/questions/1197401/how-can-i-get-the-element-the-caret-is-in-with-javascript-when-using-contentedi
+    // by You
+    function getSelectionStart() {
+        var node = document.getSelection().anchorNode,
+            startNode = (node && node.nodeType === 3 ? node.parentNode : node);
+        return startNode;
+    }
+
     MediumEditor.prototype = {
 
         defaults: {
@@ -70,15 +78,16 @@ function MediumEditor(selector, options) {
             delay: 0
         },
 
-        init: function (selector, options) {
-            this.elements = document.querySelectorAll(selector);
+        init: function (elements, options) {
+            this.elements = typeof elements === 'string' ? document.querySelectorAll(elements) : elements;
             if (this.elements.length === 0) {
                 return;
             }
+            this.isActive = true;
             this.parentElements = ['p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'q'];
             this.id = document.querySelectorAll('.medium-editor-toolbar').length + 1;
             this.options = extend(options, this.defaults);
-            return this.initElements(selector)
+            return this.initElements()
                        .initToolbar()
                        .bindSelect()
                        .bindButtons()
@@ -86,12 +95,27 @@ function MediumEditor(selector, options) {
                        .bindWindowActions();
         },
 
-        initElements: function (selector) {
+        initElements: function () {
             var i;
             for (i = 0; i < this.elements.length; i += 1) {
                 this.elements[i].setAttribute('contentEditable', true);
+                this.bindParagraphCreation(this.elements[i]);
             }
             return this;
+        },
+
+        bindParagraphCreation: function (el) {
+            el.addEventListener('keyup', function (e) {
+                var node = getSelectionStart();
+                if (node) {
+                    node = node.tagName.toLowerCase();
+                }
+                if (e.which === 13 && !e.shiftKey) {
+                    if (node !== 'q') {
+                        document.execCommand('formatBlock', false, 'p');
+                    }
+                }
+            });
         },
 
         //TODO: actionTemplate
@@ -130,16 +154,16 @@ function MediumEditor(selector, options) {
         bindSelect: function () {
             var self = this,
                 timer = '',
-                checkSelectionWrapper = function (e) {
-                    clearTimeout(timer);
-                    setTimeout(function () {
-                        self.checkSelection(e);
-                    }, self.options.delay);
-                },
                 i;
+            this.checkSelectionWrapper = function (e) {
+                clearTimeout(timer);
+                setTimeout(function () {
+                    self.checkSelection(e);
+                }, self.options.delay);
+            };
             for (i = 0; i < this.elements.length; i += 1) {
-                this.elements[i].onmouseup = checkSelectionWrapper;
-                this.elements[i].onkeyup = checkSelectionWrapper;
+                this.elements[i].addEventListener('mouseup', this.checkSelectionWrapper);
+                this.elements[i].addEventListener('keyup', this.checkSelectionWrapper);
             }
             return this;
         },
@@ -154,8 +178,8 @@ function MediumEditor(selector, options) {
                     this.selection = newSelection;
                     this.selectionRange = this.selection.getRangeAt(0);
                     this.toolbar.style.display = 'block';
-                    this.setToolbarPosition()
-                        .setToolbarButtonStates()
+                    this.setToolbarButtonStates()
+                        .setToolbarPosition()
                         .showToolbarActions();
                 }
             }
@@ -166,8 +190,8 @@ function MediumEditor(selector, options) {
             var selection = window.getSelection(),
                 range = selection.getRangeAt(0),
                 boundary = range.getBoundingClientRect();
-            this.toolbar.style.top = boundary.top - 5 + window.pageYOffset - this.toolbar.offsetHeight + 'px';
-            this.toolbar.style.left = ((boundary.left + boundary.right) / 2) - (this.toolbar.offsetWidth / 2) + 'px';
+            this.toolbar.style.top = boundary.top + this.options.diffTop + window.pageYOffset - this.toolbar.offsetHeight + 'px';
+            this.toolbar.style.left = ((boundary.left + boundary.right) / 2) - (this.toolbar.offsetWidth / 2) + (this.options.diffLeft) + 'px';
             return this;
         },
 
@@ -231,8 +255,15 @@ function MediumEditor(selector, options) {
                     self.execAction(this.getAttribute('data-action'), e);
                 };
             for (i = 0; i < buttons.length; i += 1) {
-                buttons[i].onclick = triggerAction;
+                buttons[i].addEventListener('click', triggerAction);
             }
+            this.setFirstAndLastItens(buttons);
+            return this;
+        },
+
+        setFirstAndLastItens: function (buttons) {
+            buttons[0].className += ' medium-editor-button-first';
+            buttons[buttons.length - 1].className += ' medium-editor-button-last';
             return this;
         },
 
@@ -280,6 +311,7 @@ function MediumEditor(selector, options) {
             selectionEl.parentNode.replaceChild(el, selectionEl);
             selectElementContents(el);
             this.bindElementToolbarEvents(el);
+            this.setToolbarPosition();
         },
 
         transferAttributes: function (elFrom, elTo) {
@@ -298,12 +330,12 @@ function MediumEditor(selector, options) {
 
         bindElementToolbarEvents: function (el) {
             var self = this;
-            el.onmouseup = function (e) {
+            el.addEventListener('mouseup', function (e) {
                 self.checkSelection(e);
-            };
-            el.onkeyup = function (e) {
+            });
+            el.addEventListener('keyup', function (e) {
                 self.checkSelection(e);
-            };
+            });
         },
 
         showToolbarActions: function () {
@@ -314,11 +346,11 @@ function MediumEditor(selector, options) {
             this.keepToolbarAlive = false;
             clearTimeout(timer);
             timer = setTimeout(function () {
-                document.onclick = function (e) {
+                document.addEventListener('click', function (e) {
                     self.keepToolbarAlive = false;
                     self.toolbar.style.display = 'none';
-                    this.onclick = '';
-                };
+                    document.removeEventListener('click', this);
+                });
             }, 300);
         },
 
@@ -337,21 +369,21 @@ function MediumEditor(selector, options) {
                 linkCancel = this.anchorForm.querySelector('a'),
                 self = this;
 
-            this.anchorForm.onclick = function (e) {
+            this.anchorForm.addEventListener('click', function (e) {
                 e.stopPropagation();
-            };
+            });
 
-            input.onkeyup = function (e) {
+            input.addEventListener('keyup', function (e) {
                 if (e.keyCode === 13) {
                     e.preventDefault();
                     self.createLink(this);
                 }
-            };
+            });
 
-            linkCancel.onclick = function (e) {
+            linkCancel.addEventListener('click', function (e) {
                 self.showToolbarActions();
                 restoreSelection(self.savedSelection);
-            };
+            });
 
             return this;
         },
@@ -375,6 +407,32 @@ function MediumEditor(selector, options) {
             });
 
             return this;
+        },
+
+        activate: function () {
+            var i;
+            if (this.isActive) {
+                return;
+            }
+            this.isActive = true;
+            for (i = 0; i < this.elements.length; i += 1) {
+                this.elements[i].setAttribute('contentEditable', true);
+            }
+            this.bindSelect();
+        },
+
+        deactivate: function () {
+            var i;
+            if (!this.isActive) {
+                return;
+            }
+            this.isActive = false;
+            this.toolbar.style.display = 'none';
+            for (i = 0; i < this.elements.length; i += 1) {
+                this.elements[i].removeEventListener('mouseup', this.checkSelectionWrapper);
+                this.elements[i].removeEventListener('keyup', this.checkSelectionWrapper);
+                this.elements[i].removeAttribute('contentEditable');
+            }
         }
     };
 }(window, document));
