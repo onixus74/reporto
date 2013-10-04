@@ -8,14 +8,36 @@
 
 	<div class="container">
 
-		<!--
 		<div class="page-header">
-			<h1>Reports Dashboard</h1>
+			<h1 class="text-center">Reports Dashboard</h1>
 		</div>
-		-->
+
 
 		<div class="hero-unit clearfix" style="padding: 40px;">
-			<h1 class="pull-left" style="margin-top: 0;">Reports Dashboard</h1>
+			<div class="pull-left" style="margin: 0;">
+
+				{% with report=report_list.0 %}
+				<div class="well well-small"style="margin: 0;">
+					<h2 style="margin-top: 0;">Latest Report</h2>
+					<span class="label victim">{{report.victim}} <i class="icon-user"></i></span>
+					has been a victim of
+					<span class="label category">{{report.category}}</span>
+					happened in
+					<span class="label location">{{report.location_text}} <i class="icon-map-marker"></i></span>
+					on
+					<span class="label datetime">
+						{{report.datetime}} <i class="icon-calendar"></i>
+					</span>
+					{% if report.is_verified %}<span class="badge badge-success">Verified <i class="icon-ok"></i></span>{% endif %}
+					{% comment %}
+					{% if report.is_closed %}<span class="badge badge-important">Closed <i class="icon-lock"></i></span>{% endif %}
+					{% endcomment %}
+					<a class="btn btn-quiet" href="{% url 'reports:view' report.id %}" target="_blank" title="Click to view report">
+						<i class="icon-link"></i>
+					</a>
+				</div>
+				{% endwith %}
+			</div>
 			<a class="btn btn-danger btn-large pull-right" href="{% url 'reports:submit' %}"><i class="icon-plus"></i> Report Indecent</a>
 		</div>
 
