@@ -83,7 +83,7 @@ class Victim(models.Model):
 		(COP, "Cop")
 	)
 
-	UNKNOWN = ''
+	UNKNOWN = '?'
 	NO_EDUCATION = 'NO'
 	PRIMARY_SCHOOL =  'PS'
 	HIGH_SCHOOL = 'HS'
