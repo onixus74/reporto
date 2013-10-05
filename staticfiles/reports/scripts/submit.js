@@ -176,18 +176,10 @@ reform.widgets.wizard.init = function() {
 	/* victim-witness section */
 
 	elements.victimButton = $('#ui-wizard-victim-button');
-	console.log(elements.victimButton);
 	elements.victimButtonContainer = $('#ui-wizard-victim-button-container');
-	console.log(elements.victimButtonContainer);
 	elements.witnessButton = $('#ui-wizard-witness-button');
-	console.log(elements.witnessButton);
 	elements.witnessButtonContainer = $('#ui-wizard-witness-button-container');
-	console.log(elements.witnessButtonContainer);
 
-	elements.witnessVictimFieldset = $('#ui-witness-victim-fieldset');
-	console.log(elements.witnessVictimFieldset);
-	elements.reporterVictimFieldset = $('#ui-reporter-victim-fieldset');
-	console.log(elements.reporterVictimFieldset);
 
 	function victimWitnessButtonsAction(e) {
 		var el = $(this);
@@ -209,14 +201,16 @@ reform.widgets.wizard.init = function() {
 		//$('#ui-wizard-victim-area').remove();
 		//$('#ui-wizard-victim-area').hide();
 		//$('#ui-wizard-aggressor-area').removeClass('span6').addClass('span12');
-		elements.reporterVictimFieldset.show().removeAttr('disabled');
+		$('#ui-reporter-victim-fieldset').show().removeAttr('disabled');
+		$('#ui-witness-victim-label').show();
+		$('#ui-reporter-victim-label').hide();
 	});
 
 	elements.witnessButton.on('click', function(e) {
 		victimWitnessButtonsAction.call(this, e);
 		$('#ui-wizard-witness-text').show();
 		$('#id_victim').val('0').change();
-		elements.witnessVictimFieldset.show().removeAttr('disabled');
+		$('#ui-witness-victim-fieldset').show().removeAttr('disabled');
 	});
 
 	/*
