@@ -44,10 +44,9 @@ LANGUAGES = (
 	('en', 'English'),
 	('fr', 'French'),
 	('ar', 'Arabic'),
-	#('ar-tn', 'Tounsi'),
 )
 
-SITE_ID = 1
+SITE_ID = 2
 
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
