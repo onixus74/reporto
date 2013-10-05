@@ -39,7 +39,7 @@ class Migration(SchemaMigration):
             ('lastname', self.gf('django.db.models.fields.CharField')(max_length=100)),
             ('gender', self.gf('django.db.models.fields.CharField')(default='M', max_length=1)),
             ('age', self.gf('django.db.models.fields.PositiveIntegerField')(null=True, blank=True)),
-            ('education', self.gf('django.db.models.fields.CharField')(max_length=200, null=True, blank=True)),
+            ('education', self.gf('django.db.models.fields.CharField')(default='?', max_length=200)),
             ('profession', self.gf('django.db.models.fields.CharField')(max_length=200, null=True, blank=True)),
             ('phone', self.gf('django.db.models.fields.CharField')(max_length=20, null=True, blank=True)),
             ('email', self.gf('django.db.models.fields.EmailField')(max_length=75, null=True, blank=True)),
@@ -183,7 +183,7 @@ class Migration(SchemaMigration):
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'})
         },
         u'reports.report': {
-            'Meta': {'ordering': "['datetime']", 'object_name': 'Report'},
+            'Meta': {'ordering': "['-datetime']", 'object_name': 'Report'},
             'aggressor': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
             'aggressor_category': ('django.db.models.fields.CharField', [], {'default': "'COP'", 'max_length': '3', 'blank': 'True'}),
             'category': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['reports.Category']"}),
@@ -207,7 +207,7 @@ class Migration(SchemaMigration):
             'age': ('django.db.models.fields.PositiveIntegerField', [], {'null': 'True', 'blank': 'True'}),
             'category': ('django.db.models.fields.CharField', [], {'default': "'CIT'", 'max_length': '3'}),
             'description': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
-            'education': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True', 'blank': 'True'}),
+            'education': ('django.db.models.fields.CharField', [], {'default': "'?'", 'max_length': '200'}),
             'email': ('django.db.models.fields.EmailField', [], {'max_length': '75', 'null': 'True', 'blank': 'True'}),
             'firstname': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'gender': ('django.db.models.fields.CharField', [], {'default': "'M'", 'max_length': '1'}),
