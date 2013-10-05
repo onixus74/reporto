@@ -4,8 +4,18 @@ logger = logging.getLogger(__name__)
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from base.utils.views import ListHybridResponseMixin, DetailHybridResponseMixin
+from django import forms
 
 from reports.models import Victim
+
+
+class VictimForm(forms.ModelForm):
+	class Meta:
+		model = Victim
+		widgets = {
+			'category': forms.RadioSelect(),
+			'gender': forms.RadioSelect(),
+		}
 
 
 class VictimListView(ListView):
@@ -28,11 +38,13 @@ class VictimDetailHybridView(DetailHybridResponseMixin, VictimDetailView):
 
 class VictimCreateView(CreateView):
 	model = Victim
+	form_class = VictimForm
 	template_name = "victims/new.html"
 
 
 class VictimUpdateView(UpdateView):
 	model = Victim
+	form_class = VictimForm
 	template_name = "victims/edit.html"
 
 

@@ -6,8 +6,15 @@ from django.shortcuts import render_to_response
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from base.utils.views import ListHybridResponseMixin, DetailHybridResponseMixin
+from django import forms
 
 from reports.models import Category
+
+
+class CategoryForm(forms.ModelForm):
+	class Meta:
+		model = Category
+		exclude = ('slug',)
 
 
 class CategoryListView(ListView):
@@ -30,6 +37,7 @@ class CategoryDetailHybridView(DetailHybridResponseMixin, CategoryDetailView):
 
 class CategoryCreateView(CreateView):
 	model = Category
+	form_class = CategoryForm
 	template_name = "categories/new.html"
 
 

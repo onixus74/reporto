@@ -6,15 +6,15 @@
 											</a>
 										</div>
 										<div class="span8">
-											<span class="label victim">{{report.victim}} <i class="icon-user"></i></span>
+											<span class="label victim"><i class="icon-user"></i> {{report.victim}}</span>
 											has been a victim of
 											<span class="label category">{{report.category}}</span>
 											happened in
-											<span class="label location">{{report.location_text}} <i class="icon-map-marker"></i></span>
+											<span class="label location"><i class="icon-map-marker"></i> {{report.location_text}}</span>
 											on
 											<span class="label datetime">
 												<!--<a href="{% url 'reports:view' report.id %}" target="_blank">{{report.datetime}}</a>-->
-												{{report.datetime}} <i class="icon-calendar"></i>
+												<i class="icon-calendar"></i> {{report.datetime}}
 											</span>
 											{% if report.is_verified %}<span class="badge badge-success">Verified <i class="icon-ok"></i></span>{% endif %}
 											{% comment %}

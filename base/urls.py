@@ -11,6 +11,8 @@ from reports.views import ReportsDashboard
 urlpatterns = patterns('',
 	url(r'^test/$', test, name='test'),
 
+	(r'^i18n/', include('django.conf.urls.i18n')),
+
 	#url(r'^$', 'base.views.home', name='home'),
 	url(r'^$',           login_required(ReportsDashboard.as_view()),       name='home'),
 

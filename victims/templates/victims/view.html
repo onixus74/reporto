@@ -6,7 +6,7 @@
 <div class="container">
 
 	<div class="page-header">
-		<h1>Victim <small>Detail</small></h1>
+		<h1 class="text-center">Victim <small>Detail</small></h1>
 	</div>
 
 	<div class="container-fluid">
@@ -20,18 +20,18 @@
 							<dl>
 								<dt>Category</dt>
 								<dd>{{victim.get_category_display}}</dd>
-								<dt>Firstname</dt>
+								<dt>First name</dt>
 								<dd>{{victim.firstname}}</dd>
-								<dt>Lastname</dt>
+								<dt>Last name</dt>
 								<dd>{{victim.lastname}}</dd>
 								<dt>Gender</dt>
 								<dd>{{victim.get_gender_display}}</dd>
 								<dt>Age</dt>
-								<dd>{{victim.age}}</dd>
+								<dd>{{victim.age|default:"N/A"}}</dd>
 								<dt>Education</dt>
-								<dd>{{victim.education}}</dd>
+								<dd>{{victim.get_education_display}}</dd>
 								<dt>Profession</dt>
-								<dd>{{victim.profession}}</dd>
+								<dd>{{victim.profession|default:"N/A"}}</dd>
 								{% comment %}
 								<dt>Phone</dt>
 								<dd>{{victim.phone}}</dd>
@@ -39,7 +39,7 @@
 								<dd>{{victim.email}}</dd>
 								{% endcomment %}
 								<dt>Description</dt>
-								<dd>{{victim.description}}</dd>
+								<dd>{{victim.description|default:"N/A"}}</dd>
 							</dl>
 						</div>
 					</div>

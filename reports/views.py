@@ -6,7 +6,7 @@ import os
 import json
 import logging
 import shutil
-from datetime import datetime
+from datetime import datetime, date
 
 from django.conf import settings
 from django.shortcuts import render, redirect, render_to_response
@@ -36,11 +36,6 @@ def index(request, template_name = "reports/index.html", *args, **kwargs):
 		"object_list": Report.objects.all()
 	}
 	return render(request, template_name, context)
-
-
-class ReportForm(forms.ModelForm):
-	class Meta:
-		model = Report
 
 
 class ReportsDashboard(PaginatedListHybridResponseMixin, ListView):
@@ -110,6 +105,9 @@ class ReportsDashboard(PaginatedListHybridResponseMixin, ListView):
 			for report in Report.objects.all():
 				date_str = str(report.datetime.date())
 				reports_by_date_dict[date_str] = reports_by_date_dict.get(date_str, 0) + 1
+
+			date_str = str(date.today())
+			reports_by_date_dict[date_str] = reports_by_date_dict.get(date_str, 0)
 
 			reports_by_date = [{'date': key, 'reports': reports_by_date_dict[key]} for key in reports_by_date_dict.keys()]
 
@@ -181,16 +179,17 @@ class ReportCreateForm(forms.ModelForm):
 		exclude = ('created_by','victim')
 
 
-class VictimCreateForm(forms.ModelForm):
-	class Meta:
-		model = Victim
+from victims.views import VictimForm as BaseVictimForm
+
+class VictimCreateForm(BaseVictimForm):
+	class Meta(BaseVictimForm.Meta):
 		exclude = ('user','description')
 
-class VictimUpdateForm(forms.ModelForm):
-	class Meta:
-		model = Victim
-		exclude = ('user','firstname','lastname','email','description')
+from users.views import VictimForm as VictimUpdateForm
 
+# class VictimUpdateForm(BaseVictimForm):
+# 	class Meta(BaseVictimForm.Meta):
+# 		exclude = ('user','firstname','lastname','email','description')
 
 
 def report_submit(request, template_name = "reports/submit.html", *args, **kwargs):
@@ -208,8 +207,8 @@ def report_submit(request, template_name = "reports/submit.html", *args, **kwarg
 		victim = Victim.objects.get(user=request.user)
 	except Victim.DoesNotExist:
 		victim = None
-	reporter_victim_form = VictimUpdateForm(request.POST or None, instance = victim, prefix = 'reporter-victim')
-	context['reporter_victim_form'] = reporter_victim_form
+	victim_profile_form = VictimUpdateForm(request.POST or None, instance = victim, prefix = 'reporter-victim')
+	context['victim_profile_form'] = victim_profile_form
 
 	if request.method == 'GET':
 		# create report submit id for files upload
@@ -220,26 +219,31 @@ def report_submit(request, template_name = "reports/submit.html", *args, **kwarg
 		context['report_submit_id'] = rsid
 		#victims = Victim.objects.all()
 		#context['victims'] = victims
-		reports = Report.objects.all()[:5]
+		reports = Report.objects.all()[:9]
 		context['reports'] = reports
 
 	victim_id = request.POST.get('victim', None)
 	logger.debug('VICTIM %s', victim_id)
 
-	if form.is_valid() and ((victim_id != '0' and victim_id != 'user') or (victim_id == '0' and victim_form.is_valid()) or (victim_id == 'user' and reporter_victim_form.is_valid())):
+	if form.is_valid() and (
+		   (victim_id != '0' and victim_id != 'user')
+		or (victim_id == '0' and victim_form.is_valid())
+		or (victim_id == 'user' and victim_profile_form.is_valid())
+	):
 
 		if victim_id == 'user': # the user is the victim
 			try:
 				victim = Victim.objects.get(user=request.user)
 				# update goes here!
 			except Victim.DoesNotExist:
-				#victim = Victim(category=reporter_victim_form.instance.category, firstname=request.user.first_name, lastname=request.user.last_name, gender=reporter_victim_form.instance.gender, email=request.user.email, user=request.user);
+				#victim = Victim(category=victim_profile_form.instance.category, firstname=request.user.first_name, lastname=request.user.last_name, gender=victim_profile_form.instance.gender, email=request.user.email, user=request.user);
 				#victim.save();
-				reporter_victim_form.instance.firstname = request.user.first_name
-				reporter_victim_form.instance.lastname = request.user.last_name
-				reporter_victim_form.instance.email = request.user.email
-				reporter_victim_form.instance.user = request.user
-				victim = reporter_victim_form.save()
+				pass
+			victim_profile_form.instance.firstname = request.user.first_name
+			victim_profile_form.instance.lastname = request.user.last_name
+			victim_profile_form.instance.email = request.user.email
+			victim_profile_form.instance.user = request.user
+			victim = victim_profile_form.save()
 		elif victim_id != '0': # existent victim
 			victim = Victim.objects.get(pk=victim_id)
 		else: # create new user
@@ -285,7 +289,7 @@ def report_submit(request, template_name = "reports/submit.html", *args, **kwarg
 	else:
 		if request.is_ajax():
 			if victim_id == 'user':
-				form.errors['victim'] = reporter_victim_form.errors
+				form.errors['victim'] = victim_profile_form.errors
 			elif victim_id == '0':
 				form.errors['victim'] = victim_form.errors
 			return JSONResponse({
@@ -660,6 +664,18 @@ def stats_xxx(request, *args, **kwargs):
 
 # CRUD
 
+
+from django.views.generic import ListView, DetailView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from base.utils.views import ListHybridResponseMixin, DetailHybridResponseMixin
+
+
+class ReportForm(forms.ModelForm):
+	class Meta:
+		model = Report
+		exclude = ('comments','media','created_by')
+
+
 class ReportListView(ListView):
 	model = Report
 	template_name = "reports/crud/list.html"
@@ -680,11 +696,13 @@ class ReportDetailHybridView(DetailHybridResponseMixin, ReportDetailView):
 
 class ReportCreateView(CreateView):
 	model = Report
+	form_class = ReportForm
 	template_name = "reports/crud/new.html"
 
 
 class ReportUpdateView(UpdateView):
 	model = Report
+	form_class = ReportForm
 	template_name = "reports/crud/edit.html"
 
 

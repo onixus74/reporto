@@ -40,7 +40,6 @@ TIME_ZONE = 'Africa/Tunis'
 # http://www.i18nguy.com/unicode/language-identifiers.html
 LANGUAGE_CODE = 'en'
 
-
 LANGUAGES = (
 	('en', 'English'),
 	('fr', 'French'),
@@ -48,7 +47,7 @@ LANGUAGES = (
 	('ar-tn', 'Tounsi'),
 )
 
-SITE_ID = 1
+SITE_ID = 2
 
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
@@ -56,7 +55,7 @@ USE_I18N = True
 
 # If you set this to False, Django will not format dates, numbers and
 # calendars according to the current locale.
-USE_L10N = False
+USE_L10N = True
 
 # If you set this to False, Django will not use timezone-aware datetimes.
 USE_TZ = False

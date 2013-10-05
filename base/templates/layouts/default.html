@@ -149,7 +149,7 @@
 							{% if user.is_authenticated %}
 							<li><a href="{% url 'users:profile' %}"><i class="icon-user"></i> Profile</a></li>
 							{% endif %}
-							<li><a href="/logout"><i class="icon-off"></i> <span data-ch-i18n="">Logout</span></a></li>
+							<li><a href="/logout"><i class="icon-off"></i> >Logout</a></li>
 						</ul>
 						{% endif %}
 						</li>
@@ -180,24 +180,34 @@
 
 {#% <pre>{% debug %}</pre> %#}
 
+	{% comment %}
 	<div id="footer">
 		<!--<hr style="margin-bottom: 5px;" />-->
 		<div class="container">
 
-			<!--
-			<div class="btn-group pull-right" style="margin: 5px 0;">
-				<a class="btn" href="https://www.facebook.com/X" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>
-				<a class="btn" href="https://twitter.com/X" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>
-			</div>
-			-->
-
-			<!--<p class="credit pull-right"><a href="#">Back to top</a></p>-->
-			<p class="muted credit">
+			<p class="muted credit pull-left">
 				<a href="http://reform.tn/" target="_blank">reform.tn</a>
 			</p>
 
+			{% load i18n l10n %}
+			<form action="{% url 'set_language' %}" method="post" class="form-inline pull-right" style="margin-top: 6px;">
+				{% csrf_token %}
+				<input name="next" type="hidden" value="{{ redirect_to }}" />
+				<select name="language" class="input-medium">
+					{% get_language_info_list for LANGUAGES as languages %}
+					{% for language in languages %}
+					<option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected="selected"{% endif %}>
+						{{ language.name_local }} ({{ language.code }})
+					</option>
+					{% endfor %}
+				</select>
+				<input type="submit" class="btn" value="Go" />
+			</form>
+
 		</div>
 	</div>
+	{% endcomment %}
+
 
 <!-- View Addons: dialogs, client-side templates, .... -->
 {% block view_addons %}{% endblock %}
