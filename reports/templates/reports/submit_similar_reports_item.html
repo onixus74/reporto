@@ -1,12 +1,16 @@
 {% load l10n %}
 					<li class="ui-similar-report-candidate{% if report.similarity %} ui-similar ui-similar-{{report.similarity}} {% for similarity in report.similarities %} ui-similar-{{similarity}}{% endfor %}{% endif %}">
-						<span class="label victim ui-similar-report-victim"><a href="{{ report.victim.get_absolute_url }}" target="_blank">{{report.victim}}</a></span>
+						<span class="label victim ui-similar-report-victim"><i class="icon-user"></i> {{report.victim}}</span>
 						has been a victim of
 						<span class="label category ui-similar-report-category">{{report.category}}</span>
 						happened in
-						<span class="label location ui-similar-report-location">{{report.location_text}}</span>
+						<span class="label location ui-similar-report-location"><i class="icon-map-marker"></i> {{report.location_text}}
+						</span>
 						on
-						<span class="label datetime ui-similar-report-datetime"><a href="{% url 'reports:view' report.id %}" target="_blank">{{report.datetime}}</a></span>
+						<span class="label datetime ui-similar-report-datetime">
+							<i class="icon-calendar"></i>
+							<a href="{% url 'reports:view' report.id %}" target="_blank">{{report.datetime}}</a>
+						</span>
 						{% if report.is_verified %}<span class="badge badge-success">Verified <i class="icon-ok"></i></span>{% endif %}
 						{% if report.is_closed %}<span class="badge badge-important">Closed <i class="icon-lock"></i></span>{% endif %}
 					</li>

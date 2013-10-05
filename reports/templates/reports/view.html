@@ -43,24 +43,24 @@
 					<dl class="dl-horizontal">
 						<dt>Category</dt>
 						<dd>{{report.victim.get_category_display}}</dd>
-						<dt>Firstname</dt>
+						<dt>First name</dt>
 						<dd>{{report.victim.firstname}}</dd>
-						<dt>Lastname</dt>
+						<dt>Last name</dt>
 						<dd>{{report.victim.lastname}}</dd>
 						<dt>Gender</dt>
 						<dd>{{report.victim.get_gender_display}}</dd>
 						<dt>Age</dt>
-						<dd>{{report.victim.age}}</dd>
+						<dd>{{report.victim.age|default:"N/A"}}</dd>
 						<dt>Education</dt>
-						<dd>{{report.victim.education}}</dd>
+						<dd>{{report.victim.get_education_display}}</dd>
 						<dt>Profession</dt>
-						<dd>{{report.victim.profession}}</dd>
+						<dd>{{report.victim.profession|default:"N/A"}}</dd>
 					</dl>
 				</div>
 				<div class="span6">
 					<hr>
 					<h2><i class="icon-male"></i> Aggressor</h2>
-					{{report.aggressor}}
+					{{report.aggressor|default:"N/A"}}
 				</div>
 			</div>
 

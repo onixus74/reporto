@@ -12,4 +12,11 @@
 		"domain": "reform-tn-platform.herokuapp.com",
 		"name": "Staging (Heroku)"
 	}
+}, {
+	"pk": 3,
+	"model": "sites.site",
+	"fields": {
+		"domain": "reporting.reform.tn",
+		"name": "Production"
+	}
 }]

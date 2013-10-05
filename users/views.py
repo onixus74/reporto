@@ -72,9 +72,20 @@ def user_view(request, pk=None, username=None, extension=None):
 		return render(request, "users/view.html", {'profile': user})
 
 
-class VictimForm(forms.ModelForm):
-	class Meta:
-		model = Victim
+# class VictimForm(forms.ModelForm):
+# 	class Meta:
+# 		model = Victim
+# 		exclude = ('user','firstname','lastname','email','description')
+# 		widgets = {
+# 			'category': forms.RadioSelect(),
+# 			'gender': forms.RadioSelect(),
+# 		}
+
+
+from victims.views import VictimForm as BaseVictimForm
+
+class VictimForm(BaseVictimForm):
+	class Meta(BaseVictimForm.Meta):
 		exclude = ('user','firstname','lastname','email','description')
 
 

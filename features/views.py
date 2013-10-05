@@ -4,8 +4,15 @@ logger = logging.getLogger(__name__)
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from base.utils.views import ListHybridResponseMixin, DetailHybridResponseMixin
+from django import forms
 
 from reports.models import Feature
+
+
+class FeatureForm(forms.ModelForm):
+	class Meta:
+		model = Feature
+		exclude = ('slug',)
 
 
 class FeatureListView(ListView):
@@ -26,6 +33,7 @@ class FeatureDetailHybridView(DetailHybridResponseMixin, FeatureDetailView):
 
 class FeatureCreateView(CreateView):
 	model = Feature
+	form_class = FeatureForm
 	template_name = "features/new.html"
 
 

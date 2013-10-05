@@ -83,18 +83,26 @@ class Victim(models.Model):
 		(COP, "Cop")
 	)
 
-	# VALUE1 = 'V1'
-	# VALUE2 = 'V2'
-	# EDUCATION = (
-	# 	(VALUE1, "VALUE1"),
-	# 	(VALUE2, "VALUE2")
-	# )
+	UNKNOWN = ''
+	NO_EDUCATION = 'NO'
+	PRIMARY_SCHOOL =  'PS'
+	HIGH_SCHOOL = 'HS'
+	UNIVERSITY = 'UN'
+	EDUCATION = (
+		(UNKNOWN, "Unknown"),
+		(NO_EDUCATION, "No Education"),
+		(PRIMARY_SCHOOL, "Primary School"),
+		(HIGH_SCHOOL, "High School"),
+		(UNIVERSITY, "University")
+	)
 
-	# VALUE1 = 'V1'
-	# VALUE2 = 'V2'
+	# POOR = ''
+	# MIDDLE = ''
+	# RICH = ''
 	# SOCIAL_STATUS = (
 	# 	(VALUE1, "VALUE1"),
-	# 	(VALUE2, "VALUE2")
+	# 	(VALUE1, "VALUE1"),
+	# 	(VALUE1, "VALUE1")
 	# )
 
 	category    = models.CharField(max_length=3, choices=CATEGORY, default=CITIZEN)
@@ -102,8 +110,7 @@ class Victim(models.Model):
 	lastname    = models.CharField(max_length=100)
 	gender      = models.CharField(max_length=1, choices=GENDER, default=MALE)
 	age         = models.PositiveIntegerField(blank=True, null=True)
-	education   = models.CharField(max_length=200, blank=True, null=True)
-	# education   = models.CharField(max_length=200, choices=EDUCATION, default=VALUE1)
+	education   = models.CharField(max_length=200, choices=EDUCATION, default=UNKNOWN)
 	profession  = models.CharField(max_length=200, blank=True, null=True)
 	# social_status  = models.CharField(max_length=200, choices=SOCIAL_STATUS, default=VALUE1)
 	phone       = models.CharField(max_length=20, blank=True, null=True, help_text="Victim's email address is a private information, it wont be shared or publicly accessible.")
@@ -124,6 +131,7 @@ class Victim(models.Model):
 		data = model_to_dict(self)
 		data['gender_display'] = self.get_gender_display()
 		data['category_display'] = self.get_category_display()
+		data['education_display'] = self.get_education_display()
 		data['user'] = self.user
 		data.pop('email')
 		data.pop('phone')

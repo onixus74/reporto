@@ -39,33 +39,7 @@
 				<form class="form-horizontal" action="{% url 'categories:create' %}" method="post">
 					{% csrf_token %}
 
-					{#% {{form|crispy}} %#}
-
-					{% if form.errors %}
-					<div class="alert alert-error">
-						<button type="button" class="close" data-dismiss="alert">&times;</button>
-						{% for field, errors in form.errors.items %}
-							<div>{{field}}:{% for error in errors %} {{error}}{% endfor %}</div>
-						{% endfor %}
-					</div>
-					{% endif %}
-
-					<div class="control-group">
-						<label class="control-label" for="input_slug">Slug</label>
-						<div class="controls">
-							<input type="text" id="input_slug" placeholder="Slug" name="slug">
-							<span class="help-block">
-								<p class="text-error">{{ category.slug.errors }}</p>
-							</span>
-						</div>
-					</div>
-
-					<div class="control-group">
-						<label class="control-label" for="input_definition">Definition</label>
-						<div class="controls">
-							<input type="text" id="input_definition" placeholder="Definition" name="definition">
-						</div>
-					</div>
+					{{form|crispy}}
 
 					<div class="form-actions">
 						<button type="submit" class="btn btn-primary">Submit</button>
