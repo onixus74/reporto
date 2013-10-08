@@ -17,6 +17,7 @@ from django.utils import simplejson
 
 from django import forms
 from django.forms.models import model_to_dict
+from django.db.models import Count, Min, Sum, Max, Avg
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required, permission_required
 
@@ -62,60 +63,42 @@ class ReportsDashboard(PaginatedListHybridResponseMixin, ListView):
 
 		else:
 
-			reports_by_category = []
-			categories = Category.objects.all()
-			sum_category = Category.objects.count()
-			for category in categories:
-				val = Report.objects.filter(category=category).count()
-				if val != 0:
-					reports_by_category.append({
-						'label': category.definition,
-						'value': val
-					})
-			context['reports_by_category'] = reports_by_category
+			reports_by_category = Report.objects.values('category__definition').annotate(Count("id")).order_by('category__definition')
+			context['reports_by_category'] = [ { 'label': i['category__definition'], 'value': i['id__count'] } for i in reports_by_category ]
 
+			victim_gender_display = dict(Victim.GENDER)
+			reports_by_victim_gender = Report.objects.values('victim__gender').annotate(Count("id")).order_by('victim__gender')
+			context['reports_by_victim_gender'] = [ { 'label': victim_gender_display[i['victim__gender']], 'value': i['id__count'] } for i in reports_by_victim_gender ]
 
-			reports_by_feature = []
-			features = Feature.objects.all()
-			sum_features = Feature.objects.count()
-			for feature in features:
-				val = Report.objects.filter(features=feature).count()
-				if val != 0:
-					reports_by_feature.append({
-						'label': feature.definition,
-						'value': val
-					})
-			context['reports_by_feature'] = reports_by_feature
+			victim_education_display = dict(Victim.EDUCATION)
+			reports_by_victim_education = Report.objects.values('victim__education').annotate(Count("id")).order_by('victim__education')
+			context['reports_by_victim_education'] = [ { 'label': victim_education_display[i['victim__education']], 'value': i['id__count'] } for i in reports_by_victim_education ]
 
+			reports_by_feature = Report.objects.values('features__definition').annotate(Count("id")).order_by('features__definition')
+			context['reports_by_feature'] = [ { 'label': i['features__definition'], 'count': i['id__count'] } for i in reports_by_feature ]
 
-			reports_by_victim_gender = []
-			victim_genders = [Victim.MALE, Victim.FEMALE]
-			victim_genders_display = dict(Victim.GENDER)
-			sum_victims = Victim.objects.count()
-			for victim_gender in victim_genders:
-				val = Report.objects.filter(victim__gender=victim_gender).count()
-				if val != 0:
-					reports_by_victim_gender.append({
-						'label': victim_genders_display[victim_gender],
-						'value': val
-					})
-			context['reports_by_victim_gender'] = reports_by_victim_gender
+			reports_by_date = Report.objects.extra({'date' : "date(datetime)"}).values('date').annotate(Count('id')).order_by('date')
+			context['reports_by_date'] = [ { 'date': i['date'], 'total': i['id__count'] } for i in reports_by_date ]
 
-			reports_by_date_dict = {}
-			for report in Report.objects.all():
-				date_str = str(report.datetime.date())
-				reports_by_date_dict[date_str] = reports_by_date_dict.get(date_str, 0) + 1
+			context['categories'] = [ category.__unicode__() for category in Category.objects.all() ]
 
-			date_str = str(date.today())
-			reports_by_date_dict[date_str] = reports_by_date_dict.get(date_str, 0)
-
-			reports_by_date = [{'date': key, 'reports': reports_by_date_dict[key]} for key in reports_by_date_dict.keys()]
-
-			context['reports_by_date'] = reports_by_date
+			for category in Category.objects.all():
+				result = Report.objects.extra({'date' : "date(datetime)"}).filter(category=category).values('date').annotate(Count('id')).order_by('date')
+				result = [ { 'date': i['date'], category.__unicode__(): i['id__count'] } for i in result ]
+				if len(result) > 0:
+					context['reports_by_date'] = merge_lists(context['reports_by_date'], result, 'date')
 
 		return context
 
 
+def merge_lists(l1, l2, key):
+	merged = {}
+	for item in l1+l2:
+		if item[key] in merged:
+			merged[item[key]].update(item)
+		else:
+			merged[item[key]] = item
+	return [val for (_, val) in merged.items()]
 
 # def paginated_reports(request, *args, **kwargs):
 
