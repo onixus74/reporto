@@ -147,12 +147,17 @@ reform.widgets.stats = function() {
 		element: 'ui-reports-dates-chart',
 		data: reform.data.reportsByDate,
 		xkey: 'date',
-		ykeys: ['reports'],
-		labels: ['Reports'],
+		/*
+		ykeys: ['total'].concat(reform.data.categories),
+		labels: ['Total Reports'].concat(reform.data.categories),
+		*/
+		ykeys: ['total'],
+		labels: ['Total Reports'],
 		xLabelFormat: function (x) { return x.toLocaleDateString(); },
 		xLabels: xLabel,
 		//yLabelFormat: function (y) { return y.toString(); },
 		dateFormat: function (x) { return new Date(x).toLocaleDateString(); },
+		smooth: false
 	});
 
 	new Morris.Bar({
@@ -160,7 +165,7 @@ reform.widgets.stats = function() {
 		data: reform.data.reportsByFeature,
 		//formatter: function(y, data){ return String(y) + ' (' + String((y / reform.data.reportsByCategory.length).toFixed(2)) + '%)' }
 		xkey: 'label',
-	  ykeys: ['value'],
+	  ykeys: ['count'],
 	  labels: ['Feature'],
 		//xLabelFormat: function (x) { return 'F1'; },
 		//yLabelFormat: function (y) { return y.toString(); },
@@ -188,6 +193,14 @@ reform.widgets.stats = function() {
 		}
 	});
 
+	new Morris.Donut({
+		element: 'ui-stats-victim-education-chart',
+		data: reform.data.reportsByVictimEducation,
+		//colors: ['#F00', '#0F0', '#00F']
+		formatter: function(y, data){
+			return String(y) + ' (' + String((y * 100 / reform.data.timeline.count).toFixed(2)) + '%)'
+		}
+	});
 };
 
 $(document).ready(reform.widgets.stats);

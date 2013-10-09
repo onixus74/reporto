@@ -51,6 +51,14 @@
 					</div>
 				</div>
 
+				<!--
+				<div class="row-fluid">
+					<div class="span12">
+						<div id="ui-reports-dates-chart-highcharts" style="height: 300px;"></div>
+					</div>
+				</div>
+				-->
+
 				<div class="row-fluid">
 					<div class="span6">
 						<h2>Map</h2>
@@ -145,6 +153,10 @@
 								<div id="ui-stats-victim-gender-chart" class=""></div>
 								<h3 class="text-center">Distribution by victim's gender</h3>
 							</div>
+							<div class="span4">
+								<div id="ui-stats-victim-education-chart" class=""></div>
+								<h3 class="text-center">Distribution by victim's education</h3>
+							</div>
 						</div>
 
 						<div class="row-fluid">
@@ -191,11 +203,14 @@
 	<script src="{% static 'components/raphael/raphael.js' %}"></script>
 	<script src="{% static 'components/morris.js/morris.js' %}"></script>
 	{% endcompress %}
+
 	<script type="text/javascript">
 		reform.data.reportsByCategory = {{reports_by_category|json}}
 		reform.data.reportsByFeature = {{reports_by_feature|json}}
 		reform.data.reportsByVictimGender = {{reports_by_victim_gender|json}}
+		reform.data.reportsByVictimEducation = {{reports_by_victim_education|json}}
 		reform.data.reportsByDate = {{reports_by_date|json}}
+		reform.data.categories = {{categories|json}}
 		reform.data.timeline = {
 			pages: {{pages|json}},
 			current: {{current|json}},
@@ -205,4 +220,26 @@
 	{% compress js %}
 	<script src="{% static 'reports/scripts/dashboard.js' %}"></script>
 	{% endcompress %}
+
+	<!--
+	<script src="http://code.highcharts.com/highcharts.js"></script>
+	<script src="http://code.highcharts.com/modules/exporting.js"></script>
+	<script type="text/javascript">
+$('#ui-reports-dates-chart-highcharts').highcharts({
+
+    xAxis: {
+        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+            'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+    },
+
+    series: [{
+        data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
+    }]
+
+});
+
+	</script>
+	-->
+
+
 {% endblock %}
