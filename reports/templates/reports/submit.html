@@ -20,7 +20,7 @@
 				<div class="span2">Incident Description and Evidence</div>
 			</div>
 		</div>
-	-->
+		-->
 	</div>
 
 	<form id="report-form" action="{% url 'reports:submit' %}" method="post" enctype="multipart/form-data">
@@ -100,7 +100,7 @@
 								<div class="clndr-grid">
 									<div class="days-of-the-week clearfix">
 										<% _.each(daysOfTheWeek, function(day) { %>
-											<div class="header-day"><%= day %></div>
+											<div class="header-day muted"><strong><%= day %></strong></div>
 										<% }); %>
 									</div>
 									<div class="days clearfix">
@@ -164,19 +164,65 @@
 							<h2><i class="icon-picture"></i> Evidence</h2>
 							<!--<input name="files[]" type="file" multiple />-->
 							<!--<input type="hidden" name="rsid" value="{{report_submit_id}}">-->
-							<div id="assets" tabindex="0" class="dropzone input-area" style="background-color: #FFF; border: 1px solid #999;"></div>
+							<div id="ui-evidence-file-upload" tabindex="0" class="dropzone input-area" style="background-color: #FFF; border: 1px solid #999;"></div>
 							<!--
 							<button type="button" class="input-block-level input-area" style="padding: 0;">
-								<div id="assets" class="dropzone" style="background-color: #FFF; height: 100%">
+								<div id="ui-evidence-file-upload" class="dropzone" style="background-color: #FFF; height: 100%">
 								</div>
 							</button>
 							-->
 						</div>
 					</div>
 
+					<div class="row-fluid ui-wizard-row" id="ui-wizard-seources-evidence-links" hidden>
+						<div class="span6">
+							<h2><i class="icon-search"></i> Sources</h2>
+							<ul id="ui-sources-list" class="unstyled">
+								<script id="ui-sources-list-item" type="text/template">
+									<li>
+										<input type="hidden" name="sources[]" value="<%= value %>">
+										<a href="<%= url %>" target="_blank"><%= source %></a>
+										<a href="#" class="ui-sources-remove-button btn btn-not text-error"><i class="icon-minus-sign icon-large"></i></a>
+									</li>
+								</script>
+							</ul>
+							<div class="row-fluid">
+								<div class="span4">
+									<input id="ui-sources-source-input" type="text" class="input-block-level" placeholder="Source">
+								</div>
+								<div class="span6">
+									<input id="ui-sources-url-input" type="url" class="input-block-level" placeholder="URL">
+								</div>
+								<div class="span2">
+									<a id="ui-sources-add-button" href="#" class="btn btn-block btn-not text-success"><i class="icon-plus-sign icon-large"></i></a>
+								</div>
+							</div>
+						</div>
+						<div class="span6">
+							<h2><i class="icon-link"></i> Evidence Links</h2>
+							<ul id="ui-links-list" class="unstyled">
+								<script id="ui-links-list-item" type="text/template">
+									<li>
+										<input type="hidden" name="links[]" value="<%= url %>">
+										<a href="<%= url %>" target="_blank"><%= url %></a>
+										<a href="#" class="ui-links-remove-button btn btn-not text-error"><i class="icon-minus-sign icon-large"></i></a>
+									</li>
+								</script>
+							</ul>
+							<div class="row-fluid">
+								<div class="span10">
+									<input id="ui-links-url-input" type="url" class="input-block-level" placeholder="Evidence Link">
+								</div>
+								<div class="span2">
+									<a id="ui-links-add-button" href="#" class="btn btn-block btn-not text-success"><i class="icon-plus-sign icon-large"></i></a>
+								</div>
+							</div>
+						</div>
+					</div>
+
 					<div class="row-fluid ui-wizard-row" id="ui-wizard-features" hidden>
 						<div class="span12">
-							<h2><i class="icon-tag"></i> Features</h2>
+							<h2><i class="icon-tags"></i> Features</h2>
 							<!--<input type="text" class="input-block-level" placeholder="Features">-->
 							{% render_field form.features placeholder="Select applicable features" class+="select2 input-block-level btn-large" data-style="btn-large"  %}
 						</div>

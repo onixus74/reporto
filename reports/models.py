@@ -47,23 +47,29 @@ class Media(models.Model):
 
 	#title        = models.CharField(max_length=200)
 	#description  = models.TextField()
-	#url  = models.URLField(max_length=300)
-	file = models.FileField(upload_to='reports/')
+	url  = models.URLField(max_length=300)
+	file = models.FileField(upload_to='reports/', blank=True, null=True)
 
 	def __unicode__(self):
-		return self.file.url
+		#return self.file.url
+		return self.url
 
-	# def save(self, *args, **kwargs):
-	# 	if self.file:
-	# 		self.url = self.file.url
-	# 	super(Media, self).save(*args, **kwargs)
+	# def clean(self):
+	# 	if not self.url:
+	# 		raise ValidationError('URL can not be empty.')
+
+	def save(self, *args, **kwargs):
+		if self.file:
+			self.url = self.file.url
+		super(Media, self).save(*args, **kwargs)
 
 	# def get_url(self):
-	# 	return self.url or self.file.url
+	#  	return self.url or self.file.url
 
 	def serialize(self):
 		data = model_to_dict(self)
-		data['file'] = { 'url': self.file.url }
+		data['file'] = { 'url': self.url }
+		data['url'] = self.url
 		return data
 
 
@@ -200,7 +206,7 @@ class Report(models.Model):
 	aggressor_category = models.CharField(max_length=3, choices=CATEGORY, default=COP, blank=True)
 	description        = models.TextField()
 	media              = models.ManyToManyField(Media, blank=True, null=True)
-	#sources            = models.TextField(blank=True, null=True)
+	sources            = models.TextField(blank=True, null=True)
 	features           = models.ManyToManyField(Feature)
 	is_verified        = models.BooleanField()
 	is_closed          = models.BooleanField()

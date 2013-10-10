@@ -1,6 +1,6 @@
 {% extends "layouts/default.html" %}
 
-{% load static custom thumbnail compress %}
+{% load static custom thumbnail compress markup %}
 
 {% block view_title %}Report Details | {% endblock %}
 
@@ -68,7 +68,8 @@
 				<div class="span6">
 					<hr>
 					<h2><i class="icon-ellipsis-horizontal"></i> Description</h2>
-					{{report.description|urlize}}
+					<p>{{report.description|urlize}}</p>
+					{% if report.sources %}<p>Sources: {{report.sources|markdown}}</p>{% endif %}
 				</div>
 				<div class="span6">
 					<hr>
@@ -77,8 +78,8 @@
 					<ul class="thumbnails">
 						{% for media in report.media.all %}
 						<li class="span4_" style="display: inline-block; width: auto;">
-							<a class="thumbnail fancybox" href="{{media.file.url}}" target="_blank" rel="group">
-								<img src="{{ media.file|thumbnail_url:'report_comment' }}" alt="" style="height: 100px; width: auto;">
+							<a class="thumbnail fancybox" href="{{media.url}}" target="_blank" rel="group">
+								<img src="{% if media.file %}{{ media.file|thumbnail_url:'media' }}{% else %}{{media.url}}{% endif %}" alt="" style="height: 100px; width: auto;">
 							</a>
 						</li>
 						{% endfor %}
@@ -92,7 +93,7 @@
 			<div class="row-fluid">
 				<div class="offset2 span8">
 					<hr>
-					<h2><i class="icon-tag"></i> Features</h2>
+					<h2><i class="icon-tags"></i> Features</h2>
 					<ul class="inline">
 					{% for feature in report.features.all  %}
 						<li><span class="label">{{feature}}</span></li>

@@ -44,6 +44,26 @@ ol.list {
   background-color: transparent;
 }
 
+
+.btn-not {
+	@extend .btn-link;
+
+  //color: $text-color;
+  @include transition(color .3s ease-in-out);
+
+  &:hover,
+  &:focus {
+    text-decoration: none;
+  }
+
+  &.active,
+  &:active {
+
+  }
+
+}
+
+
 /*-------------------------------------------------
 | GLOBAL STYLES
 \*/

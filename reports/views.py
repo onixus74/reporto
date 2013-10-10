@@ -179,6 +179,9 @@ def report_submit(request, template_name = "reports/submit.html", *args, **kwarg
 	logger.debug('POST %s', request.POST)
 	logger.debug('FILES %s', request.FILES)
 
+	links = request.POST.getlist('links[]')
+	logger.debug('LINKS %s', links)
+
 	context = {}
 	form = ReportCreateForm(request.POST or None, request.FILES or None)
 	context['form'] = form
@@ -239,6 +242,12 @@ def report_submit(request, template_name = "reports/submit.html", *args, **kwarg
 		form.instance.created_by = request.user
 		if request.user.is_moderator():
 			form.instance.is_verified = True
+
+		sources = request.POST.getlist('sources[]')
+		logger.debug('SOURCES %s', sources)
+
+		form.instance.sources = ' - '.join(sources)
+
 		report = form.save()
 
 		files = request.FILES.getlist('files[]')
@@ -250,12 +259,18 @@ def report_submit(request, template_name = "reports/submit.html", *args, **kwarg
 		logger.debug('OBJECT %s', report)
 
 		for f in files:
-			logger.debug('FILE %s', f)
+			#logger.debug('FILE %s', f)
 			report.media.create(file=f)
 			#file_path = os.path.join(media_path, f.name)
 			#logger.debug('FILE PATH %s', file_path)
 			#file_path = default_storage.save(file_path, f)
 			#report.media.create(url=file_path)
+
+		links = request.POST.getlist('links[]')
+		logger.debug('LINKS %s', links)
+
+		for l in links:
+			report.media.create(url=l, file=None)
 
 		report.save()
 

@@ -86,44 +86,40 @@ reform.widgets.map.init = function() {
 
 Dropzone.autoDiscover = false;
 
-Dropzone.options.assets = {
-	paramName: "files", // The name that will be used to transfer the file
-	/*
-	headers: {
-		'X-CSRFToken': csrf_token,
-		'X-RSID': report_submit_id
-	},
-	*/
-	maxFilesize: 10, // MB
-	uploadMultiple: true,
-	autoProcessQueue: false,
-	addRemoveLinks: true,
-	acceptedFiles: 'image/*',
-	/*
-
-	accept: function(file, done) {
-		console.log(file);
-		done();
-	},
-	*/
-	/*
-	removedfile: function(file){
-		console.log(file);
-		window.file = file;
-		return true;
-	},
-	*/
-	dictDefaultMessage: "Drop files or click to upload evidence photos/videos"
-};
 
 reform.widgets.dropzone = {};
 reform.widgets.dropzone.init = function() {
-
 	var widget = reform.widgets.dropzone;
-	//var dropzone = new Dropzone("#assets", { url: reform.urls.upload });
-	var dropzone = new Dropzone("#assets", { url: '/' });
-	widget.object = dropzone;
+	var dropzone = widget.object = new Dropzone('#ui-evidence-file-upload', {
+		url: '/',
+		paramName: "files", // The name that will be used to transfer the file
+		/*
+		headers: {
+			'X-CSRFToken': csrf_token,
+			'X-RSID': report_submit_id
+		},
+		*/
+		maxFilesize: 10, // MB
+		uploadMultiple: true,
+		autoProcessQueue: false,
+		addRemoveLinks: true,
+		acceptedFiles: 'image/*',
+		/*
 
+		accept: function(file, done) {
+			console.log(file);
+			done();
+		},
+		*/
+		/*
+		removedfile: function(file){
+			console.log(file);
+			window.file = file;
+			return true;
+		},
+		*/
+		dictDefaultMessage: "Drop files or click to upload evidence photos/videos"
+	});
 };
 
 $(document).ready(reform.widgets.dropzone.init);
@@ -134,9 +130,11 @@ reform.widgets.wizard.init = function() {
 
 	var widget = reform.widgets.wizard;
 
-	//$('#id_category option[selected]').remove()
-	$('#id_category option[selected]').removeAttr('selected').html('')
+	// fix for category input's values list
+	$('#id_category option[selected]').removeAttr('selected').html('');
+
 	$('.select2').select2()
+
 	//$('.select2').selectpicker();
 
 	var form = widget.form = $('#report-form');
@@ -145,21 +143,19 @@ reform.widgets.wizard.init = function() {
 	var inputs = widget.inputs = {};
 
 	elements.reporterState = $('#ui-wizard-reporter-state');
-	console.log(elements.reporterState);
 
 	var sections = widget.sections = {
 		'victim-witness': $('#ui-wizard-victim-witness-buttons'),
 		'category': $('#ui-wizard-category'),
 		'location-datetime': $('#ui-wizard-location-datetime'),
 		'victim-aggressor' : $('#ui-wizard-victim-aggressor'),
-		//'victim': $('#ui-wizard-victim'),
-		//'aggressor': $('#ui-wizard-aggressor'),
 		'description-evidence': $('#ui-wizard-description-evidence'),
+		'sources-evidence-links': $('#ui-wizard-seources-evidence-links'),
 		'features': $('#ui-wizard-features'),
 		'submit': $('#ui-wizard-submit')
 	};
 	//var order = widget.order = ['victim-witness', 'category', 'location-datetime', 'victim-aggressor', 'description-evidence', 'features', 'submit'];
-	var order = widget.order = ['victim-witness', 'category', 'location-datetime', ['victim-aggressor', 'description-evidence', 'features', 'submit']];
+	var order = widget.order = ['victim-witness', 'category', 'location-datetime', ['victim-aggressor', 'description-evidence', 'sources-evidence-links', 'features', 'submit']];
 
 	console.log(sections);
 
@@ -179,7 +175,6 @@ reform.widgets.wizard.init = function() {
 	elements.victimButtonContainer = $('#ui-wizard-victim-button-container');
 	elements.witnessButton = $('#ui-wizard-witness-button');
 	elements.witnessButtonContainer = $('#ui-wizard-witness-button-container');
-
 
 	function victimWitnessButtonsAction(e) {
 		var el = $(this);
@@ -275,7 +270,7 @@ reform.widgets.wizard.init = function() {
 		showNextSectionClosure.fields = {};
 		fields_list.forEach(function(name) {
 			showNextSectionClosure.fields[name] = false;
-		})
+		});
 
 		return showNextSectionClosure;
 
@@ -285,7 +280,7 @@ reform.widgets.wizard.init = function() {
 		var handler = showNextSection(section, fields_list, callback);
 		fields_list.forEach(function(field) {
 			elements[field].on('change.showNextSection', handler);
-		})
+		});
 	}
 
 	/* */
@@ -297,32 +292,26 @@ reform.widgets.wizard.init = function() {
 	/* category section */
 
 	elements.category = $('#id_category');
-	console.log(elements.category);
 
 	/*
 	var showLocationSection = showNextSection('category-datetime', ['category', 'datetime'], reform.widgets.map.init);
 	elements.category.on('change.showNextSection', showLocationSection);
 	elements.datetime.on('change.showNextSection', showLocationSection);
 	*/
+
 	handleShowNextSection('category', ['category'], reform.widgets.map.init);
 
 	/* location-datetime section */
 
 	elements.location = $('#id_location');
-	console.log(elements.location);
 
 	elements.location_text = $('#id_location_text');
-	console.log(elements.location_text);
 
 	elements.datetime = $('#id_datetime');
-	console.log(elements.datetime);
 
 	elements.date = $('#id_date');
-	console.log(elements.date);
 
 	elements.time = $('#id_time');
-
-	console.log(elements.time);
 
 	/*
 	var showVictimAggressorSection = showNextSection('location', ['location', 'location_text']);
@@ -366,10 +355,8 @@ reform.widgets.wizard.init = function() {
 	/* victim-aggressor section */
 
 	elements.victim = $('#id_victim');
-	console.log(elements.victim);
 
 	elements.aggressor = $('#id_aggressor');
-	console.log(elements.aggressor);
 
 	//handleShowNextSection('victim', ['victim-firstname']);
 
@@ -402,7 +389,53 @@ reform.widgets.wizard.init = function() {
 	/* description-evidence section */
 
 	elements.description = $('#id_description');
-	console.log(elements.description);
+
+	/* sources-evidence-links section */
+
+	elements.sourcesList = $('#ui-sources-list');
+	elements.sourcesSourceInput = $('#ui-sources-source-input');
+	elements.sourcesUrlInput = $('#ui-sources-url-input');
+	elements.sourcesAddButton = $('#ui-sources-add-button');
+
+	var sourceItemTemplate = $('#ui-sources-list-item').html();
+
+	elements.sourcesAddButton.on('click', function(e){
+		e.preventDefault();
+		var source = elements.sourcesSourceInput.val();
+		var url = elements.sourcesUrlInput.val();
+		if(source && url) {
+			var element = $(_.template(sourceItemTemplate, { source: source, url: url, value: '[' + source + '](' + url + ')' }));
+			elements.sourcesList.append(element);
+			element.find('.ui-sources-remove-button').on('click', function(e){
+				e.preventDefault();
+				element.remove();
+			});
+			elements.sourcesSourceInput.val(null);
+			elements.sourcesUrlInput.val(null);
+		}
+		elements.sourcesSourceInput.focus();
+	});
+
+	elements.linksList = $('#ui-links-list');
+	elements.linksUrlInput = $('#ui-links-url-input');
+	elements.linksAddButton = $('#ui-links-add-button');
+
+	var linkItemTemplate = $('#ui-links-list-item').html();
+
+	elements.linksAddButton.on('click', function(e){
+		e.preventDefault();
+		var url = elements.linksUrlInput.val();
+		if(url) {
+			var element = $(_.template(linkItemTemplate, {url: url}));
+			elements.linksList.append(element);
+			element.find('.ui-links-remove-button').on('click', function(e){
+				e.preventDefault();
+				element.remove();
+			});
+			elements.linksUrlInput.val(null);
+		}
+		elements.linksUrlInput.focus();
+	});
 
 	/*
 	var showFeaturesSection = showNextSection('description-evidence', ['description']);
@@ -411,7 +444,6 @@ reform.widgets.wizard.init = function() {
 	//handleShowNextSection('description-evidence', ['description']);
 
 	elements.features = $('#id_features');
-	console.log(elements.features);
 
 	/*
 	var showSubmitSection = showNextSection('features', ['features']);
@@ -468,6 +500,69 @@ reform.widgets.wizard.init = function() {
 };
 
 $(document).ready(reform.widgets.wizard.init);
+
+
+reform.widgets.datetime = {};
+reform.widgets.datetime.init = function() {
+	var widget = reform.widgets.datetime;
+
+	var elements = reform.widgets.wizard.elements;
+	var timeInput = elements.time,
+			dateInput = elements.date,
+			datetimeInput = elements.datetime;
+
+	function handleDateOrTimeChange(e){
+		var time = timeInput.val();
+		var date = dateInput.val();
+
+		if(date && time) {
+			datetimeInput.val(date + 'T' + time).trigger('change'); //change();
+		}
+	}
+
+	timeInput.on('change', handleDateOrTimeChange);
+	dateInput.on('change', handleDateOrTimeChange);
+
+	var clndr;
+
+	function previousYear(e) {
+		//console.log('previousYear', clndr.element.find('.clndr-previous-year-button'), clndr.element.find('.clndr-next-year-button'))
+		clndr.previousYear();
+	}
+	function nextYear(e) {
+		//console.log('nextYear', clndr.element.find('.clndr-previous-year-button'), clndr.element.find('.clndr-next-year-button'))
+		clndr.nextYear();
+	}
+
+	clndr = widget.object = $('#dateinput').clndr({
+
+		template: $('#dateinput-template').html().split(/\n|\r/gi).map(function(s){return s.trim()}).join(''),
+
+		clickEvents: {
+			click: function(target) {
+				console.log(target);
+				dateInput.val(target.date._i).change();
+				$('#dateinput .day.selected').removeClass('selected');
+				$(target.element).addClass('selected');
+			},
+		},
+
+		doneRendering: function() {
+			console.log('doneRendering', this);
+			if (clndr) {
+				clndr.element.find('.clndr-previous-year-button').off('click').on('click', previousYear);
+				clndr.element.find('.clndr-next-year-button').off('click').on('click', nextYear);
+			}
+		}
+
+	});
+
+	clndr.element.find('.clndr-previous-year-button').off('click').on('click', previousYear);
+	clndr.element.find('.clndr-next-year-button').off('click').on('click', nextYear);
+
+};
+
+$(document).ready(reform.widgets.datetime.init);
 
 
 reform.widgets.similarReports = {};
@@ -599,75 +694,6 @@ reform.widgets.similarReports.init = function() {
 };
 
 $(document).ready(reform.widgets.similarReports.init);
-
-reform.widgets.datetime = {};
-reform.widgets.datetime.init = function() {
-	var widget = reform.widgets.datetime;
-
-	var elements = reform.widgets.wizard.elements;
-	var timeInput = elements.time,
-			dateInput = elements.date,
-			datetimeInput = elements.datetime;
-
-	function handleDateOrTimeChange(e){
-		var time = timeInput.val();
-		var date = dateInput.val();
-
-		if(date && time) {
-			datetimeInput.val(date + 'T' + time).trigger('change'); //change();
-		}
-	}
-
-	timeInput.on('change', handleDateOrTimeChange);
-	dateInput.on('change', handleDateOrTimeChange);
-
-	var clndr;
-
-	function previousYear(e) {
-		console.log('previousYear', clndr.element.find('.clndr-previous-year-button'), clndr.element.find('.clndr-next-year-button'))
-		clndr.previousYear();
-		clndr.element.find('.clndr-previous-year-button').on('click', previousYear);
-		clndr.element.find('.clndr-next-year-button').on('click', nextYear);
-	}
-	function nextYear(e) {
-		console.log('nextYear', clndr.element.find('.clndr-previous-year-button'), clndr.element.find('.clndr-next-year-button'))
-		clndr.nextYear();
-		clndr.element.find('.clndr-previous-year-button').on('click', previousYear);
-		clndr.element.find('.clndr-next-year-button').on('click', nextYear);
-	}
-
-	clndr = widget.object = $('#dateinput').clndr({
-		template: $('#dateinput-template').html().split(/\n|\r/gi).map(function(s){return s.trim()}).join(''),
-		//events: events,
-		clickEvents: {
-			click: function(target) {
-				console.log(target)
-				dateInput.val(target.date._i).change();
-				$('#dateinput .day.selected').removeClass('selected');
-				$(target.element).addClass('selected');
-			},
-			onMonthChange: function(month){
-				clndr.element.find('.clndr-previous-year-button').on('click', previousYear);
-				clndr.element.find('.clndr-next-year-button').on('click', nextYear);
-			}
-		},
-		/*
-		doneRendering: function() {
-			console.log(this)
-			this.element.find('.clndr-previous-year-button').on('click', function(){clndr.previousYear();});
-			this.element.find('.clndr-next-year-button').on('click', function(){clndr.nextYear();});
-		}
-		*/
-	});
-
-	clndr.element.find('.clndr-previous-year-button').on('click', previousYear);
-	clndr.element.find('.clndr-next-year-button').on('click', nextYear);
-
-};
-
-$(document).ready(reform.widgets.datetime.init);
-
-
 
 
 /*
