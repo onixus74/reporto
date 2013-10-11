@@ -403,16 +403,22 @@ reform.widgets.wizard.init = function() {
 		e.preventDefault();
 		var source = elements.sourcesSourceInput.val();
 		var url = elements.sourcesUrlInput.val();
-		if(source && url) {
-			var element = $(_.template(sourceItemTemplate, { source: source, url: url, value: '[' + source + '](' + url + ')' }));
-			elements.sourcesList.append(element);
-			element.find('.ui-sources-remove-button').on('click', function(e){
-				e.preventDefault();
-				element.remove();
-			});
-			elements.sourcesSourceInput.val(null);
-			elements.sourcesUrlInput.val(null);
+		if (!source) {
+			elements.sourcesSourceInput.focus();
+			return;
 		}
+		if (!url || !elements.sourcesUrlInput.get(0).checkValidity()) {
+			elements.sourcesUrlInput.focus();
+			return;
+		}
+		var element = $(_.template(sourceItemTemplate, { source: source, url: url, value: '[' + source + '](' + url + ')' }));
+		elements.sourcesList.append(element);
+		element.find('.ui-sources-remove-button').on('click', function(e){
+			e.preventDefault();
+			element.remove();
+		});
+		elements.sourcesSourceInput.val(null);
+		elements.sourcesUrlInput.val(null);
 		elements.sourcesSourceInput.focus();
 	});
 
@@ -425,15 +431,17 @@ reform.widgets.wizard.init = function() {
 	elements.linksAddButton.on('click', function(e){
 		e.preventDefault();
 		var url = elements.linksUrlInput.val();
-		if(url) {
-			var element = $(_.template(linkItemTemplate, {url: url}));
-			elements.linksList.append(element);
-			element.find('.ui-links-remove-button').on('click', function(e){
-				e.preventDefault();
-				element.remove();
-			});
-			elements.linksUrlInput.val(null);
-		}
+		if (!url || !elements.linksUrlInput.get(0).checkValidity()) {
+			elements.linksUrlInput.focus();
+			return;
+		};
+		var element = $(_.template(linkItemTemplate, {url: url}));
+		elements.linksList.append(element);
+		element.find('.ui-links-remove-button').on('click', function(e){
+			e.preventDefault();
+			element.remove();
+		});
+		elements.linksUrlInput.val(null);
 		elements.linksUrlInput.focus();
 	});
 
@@ -624,7 +632,7 @@ reform.widgets.similarReports.init = function() {
 			});
 			*/
 		});
-		reportsList.html("Loading ...")
+		reportsList.html('<li><div class="text-center">Loading ...</div></li>')
 
 		return;
 

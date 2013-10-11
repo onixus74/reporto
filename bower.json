@@ -35,7 +35,8 @@
     "medium-editor": "daviferreira/medium-editor#~1.0.0",
     "pickadate": "~3.2.2",
     "html5shiv": "~3.7.0",
-    "x-editable": "~1.4.6"
+    "x-editable": "~1.4.6",
+    "bootstrap-multiselect": "~0.9.1"
   },
   "devDependencies": {
     "html-inspector": "~0.3.0"

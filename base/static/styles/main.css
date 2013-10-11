@@ -10498,17 +10498,123 @@ a.thumbnail:hover {
     overflow: visible !important;
   }
 }
+/**
+ * Select2 Bootstrap CSS 1.0
+ * Compatible with select2 3.3.2 and bootstrap 2.3.1
+ * MIT License
+ */
+/* line 7, ../components/select2-bootstrap-css/lib/select2-bootstrap.scss */
+.select2-container {
+  vertical-align: middle;
+}
+
+/* line 12, ../components/select2-bootstrap-css/lib/select2-bootstrap.scss */
+.select2-container .select2-choice,
+.select2-container-multi .select2-choices {
+  height: 28px;
+  line-height: 29px;
+  border: 1px solid #95a5a6;
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  border-radius: 0px;
+  background: none;
+  background-color: white;
+  filter: none;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+
+/* line 24, ../components/select2-bootstrap-css/lib/select2-bootstrap.scss */
+.select2-container .select2-choice div,
+.select2-container.select2-container-disabled .select2-choice div {
+  border-left: none;
+  background: none;
+  filter: none;
+}
+
+/* line 30, ../components/select2-bootstrap-css/lib/select2-bootstrap.scss */
+.control-group.error [class^="select2-choice"] {
+  border-color: white;
+}
+
+/* line 34, ../components/select2-bootstrap-css/lib/select2-bootstrap.scss */
+.select2-container-multi .select2-choices .select2-search-field {
+  height: 28px;
+  line-height: 27px;
+}
+
+/* line 40, ../components/select2-bootstrap-css/lib/select2-bootstrap.scss */
+.select2-container-active .select2-choice,
+.select2-container-multi.select2-container-active .select2-choices {
+  border-color: rgba(82, 168, 236, 0.8);
+  outline: none;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(82, 168, 236, 0.6);
+  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(82, 168, 236, 0.6);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(82, 168, 236, 0.6);
+}
+
+/* line 46, ../components/select2-bootstrap-css/lib/select2-bootstrap.scss */
+[class^="input-"] .select2-container {
+  font-size: 14px;
+}
+
+/* line 50, ../components/select2-bootstrap-css/lib/select2-bootstrap.scss */
+.input-prepend [class^="select2-choice"] {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+/* line 55, ../components/select2-bootstrap-css/lib/select2-bootstrap.scss */
+.input-append [class^="select2-choice"] {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+/* line 60, ../components/select2-bootstrap-css/lib/select2-bootstrap.scss */
+.select2-dropdown-open [class^="select2-choice"] {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+/* line 65, ../components/select2-bootstrap-css/lib/select2-bootstrap.scss */
+.select2-dropdown-open.select2-drop-above [class^="select2-choice"] {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+/* line 70, ../components/select2-bootstrap-css/lib/select2-bootstrap.scss */
+[class^="input-"] [class^="select2-choice"] > div {
+  display: none;
+}
+
+/* line 74, ../components/select2-bootstrap-css/lib/select2-bootstrap.scss */
+[class^="input-"] .select2-offscreen {
+  position: absolute;
+}
+
+/**
+ * This stops the quick flash when a native selectbox is shown and 
+ * then replaced by a select2 input when javascript kicks in. This can be 
+ * removed if javascript is not present 
+ */
+/* line 84, ../components/select2-bootstrap-css/lib/select2-bootstrap.scss */
+select.select2 {
+  height: 28px;
+  visibility: hidden;
+}
+
 /*-------------------------------------------------
 | BOOTSTRAP MOD
 \*/
-/* line 24, main.scss */
+/* line 28, main.scss */
 ul.list,
 ol.list {
   margin-left: 0;
   margin-bottom: 20px;
   list-style: none;
 }
-/* line 28, main.scss */
+/* line 32, main.scss */
 ul.list li,
 ol.list li {
   padding: 8px;
@@ -10517,43 +10623,60 @@ ol.list li {
   vertical-align: top;
 }
 
-/* line 37, main.scss */
+/* line 42, main.scss */
 .list-hover li:hover {
   background-color: #e8f8fd;
 }
 
-/* line 42, main.scss */
+/* line 47, main.scss */
 .btn-quiet {
   background-color: transparent;
 }
 
-/* line 48, main.scss */
+/* line 53, main.scss */
 .btn-not {
-  -webkit-transition: color 0.3s ease-in-out;
-  -moz-transition: color 0.3s ease-in-out;
-  -o-transition: color 0.3s ease-in-out;
-  transition: color 0.3s ease-in-out;
+  -webkit-transition: color 0.2s linear;
+  -moz-transition: color 0.2s linear;
+  -o-transition: color 0.2s linear;
+  transition: color 0.2s linear;
 }
-/* line 55, main.scss */
+/* line 59, main.scss */
 .btn-not:hover, .btn-not:focus {
   text-decoration: none;
+}
+/* line 63, main.scss */
+.btn-not.btn-success {
+  color: #2cc36b;
+}
+/* line 67, main.scss */
+.btn-not.btn-success:hover, .btn-not.btn-success:focus {
+  color: #229955;
+}
+/* line 72, main.scss */
+.btn-not.btn-danger {
+  color: #d14233;
+}
+/* line 76, main.scss */
+.btn-not.btn-danger:hover, .btn-not.btn-danger:focus {
+  color: #ab3326;
 }
 
 /*-------------------------------------------------
 | GLOBAL STYLES
 \*/
 /* Padding below the footer and lighter body text */
-/* line 73, main.scss */
+/* line 90, main.scss */
 body {
   padding-top: 110px;
   padding-bottom: 60px;
   color: #5a5a5a;
 }
 
-/* line 80, main.scss */
+/* line 97, main.scss */
 #top-bg {
   position: fixed;
-  background-color: #f5f5f5;
+  background-color: #666;
+  opacity: .8;
   -webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.25);
   -moz-box-shadow: 0 0 4px rgba(0, 0, 0, 0.25);
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.25);
@@ -10562,7 +10685,7 @@ body {
   top: 0;
 }
 
-/* line 89, main.scss */
+/* line 107, main.scss */
 #footer {
   position: fixed;
   bottom: 0;
@@ -10576,7 +10699,7 @@ body {
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.25);
 }
 
-/* line 100, main.scss */
+/* line 118, main.scss */
 .container .credit {
   margin: 10px 0;
 }
@@ -10585,7 +10708,7 @@ body {
 | CUSTOMIZE THE NAVBAR
 \*/
 /* Special class on .container surrounding .navbar, used for positioning it into place. */
-/* line 110, main.scss */
+/* line 128, main.scss */
 .navbar-wrapper {
   position: fixed;
   top: 0;
@@ -10598,7 +10721,7 @@ body {
 }
 
 /* Remove border and change up box shadow for more contrast */
-/* line 124, main.scss */
+/* line 142, main.scss */
 .navbar .navbar-inner {
   border: 0;
   -webkit-box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
@@ -10607,7 +10730,7 @@ body {
 }
 
 /* Downsize the brand/project name a bit */
-/* line 130, main.scss */
+/* line 148, main.scss */
 .navbar .brand {
   padding: 14px 20px 16px;
   /* Increase vertical padding to match navbar links */
@@ -10617,13 +10740,13 @@ body {
 }
 
 /* Navbar links: increase padding for taller navbar */
-/* line 138, main.scss */
+/* line 156, main.scss */
 .navbar .nav > li > a {
   padding: 15px 20px;
 }
 
 /* Offset the responsive button for proper vertical alignment */
-/* line 143, main.scss */
+/* line 161, main.scss */
 .navbar .btn-navbar {
   margin-top: 10px;
 }
@@ -10634,13 +10757,13 @@ body {
 /* Large desktop */
 /* Portrait tablet to landscape and desktop */
 @media (min-width: 768px) and (max-width: 979px) {
-  /* line 160, main.scss */
+  /* line 178, main.scss */
   .container.navbar-wrapper {
     margin-bottom: 0;
     width: auto;
   }
 
-  /* line 165, main.scss */
+  /* line 183, main.scss */
   #footer {
     padding-left: 20px;
     padding-right: 20px;
@@ -10648,29 +10771,29 @@ body {
 }
 /* Landscape phone to portrait tablet */
 @media (max-width: 767px) {
-  /* line 175, main.scss */
+  /* line 193, main.scss */
   body {
     padding-top: 70px;
     padding-bottom: 50px;
   }
 
-  /* line 180, main.scss */
+  /* line 198, main.scss */
   .container.navbar-wrapper {
     margin-bottom: 0;
     width: auto;
   }
 
-  /* line 185, main.scss */
+  /* line 203, main.scss */
   .navbar-inner {
     margin: -20px;
   }
 
-  /* line 189, main.scss */
+  /* line 207, main.scss */
   #top-bg {
     display: none;
   }
 
-  /* line 193, main.scss */
+  /* line 211, main.scss */
   #footer {
     padding-left: 20px;
     padding-right: 20px;
@@ -10678,24 +10801,24 @@ body {
 }
 /* Landscape phones and down */
 @media (max-width: 480px) {
-  /* line 203, main.scss */
+  /* line 221, main.scss */
   .container.navbar-wrapper {
     margin-bottom: 0;
     width: auto;
   }
 
-  /* line 208, main.scss */
+  /* line 226, main.scss */
   #footer {
     padding-left: 20px;
     padding-right: 20px;
   }
 
-  /* line 213, main.scss */
+  /* line 231, main.scss */
   .navbar-inner {
     margin: -20px;
   }
 
-  /* line 217, main.scss */
+  /* line 235, main.scss */
   #footer {
     padding-left: 20px;
     padding-right: 20px;
@@ -10704,37 +10827,37 @@ body {
 /*
 @media (max-width: 979px) {
 
-  body {
-    padding-top: 80px;
-  }
+	body {
+		padding-top: 80px;
+	}
 
-  .container.navbar-wrapper {
-    margin-bottom: 0;
-    width: auto;
-  }
+	.container.navbar-wrapper {
+		margin-bottom: 0;
+		width: auto;
+	}
 
-  #footer {
-    padding-left: 20px;
-    padding-right: 20px;
-  }
+	#footer {
+		padding-left: 20px;
+		padding-right: 20px;
+	}
 
 }
 
 
 @media (max-width: 767px) {
 
-  .navbar-inner {
-    margin: -20px;
-  }
+	.navbar-inner {
+		margin: -20px;
+	}
 
-  #footer {
-    padding-left: 20px;
-    padding-right: 20px;
-  }
+	#footer {
+		padding-left: 20px;
+		padding-right: 20px;
+	}
 
 }
 */
-/* line 260, main.scss */
+/* line 278, main.scss */
 #mainView {
   position: fixed;
   z-index: 99999;
@@ -10752,7 +10875,7 @@ body {
 /*-------------------------------------------------
 | report-submit.scss
 \*/
-/* line 279, main.scss */
+/* line 297, main.scss */
 .report-incident-dialog {
   top: 10%;
   left: 10%;
@@ -10769,40 +10892,40 @@ body {
 	margin-bottom: 20px;
 }
 */
-/* line 308, main.scss */
+/* line 326, main.scss */
 .natural-language-form {
   /* placeholder */
 }
-/* line 310, main.scss */
+/* line 328, main.scss */
 .natural-language-form p.text {
   line-height: 2em;
   vertical-align: middle;
 }
-/* line 315, main.scss */
+/* line 333, main.scss */
 .natural-language-form input, .natural-language-form .natural-language-input {
   background: none;
   border: none;
   text-align: center;
 }
-/* line 322, main.scss */
+/* line 340, main.scss */
 .natural-language-form ::-webkit-input-placeholder {
   /* WebKit browsers */
   color: #999;
   text-align: center;
 }
-/* line 325, main.scss */
+/* line 343, main.scss */
 .natural-language-form :-moz-placeholder {
   /* Mozilla Firefox 4 to 18 */
   color: #999;
   text-align: center;
 }
-/* line 328, main.scss */
+/* line 346, main.scss */
 .natural-language-form ::-moz-placeholder {
   /* Mozilla Firefox 19+ */
   color: #999;
   text-align: center;
 }
-/* line 331, main.scss */
+/* line 349, main.scss */
 .natural-language-form :-ms-input-placeholder {
   /* Internet Explorer 10+ */
   color: #999;
@@ -10812,31 +10935,12 @@ body {
 /*-------------------------------------------------
 | FIXES
 \*/
-/* line 342, main.scss */
+/* line 360, main.scss */
 [hidden] {
   display: none;
 }
 
-/* line 344, main.scss */
-.bootstrap-select {
-  margin: 0px;
-}
-
-/* fix boostrap-select width */
-/* line 349, main.scss */
-.bootstrap-select:not([class*="span"]) {
-  width: 100%;
-}
-
-/* fix boostrap-select colors in natural language form */
-/* line 354, main.scss */
-.boostrap-select-colors-fix {
-  background-color: transparent;
-  color: #080808;
-  text-align: center;
-}
-
-/* line 360, main.scss */
+/* line 362, main.scss */
 .ui-pnotify .alert {
   margin-bottom: 0;
 }
@@ -10877,23 +10981,23 @@ body::-webkit-scrollbar-corner { background-clip: padding-box; background-color:
 ::-webkit-scrollbar-thumb { background-color: #DDD; }
 ::-webkit-scrollbar-thumb:hover { background-color: #999; }
 */
-/* line 405, main.scss */
+/* line 407, main.scss */
 ::-webkit-scrollbar {
   width: 4px;
 }
 
-/* line 406, main.scss */
+/* line 408, main.scss */
 ::-webkit-scrollbar-track {
   background: rgba(0, 0, 0, 0.1);
 }
 
-/* line 407, main.scss */
+/* line 409, main.scss */
 ::-webkit-scrollbar-thumb {
   background: rgba(0, 0, 0, 0.6);
   border-radius: 2px;
 }
 
-/* line 408, main.scss */
+/* line 410, main.scss */
 ::-webkit-scrollbar:horizontal {
   height: 4px;
 }
@@ -10901,7 +11005,7 @@ body::-webkit-scrollbar-corner { background-clip: padding-box; background-color:
 /*-------------------------------------------------
 | typeahead.js
 \*/
-/* line 418, main.scss */
+/* line 420, main.scss */
 .typeahead,
 .tt-query,
 .tt-hint {
@@ -10917,29 +11021,29 @@ body::-webkit-scrollbar-corner { background-clip: padding-box; background-color:
   outline: none;
 }
 
-/* line 431, main.scss */
+/* line 433, main.scss */
 .typeahead {
   background-color: #fff;
 }
 
-/* line 435, main.scss */
+/* line 437, main.scss */
 .typeahead:focus {
   border: 2px solid #0097cf;
 }
 
-/* line 439, main.scss */
+/* line 441, main.scss */
 .tt-query {
   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
 }
 
-/* line 443, main.scss */
+/* line 445, main.scss */
 .tt-hint {
   color: #999999;
 }
 
-/* line 447, main.scss */
+/* line 449, main.scss */
 .tt-dropdown-menu {
   width: 422px;
   margin-top: 12px;
@@ -10955,20 +11059,20 @@ body::-webkit-scrollbar-corner { background-clip: padding-box; background-color:
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
 }
 
-/* line 458, main.scss */
+/* line 460, main.scss */
 .tt-suggestion {
   padding: 3px 20px;
   font-size: 18px;
   line-height: 24px;
 }
 
-/* line 464, main.scss */
+/* line 466, main.scss */
 .tt-suggestion.tt-is-under-cursor {
   color: #fff;
   background-color: #0097cf;
 }
 
-/* line 470, main.scss */
+/* line 472, main.scss */
 .tt-suggestion p {
   margin: 0;
 }

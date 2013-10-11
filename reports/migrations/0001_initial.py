@@ -27,7 +27,8 @@ class Migration(SchemaMigration):
         # Adding model 'Media'
         db.create_table(u'reports_media', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('file', self.gf('django.db.models.fields.files.FileField')(max_length=100)),
+            ('url', self.gf('django.db.models.fields.URLField')(max_length=300)),
+            ('file', self.gf('django.db.models.fields.files.FileField')(max_length=100, null=True, blank=True)),
         ))
         db.send_create_signal(u'reports', ['Media'])
 
@@ -39,7 +40,8 @@ class Migration(SchemaMigration):
             ('lastname', self.gf('django.db.models.fields.CharField')(max_length=100)),
             ('gender', self.gf('django.db.models.fields.CharField')(default='M', max_length=1)),
             ('age', self.gf('django.db.models.fields.PositiveIntegerField')(null=True, blank=True)),
-            ('education', self.gf('django.db.models.fields.CharField')(default='?', max_length=200)),
+            ('education', self.gf('django.db.models.fields.CharField')(default='?', max_length=2)),
+            ('social_class', self.gf('django.db.models.fields.CharField')(default='?', max_length=2)),
             ('profession', self.gf('django.db.models.fields.CharField')(max_length=200, null=True, blank=True)),
             ('phone', self.gf('django.db.models.fields.CharField')(max_length=20, null=True, blank=True)),
             ('email', self.gf('django.db.models.fields.EmailField')(max_length=75, null=True, blank=True)),
@@ -70,6 +72,7 @@ class Migration(SchemaMigration):
             ('aggressor', self.gf('django.db.models.fields.TextField')(null=True, blank=True)),
             ('aggressor_category', self.gf('django.db.models.fields.CharField')(default='COP', max_length=3, blank=True)),
             ('description', self.gf('django.db.models.fields.TextField')()),
+            ('sources', self.gf('django.db.models.fields.TextField')(null=True, blank=True)),
             ('is_verified', self.gf('django.db.models.fields.BooleanField')(default=False)),
             ('is_closed', self.gf('django.db.models.fields.BooleanField')(default=False)),
             ('created_by', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['users.User'])),
@@ -179,8 +182,9 @@ class Migration(SchemaMigration):
         },
         u'reports.media': {
             'Meta': {'object_name': 'Media'},
-            'file': ('django.db.models.fields.files.FileField', [], {'max_length': '100'}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'})
+            'file': ('django.db.models.fields.files.FileField', [], {'max_length': '100', 'null': 'True', 'blank': 'True'}),
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'url': ('django.db.models.fields.URLField', [], {'max_length': '300'})
         },
         u'reports.report': {
             'Meta': {'ordering': "['-datetime']", 'object_name': 'Report'},
@@ -199,6 +203,7 @@ class Migration(SchemaMigration):
             'location': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'location_text': ('django.db.models.fields.CharField', [], {'max_length': '300'}),
             'media': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'to': u"orm['reports.Media']", 'null': 'True', 'blank': 'True'}),
+            'sources': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
             'updated_at': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'}),
             'victim': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['reports.Victim']"})
         },
@@ -207,7 +212,7 @@ class Migration(SchemaMigration):
             'age': ('django.db.models.fields.PositiveIntegerField', [], {'null': 'True', 'blank': 'True'}),
             'category': ('django.db.models.fields.CharField', [], {'default': "'CIT'", 'max_length': '3'}),
             'description': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
-            'education': ('django.db.models.fields.CharField', [], {'default': "'?'", 'max_length': '200'}),
+            'education': ('django.db.models.fields.CharField', [], {'default': "'?'", 'max_length': '2'}),
             'email': ('django.db.models.fields.EmailField', [], {'max_length': '75', 'null': 'True', 'blank': 'True'}),
             'firstname': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'gender': ('django.db.models.fields.CharField', [], {'default': "'M'", 'max_length': '1'}),
@@ -215,6 +220,7 @@ class Migration(SchemaMigration):
             'lastname': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'phone': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True', 'blank': 'True'}),
             'profession': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True', 'blank': 'True'}),
+            'social_class': ('django.db.models.fields.CharField', [], {'default': "'?'", 'max_length': '2'}),
             'user': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['users.User']", 'null': 'True', 'blank': 'True'})
         },
         u'users.user': {

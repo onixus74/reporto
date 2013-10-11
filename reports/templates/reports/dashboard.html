@@ -14,8 +14,8 @@
 
 
 		<div class="hero-unit clearfix" style="padding: 40px;">
+			{% if report_list %}
 			<div class="pull-left" style="margin: 0;">
-
 				{% with report=report_list.0 %}
 				<div class="well well-small" style="margin: 0;">
 					<h2 style="margin-top: 0;">Latest Report</h2>
@@ -36,11 +36,15 @@
 				</div>
 				{% endwith %}
 			</div>
+			{% else %}
+			<div class="pull-left" style="margin: 0;">
+				<h2>There is no reports!</h2>
+			</div>
+			{% endif %}
 			<a class="btn btn-danger btn-large pull-right" href="{% url 'reports:submit' %}"><i class="icon-plus"></i> Report Indecent</a>
 		</div>
 
-
-
+		{% if report_list %}
 		<div class="well">
 
 			<div class="container-fluid">
@@ -178,6 +182,7 @@
 				</div>
 
 		</div>
+		{% endif %}
 
 	</div>
 
@@ -204,6 +209,7 @@
 	<script src="{% static 'components/morris.js/morris.js' %}"></script>
 	{% endcompress %}
 
+	{% if report_list %}
 	<script type="text/javascript">
 		reform.data.reportsByCategory = {{reports_by_category|json}}
 		reform.data.reportsByFeature = {{reports_by_feature|json}}
@@ -220,6 +226,7 @@
 	{% compress js %}
 	<script src="{% static 'reports/scripts/dashboard.js' %}"></script>
 	{% endcompress %}
+	{% endif %}
 
 	<!--
 	<script src="http://code.highcharts.com/highcharts.js"></script>

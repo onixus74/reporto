@@ -111,6 +111,7 @@ class Victim(models.Model):
 	)
 
 	UNKNOWN = '?'
+
 	NO_EDUCATION = 'NO'
 	PRIMARY_SCHOOL =  'PS'
 	HIGH_SCHOOL = 'HS'
@@ -123,27 +124,28 @@ class Victim(models.Model):
 		(UNIVERSITY, "University")
 	)
 
-	# POOR = ''
-	# MIDDLE = ''
-	# RICH = ''
-	# SOCIAL_STATUS = (
-	# 	(VALUE1, "VALUE1"),
-	# 	(VALUE1, "VALUE1"),
-	# 	(VALUE1, "VALUE1")
-	# )
+	LOWER = 'L'
+	MIDDLE = 'M'
+	UPPER = 'U'
+	SOCIAL_CLASS = (
+		(UNKNOWN, "Unknown"),
+		(LOWER, "Lower"),
+		(MIDDLE, "Middle"),
+		(UPPER, "Upper")
+	)
 
-	category    = models.CharField(max_length=3, choices=CATEGORY, default=CITIZEN)
-	firstname   = models.CharField(max_length=100)
-	lastname    = models.CharField(max_length=100)
-	gender      = models.CharField(max_length=1, choices=GENDER, default=MALE)
-	age         = models.PositiveIntegerField(blank=True, null=True)
-	education   = models.CharField(max_length=200, choices=EDUCATION, default=UNKNOWN)
-	profession  = models.CharField(max_length=200, blank=True, null=True)
-	# social_status  = models.CharField(max_length=200, choices=SOCIAL_STATUS, default=VALUE1)
-	phone       = models.CharField(max_length=20, blank=True, null=True, help_text="Victim's email address is a private information, it wont be shared or publicly accessible.")
-	email       = models.EmailField(blank=True, null=True, help_text="Victim's phone number is a private information, it wont be shared or publicly accessible.")
-	description = models.TextField(blank=True, null=True)
-	user        = models.ForeignKey(settings.AUTH_USER_MODEL, blank=True, null=True)
+	category     = models.CharField(max_length=3, choices=CATEGORY, default=CITIZEN)
+	firstname    = models.CharField(max_length=100)
+	lastname     = models.CharField(max_length=100)
+	gender       = models.CharField(max_length=1, choices=GENDER, default=MALE)
+	age          = models.PositiveIntegerField(blank=True, null=True)
+	education    = models.CharField(max_length=2, choices=EDUCATION, default=UNKNOWN)
+	social_class = models.CharField(max_length=2, choices=SOCIAL_CLASS, default=UNKNOWN)
+	profession   = models.CharField(max_length=200, blank=True, null=True)
+	phone        = models.CharField(max_length=20, blank=True, null=True, help_text="Victim's email address is a private information, it wont be shared or publicly accessible.")
+	email        = models.EmailField(blank=True, null=True, help_text="Victim's phone number is a private information, it wont be shared or publicly accessible.")
+	description  = models.TextField(blank=True, null=True)
+	user         = models.ForeignKey(settings.AUTH_USER_MODEL, blank=True, null=True)
 
 	def get_absolute_url(self):
 		return reverse('victims:view', kwargs={'pk': self.id})
