@@ -8,7 +8,7 @@ from django.template.defaultfilters import slugify
 from django.utils.html import strip_tags
 from django.forms.models import model_to_dict
 from django.core.exceptions import ValidationError
-
+from urlparse import parse_qs
 
 class Category(models.Model):
 	slug       = models.SlugField(max_length=100, blank=True, null=True)
@@ -44,11 +44,18 @@ class Feature(models.Model):
 
 
 class Media(models.Model):
-
-	#title        = models.CharField(max_length=200)
-	#description  = models.TextField()
+	IMAGE = 'I'
+	VIDEO = 'V'
+	TYPE = (
+		(IMAGE, "Image"),
+		(VIDEO, "Video"),
+	)
+	# title        = models.CharField(max_length=200)
+	# description  = models.TextField()
 	url  = models.URLField(max_length=300)
 	file = models.FileField(upload_to='reports/', blank=True, null=True)
+	# video_thumbnail = models.ImageField(upload_to='reports/', blank=True, null=True)
+	# external = models.BooleanField()
 
 	def __unicode__(self):
 		#return self.file.url
@@ -61,14 +68,28 @@ class Media(models.Model):
 	def save(self, *args, **kwargs):
 		if self.file:
 			self.url = self.file.url
+		#else:
+		#	self.external = True
 		super(Media, self).save(*args, **kwargs)
 
 	# def get_url(self):
 	#  	return self.url or self.file.url
 
+	def is_file(self):
+		return self.file
+
+	def is_youtube(self):
+		return self.url.find('youtube.com') >= 0
+
+	def get_youtube_thumbnail(self):
+		qs = self.url.split('?')
+		video_id = parse_qs(qs[1])['v'][0]
+		return "http://img.youtube.com/vi/%s/1.jpg" % video_id
+
 	def serialize(self):
 		data = model_to_dict(self)
-		data['file'] = { 'url': self.url }
+		#data['file'] = { 'url': self.url }
+		data.pop('file')
 		data['url'] = self.url
 		return data
 
