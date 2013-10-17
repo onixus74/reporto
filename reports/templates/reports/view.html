@@ -78,6 +78,9 @@
 					<ul class="thumbnails">
 						{% for media in report.media.all %}
 						<li class="span4_" style="display: inline-block; width: auto;">
+							{% comment %}
+							<a class="thumbnail- fancybox" href="{% if media.is_file %}{{ media.file.url }}{% else %}{{media.url}}{% endif %}" target="_blank" rel="group">
+							{% endcomment %}
 							<a class="thumbnail- fancybox" href="{{media.url}}" target="_blank" rel="group">
 								<img src="{% if media.is_file %}{{ media.file|thumbnail_url:'media' }}{% elif media.is_youtube %}{{media.get_youtube_thumbnail}}{% else %}{{media.url}}{% endif %}" alt="" style="height: 100px; width: auto;" class="img-polaroid">
 							</a>

@@ -36,7 +36,8 @@
     "pickadate": "~3.2.2",
     "html5shiv": "~3.7.0",
     "x-editable": "~1.4.6",
-    "bootstrap-multiselect": "~0.9.1"
+    "bootstrap-multiselect": "~0.9.1",
+    "blockui": "*"
   },
   "devDependencies": {
     "html-inspector": "~0.3.0"

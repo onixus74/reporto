@@ -462,6 +462,11 @@ reform.widgets.wizard.init = function() {
 
 	$('#report-form').on('submit', function(e) {
 		e.preventDefault();
+		$('.report-incident-form').block({
+			message: '<h3>Processing ...</h3>',
+			//css: { border: '3px solid #a00' }
+		});
+
 		var data = {};
 		var formData = new FormData(this);
 		var files = reform.widgets.dropzone.object.files;
@@ -501,6 +506,7 @@ reform.widgets.wizard.init = function() {
 				type: 'error',
 				//nonblock: true
 			});
+			$('.report-incident-form').unblock();
 		});
 		return false;
 	})
@@ -586,10 +592,13 @@ reform.widgets.similarReports.init = function() {
 			latestReportsLabel = $('#ui-latest-reports-label'),
 			similarReportsLabel = $('#ui-similar-reports-label'),
 			noSimilarReportsNotification = $('#ui-no-similar-reports'),
+			noReportsNotification = $('#ui-no-reports'),
 			reportsList = $('#ui-reports-list'),
 			reportsItems = reportsList.find('.ui-similar-report-candidate');
 
 	//noSimilarReportsNotification.addClass('animated');
+
+	noReportsNotification.addClass('animated fadeInUp').show();
 
 	window.similarReports = widget;
 
@@ -608,6 +617,10 @@ reform.widgets.similarReports.init = function() {
 
 		var formData = new FormData(document.querySelector('#report-form'));
 
+		$('#ui-reports-list').block({
+			message: 'Loading ...',
+			//css: { border: '3px solid #a00' }
+		});
 		$.ajax({
 			type: "POST",
 			url: reform.urls.similar,
@@ -620,6 +633,7 @@ reform.widgets.similarReports.init = function() {
 			}
 		}).done(function(data) {
 			reportsList.html(data.html).find('#ui-no-similar-reports').addClass('animated fadeInUp').show();;
+			$('#ui-reports-list').unblock();
 		}).fail(function(err) {
 			console.log(err);
 			/*
@@ -632,7 +646,7 @@ reform.widgets.similarReports.init = function() {
 			});
 			*/
 		});
-		reportsList.html('<li><div class="text-center">Loading ...</div></li>')
+		//reportsList.html('<li><div class="text-center">Loading ...</div></li>')
 
 		return;
 

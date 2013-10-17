@@ -71,6 +71,9 @@ class Media(models.Model):
 		#else:
 		#	self.external = True
 		super(Media, self).save(*args, **kwargs)
+		if self.file:
+		 	self.url = self.file.url
+		 	super(Media, self).save(*args, **kwargs)
 
 	# def get_url(self):
 	#  	return self.url or self.file.url
