@@ -20,3 +20,5 @@ components
 /.pydevproject
 /.checkstyle
 /.settings
+
+/data

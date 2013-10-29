@@ -52,7 +52,7 @@ reform.widgets.timeline = function() {
 		});
 	}
 
-	bindReportItemsToMap();
+	$(bindReportItemsToMap);
 
 
 	var status = reform.data.timeline;
@@ -71,7 +71,15 @@ reform.widgets.timeline = function() {
 		paginationNext.off('click');
 		if (status.current == 1) {
 			paginationFirst.closest('li').addClass('disabled');
+			paginationFirst.on('click', function(e){
+				e.stopPropagation();
+				e.preventDefault();
+			});
 			paginationPrevious.closest('li').addClass('disabled');
+			paginationPrevious.on('click', function(e){
+				e.stopPropagation();
+				e.preventDefault();
+			});
 		} else {
 			paginationFirst.closest('li').removeClass('disabled');
 			paginationFirst.on('click', function(e){
@@ -88,7 +96,15 @@ reform.widgets.timeline = function() {
 		}
 		if (status.current == status.pages) {
 			paginationNext.closest('li').addClass('disabled');
+			paginationNext.on('click', function(e){
+				e.stopPropagation();
+				e.preventDefault();
+			});
 			paginationLast.closest('li').addClass('disabled');
+			paginationLast.on('click', function(e){
+				e.stopPropagation();
+				e.preventDefault();
+			});
 		} else {
 			paginationNext.closest('li').removeClass('disabled');
 			paginationNext.on('click', function(e){
@@ -104,15 +120,24 @@ reform.widgets.timeline = function() {
 			});
 		}
 	}
-	updatePagination();
+	$(updatePagination);
 
 	function showPage(page){
 		$.get('/reports/dashboard.json?page=' + page).done(function(data){
 			console.log(arguments, status);
 			status.current = data.current;
 			list.html(data.html);
-		}).done(updatePagination).done(bindReportItemsToMap);
-		list.html('<li>Loading ...</li>');
+		})
+		.done(updatePagination)
+		.done(function(){
+			list.unblock();
+		})
+		.done(bindReportItemsToMap);
+		//list.html('<li>Loading ...</li>');
+		list.block({
+			message: 'Loading ...',
+			//css: { border: '3px solid #a00' }
+		});
 	}
 
 	widget.showPage = showPage;

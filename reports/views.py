@@ -43,6 +43,7 @@ class ReportsDashboard(PaginatedListHybridResponseMixin, ListView):
 	""" """
 	model = Report
 	template_name = "reports/dashboard.html"
+	paginate_by = 5
 
 	def get_context_data(self, **kwargs):
 		"""
@@ -100,60 +101,11 @@ def merge_lists(l1, l2, key):
 			merged[item[key]] = item
 	return [val for (_, val) in merged.items()]
 
-# def paginated_reports(request, *args, **kwargs):
-
-# 	return JSONResponse({
-# 		'success': True,
-# 		'exist': exist,
-# 		'list': similars,
-# 		'html': render_to_string("reports/submit_similar_reports_list.html", { 'reports': similars })
-# 	})
-
 
 class ReportView(DetailHybridResponseMixin, DetailView):
 	""" """
 	model = Report
 	template_name = "reports/view.html"
-
-
-# def item(request, id, *args, **kwargs):
-# 	template_name = "reports/view.html"
-# 	context = {
-# 		"object": Report.objects.get(id=id)
-# 	}
-# 	return render(request, template_name, context)
-
-
-# @csrf_exempt
-# class SubmissionForm(forms.Form):
-# 	name = forms.CharField('Name', required=True)
-
-
-# def submission(request, template_name = "reports/submit.html", *args, **kwargs):
-# 	form = SubmissionForm(request.POST or None)
-# 	#form = SubmissionForm(request.POST or None, request.FILES or None)
-# 	if form.is_valid():
-# 		logger.debug("form valid")
-# 		return redirect("home")
-# 	context = {
-# 		"message": "Hello!",
-# 		"form": form
-# 	}
-# 	return render(request, template_name, context)
-
-
-# def submission_json(request, *args, **kwargs):
-# 	data = {
-# 		"message": "Hello!",
-# 	}
-# 	return HttpResponse(simplejson.dumps(data), content_type="application/json")
-
-
-
-# class ReportSubmissionForm(forms.Form):
-# 	class Meta:
-# 		model = Report
-# 		#fields = [...]
 
 
 class ReportCreateForm(forms.ModelForm):
@@ -198,11 +150,11 @@ def report_submit(request, template_name = "reports/submit.html", *args, **kwarg
 
 	if request.method == 'GET':
 		# create report submit id for files upload
-		rsid = uuid.uuid1().hex
+		#rsid = uuid.uuid1().hex
 		#RSIDs = request.session.get('RSIDs', [])
 		#RSIDs.append(rsid)
 		#request.session['RSIDs'] = RSIDs
-		context['report_submit_id'] = rsid
+		#context['report_submit_id'] = rsid
 		#victims = Victim.objects.all()
 		#context['victims'] = victims
 		reports = Report.objects.all()[:9]
@@ -286,9 +238,9 @@ def report_submit(request, template_name = "reports/submit.html", *args, **kwarg
 
 	else:
 		if request.is_ajax():
-			if victim_id == 'user':
+			if victim_id == 'user' and victim_profile_form.errors:
 				form.errors['victim'] = victim_profile_form.errors
-			elif victim_id == '0':
+			elif victim_id == '0' and victim_form.errors:
 				form.errors['victim'] = victim_form.errors
 			return JSONResponse({
 				'success': False,
@@ -297,21 +249,6 @@ def report_submit(request, template_name = "reports/submit.html", *args, **kwarg
 			}, status=400)
 
 	return render(request, template_name, context)
-
-
-# class SimilarReportForm(forms.ModelForm):
-# 	class Meta:
-# 		model = Report
-# 		fields = ('category', 'location', 'datetime')
-
-
-# class SimilarInputForm(forms.Form):
-# 	category = forms.CharField()
-# 	location = forms.CharField()
-# 	datetime = forms.CharField()
-# 	date = forms.CharField()
-# 	victim_firstname = forms.CharField()
-# 	victim_lastname = forms.CharField()
 
 
 def similar_reports(request, *args, **kwargs):
@@ -576,21 +513,6 @@ def string_distance(str1, str2):
 # 		return JSONResponse({'success': True})
 
 # 	return JSONResponse({'success': False}, status=400)
-
-
-
-# class ReportVerifyView(View):
-# 	http_method_names = ['get', 'post']
-
-# 	def get(self, request, pk, *args, **kwargs):
-# 		report = Report.objects.get(pk=pk)
-# 		return JSONResponse({'success': True, 'verified': report.is_verified})
-
-# 	def post(self, request, pk, *args, **kwargs):
-# 		report = Report.objects.get(pk=pk)
-# 		report.is_verified = True
-# 		report.save()
-# 		return JSONResponse({'success': True, 'verified': report.is_verified})
 
 
 def report_verify(request, pk, *args, **kwargs):

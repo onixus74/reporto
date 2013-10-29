@@ -50,7 +50,7 @@ class Media(models.Model):
 		(IMAGE, "Image"),
 		(VIDEO, "Video"),
 	)
-	# title        = models.CharField(max_length=200)
+	# title        = models.CharField(max, blank=True, null=True_length=200)
 	# description  = models.TextField()
 	url  = models.URLField(max_length=300)
 	file = models.FileField(upload_to='reports/', blank=True, null=True)
@@ -71,12 +71,13 @@ class Media(models.Model):
 		#else:
 		#	self.external = True
 		super(Media, self).save(*args, **kwargs)
-		if self.file:
-		 	self.url = self.file.url
-		 	super(Media, self).save(*args, **kwargs)
+		#if self.file:
+		# 	self.url = self.file.url
+		# 	super(Media, self).save(*args, **kwargs)
 
-	# def get_url(self):
-	#  	return self.url or self.file.url
+
+	def get_url(self):
+	 	return self.url or self.file.url
 
 	def is_file(self):
 		return self.file
