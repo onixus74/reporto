@@ -271,6 +271,7 @@
 
 {% block view_scripts %}
 	{% compress js %}
+	<script src="{% static 'components/blockui/jquery.blockUI.js' %}"></script>
 	<!-- Map -->
 	<script src="{% static 'components/leaflet/dist/leaflet.js' %}"></script>
 	<script src="{% static 'dependencies/L.GeoSearch/src/js/l.control.geosearch.js' %}"></script>
@@ -282,8 +283,6 @@
 	<script src="{% static 'components/lodash/dist/lodash.js' %}"></script>
 	<script src="{% static 'components/momentjs/moment.js' %}"></script>
 	<script src="{% static 'components/CLNDR/clndr.js' %}"></script>
-
-	<script src="{% static 'components/blockui/jquery.blockUI.js' %}"></script>
 	{% endcompress %}
 
 	<script type="text/javascript">

@@ -82,6 +82,7 @@ class ReportsDashboard(PaginatedListHybridResponseMixin, ListView):
 			context['reports_by_date'] = [ { 'date': i['date'], 'total': i['id__count'] } for i in reports_by_date ]
 
 			context['categories'] = [ category.__unicode__() for category in Category.objects.all() ]
+			context['features'] = [ feature.__unicode__() for feature in Feature.objects.all() ]
 
 			for category in Category.objects.all():
 				result = Report.objects.extra({'date' : "date(datetime)"}).filter(category=category).values('date').annotate(Count('id')).order_by('date')

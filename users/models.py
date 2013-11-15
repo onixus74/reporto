@@ -64,8 +64,8 @@ email.blank = False
 email._unique = True
 
 username = User._meta.get_field_by_name('username')[0]
-#username.null = True
-#username.blank = True
+username.null = True
+username.blank = True
 #username._unique = False
 
 first_name = User._meta.get_field_by_name('first_name')[0]
