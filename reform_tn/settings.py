@@ -3,8 +3,8 @@
 import os
 PROJECT_DIR=os.path.dirname(__file__)
 
-DEBUG = True # !DEV!
-#DEBUG = False # !PROD!
+#DEBUG = True # !DEV!
+DEBUG = False # !PROD!
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
