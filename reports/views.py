@@ -43,15 +43,16 @@ class ReportsDashboard(PaginatedListHybridResponseMixin, ListView):
 	""" """
 	model = Report
 	template_name = "reports/dashboard.html"
+	paginate_by = 5
 
 	def get_context_data(self, **kwargs):
 		"""
 			Prepare context parameter 'reports_by_category' with the following structure
 			reports_by_category = [
-				{ 'label': 'Verbal Violence', 'value': 20 },
-				{ 'label': 'Violence', 'value': 10 },
-				{ 'label': 'Rape', 'value': 20 },
-				{ 'label': 'Lack of Investigation and Prosecution', 'value': 50 }
+				{ 'label': 'Verbal Violence', 'count': 20 },
+				{ 'label': 'Violence', 'count': 10 },
+				{ 'label': 'Rape', 'count': 20 },
+				{ 'label': 'Lack of Investigation and Prosecution', 'count': 50 }
 			]
 		"""
 		context = super(ReportsDashboard, self).get_context_data(**kwargs)
@@ -63,30 +64,30 @@ class ReportsDashboard(PaginatedListHybridResponseMixin, ListView):
 
 		else:
 
+			context['categories'] = [ category.__unicode__() for category in Category.objects.all() ]
+			context['features'] = [ feature.__unicode__() for feature in Feature.objects.all() ]
+
 			reports_by_category = Report.objects.values('category__definition').annotate(Count("id")).order_by('category__definition')
-			context['reports_by_category'] = [ { 'label': i['category__definition'], 'value': i['id__count'] } for i in reports_by_category ]
+			context['reports_by_category'] = [ { 'label': i['category__definition'], 'count': i['id__count'] } for i in reports_by_category ]
 
 			victim_gender_display = dict(Victim.GENDER)
 			reports_by_victim_gender = Report.objects.values('victim__gender').annotate(Count("id")).order_by('victim__gender')
-			context['reports_by_victim_gender'] = [ { 'label': victim_gender_display[i['victim__gender']], 'value': i['id__count'] } for i in reports_by_victim_gender ]
+			context['reports_by_victim_gender'] = [ { 'label': victim_gender_display[i['victim__gender']], 'count': i['id__count'] } for i in reports_by_victim_gender ]
 
 			victim_education_display = dict(Victim.EDUCATION)
 			reports_by_victim_education = Report.objects.values('victim__education').annotate(Count("id")).order_by('victim__education')
-			context['reports_by_victim_education'] = [ { 'label': victim_education_display[i['victim__education']], 'value': i['id__count'] } for i in reports_by_victim_education ]
+			context['reports_by_victim_education'] = [ { 'label': victim_education_display[i['victim__education']], 'count': i['id__count'] } for i in reports_by_victim_education ]
 
 			reports_by_feature = Report.objects.values('features__definition').annotate(Count("id")).order_by('features__definition')
 			context['reports_by_feature'] = [ { 'label': i['features__definition'], 'count': i['id__count'] } for i in reports_by_feature ]
 
 			reports_by_date = Report.objects.extra({'date' : "date(datetime)"}).values('date').annotate(Count('id')).order_by('date')
-			context['reports_by_date'] = [ { 'date': i['date'], 'total': i['id__count'] } for i in reports_by_date ]
+			context['reports_by_date'] = [ { 'date': i['date'], 'count': i['id__count'] } for i in reports_by_date ]
 
-			context['categories'] = [ category.__unicode__() for category in Category.objects.all() ]
-
+			context['reports_by_category_by_date'] = {}
 			for category in Category.objects.all():
 				result = Report.objects.extra({'date' : "date(datetime)"}).filter(category=category).values('date').annotate(Count('id')).order_by('date')
-				result = [ { 'date': i['date'], category.__unicode__(): i['id__count'] } for i in result ]
-				if len(result) > 0:
-					context['reports_by_date'] = merge_lists(context['reports_by_date'], result, 'date')
+				context['reports_by_category_by_date'][category.__unicode__()] = [ { 'date': i['date'], 'count': i['id__count'] } for i in result ]
 
 		return context
 
@@ -100,60 +101,11 @@ def merge_lists(l1, l2, key):
 			merged[item[key]] = item
 	return [val for (_, val) in merged.items()]
 
-# def paginated_reports(request, *args, **kwargs):
-
-# 	return JSONResponse({
-# 		'success': True,
-# 		'exist': exist,
-# 		'list': similars,
-# 		'html': render_to_string("reports/submit_similar_reports_list.html", { 'reports': similars })
-# 	})
-
 
 class ReportView(DetailHybridResponseMixin, DetailView):
 	""" """
 	model = Report
 	template_name = "reports/view.html"
-
-
-# def item(request, id, *args, **kwargs):
-# 	template_name = "reports/view.html"
-# 	context = {
-# 		"object": Report.objects.get(id=id)
-# 	}
-# 	return render(request, template_name, context)
-
-
-# @csrf_exempt
-# class SubmissionForm(forms.Form):
-# 	name = forms.CharField('Name', required=True)
-
-
-# def submission(request, template_name = "reports/submit.html", *args, **kwargs):
-# 	form = SubmissionForm(request.POST or None)
-# 	#form = SubmissionForm(request.POST or None, request.FILES or None)
-# 	if form.is_valid():
-# 		logger.debug("form valid")
-# 		return redirect("home")
-# 	context = {
-# 		"message": "Hello!",
-# 		"form": form
-# 	}
-# 	return render(request, template_name, context)
-
-
-# def submission_json(request, *args, **kwargs):
-# 	data = {
-# 		"message": "Hello!",
-# 	}
-# 	return HttpResponse(simplejson.dumps(data), content_type="application/json")
-
-
-
-# class ReportSubmissionForm(forms.Form):
-# 	class Meta:
-# 		model = Report
-# 		#fields = [...]
 
 
 class ReportCreateForm(forms.ModelForm):
@@ -179,6 +131,9 @@ def report_submit(request, template_name = "reports/submit.html", *args, **kwarg
 	logger.debug('POST %s', request.POST)
 	logger.debug('FILES %s', request.FILES)
 
+	links = request.POST.getlist('links[]')
+	logger.debug('LINKS %s', links)
+
 	context = {}
 	form = ReportCreateForm(request.POST or None, request.FILES or None)
 	context['form'] = form
@@ -195,11 +150,11 @@ def report_submit(request, template_name = "reports/submit.html", *args, **kwarg
 
 	if request.method == 'GET':
 		# create report submit id for files upload
-		rsid = uuid.uuid1().hex
+		#rsid = uuid.uuid1().hex
 		#RSIDs = request.session.get('RSIDs', [])
 		#RSIDs.append(rsid)
 		#request.session['RSIDs'] = RSIDs
-		context['report_submit_id'] = rsid
+		#context['report_submit_id'] = rsid
 		#victims = Victim.objects.all()
 		#context['victims'] = victims
 		reports = Report.objects.all()[:9]
@@ -239,6 +194,12 @@ def report_submit(request, template_name = "reports/submit.html", *args, **kwarg
 		form.instance.created_by = request.user
 		if request.user.is_moderator():
 			form.instance.is_verified = True
+
+		sources = request.POST.getlist('sources[]')
+		logger.debug('SOURCES %s', sources)
+
+		form.instance.sources = ' - '.join(sources)
+
 		report = form.save()
 
 		files = request.FILES.getlist('files[]')
@@ -250,12 +211,18 @@ def report_submit(request, template_name = "reports/submit.html", *args, **kwarg
 		logger.debug('OBJECT %s', report)
 
 		for f in files:
-			logger.debug('FILE %s', f)
+			#logger.debug('FILE %s', f)
 			report.media.create(file=f)
 			#file_path = os.path.join(media_path, f.name)
 			#logger.debug('FILE PATH %s', file_path)
 			#file_path = default_storage.save(file_path, f)
 			#report.media.create(url=file_path)
+
+		links = request.POST.getlist('links[]')
+		logger.debug('LINKS %s', links)
+
+		for l in links:
+			report.media.create(url=l, file=None)
 
 		report.save()
 
@@ -271,9 +238,9 @@ def report_submit(request, template_name = "reports/submit.html", *args, **kwarg
 
 	else:
 		if request.is_ajax():
-			if victim_id == 'user':
+			if victim_id == 'user' and victim_profile_form.errors:
 				form.errors['victim'] = victim_profile_form.errors
-			elif victim_id == '0':
+			elif victim_id == '0' and victim_form.errors:
 				form.errors['victim'] = victim_form.errors
 			return JSONResponse({
 				'success': False,
@@ -282,21 +249,6 @@ def report_submit(request, template_name = "reports/submit.html", *args, **kwarg
 			}, status=400)
 
 	return render(request, template_name, context)
-
-
-# class SimilarReportForm(forms.ModelForm):
-# 	class Meta:
-# 		model = Report
-# 		fields = ('category', 'location', 'datetime')
-
-
-# class SimilarInputForm(forms.Form):
-# 	category = forms.CharField()
-# 	location = forms.CharField()
-# 	datetime = forms.CharField()
-# 	date = forms.CharField()
-# 	victim_firstname = forms.CharField()
-# 	victim_lastname = forms.CharField()
 
 
 def similar_reports(request, *args, **kwargs):
@@ -563,21 +515,6 @@ def string_distance(str1, str2):
 # 	return JSONResponse({'success': False}, status=400)
 
 
-
-# class ReportVerifyView(View):
-# 	http_method_names = ['get', 'post']
-
-# 	def get(self, request, pk, *args, **kwargs):
-# 		report = Report.objects.get(pk=pk)
-# 		return JSONResponse({'success': True, 'verified': report.is_verified})
-
-# 	def post(self, request, pk, *args, **kwargs):
-# 		report = Report.objects.get(pk=pk)
-# 		report.is_verified = True
-# 		report.save()
-# 		return JSONResponse({'success': True, 'verified': report.is_verified})
-
-
 def report_verify(request, pk, *args, **kwargs):
 	logger.debug('POST %s', request.POST)
 	report = Report.objects.get(pk=pk)
@@ -633,18 +570,50 @@ def report_comment(request, pk, *args, **kwargs):
 		}, status=400)
 
 
-def stats_xxx(request, *args, **kwargs):
-	#data = Report.objects.get() # data request
-	response = {
-	 #'reports': data,
-	 'Verbal Vilence': 15,
-	 'Vilance': 10,
-	}
+# def statistics_reports_by_date(request, *args, **kwargs):
+# 	response = {}
+
+# 	reports_by_date = Report.objects.extra({'date' : "date(datetime)"}).values('date').annotate(Count('id')).order_by('date')
+# 	response['All'] = [ { 'date': i['date'], 'count': i['id__count'] } for i in reports_by_date ]
+
+# 	for category in Category.objects.all():
+# 		result = Report.objects.extra({'date' : "date(datetime)"}).filter(category=category).values('date').annotate(Count('id')).order_by('date')
+# 		response[category.__unicode__()] = [ { 'date': i['date'], 'count': i['id__count'] } for i in result ]
+
+# 	return JSONResponse(response)
+
+
+def statistics(request, *args, **kwargs):
+	response = {}
+
+	response['categories'] = [ category.__unicode__() for category in Category.objects.all() ]
+	response['features'] = [ feature.__unicode__() for feature in Feature.objects.all() ]
+
+	response['reports_count'] = Report.objects.count()
+
+	reports_by_category = Report.objects.values('category__definition').annotate(Count("id")).order_by('category__definition')
+	response['reports_by_category'] = [ { 'label': i['category__definition'], 'count': i['id__count'] } for i in reports_by_category ]
+
+	victim_gender_display = dict(Victim.GENDER)
+	reports_by_victim_gender = Report.objects.values('victim__gender').annotate(Count("id")).order_by('victim__gender')
+	response['reports_by_victim_gender'] = [ { 'label': victim_gender_display[i['victim__gender']], 'count': i['id__count'] } for i in reports_by_victim_gender ]
+
+	victim_education_display = dict(Victim.EDUCATION)
+	reports_by_victim_education = Report.objects.values('victim__education').annotate(Count("id")).order_by('victim__education')
+	response['reports_by_victim_education'] = [ { 'label': victim_education_display[i['victim__education']], 'count': i['id__count'] } for i in reports_by_victim_education ]
+
+	reports_by_feature = Report.objects.values('features__definition').annotate(Count("id")).order_by('features__definition')
+	response['reports_by_feature'] = [ { 'label': i['features__definition'], 'count': i['id__count'] } for i in reports_by_feature ]
+
+	reports_by_date = Report.objects.extra({'date' : "date(datetime)"}).values('date').annotate(Count('id')).order_by('date')
+	response['reports_by_date'] = [ { 'date': i['date'], 'count': i['id__count'] } for i in reports_by_date ]
+
+	response['reports_by_category_by_date'] = {}
+	for category in Category.objects.all():
+		result = Report.objects.extra({'date' : "date(datetime)"}).filter(category=category).values('date').annotate(Count('id')).order_by('date')
+		response['reports_by_category_by_date'][category.__unicode__()] = [ { 'date': i['date'], 'count': i['id__count'] } for i in result ]
+
 	return JSONResponse(response)
-
-
-
-
 # CRUD
 
 

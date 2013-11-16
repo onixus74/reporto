@@ -39,6 +39,30 @@ body {
 }
 
 /* line 40, submit.scss */
+.bootstrap-select {
+  margin: 0px;
+}
+
+/* fix boostrap-select width */
+/* line 45, submit.scss */
+.bootstrap-select:not([class*="span"]) {
+  width: 100%;
+}
+
+/* fix boostrap-select colors in natural language form */
+/* line 50, submit.scss */
+.boostrap-select-fix {
+  background-color: transparent;
+  color: #080808;
+  text-align: center;
+}
+
+/* line 56, submit.scss */
+.boostrap-select-fix .filter-option {
+  text-align: center;
+}
+
+/* line 62, submit.scss */
 #dateinput {
   max-width: 600px;
   margin: 0 auto;
@@ -50,7 +74,7 @@ body {
   */
   /* padding-bottom: 12px; */
 }
-/* line 55, submit.scss */
+/* line 77, submit.scss */
 #dateinput .noselect, #dateinput .controls .clndr-previous-button, #dateinput .controls .clndr-next-button, #dateinput .controls .clndr-previous-year-button, #dateinput .controls .clndr-next-year-button {
   -webkit-user-select: none;
   /* Chrome/Safari */
@@ -59,12 +83,12 @@ body {
   -ms-user-select: none;
   /* IE10+ */
 }
-/* line 68, submit.scss */
+/* line 90, submit.scss */
 #dateinput .controls {
   background-color: lightGray;
   color: white;
 }
-/* line 73, submit.scss */
+/* line 95, submit.scss */
 #dateinput .controls .clndr-previous-button, #dateinput .controls .clndr-next-button, #dateinput .controls .clndr-previous-year-button, #dateinput .controls .clndr-next-year-button {
   width: 10%;
   padding-top: 4px;
@@ -77,11 +101,11 @@ body {
   -o-transition: background-color 0.5s;
   transition: background-color 0.5s;
 }
-/* line 82, submit.scss */
+/* line 104, submit.scss */
 #dateinput .controls .clndr-previous-button:hover, #dateinput .controls .clndr-next-button:hover, #dateinput .controls .clndr-previous-year-button:hover, #dateinput .controls .clndr-next-year-button:hover {
   background-color: #b9b9b9;
 }
-/* line 87, submit.scss */
+/* line 109, submit.scss */
 #dateinput .controls .month {
   width: 60%;
   padding-top: 4px;
@@ -92,18 +116,18 @@ body {
   font-weight: 700;
   letter-spacing: 1px;
 }
-/* line 99, submit.scss */
+/* line 121, submit.scss */
 #dateinput .days-of-the-week {
   width: 100%;
 }
-/* line 103, submit.scss */
+/* line 125, submit.scss */
 #dateinput .days-of-the-week .header-day {
   float: left;
   width: 14.2857%;
   padding: 12px 0;
   text-align: center;
 }
-/* line 115, submit.scss */
+/* line 137, submit.scss */
 #dateinput .days .day, #dateinput .days .empty {
   float: left;
   width: 14.2857%;
@@ -111,7 +135,7 @@ body {
   text-align: center;
   cursor: pointer;
 }
-/* line 123, submit.scss */
+/* line 145, submit.scss */
 #dateinput .days .day.today, #dateinput .days .empty.today {
   font-weight: bold;
   /*background-color: lightGray;
@@ -120,11 +144,11 @@ body {
   box-shadow: inset 0 0 8px #d4d4d4;
   */
 }
-/* line 133, submit.scss */
+/* line 155, submit.scss */
 #dateinput .days .day.event, #dateinput .days .empty.event {
   color: blue;
 }
-/* line 138, submit.scss */
+/* line 160, submit.scss */
 #dateinput .days .day.selected, #dateinput .days .empty.selected {
   color: white;
   background-color: #007a9b;
@@ -133,7 +157,7 @@ body {
   box-shadow: inset 0 0 8px #d4d4d4;
 }
 
-/* line 148, submit.scss */
+/* line 170, submit.scss */
 .ui-similar-report-candidate {
   margin: 4px;
   border: 1px transparent solid;
@@ -142,77 +166,77 @@ body {
   -o-transition: border-color 0.1s linear;
   transition: border-color 0.1s linear;
 }
-/* line 152, submit.scss */
+/* line 174, submit.scss */
 .ui-similar-report-candidate.ui-similar {
   border-color: #c0392b;
   -webkit-box-shadow: 0 0 5px rgba(214, 85, 72, 0.9);
   -moz-box-shadow: 0 0 5px rgba(214, 85, 72, 0.9);
   box-shadow: 0 0 5px rgba(214, 85, 72, 0.9);
 }
-/* line 155, submit.scss */
+/* line 177, submit.scss */
 .ui-similar-report-candidate.ui-similar.ui-similar-1 {
   -webkit-box-shadow: 0 0 10px rgba(209, 66, 51, 0.8);
   -moz-box-shadow: 0 0 10px rgba(209, 66, 51, 0.8);
   box-shadow: 0 0 10px rgba(209, 66, 51, 0.8);
 }
-/* line 158, submit.scss */
+/* line 180, submit.scss */
 .ui-similar-report-candidate.ui-similar.ui-similar-2 {
   -webkit-box-shadow: 0 0 20px rgba(192, 57, 43, 0.7);
   -moz-box-shadow: 0 0 20px rgba(192, 57, 43, 0.7);
   box-shadow: 0 0 20px rgba(192, 57, 43, 0.7);
 }
-/* line 161, submit.scss */
+/* line 183, submit.scss */
 .ui-similar-report-candidate.ui-similar.ui-similar-3 {
   -webkit-box-shadow: 0 0 30px rgba(171, 51, 38, 0.7);
   -moz-box-shadow: 0 0 30px rgba(171, 51, 38, 0.7);
   box-shadow: 0 0 30px rgba(171, 51, 38, 0.7);
 }
-/* line 164, submit.scss */
+/* line 186, submit.scss */
 .ui-similar-report-candidate.ui-similar.ui-similar-4 {
   -webkit-box-shadow: 0 0 40px rgba(150, 45, 34, 0.7);
   -moz-box-shadow: 0 0 40px rgba(150, 45, 34, 0.7);
   box-shadow: 0 0 40px rgba(150, 45, 34, 0.7);
 }
 
-/* line 179, submit.scss */
+/* line 201, submit.scss */
 .ui-similar-category .ui-similar-report-category, .ui-similar-category .ui-similar-report-category a {
   color: #ab3326;
   font-weight: bold;
 }
 
-/* line 184, submit.scss */
+/* line 206, submit.scss */
 .ui-similar-location .ui-similar-report-location, .ui-similar-location .ui-similar-report-location a {
   color: #962d22;
   font-weight: bold;
 }
 
-/* line 189, submit.scss */
+/* line 211, submit.scss */
 .ui-similar-datetime .ui-similar-report-datetime, .ui-similar-datetime .ui-similar-report-datetime a {
   color: #81261d;
   font-weight: bold;
 }
 
-/* line 194, submit.scss */
+/* line 216, submit.scss */
 .ui-similar-victim .ui-similar-report-victim, .ui-similar-victim .ui-similar-report-victim a {
   color: #c0392b;
   font-weight: bold;
 }
 
 @media (max-width: 767px) {
-  /* line 201, submit.scss */
+  /* line 223, submit.scss */
   #ui-wizard-progress-bar {
     top: 50px;
   }
-  /* line 203, submit.scss */
+  /* line 225, submit.scss */
   #ui-wizard-progress-bar .progress {
     margin: 0;
   }
 }
-/* line 211, submit.scss */
+/* line 233, submit.scss */
 .ui-victim-fieldset {
   height: auto;
 }
-/* line 213, submit.scss */
+/* line 235, submit.scss */
 .ui-victim-fieldset .control-group {
   margin-bottom: 10px;
 }

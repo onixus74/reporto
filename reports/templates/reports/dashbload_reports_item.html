@@ -1,30 +1,22 @@
 								<li class="ui-timeline-story" data-latlng="{{report.location}}">
-									<div class="row-fluid">
-										<div class="span2">
-											<a class="btn btn-quiet btn-block ui-timeline-story-locator" title="Click to locate incident">
-												<i class="icon-map-marker icon-2x"></i>
-											</a>
-										</div>
-										<div class="span8">
-											<span class="label victim"><i class="icon-user"></i> {{report.victim}}</span>
-											has been a victim of
-											<span class="label category">{{report.category}}</span>
-											happened in
-											<span class="label location"><i class="icon-map-marker"></i> {{report.location_text}}</span>
-											on
-											<span class="label datetime">
-												<!--<a href="{% url 'reports:view' report.id %}" target="_blank">{{report.datetime}}</a>-->
-												<i class="icon-calendar"></i> {{report.datetime}}
-											</span>
-											{% if report.is_verified %}<span class="badge badge-success">Verified <i class="icon-ok"></i></span>{% endif %}
-											{% comment %}
-											{% if report.is_closed %}<span class="badge badge-important">Closed <i class="icon-lock"></i></span>{% endif %}
-											{% endcomment %}
-										</div>
-										<div class="span2">
-											<a class="btn btn-quiet btn-block" href="{% url 'reports:view' report.id %}" target="_blank" title="Click to view report">
-												<i class="icon-arrow-right icon-2x"></i>
-											</a>
-										</div>
-									</div>
+									<a class="btn btn-not ui-timeline-story-locator" title="Click to locate incident">
+										<i class="icon-map-marker icon-2x"></i>
+									</a>
+									<span class="label victim"><i class="icon-user"></i> {{report.victim}}</span>
+									has been a victim of
+									<span class="label category">{{report.category}}</span>
+									happened in
+									<span class="label location"><i class="icon-map-marker"></i> {{report.location_text}}</span>
+									on
+									<span class="label datetime">
+										<!--<a href="{% url 'reports:view' report.id %}" target="_blank">{{report.datetime}}</a>-->
+										<i class="icon-calendar"></i> {{report.datetime}}
+									</span>
+									{% if report.is_verified %}<span class="badge badge-success">Verified <i class="icon-ok"></i></span>{% endif %}
+									{% comment %}
+									{% if report.is_closed %}<span class="badge badge-important">Closed <i class="icon-lock"></i></span>{% endif %}
+									{% endcomment %}
+									<a class="btn btn-not" href="{% url 'reports:view' report.id %}" target="_blank" title="Click to view report">
+										<i class="icon-arrow-right icon-2x"></i>
+									</a>
 								</li>

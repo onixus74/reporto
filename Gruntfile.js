@@ -140,6 +140,13 @@ module.exports = function(grunt) {
 				options: {
 					nospawn: true
 				}
+			},
+			styles: {
+				files: ['reports/static/reports/styles/**/*.css', '!*.min.css', '!*.dist.css'],
+				tasks: ['compass:reports', 'cssmin:reports'],
+				options: {
+					nospawn: true
+				}
 			}
 		}
 

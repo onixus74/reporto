@@ -1,6 +1,6 @@
 {% extends "layouts/default.html" %}
 
-{% load static custom thumbnail compress %}
+{% load static custom thumbnail compress markup %}
 
 {% block view_title %}Report Details | {% endblock %}
 
@@ -68,7 +68,8 @@
 				<div class="span6">
 					<hr>
 					<h2><i class="icon-ellipsis-horizontal"></i> Description</h2>
-					{{report.description|urlize}}
+					<p>{{report.description|urlize}}</p>
+					{% if report.sources %}<p>Sources: {{report.sources|markdown}}</p>{% endif %}
 				</div>
 				<div class="span6">
 					<hr>
@@ -77,8 +78,11 @@
 					<ul class="thumbnails">
 						{% for media in report.media.all %}
 						<li class="span4_" style="display: inline-block; width: auto;">
-							<a class="thumbnail fancybox" href="{{media.file.url}}" target="_blank" rel="group">
-								<img src="{{ media.file|thumbnail_url:'report_comment' }}" alt="" style="height: 100px; width: auto;">
+							{% comment %}
+							<a class="thumbnail- fancybox" href="{% if media.is_file %}{{ media.file.url }}{% else %}{{media.url}}{% endif %}" target="_blank" rel="group">
+							{% endcomment %}
+							<a class="thumbnail- fancybox" href="{{media.url}}" target="_blank" rel="group">
+								<img src="{% if media.is_file %}{{ media.file|thumbnail_url:'media' }}{% elif media.is_youtube %}{{media.get_youtube_thumbnail}}{% else %}{{media.url}}{% endif %}" alt="" style="height: 100px; width: auto;" class="img-polaroid">
 							</a>
 						</li>
 						{% endfor %}
@@ -92,7 +96,7 @@
 			<div class="row-fluid">
 				<div class="offset2 span8">
 					<hr>
-					<h2><i class="icon-tag"></i> Features</h2>
+					<h2><i class="icon-tags"></i> Features</h2>
 					<ul class="inline">
 					{% for feature in report.features.all  %}
 						<li><span class="label">{{feature}}</span></li>
@@ -147,7 +151,8 @@
 	<!-- Map -->
 	<link rel="stylesheet" href="{% static 'components/leaflet/dist/leaflet.css' %}" />
 	<!-- Lightbox -->
-	<link rel="stylesheet" href="{% static 'components/fancybox/source/jquery.fancybox.css' %}" type="text/css" media="screen" />
+	<link rel="stylesheet" href="{% static 'components/fancybox/source/jquery.fancybox.css' %}" type="text/css" />
+	<link rel="stylesheet" href="{% static 'components/fancybox/source/helpers/jquery.fancybox-thumbs.css' %}" type="text/css" />
 	{% endcompress %}
 
 	{% compress css %}
@@ -163,6 +168,8 @@
 	<script src="{% static 'components/leaflet/dist/leaflet.js' %}"></script>
 	<!-- Lightbox -->
 	<script type="text/javascript" src="{% static 'components/fancybox/source/jquery.fancybox.js' %}"></script>
+	<script type="text/javascript" src="{% static 'components/fancybox/source/helpers/jquery.fancybox-media.js' %}"></script>
+	<script type="text/javascript" src="{% static 'components/fancybox/source/helpers/jquery.fancybox-thumbs.js' %}"></script>
 	{% endcompress %}
 
 	<script type="text/javascript">
@@ -181,8 +188,43 @@
 		});
 		*/
 		$(function(){
-			$(".fancybox").fancybox();
-		})
+
+			//$(".fancybox").fancybox();
+
+			$(".fancybox").fancybox({
+				helpers : {
+					media : {},
+					thumbs	: {
+						width	: 50,
+						height	: 50
+					},
+				}
+			});
+
+			$(".fancybox-thumb").fancybox({
+				prevEffect	: 'none',
+				nextEffect	: 'none',
+				helpers	: {
+					/*title	: {
+						type: 'outside'
+					},*/
+					thumbs	: {
+						width	: 50,
+						height	: 50
+					}
+				}
+			});
+
+			$('.fancybox-media').fancybox({
+				/*
+				openEffect  : 'none',
+				closeEffect : 'none',
+				*/
+				helpers : {
+					media : {}
+				}
+			});
+		});
 	</script>
 
 	{% compress js %}

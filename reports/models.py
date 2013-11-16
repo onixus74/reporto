@@ -8,7 +8,7 @@ from django.template.defaultfilters import slugify
 from django.utils.html import strip_tags
 from django.forms.models import model_to_dict
 from django.core.exceptions import ValidationError
-
+from urlparse import parse_qs
 
 class Category(models.Model):
 	slug       = models.SlugField(max_length=100, blank=True, null=True)
@@ -44,26 +44,57 @@ class Feature(models.Model):
 
 
 class Media(models.Model):
-
-	#title        = models.CharField(max_length=200)
-	#description  = models.TextField()
-	#url  = models.URLField(max_length=300)
-	file = models.FileField(upload_to='reports/')
+	IMAGE = 'I'
+	VIDEO = 'V'
+	TYPE = (
+		(IMAGE, "Image"),
+		(VIDEO, "Video"),
+	)
+	# title        = models.CharField(max, blank=True, null=True_length=200)
+	# description  = models.TextField()
+	url  = models.URLField(max_length=300)
+	file = models.FileField(upload_to='reports/', blank=True, null=True)
+	# video_thumbnail = models.ImageField(upload_to='reports/', blank=True, null=True)
+	# external = models.BooleanField()
 
 	def __unicode__(self):
-		return self.file.url
+		#return self.file.url
+		return self.url
 
-	# def save(self, *args, **kwargs):
-	# 	if self.file:
-	# 		self.url = self.file.url
-	# 	super(Media, self).save(*args, **kwargs)
+	# def clean(self):
+	# 	if not self.url:
+	# 		raise ValidationError('URL can not be empty.')
 
-	# def get_url(self):
-	# 	return self.url or self.file.url
+	def save(self, *args, **kwargs):
+		if self.file:
+			self.url = self.file.url
+		#else:
+		#	self.external = True
+		super(Media, self).save(*args, **kwargs)
+		#if self.file:
+		# 	self.url = self.file.url
+		# 	super(Media, self).save(*args, **kwargs)
+
+
+	def get_url(self):
+	 	return self.url or self.file.url
+
+	def is_file(self):
+		return self.file
+
+	def is_youtube(self):
+		return self.url.find('youtube.com') >= 0
+
+	def get_youtube_thumbnail(self):
+		qs = self.url.split('?')
+		video_id = parse_qs(qs[1])['v'][0]
+		return "http://img.youtube.com/vi/%s/1.jpg" % video_id
 
 	def serialize(self):
 		data = model_to_dict(self)
-		data['file'] = { 'url': self.file.url }
+		#data['file'] = { 'url': self.url }
+		data.pop('file')
+		data['url'] = self.url
 		return data
 
 
@@ -84,6 +115,7 @@ class Victim(models.Model):
 	)
 
 	UNKNOWN = '?'
+
 	NO_EDUCATION = 'NO'
 	PRIMARY_SCHOOL =  'PS'
 	HIGH_SCHOOL = 'HS'
@@ -96,27 +128,28 @@ class Victim(models.Model):
 		(UNIVERSITY, "University")
 	)
 
-	# POOR = ''
-	# MIDDLE = ''
-	# RICH = ''
-	# SOCIAL_STATUS = (
-	# 	(VALUE1, "VALUE1"),
-	# 	(VALUE1, "VALUE1"),
-	# 	(VALUE1, "VALUE1")
-	# )
+	LOWER = 'L'
+	MIDDLE = 'M'
+	UPPER = 'U'
+	SOCIAL_CLASS = (
+		(UNKNOWN, "Unknown"),
+		(LOWER, "Lower"),
+		(MIDDLE, "Middle"),
+		(UPPER, "Upper")
+	)
 
-	category    = models.CharField(max_length=3, choices=CATEGORY, default=CITIZEN)
-	firstname   = models.CharField(max_length=100)
-	lastname    = models.CharField(max_length=100)
-	gender      = models.CharField(max_length=1, choices=GENDER, default=MALE)
-	age         = models.PositiveIntegerField(blank=True, null=True)
-	education   = models.CharField(max_length=200, choices=EDUCATION, default=UNKNOWN)
-	profession  = models.CharField(max_length=200, blank=True, null=True)
-	# social_status  = models.CharField(max_length=200, choices=SOCIAL_STATUS, default=VALUE1)
-	phone       = models.CharField(max_length=20, blank=True, null=True, help_text="Victim's email address is a private information, it wont be shared or publicly accessible.")
-	email       = models.EmailField(blank=True, null=True, help_text="Victim's phone number is a private information, it wont be shared or publicly accessible.")
-	description = models.TextField(blank=True, null=True)
-	user        = models.ForeignKey(settings.AUTH_USER_MODEL, blank=True, null=True)
+	category     = models.CharField(max_length=3, choices=CATEGORY, default=CITIZEN)
+	firstname    = models.CharField(max_length=100)
+	lastname     = models.CharField(max_length=100)
+	gender       = models.CharField(max_length=1, choices=GENDER, default=MALE)
+	age          = models.PositiveIntegerField(blank=True, null=True)
+	education    = models.CharField(max_length=2, choices=EDUCATION, default=UNKNOWN)
+	social_class = models.CharField(max_length=2, choices=SOCIAL_CLASS, default=UNKNOWN)
+	profession   = models.CharField(max_length=200, blank=True, null=True)
+	phone        = models.CharField(max_length=20, blank=True, null=True, help_text="Victim's phone address is a private information, it wont be shared or publicly accessible.")
+	email        = models.EmailField(blank=True, null=True, help_text="Victim's email number is a private information, it wont be shared or publicly accessible.")
+	description  = models.TextField(blank=True, null=True)
+	user         = models.ForeignKey(settings.AUTH_USER_MODEL, blank=True, null=True)
 
 	def get_absolute_url(self):
 		return reverse('victims:view', kwargs={'pk': self.id})
@@ -200,7 +233,7 @@ class Report(models.Model):
 	aggressor_category = models.CharField(max_length=3, choices=CATEGORY, default=COP, blank=True)
 	description        = models.TextField()
 	media              = models.ManyToManyField(Media, blank=True, null=True)
-	#sources            = models.TextField(blank=True, null=True)
+	sources            = models.TextField(blank=True, null=True)
 	features           = models.ManyToManyField(Feature)
 	is_verified        = models.BooleanField()
 	is_closed          = models.BooleanField()
