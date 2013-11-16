@@ -92,7 +92,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 					</button>
-					<a class="brand" href="/">Reform</a>
+					<a class="brand" href="/"><img src="{% static 'reform-logo.png' %}" alt="Tunisian Institutional Reform | جمعية إصلاح المؤسسات"></a>
 					<div class="nav-collapse collapse">
 					<ul class="nav">
 						{% if user.is_authenticated %}
@@ -129,8 +129,8 @@
 							<b class="caret"></b>
 						</a>
 						{% if not user.is_authenticated %}
+						{% comment %}
 						<div class="dropdown-menu" style="padding: 15px; padding-bottom: 0px;">
-
 							<form action="{% url 'login' %}" method="post">
 								{% csrf_token %}
 								<input type="hidden" name="next" value="{{ next }}" />
@@ -143,11 +143,14 @@
 									{% render_field form.password placeholder="Password" required="required" %}
 								</div>
 								<div class="clearfix">
-									<button class="btn-inverse btn button pull-right" type="submit">Login</button>
+									<button class="btn-inverse btn button pull-right" type="submit">Register</button>
 								</div>
-
 							</form>
 						</div>
+						{% endcomment %}
+						<ul class="dropdown-menu">
+							<li><a href="{% url 'login' %}">Login</a></li>
+						</ul>
 						{% else %}
 						<ul class="dropdown-menu">
 							{% if user.is_authenticated %}
@@ -249,7 +252,7 @@
 <!-- View Scripts - END -->
 
 	{% if debug %}
-	<script src="{% static 'components/html-inspector/dist/html-inspector.js' %}"></script>
+	<script src="{% static 'components/html-inspector/html-inspector.js' %}"></script>
 	<script> HTMLInspector.inspect() </script>
 	{% endif %}
 

@@ -8,7 +8,7 @@ from django.http import HttpResponse, Http404
 from django.contrib.auth import authenticate, login, logout
 from django.views.decorators.http import require_POST
 from django.contrib.auth.views import redirect_to_login
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.decorators import login_required, user_passes_test, permission_required
 from django.contrib import messages
 from base.utils.views import JSONResponse
@@ -43,6 +43,27 @@ def home(request, *args, **kwargs):
 	else:
 		#return redirect_to_login(next[, login_url, redirect_field_name])
 		return redirect_to_login('/')
+
+class CustomUserCreationForm(UserCreationForm):
+
+    class Meta:
+        model = User
+        fields = ('email', 'first_name', 'last_name')
+
+
+def register_view(request, *args, **kwargs):
+	if request.user.is_authenticated():
+		return redirect('home')
+	form = CustomUserCreationForm(data = request.POST or None)
+	if form.is_valid():
+		user = form.get_user()
+		# if user.is_active:
+		# 	login(request, user)
+		# 	messages.success(request, 'Login succeeded.')
+		# 	return redirect(request.REQUEST.get('next', '/'))
+		# else:
+		# 	messages.warning(request, 'Sorry, your user account is inactive.')
+	return render(request, "register.html", {'form': form, 'next': request.REQUEST.get('next', '/')})
 
 
 def login_view(request, *args, **kwargs):
