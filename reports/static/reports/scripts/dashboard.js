@@ -146,7 +146,7 @@ reform.widgets.timeline = function() {
 
 $(document).ready(reform.widgets.timeline);
 
-
+/*
 reform.widgets.stats = function() {
 
 	var dates = reform.data.reportsByDate.map(function(o) {
@@ -175,10 +175,8 @@ reform.widgets.stats = function() {
 		element: 'ui-reports-dates-chart',
 		data: reform.data.reportsByDate,
 		xkey: 'date',
-		/*
-		ykeys: ['total'].concat(reform.data.categories),
-		labels: ['Total Reports'].concat(reform.data.categories),
-		*/
+		//ykeys: ['total'].concat(reform.data.categories),
+		//labels: ['Total Reports'].concat(reform.data.categories),
 		ykeys: ['total'],
 		labels: ['Total Reports'],
 		xLabelFormat: function(x) {
@@ -235,7 +233,8 @@ reform.widgets.stats = function() {
 	});
 };
 
-//$(document).ready(reform.widgets.stats);
+$(document).ready(reform.widgets.stats);
+*/
 
 !(function() {
 	var series = {};

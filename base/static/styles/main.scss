@@ -218,6 +218,10 @@ body {
 /* Landscape phones and down */
 @media (max-width: 480px) {
 
+	body {
+		padding-left: 0;
+		padding-right: 0;
+	}
 	.container.navbar-wrapper {
 		margin-bottom: 0;
 		width: auto;

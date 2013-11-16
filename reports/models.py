@@ -146,8 +146,8 @@ class Victim(models.Model):
 	education    = models.CharField(max_length=2, choices=EDUCATION, default=UNKNOWN)
 	social_class = models.CharField(max_length=2, choices=SOCIAL_CLASS, default=UNKNOWN)
 	profession   = models.CharField(max_length=200, blank=True, null=True)
-	phone        = models.CharField(max_length=20, blank=True, null=True, help_text="Victim's email address is a private information, it wont be shared or publicly accessible.")
-	email        = models.EmailField(blank=True, null=True, help_text="Victim's phone number is a private information, it wont be shared or publicly accessible.")
+	phone        = models.CharField(max_length=20, blank=True, null=True, help_text="Victim's phone address is a private information, it wont be shared or publicly accessible.")
+	email        = models.EmailField(blank=True, null=True, help_text="Victim's email number is a private information, it wont be shared or publicly accessible.")
 	description  = models.TextField(blank=True, null=True)
 	user         = models.ForeignKey(settings.AUTH_USER_MODEL, blank=True, null=True)
 

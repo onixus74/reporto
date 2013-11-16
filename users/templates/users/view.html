@@ -50,16 +50,14 @@
 {% block view_styles %}
 
 	{% compress css %}
-	<link rel="stylesheet" href="{% static 'dependencies/x-editable/dist/bootstrap-editable/css/bootstrap-editable.css' %}" />
+	<link rel="stylesheet" href="{% static 'components/x-editable/dist/bootstrap-editable/css/bootstrap-editable.css' %}" />
 	{% endcompress %}
-
-	<link rel="stylesheet" href="{% static '.css'%}" />
 
 {% endblock %}
 
 {% block view_scripts %}
 	{% compress js %}
-	<script src="{% static 'dependencies/x-editable/dist/bootstrap-editable/js/bootstrap-editable.js' %}"></script>
+	<script src="{% static 'components/x-editable/dist/bootstrap-editable/js/bootstrap-editable.js' %}"></script>
 	{% endcompress %}
 
 	<script type="text/javascript">
@@ -68,8 +66,6 @@
 		//reform.data.reports = {{reports|json}};
 		reform.urls.submit = {% url 'reports:submit' as submit_url %}{{submit_url|json}};
 	</script>
-
-	<script src="{% static '.js' %}"></script>
 
 	<script>
 	$.fn.editable.defaults.mode = 'inline';

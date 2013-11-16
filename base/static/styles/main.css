@@ -10802,23 +10802,29 @@ body {
 /* Landscape phones and down */
 @media (max-width: 480px) {
   /* line 221, main.scss */
+  body {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  /* line 225, main.scss */
   .container.navbar-wrapper {
     margin-bottom: 0;
     width: auto;
   }
 
-  /* line 226, main.scss */
+  /* line 230, main.scss */
   #footer {
     padding-left: 20px;
     padding-right: 20px;
   }
 
-  /* line 231, main.scss */
+  /* line 235, main.scss */
   .navbar-inner {
     margin: -20px;
   }
 
-  /* line 235, main.scss */
+  /* line 239, main.scss */
   #footer {
     padding-left: 20px;
     padding-right: 20px;
@@ -10857,7 +10863,7 @@ body {
 
 }
 */
-/* line 278, main.scss */
+/* line 282, main.scss */
 #mainView {
   position: fixed;
   z-index: 99999;
@@ -10875,7 +10881,7 @@ body {
 /*-------------------------------------------------
 | report-submit.scss
 \*/
-/* line 297, main.scss */
+/* line 301, main.scss */
 .report-incident-dialog {
   top: 10%;
   left: 10%;
@@ -10892,40 +10898,40 @@ body {
 	margin-bottom: 20px;
 }
 */
-/* line 326, main.scss */
+/* line 330, main.scss */
 .natural-language-form {
   /* placeholder */
 }
-/* line 328, main.scss */
+/* line 332, main.scss */
 .natural-language-form p.text {
   line-height: 2em;
   vertical-align: middle;
 }
-/* line 333, main.scss */
+/* line 337, main.scss */
 .natural-language-form input, .natural-language-form .natural-language-input {
   background: none;
   border: none;
   text-align: center;
 }
-/* line 340, main.scss */
+/* line 344, main.scss */
 .natural-language-form ::-webkit-input-placeholder {
   /* WebKit browsers */
   color: #999;
   text-align: center;
 }
-/* line 343, main.scss */
+/* line 347, main.scss */
 .natural-language-form :-moz-placeholder {
   /* Mozilla Firefox 4 to 18 */
   color: #999;
   text-align: center;
 }
-/* line 346, main.scss */
+/* line 350, main.scss */
 .natural-language-form ::-moz-placeholder {
   /* Mozilla Firefox 19+ */
   color: #999;
   text-align: center;
 }
-/* line 349, main.scss */
+/* line 353, main.scss */
 .natural-language-form :-ms-input-placeholder {
   /* Internet Explorer 10+ */
   color: #999;
@@ -10935,12 +10941,12 @@ body {
 /*-------------------------------------------------
 | FIXES
 \*/
-/* line 360, main.scss */
+/* line 364, main.scss */
 [hidden] {
   display: none;
 }
 
-/* line 362, main.scss */
+/* line 366, main.scss */
 .ui-pnotify .alert {
   margin-bottom: 0;
 }
@@ -10981,23 +10987,23 @@ body::-webkit-scrollbar-corner { background-clip: padding-box; background-color:
 ::-webkit-scrollbar-thumb { background-color: #DDD; }
 ::-webkit-scrollbar-thumb:hover { background-color: #999; }
 */
-/* line 407, main.scss */
+/* line 411, main.scss */
 ::-webkit-scrollbar {
   width: 4px;
 }
 
-/* line 408, main.scss */
+/* line 412, main.scss */
 ::-webkit-scrollbar-track {
   background: rgba(0, 0, 0, 0.1);
 }
 
-/* line 409, main.scss */
+/* line 413, main.scss */
 ::-webkit-scrollbar-thumb {
   background: rgba(0, 0, 0, 0.6);
   border-radius: 2px;
 }
 
-/* line 410, main.scss */
+/* line 414, main.scss */
 ::-webkit-scrollbar:horizontal {
   height: 4px;
 }
@@ -11005,7 +11011,7 @@ body::-webkit-scrollbar-corner { background-clip: padding-box; background-color:
 /*-------------------------------------------------
 | typeahead.js
 \*/
-/* line 420, main.scss */
+/* line 424, main.scss */
 .typeahead,
 .tt-query,
 .tt-hint {
@@ -11021,29 +11027,29 @@ body::-webkit-scrollbar-corner { background-clip: padding-box; background-color:
   outline: none;
 }
 
-/* line 433, main.scss */
+/* line 437, main.scss */
 .typeahead {
   background-color: #fff;
 }
 
-/* line 437, main.scss */
+/* line 441, main.scss */
 .typeahead:focus {
   border: 2px solid #0097cf;
 }
 
-/* line 441, main.scss */
+/* line 445, main.scss */
 .tt-query {
   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
 }
 
-/* line 445, main.scss */
+/* line 449, main.scss */
 .tt-hint {
   color: #999999;
 }
 
-/* line 449, main.scss */
+/* line 453, main.scss */
 .tt-dropdown-menu {
   width: 422px;
   margin-top: 12px;
@@ -11059,20 +11065,20 @@ body::-webkit-scrollbar-corner { background-clip: padding-box; background-color:
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
 }
 
-/* line 460, main.scss */
+/* line 464, main.scss */
 .tt-suggestion {
   padding: 3px 20px;
   font-size: 18px;
   line-height: 24px;
 }
 
-/* line 466, main.scss */
+/* line 470, main.scss */
 .tt-suggestion.tt-is-under-cursor {
   color: #fff;
   background-color: #0097cf;
 }
 
-/* line 472, main.scss */
+/* line 476, main.scss */
 .tt-suggestion p {
   margin: 0;
 }
