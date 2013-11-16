@@ -156,8 +156,11 @@ INSTALLED_APPS = (
 	'django.contrib.staticfiles',
 	'django.contrib.markup',
 
-	# 'suit', # theme for admin
+	# project components
+	'users',
 	'admin_mod',
+
+	# 'suit', # theme for admin
 	'django_admin_bootstrapped', # theme for admin
 	#'grappelli',
 	#'filebrowser',
@@ -166,7 +169,6 @@ INSTALLED_APPS = (
 
 	# project components
 	'base',
-	'users',
 	'reports',
 	'categories',
 	'features',

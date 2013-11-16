@@ -30,6 +30,13 @@
 			</div>
 			{% endif %}
 
+      <div class="jumbotron">
+        <h1>Reform Report Platform</h1>
+        <p class="lead">...</p>
+      </div>
+
+			<p class="lead">Start by signing in</p>
+
 			<form action="{% url 'login' %}" class="form-inline" method="post">
 				{% csrf_token %}
 				<div class="input-prepend">
@@ -42,9 +49,13 @@
 				</div>
 				<input type="hidden" name="next" value="{{ next }}" />
 				<input class="btn btn-primary" name="commit" type="submit" value="Login">
+
 			</form>
 
-			<p class="text-center">or register/login with <a href="{% url 'socialauth_begin' 'facebook' %}?next={{next}}" class="btn btn-primary" style="background-color: #3C5A99;"><i class="icon-facebook-sign"></i> Facebook</a> or with <a href="{% url 'socialauth_begin' 'google' %}?next={{next}}" class="btn btn-primary" style="background-color: #547DBF;"><i class="icon-google-plus-sign"></i> Google</a></p>
+			<p><a href="{% url 'socialauth_begin' 'facebook' %}?next={{next}}" class="btn btn-primary" style="background-color: #3C5A99;"><i class="icon-facebook-sign"></i> Facebook</a> <a href="{% url 'socialauth_begin' 'google' %}?next={{next}}" class="btn btn-primary" style="background-color: #547DBF;"><i class="icon-google-plus-sign"></i> Google</a></p>
+
+
+			<p class="text-center">or <a href="{% url 'register' %}?next={{next}}">register</a> using your <a href="{% url 'socialauth_begin' 'facebook' %}?next={{next}}"> Facebook</a> / <a href="{% url 'socialauth_begin' 'google' %}?next={{next}}">Google</a> account.</p>
 
 			<!--<p class="text-center">or <a href="/register">create an account</a></p>-->
 
