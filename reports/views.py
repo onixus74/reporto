@@ -49,10 +49,10 @@ class ReportsDashboard(PaginatedListHybridResponseMixin, ListView):
 		"""
 			Prepare context parameter 'reports_by_category' with the following structure
 			reports_by_category = [
-				{ 'label': 'Verbal Violence', 'value': 20 },
-				{ 'label': 'Violence', 'value': 10 },
-				{ 'label': 'Rape', 'value': 20 },
-				{ 'label': 'Lack of Investigation and Prosecution', 'value': 50 }
+				{ 'label': 'Verbal Violence', 'count': 20 },
+				{ 'label': 'Violence', 'count': 10 },
+				{ 'label': 'Rape', 'count': 20 },
+				{ 'label': 'Lack of Investigation and Prosecution', 'count': 50 }
 			]
 		"""
 		context = super(ReportsDashboard, self).get_context_data(**kwargs)
@@ -64,31 +64,30 @@ class ReportsDashboard(PaginatedListHybridResponseMixin, ListView):
 
 		else:
 
+			context['categories'] = [ category.__unicode__() for category in Category.objects.all() ]
+			context['features'] = [ feature.__unicode__() for feature in Feature.objects.all() ]
+
 			reports_by_category = Report.objects.values('category__definition').annotate(Count("id")).order_by('category__definition')
-			context['reports_by_category'] = [ { 'label': i['category__definition'], 'value': i['id__count'] } for i in reports_by_category ]
+			context['reports_by_category'] = [ { 'label': i['category__definition'], 'count': i['id__count'] } for i in reports_by_category ]
 
 			victim_gender_display = dict(Victim.GENDER)
 			reports_by_victim_gender = Report.objects.values('victim__gender').annotate(Count("id")).order_by('victim__gender')
-			context['reports_by_victim_gender'] = [ { 'label': victim_gender_display[i['victim__gender']], 'value': i['id__count'] } for i in reports_by_victim_gender ]
+			context['reports_by_victim_gender'] = [ { 'label': victim_gender_display[i['victim__gender']], 'count': i['id__count'] } for i in reports_by_victim_gender ]
 
 			victim_education_display = dict(Victim.EDUCATION)
 			reports_by_victim_education = Report.objects.values('victim__education').annotate(Count("id")).order_by('victim__education')
-			context['reports_by_victim_education'] = [ { 'label': victim_education_display[i['victim__education']], 'value': i['id__count'] } for i in reports_by_victim_education ]
+			context['reports_by_victim_education'] = [ { 'label': victim_education_display[i['victim__education']], 'count': i['id__count'] } for i in reports_by_victim_education ]
 
 			reports_by_feature = Report.objects.values('features__definition').annotate(Count("id")).order_by('features__definition')
 			context['reports_by_feature'] = [ { 'label': i['features__definition'], 'count': i['id__count'] } for i in reports_by_feature ]
 
 			reports_by_date = Report.objects.extra({'date' : "date(datetime)"}).values('date').annotate(Count('id')).order_by('date')
-			context['reports_by_date'] = [ { 'date': i['date'], 'total': i['id__count'] } for i in reports_by_date ]
+			context['reports_by_date'] = [ { 'date': i['date'], 'count': i['id__count'] } for i in reports_by_date ]
 
-			context['categories'] = [ category.__unicode__() for category in Category.objects.all() ]
-			context['features'] = [ feature.__unicode__() for feature in Feature.objects.all() ]
-
+			context['reports_by_category_by_date'] = {}
 			for category in Category.objects.all():
 				result = Report.objects.extra({'date' : "date(datetime)"}).filter(category=category).values('date').annotate(Count('id')).order_by('date')
-				result = [ { 'date': i['date'], category.__unicode__(): i['id__count'] } for i in result ]
-				if len(result) > 0:
-					context['reports_by_date'] = merge_lists(context['reports_by_date'], result, 'date')
+				context['reports_by_category_by_date'][category.__unicode__()] = [ { 'date': i['date'], 'count': i['id__count'] } for i in result ]
 
 		return context
 
@@ -571,21 +570,50 @@ def report_comment(request, pk, *args, **kwargs):
 		}, status=400)
 
 
-def statistics_reports_by_date(request, *args, **kwargs):
-	#data = Report.objects.get() # data request
+# def statistics_reports_by_date(request, *args, **kwargs):
+# 	response = {}
+
+# 	reports_by_date = Report.objects.extra({'date' : "date(datetime)"}).values('date').annotate(Count('id')).order_by('date')
+# 	response['All'] = [ { 'date': i['date'], 'count': i['id__count'] } for i in reports_by_date ]
+
+# 	for category in Category.objects.all():
+# 		result = Report.objects.extra({'date' : "date(datetime)"}).filter(category=category).values('date').annotate(Count('id')).order_by('date')
+# 		response[category.__unicode__()] = [ { 'date': i['date'], 'count': i['id__count'] } for i in result ]
+
+# 	return JSONResponse(response)
+
+
+def statistics(request, *args, **kwargs):
+	response = {}
+
+	response['categories'] = [ category.__unicode__() for category in Category.objects.all() ]
+	response['features'] = [ feature.__unicode__() for feature in Feature.objects.all() ]
+
+	response['reports_count'] = Report.objects.count()
+
+	reports_by_category = Report.objects.values('category__definition').annotate(Count("id")).order_by('category__definition')
+	response['reports_by_category'] = [ { 'label': i['category__definition'], 'count': i['id__count'] } for i in reports_by_category ]
+
+	victim_gender_display = dict(Victim.GENDER)
+	reports_by_victim_gender = Report.objects.values('victim__gender').annotate(Count("id")).order_by('victim__gender')
+	response['reports_by_victim_gender'] = [ { 'label': victim_gender_display[i['victim__gender']], 'count': i['id__count'] } for i in reports_by_victim_gender ]
+
+	victim_education_display = dict(Victim.EDUCATION)
+	reports_by_victim_education = Report.objects.values('victim__education').annotate(Count("id")).order_by('victim__education')
+	response['reports_by_victim_education'] = [ { 'label': victim_education_display[i['victim__education']], 'count': i['id__count'] } for i in reports_by_victim_education ]
+
+	reports_by_feature = Report.objects.values('features__definition').annotate(Count("id")).order_by('features__definition')
+	response['reports_by_feature'] = [ { 'label': i['features__definition'], 'count': i['id__count'] } for i in reports_by_feature ]
 
 	reports_by_date = Report.objects.extra({'date' : "date(datetime)"}).values('date').annotate(Count('id')).order_by('date')
-	reports_by_date = [ { 'date': i['date'], 'total': i['id__count'] } for i in reports_by_date ]
+	response['reports_by_date'] = [ { 'date': i['date'], 'count': i['id__count'] } for i in reports_by_date ]
 
+	response['reports_by_category_by_date'] = {}
 	for category in Category.objects.all():
 		result = Report.objects.extra({'date' : "date(datetime)"}).filter(category=category).values('date').annotate(Count('id')).order_by('date')
-		result = [ { 'date': i['date'], category.__unicode__(): i['id__count'] } for i in result ]
-		if len(result) > 0:
-			reports_by_date = merge_lists(reports_by_date, result, 'date')
+		response['reports_by_category_by_date'][category.__unicode__()] = [ { 'date': i['date'], 'count': i['id__count'] } for i in result ]
 
-	return JSONResponse(reports_by_date)
-
-
+	return JSONResponse(response)
 # CRUD
 
 

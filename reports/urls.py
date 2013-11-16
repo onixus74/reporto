@@ -24,7 +24,8 @@ urlpatterns = patterns('',
 	url(r'^(?P<pk>\d+)/comment$', login_required(report_comment),                   name='comment'),
 
 
-	url(r'^public/statistics/by-date$', statistics_reports_by_date,         name='public_statistics_reports_by_date'),
+	url(r'^public/statistics$', statistics,         name='public_statistics'),
+	#url(r'^public/statistics/by-date$', statistics_reports_by_date,         name='public_statistics_reports_by_date'),
 
 	url(r'^crud/(\.(?P<extension>(json)))?$',            administrator_required(ReportListHybridView.as_view()),   name='crud-list'),
 	url(r'^crud/new$',                                   administrator_required(ReportCreateView.as_view()),       name='crud-create'),

@@ -222,13 +222,14 @@
 
 	{% if report_list %}
 	<script type="text/javascript">
+		reform.data.categories = {{categories|json}}
+		reform.data.features = {{features|json}}
 		reform.data.reportsByCategory = {{reports_by_category|json}}
 		reform.data.reportsByFeature = {{reports_by_feature|json}}
 		reform.data.reportsByVictimGender = {{reports_by_victim_gender|json}}
 		reform.data.reportsByVictimEducation = {{reports_by_victim_education|json}}
 		reform.data.reportsByDate = {{reports_by_date|json}}
-		reform.data.categories = {{categories|json}}
-		reform.data.features = {{features|json}}
+		reform.data.reportsByCategoryByDate = {{reports_by_category_by_date|json}}
 		reform.data.timeline = {
 			pages: {{pages|json}},
 			current: {{current|json}},

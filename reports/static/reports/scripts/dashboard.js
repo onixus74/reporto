@@ -237,35 +237,45 @@ $(document).ready(reform.widgets.stats);
 */
 
 !(function() {
-	var series = {};
-	series['All Incidents'] = {
+
+	var series = [];
+
+	var serie = {
 		name: 'All Incidents',
-		data: [ /* [Date.UTC(1970,  9, 27), 0   ], ... */ ]
+		data: [],
+		lineWidth: 4,
 	};
-	reform.data.categories.forEach(function(category) {
-		series[category] = {
+	reform.data.reportsByDate.forEach(function(report) {
+		serie.data.push([new Date(report.date).getTime(), report.count]);
+	});
+	//serie.data.push([new Date().getTime(), 0]);
+	series.push(serie);
+
+	var dateMin = serie.data[0][0],
+		dateMax = serie.data[serie.data.length - 1][0];
+
+
+	Object.keys(reform.data.reportsByCategoryByDate).forEach(function(category) {
+		var serie = {
 			name: category,
 			data: []
 		};
-	});
-	reform.data.reportsByDate.sort(function(report1, report2) {
-		return report2.date < report1.date;
-	}).forEach(function(report) {
-		var date = new Date(report.date).getTime();
-		series['All Incidents'].data.push([date, report.total]);
-		reform.data.categories.forEach(function(category) {
-			series[category].data.push([date, report[category] || 0]);
+		reform.data.reportsByCategoryByDate[category].forEach(function(report) {
+			serie.data.push([new Date(report.date).getTime(), report.count]);
 		});
+		if (!serie.data[0] || serie.data[0][0] != dateMin)
+			serie.data.unshift([dateMin, 0]);
+		if (!serie.data[serie.data.length - 1] || serie.data[serie.data.length - 1][0] != dateMax)
+			serie.data.push([dateMax, 0]);
+		series.push(serie);
 	});
-	series = Object.keys(series).map(function(key) {
-		return series[key];
-	});
+
 	$(document).ready(function() {
 		console.log(series);
 
 		$('#ui-reports-dates-chart-highcharts').highcharts({
 			chart: {
-				type: 'spline',
+				type: 'line', //'spline',
 				zoomType: 'x',
 			},
 			title: {
@@ -307,7 +317,7 @@ $(document).ready(reform.widgets.stats);
 !(function() {
 
 	var data = reform.data.reportsByCategory.map(function(e) {
-		return [e.label, e.value]
+		return [e.label, e.count]
 	});
 
 	$(document).ready(function() {
@@ -353,7 +363,7 @@ $(document).ready(reform.widgets.stats);
 !(function() {
 
 	var data = reform.data.reportsByVictimGender.map(function(e) {
-		return [e.label, e.value]
+		return [e.label, e.count]
 	});
 
 	$(document).ready(function() {
@@ -398,7 +408,7 @@ $(document).ready(reform.widgets.stats);
 !(function() {
 
 	var data = reform.data.reportsByVictimEducation.map(function(e) {
-		return [e.label, e.value]
+		return [e.label, e.count]
 	});
 
 	$(document).ready(function() {
@@ -468,7 +478,9 @@ $(document).ready(reform.widgets.stats);
 			title: {
 				text: 'Incidents by Features'
 			},
-			legend: {enabled: false},
+			legend: {
+				enabled: false
+			},
 			xAxis: {
 				categories: features,
 				title: {
