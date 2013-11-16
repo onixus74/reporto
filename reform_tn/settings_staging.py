@@ -27,7 +27,7 @@ DATABASES['default'] = dj_database_url.config()
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
 # ALLOWED_HOSTS = ['localhost', 'nader-laptop.local', 'reform.tn', 'www.reform.tn', 'reporting.reform.tn', 'reform-tn-platform.herokuapp.com']
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['*','localhost', 'nader-laptop.local', 'reform.tn', 'www.reform.tn', 'reporting.reform.tn', 'reform-tn-platform.herokuapp.com', 'tunpixel.webfactional.com']
 # SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # Local time zone for this installation. Choices can be found here:
