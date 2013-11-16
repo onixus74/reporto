@@ -571,16 +571,19 @@ def report_comment(request, pk, *args, **kwargs):
 		}, status=400)
 
 
-def stats_xxx(request, *args, **kwargs):
+def statistics_reports_by_date(request, *args, **kwargs):
 	#data = Report.objects.get() # data request
-	response = {
-	 #'reports': data,
-	 'Verbal Vilence': 15,
-	 'Vilance': 10,
-	}
-	return JSONResponse(response)
 
+	reports_by_date = Report.objects.extra({'date' : "date(datetime)"}).values('date').annotate(Count('id')).order_by('date')
+	reports_by_date = [ { 'date': i['date'], 'total': i['id__count'] } for i in reports_by_date ]
 
+	for category in Category.objects.all():
+		result = Report.objects.extra({'date' : "date(datetime)"}).filter(category=category).values('date').annotate(Count('id')).order_by('date')
+		result = [ { 'date': i['date'], category.__unicode__(): i['id__count'] } for i in result ]
+		if len(result) > 0:
+			reports_by_date = merge_lists(reports_by_date, result, 'date')
+
+	return JSONResponse(reports_by_date)
 
 
 # CRUD
