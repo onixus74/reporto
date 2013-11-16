@@ -319,7 +319,9 @@ div.subnav {
     & > li > span {
       margin-right: 6px;
       color: $grayDark;
+    }
 
+		& > li > a {
       &:hover {
         background-color: $grayDarker;
         color: $white;

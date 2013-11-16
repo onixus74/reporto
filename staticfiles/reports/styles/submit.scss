@@ -36,6 +36,28 @@ body {
 	overflow: auto;
 }
 
+
+.bootstrap-select {
+	margin: 0px;
+}
+
+/* fix boostrap-select width */
+.bootstrap-select:not([class*="span"]) {
+	width: 100%;
+}
+
+/* fix boostrap-select colors in natural language form */
+.boostrap-select-fix {
+	background-color: transparent;
+	color: $grayDarker;
+	text-align: center;
+}
+
+.boostrap-select-fix .filter-option {
+	text-align: center;
+}
+
+
 #dateinput
 {
 	max-width: 600px;

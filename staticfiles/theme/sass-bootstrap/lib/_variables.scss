@@ -88,7 +88,7 @@ $tableBorder:                       #ddd; // table and cell border
 // Buttons
 // -------------------------
 $btnBackground:                     $grayLighter;
-$btnBackgroundHighlight:            darken($grayLighter, 15%);
+$btnBackgroundHighlight:            darken($grayLighter, 10%);
 $btnBorder:                         #bbb;
 
 $btnPrimaryBackground:              lighten($blueDark, 5%);
