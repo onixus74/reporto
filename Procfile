@@ -1,1 +1,1 @@
-web: gunicorn reform_tn.wsgi_staging
+web: python manage_staging.py runserver 5000

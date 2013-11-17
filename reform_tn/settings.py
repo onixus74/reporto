@@ -23,7 +23,7 @@ DATABASES = {
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = ['localhost', 'nader-laptop.local', 'reform.tn', 'www.reform.tn', 'reporting.reform.tn', 'reform-tn-platform.herokuapp.com']
+ALLOWED_HOSTS = ['localhost', 'nader-laptop.local', 'reform.tn', 'www.reform.tn', 'tunpixel.webfactional.com', 'reporting.reform.tn', 'reform-tn-platform.herokuapp.com']
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -326,3 +326,4 @@ SOCIAL_AUTH_PIPELINE = (
 	'social_auth.backends.pipeline.social.load_extra_data',
 	'social_auth.backends.pipeline.user.update_user_details'
 )
+
