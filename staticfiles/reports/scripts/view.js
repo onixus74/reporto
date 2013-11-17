@@ -7,21 +7,15 @@ reform.widgets.map.init = function() {
 
 	var widget = reform.widgets.map;
 
-	var location = reform.data.report.location.split(',');
-	location[0] = parseFloat(location[0], 10);
-	location[1] = parseFloat(location[1], 10);
-	console.log('location', location);
-
-	// create a map in the "map" div, set the view to a given place and zoom
 	var map = widget.object = L.map('map', {
-		center: new L.LatLng(location[0], location[1]),
+		center: new L.LatLng(reform.data.report.latitude, reform.data.report.longitude),
 		zoom: 8
 	});
 
 	// add an OpenStreetMap tile layer
 	L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png').addTo(map);
 
-	L.marker(location).addTo(map);
+	L.marker([reform.data.report.latitude, reform.data.report.longitude]).addTo(map);
 
 	L.control.scale().addTo(map);
 
@@ -94,7 +88,7 @@ reform.widgets.comment.init = function() {
 				"X-CSRFToken": csrf_token
 			}
 		}).done(function(data) {
-			//location.reload();
+			window.location.reload();
 			$('#ui-no-comments').remove();
 			comments.append(data.html);
 			comments.find(".fancybox").fancybox();
