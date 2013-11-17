@@ -13,7 +13,7 @@ node_modules
 *.sublime-*
 /reform_tn/development.sqlite3
 /reform_tn/media
-/base/static/components
+components
 .sass-cache
 *.orig
 /.project
