@@ -90,6 +90,8 @@ class ReportsDashboard(PaginatedListHybridResponseMixin, ListView):
 				result = Report.objects.extra({'date' : "date(datetime)"}).filter(category=category).values('date').annotate(Count('id')).order_by('date')
 				context['reports_by_category_by_date'][category.__unicode__()] = [ { 'date': i['date'], 'count': i['id__count'] } for i in result ]
 
+			context['reports_locations'] = Report.objects.values('latitude', 'longitude', 'category__definition')
+
 		return context
 
 
@@ -107,6 +109,12 @@ class ReportView(DetailHybridResponseMixin, DetailView):
 	""" """
 	model = Report
 	template_name = "reports/view.html"
+
+
+class ReportPartialView(DetailHybridResponseMixin, DetailView):
+	""" """
+	model = Report
+	template_name = "reports/view_partial.html"
 
 
 class ReportCreateForm(forms.ModelForm):

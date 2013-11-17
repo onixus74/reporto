@@ -223,10 +223,10 @@ class Report(models.Model):
 	)
 
 	datetime           = models.DateTimeField('date and time')
-	location           = models.CharField(max_length=100)
+	latitude           = models.FloatField()
+	longitude          = models.FloatField()
+	location           = models.CharField(max_length=100, blank=True, null=True)
 	location_text      = models.CharField(max_length=300)
-	#location_latitude  = models.FloatField()
-	#location_longitude = models.FloatField()
 	category           = models.ForeignKey(Category)
 	victim             = models.ForeignKey(Victim)
 	aggressor          = models.TextField(blank=True, null=True)

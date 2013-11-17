@@ -29,8 +29,8 @@
 					{% comment %}
 					{% if report.is_closed %}<span class="badge badge-important">Closed <i class="icon-lock"></i></span>{% endif %}
 					{% endcomment %}
-					<a class="btn btn-quiet" href="{% url 'reports:view' report.id %}" target="_blank" title="Click to view report">
-						<i class="icon-link"></i>
+					<a class="btn btn-not" href="{% url 'reports:view' report.id %}" target="_blank" title="Click to view report" _data-toggle="modal" _data-target="#ui-report-view-modal">
+						<i class="icon-external-link icon-large"></i>
 					</a>
 				</div>
 				{% endwith %}
@@ -190,11 +190,25 @@
 
 	</div>
 
+<!-- Modal -->
+<div id="ui-report-view-modal" class="modal modal-big hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">Report View</h3>
+  </div>
+  <div class="modal-body">
+    <p>...</p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-danger" data-dismiss="modal" aria-hidden="true">Close</button>
+  </div>
+</div>
 {% endblock %}
 
 {% block view_styles %}
 	{% compress css %}
 	<link rel="stylesheet" href="{% static 'components/leaflet/dist/leaflet.css'%}" />
+	<link rel="stylesheet" href="{% static 'components/leaflet.markerclusterer/dist/MarkerCluster.Default.css'%}" />
 	{% comment %}
 	<link rel="stylesheet" href="{% static 'components/morris.js/morris.css'%}" />
 	<link rel="stylesheet" href="{% static 'components/morris.js/morris.css'%}" />
@@ -212,6 +226,7 @@
 	{% compress js %}
 	<script src="{% static 'components/blockui/jquery.blockUI.js' %}"></script>
 	<script src="{% static 'components/leaflet/dist/leaflet.js' %}"></script>
+	<script src="{% static 'components/leaflet.markerclusterer/dist/leaflet.markercluster-src.js' %}"></script>
 	{% comment %}
 	<script src="{% static 'components/raphael/raphael.js' %}"></script>
 	<script src="{% static 'components/morris.js/morris.js' %}"></script>
@@ -230,6 +245,7 @@
 		reform.data.reportsByVictimEducation = {{reports_by_victim_education|json}}
 		reform.data.reportsByDate = {{reports_by_date|json}}
 		reform.data.reportsByCategoryByDate = {{reports_by_category_by_date|json}}
+		reform.data.reportsLocations = {{reports_locations|json}}
 		reform.data.timeline = {
 			pages: {{pages|json}},
 			current: {{current|json}},
