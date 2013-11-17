@@ -277,6 +277,7 @@
 	<script type="text/javascript">$.blockUI.defaults.baseZ = 800;</script>
 	<!-- Map -->
 	<script src="{% static 'components/leaflet/dist/leaflet.js' %}"></script>
+	<script type="text/javascript">L.Icon.Default.imagePath = "{% static 'components/leaflet/dist/images' %}";</script>
 	<script src="{% static 'dependencies/L.GeoSearch/src/js/l.control.geosearch.js' %}"></script>
 	<script src="{% static 'dependencies/L.GeoSearch/src/js/l.geosearch.provider.google.js' %}"></script>
 	<!-- file upload -->
