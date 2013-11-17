@@ -226,6 +226,7 @@
 	{% compress js %}
 	<script src="{% static 'components/blockui/jquery.blockUI.js' %}"></script>
 	<script src="{% static 'components/leaflet/dist/leaflet.js' %}"></script>
+	<script type="text/javascript">L.Icon.Default.imagePath = "{% static 'components/leaflet/dist/images' %}";</script>
 	<script src="{% static 'components/leaflet.markerclusterer/dist/leaflet.markercluster-src.js' %}"></script>
 	{% comment %}
 	<script src="{% static 'components/raphael/raphael.js' %}"></script>

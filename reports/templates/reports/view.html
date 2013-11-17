@@ -37,6 +37,7 @@
 	{% compress js %}
 	<!-- Map -->
 	<script src="{% static 'components/leaflet/dist/leaflet.js' %}"></script>
+	<script type="text/javascript">L.Icon.Default.imagePath = "{% static 'components/leaflet/dist/images' %}";</script>
 	<!-- Lightbox -->
 	<script type="text/javascript" src="{% static 'components/fancybox/source/jquery.fancybox.js' %}"></script>
 	<script type="text/javascript" src="{% static 'components/fancybox/source/helpers/jquery.fancybox-media.js' %}"></script>
