@@ -24,6 +24,7 @@ from django.contrib.auth.decorators import login_required, permission_required
 from django.views.generic.base import View
 from django.views.generic import FormView, ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.decorators.http import require_http_methods
 
 from base.utils.views import JSONResponse, JSONDataView, ListHybridResponseMixin, PaginatedListHybridResponseMixin, DetailHybridResponseMixin, AjaxableResponseMixin
 
@@ -583,37 +584,45 @@ def report_comment(request, pk, *args, **kwargs):
 # 	return JSONResponse(response)
 
 
+@require_http_methods(["OPTIONS", "GET"])
 def statistics(request, *args, **kwargs):
-	response = {}
+	if request.method == 'OPTIONS':
+		response = HttpResponse()
+	else:
+		response = {}
 
-	response['categories'] = [ category.__unicode__() for category in Category.objects.all() ]
-	response['features'] = [ feature.__unicode__() for feature in Feature.objects.all() ]
+		response['categories'] = [ category.__unicode__() for category in Category.objects.all() ]
+		response['features'] = [ feature.__unicode__() for feature in Feature.objects.all() ]
 
-	response['reports_count'] = Report.objects.count()
+		response['reports_count'] = Report.objects.count()
 
-	reports_by_category = Report.objects.values('category__definition').annotate(Count("id")).order_by('category__definition')
-	response['reports_by_category'] = [ { 'label': i['category__definition'], 'count': i['id__count'] } for i in reports_by_category ]
+		reports_by_category = Report.objects.values('category__definition').annotate(Count("id")).order_by('category__definition')
+		response['reports_by_category'] = [ { 'label': i['category__definition'], 'count': i['id__count'] } for i in reports_by_category ]
 
-	victim_gender_display = dict(Victim.GENDER)
-	reports_by_victim_gender = Report.objects.values('victim__gender').annotate(Count("id")).order_by('victim__gender')
-	response['reports_by_victim_gender'] = [ { 'label': victim_gender_display[i['victim__gender']], 'count': i['id__count'] } for i in reports_by_victim_gender ]
+		victim_gender_display = dict(Victim.GENDER)
+		reports_by_victim_gender = Report.objects.values('victim__gender').annotate(Count("id")).order_by('victim__gender')
+		response['reports_by_victim_gender'] = [ { 'label': victim_gender_display[i['victim__gender']], 'count': i['id__count'] } for i in reports_by_victim_gender ]
 
-	victim_education_display = dict(Victim.EDUCATION)
-	reports_by_victim_education = Report.objects.values('victim__education').annotate(Count("id")).order_by('victim__education')
-	response['reports_by_victim_education'] = [ { 'label': victim_education_display[i['victim__education']], 'count': i['id__count'] } for i in reports_by_victim_education ]
+		victim_education_display = dict(Victim.EDUCATION)
+		reports_by_victim_education = Report.objects.values('victim__education').annotate(Count("id")).order_by('victim__education')
+		response['reports_by_victim_education'] = [ { 'label': victim_education_display[i['victim__education']], 'count': i['id__count'] } for i in reports_by_victim_education ]
 
-	reports_by_feature = Report.objects.values('features__definition').annotate(Count("id")).order_by('features__definition')
-	response['reports_by_feature'] = [ { 'label': i['features__definition'], 'count': i['id__count'] } for i in reports_by_feature ]
+		reports_by_feature = Report.objects.values('features__definition').annotate(Count("id")).order_by('features__definition')
+		response['reports_by_feature'] = [ { 'label': i['features__definition'], 'count': i['id__count'] } for i in reports_by_feature ]
 
-	reports_by_date = Report.objects.extra({'date' : "date(datetime)"}).values('date').annotate(Count('id')).order_by('date')
-	response['reports_by_date'] = [ { 'date': i['date'], 'count': i['id__count'] } for i in reports_by_date ]
+		reports_by_date = Report.objects.extra({'date' : "date(datetime)"}).values('date').annotate(Count('id')).order_by('date')
+		response['reports_by_date'] = [ { 'date': i['date'], 'count': i['id__count'] } for i in reports_by_date ]
 
-	response['reports_by_category_by_date'] = {}
-	for category in Category.objects.all():
-		result = Report.objects.extra({'date' : "date(datetime)"}).filter(category=category).values('date').annotate(Count('id')).order_by('date')
-		response['reports_by_category_by_date'][category.__unicode__()] = [ { 'date': i['date'], 'count': i['id__count'] } for i in result ]
+		response['reports_by_category_by_date'] = {}
+		for category in Category.objects.all():
+			result = Report.objects.extra({'date' : "date(datetime)"}).filter(category=category).values('date').annotate(Count('id')).order_by('date')
+			response['reports_by_category_by_date'][category.__unicode__()] = [ { 'date': i['date'], 'count': i['id__count'] } for i in result ]
 
-	return JSONResponse(response)
+		response = JSONResponse(response)
+
+	response['Access-Control-Allow-Origin'] = '*'
+	return response
+
 # CRUD
 
 
