@@ -12,7 +12,6 @@ local_settings.py
 node_modules
 *.sublime-*
 /reform_tn/development.sqlite3
-/reform_tn/static
 /reform_tn/media
 components
 .sass-cache
