@@ -3,8 +3,8 @@
 import os
 PROJECT_DIR=os.path.dirname(__file__)
 
-#DEBUG = True # !DEV!
-DEBUG = False # !PROD!
+DEBUG = True # !DEV!
+#DEBUG = False # !PROD!
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
@@ -44,6 +44,7 @@ LANGUAGES = (
 	('en', 'English'),
 	('fr', 'French'),
 	('ar', 'Arabic'),
+	#('ar-tn', 'Tounsi'),
 )
 
 SITE_ID = 2
@@ -333,3 +334,4 @@ SOCIAL_AUTH_PIPELINE = (
 	'social_auth.backends.pipeline.social.load_extra_data',
 	'social_auth.backends.pipeline.user.update_user_details'
 )
+

@@ -26,8 +26,8 @@ DATABASES['default'] = dj_database_url.config()
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
-# ALLOWED_HOSTS = ['localhost', 'nader-laptop.local', 'reform.tn', 'www.reform.tn', 'reporting.reform.tn', 'reform-tn-platform.herokuapp.com']
-ALLOWED_HOSTS = ['*','localhost', 'nader-laptop.local', 'reform.tn', 'www.reform.tn', 'reporting.reform.tn', 'reform-tn-platform.herokuapp.com', 'tunpixel.webfactional.com']
+# ALLOWED_HOSTS = ['localhost', 'nader-laptop.local', 'reform.tn', 'www.reform.tn', 'tunpixel.webfactional.com', 'reporting.reform.tn', 'reform-tn-platform.herokuapp.com']
+ALLOWED_HOSTS = ['*']
 # SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # Local time zone for this installation. Choices can be found here:
@@ -44,18 +44,18 @@ LANGUAGES = (
 	('en', 'English'),
 	('fr', 'French'),
 	('ar', 'Arabic'),
-	('ar-tn', 'Tounsi'),
+	#('ar-tn', 'Tounsi'),
 )
 
 SITE_ID = 2
 
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
-USE_I18N = True
+USE_I18N = False
 
 # If you set this to False, Django will not format dates, numbers and
 # calendars according to the current locale.
-USE_L10N = True
+USE_L10N = False
 
 # If you set this to False, Django will not use timezone-aware datetimes.
 USE_TZ = False
@@ -155,9 +155,13 @@ INSTALLED_APPS = (
 	'django.contrib.sites',
 	'django.contrib.messages',
 	'django.contrib.staticfiles',
+	'django.contrib.markup',
+
+	# project components
+	'users',
+	'admin_mod',
 
 	# 'suit', # theme for admin
-	'admin_mod',
 	'django_admin_bootstrapped', # theme for admin
 	#'grappelli',
 	#'filebrowser',
@@ -166,7 +170,6 @@ INSTALLED_APPS = (
 
 	# project components
 	'base',
-	'users',
 	'reports',
 	'categories',
 	'features',
@@ -256,9 +259,9 @@ AUTH_USER_MODEL = 'users.User'
 
 INSTALLED_APPS += ('debug_toolbar',) # !DEV!
 INTERNAL_IPS = ('127.0.0.1','127.0.1.1')
-DEBUG_TOOLBAR_CONFIG = {
-  'INTERCEPT_REDIRECTS': False
-}
+# DEBUG_TOOLBAR_CONFIG = {
+#   'INTERCEPT_REDIRECTS': False
+# }
 
 INSTALLED_APPS += ('south',)
 
@@ -331,3 +334,4 @@ SOCIAL_AUTH_PIPELINE = (
 	'social_auth.backends.pipeline.social.load_extra_data',
 	'social_auth.backends.pipeline.user.update_user_details'
 )
+
