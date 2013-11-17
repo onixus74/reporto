@@ -2,6 +2,7 @@
 
 import os
 PROJECT_DIR=os.path.dirname(__file__)
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 DEBUG = True # !DEV!
 #DEBUG = False # !PROD!
@@ -14,21 +15,16 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
-# DATABASES = {
-# 	'default': {
-# 		'ENGINE': 'django.db.backends.sqlite3',
-# 		'NAME': 'reform_tn/development.sqlite3',
-# 	}
-# }
-DATABASES = {}
-import dj_database_url
-DATABASES['default'] = dj_database_url.config()
+DATABASES = {
+	'default': {
+		'ENGINE': 'django.db.backends.sqlite3',
+		'NAME': 'reform_tn/development.sqlite3',
+	}
+}
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
-# ALLOWED_HOSTS = ['localhost', 'nader-laptop.local', 'reform.tn', 'www.reform.tn', 'tunpixel.webfactional.com', 'reporting.reform.tn', 'reform-tn-platform.herokuapp.com']
-ALLOWED_HOSTS = ['*']
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+ALLOWED_HOSTS = ['localhost', 'nader-laptop.local', 'reform.tn', 'www.reform.tn', 'tunpixel.webfactional.com', 'reporting.reform.tn', 'reform-tn-platform.herokuapp.com']
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -47,7 +43,7 @@ LANGUAGES = (
 	#('ar-tn', 'Tounsi'),
 )
 
-SITE_ID = 2
+SITE_ID = 1
 
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
@@ -81,7 +77,7 @@ DATETIME_INPUT_FORMATS = (
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/var/www/example.com/media/"
-MEDIA_ROOT = os.path.join(PROJECT_DIR,'media/')
+MEDIA_ROOT = os.path.join(PROJECT_DIR, 'media/')
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
@@ -92,7 +88,7 @@ MEDIA_URL = '/media/'
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/var/www/example.com/static/"
-# STATIC_ROOT = os.path.join(PROJECT_DIR,'static/')
+#STATIC_ROOT = os.path.join(PROJECT_DIR, 'static/')
 STATIC_ROOT = 'staticfiles'
 
 # URL prefix for static files.
@@ -100,11 +96,11 @@ STATIC_ROOT = 'staticfiles'
 STATIC_URL = '/static/'
 
 # Additional locations of static files
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 STATICFILES_DIRS = (
 	# Put strings here, like "/home/html/static" or "C:/www/django/static".
 	# Always use forward slashes, even on Windows.
 	# Don't forget to use absolute paths, not relative paths.
+	#os.path.join(PROJECT_DIR, 'staticfiles'),
 	os.path.join(BASE_DIR, 'static'),
 )
 
@@ -128,6 +124,8 @@ TEMPLATE_LOADERS = (
 )
 
 MIDDLEWARE_CLASSES = (
+	'django.middleware.gzip.GZipMiddleware',
+	'htmlmin.middleware.HtmlMinifyMiddleware',
 	'django.middleware.common.CommonMiddleware',
 	'django.contrib.sessions.middleware.SessionMiddleware',
 	'django.middleware.csrf.CsrfViewMiddleware',
@@ -140,7 +138,7 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'reform_tn.urls'
 
 # Python dotted path to the WSGI application used by Django's runserver.
-WSGI_APPLICATION = 'reform_tn.wsgi_staging.application'
+WSGI_APPLICATION = 'reform_tn.wsgi.application'
 
 TEMPLATE_DIRS = (
 	# Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
@@ -313,7 +311,7 @@ SOCIAL_AUTH_USERNAME_IS_FULL_EMAIL = True
 SOCIAL_AUTH_PROTECTED_USER_FIELDS = ['email', 'username', 'first_name', 'last_name']
 SOCIAL_AUTH_FIELDS_STORED_IN_SESSION = ['next',]
 
-SOCIAL_AUTH_REDIRECT_IS_HTTPS = True
+#SOCIAL_AUTH_REDIRECT_IS_HTTPS = True
 
 from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS
 
