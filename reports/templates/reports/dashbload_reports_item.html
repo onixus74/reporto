@@ -1,6 +1,9 @@
-								<li class="ui-timeline-story" data-latlng="{{report.location}}">
-									<a class="btn btn-not ui-timeline-story-locator" title="Click to locate incident">
-										<i class="icon-map-marker icon-2x"></i>
+								<li class="ui-timeline-story" data-latitude="{{report.latitude}}" data-longitude="{{report.longitude}}">
+									<a class="btn btn-not ui-timeline-story-locator pull-left" title="Click to locate incident" href="https://maps.google.com/?q={{report.latitude}},{{report.longitude}}" target="_blank">
+										<i class="icon-map-marker icon-large"></i>
+									</a>
+									<a class="btn btn-not pull-right" href="{% url 'reports:view' report.id %}" target="_blank" title="Click to view report" _data-toggle="modal" _data-target="#ui-report-view-modal">
+										<i class="icon-external-link icon-large"></i>
 									</a>
 									<span class="label victim"><i class="icon-user"></i> {{report.victim}}</span>
 									has been a victim of
@@ -16,7 +19,4 @@
 									{% comment %}
 									{% if report.is_closed %}<span class="badge badge-important">Closed <i class="icon-lock"></i></span>{% endif %}
 									{% endcomment %}
-									<a class="btn btn-not" href="{% url 'reports:view' report.id %}" target="_blank" title="Click to view report">
-										<i class="icon-arrow-right icon-2x"></i>
-									</a>
 								</li>

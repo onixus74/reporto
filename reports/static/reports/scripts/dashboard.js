@@ -14,6 +14,14 @@ reform.widgets.map = function() {
 	// add an OpenStreetMap tile layer
 	L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png').addTo(map);
 
+	var markers = new L.MarkerClusterGroup();
+	markers.addLayers(reform.data.reportsLocations.map(function(loc){
+		var marker = L.marker(L.latLng(loc.latitude, loc.longitude), { title: loc.category__definition });
+		marker.bindPopup(loc.category__definition);
+		return marker;
+	}));
+	map.addLayer(markers);
+
 };
 
 $(document).ready(reform.widgets.map);
@@ -38,8 +46,11 @@ reform.widgets.timeline = function() {
 			e.stopPropagation();
 			e.preventDefault();
 			console.log(marker, e.target, e.currentTarget, e.relatedTarget, e.delegateTarget);
-			var loc = $(e.target).closest('li').data('latlng').split(',');
-			loc = new L.LatLng(loc[0], loc[1]);
+			//var loc = $(e.target).closest('li').data('latlng').split(',');
+			//loc = new L.LatLng(loc[0], loc[1]);
+			var li = $(e.target).closest('li');
+			var loc = new L.LatLng(li.data('latitude'), li.data('longitude'));
+			/*
 			if (!marker) {
 				console.log(loc);
 				marker = L.marker(loc);
@@ -48,6 +59,7 @@ reform.widgets.timeline = function() {
 			} else {
 				marker.setLatLng(loc);
 			}
+			*/
 			reform.widgets.map.setView(loc, 12);
 		});
 	}

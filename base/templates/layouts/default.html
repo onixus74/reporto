@@ -6,7 +6,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<title>{% block view_title %}{% endblock %}Reform</title>
+	<title>{% block view_title %}{% endblock %}Reform Reporting Platform</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width">
 
@@ -80,9 +80,9 @@
 	<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 	<![endif]-->
 
-	<div id="top-bg" style="z-index: 1100;"></div>
+	<div id="top-bg" style="z-index: 900;"></div>
 
-	<div class="navbar-wrapper" style="z-index: 1101;">
+	<div class="navbar-wrapper" style="z-index: 901;">
 		<div class="container">
 			<div class="navbar">
 				<div class="navbar-inner">
@@ -231,8 +231,6 @@
 	<script src="{% static 'components/bootstrap-select/bootstrap-select.js' %}"></script>
 
 	<script src="{% static 'components/pines-notify/jquery.pnotify.js' %}"></script>
-	{% endcompress %}
-
 	<script type="text/javascript">
 		$.pnotify.defaults.styling = "bootstrap";
 		$.pnotify.defaults.opacity = 0.9;
@@ -244,6 +242,8 @@
 			//$('select').selectpicker();
 		});
 	</script>
+	{% endcompress %}
+
 {% endblock %}
 <!-- Layout Scripts Dependencies - END -->
 

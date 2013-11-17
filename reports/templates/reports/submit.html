@@ -74,7 +74,8 @@
 						<div class="span6">
 							<h2><i class="icon-map-marker"></i> Location</h2>
 							<div id="map" style="width:100%; height: 300px"></div>
-							<!--<input type="text" name="location" id="id_location">-->
+							{% render_field form.latitude type="hidden" %}
+							{% render_field form.longitude type="hidden" %}
 							{% render_field form.location type="hidden" %}
 							<div class="input-prepend" style="display: block; margin-top: 10px; margin-bottom: 0; text-align: center;">
 								<span class="add-on" style="width: 20%;"> <i class="icon-map-marker icon-large"></i> </span>
@@ -271,7 +272,9 @@
 
 {% block view_scripts %}
 	{% compress js %}
+	<!-- UI Block -->
 	<script src="{% static 'components/blockui/jquery.blockUI.js' %}"></script>
+	<script type="text/javascript">$.blockUI.defaults.baseZ = 800;</script>
 	<!-- Map -->
 	<script src="{% static 'components/leaflet/dist/leaflet.js' %}"></script>
 	<script src="{% static 'dependencies/L.GeoSearch/src/js/l.control.geosearch.js' %}"></script>
@@ -279,7 +282,7 @@
 	<!-- file upload -->
 	<script src="{% static 'components/dropzone/downloads/dropzone.js' %}"></script>
 	<!--<script src="{% static 'components/typeahead.js/dist/typeahead.js' %}"></script>-->
-
+	<!-- date input -->
 	<script src="{% static 'components/lodash/dist/lodash.js' %}"></script>
 	<script src="{% static 'components/momentjs/moment.js' %}"></script>
 	<script src="{% static 'components/CLNDR/clndr.js' %}"></script>

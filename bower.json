@@ -38,7 +38,8 @@
     "x-editable": "~1.5.1",
     "bootstrap-multiselect": "~0.9.1",
     "blockui": "*",
-    "highcharts.com": "~3.0.7"
+    "highcharts.com": "~3.0.7",
+    "leaflet.markerclusterer": "*"
   },
   "devDependencies": {
     "html-inspector": "~0.3.0"

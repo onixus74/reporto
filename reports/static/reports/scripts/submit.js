@@ -43,22 +43,9 @@ reform.widgets.map.init = function() {
 
 	var marker;
 
-	var location = $('#id_location');
-	var location_text = $('#id_location_text');
-	var loc = location.val();
-	console.log('widget', 'map', 'location', loc);
-	if (loc) {
-		loc = loc.split(',');
-		var lat = parseFloat(loc[0]),
-			lng = parseFloat(loc[1]);
-		console.log('widget', 'map', 'latlng', loc, lat, lng);
-		var latlng = new L.LatLng(lat, lng);
-		console.log('widget', 'map', 'latlng', latlng);
-		marker = L.marker(latlng, {
-			draggable: true
-		});
-		marker.addTo(map);
-	}
+	var latitude_input = $('#id_latitude');
+	var longitude_input = $('#id_longitude');
+	var location_input = $('#id_location');
 
 	map.on('click ', function map_click(e) {
 		console.log('widget', 'map', 'latlng', e.latlng);
@@ -69,15 +56,17 @@ reform.widgets.map.init = function() {
 			marker.addTo(map);
 			marker.on('dragend', function(e) {
 				var value = '' + e.target._latlng.lat + ',' + e.target._latlng.lng;
-				console.log('widget', 'map', 'latlng', e.target._latlng, value);
-				location.val(value).change();
+				latitude_input.val(e.target._latlng.lat);
+				longitude_input.val(e.target._latlng.lng);
+				location_input.val(value).change();
 			});
 		} else {
 			console.log('widget', 'map', 'marker', marker);
 			marker.setLatLng(e.latlng);
 		}
-
-		location.val('' + e.latlng.lat + ',' + e.latlng.lng).change();
+		latitude_input.val(e.latlng.lat);
+		longitude_input.val(e.latlng.lng);
+		location_input.val('' + e.latlng.lat + ',' + e.latlng.lng).change();
 	});
 
 };
@@ -303,14 +292,12 @@ reform.widgets.wizard.init = function() {
 
 	/* location-datetime section */
 
+	elements.latitude = $('#id_latitude');
+	elements.longitude = $('#id_longitude');
 	elements.location = $('#id_location');
-
 	elements.location_text = $('#id_location_text');
-
 	elements.datetime = $('#id_datetime');
-
 	elements.date = $('#id_date');
-
 	elements.time = $('#id_time');
 
 	/*
@@ -463,8 +450,7 @@ reform.widgets.wizard.init = function() {
 	$('#report-form').on('submit', function(e) {
 		e.preventDefault();
 		$('.report-incident-form').block({
-			message: '<h3>Processing ...</h3>',
-			//css: { border: '3px solid #a00' }
+			message: '<h3>Processing ...</h3>'
 		});
 
 		var data = {};
@@ -619,7 +605,6 @@ reform.widgets.similarReports.init = function() {
 
 		$('#ui-reports-list').block({
 			message: 'Loading ...',
-			//css: { border: '3px solid #a00' }
 		});
 		$.ajax({
 			type: "POST",
