@@ -30,7 +30,8 @@
 	{% endcompress %}
 
 	{% compress js %}
-	<script src="{% static 'components/modernizr/modernizr.js' %}"></script>
+	{% comment %}<script src="{% static 'components/modernizr/modernizr.js' %}"></script>{% endcomment %}
+	<script src="{% static 'scripts/modernizr.js' %}"></script>
 	{% endcompress %}
 
 	{% if debug %}
