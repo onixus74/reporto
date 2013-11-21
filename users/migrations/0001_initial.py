@@ -10,25 +10,38 @@ class Migration(SchemaMigration):
     def forwards(self, orm):
         # Adding model 'User'
         db.create_table(u'users_user', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('password', self.gf('django.db.models.fields.CharField')(max_length=128)),
-            ('last_login', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime.now)),
-            ('is_superuser', self.gf('django.db.models.fields.BooleanField')(default=False)),
-            ('username', self.gf('django.db.models.fields.CharField')(max_length=30, unique=True, null=True, blank=True)),
-            ('first_name', self.gf('django.db.models.fields.CharField')(max_length=30)),
-            ('last_name', self.gf('django.db.models.fields.CharField')(max_length=30)),
-            ('email', self.gf('django.db.models.fields.EmailField')(unique=True, max_length=75)),
-            ('is_staff', self.gf('django.db.models.fields.BooleanField')(default=False)),
-            ('is_active', self.gf('django.db.models.fields.BooleanField')(default=True)),
-            ('date_joined', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime.now)),
-            ('role', self.gf('django.db.models.fields.CharField')(default='R', max_length=1)),
+            (u'id', self.gf('django.db.models.fields.AutoField')
+             (primary_key=True)),
+            ('password', self.gf('django.db.models.fields.CharField')
+             (max_length=128)),
+            ('last_login', self.gf('django.db.models.fields.DateTimeField')
+             (default=datetime.datetime.now)),
+            ('is_superuser', self.gf('django.db.models.fields.BooleanField')
+             (default=False)),
+            ('username', self.gf('django.db.models.fields.CharField')
+             (max_length=30, unique=True, null=True, blank=True)),
+            ('first_name', self.gf('django.db.models.fields.CharField')
+             (max_length=30)),
+            ('last_name', self.gf('django.db.models.fields.CharField')
+             (max_length=30)),
+            ('email', self.gf('django.db.models.fields.EmailField')
+             (unique=True, max_length=75)),
+            ('is_staff', self.gf('django.db.models.fields.BooleanField')
+             (default=False)),
+            ('is_active', self.gf('django.db.models.fields.BooleanField')
+             (default=True)),
+            ('date_joined', self.gf('django.db.models.fields.DateTimeField')
+             (default=datetime.datetime.now)),
+            ('role', self.gf('django.db.models.fields.CharField')
+             (default='R', max_length=1)),
         ))
         db.send_create_signal(u'users', ['User'])
 
         # Adding M2M table for field groups on 'User'
         m2m_table_name = db.shorten_name(u'users_user_groups')
         db.create_table(m2m_table_name, (
-            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
+            ('id', models.AutoField(verbose_name='ID',
+             primary_key=True, auto_created=True)),
             ('user', models.ForeignKey(orm[u'users.user'], null=False)),
             ('group', models.ForeignKey(orm[u'auth.group'], null=False))
         ))
@@ -37,12 +50,13 @@ class Migration(SchemaMigration):
         # Adding M2M table for field user_permissions on 'User'
         m2m_table_name = db.shorten_name(u'users_user_user_permissions')
         db.create_table(m2m_table_name, (
-            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
+            ('id', models.AutoField(verbose_name='ID',
+             primary_key=True, auto_created=True)),
             ('user', models.ForeignKey(orm[u'users.user'], null=False)),
-            ('permission', models.ForeignKey(orm[u'auth.permission'], null=False))
+            ('permission',
+             models.ForeignKey(orm[u'auth.permission'], null=False))
         ))
         db.create_unique(m2m_table_name, ['user_id', 'permission_id'])
-
 
     def backwards(self, orm):
         # Deleting model 'User'
@@ -53,7 +67,6 @@ class Migration(SchemaMigration):
 
         # Removing M2M table for field user_permissions on 'User'
         db.delete_table(db.shorten_name(u'users_user_user_permissions'))
-
 
     models = {
         u'auth.group': {

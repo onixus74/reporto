@@ -11,9 +11,9 @@
 		<h1 class="text-center">User Registration</h1>
 	</div>
 
-	<div class="well">
+	<div class="well text-center">
 
-			<form action="{% url 'register' %}" class="form-horizontal" method="post">
+			<form action="{% url 'register' %}" class="form-horizontal" style="display: inline-block" method="post">
 				{% csrf_token %}
 				{{form|crispy}}
 				<input type="hidden" name="next" value="{{ next }}" />

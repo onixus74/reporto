@@ -18,14 +18,12 @@ class Migration(SchemaMigration):
                       self.gf('django.db.models.fields.FloatField')(default=0),
                       keep_default=False)
 
-
     def backwards(self, orm):
         # Deleting field 'Report.latitude'
         db.delete_column(u'reports_report', 'latitude')
 
         # Deleting field 'Report.longitude'
         db.delete_column(u'reports_report', 'longitude')
-
 
     models = {
         u'auth.group': {

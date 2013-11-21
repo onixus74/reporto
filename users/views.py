@@ -12,64 +12,63 @@ from django.http import HttpResponse, Http404
 from django.contrib.auth import authenticate, login, logout
 from django.views.decorators.http import require_POST
 from django.contrib.auth.views import redirect_to_login
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, ReadOnlyPasswordHashField
 from django.contrib.auth.decorators import login_required, user_passes_test, permission_required
 from django.contrib import messages
 from base.utils.views import JSONResponse
 
 from django import forms
 
-from users.models import User
+from .models import User
 from reports.models import Victim
 
-
 class UserListView(ListView):
-	model = User
-	template_name = "users/list.html"
+    model = User
+    template_name = "users/list.html"
 
 
 class UserListHybridView(ListHybridResponseMixin, UserListView):
-	pass
+    pass
 
 
 class UserDetailView(DetailView):
-	model = User
-	template_name = "users/view.html"
+    model = User
+    template_name = "users/view.html"
 
 
 class UserDetailHybridView(DetailHybridResponseMixin, UserDetailView):
-	pass
+    pass
 
 
 class UserCreateView(CreateView):
-	model = User
-	template_name = "users/new.html"
+    model = User
+    template_name = "users/new.html"
 
 
 class UserUpdateView(UpdateView):
-	model = User
-	template_name = "users/edit.html"
+    model = User
+    template_name = "users/edit.html"
 
 
 class UserDeleteView(DeleteView):
-	model = User
-	template_name = "users/delete.html"
-	success_url = '/users/'
+    model = User
+    template_name = "users/delete.html"
+    success_url = '/users/'
 
 
 def user_view(request, pk=None, username=None, extension=None):
-	if pk:
-		user = get_object_or_404(User, pk=pk)
-	elif username:
-		user = get_object_or_404(User, username=username)
-	else:
-		raise Http404()
-	if user.pk == request.user.pk:
-		return redirect('users:profile')
-	if extension:
-		return JSONResponse({'user': user})
-	else:
-		return render(request, "users/view.html", {'profile': user})
+    if pk:
+        user = get_object_or_404(User, pk=pk)
+    elif username:
+        user = get_object_or_404(User, username=username)
+    else:
+        raise Http404()
+    if user.pk == request.user.pk:
+        return redirect('users:profile')
+    if extension:
+        return JSONResponse({'user': user})
+    else:
+        return render(request, "users/view.html", {'profile': user})
 
 
 # class VictimForm(forms.ModelForm):
@@ -84,74 +83,75 @@ def user_view(request, pk=None, username=None, extension=None):
 
 from victims.views import VictimForm as BaseVictimForm
 
+
 class VictimForm(BaseVictimForm):
-	class Meta(BaseVictimForm.Meta):
-		exclude = ('user','firstname','lastname','email','description')
+
+    class Meta(BaseVictimForm.Meta):
+        exclude = ('user', 'firstname', 'lastname', 'email', 'description')
 
 
 def user_profile_view(request, extension=None):
-	user = request.user
+    user = request.user
 
-	try:
-		victim = Victim.objects.get(user=user)
-	except Victim.DoesNotExist:
-		victim = None
+    try:
+        victim = Victim.objects.get(user=user)
+    except Victim.DoesNotExist:
+        victim = None
 
-	if extension:
-		return JSONResponse({'user': user})
-	else:
-		victim_form = VictimForm(request.POST or None, instance = victim)
-		if request.method == 'POST' and victim_form.is_valid():
-			victim = victim_form.save()
-			victim.user = user
-			victim.firstname = user.first_name
-			victim.lastname = user.last_name
-			victim.email = user.email
-			victim.save()
+    if extension:
+        return JSONResponse({'user': user})
+    else:
+        victim_form = VictimForm(request.POST or None, instance=victim)
+        if request.method == 'POST' and victim_form.is_valid():
+            victim = victim_form.save()
+            victim.user = user
+            victim.firstname = user.first_name
+            victim.lastname = user.last_name
+            victim.email = user.email
+            victim.save()
 
-		return render(request, "users/profile.html", {
-			'profile': user,
-			'victim_profile': victim,
-			'victim_form': victim_form
-		})
+        return render(request, "users/profile.html", {
+            'profile': user,
+            'victim_profile': victim,
+            'victim_form': victim_form
+        })
 
 
 @require_POST
 def user_change_password_view(request):
-	logger.debug("USER PASSWORD CHANGE %s", request.POST)
-	user = request.user
-	user.set_password(request.POST['value'])
-	user.save()
-	return HttpResponse("Password changed")
-	# if user.save():
-	# 	return HttpResponse("Password changed")
-	# else:
-	# 	return HttpResponse("Unable to chage password", status=400)
+    logger.debug("USER PASSWORD CHANGE %s", request.POST)
+    user = request.user
+    user.set_password(request.POST['value'])
+    user.save()
+    return HttpResponse("Password changed")
+    # if user.save():
+    # 	return HttpResponse("Password changed")
+    # else:
+    # 	return HttpResponse("Unable to chage password", status=400)
 
 
 @require_POST
 def user_change_role_view(request):
-	logger.debug("USER PASSWORD CHANGE %s", request.POST)
-	user = get_object_or_404(User, pk=request.POST['pk'])
-	user.role = request.POST['value']
-	user.save()
-	return HttpResponse("Role changed")
+    logger.debug("USER PASSWORD CHANGE %s", request.POST)
+    user = get_object_or_404(User, pk=request.POST['pk'])
+    user.role = request.POST['value']
+    user.save()
+    return HttpResponse("Role changed")
 
 
 @require_POST
 def user_deactivate_view(request, pk):
-	logger.debug("USER PASSWORD DEACTIVATE %s", request.POST)
-	user = get_object_or_404(User, pk=pk)
-	user.is_active = False
-	user.save()
-	return HttpResponse("Status changed")
+    logger.debug("USER PASSWORD DEACTIVATE %s", request.POST)
+    user = get_object_or_404(User, pk=pk)
+    user.is_active = False
+    user.save()
+    return HttpResponse("Status changed")
 
 
 @require_POST
 def user_activate_view(request, pk):
-	logger.debug("USER PASSWORD ACTIVATE %s", request.POST)
-	user = get_object_or_404(User, pk=pk)
-	user.is_active = True
-	user.save()
-	return HttpResponse("Status changed")
-
+    logger.debug("USER PASSWORD ACTIVATE %s", request.POST)
+    user = get_object_or_404(User, pk=pk)
+    user.is_active = True
+    user.save()
+    return HttpResponse("Status changed")
