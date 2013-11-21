@@ -34,5 +34,8 @@ urlpatterns = patterns('',
 	url(r'^crud/(?P<pk>\d+)/edit$',                      administrator_required(ReportUpdateView.as_view()),       name='crud-edit'),
 	url(r'^crud/(?P<pk>\d+)/delete$',                    administrator_required(ReportDeleteView.as_view()),       name='crud-delete'),
 
+	url(r'^categories/', include('reports_categories.urls', namespace="categories")),
+	url(r'^features/',   include('reports_features.urls', namespace="features")),
+	url(r'^victims/',    include('reports_victims.urls', namespace="victims")),
 )
 

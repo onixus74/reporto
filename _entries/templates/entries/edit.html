@@ -1,0 +1,64 @@
+{% extends "layouts/default.html" %}
+
+{% load crispy_forms_tags %}
+{% load widget_tweaks %}
+
+{% block view_title %}Edit Entry | {% endblock %}
+
+{% block view_content %}
+<div class="container">
+
+	<div class="page-header">
+		<h1 class="text-center">Entry <small>Edit</small></h1>
+	</div>
+
+	{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+	<div class="container-fluid">
+		<div class="row-fluid">
+			<div class="offset2 span8">
+
+				<form class="form-horizontal" action="{% url 'entries:edit' object.id %}" method="post">
+					{% csrf_token %}
+
+					{#% {{form|crispy}} %#}
+
+					{% if form.errors %}
+					<div class="alert alert-error">
+						<button type="button" class="close" data-dismiss="alert">&times;</button>
+						{% for field, errors in form.errors.items %}
+							<div>{{field}}:{% for error in errors %} {{error}}{% endfor %}</div>
+						{% endfor %}
+					</div>
+					{% endif %}
+
+					<div class="control-group">
+						<label class="control-label" for="input_slug">Slug</label>
+						<div class="controls">
+							<input type="text" id="input_slug" placeholder="Slug" name="slug" value="{{object.slug}}">
+							<span class="help-block">
+								<p class="text-error">{{ object.slug.errors }}</p>
+							</span>
+						</div>
+					</div>
+
+					<div class="control-group">
+						<label class="control-label" for="input_definition">Definition</label>
+						<div class="controls">
+							<input type="text" id="input_definition" placeholder="Definition" name="definition" value="{{object.definition}}">
+						</div>
+					</div>
+
+					<div class="form-actions">
+						<button type="submit" class="btn btn-primary">Submit</button>
+						<a href="{% url 'entries:list' %}" class="btn">Cancel</a>
+					</div>
+
+				</form>
+
+			</div>
+		</div>
+	</div>
+
+</div>
+{% endblock %}

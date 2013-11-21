@@ -170,9 +170,11 @@ INSTALLED_APPS = (
     # project components
     'base',
     'reports',
-    'categories',
-    'features',
-    'victims',
+    'reports_categories',
+    'reports_features',
+    'reports_victims',
+    'thanks',
+    'thanks_categories',
 
     # project dependencies
     'form_utils',

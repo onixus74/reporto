@@ -27,8 +27,6 @@ urlpatterns = patterns('',
 	url(r'^users/',      include('users.urls', namespace="users")),
 
 	url(r'^reports/',    include('reports.urls',    namespace='reports')),
-	url(r'^categories/', include('categories.urls', namespace="categories")),
-	url(r'^features/',   include('features.urls', namespace="features")),
-	url(r'^victims/',    include('victims.urls', namespace="victims")),
+	url(r'^thanks/',    include('thanks.urls',    namespace='thanks')),
 
 )

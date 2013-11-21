@@ -123,7 +123,7 @@ class ReportCreateForm(forms.ModelForm):
 		exclude = ('created_by','victim')
 
 
-from victims.views import VictimForm as BaseVictimForm
+from reports_victims.views import VictimForm as BaseVictimForm
 
 class VictimCreateForm(BaseVictimForm):
 	class Meta(BaseVictimForm.Meta):
@@ -678,5 +678,5 @@ class ReportUpdateView(UpdateView):
 class ReportDeleteView(DeleteView):
 	model = Report
 	template_name = "reports/crud/delete.html"
-	success_url = '/reports/crud/'
+	success_url = '..'
 

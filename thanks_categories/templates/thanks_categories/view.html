@@ -1,0 +1,42 @@
+{% extends "layouts/default.html" %}
+
+{% block view_title %}Thank Category Details | {% endblock %}
+
+{% block view_content %}
+<div class="container">
+
+	<div class="page-header">
+		<h1 class="text-center">Thank Category <small>Detail</small></h1>
+	</div>
+
+	<div class="container-fluid">
+		<div class="row-fluid">
+			<div class="offset2 span8">
+
+				<form class="form-horizontal">
+
+					<div class="control-group">
+						<div class="controls">
+							<dl>
+								<dt>Slug</dt>
+								<dd>{{object.slug}}</dd>
+								<dt>Definition</dt>
+								<dd>{{object.definition}}</dd>
+							</dl>
+						</div>
+					</div>
+
+					<div class="form-actions">
+						<a href="{% url 'thanks:categories:edit' object.id %}" class="btn btn-info"><i class="icon-pencil"></i> Edit</a>
+						<a href="{% url 'thanks:categories:delete' object.id %}" class="btn btn-warning"><i class="icon-trash"></i> Delete</a>
+						<a href="{% url 'thanks:categories:list' %}" class="btn"><i class="icon-back"></i> Back</a>
+					</div>
+
+				</form>
+
+			</div>
+		</div>
+	</div>
+
+</div>
+{% endblock %}

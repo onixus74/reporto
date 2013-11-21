@@ -53,7 +53,7 @@ class UserUpdateView(UpdateView):
 class UserDeleteView(DeleteView):
     model = User
     template_name = "users/delete.html"
-    success_url = '/users/'
+    success_url = '..'
 
 
 def user_view(request, pk=None, username=None, extension=None):
@@ -81,7 +81,7 @@ def user_view(request, pk=None, username=None, extension=None):
 # 		}
 
 
-from victims.views import VictimForm as BaseVictimForm
+from reports_victims.views import VictimForm as BaseVictimForm
 
 
 class VictimForm(BaseVictimForm):

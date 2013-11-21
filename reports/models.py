@@ -16,7 +16,7 @@ class Category(models.Model):
     definition = models.CharField(max_length=300)
 
     def get_absolute_url(self):
-        return reverse('categories:view', kwargs={'pk': self.id})
+        return reverse('reports:categories:view', kwargs={'pk': self.id})
 
     def __unicode__(self):
         return self.definition
@@ -34,7 +34,7 @@ class Feature(models.Model):
     definition = models.CharField(max_length=300)
 
     def get_absolute_url(self):
-        return reverse('features:view', kwargs={'pk': self.id})
+        return reverse('reports:features:view', kwargs={'pk': self.id})
 
     def __unicode__(self):
         return self.definition
@@ -158,7 +158,7 @@ class Victim(models.Model):
         settings.AUTH_USER_MODEL, blank=True, null=True)
 
     def get_absolute_url(self):
-        return reverse('victims:view', kwargs={'pk': self.id})
+        return reverse('reports:victims:view', kwargs={'pk': self.id})
 
     def get_fullname(self):
         return "%s %s" % (self.firstname, self.lastname)
@@ -280,7 +280,7 @@ class ThankCategory(models.Model):
     definition = models.CharField(max_length=300)
 
     def get_absolute_url(self):
-        return reverse('thank_categories:view', kwargs={'pk': self.id})
+        return reverse('thanks:categories:view', kwargs={'pk': self.id})
 
     def __unicode__(self):
         return self.definition
@@ -290,7 +290,7 @@ class ThankCategory(models.Model):
         super(ThankCategory, self).save(*args, **kwargs)
 
     class Meta:
-        verbose_name_plural = "categories"
+        verbose_name_plural = "thank categories"
 
 
 class ThankReport(models.Model):
@@ -301,10 +301,10 @@ class ThankReport(models.Model):
     datetime = models.DateTimeField('date and time')
     latitude = models.FloatField()
     longitude = models.FloatField()
-    location = models.CharField(
-        max_length=100, blank=True, null=True)
+    location = models.CharField(max_length=100, blank=True, null=True)
     location_text = models.CharField(max_length=300)
     category = models.ForeignKey(ThankCategory)
+    #subject = models.CharField()
     description = models.TextField()
     media = models.ManyToManyField(Media, blank=True, null=True)
     # comments = models.ManyToManyField(Comment, blank=True, null=True)
@@ -313,7 +313,7 @@ class ThankReport(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def get_absolute_url(self):
-        return reverse('thank_reports:view', kwargs={'pk': self.id})
+        return reverse('thanks:view', kwargs={'pk': self.id})
 
     def __unicode__(self):
         return '%s - %s %s' % (self.pk, self.datetime, self.location)

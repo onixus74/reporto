@@ -101,18 +101,22 @@ class JSONResponse(HttpResponse):
 
 class JSONResponseMixin(object):
 
+	def is_json(self):
+		return True
+
 	def render_to_response(self, context, *args, **kwargs):
 		return JSONResponse(context, *args, **kwargs)
 
 	def remove_duplicate_obj(self, context, duplicate="object", **kwargs):
-		# Check if the duplicate key is in the context
-		if duplicate in context:
-			# Search to ensure that this key is in fact duplicated
-			for key, val in context.items():
-				if key == duplicate: continue           # Skip the duplicate object
-				if val == context[duplicate]:
-					del context[duplicate]
-					break
+		if self.is_json():
+			# Check if the duplicate key is in the context
+			if duplicate in context:
+				# Search to ensure that this key is in fact duplicated
+				for key, val in context.items():
+					if key == duplicate: continue           # Skip the duplicate object
+					if val == context[duplicate]:
+						del context[duplicate]
+						break
 
 		# Django 1.5 also adds the View...
 		context.pop('view')
