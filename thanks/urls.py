@@ -5,9 +5,10 @@ from base.utils.urls import administrator_required
 
 from thanks.views import *
 
+from django.views.generic import TemplateView
+
 
 urlpatterns = patterns('',
-
-                       url(r'^categories/', include('thanks_categories.urls', namespace="categories")),
-
-                       )
+    url(r'^submit$', TemplateView.as_view(template_name="thanks/submit.html"), name='submit'),
+    url(r'^categories/', include('thanks_categories.urls', namespace="categories")),
+)

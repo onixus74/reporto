@@ -6,7 +6,7 @@
 <div class="container">
 
 	<div class="page-header">
-		<h1>Category <small>Detail</small></h1>
+		<h1 class="text-center">Category <small>Detail</small></h1>
 	</div>
 
 	<div class="container-fluid">
@@ -19,16 +19,16 @@
 						<div class="controls">
 							<dl>
 								<dt>Slug</dt>
-								<dd>{{category.slug}}</dd>
+								<dd>{{object.slug}}</dd>
 								<dt>Definition</dt>
-								<dd>{{category.definition}}</dd>
+								<dd>{{object.definition}}</dd>
 							</dl>
 						</div>
 					</div>
 
 					<div class="form-actions">
-						<a href="{% url 'reports:categories:edit' category.id %}" class="btn btn-info"><i class="icon-pencil"></i> Edit</a>
-						<a href="{% url 'reports:categories:delete' category.id %}" class="btn btn-warning"><i class="icon-trash"></i> Delete</a>
+						<a href="{% url 'reports:categories:edit' object.id %}" class="btn btn-info"><i class="icon-pencil"></i> Edit</a>
+						<a href="{% url 'reports:categories:delete' object.id %}" class="btn btn-warning"><i class="icon-trash"></i> Delete</a>
 						<a href="{% url 'reports:categories:list' %}" class="btn"><i class="icon-back"></i> Back</a>
 					</div>
 
