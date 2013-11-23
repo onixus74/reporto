@@ -1,0 +1,242 @@
+/* line 5, submit.scss */
+body {
+  padding-top: 120px;
+}
+
+/* line 9, submit.scss */
+#top-bg {
+  height: 100px;
+}
+
+/* line 13, submit.scss */
+#ui-wizard-progress-bar {
+  position: fixed;
+  top: 80px;
+  width: 100%;
+  z-index: 100;
+}
+
+/* line 20, submit.scss */
+#thank-form {
+  margin: 0;
+}
+
+/* line 24, submit.scss */
+#thank-incident-form {
+  margin: 0;
+}
+
+/* line 28, submit.scss */
+.input-area {
+  display: block;
+  width: 100%;
+  min-height: 30px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  height: 180px;
+  overflow: auto;
+}
+
+/* line 40, submit.scss */
+.bootstrap-select {
+  margin: 0px;
+}
+
+/* fix boostrap-select width */
+/* line 45, submit.scss */
+.bootstrap-select:not([class*="span"]) {
+  width: 100%;
+}
+
+/* fix boostrap-select colors in natural language form */
+/* line 50, submit.scss */
+.boostrap-select-fix {
+  background-color: transparent;
+  color: #080808;
+  text-align: center;
+}
+
+/* line 56, submit.scss */
+.boostrap-select-fix .filter-option {
+  text-align: center;
+}
+
+/* line 62, submit.scss */
+#dateinput {
+  max-width: 600px;
+  margin: 0 auto;
+  background-color: #f4f4f4;
+  /*
+  -moz-box-shadow: 4px 4px 0 darken(darkGray, 5%);
+  -webkit-box-shadow: 4px 4px 0 darken(darkGray, 5%);
+  box-shadow: 4px 4px 0 darken(darkGray, 5%);
+  */
+  /* padding-bottom: 12px; */
+}
+/* line 77, submit.scss */
+#dateinput .noselect, #dateinput .controls .clndr-previous-button, #dateinput .controls .clndr-next-button, #dateinput .controls .clndr-previous-year-button, #dateinput .controls .clndr-next-year-button {
+  -webkit-user-select: none;
+  /* Chrome/Safari */
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+  /* IE10+ */
+}
+/* line 90, submit.scss */
+#dateinput .controls {
+  background-color: lightGray;
+  color: white;
+}
+/* line 95, submit.scss */
+#dateinput .controls .clndr-previous-button, #dateinput .controls .clndr-next-button, #dateinput .controls .clndr-previous-year-button, #dateinput .controls .clndr-next-year-button {
+  width: 10%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  display: inline-block;
+  text-align: center;
+  cursor: pointer;
+  -webkit-transition: background-color 0.5s;
+  -moz-transition: background-color 0.5s;
+  -o-transition: background-color 0.5s;
+  transition: background-color 0.5s;
+}
+/* line 104, submit.scss */
+#dateinput .controls .clndr-previous-button:hover, #dateinput .controls .clndr-next-button:hover, #dateinput .controls .clndr-previous-year-button:hover, #dateinput .controls .clndr-next-year-button:hover {
+  background-color: #b9b9b9;
+}
+/* line 109, submit.scss */
+#dateinput .controls .month {
+  width: 60%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  display: inline-block;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+/* line 121, submit.scss */
+#dateinput .days-of-the-week {
+  width: 100%;
+}
+/* line 125, submit.scss */
+#dateinput .days-of-the-week .header-day {
+  float: left;
+  width: 14.2857%;
+  padding: 12px 0;
+  text-align: center;
+}
+/* line 137, submit.scss */
+#dateinput .days .day, #dateinput .days .empty {
+  float: left;
+  width: 14.2857%;
+  padding: 12px 0;
+  text-align: center;
+  cursor: pointer;
+}
+/* line 145, submit.scss */
+#dateinput .days .day.today, #dateinput .days .empty.today {
+  font-weight: bold;
+  /*background-color: lightGray;
+  -moz-box-shadow: inset 0 0 8px #d4d4d4;
+  -webkit-box-shadow: inset 0 0 8px #d4d4d4;
+  box-shadow: inset 0 0 8px #d4d4d4;
+  */
+}
+/* line 155, submit.scss */
+#dateinput .days .day.event, #dateinput .days .empty.event {
+  color: blue;
+}
+/* line 160, submit.scss */
+#dateinput .days .day.selected, #dateinput .days .empty.selected {
+  color: white;
+  background-color: #007a9b;
+  -webkit-box-shadow: inset 0 0 8px #d4d4d4;
+  -moz-box-shadow: inset 0 0 8px #d4d4d4;
+  box-shadow: inset 0 0 8px #d4d4d4;
+}
+
+/* line 170, submit.scss */
+.ui-similar-thank-candidate {
+  margin: 4px;
+  border: 1px transparent solid;
+  -webkit-transition: border-color 0.1s linear;
+  -moz-transition: border-color 0.1s linear;
+  -o-transition: border-color 0.1s linear;
+  transition: border-color 0.1s linear;
+}
+/* line 174, submit.scss */
+.ui-similar-thank-candidate.ui-similar {
+  border-color: #c0392b;
+  -webkit-box-shadow: 0 0 5px rgba(214, 85, 72, 0.9);
+  -moz-box-shadow: 0 0 5px rgba(214, 85, 72, 0.9);
+  box-shadow: 0 0 5px rgba(214, 85, 72, 0.9);
+}
+/* line 177, submit.scss */
+.ui-similar-thank-candidate.ui-similar.ui-similar-1 {
+  -webkit-box-shadow: 0 0 10px rgba(209, 66, 51, 0.8);
+  -moz-box-shadow: 0 0 10px rgba(209, 66, 51, 0.8);
+  box-shadow: 0 0 10px rgba(209, 66, 51, 0.8);
+}
+/* line 180, submit.scss */
+.ui-similar-thank-candidate.ui-similar.ui-similar-2 {
+  -webkit-box-shadow: 0 0 20px rgba(192, 57, 43, 0.7);
+  -moz-box-shadow: 0 0 20px rgba(192, 57, 43, 0.7);
+  box-shadow: 0 0 20px rgba(192, 57, 43, 0.7);
+}
+/* line 183, submit.scss */
+.ui-similar-thank-candidate.ui-similar.ui-similar-3 {
+  -webkit-box-shadow: 0 0 30px rgba(171, 51, 38, 0.7);
+  -moz-box-shadow: 0 0 30px rgba(171, 51, 38, 0.7);
+  box-shadow: 0 0 30px rgba(171, 51, 38, 0.7);
+}
+/* line 186, submit.scss */
+.ui-similar-thank-candidate.ui-similar.ui-similar-4 {
+  -webkit-box-shadow: 0 0 40px rgba(150, 45, 34, 0.7);
+  -moz-box-shadow: 0 0 40px rgba(150, 45, 34, 0.7);
+  box-shadow: 0 0 40px rgba(150, 45, 34, 0.7);
+}
+
+/* line 201, submit.scss */
+.ui-similar-category .ui-similar-thank-category, .ui-similar-category .ui-similar-thank-category a {
+  color: #ab3326;
+  font-weight: bold;
+}
+
+/* line 206, submit.scss */
+.ui-similar-location .ui-similar-thank-location, .ui-similar-location .ui-similar-thank-location a {
+  color: #962d22;
+  font-weight: bold;
+}
+
+/* line 211, submit.scss */
+.ui-similar-datetime .ui-similar-thank-datetime, .ui-similar-datetime .ui-similar-thank-datetime a {
+  color: #81261d;
+  font-weight: bold;
+}
+
+/* line 216, submit.scss */
+.ui-similar-victim .ui-similar-thank-victim, .ui-similar-victim .ui-similar-thank-victim a {
+  color: #c0392b;
+  font-weight: bold;
+}
+
+@media (max-width: 767px) {
+  /* line 223, submit.scss */
+  #ui-wizard-progress-bar {
+    top: 50px;
+  }
+  /* line 225, submit.scss */
+  #ui-wizard-progress-bar .progress {
+    margin: 0;
+  }
+}
+/* line 233, submit.scss */
+.ui-victim-fieldset {
+  height: auto;
+}
+/* line 235, submit.scss */
+.ui-victim-fieldset .control-group {
+  margin-bottom: 10px;
+}

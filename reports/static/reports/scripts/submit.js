@@ -139,7 +139,7 @@ reform.widgets.wizard.init = function() {
 		'location-datetime': $('#ui-wizard-location-datetime'),
 		'victim-aggressor' : $('#ui-wizard-victim-aggressor'),
 		'description-evidence': $('#ui-wizard-description-evidence'),
-		'sources-evidence-links': $('#ui-wizard-seources-evidence-links'),
+		'sources-evidence-links': $('#ui-wizard-sources-evidence-links'),
 		'features': $('#ui-wizard-features'),
 		'submit': $('#ui-wizard-submit')
 	};
