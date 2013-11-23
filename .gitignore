@@ -20,4 +20,5 @@ components
 /.checkstyle
 /.settings
 /staticfiles
+/reform_tn/static
 /data

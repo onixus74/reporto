@@ -3,8 +3,8 @@
 import os
 PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
 
-DEBUG = True  # !DEV!
-# DEBUG = False # !PROD!
+# DEBUG = True # !DEV!
+DEBUG = False  # !PROD!
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
@@ -14,15 +14,14 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
-# DATABASES = {
-# 	'default': {
-# 		'ENGINE': 'django.db.backends.sqlite3',
-# 		'NAME': 'reform_tn/development.sqlite3',
-# 	}
-# }
-DATABASES = {}
-import dj_database_url
-DATABASES['default'] = dj_database_url.config()
+DATABASES = {
+	'default': {
+		'ENGINE': 'django.db.backends.postgresql_psycopg2',
+ 		'NAME': 'reporto',
+    'USER': 'reporto',
+    'PASSWORD': 'reportopass',
+	}
+}
 
 EMAIL_HOST = 'smtp.webfaction.com'
 EMAIL_HOST_USER = 'reporto'
@@ -53,7 +52,7 @@ LANGUAGES = (
     #('ar-tn', 'Tounsi'),
 )
 
-SITE_ID = 2
+SITE_ID = 3
 
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
@@ -148,7 +147,7 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'reform_tn.urls'
 
 # Python dotted path to the WSGI application used by Django's runserver.
-WSGI_APPLICATION = 'reform_tn.wsgi_staging.application'
+WSGI_APPLICATION = 'reform_tn.wsgi_production.application'
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".

@@ -39,7 +39,8 @@
     "bootstrap-multiselect": "~0.9.1",
     "blockui": "*",
     "highcharts.com": "~3.0.7",
-    "leaflet.markerclusterer": "*"
+    "leaflet.markerclusterer": "*",
+    "Leaflet.awesome-markers": "~2.0.1"
   },
   "devDependencies": {
     "html-inspector": "~0.3.0"

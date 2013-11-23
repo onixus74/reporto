@@ -19,7 +19,7 @@ reform.widgets.map.init = function() {
 
 	L.control.scale().addTo(map);
 
-	map.setMaxBounds(map.getBounds());
+	//map.setMaxBounds(map.getBounds());
 
 	//map.scrollWheelZoom.disable();
 

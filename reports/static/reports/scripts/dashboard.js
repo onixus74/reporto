@@ -14,12 +14,27 @@ reform.widgets.map = function() {
 	// add an OpenStreetMap tile layer
 	L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png').addTo(map);
 
+  var incidentMarker = L.AwesomeMarkers.icon({
+    icon: 'flag',
+    markerColor: 'red'
+  });
+
+  var thankMarker = L.AwesomeMarkers.icon({
+    icon: 'star',
+    markerColor: 'green'
+  });
+
 	var markers = new L.MarkerClusterGroup();
-	markers.addLayers(reform.data.reportsLocations.map(function(loc){
-		var marker = L.marker(L.latLng(loc.latitude, loc.longitude), { title: loc.category__definition });
+	markers.addLayers(reform.data.incidentsLocations.map(function(loc){
+		var marker = L.marker(L.latLng(loc.latitude, loc.longitude), { title: loc.category__definition, icon: incidentMarker });
 		marker.bindPopup(loc.category__definition);
 		return marker;
 	}));
+  markers.addLayers(reform.data.thanksLocations.map(function(loc){
+    var marker = L.marker(L.latLng(loc.latitude, loc.longitude), { title: loc.category__definition, icon: thankMarker });
+    marker.bindPopup(loc.category__definition);
+    return marker;
+  }));
 	map.addLayer(markers);
 
 };
@@ -161,7 +176,7 @@ $(document).ready(reform.widgets.timeline);
 /*
 reform.widgets.stats = function() {
 
-	var dates = reform.data.reportsByDate.map(function(o) {
+	var dates = reform.data.incidentsByDate.map(function(o) {
 		return (new Date(o.date)).getTime()
 	})
 	var minDate = new Date(Math.min.apply(Math, dates)),
@@ -185,7 +200,7 @@ reform.widgets.stats = function() {
 
 	new Morris.Line({
 		element: 'ui-reports-dates-chart',
-		data: reform.data.reportsByDate,
+		data: reform.data.incidentsByDate,
 		xkey: 'date',
 		//ykeys: ['total'].concat(reform.data.categories),
 		//labels: ['Total Reports'].concat(reform.data.categories),
@@ -204,8 +219,8 @@ reform.widgets.stats = function() {
 
 	new Morris.Bar({
 		element: 'ui-stats-features-chart',
-		data: reform.data.reportsByFeature,
-		//formatter: function(y, data){ return String(y) + ' (' + String((y / reform.data.reportsByCategory.length).toFixed(2)) + '%)' }
+		data: reform.data.incidentsByFeature,
+		//formatter: function(y, data){ return String(y) + ' (' + String((y / reform.data.incidentsByCategory.length).toFixed(2)) + '%)' }
 		xkey: 'label',
 		ykeys: ['count'],
 		labels: ['Feature'],
@@ -218,7 +233,7 @@ reform.widgets.stats = function() {
 
 	new Morris.Donut({
 		element: 'ui-stats-categories-chart',
-		data: reform.data.reportsByCategory,
+		data: reform.data.incidentsByCategory,
 		//colors: ['#F00', '#0F0', '#00F']
 		formatter: function(y) {
 			return String(y) + ' (' + String((y * 100 / reform.data.timeline.count).toFixed(2)) + '%)'
@@ -228,7 +243,7 @@ reform.widgets.stats = function() {
 
 	new Morris.Donut({
 		element: 'ui-stats-victim-gender-chart',
-		data: reform.data.reportsByVictimGender,
+		data: reform.data.incidentsByVictimGender,
 		//colors: ['#F00', '#0F0', '#00F']
 		formatter: function(y, data) {
 			return String(y) + ' (' + String((y * 100 / reform.data.timeline.count).toFixed(2)) + '%)'
@@ -237,7 +252,7 @@ reform.widgets.stats = function() {
 
 	new Morris.Donut({
 		element: 'ui-stats-victim-education-chart',
-		data: reform.data.reportsByVictimEducation,
+		data: reform.data.incidentsByVictimEducation,
 		//colors: ['#F00', '#0F0', '#00F']
 		formatter: function(y, data) {
 			return String(y) + ' (' + String((y * 100 / reform.data.timeline.count).toFixed(2)) + '%)'
@@ -250,48 +265,61 @@ $(document).ready(reform.widgets.stats);
 
 !(function() {
 
-	var series = [];
+	var series = [], serie, dateMin, dateMax;
 
-	var serie = {
-		name: 'All Incidents',
+	serie = {
+		name: 'Incidents',
+    color: '#c13c2d',
 		data: [],
-		lineWidth: 4,
 	};
-	reform.data.reportsByDate.forEach(function(report) {
+	reform.data.incidentsByDate.forEach(function(report) {
 		serie.data.push([new Date(report.date).getTime(), report.count]);
 	});
-	//serie.data.push([new Date().getTime(), 0]);
+	serie.data.push([new Date().getTime(), 0]);
 	series.push(serie);
 
-	var dateMin = serie.data[0][0],
-		dateMax = serie.data[serie.data.length - 1][0];
+  dateMin = serie.data[0][0];
+  dateMax = serie.data[serie.data.length - 1][0];
 
+  serie = {
+    name: 'Thanks',
+    color: '#28b262',
+    data: []
+  };
+  reform.data.thanksByDate.forEach(function(report) {
+    serie.data.push([new Date(report.date).getTime(), report.count]);
+  });
+  if (!serie.data[0] || serie.data[0][0] > dateMin)
+    serie.data.unshift([dateMin, 0]);
+  if (!serie.data[serie.data.length - 1] || serie.data[serie.data.length - 1][0] < dateMax)
+    serie.data.push([dateMax, 0]);
+  series.push(serie);
 
-	Object.keys(reform.data.reportsByCategoryByDate).forEach(function(category) {
+	/*Object.keys(reform.data.incidentsByCategoryByDate).forEach(function(category) {
 		var serie = {
 			name: category,
 			data: []
 		};
-		reform.data.reportsByCategoryByDate[category].forEach(function(report) {
+		reform.data.incidentsByCategoryByDate[category].forEach(function(report) {
 			serie.data.push([new Date(report.date).getTime(), report.count]);
 		});
-		if (!serie.data[0] || serie.data[0][0] != dateMin)
+		if (!serie.data[0] || serie.data[0][0] > dateMin)
 			serie.data.unshift([dateMin, 0]);
-		if (!serie.data[serie.data.length - 1] || serie.data[serie.data.length - 1][0] != dateMax)
+		if (!serie.data[serie.data.length - 1] || serie.data[serie.data.length - 1][0] < dateMax)
 			serie.data.push([dateMax, 0]);
 		series.push(serie);
-	});
+	});*/
 
 	$(document).ready(function() {
 		console.log(series);
 
-		$('#ui-reports-dates-chart-highcharts').highcharts({
+		$('#ui-reports-dates-chart').highcharts({
 			chart: {
 				type: 'line', //'spline',
 				zoomType: 'x',
 			},
 			title: {
-				text: 'Incidents by date'
+				text: 'Incidents/Thanks by date'
 			},
 			subtitle: {
 				text: document.ontouchstart === undefined ?
@@ -306,7 +334,7 @@ $(document).ready(reform.widgets.stats);
 			},
 			yAxis: {
 				title: {
-					text: 'Incidents Number'
+					text: 'Incidents/Thanks Number'
 				},
 				min: 0
 			},
@@ -328,12 +356,12 @@ $(document).ready(reform.widgets.stats);
 
 !(function() {
 
-	var data = reform.data.reportsByCategory.map(function(e) {
+	var data = reform.data.incidentsByCategory.map(function(e) {
 		return [e.label, e.count]
 	});
 
 	$(document).ready(function() {
-		$('#ui-stats-categories-chart-highcharts').highcharts({
+		$('#ui-stats-categories-chart').highcharts({
 			chart: {
 				plotBackgroundColor: null,
 				plotBorderWidth: null,
@@ -374,12 +402,12 @@ $(document).ready(reform.widgets.stats);
 
 !(function() {
 
-	var data = reform.data.reportsByVictimGender.map(function(e) {
+	var data = reform.data.incidentsByVictimGender.map(function(e) {
 		return [e.label, e.count]
 	});
 
 	$(document).ready(function() {
-		$('#ui-stats-victim-gender-chart-highcharts').highcharts({
+		$('#ui-stats-victim-gender-chart').highcharts({
 			chart: {
 				plotBackgroundColor: null,
 				plotBorderWidth: null,
@@ -419,12 +447,12 @@ $(document).ready(reform.widgets.stats);
 
 !(function() {
 
-	var data = reform.data.reportsByVictimEducation.map(function(e) {
+	var data = reform.data.incidentsByVictimEducation.map(function(e) {
 		return [e.label, e.count]
 	});
 
 	$(document).ready(function() {
-		$('#ui-stats-victim-education-chart-highcharts').highcharts({
+		$('#ui-stats-victim-education-chart').highcharts({
 			chart: {
 				plotBackgroundColor: null,
 				plotBorderWidth: null,
@@ -473,7 +501,7 @@ $(document).ready(reform.widgets.stats);
 		data[i] = 0;
 	});
 
-	reform.data.reportsByFeature.forEach(function(e) {
+	reform.data.incidentsByFeature.forEach(function(e) {
 		var index = features.indexOf(e.label);
 		if (index >= 0)
 			data[index] = e.count;
@@ -483,7 +511,7 @@ $(document).ready(reform.widgets.stats);
 	data.unshift(reform.data.timeline.count);
 
 	$(document).ready(function() {
-		$('#ui-stats-features-chart-highcharts').highcharts({
+		$('#ui-stats-features-chart').highcharts({
 			chart: {
 				type: 'bar'
 			},

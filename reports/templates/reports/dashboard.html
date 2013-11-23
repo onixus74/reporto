@@ -40,7 +40,8 @@
 				<h2>There is no reports!</h2>
 			</div>
 			{% endif %}
-			<a class="btn btn-danger btn-large pull-right" href="{% url 'reports:submit' %}"><i class="icon-plus"></i> Report Incident</a>
+			<a class="btn btn-danger btn-large pull-right" href="{% url 'reports:submit' %}"><i class="icon-plus"></i> Report an Incident</a>
+      <a class="btn btn-success btn-large pull-right" href="{% url 'thanks:submit' %}"><i class="icon-plus"></i> Thank a Security Officer</a>
 		</div>
 
 		{% if report_list %}
@@ -58,18 +59,21 @@
 
 				<div class="row-fluid">
 					<div class="span12">
-						<div id="ui-reports-dates-chart-highcharts" style="height: 300px;"></div>
+						<div id="ui-reports-dates-chart" style="height: 300px;"></div>
 					</div>
 				</div>
 
+
+        <div class="row-fluid">
+          <div class="offset2 span8" style="margin-top: 20px;">
+            <!--<h2>Map</h2>-->
+            <div id="ui-timeline-map" class="ui-timeline-map" style="width:100%; height: 400px"></div>
+          </div>
+        </div>
+
 				<div class="row-fluid">
 					<div class="span6" style="margin-top: 20px;">
-						<!--<h2>Map</h2>-->
-
-						<div id="ui-timeline-map" class="ui-timeline-map" style="width:100%; height: 300px"></div>
-
-						<div style="margin: 0; margin-top: 20px;">
-						<!--<h2>Timeline</h2>-->
+						<h2>Incidents</h2>
 						<div id="ui-timeline-reports-list" class="ui-timeline-list">
 							<div class="row-fluid">
 								<!--
@@ -127,15 +131,13 @@
 								</ul>
 							</div>
 						</div>
-						</div>
-
+            <div id="ui-stats-features-chart" style="margin-top: 20px;"></div>
 					</div>
 					<div class="span6" style="margin-top: 20px;">
-						<!--
-						<div id="ui-stats-features-chart"></div>
-						<h3 class="text-center">Features</h3>
-						-->
-						<div id="ui-stats-features-chart-highcharts"></div>
+            <h2>Thanks</h2>
+            <div id="ui-timeline-thanks-list" class="ui-timeline-list">
+            </div>
+            <div id="ui-stats-thanks-by-category-chart" style="margin-top: 20px;"></div>
 					</div>
 				</div>
 
@@ -147,21 +149,21 @@
 						<div id="ui-stats-categories-chart"></div>
 						<h3 class="text-center">Distribution by incident category</h3>
 						-->
-						<div id="ui-stats-categories-chart-highcharts"></div>
+						<div id="ui-stats-categories-chart"></div>
 					</div>
 					<div class="span4" style="margin-top: 20px;">
 						<!--
 						<div id="ui-stats-victim-gender-chart"></div>
 						<h3 class="text-center">Distribution by victim's gender</h3>
 						-->
-						<div id="ui-stats-victim-gender-chart-highcharts"></div>
+						<div id="ui-stats-victim-gender-chart"></div>
 					</div>
 					<div class="span4" style="margin-top: 20px;">
 						<!--
 						<div id="ui-stats-victim-education-chart"></div>
 						<h3 class="text-center">Distribution by victim's education</h3>
 						-->
-						<div id="ui-stats-victim-education-chart-highcharts"></div>
+						<div id="ui-stats-victim-education-chart"></div>
 					</div>
 				</div>
 
@@ -209,6 +211,7 @@
 	{% compress css %}
 	<link rel="stylesheet" href="{% static 'components/leaflet/dist/leaflet.css'%}" />
 	<link rel="stylesheet" href="{% static 'components/leaflet.markerclusterer/dist/MarkerCluster.Default.css'%}" />
+  <link rel="stylesheet" href="{% static 'components/Leaflet.awesome-markers/dist/leaflet.awesome-markers.css'%}" />
 	{% comment %}
 	<link rel="stylesheet" href="{% static 'components/morris.js/morris.css'%}" />
 	<link rel="stylesheet" href="{% static 'components/morris.js/morris.css'%}" />
@@ -228,6 +231,7 @@
 	<script src="{% static 'components/leaflet/dist/leaflet.js' %}"></script>
 	<script type="text/javascript">L.Icon.Default.imagePath = "{% static 'components/leaflet/dist/images' %}";</script>
 	<script src="{% static 'components/leaflet.markerclusterer/dist/leaflet.markercluster-src.js' %}"></script>
+  <script src="{% static 'components/Leaflet.awesome-markers/dist/leaflet.awesome-markers.js' %}"></script>
 	{% comment %}
 	<script src="{% static 'components/raphael/raphael.js' %}"></script>
 	<script src="{% static 'components/morris.js/morris.js' %}"></script>
@@ -240,13 +244,15 @@
 	<script type="text/javascript">
 		reform.data.categories = {{categories|json}}
 		reform.data.features = {{features|json}}
-		reform.data.reportsByCategory = {{reports_by_category|json}}
-		reform.data.reportsByFeature = {{reports_by_feature|json}}
-		reform.data.reportsByVictimGender = {{reports_by_victim_gender|json}}
-		reform.data.reportsByVictimEducation = {{reports_by_victim_education|json}}
-		reform.data.reportsByDate = {{reports_by_date|json}}
-		reform.data.reportsByCategoryByDate = {{reports_by_category_by_date|json}}
-		reform.data.reportsLocations = {{reports_locations|json}}
+		reform.data.incidentsByCategory = {{incidents_by_category|json}}
+		reform.data.incidentsByFeature = {{incidents_by_feature|json}}
+		reform.data.incidentsByVictimGender = {{incidents_by_victim_gender|json}}
+		reform.data.incidentsByVictimEducation = {{incidents_by_victim_education|json}}
+		reform.data.incidentsByDate = {{incidents_by_date|json}}
+		reform.data.incidentsByCategoryByDate = {{incidents_by_category_by_date|json}}
+		reform.data.incidentsLocations = {{incidents_locations|json}}
+    reform.data.thanksByDate = {{thanks_by_date|json}}
+    reform.data.thanksLocations = {{thanks_locations|json}}
 		reform.data.timeline = {
 			pages: {{pages|json}},
 			current: {{current|json}},

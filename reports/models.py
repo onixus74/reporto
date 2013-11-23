@@ -233,8 +233,6 @@ class Report(models.Model):
     datetime = models.DateTimeField('date and time')
     latitude = models.FloatField()
     longitude = models.FloatField()
-    location = models.CharField(
-        max_length=100, blank=True, null=True)
     location_text = models.CharField(max_length=300)
     category = models.ForeignKey(Category)
     victim = models.ForeignKey(Victim)
@@ -301,7 +299,6 @@ class ThankReport(models.Model):
     datetime = models.DateTimeField('date and time')
     latitude = models.FloatField()
     longitude = models.FloatField()
-    location = models.CharField(max_length=100, blank=True, null=True)
     location_text = models.CharField(max_length=300)
     category = models.ForeignKey(ThankCategory)
     #subject = models.CharField()
@@ -316,7 +313,7 @@ class ThankReport(models.Model):
         return reverse('thanks:view', kwargs={'pk': self.id})
 
     def __unicode__(self):
-        return '%s - %s %s' % (self.pk, self.datetime, self.location)
+        return '%s - %s %s' % (self.pk, self.datetime, self.location_text)
 
     def serialize(self):
         data = model_to_dict(self)

@@ -1,11 +1,51 @@
 {% extends "layouts/default.html" %}
 
-{% block view_title %}Thank a Security Agent | {% endblock %}
+{% load static custom crispy_forms_tags widget_tweaks compress l10n %}
+
+{% block view_title %}Thank a Security Officer | {% endblock %}
 
 {% block view_content %}
-<div class="container">
-	<div class="well">
-		...
-	</div>
-</div>
+
+  <form id="thank-form" action="{% url 'thanks:submit' %}" method="post" enctype="multipart/form-data" class="form-horizontal">
+    {% csrf_token %}
+
+  <div class="container">
+
+    {% if form.errors %}
+    <div class="alert alert-error">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      {% for field, errors in form.errors.items %}
+        <div>{{field}}:{% for error in errors %} {{error}}{% endfor %}</div>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    <div class="row-fluid">
+      <div class="offset2 span8">
+        <div class="row-fluid">
+
+          <div class="span12 well thank-incident-form">
+          {{form|crispy}}
+          </div>
+
+          <div class="row-fluid">
+            <div class="span12">
+
+            </div>
+          </div>
+
+          <div class="row-fluid ui-wizard-row" id="ui-wizard-submit">
+            <div class="span12">
+              <button class="btn btn-success btn-block btn-large"><i class="icon-plus"></i> Thank</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  </form>
+
 {% endblock %}
