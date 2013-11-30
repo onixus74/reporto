@@ -135,6 +135,7 @@
 					</div>
 					<div class="span6" style="margin-top: 20px;">
             <h2>Thanks</h2>
+            <p>...</p>
             <div id="ui-timeline-thanks-list" class="ui-timeline-list">
             </div>
             <div id="ui-stats-thanks-by-category-chart" style="margin-top: 20px;"></div>
@@ -242,8 +243,10 @@
 
 	{% if report_list %}
 	<script type="text/javascript">
-		reform.data.categories = {{categories|json}}
-		reform.data.features = {{features|json}}
+    reform.urls.incidentView = {% url 'reports:view' 0 as incident_view_url %}{{incident_view_url|json}};
+    reform.urls.thankView = {% url 'thanks:view' 0 as thank_view_url %}{{thank_view_url|json}};
+		reform.data.incidentsCategories = {{incidents_categories|json}}
+		reform.data.incidentsFeatures = {{incidents_features|json}}
 		reform.data.incidentsByCategory = {{incidents_by_category|json}}
 		reform.data.incidentsByFeature = {{incidents_by_feature|json}}
 		reform.data.incidentsByVictimGender = {{incidents_by_victim_gender|json}}

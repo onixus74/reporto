@@ -164,9 +164,11 @@ INSTALLED_APPS = (
 
     # project components
     'users',
-    'admin_mod',
+
 
     # 'suit', # theme for admin
+    'admin_mod',
+    #'django_admin_bootstrapped.bootstrap3',
     'django_admin_bootstrapped',  # theme for admin
     #'grappelli',
     #'filebrowser',

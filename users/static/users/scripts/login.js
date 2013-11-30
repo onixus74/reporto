@@ -211,7 +211,7 @@ $(document).ready(function() {
 
     !(function() {
 
-      var features = statistics.features.slice(0);
+      var features = statistics.incidents_features.slice(0);
 
       var data = [];
       data.length = features.length;
@@ -227,7 +227,7 @@ $(document).ready(function() {
       });
 
       features.unshift("All");
-      data.unshift(statistics.reports_count);
+      data.unshift(statistics.incidents_count);
 
       $(document).ready(function() {
         $('#ui-stats-features-chart').highcharts({

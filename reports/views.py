@@ -66,8 +66,8 @@ class ReportsDashboard(PaginatedListHybridResponseMixin, ListView):
 
     else:
 
-      context['categories'] = [category.__unicode__() for category in Category.objects.all()]
-      context['features'] = [feature.__unicode__() for feature in Feature.objects.all()]
+      context['incidents_categories'] = [category.__unicode__() for category in Category.objects.all()]
+      context['incidents_features'] = [feature.__unicode__() for feature in Feature.objects.all()]
 
       incidents_by_category = Report.objects.values('category__definition').annotate(Count("id")).order_by('category__definition')
       context['incidents_by_category'] = [{'label': i['category__definition'], 'count': i['id__count']} for i in incidents_by_category]
@@ -94,8 +94,8 @@ class ReportsDashboard(PaginatedListHybridResponseMixin, ListView):
         result = Report.objects.extra({'date' : "date(datetime)"}).filter(category=category).values('date').annotate(Count('id')).order_by('date')
         context['incidents_by_category_by_date'][category.__unicode__()] = [ { 'date': i['date'], 'count': i['id__count'] } for i in result ]
 
-      context['incidents_locations'] = Report.objects.values('latitude', 'longitude', 'category__definition')
-      context['thanks_locations'] = ThankReport.objects.values('latitude', 'longitude', 'category__definition')
+      context['incidents_locations'] = Report.objects.values('latitude', 'longitude', 'category__definition', 'pk')
+      context['thanks_locations'] = ThankReport.objects.values('latitude', 'longitude', 'category__definition', 'pk')
 
     return context
 
@@ -601,8 +601,8 @@ def statistics(request, *args, **kwargs):
   else:
     response = {}
 
-    response['categories'] = [ category.__unicode__() for category in Category.objects.all() ]
-    response['features'] = [ feature.__unicode__() for feature in Feature.objects.all() ]
+    response['incidents_categories'] = [ category.__unicode__() for category in Category.objects.all() ]
+    response['incidents_features'] = [ feature.__unicode__() for feature in Feature.objects.all() ]
 
     response['incidents_count'] = Report.objects.count()
 
@@ -622,6 +622,10 @@ def statistics(request, *args, **kwargs):
 
     incidents_by_date = Report.objects.extra({'date' : "date(datetime)"}).values('date').annotate(Count('id')).order_by('date')
     response['incidents_by_date'] = [ { 'date': i['date'], 'count': i['id__count'] } for i in incidents_by_date ]
+
+    response['thanks_categories'] = [ category.__unicode__() for category in ThankCategory.objects.all() ]
+
+    response['thanks_count'] = ThankReport.objects.count()
 
     thanks_by_date = ThankReport.objects.extra({'date' : "date(datetime)"}).values('date').annotate(Count('id')).order_by('date')
     response['thanks_by_date'] = [ { 'date': i['date'], 'count': i['id__count'] } for i in thanks_by_date ]

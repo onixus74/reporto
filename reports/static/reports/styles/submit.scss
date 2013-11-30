@@ -162,6 +162,10 @@ body {
 				background-color: $btnPrimaryBackground;
 				@include box-shadow(inset 0 0 8px #d4d4d4);
 			}
+
+      &.adjacent-month {
+        color: $grayLight;
+      }
 		}
 	}
 

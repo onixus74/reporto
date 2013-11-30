@@ -156,8 +156,12 @@ body {
   -moz-box-shadow: inset 0 0 8px #d4d4d4;
   box-shadow: inset 0 0 8px #d4d4d4;
 }
+/* line 166, submit.scss */
+#dateinput .days .day.adjacent-month, #dateinput .days .empty.adjacent-month {
+  color: #bdc3c7;
+}
 
-/* line 170, submit.scss */
+/* line 174, submit.scss */
 .ui-similar-report-candidate {
   margin: 4px;
   border: 1px transparent solid;
@@ -166,77 +170,77 @@ body {
   -o-transition: border-color 0.1s linear;
   transition: border-color 0.1s linear;
 }
-/* line 174, submit.scss */
+/* line 178, submit.scss */
 .ui-similar-report-candidate.ui-similar {
   border-color: #c0392b;
   -webkit-box-shadow: 0 0 5px rgba(214, 85, 72, 0.9);
   -moz-box-shadow: 0 0 5px rgba(214, 85, 72, 0.9);
   box-shadow: 0 0 5px rgba(214, 85, 72, 0.9);
 }
-/* line 177, submit.scss */
+/* line 181, submit.scss */
 .ui-similar-report-candidate.ui-similar.ui-similar-1 {
   -webkit-box-shadow: 0 0 10px rgba(209, 66, 51, 0.8);
   -moz-box-shadow: 0 0 10px rgba(209, 66, 51, 0.8);
   box-shadow: 0 0 10px rgba(209, 66, 51, 0.8);
 }
-/* line 180, submit.scss */
+/* line 184, submit.scss */
 .ui-similar-report-candidate.ui-similar.ui-similar-2 {
   -webkit-box-shadow: 0 0 20px rgba(192, 57, 43, 0.7);
   -moz-box-shadow: 0 0 20px rgba(192, 57, 43, 0.7);
   box-shadow: 0 0 20px rgba(192, 57, 43, 0.7);
 }
-/* line 183, submit.scss */
+/* line 187, submit.scss */
 .ui-similar-report-candidate.ui-similar.ui-similar-3 {
   -webkit-box-shadow: 0 0 30px rgba(171, 51, 38, 0.7);
   -moz-box-shadow: 0 0 30px rgba(171, 51, 38, 0.7);
   box-shadow: 0 0 30px rgba(171, 51, 38, 0.7);
 }
-/* line 186, submit.scss */
+/* line 190, submit.scss */
 .ui-similar-report-candidate.ui-similar.ui-similar-4 {
   -webkit-box-shadow: 0 0 40px rgba(150, 45, 34, 0.7);
   -moz-box-shadow: 0 0 40px rgba(150, 45, 34, 0.7);
   box-shadow: 0 0 40px rgba(150, 45, 34, 0.7);
 }
 
-/* line 201, submit.scss */
+/* line 205, submit.scss */
 .ui-similar-category .ui-similar-report-category, .ui-similar-category .ui-similar-report-category a {
   color: #ab3326;
   font-weight: bold;
 }
 
-/* line 206, submit.scss */
+/* line 210, submit.scss */
 .ui-similar-location .ui-similar-report-location, .ui-similar-location .ui-similar-report-location a {
   color: #962d22;
   font-weight: bold;
 }
 
-/* line 211, submit.scss */
+/* line 215, submit.scss */
 .ui-similar-datetime .ui-similar-report-datetime, .ui-similar-datetime .ui-similar-report-datetime a {
   color: #81261d;
   font-weight: bold;
 }
 
-/* line 216, submit.scss */
+/* line 220, submit.scss */
 .ui-similar-victim .ui-similar-report-victim, .ui-similar-victim .ui-similar-report-victim a {
   color: #c0392b;
   font-weight: bold;
 }
 
 @media (max-width: 767px) {
-  /* line 223, submit.scss */
+  /* line 227, submit.scss */
   #ui-wizard-progress-bar {
     top: 50px;
   }
-  /* line 225, submit.scss */
+  /* line 229, submit.scss */
   #ui-wizard-progress-bar .progress {
     margin: 0;
   }
 }
-/* line 233, submit.scss */
+/* line 237, submit.scss */
 .ui-victim-fieldset {
   height: auto;
 }
-/* line 235, submit.scss */
+/* line 239, submit.scss */
 .ui-victim-fieldset .control-group {
   margin-bottom: 10px;
 }

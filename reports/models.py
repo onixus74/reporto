@@ -29,6 +29,10 @@ class Category(models.Model):
         verbose_name_plural = "categories"
 
 
+class IncidentCategory(Category):
+    pass
+
+
 class Feature(models.Model):
     slug = models.SlugField(max_length=200, blank=True, null=True)
     definition = models.CharField(max_length=300)

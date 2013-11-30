@@ -2,7 +2,7 @@
 /* global angular, $, L, Dropzone, reform */
 'use strict';
 
-if(!reform) {
+if (!reform) {
   var reform = {
     data: {},
     urls: {},
@@ -178,8 +178,8 @@ reform.widgets.wizard.init = function() {
         var index = order.indexOf(section);
         var next_index = order[index + 1];
         var next_section;
-        if(Array.isArray(next_index)){
-          next_section = next_index.map(function(i){
+        if (Array.isArray(next_index)) {
+          next_section = next_index.map(function(i) {
             return sections[i];
           });
         } else {
@@ -188,8 +188,8 @@ reform.widgets.wizard.init = function() {
         console.log('section', section, sections[section]);
         console.log('next section', next_index, next_section);
         if (next_section) {
-          if(Array.isArray(next_section)) {
-            next_section.forEach(function(e){
+          if (Array.isArray(next_section)) {
+            next_section.forEach(function(e) {
               $(e).addClass('animated fadeIn').show();
             });
           } else {
@@ -222,7 +222,7 @@ reform.widgets.wizard.init = function() {
 
   /* */
 
-  Array.prototype.slice.apply(document.querySelector('#thank-form').elements).forEach(function(e){
+  Array.prototype.slice.apply(document.querySelector('#thank-form').elements).forEach(function(e) {
     elements[e.name] = $(e);
   });
 
@@ -313,7 +313,7 @@ reform.widgets.wizard.init = function() {
         "X-CSRFToken": csrf_token
       }
     }).done(function(data) {
-      setTimeout(function(){
+      setTimeout(function() {
         window.location = data.url;
       }, 500);
       $.pnotify({
@@ -347,14 +347,14 @@ reform.widgets.datetime.init = function() {
 
   var elements = reform.widgets.wizard.elements;
   var timeInput = elements.time,
-      dateInput = elements.date,
-      datetimeInput = elements.datetime;
+    dateInput = elements.date,
+    datetimeInput = elements.datetime;
 
-  function handleDateOrTimeChange(e){
+  function handleDateOrTimeChange(e) {
     var time = timeInput.val();
     var date = dateInput.val();
 
-    if(date && time) {
+    if (date && time) {
       datetimeInput.val(date + 'T' + time).trigger('change'); //change();
     }
   }
@@ -368,6 +368,7 @@ reform.widgets.datetime.init = function() {
     //console.log('previousYear', clndr.element.find('.clndr-previous-year-button'), clndr.element.find('.clndr-next-year-button'))
     clndr.previousYear();
   }
+
   function nextYear(e) {
     //console.log('nextYear', clndr.element.find('.clndr-previous-year-button'), clndr.element.find('.clndr-next-year-button'))
     clndr.nextYear();
@@ -375,14 +376,20 @@ reform.widgets.datetime.init = function() {
 
   clndr = widget.object = $('#dateinput').clndr({
 
-    template: $('#dateinput-template').html().split(/\n|\r/gi).map(function(s){return s.trim()}).join(''),
+    template: $('#dateinput-template').html().split(/\n|\r/gi).map(function(s) {
+      return s.trim()
+    }).join(''),
+
+    adjacentDaysChangeMonth: true,
 
     clickEvents: {
       click: function(target) {
         console.log(target);
-        dateInput.val(target.date._i).change();
-        $('#dateinput .day.selected').removeClass('selected');
-        $(target.element).addClass('selected');
+        if (target.date._f) {
+          dateInput.val(target.date._i).change();
+          $('#dateinput .day.selected').removeClass('selected');
+          $(target.element).addClass('selected');
+        }
       },
     },
 
@@ -415,4 +422,3 @@ reform.widgets.xxx.init = function() {
 
 $(document).ready(reform.widgets.xxx.init);
 */
-
