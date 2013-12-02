@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required, user_passes_test, per
 from base.utils.urls import administrator_required
 
 from base.views import *
-from reports.views import ReportsDashboard
+from incidents.views import ReportsDashboard
 
 
 urlpatterns = patterns('',
@@ -15,7 +15,7 @@ urlpatterns = patterns('',
 
 	#url(r'^$', 'base.views.home', name='home'),
 	#url(r'^$',           login_required(ReportsDashboard.as_view(), login_url="login"),       name='home'),
-  url(r'^$',           login_required(home_dashboard, login_url="login"),       name='home'),
+    url(r'^$',           login_required(home, login_url="login"),       name='home'),
 
 	# url(r'^$', TemplateView.as_view(template_name="home.html"), name='home'),
 
@@ -27,7 +27,7 @@ urlpatterns = patterns('',
 
 	url(r'^users/',      include('users.urls', namespace="users")),
 
-	url(r'^reports/',    include('reports.urls',    namespace='reports')),
+	url(r'^incidents/',    include('incidents.urls',    namespace='incidents')),
 	url(r'^thanks/',    include('thanks.urls',    namespace='thanks')),
 
 )

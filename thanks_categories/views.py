@@ -6,7 +6,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from base.utils.views import ListHybridResponseMixin, DetailHybridResponseMixin
 from django import forms
 
-from reports.models import ThankCategory
+from incidents.models import ThankCategory
 
 
 TEMPLATE_BASE = 'thanks_categories'

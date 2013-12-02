@@ -88,7 +88,7 @@
 
 {% block view_scripts %}
 	<script type="text/javascript">
-		reform.urls.statistics = {% url 'reports:public_statistics' as stats_url %}{{stats_url|json}};
+		reform.urls.statistics = {% url 'incidents:public_statistics' as stats_url %}{{stats_url|json}};
 	</script>
 	{% compress js %}
 	<script src="{% static 'components/highcharts.com/js/highcharts.src.js' %}"></script>

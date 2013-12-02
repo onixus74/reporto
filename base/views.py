@@ -18,8 +18,8 @@ from base.utils.views import JSONResponse
 from users.models import User
 from users.forms import UserCreationForm
 
-from reports.models import Report, ThankReport
-from reports.views import append_statistics
+from incidents.models import Report, ThankReport
+from incidents.views import append_incidents_statistics, append_thanks_statistics
 
 
 @csrf_exempt
@@ -35,20 +35,6 @@ def test(request, *args, **kwargs):
     logger.debug("files: %s", request.FILES)
     # return HttpResponse({'done': True})
     return render(request, 'test.html', {'done': True})
-
-
-def home(request, *args, **kwargs):
-    if request.user.is_authenticated():
-        template_name = "home.html"
-        context = {
-            "message": "Hello!"
-        }
-        # context.update(csrf(request))
-        #context = RequestContext(request, context)
-        return render(request, template_name, context)
-    else:
-        # return redirect_to_login(next[, login_url, redirect_field_name])
-        return redirect_to_login('/')
 
 
 class UserForm(forms.ModelForm):
@@ -115,15 +101,16 @@ def logout_view(request, *args, **kwargs):
     return redirect('home')
 
 
-def home_dashboard(request, *args, **kwargs):
+def home(request, *args, **kwargs):
     #if request.user.is_authenticated():
-    template_name = "home_dashboard.html"
+    template_name = "home.html"
     context = {}
 
     context['report_list'] = Report.objects.all();
     context['thankreport_list'] = ThankReport.objects.all();
 
-    append_statistics(context)
+    append_incidents_statistics(context)
+    append_thanks_statistics(context)
 
     context['incidents_locations'] = Report.objects.values('latitude', 'longitude', 'category__definition', 'pk')
     context['thanks_locations'] = ThankReport.objects.values('latitude', 'longitude', 'category__definition', 'pk')

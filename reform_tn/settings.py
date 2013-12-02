@@ -177,10 +177,10 @@ INSTALLED_APPS = (
 
     # project components
     'base',
-    'reports',
-    'reports_categories',
-    'reports_features',
-    'reports_victims',
+    'incidents',
+    'incidents_categories',
+    'incidents_features',
+    'incidents_victims',
     'thanks',
     'thanks_categories',
 

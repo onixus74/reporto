@@ -3,7 +3,7 @@
 'use strict';
 
 if (!reform) {
-  var reform = {
+  window.reform = {
     data: {},
     urls: {},
     widgets: {}

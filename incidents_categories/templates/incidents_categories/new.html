@@ -1,0 +1,56 @@
+{% extends "layouts/default.html" %}
+
+{% load crispy_forms_tags %}
+{% load widget_tweaks %}
+
+{% block view_title %}New Category | {% endblock %}
+
+{% block view_content %}
+<div class="container">
+
+	<div class="page-header">
+		<h1 class="text-center">Category <small>Add</small></h1>
+	</div>
+
+	{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+	<div class="container-fluid">
+		<div class="row-fluid">
+			<div class="offset2 span8">
+
+				{% comment %}
+					<form>
+						{% for field in form %}
+							<div class="control-group">
+								{#% {{ field.label_tag }} %#}
+								<label class="control-label" for="{{ field.id }}">{{ field.label }}</label>
+								<div class="controls">
+									{{ field }}
+									<span class="help-block">
+										<p class="text-error">{{ field.errors }}</p>
+									</span>
+								</div>
+
+							</div>
+						{% endfor %}
+					</form>
+				{% endcomment %}
+
+				<form class="form-horizontal" action="{% url 'incidents:categories:create' %}" method="post">
+					{% csrf_token %}
+
+					{{form|crispy}}
+
+					<div class="form-actions">
+						<button type="submit" class="btn btn-primary">Submit</button>
+						<a href="{% url 'incidents:categories:list' %}" class="btn">Cancel</a>
+					</div>
+
+				</form>
+
+			</div>
+		</div>
+	</div>
+
+</div>
+{% endblock %}

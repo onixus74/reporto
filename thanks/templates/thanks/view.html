@@ -1,6 +1,6 @@
 {% extends "layouts/default.html" %}
 
-{% load static custom thumbnail compress markup %}
+{% load static custom thumbnail compress %}
 
 {% block view_title %}Thank Details | {% endblock %}
 
@@ -21,7 +21,7 @@
           <hr>
           <h2 class="text-center">
             {{thankreport.category}} on {{thankreport.datetime}} at {{thankreport.location_text}}
-            {% if user.is_admin %}<a class="btn btn-warning" href="/admin/reports/thankreport/{{thankreport.id}}" target="_blank"><i class="icon-pencil"></i> Edit</a>{% endif %}
+            {% if user.is_admin %}<a class="btn btn-warning" href="/admin/incidents/thankreport/{{thankreport.id}}" target="_blank"><i class="icon-pencil"></i> Edit</a>{% endif %}
           </h2>
         </div>
       </div>

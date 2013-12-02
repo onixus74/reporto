@@ -1,0 +1,106 @@
+{% extends "layouts/default.html" %}
+
+{% load static custom thumbnail compress %}
+
+{% block view_title %}Report Details | {% endblock %}
+
+{% block view_content %}
+<div class="container">
+
+	<div class="page-header">
+		<h1 class="text-center">Report View<small></small></h1>
+	</div>
+
+	{% include "incidents/view_partial.html" %}
+
+</div>
+{% endblock %}
+
+{% block view_styles %}
+
+	{% compress css %}
+	<!-- Map -->
+	<link rel="stylesheet" href="{% static 'components/leaflet/dist/leaflet.css' %}" />
+	<!-- Lightbox -->
+	<link rel="stylesheet" href="{% static 'components/fancybox/source/jquery.fancybox.css' %}" type="text/css" />
+	<link rel="stylesheet" href="{% static 'components/fancybox/source/helpers/jquery.fancybox-thumbs.css' %}" type="text/css" />
+	{% endcompress %}
+
+	{% compress css %}
+	<link rel="stylesheet" href="{% static 'incidents/styles/view.css'%}" />
+	{% endcompress %}
+
+{% endblock %}
+
+{% block view_scripts %}
+
+	{% compress js %}
+	<!-- Map -->
+	<script src="{% static 'components/leaflet/dist/leaflet.js' %}"></script>
+	<script type="text/javascript">L.Icon.Default.imagePath = "{% static 'components/leaflet/dist/images' %}";</script>
+	<!-- Lightbox -->
+	<script type="text/javascript" src="{% static 'components/fancybox/source/jquery.fancybox.js' %}"></script>
+	<script type="text/javascript" src="{% static 'components/fancybox/source/helpers/jquery.fancybox-media.js' %}"></script>
+	<script type="text/javascript" src="{% static 'components/fancybox/source/helpers/jquery.fancybox-thumbs.js' %}"></script>
+	{% endcompress %}
+
+	<script type="text/javascript">
+		reform.urls = {
+			'verify': "{% url 'incidents:verify' report.id %}",
+			'close': "{% url 'incidents:close' report.id %}",
+			'comment': "{% url 'incidents:comment' report.id %}"
+		};
+		reform.data.report = {{report|json}}
+		//$.post(reform.urls.verify, {csrfmiddlewaretoken: csrf_token}).done(function(data){console.log(data)})
+		/*
+		$.ajaxSetup({
+			beforeSend: function(xhr, settings) {
+				xhr.setRequestHeader("X-CSRFToken", csrf_token);
+			}
+		});
+		*/
+		$(function(){
+
+			//$(".fancybox").fancybox();
+
+			$(".fancybox").fancybox({
+				helpers : {
+					media : {},
+					thumbs	: {
+						width	: 50,
+						height	: 50
+					},
+				}
+			});
+
+			$(".fancybox-thumb").fancybox({
+				prevEffect	: 'none',
+				nextEffect	: 'none',
+				helpers	: {
+					/*title	: {
+						type: 'outside'
+					},*/
+					thumbs	: {
+						width	: 50,
+						height	: 50
+					}
+				}
+			});
+
+			$('.fancybox-media').fancybox({
+				/*
+				openEffect  : 'none',
+				closeEffect : 'none',
+				*/
+				helpers : {
+					media : {}
+				}
+			});
+		});
+	</script>
+
+	{% compress js %}
+	<script src="{% static 'incidents/scripts/view.js' %}"></script>
+	{% endcompress %}
+
+{% endblock %}

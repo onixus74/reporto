@@ -20,7 +20,7 @@ from base.utils.views import JSONResponse
 from django import forms
 
 from .models import User
-from reports.models import Victim
+from incidents.models import Victim
 
 class UserListView(ListView):
     model = User
@@ -81,7 +81,7 @@ def user_view(request, pk=None, username=None, extension=None):
 # 		}
 
 
-from reports_victims.views import VictimForm as BaseVictimForm
+from incidents_victims.views import VictimForm as BaseVictimForm
 
 
 class VictimForm(BaseVictimForm):

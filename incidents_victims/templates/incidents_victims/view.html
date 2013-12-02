@@ -1,0 +1,60 @@
+{% extends "layouts/default.html" %}
+
+{% block view_title %}Victim Details | {% endblock %}
+
+{% block view_content %}
+<div class="container">
+
+	<div class="page-header">
+		<h1 class="text-center">Victim <small>Detail</small></h1>
+	</div>
+
+	<div class="container-fluid">
+		<div class="row-fluid">
+			<div class="offset2 span8">
+
+				<form class="form-horizontal">
+
+					<div class="control-group">
+						<div class="controls">
+							<dl>
+								<dt>Category</dt>
+								<dd>{{victim.get_category_display}}</dd>
+								<dt>First name</dt>
+								<dd>{{victim.firstname}}</dd>
+								<dt>Last name</dt>
+								<dd>{{victim.lastname}}</dd>
+								<dt>Gender</dt>
+								<dd>{{victim.get_gender_display}}</dd>
+								<dt>Age</dt>
+								<dd>{{victim.age|default:"N/A"}}</dd>
+								<dt>Education</dt>
+								<dd>{{victim.get_education_display}}</dd>
+								<dt>Profession</dt>
+								<dd>{{victim.profession|default:"N/A"}}</dd>
+								{% comment %}
+								<dt>Phone</dt>
+								<dd>{{victim.phone}}</dd>
+								<dt>Email</dt>
+								<dd>{{victim.email}}</dd>
+								{% endcomment %}
+								<dt>Description</dt>
+								<dd>{{victim.description|default:"N/A"}}</dd>
+							</dl>
+						</div>
+					</div>
+
+					<div class="form-actions">
+						<a href="{% url 'incidents:victims:edit' victim.id %}" class="btn btn-info"><i class="icon-pencil"></i> Edit</a>
+						<a href="{% url 'incidents:victims:delete' victim.id %}" class="btn btn-warning"><i class="icon-trash"></i> Delete</a>
+						<a href="{% url 'incidents:victims:list' %}" class="btn"><i class="icon-back"></i> Back</a>
+					</div>
+
+				</form>
+
+			</div>
+		</div>
+	</div>
+
+</div>
+{% endblock %}

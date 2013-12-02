@@ -98,16 +98,16 @@
 					<ul class="nav">
 						{% if user.is_authenticated %}
 						<li{% if false %} class="active"{% endif %}><a href="{% url 'home' %}">Dashboard</a></li>
-						<li{% if false %} class="active"{% endif %}><a href="{% url 'reports:submit' %}">Report an Incident</a></li>
+						<li{% if false %} class="active"{% endif %}><a href="{% url 'incidents:submit' %}">Report an Incident</a></li>
                         <li{% if false %} class="active"{% endif %}><a href="{% url 'thanks:submit' %}">Thank a Security Officer</a></li>
 						{% if user.role == "A" %}
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Administration<b class="caret"></b></a>
 							<ul class="dropdown-menu">
 								<li><a href="{% url 'users:list' %}">Users</a></li>
-								<li><a href="{% url 'reports:categories:list' %}">Report Categories</a></li>
-								<li><a href="{% url 'reports:features:list' %}">Report Features</a></li>
-								<li><a href="{% url 'reports:victims:list' %}">Report Victims</a></li>
+								<li><a href="{% url 'incidents:categories:list' %}">Incident Categories</a></li>
+								<li><a href="{% url 'incidents:features:list' %}">Incident Features</a></li>
+								<li><a href="{% url 'incidents:victims:list' %}">Incident Victims</a></li>
 								<li><a href="{% url 'thanks:categories:list' %}">Thank Categories</a></li>
 								<li class="divider"></li>
 								<!--<li class="nav-header">Nav header</li>-->

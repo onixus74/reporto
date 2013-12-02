@@ -7,7 +7,7 @@ from thanks.views import *
 
 
 urlpatterns = patterns('',
-    url(r'^dashboard(\.(?P<extension>(json)))?$',           login_required(ThankReportsDashboard.as_view()),       name='dashboard'),
+    url(r'^(\.(?P<extension>(json)))?$',           login_required(ThankReportsDashboard.as_view()),       name='dashboard'),
     url(r'^submit$',              login_required(thank_submit),                    name='submit'),
     url(r'^(?P<pk>\d+)(\.(?P<extension>(json)))?$',    login_required(ThankView.as_view()),             name='view'),
     url(r'^categories/', include('thanks_categories.urls', namespace="categories")),

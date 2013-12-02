@@ -100,10 +100,7 @@
 	{% endcompress %}
 
 	<script type="text/javascript">
-		//var report_submit_id = {{report_submit_id|json}};
-		//reform.data.victims = {{victims|json}};
-		//reform.data.reports = {{reports|json}};
-		reform.urls.submit = {% url 'reports:submit' as submit_url %}{{submit_url|json}};
+		reform.urls.submit = {% url 'incidents:submit' as submit_url %}{{submit_url|json}};
 	</script>
 
 {% endblock %}
