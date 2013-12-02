@@ -29,8 +29,8 @@ class Category(models.Model):
         verbose_name_plural = "categories"
 
 
-class IncidentCategory(Category):
-    pass
+# class IncidentCategory(Category):
+#     pass
 
 
 class Feature(models.Model):

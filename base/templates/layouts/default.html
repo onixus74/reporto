@@ -97,7 +97,7 @@
 					<div class="nav-collapse collapse">
 					<ul class="nav">
 						{% if user.is_authenticated %}
-						<li{% if false %} class="active"{% endif %}><a href="{% url 'reports:dashboard' %}">Dashboard</a></li>
+						<li{% if false %} class="active"{% endif %}><a href="{% url 'home' %}">Dashboard</a></li>
 						<li{% if false %} class="active"{% endif %}><a href="{% url 'reports:submit' %}">Report an Incident</a></li>
                         <li{% if false %} class="active"{% endif %}><a href="{% url 'thanks:submit' %}">Thank a Security Officer</a></li>
 						{% if user.role == "A" %}

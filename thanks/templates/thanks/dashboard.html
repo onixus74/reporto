@@ -213,11 +213,17 @@
 	<link rel="stylesheet" href="{% static 'components/leaflet/dist/leaflet.css'%}" />
 	<link rel="stylesheet" href="{% static 'components/leaflet.markerclusterer/dist/MarkerCluster.Default.css'%}" />
   <link rel="stylesheet" href="{% static 'components/Leaflet.awesome-markers/dist/leaflet.awesome-markers.css'%}" />
+	{% comment %}
+	<link rel="stylesheet" href="{% static 'components/morris.js/morris.css'%}" />
+	<link rel="stylesheet" href="{% static 'components/morris.js/morris.css'%}" />
+	{% endcomment %}
+	{% endcompress %}
+	<!--[if lte IE 8]>
+	<link rel="stylesheet" href="{% static 'components/leaflet/dist/leaflet.ie.css'%}" />
+	<![endif]-->
+	{% compress css %}
 	<link rel="stylesheet" href="{% static 'reports/styles/dashboard.css'%}" />
 	{% endcompress %}
-  <!--[if lte IE 8]>
-  <link rel="stylesheet" href="{% static 'components/leaflet/dist/leaflet.ie.css'%}" />
-  <![endif]-->
 {% endblock %}
 
 {% block view_scripts %}
@@ -227,8 +233,14 @@
 	<script type="text/javascript">L.Icon.Default.imagePath = "{% static 'components/leaflet/dist/images' %}";</script>
 	<script src="{% static 'components/leaflet.markerclusterer/dist/leaflet.markercluster-src.js' %}"></script>
   <script src="{% static 'components/Leaflet.awesome-markers/dist/leaflet.awesome-markers.js' %}"></script>
+	{% comment %}
+	<script src="{% static 'components/raphael/raphael.js' %}"></script>
+	<script src="{% static 'components/morris.js/morris.js' %}"></script>
+	{% endcomment %}
 	<script src="{% static 'components/highcharts.com/js/highcharts.src.js' %}"></script>
 	<script src="{% static 'components/highcharts.com/js/modules/exporting.src.js' %}"></script>
+	{% endcompress %}
+
 	{% if report_list %}
 	<script type="text/javascript">
     reform.urls.incidentView = {% url 'reports:view' 0 as incident_view_url %}{{incident_view_url|json}};
@@ -250,9 +262,9 @@
 			count: {{count|json}},
 		};
 	</script>
-  {% endif %}
+	{% compress js %}
 	<script src="{% static 'reports/scripts/dashboard.js' %}"></script>
 	{% endcompress %}
-
+	{% endif %}
 
 {% endblock %}

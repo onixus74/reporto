@@ -2,14 +2,14 @@
 
 {% load static custom compress %}
 
-{% block view_title %}Reports Dashboard | {% endblock %}
+{% block view_title %}Reports/Thanks Dashboard | {% endblock %}
 
 {% block view_content %}
 
 	<div class="container">
 
 		<div class="page-header">
-			<h1 class="text-center">Reports Dashboard</h1>
+			<h1 class="text-center">Reports/Thanks Dashboard</h1>
 		</div>
 
 		<div class="hero-unit clearfix" style="padding: 20px 40px;">
@@ -250,7 +250,7 @@
 			count: {{count|json}},
 		};
 	</script>
-  {% endif %}
+	{% endif %}
 	<script src="{% static 'reports/scripts/dashboard.js' %}"></script>
 	{% endcompress %}
 

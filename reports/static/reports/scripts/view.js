@@ -64,6 +64,8 @@ reform.widgets.comment.init = function() {
 
 	function handleClick(e) {
 
+    e.preventDefault();
+
 		var type = 'U';
 		console.log(e.target);
 		if(e.target.id == 'ui-add-correction-comment-button')
@@ -88,7 +90,6 @@ reform.widgets.comment.init = function() {
 				"X-CSRFToken": csrf_token
 			}
 		}).done(function(data) {
-			window.location.reload();
 			$('#ui-no-comments').remove();
 			comments.append(data.html);
 			comments.find(".fancybox").fancybox();

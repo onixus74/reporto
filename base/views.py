@@ -18,6 +18,10 @@ from base.utils.views import JSONResponse
 from users.models import User
 from users.forms import UserCreationForm
 
+from reports.models import Report, ThankReport
+from reports.views import append_statistics
+
+
 @csrf_exempt
 def test(request, *args, **kwargs):
     logger.debug("session: %s", request.session.items())
@@ -60,7 +64,7 @@ def register_view(request, *args, **kwargs):
     form = UserCreationForm(request.POST or None)
     if form.is_valid():
         user = form.save()
-        
+
         if user.is_active:
             #logger.debug('REGISTRATION %s', [user, user.username, user.password, request.POST["password"], form.cleaned_data["password"]])
             user = authenticate(username=user.username, password=form.cleaned_data["password"])
@@ -109,3 +113,24 @@ def login_view(request, *args, **kwargs):
 def logout_view(request, *args, **kwargs):
     logout(request)
     return redirect('home')
+
+
+def home_dashboard(request, *args, **kwargs):
+    #if request.user.is_authenticated():
+    template_name = "home_dashboard.html"
+    context = {}
+
+    context['report_list'] = Report.objects.all();
+    context['thankreport_list'] = ThankReport.objects.all();
+
+    append_statistics(context)
+
+    context['incidents_locations'] = Report.objects.values('latitude', 'longitude', 'category__definition', 'pk')
+    context['thanks_locations'] = ThankReport.objects.values('latitude', 'longitude', 'category__definition', 'pk')
+
+    #context = RequestContext(request, context)
+    # context.update(csrf(request))
+    return render(request, template_name, context)
+    #else:
+    # return redirect_to_login(next[, login_url, redirect_field_name])
+    # return redirect_to_login('/')

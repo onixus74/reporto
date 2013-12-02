@@ -14,7 +14,8 @@ urlpatterns = patterns('',
 	(r'^i18n/', include('django.conf.urls.i18n')),
 
 	#url(r'^$', 'base.views.home', name='home'),
-	url(r'^$',           login_required(ReportsDashboard.as_view(), login_url="login"),       name='home'),
+	#url(r'^$',           login_required(ReportsDashboard.as_view(), login_url="login"),       name='home'),
+  url(r'^$',           login_required(home_dashboard, login_url="login"),       name='home'),
 
 	# url(r'^$', TemplateView.as_view(template_name="home.html"), name='home'),
 

@@ -1,4 +1,4 @@
-{% load static thumbnail markup %}
+{% load static thumbnail %}
 
 	<div class="well">
 
@@ -58,7 +58,7 @@
 					<hr>
 					<h2><i class="icon-ellipsis-horizontal"></i> Description</h2>
 					<p>{{report.description|urlize}}</p>
-					{% if report.sources %}<p>Sources: {{report.sources|markdown}}</p>{% endif %}
+					{% if report.sources %}<p>Sources: {{report.sources}}</p>{% endif %}
 				</div>
 				<div class="span6">
 					<hr>
