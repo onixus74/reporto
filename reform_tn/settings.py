@@ -257,7 +257,11 @@ LOGGING = {
             'handlers': ['console'],
             'level': 'DEBUG',
         },
-        'reports': {
+        'incidents': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+        },
+        'thanks': {
             'handlers': ['console'],
             'level': 'DEBUG',
         }

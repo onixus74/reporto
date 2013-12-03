@@ -57,7 +57,7 @@ def register_view(request, *args, **kwargs):
             #logger.debug('REGISTRATION %s', [user])
             login(request, user)
             messages.success(request, 'Login succeeded.')
-            #return redirect(request.REQUEST.get('next', 'users:profile'))
+            # return redirect(request.REQUEST.get('next', 'users:profile'))
             return redirect('users:profile')
         else:
             messages.warning(request, 'Sorry, your user account is inactive.')
@@ -100,14 +100,57 @@ def logout_view(request, *args, **kwargs):
     logout(request)
     return redirect('home')
 
+paginate_by = 5
+
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+
 
 def home(request, *args, **kwargs):
-    #if request.user.is_authenticated():
+    # if request.user.is_authenticated():
     template_name = "home.html"
     context = {}
 
-    context['report_list'] = Report.objects.all();
-    context['thankreport_list'] = ThankReport.objects.all();
+    incidents = Report.objects.all()
+    incidents_paginator = Paginator(incidents, paginate_by)
+
+    incidents_page = request.GET.get('incidents-page')
+    try:
+        incidents = incidents_paginator.page(incidents_page)
+    except PageNotAnInteger:
+        incidents_page = 1
+        incidents = incidents_paginator.page(incidents_page)
+    except EmptyPage:
+        incidents_page = incidents_paginator.num_pages
+        incidents = incidents_paginator.page(incidents_page)
+
+    context['report_list'] = incidents
+    context['report_pagination'] = {
+        'count': incidents_paginator.count,
+        'pages': incidents_paginator.num_pages,
+        'current': incidents.number,
+        'is_paginated': incidents_paginator.num_pages > 1
+    }
+
+    thanks = ThankReport.objects.all()
+    thanks_paginator = Paginator(thanks, paginate_by)
+
+    thanks_page = request.GET.get('thanks-page')
+    try:
+        thanks = thanks_paginator.page(thanks_page)
+    except PageNotAnInteger:
+        thanks_page = 1
+        thanks = thanks_paginator.page(thanks_page)
+    except EmptyPage:
+        thanks_page = thanks_paginator.num_pages
+        thanks = thanks_paginator.page(thanks_page)
+
+    context['thankreport_list'] = thanks
+    context['thankreport_pagination'] = {
+        'count': thanks_paginator.count,
+        'pages': thanks_paginator.num_pages,
+        'current': thanks.number,
+        'is_paginated': thanks_paginator.num_pages > 1
+    }
 
     append_incidents_statistics(context)
     append_thanks_statistics(context)
@@ -118,6 +161,6 @@ def home(request, *args, **kwargs):
     #context = RequestContext(request, context)
     # context.update(csrf(request))
     return render(request, template_name, context)
-    #else:
+    # else:
     # return redirect_to_login(next[, login_url, redirect_field_name])
     # return redirect_to_login('/')

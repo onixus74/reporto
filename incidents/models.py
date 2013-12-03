@@ -26,7 +26,6 @@ class Category(models.Model):
         super(Category, self).save(*args, **kwargs)
 
     class Meta:
-        db_table = 'reports_category'
         verbose_name_plural = "categories"
 
 
@@ -49,7 +48,7 @@ class Feature(models.Model):
         super(Feature, self).save(*args, **kwargs)
 
     class Meta:
-        db_table = 'reports_feature'
+        pass
 
 
 class Media(models.Model):
@@ -106,7 +105,7 @@ class Media(models.Model):
         return data
 
     class Meta:
-        db_table = 'reports_media'
+        pass
 
 
 class Victim(models.Model):
@@ -188,14 +187,12 @@ class Victim(models.Model):
         return data
 
     class Meta:
-        db_table = 'reports_victim'
+        pass
 
 
 class Comment(models.Model):
 
-
     class Meta:
-        db_table = 'reports_comment'
         ordering = ["created_at"]
 
     UPDATE = 'U'
@@ -237,7 +234,6 @@ class Comment(models.Model):
 class Report(models.Model):
 
     class Meta:
-        db_table = 'reports_report'
         ordering = ["-datetime"]
 
     CITIZEN = 'CIT'
@@ -283,11 +279,8 @@ class Report(models.Model):
         data['victim'] = self.victim
         data['media'] = self.media.all()
         data['comments'] = self.comments.all()
-        data[
-            'aggressor_category_display'] = self.get_aggressor_category_display()
+        data['aggressor_category_display'] = self.get_aggressor_category_display()
         return data
-
-
 
 
 class ThankCategory(models.Model):
@@ -305,14 +298,12 @@ class ThankCategory(models.Model):
         super(ThankCategory, self).save(*args, **kwargs)
 
     class Meta:
-        db_table = 'reports_thankcategory'
         verbose_name_plural = "thank categories"
 
 
 class ThankReport(models.Model):
 
     class Meta:
-        db_table = 'reports_thankreport'
         ordering = ["-datetime"]
 
     datetime = models.DateTimeField('date and time')

@@ -72,62 +72,34 @@
 
         <div class="row-fluid">
           <div class="span6" style="margin-top: 20px;">
-            <div id="ui-timeline-reports-list" class="ui-timeline-list">
-              <div class="row-fluid">
-                <!--
-                <div class="span12">
-                  <input type="text" placeholder="Search" class="search input-block-level">
-                </div>
-                -->
-                <div class="span4" style="display: none;">
-                  <div class="pagination" style="margin: 0;">
-                    <ul>
-                      <!--<li class="disabled"><a href="#">&larr;</a></li>-->
-                      <li class="previous"><a href="javascript:void(0)" onclick="reform.widgets.timeline.showPreviousPage()">&larr;</a></li>
-                      <!--
-                      <li class="active"><a href="#">1</a></li>
-                      <li><a href="#">2</a></li>
-                      <li><a href="#">3</a></li>
-                      -->
-                      <li><span id="ui-timeline-pagination-indicator_"></span></li>
-                      <li class="next"><a href="javascript:void(0)" onclick="reform.widgets.timeline.showNextPage()">&rarr;</a></li>
-                    </ul>
-                  </div>
-                </div>
+            <div id="ui-timeline-reports-list" class="ui-timeline-list clearfix">
+
+              <div class="ui-pagination pagination pagination-small pagination-centered">
+                <ul>
+                  <li class="{% if current == 1 %}disabled{% endif %}">
+                    <a class="ui-pagination-control ui-pagination-first" href="{{request.path}}?page=1"><i class="icon-arrow-left"></i> First</a>
+                  </li>
+
+                  <li class="{% if current == 1 %}disabled{% endif %}">
+                    <a class="ui-pagination-control ui-pagination-previous" href="{{request.path}}?page={{ current|add:-1 }}"><i class="icon-chevron-left"></i> Previous</a>
+                  </li>
+
+                  <li><span class="ui-pagination-indicator">{{current}} / {{pages}}</span></li>
+
+                  <li class="{% if current == pages %}disabled{% endif %}">
+                    <a class="ui-pagination-control ui-pagination-next" href="{{request.path}}?page={{ current|add:1 }}">Next <i class="icon-chevron-right"></i></a>
+                  </li>
+
+                  <li class="{% if current == pages %}disabled{% endif %}">
+                    <a class="ui-pagination-control ui-pagination-last" href="{{request.path}}?page={{ pages }}">Last <i class="icon-arrow-right"></i></a>
+                  </li>
+                </ul>
               </div>
 
               <ul id="ui-timeline-list" class="list list-hover">
                 {% include "incidents/dashboard_incidents_list.html" %}
               </ul>
 
-              <div class="pagination pagination-centered">
-                <ul>
-
-                  <li class="{% if current == 1 %}disabled{% endif %}">
-                    <a id="ui-timeline-pagination-first" class="ui-timeline-pagination-control" href="{{request.path}}?page=1"><i class="icon-arrow-left"></i> First</a>
-                  </li>
-
-                  <li class="{% if current == 1 %}disabled{% endif %}">
-                    <a id="ui-timeline-pagination-previous" class="ui-timeline-pagination-control" href="{{request.path}}?page={{current}}"><i class="icon-arrow-left"></i> Previous</a>
-                  </li>
-
-                  {% comment %}
-                  {% for page in pages|times %}
-                  <li{% if forloop.counter == current  %} class="active"{% endif %}><a href="{{request.path}}?page={{forloop.counter}}">{{forloop.counter}}</a></li>
-                  {% endfor %}
-                  {% endcomment %}
-
-                  <li><span id="ui-timeline-pagination-indicator">{{current}} / {{pages}}</span></li>
-
-                  <li class="{% if current == pages %}disabled{% endif %}">
-                    <a id="ui-timeline-pagination-next" class="ui-timeline-pagination-control" href="{{request.path}}?page={{ current|add:1 }}">Next <i class="icon-arrow-right"></i></a>
-                  </li>
-
-                  <li class="{% if current == pages %}disabled{% endif %}">
-                    <a id="ui-timeline-pagination-last" class="ui-timeline-pagination-control" href="{{request.path}}?page=last">Last <i class="icon-arrow-right"></i></a>
-                  </li>
-                </ul>
-              </div>
             </div>
           </div>
           <div class="span6" style="margin-top: 20px;">
@@ -222,10 +194,11 @@
   <script src="{% static 'components/Leaflet.awesome-markers/dist/leaflet.awesome-markers.js' %}"></script>
   <script src="{% static 'components/highcharts.com/js/highcharts.src.js' %}"></script>
   <script src="{% static 'components/highcharts.com/js/modules/exporting.src.js' %}"></script>
+  <script src="{% static 'utils/pagination.js' %}"></script>
   {% if report_list %}
   <script type="text/javascript">
     reform.urls.incidentView = {% url 'incidents:view' 0 as incident_view_url %}{{incident_view_url|json}};
-    reform.urls.incidentDashboard = {% url 'incidents:dashboard' as incident_dashboard_url %}{{incident_dashboard_url|json}};
+    reform.urls.incidentsDashboard = {% url 'incidents:dashboard' as incident_dashboard_url %}{{incident_dashboard_url|json}};
 
     reform.data.incidentsCategories = {{incidents_categories|json}}
     reform.data.incidentsFeatures = {{incidents_features|json}}

@@ -33,17 +33,16 @@ class User(AbstractUser):
 
     def save(self, *args, **kwargs):
         self.username = self.email
-        #self.set_password(self.password)
+        # self.set_password(self.password)
         super(User, self).save(*args, **kwargs)
 
     def serialize(self):
-        data = model_to_dict(
-            self, fields=['id', 'username', 'first_name', 'last_name', 'role'])
+        data = model_to_dict(self, fields=['id', 'first_name', 'last_name', 'role'])
         data['short_name'] = self.get_short_name()
         data['full_name'] = self.get_full_name()
         data['role_display'] = self.get_role_display()
         # data.pop('email')
-        data.pop('username')
+        # data.pop('username')
         return data
 
     def is_admin(self):

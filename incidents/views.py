@@ -61,8 +61,8 @@ class ReportsDashboard(PaginatedListHybridResponseMixin, ListView):
 
         if self.is_json():
 
-            context['html'] = render_to_string("incidents/dashboard_incidents_list.html", {'report_list': context['report_list']})
-            context['report_list'] = None
+            reports = context.pop('report_list')
+            context['html'] = render_to_string("incidents/dashboard_incidents_list.html", {'report_list': reports})
 
         else:
 
@@ -246,11 +246,12 @@ def report_submit(request, template_name="incidents/submit.html", *args, **kwarg
             report.media.create(url=l, file=None)
 
         report.save()
+        #report = Report.objects.get(pk=report.pk)
 
         if request.is_ajax():
             return JSONResponse({
                 'success': True,
-                'object': report,
+                #'object': report,
                 'url': report.get_absolute_url(),
                 'notification': {'title': "Adding Report", 'body': "Report added."}
             })
@@ -702,7 +703,7 @@ def append_thanks_statistics(context):
 
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from base.utils.views import ListHybridResponseMixin, DetailHybridResponseMixin
+from base.utils.views import ListHybridResponseMixin, PaginatedListHybridResponseMixin, DetailHybridResponseMixin
 
 
 class ReportForm(forms.ModelForm):
@@ -717,7 +718,7 @@ class ReportListView(ListView):
     template_name = "incidents/crud/list.html"
 
 
-class ReportListHybridView(ListHybridResponseMixin, ReportListView):
+class ReportListHybridView(PaginatedListHybridResponseMixin, ReportListView):
     pass
 
 

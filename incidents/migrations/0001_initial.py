@@ -9,176 +9,176 @@ class Migration(SchemaMigration):
 
     def forwards(self, orm):
         # Adding model 'Category'
-        db.create_table(u'reports_category', (
-            (u'id', self.gf('django.db.models.fields.AutoField')
-             (primary_key=True)),
-            ('slug', self.gf('django.db.models.fields.SlugField')
-             (max_length=100, null=True, blank=True)),
-            ('definition', self.gf('django.db.models.fields.CharField')
-             (max_length=300)),
+        db.create_table(u'incidents_category', (
+            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('slug', self.gf('django.db.models.fields.SlugField')(max_length=100, null=True, blank=True)),
+            ('definition', self.gf('django.db.models.fields.CharField')(max_length=300)),
         ))
-        db.send_create_signal(u'reports', ['Category'])
+        db.send_create_signal(u'incidents', ['Category'])
 
         # Adding model 'Feature'
-        db.create_table(u'reports_feature', (
-            (u'id', self.gf('django.db.models.fields.AutoField')
-             (primary_key=True)),
-            ('slug', self.gf('django.db.models.fields.SlugField')
-             (max_length=200, null=True, blank=True)),
-            ('definition', self.gf('django.db.models.fields.CharField')
-             (max_length=300)),
+        db.create_table(u'incidents_feature', (
+            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('slug', self.gf('django.db.models.fields.SlugField')(max_length=200, null=True, blank=True)),
+            ('definition', self.gf('django.db.models.fields.CharField')(max_length=300)),
         ))
-        db.send_create_signal(u'reports', ['Feature'])
+        db.send_create_signal(u'incidents', ['Feature'])
 
         # Adding model 'Media'
-        db.create_table(u'reports_media', (
-            (u'id', self.gf('django.db.models.fields.AutoField')
-             (primary_key=True)),
-            ('url', self.gf('django.db.models.fields.URLField')
-             (max_length=300)),
-            ('file', self.gf('django.db.models.fields.files.FileField')
-             (max_length=100, null=True, blank=True)),
+        db.create_table(u'incidents_media', (
+            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('url', self.gf('django.db.models.fields.URLField')(max_length=300)),
+            ('file', self.gf('django.db.models.fields.files.FileField')(max_length=100, null=True, blank=True)),
         ))
-        db.send_create_signal(u'reports', ['Media'])
+        db.send_create_signal(u'incidents', ['Media'])
 
         # Adding model 'Victim'
-        db.create_table(u'reports_victim', (
-            (u'id', self.gf('django.db.models.fields.AutoField')
-             (primary_key=True)),
-            ('category', self.gf('django.db.models.fields.CharField')
-             (default='CIT', max_length=3)),
-            ('firstname', self.gf('django.db.models.fields.CharField')
-             (max_length=100)),
-            ('lastname', self.gf('django.db.models.fields.CharField')
-             (max_length=100)),
-            ('gender', self.gf('django.db.models.fields.CharField')
-             (default='M', max_length=1)),
-            ('age', self.gf('django.db.models.fields.PositiveIntegerField')
-             (null=True, blank=True)),
-            ('education', self.gf('django.db.models.fields.CharField')
-             (default='?', max_length=2)),
-            ('social_class', self.gf('django.db.models.fields.CharField')
-             (default='?', max_length=2)),
-            ('profession', self.gf('django.db.models.fields.CharField')
-             (max_length=200, null=True, blank=True)),
-            ('phone', self.gf('django.db.models.fields.CharField')
-             (max_length=20, null=True, blank=True)),
-            ('email', self.gf('django.db.models.fields.EmailField')
-             (max_length=75, null=True, blank=True)),
-            ('description', self.gf('django.db.models.fields.TextField')
-             (null=True, blank=True)),
-            ('user', self.gf('django.db.models.fields.related.ForeignKey')
-             (to=orm['users.User'], null=True, blank=True)),
+        db.create_table(u'incidents_victim', (
+            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('category', self.gf('django.db.models.fields.CharField')(default='CIT', max_length=3)),
+            ('firstname', self.gf('django.db.models.fields.CharField')(max_length=100)),
+            ('lastname', self.gf('django.db.models.fields.CharField')(max_length=100)),
+            ('gender', self.gf('django.db.models.fields.CharField')(default='M', max_length=1)),
+            ('age', self.gf('django.db.models.fields.PositiveIntegerField')(null=True, blank=True)),
+            ('education', self.gf('django.db.models.fields.CharField')(default='?', max_length=2)),
+            ('social_class', self.gf('django.db.models.fields.CharField')(default='?', max_length=2)),
+            ('profession', self.gf('django.db.models.fields.CharField')(max_length=200, null=True, blank=True)),
+            ('phone', self.gf('django.db.models.fields.CharField')(max_length=20, null=True, blank=True)),
+            ('email', self.gf('django.db.models.fields.EmailField')(max_length=75, null=True, blank=True)),
+            ('description', self.gf('django.db.models.fields.TextField')(null=True, blank=True)),
+            ('user', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['users.User'], null=True, blank=True)),
         ))
-        db.send_create_signal(u'reports', ['Victim'])
+        db.send_create_signal(u'incidents', ['Victim'])
 
         # Adding model 'Comment'
-        db.create_table(u'reports_comment', (
-            (u'id', self.gf('django.db.models.fields.AutoField')
-             (primary_key=True)),
-            ('type', self.gf('django.db.models.fields.CharField')
-             (default='U', max_length=1)),
-            ('content', self.gf('django.db.models.fields.TextField')
-             (null=True, blank=True)),
-            ('attachment', self.gf('django.db.models.fields.files.FileField')
-             (max_length=100, null=True, blank=True)),
-            ('created_by', self.gf('django.db.models.fields.related.ForeignKey')
-             (to=orm['users.User'])),
-            ('created_at', self.gf('django.db.models.fields.DateTimeField')
-             (auto_now_add=True, blank=True)),
+        db.create_table(u'incidents_comment', (
+            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('type', self.gf('django.db.models.fields.CharField')(default='U', max_length=1)),
+            ('content', self.gf('django.db.models.fields.TextField')(null=True, blank=True)),
+            ('attachment', self.gf('django.db.models.fields.files.FileField')(max_length=100, null=True, blank=True)),
+            ('created_by', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['users.User'])),
+            ('created_at', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
         ))
-        db.send_create_signal(u'reports', ['Comment'])
+        db.send_create_signal(u'incidents', ['Comment'])
 
         # Adding model 'Report'
-        db.create_table(u'reports_report', (
-            (u'id', self.gf('django.db.models.fields.AutoField')
-             (primary_key=True)),
+        db.create_table(u'incidents_report', (
+            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('datetime', self.gf('django.db.models.fields.DateTimeField')()),
-            ('location', self.gf('django.db.models.fields.CharField')
-             (max_length=100)),
-            ('location_text', self.gf('django.db.models.fields.CharField')
-             (max_length=300)),
-            ('category', self.gf('django.db.models.fields.related.ForeignKey')
-             (to=orm['reports.Category'])),
-            ('victim', self.gf('django.db.models.fields.related.ForeignKey')
-             (to=orm['reports.Victim'])),
-            ('aggressor', self.gf('django.db.models.fields.TextField')
-             (null=True, blank=True)),
-            ('aggressor_category', self.gf('django.db.models.fields.CharField')
-             (default='COP', max_length=3, blank=True)),
+            ('latitude', self.gf('django.db.models.fields.FloatField')()),
+            ('longitude', self.gf('django.db.models.fields.FloatField')()),
+            ('location_text', self.gf('django.db.models.fields.CharField')(max_length=300)),
+            ('category', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['incidents.Category'])),
+            ('victim', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['incidents.Victim'])),
+            ('aggressor', self.gf('django.db.models.fields.TextField')(null=True, blank=True)),
+            ('aggressor_category', self.gf('django.db.models.fields.CharField')(default='COP', max_length=3, blank=True)),
             ('description', self.gf('django.db.models.fields.TextField')()),
-            ('sources', self.gf('django.db.models.fields.TextField')
-             (null=True, blank=True)),
-            ('is_verified', self.gf('django.db.models.fields.BooleanField')
-             (default=False)),
-            ('is_closed', self.gf('django.db.models.fields.BooleanField')
-             (default=False)),
-            ('created_by', self.gf('django.db.models.fields.related.ForeignKey')
-             (to=orm['users.User'])),
-            ('created_at', self.gf('django.db.models.fields.DateTimeField')
-             (auto_now_add=True, blank=True)),
-            ('updated_at', self.gf('django.db.models.fields.DateTimeField')
-             (auto_now=True, blank=True)),
+            ('sources', self.gf('django.db.models.fields.TextField')(null=True, blank=True)),
+            ('is_verified', self.gf('django.db.models.fields.BooleanField')()),
+            ('is_closed', self.gf('django.db.models.fields.BooleanField')()),
+            ('created_by', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['users.User'])),
+            ('created_at', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
+            ('updated_at', self.gf('django.db.models.fields.DateTimeField')(auto_now=True, blank=True)),
         ))
-        db.send_create_signal(u'reports', ['Report'])
+        db.send_create_signal(u'incidents', ['Report'])
 
         # Adding M2M table for field media on 'Report'
-        m2m_table_name = db.shorten_name(u'reports_report_media')
+        m2m_table_name = db.shorten_name(u'incidents_report_media')
         db.create_table(m2m_table_name, (
-            ('id', models.AutoField(verbose_name='ID',
-             primary_key=True, auto_created=True)),
-            ('report', models.ForeignKey(orm[u'reports.report'], null=False)),
-            ('media', models.ForeignKey(orm[u'reports.media'], null=False))
+            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
+            ('report', models.ForeignKey(orm[u'incidents.report'], null=False)),
+            ('media', models.ForeignKey(orm[u'incidents.media'], null=False))
         ))
         db.create_unique(m2m_table_name, ['report_id', 'media_id'])
 
         # Adding M2M table for field features on 'Report'
-        m2m_table_name = db.shorten_name(u'reports_report_features')
+        m2m_table_name = db.shorten_name(u'incidents_report_features')
         db.create_table(m2m_table_name, (
-            ('id', models.AutoField(verbose_name='ID',
-             primary_key=True, auto_created=True)),
-            ('report', models.ForeignKey(orm[u'reports.report'], null=False)),
-            ('feature', models.ForeignKey(orm[u'reports.feature'], null=False))
+            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
+            ('report', models.ForeignKey(orm[u'incidents.report'], null=False)),
+            ('feature', models.ForeignKey(orm[u'incidents.feature'], null=False))
         ))
         db.create_unique(m2m_table_name, ['report_id', 'feature_id'])
 
         # Adding M2M table for field comments on 'Report'
-        m2m_table_name = db.shorten_name(u'reports_report_comments')
+        m2m_table_name = db.shorten_name(u'incidents_report_comments')
         db.create_table(m2m_table_name, (
-            ('id', models.AutoField(verbose_name='ID',
-             primary_key=True, auto_created=True)),
-            ('report', models.ForeignKey(orm[u'reports.report'], null=False)),
-            ('comment', models.ForeignKey(orm[u'reports.comment'], null=False))
+            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
+            ('report', models.ForeignKey(orm[u'incidents.report'], null=False)),
+            ('comment', models.ForeignKey(orm[u'incidents.comment'], null=False))
         ))
         db.create_unique(m2m_table_name, ['report_id', 'comment_id'])
 
+        # Adding model 'ThankCategory'
+        db.create_table(u'incidents_thankcategory', (
+            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('slug', self.gf('django.db.models.fields.SlugField')(max_length=100, null=True, blank=True)),
+            ('definition', self.gf('django.db.models.fields.CharField')(max_length=300)),
+        ))
+        db.send_create_signal(u'incidents', ['ThankCategory'])
+
+        # Adding model 'ThankReport'
+        db.create_table(u'incidents_thankreport', (
+            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('datetime', self.gf('django.db.models.fields.DateTimeField')()),
+            ('latitude', self.gf('django.db.models.fields.FloatField')()),
+            ('longitude', self.gf('django.db.models.fields.FloatField')()),
+            ('location_text', self.gf('django.db.models.fields.CharField')(max_length=300)),
+            ('category', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['incidents.ThankCategory'])),
+            ('description', self.gf('django.db.models.fields.TextField')()),
+            ('created_by', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['users.User'])),
+            ('created_at', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
+            ('updated_at', self.gf('django.db.models.fields.DateTimeField')(auto_now=True, blank=True)),
+        ))
+        db.send_create_signal(u'incidents', ['ThankReport'])
+
+        # Adding M2M table for field media on 'ThankReport'
+        m2m_table_name = db.shorten_name(u'incidents_thankreport_media')
+        db.create_table(m2m_table_name, (
+            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
+            ('thankreport', models.ForeignKey(orm[u'incidents.thankreport'], null=False)),
+            ('media', models.ForeignKey(orm[u'incidents.media'], null=False))
+        ))
+        db.create_unique(m2m_table_name, ['thankreport_id', 'media_id'])
+
+
     def backwards(self, orm):
         # Deleting model 'Category'
-        db.delete_table(u'reports_category')
+        db.delete_table(u'incidents_category')
 
         # Deleting model 'Feature'
-        db.delete_table(u'reports_feature')
+        db.delete_table(u'incidents_feature')
 
         # Deleting model 'Media'
-        db.delete_table(u'reports_media')
+        db.delete_table(u'incidents_media')
 
         # Deleting model 'Victim'
-        db.delete_table(u'reports_victim')
+        db.delete_table(u'incidents_victim')
 
         # Deleting model 'Comment'
-        db.delete_table(u'reports_comment')
+        db.delete_table(u'incidents_comment')
 
         # Deleting model 'Report'
-        db.delete_table(u'reports_report')
+        db.delete_table(u'incidents_report')
 
         # Removing M2M table for field media on 'Report'
-        db.delete_table(db.shorten_name(u'reports_report_media'))
+        db.delete_table(db.shorten_name(u'incidents_report_media'))
 
         # Removing M2M table for field features on 'Report'
-        db.delete_table(db.shorten_name(u'reports_report_features'))
+        db.delete_table(db.shorten_name(u'incidents_report_features'))
 
         # Removing M2M table for field comments on 'Report'
-        db.delete_table(db.shorten_name(u'reports_report_comments'))
+        db.delete_table(db.shorten_name(u'incidents_report_comments'))
+
+        # Deleting model 'ThankCategory'
+        db.delete_table(u'incidents_thankcategory')
+
+        # Deleting model 'ThankReport'
+        db.delete_table(u'incidents_thankreport')
+
+        # Removing M2M table for field media on 'ThankReport'
+        db.delete_table(db.shorten_name(u'incidents_thankreport_media'))
+
 
     models = {
         u'auth.group': {
@@ -201,13 +201,13 @@ class Migration(SchemaMigration):
             'model': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '100'})
         },
-        u'reports.category': {
+        u'incidents.category': {
             'Meta': {'object_name': 'Category'},
             'definition': ('django.db.models.fields.CharField', [], {'max_length': '300'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'slug': ('django.db.models.fields.SlugField', [], {'max_length': '100', 'null': 'True', 'blank': 'True'})
         },
-        u'reports.comment': {
+        u'incidents.comment': {
             'Meta': {'ordering': "['created_at']", 'object_name': 'Comment'},
             'attachment': ('django.db.models.fields.files.FileField', [], {'max_length': '100', 'null': 'True', 'blank': 'True'}),
             'content': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
@@ -216,40 +216,61 @@ class Migration(SchemaMigration):
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'type': ('django.db.models.fields.CharField', [], {'default': "'U'", 'max_length': '1'})
         },
-        u'reports.feature': {
+        u'incidents.feature': {
             'Meta': {'object_name': 'Feature'},
             'definition': ('django.db.models.fields.CharField', [], {'max_length': '300'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'slug': ('django.db.models.fields.SlugField', [], {'max_length': '200', 'null': 'True', 'blank': 'True'})
         },
-        u'reports.media': {
+        u'incidents.media': {
             'Meta': {'object_name': 'Media'},
             'file': ('django.db.models.fields.files.FileField', [], {'max_length': '100', 'null': 'True', 'blank': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'url': ('django.db.models.fields.URLField', [], {'max_length': '300'})
         },
-        u'reports.report': {
+        u'incidents.report': {
             'Meta': {'ordering': "['-datetime']", 'object_name': 'Report'},
             'aggressor': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
             'aggressor_category': ('django.db.models.fields.CharField', [], {'default': "'COP'", 'max_length': '3', 'blank': 'True'}),
-            'category': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['reports.Category']"}),
-            'comments': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'to': u"orm['reports.Comment']", 'null': 'True', 'blank': 'True'}),
+            'category': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['incidents.Category']"}),
+            'comments': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'to': u"orm['incidents.Comment']", 'null': 'True', 'blank': 'True'}),
             'created_at': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
             'created_by': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['users.User']"}),
             'datetime': ('django.db.models.fields.DateTimeField', [], {}),
             'description': ('django.db.models.fields.TextField', [], {}),
-            'features': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['reports.Feature']", 'symmetrical': 'False'}),
+            'features': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['incidents.Feature']", 'symmetrical': 'False'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'is_closed': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'is_verified': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'location': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
+            'is_closed': ('django.db.models.fields.BooleanField', [], {}),
+            'is_verified': ('django.db.models.fields.BooleanField', [], {}),
+            'latitude': ('django.db.models.fields.FloatField', [], {}),
             'location_text': ('django.db.models.fields.CharField', [], {'max_length': '300'}),
-            'media': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'to': u"orm['reports.Media']", 'null': 'True', 'blank': 'True'}),
+            'longitude': ('django.db.models.fields.FloatField', [], {}),
+            'media': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'to': u"orm['incidents.Media']", 'null': 'True', 'blank': 'True'}),
             'sources': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
             'updated_at': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'}),
-            'victim': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['reports.Victim']"})
+            'victim': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['incidents.Victim']"})
         },
-        u'reports.victim': {
+        u'incidents.thankcategory': {
+            'Meta': {'object_name': 'ThankCategory'},
+            'definition': ('django.db.models.fields.CharField', [], {'max_length': '300'}),
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'slug': ('django.db.models.fields.SlugField', [], {'max_length': '100', 'null': 'True', 'blank': 'True'})
+        },
+        u'incidents.thankreport': {
+            'Meta': {'ordering': "['-datetime']", 'object_name': 'ThankReport'},
+            'category': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['incidents.ThankCategory']"}),
+            'created_at': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
+            'created_by': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['users.User']"}),
+            'datetime': ('django.db.models.fields.DateTimeField', [], {}),
+            'description': ('django.db.models.fields.TextField', [], {}),
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'latitude': ('django.db.models.fields.FloatField', [], {}),
+            'location_text': ('django.db.models.fields.CharField', [], {'max_length': '300'}),
+            'longitude': ('django.db.models.fields.FloatField', [], {}),
+            'media': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'to': u"orm['incidents.Media']", 'null': 'True', 'blank': 'True'}),
+            'updated_at': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'})
+        },
+        u'incidents.victim': {
             'Meta': {'object_name': 'Victim'},
             'age': ('django.db.models.fields.PositiveIntegerField', [], {'null': 'True', 'blank': 'True'}),
             'category': ('django.db.models.fields.CharField', [], {'default': "'CIT'", 'max_length': '3'}),
@@ -270,7 +291,7 @@ class Migration(SchemaMigration):
             'date_joined': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
             'email': ('django.db.models.fields.EmailField', [], {'unique': 'True', 'max_length': '75'}),
             'first_name': ('django.db.models.fields.CharField', [], {'max_length': '30'}),
-            'groups': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['auth.Group']", 'symmetrical': 'False', 'blank': 'True'}),
+            'groups': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'related_name': "u'user_set'", 'blank': 'True', 'to': u"orm['auth.Group']"}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'is_active': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             'is_staff': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
@@ -279,9 +300,9 @@ class Migration(SchemaMigration):
             'last_name': ('django.db.models.fields.CharField', [], {'max_length': '30'}),
             'password': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
             'role': ('django.db.models.fields.CharField', [], {'default': "'R'", 'max_length': '1'}),
-            'user_permissions': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['auth.Permission']", 'symmetrical': 'False', 'blank': 'True'}),
+            'user_permissions': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'related_name': "u'user_set'", 'blank': 'True', 'to': u"orm['auth.Permission']"}),
             'username': ('django.db.models.fields.CharField', [], {'max_length': '30', 'unique': 'True', 'null': 'True', 'blank': 'True'})
         }
     }
 
-    complete_apps = ['reports']
+    complete_apps = ['incidents']

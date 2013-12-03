@@ -1,7 +1,7 @@
 [
 {
   "pk": 1,
-  "model": "reports.category",
+  "model": "incidents.category",
   "fields": {
     "definition": "Verbal Violence",
     "slug": "verbal-violence"
@@ -9,7 +9,7 @@
 },
 {
   "pk": 2,
-  "model": "reports.category",
+  "model": "incidents.category",
   "fields": {
     "definition": "Violence",
     "slug": "violence"
@@ -17,7 +17,7 @@
 },
 {
   "pk": 3,
-  "model": "reports.category",
+  "model": "incidents.category",
   "fields": {
     "definition": "Rape",
     "slug": "rape"
@@ -25,7 +25,7 @@
 },
 {
   "pk": 4,
-  "model": "reports.category",
+  "model": "incidents.category",
   "fields": {
     "definition": "Lack of Investigation and Prosecution",
     "slug": "lack-of-investigation-and-prosecution"
