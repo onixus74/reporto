@@ -13,7 +13,6 @@
     </div>
 
     <div class="hero-unit clearfix" style="padding: 20px 40px;">
-      {% comment %}
       {% if report_list %}
       <div class="pull-left" style="margin: 0;">
           {% with report=report_list.0 %}
@@ -33,13 +32,12 @@
           </div>
           {% endwith %}
       </div>
+      {% elif thankreport_list %}
       {% else %}
       <div class="pull-left" style="margin: 0;">
         <h2>There is no reports!</h2>
       </div>
       {% endif %}
-      {% endcomment %}
-      <div class="pull-left" style="margin: 0;">...</div>
 
       <a class="btn btn-danger btn-large pull-right" href="{% url 'incidents:submit' %}"><i class="icon-plus"></i> Report an Incident</a>
       <a class="btn btn-success btn-large pull-right" href="{% url 'thanks:submit' %}"><i class="icon-plus"></i> Thank a Security Officer</a>

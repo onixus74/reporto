@@ -1,58 +1,70 @@
-[
-{
-  "pk": 1,
-  "model": "incidents.feature",
-  "fields": {
-    "definition": "Got help with NGO",
-    "slug": "got-help-with-ngo"
-  }
-},
-{
-  "pk": 2,
-  "model": "incidents.feature",
-  "fields": {
-    "definition": "Hired a lawyer",
-    "slug": "hired-a-lawyer"
-  }
-},
-{
-  "pk": 3,
-  "model": "incidents.feature",
-  "fields": {
-    "definition": "Incident during a protest",
-    "slug": "incident-during-a-protest"
-  }
-},
-{
-  "pk": 4,
-  "model": "incidents.feature",
-  "fields": {
-    "definition": "Incident in a police station",
-    "slug": "incident-in-a-police-station"
-  }
-},
-{
-  "pk": 5,
-  "model": "incidents.feature",
-  "fields": {
-    "definition": "Policeman wearing a uniform",
-    "slug": "policeman-wearing-a-uniform"
-  }
-},
-{
-  "pk": 6,
-  "model": "incidents.feature",
-  "fields": {
-    "definition": "Reported and satisfied",
-    "slug": "reported-and-satisfied"
-  }
-},
-{
-  "pk": 7,
-  "model": "incidents.feature",
-  "fields": {
-    "definition": "Report to authorities",
-    "slug": "report-to-authorities"
-  }
-}
-]
+[{
+    "pk": 1,
+    "model": "incidents.feature",
+    "fields": {
+      "definition": "Test",
+      "parent": null,
+      "rght": 2,
+      "level": 0,
+      "lft": 1,
+      "tree_id": 1,
+      "selectable": true,
+      "slug": "test"
+    },
+    {
+      "pk": 1,
+      "model": "incidents.feature",
+      "fields": {
+        "definition": "Got help with NGO",
+        "slug": "got-help-with-ngo"
+      }
+    },
+    {
+      "pk": 2,
+      "model": "incidents.feature",
+      "fields": {
+        "definition": "Hired a lawyer",
+        "slug": "hired-a-lawyer"
+      }
+    },
+    {
+      "pk": 3,
+      "model": "incidents.feature",
+      "fields": {
+        "definition": "Incident during a protest",
+        "slug": "incident-during-a-protest"
+      }
+    },
+    {
+      "pk": 4,
+      "model": "incidents.feature",
+      "fields": {
+        "definition": "Incident in a police station",
+        "slug": "incident-in-a-police-station"
+      }
+    },
+    {
+      "pk": 5,
+      "model": "incidents.feature",
+      "fields": {
+        "definition": "Policeman wearing a uniform",
+        "slug": "policeman-wearing-a-uniform"
+      }
+    },
+    {
+      "pk": 6,
+      "model": "incidents.feature",
+      "fields": {
+        "definition": "Reported and satisfied",
+        "slug": "reported-and-satisfied"
+      }
+    },
+    {
+      "pk": 7,
+      "model": "incidents.feature",
+      "fields": {
+        "definition": "Report to authorities",
+        "slug": "report-to-authorities"
+      }
+    }
+    ]

@@ -6,304 +6,303 @@
 
 {% block view_content %}
 
-	<div id="ui-wizard-progress-bar" style="z-index: 900;">
-		<div class="container progress progress-info progress-striped">
-			<div class="bar animated" id="ui-wizard-progress"></div>
-		</div>
-		<!--
-		<div class="container">
-			<div class="row-fluid">
-				<div class="span2">Victim or Witness?</div>
-				<div class="span2">Incident Category</div>
-				<div class="span2">When and Where?</div>
-				<div class="span2">Aggressor</div>
-				<div class="span2">Incident Description and Evidence</div>
-			</div>
-		</div>
-		-->
-	</div>
+  <div id="ui-wizard-progress-bar" style="z-index: 900;">
+    <div class="container progress progress-info progress-striped">
+      <div class="bar animated" id="ui-wizard-progress"></div>
+    </div>
+    <!--
+    <div class="container">
+      <div class="row-fluid">
+        <div class="span2">Victim or Witness?</div>
+        <div class="span2">Incident Category</div>
+        <div class="span2">When and Where?</div>
+        <div class="span2">Aggressor</div>
+        <div class="span2">Incident Description and Evidence</div>
+      </div>
+    </div>
+    -->
+  </div>
 
-	<form id="report-form" action="{% url 'incidents:submit' %}" method="post" enctype="multipart/form-data">
-		{% csrf_token %}
+  <form id="report-form" action="{% url 'incidents:submit' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
 
-	<div class="container">
+  <div class="container">
 
-	<div class="page-header">
-		<h1 class="text-center">Incident Report Submission<small></small></h1>
-	</div>
+  <div class="page-header">
+    <h1 class="text-center">Incident Report Submission<small></small></h1>
+  </div>
 
-		{% if form.errors %}
-		<div class="alert alert-error">
-			<button type="button" class="close" data-dismiss="alert">&times;</button>
-			{% for field, errors in form.errors.items %}
-				<div>{{field}}:{% for error in errors %} {{error}}{% endfor %}</div>
-			{% endfor %}
-		</div>
-		{% endif %}
+    {% if form.errors %}
+    <div class="alert alert-error">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      {% for field, errors in form.errors.items %}
+        <div>{{field}}:{% for error in errors %} {{error}}{% endfor %}</div>
+      {% endfor %}
+    </div>
+    {% endif %}
 
-		<div class="row-fluid">
-			<div class="span9">
+    <div class="row-fluid">
+      <div class="span9">
 
-				<div class="well report-incident-form">
+        <div class="well report-incident-form">
 
-					<div class="row-fluid">
-						<div class="span12">
-							<h1 id="wizard-1-header" class="text-center animated">I'm a <divspan id="ui-wizard-reporter-state" style="display: inline-block;">...</span></h1>
-							<input id="id_victim" name="victim" type="hidden" value="0">
-						</div>
-					</div>
+          <div class="row-fluid">
+            <div class="span12">
+              <h1 id="wizard-1-header" class="text-center animated">I'm a <divspan id="ui-wizard-reporter-state" style="display: inline-block;">...</span></h1>
+              <input id="id_victim" name="victim" type="hidden" value="0">
+            </div>
+          </div>
 
-					<div class="row-fluid ui-wizard-row" id="ui-wizard-victim-witness-buttons">
-						<div class="span6" id="ui-wizard-victim-button-container">
-							<a href="javascript:void(0)" class="btn btn-large btn-block btn-warning" id="ui-wizard-victim-button" data-value="victim" data-class="text-warning"><i class="icon-user icon-2x"></i> Victim</a>
-						</div>
-						<div class="span6" id="ui-wizard-witness-button-container">
-							<a href="javascript:void(0)" class="btn btn-large btn-block btn-success" id="ui-wizard-witness-button" data-value="witness" data-class="text-success" tabindex="0"><i class="icon-eye-open icon-2x"></i> Witness</a>
-						</div>
-					</div>
+          <div class="row-fluid ui-wizard-row" id="ui-wizard-victim-witness-buttons">
+            <div class="span6" id="ui-wizard-victim-button-container">
+              <a href="javascript:void(0)" class="btn btn-large btn-block btn-warning" id="ui-wizard-victim-button" data-value="victim" data-class="text-warning"><i class="icon-user icon-2x"></i> Victim</a>
+            </div>
+            <div class="span6" id="ui-wizard-witness-button-container">
+              <a href="javascript:void(0)" class="btn btn-large btn-block btn-success" id="ui-wizard-witness-button" data-value="witness" data-class="text-success" tabindex="0"><i class="icon-eye-open icon-2x"></i> Witness</a>
+            </div>
+          </div>
 
-					<div class="row-fluid ui-wizard-row" id="ui-wizard-category" hidden>
-						<div class="offset2 span8 natural-language-form">
+          <div class="row-fluid ui-wizard-row" id="ui-wizard-category" hidden>
+            <div class="offset2 span8 natural-language-form">
 
-							<p class="lead text text-center" style="margin: 0;">
-								<span id="ui-wizard-victim-text" hidden>I've been a victim of</span>
-								<span id="ui-wizard-witness-text" hidden>I've witnessed a</span>
-								{% render_field form.category placeholder="Select an incident category" class+="select2 _span4 btn-large" data-style="btn-large _boostrap-select-fix" %}
-							</p>
+              <p class="lead text text-center" style="margin: 0;">
+                <span id="ui-wizard-victim-text" hidden>I've been a victim of</span>
+                <span id="ui-wizard-witness-text" hidden>I've witnessed a</span>
+                {% render_field form.category placeholder="Select an incident category" class+="select2 _span4 btn-large" data-style="btn-large _boostrap-select-fix" %}
+              </p>
 
-						</div>
-					</div>
+            </div>
+          </div>
 
-					<div class="row-fluid ui-wizard-row" id="ui-wizard-location-datetime" hidden>
-						<div class="span6">
-							<h2><i class="icon-map-marker"></i> Location</h2>
-							<div id="map" style="width:100%; height: 300px"></div>
-							{% render_field form.latitude type="hidden" %}
-							{% render_field form.longitude type="hidden" %}
-							{#% render_field form.location type="hidden" %#}
+          <div class="row-fluid ui-wizard-row" id="ui-wizard-location-datetime" hidden>
+            <div class="span6">
+              <h2><i class="icon-map-marker"></i> Location</h2>
+              <div id="map" style="width:100%; height: 300px"></div>
+              {% render_field form.latitude type="hidden" %}
+              {% render_field form.longitude type="hidden" %}
+              {#% render_field form.location type="hidden" %#}
               <input type="hidden" id="id_location" name="location">
-							<div class="input-prepend" style="display: block; margin-top: 10px; margin-bottom: 0; text-align: center;">
-								<span class="add-on" style="width: 20%;"> <i class="icon-map-marker icon-large"></i> </span>
-								{% render_field form.location_text type="text" placeholder="Location" class="input-block-level_" _data-provide="typeahead" _data-source="reform.data.locations" _autocomplete="off" style="width: 70%" %}
-							</div>
-						</div>
-						<div class="span6">
-							<h2><i class="icon-calendar"></i><i class="icon-time"></i> Date and Time</h2>
-							{% render_field form.datetime type="datetime-local" class+="input-block-level" required="required" style="display: none;" %}
-							{#% render_field form.datetime type="hidden" class+="input-block-level" %#}
-							<div id="dateinput" style="height: 300px;">
-							<script type="text/template" id="dateinput-template">
-								<div class="controls">
-									<div class="clndr-previous-year-button">&lsaquo;&lsaquo;</div>
-									<div class="clndr-previous-button">&lsaquo;</div>
-									<div class="month"><%= month %> <%= year %></div>
-									<div class="clndr-next-button">&rsaquo;</div>
-									<div class="clndr-next-year-button">&rsaquo;&rsaquo;</div>
-								</div>
-								<div class="clndr-grid">
-									<div class="days-of-the-week clearfix">
-										<% _.each(daysOfTheWeek, function(day) { %>
-											<div class="header-day muted"><strong><%= day %></strong></div>
-										<% }); %>
-									</div>
-									<div class="days clearfix">
-										<% _.each(days, function(day) { %>
-											<div class="<%= day.classes %>" id="<%= day.id %>"><span class="day-number"><%= day.day %></span></div>
-										<% }); %>
-									</div>
-								</div>
-							</script>
-							</div>
-							<input id="id_date" name="date" type="hidden">
-							<div class="input-prepend" style="display: block; margin-top: 10px; margin-bottom: 0; text-align: center;">
-								<span class="add-on" style="width: 20%;"> <i class="icon-time icon-large"></i> </span>
-								<input id="id_time" name="time" type="time" class="input-block-level_" style="text-align: center; width: 70%;" placeholder="Time">
-							</div>
-						</div>
-					</div>
+              <div class="input-prepend" style="display: block; margin-top: 10px; margin-bottom: 0; text-align: center;">
+                <span class="add-on" style="width: 20%;"> <i class="icon-map-marker icon-large"></i> </span>
+                {% render_field form.location_text type="text" placeholder="Location" class="input-block-level_" _data-provide="typeahead" _data-source="reform.data.locations" _autocomplete="off" style="width: 70%" %}
+              </div>
+            </div>
+            <div class="span6">
+              <h2><i class="icon-calendar"></i><i class="icon-time"></i> Date and Time</h2>
+              {% render_field form.datetime type="datetime-local" class+="input-block-level" _required="required" style="display: none;" %}
+              <div id="dateinput" style="height: 300px;">
+              <script type="text/template" id="dateinput-template">
+                <div class="controls">
+                  <div class="clndr-previous-year-button">&lsaquo;&lsaquo;</div>
+                  <div class="clndr-previous-button">&lsaquo;</div>
+                  <div class="month"><%= month %> <%= year %></div>
+                  <div class="clndr-next-button">&rsaquo;</div>
+                  <div class="clndr-next-year-button">&rsaquo;&rsaquo;</div>
+                </div>
+                <div class="clndr-grid">
+                  <div class="days-of-the-week clearfix">
+                    <% _.each(daysOfTheWeek, function(day) { %>
+                      <div class="header-day muted"><strong><%= day %></strong></div>
+                    <% }); %>
+                  </div>
+                  <div class="days clearfix">
+                    <% _.each(days, function(day) { %>
+                      <div class="<%= day.classes %>" id="<%= day.id %>"><span class="day-number"><%= day.day %></span></div>
+                    <% }); %>
+                  </div>
+                </div>
+              </script>
+              </div>
+              <input id="id_date" name="date" type="hidden">
+              <div class="input-prepend" style="display: block; margin-top: 10px; margin-bottom: 0; text-align: center;">
+                <span class="add-on" style="width: 20%;"> <i class="icon-time icon-large"></i> </span>
+                <input id="id_time" name="time" type="time" class="input-block-level_" style="text-align: center; width: 70%;" placeholder="Time" value="12:00">
+              </div>
+            </div>
+          </div>
 
-					<div class="row-fluid ui-wizard-row" id="ui-wizard-victim-aggressor" hidden>
+          <div class="row-fluid ui-wizard-row" id="ui-wizard-victim-aggressor" hidden>
 
-						<div class="span6" id="ui-wizard-victim-area">
-							<h2 id="ui-reporter-victim-label"><i class="icon-user"></i> Victim</h2>
-							<h2 id="ui-witness-victim-label" hidden><i class="icon-user"></i> Victim Profile</h2>
+            <div class="span6" id="ui-wizard-victim-area">
+              <h2 id="ui-reporter-victim-label"><i class="icon-user"></i> Victim</h2>
+              <h2 id="ui-witness-victim-label" hidden><i class="icon-user"></i> Victim Profile</h2>
 
-							<fieldset id="ui-reporter-victim-fieldset" class="ui-victim-fieldset form-horizontal input-area" style="display: none;" disabled>
+              <fieldset id="ui-reporter-victim-fieldset" class="ui-victim-fieldset form-horizontal input-area clean-empty" style="display: none;" disabled>
 
-								{{victim_profile_form|crispy}}
+                {{victim_profile_form|crispy}}
 
-							</fieldset>
+              </fieldset>
 
-							<fieldset id="ui-witness-victim-fieldset" class="ui-victim-fieldset form-horizontal input-area" style="display: none;" disabled>
+              <fieldset id="ui-witness-victim-fieldset" class="ui-victim-fieldset form-horizontal input-area" style="display: none;" disabled>
 
-								<!--{% render_field form.victim placeholder="Victim" class+="select2 input-block-level" %}-->
+                <!--{% render_field form.victim placeholder="Victim" class+="select2 input-block-level" %}-->
 
-								{{victim_form|crispy}}
+                {{victim_form|crispy}}
 
-							</fieldset>
+              </fieldset>
 
-						</div>
+            </div>
 
-						<div class="span6" id="ui-wizard-aggressor-area">
-							<div>
-								<h2 class="pull-left_"><i class="icon-male"></i> Aggressor</h2>
-								<!--
-								<h2 class="pull-right">
-									<a id="ui-aggressor-next" class="btn btn-quiet" title="Next"><i class="icon-arrow-right icon-large"></i></a>
-								</h2>
-								-->
-							</div>
-							{% render_field form.aggressor placeholder="Aggressor" class+="input-block-level input-area" %}
-						</div>
+            <div class="span6" id="ui-wizard-aggressor-area">
+              <div>
+                <h2 class="pull-left_"><i class="icon-male"></i> Aggressor</h2>
+                <!--
+                <h2 class="pull-right">
+                  <a id="ui-aggressor-next" class="btn btn-quiet" title="Next"><i class="icon-arrow-right icon-large"></i></a>
+                </h2>
+                -->
+              </div>
+              {% render_field form.aggressor placeholder="Aggressor" class+="input-block-level input-area" %}
+            </div>
 
-					</div>
+          </div>
 
-					<div class="row-fluid ui-wizard-row" id="ui-wizard-description-evidence" hidden>
-						<div class="span6">
-							<h2><i class="icon-ellipsis-horizontal"></i> Description</h2>
-							{% render_field form.description placeholder="Description" class+="input-block-level input-area" %}
-						</div>
-						<div class="span6">
-							<h2><i class="icon-picture"></i> Evidence</h2>
-							<!--<input name="files[]" type="file" multiple />-->
-							<!--<input type="hidden" name="rsid" value="{{report_submit_id}}">-->
-							<div id="ui-evidence-file-upload" tabindex="0" class="dropzone input-area" style="background-color: #FFF; border: 1px solid #999;"></div>
-							<!--
-							<button type="button" class="input-block-level input-area" style="padding: 0;">
-								<div id="ui-evidence-file-upload" class="dropzone" style="background-color: #FFF; height: 100%">
-								</div>
-							</button>
-							-->
-						</div>
-					</div>
+          <div class="row-fluid ui-wizard-row" id="ui-wizard-description-evidence" hidden>
+            <div class="span6">
+              <h2><i class="icon-ellipsis-horizontal"></i> Description</h2>
+              {% render_field form.description placeholder="Description" required="required" class+="input-block-level input-area" %}
+            </div>
+            <div class="span6">
+              <h2><i class="icon-picture"></i> Evidence</h2>
+              <!--<input name="files[]" type="file" multiple />-->
+              <!--<input type="hidden" name="rsid" value="{{report_submit_id}}">-->
+              <div id="ui-evidence-file-upload" tabindex="0" class="dropzone input-area" style="background-color: #FFF; border: 1px solid #999;"></div>
+              <!--
+              <button type="button" class="input-block-level input-area" style="padding: 0;">
+                <div id="ui-evidence-file-upload" class="dropzone" style="background-color: #FFF; height: 100%">
+                </div>
+              </button>
+              -->
+            </div>
+          </div>
 
-					<div class="row-fluid ui-wizard-row" id="ui-wizard-sources-evidence-links" hidden>
-						<div class="span6">
-							<h2><i class="icon-search"></i> Sources</h2>
-							<ul id="ui-sources-list" class="unstyled">
-								<script id="ui-sources-list-item" type="text/template">
-									<li>
-										<input type="hidden" name="sources[]" value="<%= value %>">
-										<a href="<%= url %>" target="_blank"><%= source %></a>
-										<a href="#" class="ui-sources-remove-button btn btn-not btn-danger"><i class="icon-minus-sign icon-large"></i></a>
-									</li>
-								</script>
-							</ul>
-							<div class="row-fluid">
-								<div class="span4">
-									<input id="ui-sources-source-input" type="text" class="input-block-level" placeholder="Source">
-								</div>
-								<div class="span6">
-									<input id="ui-sources-url-input" type="url" class="input-block-level" placeholder="URL">
-								</div>
-								<div class="span2">
-									<a id="ui-sources-add-button" href="#" class="btn btn-block btn-not btn-success"><i class="icon-plus-sign icon-large"></i></a>
-								</div>
-							</div>
-						</div>
-						<div class="span6">
-							<h2><i class="icon-link"></i> Evidence Links</h2>
-							<ul id="ui-links-list" class="unstyled">
-								<script id="ui-links-list-item" type="text/template">
-									<li>
-										<input type="hidden" name="links[]" value="<%= url %>">
-										<a href="<%= url %>" target="_blank"><%= url %></a>
-										<a href="#" class="ui-links-remove-button btn btn-not btn-danger"><i class="icon-minus-sign icon-large"></i></a>
-									</li>
-								</script>
-							</ul>
-							<div class="row-fluid">
-								<div class="span10">
-									<input id="ui-links-url-input" type="url" class="input-block-level" placeholder="Evidence Link">
-								</div>
-								<div class="span2">
-									<a id="ui-links-add-button" href="#" class="btn btn-block btn-not btn-success"><i class="icon-plus-sign icon-large"></i></a>
-								</div>
-							</div>
-						</div>
-					</div>
+          <div class="row-fluid ui-wizard-row" id="ui-wizard-sources-evidence-links" hidden>
+            <div class="span6">
+              <h2><i class="icon-search"></i> Sources</h2>
+              <ul id="ui-sources-list" class="unstyled">
+                <script id="ui-sources-list-item" type="text/template">
+                  <li>
+                    <input type="hidden" name="sources[]" value="<%= value %>">
+                    <a href="<%= url %>" target="_blank"><%= source %></a>
+                    <a href="#" class="ui-sources-remove-button btn btn-not btn-danger"><i class="icon-minus-sign icon-large"></i></a>
+                  </li>
+                </script>
+              </ul>
+              <div class="row-fluid">
+                <div class="span4">
+                  <input id="ui-sources-source-input" type="text" class="input-block-level" placeholder="Source">
+                </div>
+                <div class="span6">
+                  <input id="ui-sources-url-input" type="url" class="input-block-level" placeholder="URL">
+                </div>
+                <div class="span2">
+                  <a id="ui-sources-add-button" href="#" class="btn btn-block btn-not btn-success"><i class="icon-plus-sign icon-large"></i></a>
+                </div>
+              </div>
+            </div>
+            <div class="span6">
+              <h2><i class="icon-link"></i> Evidence Links</h2>
+              <ul id="ui-links-list" class="unstyled">
+                <script id="ui-links-list-item" type="text/template">
+                  <li>
+                    <input type="hidden" name="links[]" value="<%= url %>">
+                    <a href="<%= url %>" target="_blank"><%= url %></a>
+                    <a href="#" class="ui-links-remove-button btn btn-not btn-danger"><i class="icon-minus-sign icon-large"></i></a>
+                  </li>
+                </script>
+              </ul>
+              <div class="row-fluid">
+                <div class="span10">
+                  <input id="ui-links-url-input" type="url" class="input-block-level" placeholder="Evidence Link">
+                </div>
+                <div class="span2">
+                  <a id="ui-links-add-button" href="#" class="btn btn-block btn-not btn-success"><i class="icon-plus-sign icon-large"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
 
-					<div class="row-fluid ui-wizard-row" id="ui-wizard-features" hidden>
-						<div class="span12">
-							<h2><i class="icon-tags"></i> Features</h2>
-							<!--<input type="text" class="input-block-level" placeholder="Features">-->
-							{% render_field form.features placeholder="Select applicable features" class+="select2 input-block-level btn-large" data-style="btn-large"  %}
-						</div>
-					</div>
+          <div class="row-fluid ui-wizard-row" id="ui-wizard-features" hidden>
+            <div class="span12">
+              <h2><i class="icon-tags"></i> Features</h2>
+              <!--<input type="text" class="input-block-level" placeholder="Features">-->
+              {% render_field form.features placeholder="Select applicable features" class+="select2 input-block-level btn-large" data-style="btn-large"  %}
+            </div>
+          </div>
 
-					<div class="row-fluid ui-wizard-row" id="ui-wizard-submit" hidden>
-						<div class="span12">
-							<button class="btn btn-danger btn-block btn-large"><i class="icon-plus"></i> Report</button>
-						</div>
-					</div>
+          <div class="row-fluid ui-wizard-row" id="ui-wizard-submit" hidden>
+            <div class="span12">
+              <button class="btn btn-danger btn-block btn-large"><i class="icon-plus"></i> Report</button>
+            </div>
+          </div>
 
-				</div>
+        </div>
 
-			</div>
-			<div class="span3 ui-latest-reports">
-				<h2><span id="ui-latest-reports-label">Latest</span><span id="ui-similar-reports-label" hidden>Similar</span> Reports</h2>
-				<hr>
-				<ul id="ui-reports-list" class="list list-hover">
-					{% include "incidents/submit_similar_reports_list.html" %}
-				</ul>
-			</div>
-		</div>
+      </div>
+      <div class="span3 ui-latest-reports">
+        <h2><span id="ui-latest-reports-label">Latest</span><span id="ui-similar-reports-label" hidden>Similar</span> Reports</h2>
+        <hr>
+        <ul id="ui-reports-list" class="list list-hover">
+          {% include "incidents/submit_similar_reports_list.html" %}
+        </ul>
+      </div>
+    </div>
 
-	</div>
+  </div>
 
-	</form>
+  </form>
 
 {% endblock %}
 
 {% block view_styles %}
 
-	{% compress css %}
-	<!-- Map -->
-	<link rel="stylesheet" href="{% static 'components/leaflet/dist/leaflet.css' %}" />
-	<!--[if lte IE 8]>
-	<link rel="stylesheet" href="{% static 'components/leaflet/dist/leaflet.ie.css' %}" />
-	<![endif]-->
-	<link rel="stylesheet" href="{% static 'dependencies/L.GeoSearch/src/css/l.geosearch.css' %}" />
+  {% compress css %}
+  <!-- Map -->
+  <link rel="stylesheet" href="{% static 'components/leaflet/dist/leaflet.css' %}" />
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="{% static 'components/leaflet/dist/leaflet.ie.css' %}" />
+  <![endif]-->
+  <link rel="stylesheet" href="{% static 'dependencies/L.GeoSearch/src/css/l.geosearch.css' %}" />
 
-	<link rel="stylesheet" href="{% static 'components/dropzone/downloads/css/basic.css' %}" />
-	{% endcompress %}
+  <link rel="stylesheet" href="{% static 'components/dropzone/downloads/css/basic.css' %}" />
+  {% endcompress %}
 
-	{% compress css %}
-	<link rel="stylesheet" href="{% static 'incidents/styles/submit.css'%}" />
-	{% endcompress %}
+  {% compress css %}
+  <link rel="stylesheet" href="{% static 'incidents/styles/submit.css'%}" />
+  {% endcompress %}
 
 {% endblock %}
 
 {% block view_scripts %}
-	{% compress js %}
-	<!-- UI Block -->
-	<script src="{% static 'components/blockui/jquery.blockUI.js' %}"></script>
-	<script type="text/javascript">$.blockUI.defaults.baseZ = 800;</script>
-	<!-- Map -->
-	<script src="{% static 'components/leaflet/dist/leaflet.js' %}"></script>
-	<script type="text/javascript">L.Icon.Default.imagePath = "{% static 'components/leaflet/dist/images' %}";</script>
-	<script src="{% static 'dependencies/L.GeoSearch/src/js/l.control.geosearch.js' %}"></script>
-	<script src="{% static 'dependencies/L.GeoSearch/src/js/l.geosearch.provider.google.js' %}"></script>
-	<!-- file upload -->
-	<script src="{% static 'components/dropzone/downloads/dropzone.js' %}"></script>
-	<!--<script src="{% static 'components/typeahead.js/dist/typeahead.js' %}"></script>-->
-	<!-- date input -->
-	<script src="{% static 'components/lodash/dist/lodash.js' %}"></script>
-	<script src="{% static 'components/momentjs/moment.js' %}"></script>
-	<script src="{% static 'components/CLNDR/clndr.js' %}"></script>
-	{% endcompress %}
+  {% compress js %}
+  <!-- UI Block -->
+  <script src="{% static 'components/blockui/jquery.blockUI.js' %}"></script>
+  <script type="text/javascript">$.blockUI.defaults.baseZ = 800;</script>
+  <!-- Map -->
+  <script src="{% static 'components/leaflet/dist/leaflet.js' %}"></script>
+  <script type="text/javascript">L.Icon.Default.imagePath = "{% static 'components/leaflet/dist/images' %}";</script>
+  <script src="{% static 'dependencies/L.GeoSearch/src/js/l.control.geosearch.js' %}"></script>
+  <script src="{% static 'dependencies/L.GeoSearch/src/js/l.geosearch.provider.google.js' %}"></script>
+  <!-- file upload -->
+  <script src="{% static 'components/dropzone/downloads/dropzone.js' %}"></script>
+  <!--<script src="{% static 'components/typeahead.js/dist/typeahead.js' %}"></script>-->
+  <!-- date input -->
+  <script src="{% static 'components/lodash/dist/lodash.js' %}"></script>
+  <script src="{% static 'components/momentjs/moment.js' %}"></script>
+  <script src="{% static 'components/CLNDR/clndr.js' %}"></script>
+  {% endcompress %}
 
-	<script type="text/javascript">
-		//var report_submit_id = {{report_submit_id|json}};
-		//reform.data.victims = {{victims|json}};
-		//reform.data.reports = {{reports|json}};
-		reform.urls.submit = {% url 'incidents:submit' as submit_url %}{{submit_url|json}};
-		reform.urls.similar = {% url 'incidents:similar_reports' as submit_url %}{{submit_url|json}};
-		reform.urls.upload = {% url 'incidents:submit-upload' as upload_url %}{{upload_url|json}};
-	</script>
+  <script type="text/javascript">
+    //var report_submit_id = {{report_submit_id|json}};
+    //reform.data.victims = {{victims|json}};
+    //reform.data.reports = {{reports|json}};
+    reform.urls.submit = {% url 'incidents:submit' as submit_url %}{{submit_url|json}};
+    reform.urls.similar = {% url 'incidents:similar_reports' as submit_url %}{{submit_url|json}};
+    reform.urls.upload = {% url 'incidents:submit-upload' as upload_url %}{{upload_url|json}};
+  </script>
 
-	{% compress js %}
-	<script src="{% static 'incidents/scripts/submit.js' %}"></script>
-	{% endcompress %}
+  {% compress js %}
+  <script src="{% static 'incidents/scripts/submit.js' %}"></script>
+  {% endcompress %}
 
 {% endblock %}

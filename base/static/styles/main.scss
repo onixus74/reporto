@@ -503,3 +503,17 @@ body {
 	margin: 0;
 }
 
+
+
+
+.asteriskField {
+  color: #D40000;
+}
+
+.asteriskField:before {
+  content: ' (';
+}
+
+.asteriskField:after {
+  content: ')';
+}

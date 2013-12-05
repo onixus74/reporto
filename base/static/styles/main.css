@@ -11142,3 +11142,18 @@ body {
 .tt-suggestion p {
   margin: 0;
 }
+
+/* line 509, main.scss */
+.asteriskField {
+  color: #D40000;
+}
+
+/* line 513, main.scss */
+.asteriskField:before {
+  content: ' (';
+}
+
+/* line 517, main.scss */
+.asteriskField:after {
+  content: ')';
+}

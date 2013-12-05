@@ -260,6 +260,13 @@
 	{% block view_scripts %}{% endblock %}
 <!-- View Scripts - END -->
 
+  <script type="text/javascript">
+  $(document).ready(function(){
+    $('.clean-empty option[value=]').remove();
+    $('.clean-empty input:radio[value=]').parent().remove();
+  });
+  </script>
+
 	{% if debug %}
 	<script src="{% static 'components/html-inspector/html-inspector.js' %}"></script>
 	<script> HTMLInspector.inspect() </script>

@@ -3,12 +3,14 @@ logger = logging.getLogger(__name__)
 
 from django.conf import settings
 from django.db import models
+from mptt.models import MPTTModel, TreeForeignKey
 from django.core.urlresolvers import reverse
 from django.template.defaultfilters import slugify
 from django.utils.html import strip_tags
 from django.forms.models import model_to_dict
 from django.core.exceptions import ValidationError
 from urlparse import parse_qs
+from mptt.fields import TreeManyToManyField
 
 
 class Category(models.Model):
@@ -32,10 +34,12 @@ class Category(models.Model):
 # class IncidentCategory(Category):
 #     pass
 
-
-class Feature(models.Model):
+# class Feature(models.Model):
+class Feature(MPTTModel):
+    parent = TreeForeignKey('self', null=True, blank=True, related_name='children')
     slug = models.SlugField(max_length=200, blank=True, null=True)
     definition = models.CharField(max_length=300)
+    selectable = models.BooleanField(default=True)
 
     def get_absolute_url(self):
         return reverse('incidents:features:view', kwargs={'pk': self.id})
@@ -49,6 +53,9 @@ class Feature(models.Model):
 
     class Meta:
         pass
+
+    class MPTTMeta:
+        order_insertion_by = ['definition']
 
 
 class Media(models.Model):
@@ -110,21 +117,48 @@ class Media(models.Model):
 
 class Victim(models.Model):
 
-    MALE = 'M'
-    FEMALE = 'F'
-    GENDER = (
-        (MALE, "Male"),
-        (FEMALE, "Female"),
-    )
+    UNKNOWN = '?'
+    #UNKNOWN = None
 
-    CITIZEN = 'CIT'
-    COP = 'COP'
+    CITIZEN = 'C'
+    COP = 'P'
     CATEGORY = (
+        # (UNKNOWN, "Unknown"),
         (CITIZEN, "Citizen"),
         (COP, "Cop")
     )
 
-    UNKNOWN = '?'
+    MALE = 'M'
+    FEMALE = 'F'
+    GENDER = (
+        # (UNKNOWN, "Unknown"),
+        (MALE, "Male"),
+        (FEMALE, "Female"),
+    )
+
+    MARRIED = "M"
+    SINGLE = "S"
+    DIVORCED = "D"
+    WIDOWED = "W"
+    OTHER = "O"
+    MARITAL_STATUS = (
+        (UNKNOWN, "Unknown"),
+        (MARRIED, "Married"),
+        (SINGLE, "Single"),
+        (DIVORCED, "Divorced"),
+        (WIDOWED, "Widowed"),
+        (OTHER, "Other")
+    )
+
+    LOWER = 'L'
+    MIDDLE = 'M'
+    UPPER = 'U'
+    SOCIAL_CLASS = (
+        (UNKNOWN, "Unknown"),
+        (LOWER, "Lower"),
+        (MIDDLE, "Middle"),
+        (UPPER, "Upper")
+    )
 
     NO_EDUCATION = 'NO'
     PRIMARY_SCHOOL = 'PS'
@@ -138,34 +172,30 @@ class Victim(models.Model):
         (UNIVERSITY, "University")
     )
 
-    LOWER = 'L'
-    MIDDLE = 'M'
-    UPPER = 'U'
-    SOCIAL_CLASS = (
-        (UNKNOWN, "Unknown"),
-        (LOWER, "Lower"),
-        (MIDDLE, "Middle"),
-        (UPPER, "Upper")
-    )
+    category = models.CharField(max_length=1, choices=CATEGORY, default=CITIZEN, blank=True, null=True)
+    firstname = models.CharField(max_length=100, blank=True, null=True)
+    lastname = models.CharField(max_length=100, blank=True, null=True)
 
-    category = models.CharField(
-        max_length=3, choices=CATEGORY, default=CITIZEN)
-    firstname = models.CharField(max_length=100)
-    lastname = models.CharField(max_length=100)
-    gender = models.CharField(max_length=1, choices=GENDER, default=MALE)
-    age = models.PositiveIntegerField(blank=True, null=True)
-    education = models.CharField(
-        max_length=2, choices=EDUCATION, default=UNKNOWN)
-    social_class = models.CharField(
-        max_length=2, choices=SOCIAL_CLASS, default=UNKNOWN)
+    gender = models.CharField(max_length=1, choices=GENDER, default=MALE, blank=True, null=True)
+    birthdate = models.DateField(blank=True, null=True)
+    birthplace = models.CharField(max_length=200, blank=True, null=True)
+    identity_card_number = models.CharField(max_length=20, blank=True, null=True)
+
+    # civil_status = models.CharField(max_length=1, choices=..., default=...)
+    marital_status = models.CharField(max_length=1, choices=MARITAL_STATUS, blank=True, null=True)
+    have_children = models.NullBooleanField(blank=True, null=True)
+    social_class = models.CharField(max_length=2, choices=SOCIAL_CLASS, blank=True, null=True)
+
     profession = models.CharField(max_length=200, blank=True, null=True)
-    phone = models.CharField(max_length=20, blank=True, null=True,
-                             help_text="Victim's phone address is a private information, it wont be shared or publicly accessible.")
-    email = models.EmailField(
-        blank=True, null=True, help_text="Victim's email number is a private information, it wont be shared or publicly accessible.")
+    education = models.CharField(max_length=2, choices=EDUCATION, blank=True, null=True)
+
+    address = models.TextField(null=True, blank=True)
+    phone = models.CharField(max_length=20, blank=True, null=True, help_text="Victim's phone address is a private information, it wont be shared or publicly accessible.")
+    email = models.EmailField(blank=True, null=True, help_text="Victim's email number is a private information, it wont be shared or publicly accessible.")
+
     description = models.TextField(blank=True, null=True)
-    user = models.ForeignKey(
-        settings.AUTH_USER_MODEL, blank=True, null=True)
+
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, blank=True, null=True)
 
     def get_absolute_url(self):
         return reverse('incidents:victims:view', kwargs={'pk': self.id})
@@ -178,12 +208,15 @@ class Victim(models.Model):
 
     def serialize(self):
         data = model_to_dict(self)
-        data['gender_display'] = self.get_gender_display()
         data['category_display'] = self.get_category_display()
+        data['marital_status_display'] = self.get_marital_status_display()
+        data['gender_display'] = self.get_gender_display()
+
         data['education_display'] = self.get_education_display()
         data['user'] = self.user
         data.pop('email')
         data.pop('phone')
+        data.pop('address')
         return data
 
     class Meta:
@@ -250,12 +283,11 @@ class Report(models.Model):
     category = models.ForeignKey(Category)
     victim = models.ForeignKey(Victim)
     aggressor = models.TextField(blank=True, null=True)
-    aggressor_category = models.CharField(
-        max_length=3, choices=CATEGORY, default=COP, blank=True)
-    description = models.TextField()
+    aggressor_category = models.CharField(max_length=3, choices=CATEGORY, default=COP, blank=True)
+    description = models.TextField(blank=True, null=True)
     media = models.ManyToManyField(Media, blank=True, null=True)
     sources = models.TextField(blank=True, null=True)
-    features = models.ManyToManyField(Feature)
+    features = TreeManyToManyField(Feature, blank=True, null=True)
     is_verified = models.BooleanField()
     is_closed = models.BooleanField()
     comments = models.ManyToManyField(Comment, blank=True, null=True)

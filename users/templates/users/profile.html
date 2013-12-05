@@ -62,7 +62,7 @@
 
 						<dt>Victim Profile</dt>
 						<dd>
-							<form class="ui-profile-victim form-horizontal" method="post">
+							<form class="ui-profile-victim form-horizontal clean-empty" method="post">
 								{% csrf_token %}
 								{{victim_form|crispy}}
 								<div class="form-actions">

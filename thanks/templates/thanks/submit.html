@@ -17,9 +17,9 @@
 
   <div class="container">
 
-	<div class="page-header">
-		<h1 class="text-center">Thank Submission<small></small></h1>
-	</div>
+  <div class="page-header">
+    <h1 class="text-center">Thank Submission<small></small></h1>
+  </div>
 
     {% if form.errors %}
     <div class="alert alert-error">
@@ -57,7 +57,6 @@
             <div class="span6">
               <h2><i class="icon-calendar"></i><i class="icon-time"></i> Date and Time</h2>
               {% render_field form.datetime type="datetime-local" class+="input-block-level" _required="required" style="display: none;" %}
-              {#% render_field form.datetime type="hidden" class+="input-block-level" %#}
               <div id="dateinput" style="height: 300px;">
               <script type="text/template" id="dateinput-template">
                 <div class="controls">
@@ -84,7 +83,7 @@
               <input id="id_date" name="date" type="hidden">
               <div class="input-prepend" style="display: block; margin-top: 10px; margin-bottom: 0; text-align: center;">
                 <span class="add-on" style="width: 20%;"> <i class="icon-time icon-large"></i> </span>
-                <input id="id_time" name="time" type="time" class="input-block-level_" style="text-align: center; width: 70%;" placeholder="Time">
+                <input id="id_time" name="time" type="time" class="input-block-level_" style="text-align: center; width: 70%;" placeholder="Time" value="12:00">
               </div>
             </div>
           </div>
@@ -92,7 +91,7 @@
           <div class="row-fluid ui-wizard-row" id="ui-wizard-description-evidence" hidden>
             <div class="span6">
               <h2><i class="icon-ellipsis-horizontal"></i> Description</h2>
-              {% render_field form.description placeholder="Description" class+="input-block-level input-area" %}
+              {% render_field form.description placeholder="Description" required="required" class+="input-block-level input-area" %}
             </div>
             <div class="span6">
               <h2><i class="icon-picture"></i> Photos</h2>
