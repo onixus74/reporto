@@ -62,8 +62,8 @@ $(document).ready(function(){
     color: '#28b262',
     data: []
   };
-  reform.data.thanksByDate.forEach(function(report) {
-    serie.data.push([new Date(report.date).getTime(), report.count]);
+  reform.data.thanksByDate.forEach(function(thank) {
+    serie.data.push([new Date(thank.date).getTime(), thank.count]);
   });
   serie.data.push([new Date().getTime(), 0]);
   series.push(serie);
@@ -71,7 +71,7 @@ $(document).ready(function(){
   $(document).ready(function() {
     console.log(series);
 
-    $('#ui-reports-dates-chart').highcharts({
+    $('#ui-thanks-dates-chart').highcharts({
       chart: {
         type: 'line', //'spline',
         zoomType: 'x',

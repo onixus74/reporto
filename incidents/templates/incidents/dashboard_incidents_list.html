@@ -1,5 +1,5 @@
                 {% for report in report_list %}
                   {% include "incidents/dashboard_incidents_item.html" %}
                 {% empty %}
-                <li id="ui-no-reports">No reports!</li>
+                <li class="ui-timeline-no-entries">No reports!</li>
                 {% endfor %}

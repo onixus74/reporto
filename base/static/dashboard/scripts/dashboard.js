@@ -77,8 +77,8 @@ $(document).ready(function(){
     color: '#c13c2d',
     data: [],
   };
-  reform.data.incidentsByDate.forEach(function(report) {
-    serie.data.push([new Date(report.date).getTime(), report.count]);
+  reform.data.incidentsByDate.forEach(function(incident) {
+    serie.data.push([new Date(incident.date).getTime(), incident.count]);
   });
   serie.data.push([new Date().getTime(), 0]);
   series.push(serie);
@@ -91,8 +91,8 @@ $(document).ready(function(){
     color: '#28b262',
     data: []
   };
-  reform.data.thanksByDate.forEach(function(report) {
-    serie.data.push([new Date(report.date).getTime(), report.count]);
+  reform.data.thanksByDate.forEach(function(incident) {
+    serie.data.push([new Date(incident.date).getTime(), incident.count]);
   });
   if (!serie.data[0] || serie.data[0][0] > dateMin)
     serie.data.unshift([dateMin, 0]);
@@ -105,8 +105,8 @@ $(document).ready(function(){
       name: category,
       data: []
     };
-    reform.data.incidentsByCategoryByDate[category].forEach(function(report) {
-      serie.data.push([new Date(report.date).getTime(), report.count]);
+    reform.data.incidentsByCategoryByDate[category].forEach(function(incident) {
+      serie.data.push([new Date(incident.date).getTime(), incident.count]);
     });
     if (!serie.data[0] || serie.data[0][0] > dateMin)
       serie.data.unshift([dateMin, 0]);
@@ -118,7 +118,7 @@ $(document).ready(function(){
   $(document).ready(function() {
     console.log(series);
 
-    $('#ui-reports-dates-chart').highcharts({
+    $('#ui-incidents-dates-chart').highcharts({
       chart: {
         type: 'line', //'spline',
         zoomType: 'x',

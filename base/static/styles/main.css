@@ -2,7 +2,7 @@
 /*-------------------------------------------------
 | DEPENDENCIES
 \*/
-/*
+/*!
  * Bootstrap v2.3.2
  *
  * Copyright 2012 Twitter, Inc
@@ -2448,7 +2448,7 @@ table th[class*="span"],
   background-color: #92c1ce;
 }
 
-/*
+/*!
  *  Font Awesome 3.2.1
  *  the iconic font designed for Bootstrap
  *  ------------------------------------------------------------------------------
@@ -9006,7 +9006,7 @@ a.thumbnail:hover {
   color: white;
 }
 
-/*
+/*!
  * Bootstrap Responsive v2.3.2
  *
  * Copyright 2012 Twitter, Inc
@@ -10636,14 +10636,19 @@ select.select2 {
 /*-------------------------------------------------
 | BOOTSTRAP MOD
 \*/
-/* line 28, main.scss */
+/* line 27, main.scss */
+.navbar .nav > .active > a, .navbar .nav > .active > a:hover, .navbar .nav > .active > a:focus {
+  font-weight: bold;
+}
+
+/* line 32, main.scss */
 ul.list,
 ol.list {
   margin-left: 0;
   margin-bottom: 20px;
   list-style: none;
 }
-/* line 32, main.scss */
+/* line 36, main.scss */
 ul.list li,
 ol.list li {
   padding: 8px;
@@ -10652,57 +10657,57 @@ ol.list li {
   vertical-align: top;
 }
 
-/* line 42, main.scss */
+/* line 46, main.scss */
 .list-hover li:hover {
   background-color: #e8f8fd;
 }
 
-/* line 47, main.scss */
+/* line 51, main.scss */
 .btn-quiet {
   background-color: transparent;
 }
 
-/* line 53, main.scss */
+/* line 57, main.scss */
 .btn-not {
   -webkit-transition: color 0.2s linear;
   -moz-transition: color 0.2s linear;
   -o-transition: color 0.2s linear;
   transition: color 0.2s linear;
 }
-/* line 59, main.scss */
+/* line 63, main.scss */
 .btn-not:hover, .btn-not:focus {
   text-decoration: none;
 }
-/* line 63, main.scss */
+/* line 67, main.scss */
 .btn-not.btn-success {
   color: #2cc36b;
 }
-/* line 67, main.scss */
+/* line 71, main.scss */
 .btn-not.btn-success:hover, .btn-not.btn-success:focus {
   color: #229955;
 }
-/* line 72, main.scss */
+/* line 76, main.scss */
 .btn-not.btn-danger {
   color: #d14233;
 }
-/* line 76, main.scss */
+/* line 80, main.scss */
 .btn-not.btn-danger:hover, .btn-not.btn-danger:focus {
   color: #ab3326;
 }
 
-/* line 84, main.scss */
+/* line 88, main.scss */
 .modal-big {
   height: 80%;
   width: 80%;
   margin-left: -40%;
 }
-/* line 88, main.scss */
+/* line 92, main.scss */
 .modal-big .modal-body {
   max-height: 80%;
 }
 
 @media (max-width: 768px) {
-  /* line 94, main.scss */
+  /* line 98, main.scss */
   .modal-big {
     width: 90%;
     margin-left: 2%;
@@ -10744,23 +10749,23 @@ body::-webkit-scrollbar-corner { background-clip: padding-box; background-color:
 ::-webkit-scrollbar-thumb { background-color: #DDD; }
 ::-webkit-scrollbar-thumb:hover { background-color: #999; }
 */
-/* line 140, main.scss */
+/* line 144, main.scss */
 ::-webkit-scrollbar {
   width: 4px;
 }
 
-/* line 141, main.scss */
+/* line 145, main.scss */
 ::-webkit-scrollbar-track {
   background: rgba(0, 0, 0, 0.1);
 }
 
-/* line 142, main.scss */
+/* line 146, main.scss */
 ::-webkit-scrollbar-thumb {
   background: rgba(0, 0, 0, 0.6);
   border-radius: 2px;
 }
 
-/* line 143, main.scss */
+/* line 147, main.scss */
 ::-webkit-scrollbar:horizontal {
   height: 4px;
 }
@@ -10769,14 +10774,14 @@ body::-webkit-scrollbar-corner { background-clip: padding-box; background-color:
 | GLOBAL STYLES
 \*/
 /* Padding below the footer and lighter body text */
-/* line 152, main.scss */
+/* line 156, main.scss */
 body {
   padding-top: 110px;
   padding-bottom: 60px;
   color: #5a5a5a;
 }
 
-/* line 159, main.scss */
+/* line 163, main.scss */
 #top-bg {
   position: fixed;
   background-color: #666;
@@ -10789,7 +10794,7 @@ body {
   top: 0;
 }
 
-/* line 169, main.scss */
+/* line 173, main.scss */
 #footer {
   position: fixed;
   bottom: 0;
@@ -10803,7 +10808,7 @@ body {
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.25);
 }
 
-/* line 180, main.scss */
+/* line 184, main.scss */
 .container .credit {
   margin: 10px 0;
 }
@@ -10812,7 +10817,7 @@ body {
 | CUSTOMIZE THE NAVBAR
 \*/
 /* Special class on .container surrounding .navbar, used for positioning it into place. */
-/* line 190, main.scss */
+/* line 194, main.scss */
 .navbar-wrapper {
   position: fixed;
   top: 0;
@@ -10825,7 +10830,7 @@ body {
 }
 
 /* Remove border and change up box shadow for more contrast */
-/* line 204, main.scss */
+/* line 208, main.scss */
 .navbar .navbar-inner {
   border: 0;
   -webkit-box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
@@ -10834,7 +10839,7 @@ body {
 }
 
 /* Downsize the brand/project name a bit */
-/* line 210, main.scss */
+/* line 214, main.scss */
 .navbar .brand {
   padding: 8px;
   /* Increase vertical padding to match navbar links */
@@ -10844,13 +10849,13 @@ body {
 }
 
 /* Navbar links: increase padding for taller navbar */
-/* line 218, main.scss */
+/* line 222, main.scss */
 .navbar .nav > li > a {
   padding: 15px 20px;
 }
 
 /* Offset the responsive button for proper vertical alignment */
-/* line 223, main.scss */
+/* line 227, main.scss */
 .navbar .btn-navbar {
   margin-top: 10px;
 }
@@ -10861,13 +10866,13 @@ body {
 /* Large desktop */
 /* Portrait tablet to landscape and desktop */
 @media (min-width: 768px) and (max-width: 979px) {
-  /* line 240, main.scss */
+  /* line 244, main.scss */
   .container.navbar-wrapper {
     margin-bottom: 0;
     width: auto;
   }
 
-  /* line 245, main.scss */
+  /* line 249, main.scss */
   #footer {
     padding-left: 20px;
     padding-right: 20px;
@@ -10875,29 +10880,29 @@ body {
 }
 /* Landscape phone to portrait tablet */
 @media (max-width: 767px) {
-  /* line 255, main.scss */
+  /* line 259, main.scss */
   body {
     padding-top: 70px;
     padding-bottom: 50px;
   }
 
-  /* line 260, main.scss */
+  /* line 264, main.scss */
   .container.navbar-wrapper {
     margin-bottom: 0;
     width: auto;
   }
 
-  /* line 265, main.scss */
+  /* line 269, main.scss */
   .navbar-inner {
     margin: -20px;
   }
 
-  /* line 269, main.scss */
+  /* line 273, main.scss */
   #top-bg {
     display: none;
   }
 
-  /* line 273, main.scss */
+  /* line 277, main.scss */
   #footer {
     padding-left: 20px;
     padding-right: 20px;
@@ -10905,30 +10910,30 @@ body {
 }
 /* Landscape phones and down */
 @media (max-width: 480px) {
-  /* line 283, main.scss */
+  /* line 287, main.scss */
   body {
     padding-left: 0;
     padding-right: 0;
   }
 
-  /* line 287, main.scss */
+  /* line 291, main.scss */
   .container.navbar-wrapper {
     margin-bottom: 0;
     width: auto;
   }
 
-  /* line 292, main.scss */
+  /* line 296, main.scss */
   #footer {
     padding-left: 20px;
     padding-right: 20px;
   }
 
-  /* line 297, main.scss */
+  /* line 301, main.scss */
   .navbar-inner {
     margin: -20px;
   }
 
-  /* line 301, main.scss */
+  /* line 305, main.scss */
   #footer {
     padding-left: 20px;
     padding-right: 20px;
@@ -10967,7 +10972,7 @@ body {
 
 }
 */
-/* line 344, main.scss */
+/* line 348, main.scss */
 #mainView {
   position: fixed;
   z-index: 99999;
@@ -11045,12 +11050,12 @@ body {
 /*-------------------------------------------------
 | Fixes
 \*/
-/* line 425, main.scss */
+/* line 429, main.scss */
 [hidden] {
   display: none;
 }
 
-/* line 427, main.scss */
+/* line 431, main.scss */
 .ui-pnotify .alert {
   margin-bottom: 0;
 }
@@ -11058,7 +11063,7 @@ body {
 /*-------------------------------------------------
 | Leaflet Fixes
 \*/
-/* line 436, main.scss */
+/* line 440, main.scss */
 .leaflet-top, .leaflet-bottom {
   z-index: auto !important;
 }
@@ -11066,7 +11071,7 @@ body {
 /*-------------------------------------------------
 | typeahead.js
 \*/
-/* line 446, main.scss */
+/* line 450, main.scss */
 .typeahead,
 .tt-query,
 .tt-hint {
@@ -11082,29 +11087,29 @@ body {
   outline: none;
 }
 
-/* line 459, main.scss */
+/* line 463, main.scss */
 .typeahead {
   background-color: #fff;
 }
 
-/* line 463, main.scss */
+/* line 467, main.scss */
 .typeahead:focus {
   border: 2px solid #0097cf;
 }
 
-/* line 467, main.scss */
+/* line 471, main.scss */
 .tt-query {
   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
 }
 
-/* line 471, main.scss */
+/* line 475, main.scss */
 .tt-hint {
   color: #999999;
 }
 
-/* line 475, main.scss */
+/* line 479, main.scss */
 .tt-dropdown-menu {
   width: 422px;
   margin-top: 12px;
@@ -11120,20 +11125,20 @@ body {
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
 }
 
-/* line 486, main.scss */
+/* line 490, main.scss */
 .tt-suggestion {
   padding: 3px 20px;
   font-size: 18px;
   line-height: 24px;
 }
 
-/* line 492, main.scss */
+/* line 496, main.scss */
 .tt-suggestion.tt-is-under-cursor {
   color: #fff;
   background-color: #0097cf;
 }
 
-/* line 498, main.scss */
+/* line 502, main.scss */
 .tt-suggestion p {
   margin: 0;
 }

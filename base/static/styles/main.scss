@@ -24,6 +24,10 @@
 | BOOTSTRAP MOD
 \*/
 
+.navbar .nav > .active > a, .navbar .nav > .active > a:hover, .navbar .nav > .active > a:focus {
+  font-weight: bold;
+}
+
 ul.list,
 ol.list {
 	margin-left: 0;

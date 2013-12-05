@@ -1,40 +1,61 @@
 'use strict';
 
+function makeDjangoAppConfig(config, applicationName){
+
+  config.compass[applicationName] = {
+    options: {
+      basePath: '{app}/static/{app}'.replace(/{app}/g, applicationName),
+      sassDir: 'styles',
+      cssDir: 'styles',
+      force: true
+    }
+  };
+
+  config.cssmin[applicationName] = {
+    expand: true,
+    cwd: '{app}/static/{app}/styles'.replace(/{app}/g, applicationName),
+    src: ['**/*.css', '!*.min.css', '!*.dist.css'],
+    dest: '{app}/static/{app}/styles'.replace(/{app}/g, applicationName),
+    ext: '.min.css'
+  };
+
+  config.uglify[applicationName] = {
+    options: {
+      sourceMap: function(dst) {
+        return dst + '.map';
+      },
+      sourceMappingURL: function(dst) {
+        return '/' + dst.substr(dst.indexOf('static')) + '.map';
+      },
+      sourceMapPrefix: 4
+    },
+    expand: true,
+    cwd: '{app}/static/{app}/scripts'.replace(/{app}/g, applicationName),
+    src: ['**/*.js', '!*.min.js', '!*.dist.js'],
+    dest: '{app}/static/{app}/scripts'.replace(/{app}/g, applicationName),
+    ext: '.min.js'
+  };
+
+}
+
 module.exports = function(grunt) {
 
-  // Project configuration.
-  grunt.initConfig({
+
+  var config_ = {
 
     pkg: grunt.file.readJSON('package.json'),
 
     compass: {
 
-      base: {
+      dashboard: {
         options: {
-          basePath: 'base/static/',
-          sassDir: 'styles',
-          cssDir: 'styles',
+          basePath: 'base/static',
+          sassDir: 'dashboard/styles',
+          cssDir: 'dashboard/styles',
           force: true
         }
       },
 
-      reports: {
-        options: {
-          basePath: 'reports/static/reports',
-          sassDir: 'styles',
-          cssDir: 'styles',
-          force: true
-        }
-      },
-
-      thanks: {
-        options: {
-          basePath: 'thanks/static/thanks',
-          sassDir: 'styles',
-          cssDir: 'styles',
-          force: true
-        }
-      },
     },
 
     cssmin: {
@@ -47,29 +68,6 @@ module.exports = function(grunt) {
         ext: '.min.css'
       },
 
-      base: {
-        expand: true,
-        cwd: 'base/static/styles',
-        src: ['**/*.css', '!*.min.css', '!*.dist.css'],
-        dest: 'base/static/styles',
-        ext: '.min.css'
-      },
-
-      reports: {
-        expand: true,
-        cwd: 'reports/static/reports/styles',
-        src: ['**/*.css', '!*.min.css', '!*.dist.css'],
-        dest: 'reports/static/reports/styles',
-        ext: '.min.css'
-      },
-
-      thanks: {
-        expand: true,
-        cwd: 'thanks/static/thanks/styles',
-        src: ['**/*.css', '!*.min.css', '!*.dist.css'],
-        dest: 'thanks/static/thanks/styles',
-        ext: '.min.css'
-      }
     },
 
     uglify: {
@@ -91,72 +89,6 @@ module.exports = function(grunt) {
         ext: '.min.js'
       },
 
-      base: {
-        options: {
-          sourceMap: function(dst) {
-            return dst + '.map';
-          },
-          sourceMappingURL: function(dst) {
-            return '/' + dst.substr(dst.indexOf('static')) + '.map';
-          },
-          sourceMapPrefix: 4
-        },
-        expand: true,
-        cwd: 'base/static/scripts',
-        src: ['**/*.js', '!*.min.js', '!*.dist.js'],
-        dest: 'base/static/scripts',
-        ext: '.min.js'
-      },
-
-      reports: {
-        options: {
-          sourceMap: function(dst) {
-            return dst + '.map';
-          },
-          sourceMappingURL: function(dst) {
-            return '/' + dst.substr(dst.indexOf('static')) + '.map';
-          },
-          sourceMapPrefix: 4
-        },
-        expand: true,
-        cwd: 'reports/static/reports/scripts',
-        src: ['**/*.js', '!*.min.js', '!*.dist.js'],
-        dest: 'reports/static/reports/scripts',
-        ext: '.min.js'
-        /*
-				files: {
-					'reports/static/reports/scripts/reports': ['reports/static/reports/scripts/reports.js'],
-					'reports/static/reports/scripts/reports-all.dist.js': [
-						'base/static/scripts/app.js',
-						'reports/static/reports/scripts/reports.js']
-				}
-				*/
-      },
-
-      thanks: {
-        options: {
-          sourceMap: function(dst) {
-            return dst + '.map';
-          },
-          sourceMappingURL: function(dst) {
-            return '/' + dst.substr(dst.indexOf('static')) + '.map';
-          },
-          sourceMapPrefix: 4
-        },
-        expand: true,
-        cwd: 'thanks/static/thanks/scripts',
-        src: ['**/*.js', '!*.min.js', '!*.dist.js'],
-        dest: 'thanks/static/thanks/scripts',
-        ext: '.min.js'
-        /*
-        files: {
-          'thanks/static/thanks/scripts/thanks': ['thanks/static/thanks/scripts/thanks.js'],
-          'thanks/static/thanks/scripts/thanks-all.dist.js': [
-            'base/static/scripts/app.js',
-            'thanks/static/thanks/scripts/thanks.js']
-        }
-        */
-      }
     },
 
     concat: {
@@ -166,30 +98,81 @@ module.exports = function(grunt) {
       },
       jsdist: {
         // the files to concatenate
-        src: ['reports/static/reports/scripts/**/*.min.js'],
+        src: ['incidents/static/incidents/scripts/**/*.min.js'],
         // the location of the resulting JS file
-        dest: 'reports/static/reports/scripts/reports-all.dist.js'
+        dest: 'incidents/static/incidents/scripts/incidents-all.dist.js'
       }
     },
 
     watch: {
       scripts: {
-        files: ['reports/static/reports/scripts/**/*.js', '!*.min.js', '!*.dist.js'],
-        tasks: ['uglify:reports'],
+        files: ['incidents/static/incidents/scripts/**/*.js', '!*.min.js', '!*.dist.js'],
+        tasks: ['uglify:incidents'],
         options: {
           nospawn: true
         }
       },
       styles: {
-        files: ['reports/static/reports/styles/**/*.css', '!*.min.css', '!*.dist.css'],
-        tasks: ['compass:reports', 'cssmin:reports'],
+        files: ['incidents/static/incidents/styles/**/*.css', '!*.min.css', '!*.dist.css'],
+        tasks: ['compass:incidents', 'cssmin:incidents'],
         options: {
           nospawn: true
         }
       }
     }
 
-  });
+  };
+
+  var config = {
+    pkg: grunt.file.readJSON('package.json'),
+    compass: {},
+    cssmin: {},
+    uglify: {},
+    contact: {},
+    watch: {},
+  };
+
+  /* base */
+
+  config.compass.base = {
+    options: {
+      basePath: 'base/static',
+      sassDir: 'styles',
+      cssDir: 'styles',
+      force: true
+    }
+  };
+
+  config.cssmin.base = {
+    expand: true,
+    cwd: 'base/static/styles',
+    src: ['**/*.css', '!*.min.css', '!*.dist.css'],
+    dest: 'base/static/styles',
+    ext: '.min.css'
+  };
+
+  config.uglify.base = {
+    options: {
+      sourceMap: function(dst) {
+        return dst + '.map';
+      },
+      sourceMappingURL: function(dst) {
+        return '/' + dst.substr(dst.indexOf('static')) + '.map';
+      },
+      sourceMapPrefix: 4
+    },
+    expand: true,
+    cwd: 'base/static/scripts',
+    src: ['**/*.js', '!*.min.js', '!*.dist.js'],
+    dest: 'base/static/scripts',
+    ext: '.min.js'
+  };
+
+  makeDjangoAppConfig(config, 'users');
+  makeDjangoAppConfig(config, 'incidents');
+  makeDjangoAppConfig(config, 'thanks');
+
+  grunt.initConfig(config);
 
   // Load the plugin.
   grunt.loadNpmTasks('grunt-contrib-uglify');
@@ -199,10 +182,12 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-compass');
 
   // Register default task
-  grunt.registerTask('static', ['cssmin:static'], 'uglify:static');
+  //grunt.registerTask('static', ['cssmin:static'], 'uglify:static');
   grunt.registerTask('base', ['compass:base', 'cssmin:base', 'uglify:base']);
-  grunt.registerTask('reports', ['compass:reports', 'cssmin:reports', 'uglify:reports']);
+  grunt.registerTask('users', ['compass:users', 'cssmin:users', 'uglify:users']);
+  //grunt.registerTask('dashboard', ['compass:dashboard', 'cssmin:dashboard', 'uglify:dashboard']);
+  grunt.registerTask('incidents', ['compass:incidents', 'cssmin:incidents', 'uglify:incidents']);
   grunt.registerTask('thanks', ['compass:thanks', 'cssmin:thanks', 'uglify:thanks']);
-  grunt.registerTask('default', ['base', 'reports', 'thanks']);
+  grunt.registerTask('default', ['base', 'users', 'incidents', 'thanks']);
 
 };

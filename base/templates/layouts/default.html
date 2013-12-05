@@ -97,9 +97,16 @@
 					<div class="nav-collapse collapse">
 					<ul class="nav">
 						{% if user.is_authenticated %}
-						<li{% if false %} class="active"{% endif %}><a href="{% url 'home' %}">Dashboard</a></li>
-						<li{% if false %} class="active"{% endif %}><a href="{% url 'incidents:submit' %}">Report an Incident</a></li>
-                        <li{% if false %} class="active"{% endif %}><a href="{% url 'thanks:submit' %}">Thank a Security Officer</a></li>
+            {% url 'home' as url %}
+						<li{% if request.path_info == url %} class="active"{% endif %}><a href="{{url}}">Dashboard</a></li>
+            {% url 'incidents:dashboard' as url %}
+            <li{% if request.path_info == url %} class="active"{% endif %}><a href="{{url}}">Incidents</a></li>
+            {% url 'incidents:submit' as url %}
+            <li{% if request.path_info == url %} class="active"{% endif %}><a href="{{url}}"><i class="icon-plus"></i> Report an Incident</a></li>
+            {% url 'thanks:dashboard' as url %}
+            <li{% if request.path_info == url %} class="active"{% endif %}><a href="{{url}}">Thanks</a></li>
+            {% url 'thanks:submit' as url %}
+            <li{% if request.path_info == url %} class="active"{% endif %}><a href="{{url}}"><i class="icon-plus"></i> Thank a Security Officer</a></li>
 						{% if user.role == "A" %}
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Administration<b class="caret"></b></a>

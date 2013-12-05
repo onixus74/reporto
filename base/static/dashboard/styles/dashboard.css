@@ -29,6 +29,11 @@
 }
 
 /* line 24, dashboard.scss */
+.ui-timeline-no-entries {
+  text-align: center !important;
+}
+
+/* line 28, dashboard.scss */
 .section-shadow {
   -webkit-box-shadow: 0px 0px 5px rgba(50, 50, 50, 0.6);
   -moz-box-shadow: 0px 0px 5px rgba(50, 50, 50, 0.6);
