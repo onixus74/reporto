@@ -1,26 +1,28 @@
-backups
-cache
-wp-content/cache
-wp-content/plugins/connections/cache
-db-admin
-.git*
-wp-config.php
-.htaccess
-*.pyc
+.git
 
+# Build and Temporary files
+*.log
+*.old
+*.pot
+*.pyc
+*.sqlite3
+
+# Tools
+.env*
 node_modules
 *.sublime-*
-*.sqlite3
-reform_tn/media
-components
-.sass-cache
-.project
-.pydevproject
-.checkstyle
-.settings
-data
-test
 sync-local.err
 sync-local.out
 sync-server.err
 sync-server.out
+.project
+.pydevproject
+.checkstyle
+.settings
+.sass-cache
+
+/base/static/components
+/reporto/media
+
+/data
+test
