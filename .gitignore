@@ -23,3 +23,7 @@ components
 /reform_tn/static
 /data
 /test
+/sync-local.err
+/sync-local.out
+/sync-server.err
+/sync-server.out

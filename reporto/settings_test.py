@@ -1,7 +1,8 @@
-# Django settings for reform_tn project.
+# Django settings for reporto project.
 
 import os
-PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
+PROJECT_DIR = os.path.dirname(__file__)
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # DEBUG = True # !DEV!
 DEBUG = False  # !PROD!
@@ -15,12 +16,10 @@ ADMINS = (
 MANAGERS = ADMINS
 
 DATABASES = {
-	'default': {
-		'ENGINE': 'django.db.backends.postgresql_psycopg2',
- 		'NAME': 'reporto',
-    'USER': 'reporto',
-    'PASSWORD': 'reportopass',
-	}
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'reporto/test.sqlite3',
+    }
 }
 
 EMAIL_HOST = 'smtp.webfaction.com'
@@ -52,7 +51,7 @@ LANGUAGES = (
     #('ar-tn', 'Tounsi'),
 )
 
-SITE_ID = 3
+SITE_ID = 2
 
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
@@ -144,10 +143,10 @@ MIDDLEWARE_CLASSES = (
     'debug_toolbar.middleware.DebugToolbarMiddleware',  # !debug_toolbar!
 )
 
-ROOT_URLCONF = 'reform_tn.urls'
+ROOT_URLCONF = 'reporto.urls'
 
 # Python dotted path to the WSGI application used by Django's runserver.
-WSGI_APPLICATION = 'reform_tn.wsgi_production.application'
+WSGI_APPLICATION = 'reporto.wsgi_test.application'
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
@@ -162,13 +161,16 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.markup',
+    #'django.contrib.markup',
+    'mptt',
 
     # project components
     'users',
-    'admin_mod',
+
 
     # 'suit', # theme for admin
+    'admin_mod',
+    #'django_admin_bootstrapped.bootstrap3',
     'django_admin_bootstrapped',  # theme for admin
     #'grappelli',
     #'filebrowser',
@@ -177,10 +179,10 @@ INSTALLED_APPS = (
 
     # project components
     'base',
-    'reports',
-    'reports_categories',
-    'reports_features',
-    'reports_victims',
+    'incidents',
+    'incidents_categories',
+    'incidents_features',
+    'incidents_victims',
     'thanks',
     'thanks_categories',
 
@@ -257,7 +259,11 @@ LOGGING = {
             'handlers': ['console'],
             'level': 'DEBUG',
         },
-        'reports': {
+        'incidents': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+        },
+        'thanks': {
             'handlers': ['console'],
             'level': 'DEBUG',
         }

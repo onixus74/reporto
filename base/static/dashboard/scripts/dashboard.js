@@ -297,7 +297,11 @@ $(document).ready(function(){
 
 !(function() {
 
-  var features = reform.data.incidentsFeatures.slice(0);
+  var features = reform.data.incidentsFeatures.filter(function(e){
+    return e.selectable;
+  }).map(function(e){
+    return e.definition;
+  });
 
   var data = [];
   data.length = features.length;

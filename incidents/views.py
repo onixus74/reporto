@@ -65,34 +65,6 @@ class ReportsDashboard(PaginatedListHybridResponseMixin, ListView):
 
         else:
 
-            # context['incidents_categories'] = [category.__unicode__() for category in Category.objects.all()]
-            # context['incidents_features'] = [feature.__unicode__() for feature in Feature.objects.all()]
-
-            # incidents_by_category = Report.objects.values('category__definition').annotate(Count("id")).order_by('category__definition')
-            # context['incidents_by_category'] = [{'label': i['category__definition'], 'count': i['id__count']} for i in incidents_by_category]
-
-            # victim_gender_display = dict(Victim.GENDER)
-            # incidents_by_victim_gender = Report.objects.values('victim__gender').annotate(Count("id")).order_by('victim__gender')
-            # context['incidents_by_victim_gender'] = [{'label': victim_gender_display[i['victim__gender']], 'count': i['id__count']} for i in incidents_by_victim_gender]
-
-            # victim_education_display = dict(Victim.EDUCATION)
-            # incidents_by_victim_education = Report.objects.values('victim__education').annotate(Count("id")).order_by('victim__education')
-            # context['incidents_by_victim_education'] = [{'label': victim_education_display[i['victim__education']], 'count': i['id__count']} for i in incidents_by_victim_education]
-
-            # incidents_by_feature = Report.objects.values('features__definition').annotate(Count("id")).order_by('features__definition')
-            # context['incidents_by_feature'] = [{'label': i['features__definition'], 'count': i['id__count']} for i in incidents_by_feature]
-
-            # incidents_by_date = Report.objects.extra({'date': "date(datetime)"}).values('date').annotate(Count('id')).order_by('date')
-            # context['incidents_by_date'] = [{'date': i['date'], 'count': i['id__count']} for i in incidents_by_date]
-
-            # thanks_by_date = ThankReport.objects.extra({'date': "date(datetime)"}).values('date').annotate(Count('id')).order_by('date')
-            # context['thanks_by_date'] = [{'date': i['date'], 'count': i['id__count']} for i in thanks_by_date]
-
-            # context['incidents_by_category_by_date'] = {}
-            # for category in Category.objects.all():
-            #     result = Report.objects.extra({'date': "date(datetime)"}).filter(category=category).values('date').annotate(Count('id')).order_by('date')
-            #     context['incidents_by_category_by_date'][category.__unicode__()] = [{'date': i['date'], 'count': i['id__count']} for i in result]
-
             append_incidents_statistics(context)
 
             context['incidents_locations'] = Report.objects.values('latitude', 'longitude', 'category__definition', 'pk')
@@ -611,40 +583,6 @@ def statistics(request, *args, **kwargs):
     else:
         response = {}
 
-        # response['incidents_categories'] = [category.__unicode__() for category in Category.objects.all()]
-        # response['incidents_features'] = [feature.__unicode__() for feature in Feature.objects.all()]
-
-        # response['incidents_count'] = Report.objects.count()
-
-        # incidents_by_category = Report.objects.values('category__definition').annotate(Count("id")).order_by('category__definition')
-        # response['incidents_by_category'] = [{'label': i['category__definition'], 'count': i['id__count']} for i in incidents_by_category]
-
-        # victim_gender_display = dict(Victim.GENDER)
-        # incidents_by_victim_gender = Report.objects.values('victim__gender').annotate(Count("id")).order_by('victim__gender')
-        # response['incidents_by_victim_gender'] = [{'label': victim_gender_display[i['victim__gender']], 'count': i['id__count']} for i in incidents_by_victim_gender]
-
-        # victim_education_display = dict(Victim.EDUCATION)
-        # incidents_by_victim_education = Report.objects.values('victim__education').annotate(Count("id")).order_by('victim__education')
-        # response['incidents_by_victim_education'] = [{'label': victim_education_display[i['victim__education']], 'count': i['id__count']} for i in incidents_by_victim_education]
-
-        # incidents_by_feature = Report.objects.values('features__definition').annotate(Count("id")).order_by('features__definition')
-        # response['incidents_by_feature'] = [{'label': i['features__definition'], 'count': i['id__count']} for i in incidents_by_feature]
-
-        # incidents_by_date = Report.objects.extra({'date': "date(datetime)"}).values('date').annotate(Count('id')).order_by('date')
-        # response['incidents_by_date'] = [{'date': i['date'], 'count': i['id__count']} for i in incidents_by_date]
-
-        # response['thanks_categories'] = [category.__unicode__() for category in ThankCategory.objects.all()]
-
-        # response['thanks_count'] = ThankReport.objects.count()
-
-        # thanks_by_date = ThankReport.objects.extra({'date': "date(datetime)"}).values('date').annotate(Count('id')).order_by('date')
-        # response['thanks_by_date'] = [{'date': i['date'], 'count': i['id__count']} for i in thanks_by_date]
-
-        # response['incidents_by_category_by_date'] = {}
-        # for category in Category.objects.all():
-        #     result = Report.objects.extra({'date': "date(datetime)"}).filter(category=category).values('date').annotate(Count('id')).order_by('date')
-        #     response['incidents_by_category_by_date'][category.__unicode__()] = [{'date': i['date'], 'count': i['id__count']} for i in result]
-
         append_incidents_statistics(response)
         append_thanks_statistics(response)
 
@@ -656,8 +594,11 @@ def statistics(request, *args, **kwargs):
 
 def append_incidents_statistics(context):
 
+    # context['incidents_categories'] = [category.__unicode__() for category in Category.objects.all()]
+    # context['incidents_features'] = [feature.__unicode__() for feature in Feature.objects.all()]
+
     context['incidents_categories'] = [category.__unicode__() for category in Category.objects.all()]
-    context['incidents_features'] = [feature.__unicode__() for feature in Feature.objects.all()]
+    context['incidents_features'] = [{'definition': feature.__unicode__(), 'selectable': feature.selectable} for feature in Feature.objects.all()]
 
     context['incidents_count'] = Report.objects.count()
 

@@ -1,4 +1,4 @@
-# Django settings for reform_tn project.
+# Django settings for reporto project.
 
 import os
 PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -14,12 +14,15 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'reform_tn/development.sqlite3',
-    }
-}
+# DATABASES = {
+# 	'default': {
+# 		'ENGINE': 'django.db.backends.sqlite3',
+# 		'NAME': 'reporto/development.sqlite3',
+# 	}
+# }
+DATABASES = {}
+import dj_database_url
+DATABASES['default'] = dj_database_url.config()
 
 EMAIL_HOST = 'smtp.webfaction.com'
 EMAIL_HOST_USER = 'reporto'
@@ -50,7 +53,7 @@ LANGUAGES = (
     #('ar-tn', 'Tounsi'),
 )
 
-SITE_ID = 1
+SITE_ID = 2
 
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
@@ -142,10 +145,10 @@ MIDDLEWARE_CLASSES = (
     'debug_toolbar.middleware.DebugToolbarMiddleware',  # !debug_toolbar!
 )
 
-ROOT_URLCONF = 'reform_tn.urls'
+ROOT_URLCONF = 'reporto.urls'
 
 # Python dotted path to the WSGI application used by Django's runserver.
-WSGI_APPLICATION = 'reform_tn.wsgi.application'
+WSGI_APPLICATION = 'reporto.wsgi_staging.application'
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
