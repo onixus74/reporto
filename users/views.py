@@ -3,7 +3,7 @@ logger = logging.getLogger(__name__)
 
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from base.utils.views import ListHybridResponseMixin, DetailHybridResponseMixin
+from base.utils.views import PaginatedListHybridResponseMixin, DetailHybridResponseMixin
 
 from django.shortcuts import render, redirect, render_to_response, get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
@@ -22,12 +22,13 @@ from django import forms
 from .models import User
 from incidents.models import Victim
 
+
 class UserListView(ListView):
     model = User
     template_name = "users/list.html"
 
 
-class UserListHybridView(ListHybridResponseMixin, UserListView):
+class UserListHybridView(PaginatedListHybridResponseMixin, UserListView):
     pass
 
 

@@ -3,7 +3,7 @@ logger = logging.getLogger(__name__)
 
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from base.utils.views import ListHybridResponseMixin, DetailHybridResponseMixin
+from base.utils.views import PaginatedListHybridResponseMixin, DetailHybridResponseMixin
 from django import forms
 
 from reports.models import Entry
@@ -24,7 +24,7 @@ class EntryListView(ListView):
     template_name = TEMPLATE_BASE + '/list.html'
 
 
-class EntryListHybridView(ListHybridResponseMixin, EntryListView):
+class EntryListHybridView(PaginatedListHybridResponseMixin, EntryListView):
     pass
 
 
