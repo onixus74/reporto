@@ -1,4 +1,4 @@
-{% load static widget_tweaks compress %}<!doctype html>
+{% load static widget_tweaks compress custom %}<!doctype html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
@@ -66,6 +66,20 @@
 		urls: {}
 	};
 	var csrf_token = "{{ csrf_token|escapejs }}";
+  var l10n = {};
+  l10n.datetime = {};
+  l10n.DATE_FORMAT = {{DATE_FORMAT|json}};
+  l10n.SHORT_DATE_FORMAT = {{SHORT_DATE_FORMAT|json}};
+  l10n.DATETIME_FORMAT = {{DATETIME_FORMAT|json}};
+  l10n.SHORT_DATETIME_FORMAT = {{SHORT_DATETIME_FORMAT|json}};
+  l10n.TIME_FORMAT = {{TIME_FORMAT|json}};
+  l10n.TIME_ZONE = {{TIME_ZONE|json}};
+
+  l10n.TIME_INPUT_FORMAT = 'H:M'; // ['H:M:S', 'H:M:S.f', 'H:M']
+  l10n.TIME_INPUT_FORMAT_ = 'H:M:S';
+  l10n.DATE_INPUT_FORMAT = 'Y-m-d';
+  l10n.DATETIME_INPUT_FORMAT = 'Y-m-d H:M'; // ['Y-m-d H:M:S', 'Y-m-d H:M:S.f', 'Y-m-d H:M', 'Y-m-d')
+  l10n.DATETIME_INPUT_FORMAT_ = 'Y-m-d H:M:S';
 	</script>
 
 </head>

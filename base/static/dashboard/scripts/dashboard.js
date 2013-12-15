@@ -146,7 +146,7 @@ $(document).ready(function(){
       tooltip: {
         formatter: function() {
           return '<b>' + this.series.name + '</b><br/>' +
-            Highcharts.dateFormat('%e. %b', this.x) + ': ' + this.y + ' incidents';
+            Highcharts.dateFormat('%e. %b', this.x) + ': ' + this.y + ' incidents/thanks';
         }
       },
       series: series,

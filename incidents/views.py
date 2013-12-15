@@ -25,6 +25,8 @@ from django.views.generic import FormView, ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.decorators.http import require_http_methods
 
+from django.utils.translation import ugettext as _
+
 from base.utils.views import JSONResponse, JSONDataView, ListHybridResponseMixin, PaginatedListHybridResponseMixin, DetailHybridResponseMixin, AjaxableResponseMixin
 
 from django.core.files.storage import default_storage
@@ -32,9 +34,9 @@ from django.core.files.storage import default_storage
 from .models import *
 
 
-def index(request, template_name="incidents/index.html", *args, **kwargs):
+def index(request, template_name='incidents/index.html', *args, **kwargs):
     context = {
-        "object_list": Report.objects.all()
+        'object_list': Report.objects.all()
     }
     return render(request, template_name, context)
 
@@ -43,7 +45,7 @@ class ReportsDashboard(PaginatedListHybridResponseMixin, ListView):
 
     """ """
     model = Report
-    template_name = "incidents/dashboard.html"
+    template_name = 'incidents/dashboard.html'
     paginate_by = 5
 
     def get_context_data(self, **kwargs):
@@ -61,7 +63,7 @@ class ReportsDashboard(PaginatedListHybridResponseMixin, ListView):
         if self.is_json():
 
             reports = context.pop('report_list')
-            context['html'] = render_to_string("incidents/dashboard_incidents_list.html", {'report_list': reports})
+            context['html'] = render_to_string('incidents/dashboard_incidents_list.html', {'report_list': reports})
 
         else:
 
@@ -86,15 +88,41 @@ def merge_lists(l1, l2, key):
 class ReportView(DetailHybridResponseMixin, DetailView):
 
     """ """
+
     model = Report
-    template_name = "incidents/view.html"
+    template_name = 'incidents/view.html'
+
+    def get_context_data(self, **kwargs):
+        """
+          Prepare context parameter 'incidents_by_category' with the following structure
+          incidents_by_category = [
+            { 'label': 'Verbal Violence', 'count': 20 },
+            { 'label': 'Violence', 'count': 10 },
+            { 'label': 'Rape', 'count': 20 },
+            { 'label': 'Lack of Investigation and Prosecution', 'count': 50 }
+          ]
+        """
+        context = super(ReportView, self).get_context_data(**kwargs)
+
+        if self.is_json():
+
+            #reports = context.pop('report_list')
+            #context['html'] = render_to_string("incidents/dashboard_incidents_list.html", {'report_list': reports})
+            pass
+
+        else:
+
+            context['categories'] = [{'value': category.id, 'text': category.definition} for category in Category.objects.all()]
+            context['features'] = [{'value': feature.id, 'text': feature.definition} for feature in Feature.objects.all()]
+
+        return context
 
 
 class ReportPartialView(DetailHybridResponseMixin, DetailView):
 
     """ """
     model = Report
-    template_name = "incidents/view_partial.html"
+    template_name = 'incidents/view_partial.html'
 
 
 class ReportCreateForm(forms.ModelForm):
@@ -119,7 +147,7 @@ from users.views import VictimForm as VictimUpdateForm
 #     exclude = ('user','firstname','lastname','email','description')
 
 
-def report_submit(request, template_name="incidents/submit.html", *args, **kwargs):
+def report_submit(request, template_name='incidents/submit.html', *args, **kwargs):
     logger.debug('POST %s', request.POST)
     logger.debug('FILES %s', request.FILES)
 
@@ -190,7 +218,7 @@ def report_submit(request, template_name="incidents/submit.html", *args, **kwarg
         sources = request.POST.getlist('sources[]')
         logger.debug('SOURCES %s', sources)
 
-        form.instance.sources = ' - '.join(sources)
+        form.instance.sources = '\n'.join(sources)
 
         report = form.save()
 
@@ -217,7 +245,7 @@ def report_submit(request, template_name="incidents/submit.html", *args, **kwarg
             report.media.create(url=l, file=None)
 
         report.save()
-        #report = Report.objects.get(pk=report.pk)
+        report = Report.objects.get(pk=report.pk)
 
         if request.is_ajax():
             return JSONResponse({
@@ -324,7 +352,7 @@ def similar_reports(request, *args, **kwargs):
         'success': True,
         'exist': exist,
         'list': similars,
-        'html': render_to_string("incidents/submit_similar_reports_list.html", {'reports': similars})
+        'html': render_to_string('incidents/submit_similar_reports_list.html', {'reports': similars})
     })
 
 from math import radians, cos, sin, asin, sqrt
@@ -507,6 +535,37 @@ def string_distance(str1, str2):
 #   return JSONResponse({'success': False}, status=400)
 
 
+REPORT_UPDATE_FIELDS = ['category', 'datetime', 'location_text', 'description', 'features']
+
+
+def report_update(request, pk, *args, **kwargs):
+    logger.debug('POST %s', request.POST)
+
+    if request.method == 'POST':  # and request.POST.get('name') in REPORT_UPDATE_FIELDS
+        report = Report.objects.get(pk=pk)
+        field = request.POST.get('name')
+        value = request.POST.get('value')
+        if field == 'category':
+            value = Category.objects.get(pk=value)
+            report.category = value
+            report.save(update_fields=[field])
+        elif field == 'features':
+            values = request.POST.getlist('value[]', [])
+            logger.debug('X %s', values)
+            report.features.clear()
+            for feature in values:
+                logger.debug('X %s', feature)
+                report.features.add(Feature.objects.get(pk=feature))
+            logger.debug('X %s', report.features.count())
+            # report.features.update()
+            # report.save()
+        else:
+            setattr(report, field, value)
+            report.save(update_fields=[field])
+        return HttpResponse("Done")
+    return HttpResponse("Something is wrong!", status_code=400)
+
+
 def report_verify(request, pk, *args, **kwargs):
     logger.debug('POST %s', request.POST)
     report = Report.objects.get(pk=pk)
@@ -550,7 +609,7 @@ def report_comment(request, pk, *args, **kwargs):
         return JSONResponse({
             'success': True,
             #'object': comment,
-            'html': render_to_string("incidents/view_comment.html", {'comment': comment}),
+            'html': render_to_string('incidents/view_comment.html', {'comment': comment}),
             'notification': {'title': "Adding Comment", 'body': "Comment added."}
         })
     else:
@@ -576,7 +635,7 @@ def report_comment(request, pk, *args, **kwargs):
 #   return JSONResponse(response)
 
 
-@require_http_methods(["OPTIONS", "GET"])
+@require_http_methods(['OPTIONS', 'GET'])
 def statistics(request, *args, **kwargs):
     if request.method == 'OPTIONS':
         response = HttpResponse()
@@ -602,26 +661,26 @@ def append_incidents_statistics(context):
 
     context['incidents_count'] = Report.objects.count()
 
-    incidents_by_category = Report.objects.values('category__definition').annotate(Count("id")).order_by('category__definition')
+    incidents_by_category = Report.objects.values('category__definition').annotate(Count('id')).order_by('category__definition')
     context['incidents_by_category'] = [{'label': i['category__definition'], 'count': i['id__count']} for i in incidents_by_category]
 
     victim_gender_display = dict(Victim.GENDER)
-    incidents_by_victim_gender = Report.objects.values('victim__gender').annotate(Count("id")).order_by('victim__gender')
+    incidents_by_victim_gender = Report.objects.values('victim__gender').annotate(Count('id')).order_by('victim__gender')
     context['incidents_by_victim_gender'] = [{'label': victim_gender_display[i['victim__gender']], 'count': i['id__count']} for i in incidents_by_victim_gender]
 
     victim_education_display = dict(Victim.EDUCATION)
-    incidents_by_victim_education = Report.objects.values('victim__education').annotate(Count("id")).order_by('victim__education')
+    incidents_by_victim_education = Report.objects.values('victim__education').annotate(Count('id')).order_by('victim__education')
     context['incidents_by_victim_education'] = [{'label': victim_education_display[i['victim__education']], 'count': i['id__count']} for i in incidents_by_victim_education]
 
-    incidents_by_feature = Report.objects.values('features__definition').annotate(Count("id")).order_by('features__definition')
+    incidents_by_feature = Report.objects.values('features__definition').annotate(Count('id')).order_by('features__definition')
     context['incidents_by_feature'] = [{'label': i['features__definition'], 'count': i['id__count']} for i in incidents_by_feature]
 
-    incidents_by_date = Report.objects.extra({'date': "date(datetime)"}).values('date').annotate(Count('id')).order_by('date')
+    incidents_by_date = Report.objects.extra({'date': 'date(datetime)'}).values('date').annotate(Count('id')).order_by('date')
     context['incidents_by_date'] = [{'date': i['date'], 'count': i['id__count']} for i in incidents_by_date]
 
     context['incidents_by_category_by_date'] = {}
     for category in Category.objects.all():
-        result = Report.objects.extra({'date': "date(datetime)"}).filter(category=category).values('date').annotate(Count('id')).order_by('date')
+        result = Report.objects.extra({'date': 'date(datetime)'}).filter(category=category).values('date').annotate(Count('id')).order_by('date')
         context['incidents_by_category_by_date'][category.__unicode__()] = [{'date': i['date'], 'count': i['id__count']} for i in result]
 
     return context
@@ -633,7 +692,7 @@ def append_thanks_statistics(context):
 
     context['thanks_count'] = ThankReport.objects.count()
 
-    thanks_by_date = ThankReport.objects.extra({'date': "date(datetime)"}).values('date').annotate(Count('id')).order_by('date')
+    thanks_by_date = ThankReport.objects.extra({'date': 'date(datetime)'}).values('date').annotate(Count('id')).order_by('date')
     context['thanks_by_date'] = [{'date': i['date'], 'count': i['id__count']} for i in thanks_by_date]
 
     return context
@@ -655,7 +714,7 @@ class ReportForm(forms.ModelForm):
 
 class ReportListView(ListView):
     model = Report
-    template_name = "incidents/crud/list.html"
+    template_name = 'incidents/crud/list.html'
 
 
 class ReportListHybridView(PaginatedListHybridResponseMixin, ReportListView):
@@ -664,7 +723,7 @@ class ReportListHybridView(PaginatedListHybridResponseMixin, ReportListView):
 
 class ReportDetailView(DetailView):
     model = Report
-    template_name = "incidents/crud/view.html"
+    template_name = 'incidents/crud/view.html'
 
 
 class ReportDetailHybridView(DetailHybridResponseMixin, ReportDetailView):
@@ -674,16 +733,16 @@ class ReportDetailHybridView(DetailHybridResponseMixin, ReportDetailView):
 class ReportCreateView(CreateView):
     model = Report
     form_class = ReportForm
-    template_name = "incidents/crud/new.html"
+    template_name = 'incidents/crud/new.html'
 
 
 class ReportUpdateView(UpdateView):
     model = Report
     form_class = ReportForm
-    template_name = "incidents/crud/edit.html"
+    template_name = 'incidents/crud/edit.html'
 
 
 class ReportDeleteView(DeleteView):
     model = Report
-    template_name = "incidents/crud/delete.html"
+    template_name = 'incidents/crud/delete.html'
     success_url = '..'

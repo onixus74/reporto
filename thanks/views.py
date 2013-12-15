@@ -13,7 +13,6 @@ from django.shortcuts import render, redirect, render_to_response
 from django.template.loader import render_to_string
 from django.http import HttpResponse
 from django.core import serializers
-from django.utils import simplejson
 
 from django import forms
 from django.forms.models import model_to_dict

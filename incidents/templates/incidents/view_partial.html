@@ -1,4 +1,4 @@
-{% load static thumbnail %}
+{% load static l10n thumbnail custom %}
 
 	<div class="well">
 
@@ -8,7 +8,17 @@
 				<div class="offset2 span8">
 					<hr>
 					<h2 class="text-center">
-						{{report.category}} on {{report.datetime}} at {{report.location_text}}
+            {% if user.is_admin %}
+            <a href="#" id="id_category" class="ui-editable_" data-type="select" data-source="{{categories|json|force_escape}}" data-value="{{report.category.id}}" data-pk="{{report.pk}}" data-name="category" data-url="{% url 'incidents:update_partial' report.id %}" data-title="Category">{{report.category}}</a>
+            on
+            <a href="#" id="id_datetime" class="ui-editable_" data-type="datetime" data-value="{{report.datetime|date:'Y-m-d H:i'}}" data-pk="{{report.pk}}" data-name="datetime" data-url="{% url 'incidents:update_partial' report.id %}" data-title="Date and time">{{report.datetime}}</a>
+            at
+            <a href="#" id="id_location" class="ui-editable_" data-type="text" data-pk="{{report.pk}}" data-name="location_text" data-url="{% url 'incidents:update_partial' report.id %}" data-title="Location">{{report.location_text}}</a>
+
+            {% else %}
+              {{report.category}} on {{report.datetime}} at {{report.location_text}}
+            {% endif %}
+
 						{% if report.is_verified %}<span class="badge badge-success">Verified <i class="icon-ok"></i></span>{% endif %}
 						{% comment %}
 						{% if report.is_closed %}<span class="badge badge-important">Closed <i class="icon-lock"></i></span>{% endif %}
@@ -36,8 +46,12 @@
 						<dd>{{report.victim.firstname}}</dd>
 						<dt>Last name</dt>
 						<dd>{{report.victim.lastname}}</dd>
-						<dt>Gender</dt>
+						<dt>Gender</ddt>
 						<dd>{{report.victim.get_gender_display}}</dd>
+            <dt>Marital Status</dt>
+            <dd>{{report.victim.get_marital_status_display}}</dd>
+            <dt>Social Class</dt>
+            <dd>{{report.victim.get_social_class_display}}</dd>
 						<dt>Age</dt>
 						<dd>{{report.victim.age|default:"N/A"}}</dd>
 						<dt>Education</dt>
@@ -48,21 +62,34 @@
 				</div>
 				<div class="span6">
 					<hr>
-					<h2><i class="icon-male"></i> Aggressor</h2>
-					{{report.aggressor|default:"N/A"}}
+					<h2><i class="icon-male"></i> Aggressor{% if user.is_admin %} <a id="ui-aggressor-edit" href="#" title="Edit" class="btn btn-small"><i class="icon-pencil"></i></a>{% endif %}</h2>
+					{% if user.is_admin %}
+          <p id="ui-aggressor" class="ui-editable_" data-type="textarea" data-value="{{report.aggressor}}" date-toggle="manual" data-pk="{{report.pk}}" data-name="aggressor" data-url="{% url 'incidents:update_partial' report.id %}" data-title="Aggressor">{{report.aggressor|default:"N/A"}}</p>
+          {% else %}
+          <p>{{report.aggressor|default:"N/A"}}</p>
+          {% endif %}
 				</div>
 			</div>
 
 			<div class="row-fluid">
 				<div class="span6">
 					<hr>
-					<h2><i class="icon-ellipsis-horizontal"></i> Description</h2>
+					<h2><i class="icon-ellipsis-horizontal"></i> Description{% if user.is_admin %} <a id="ui-description-edit" href="#" title="Edit" class="btn btn-small"><i class="icon-pencil"></i></a>{% endif %}</h2>
+          {% if user.is_admin %}
+          <p id="ui-description" class="ui-editable_" data-type="textarea" data-value="{{report.description}}" date-toggle="manual" data-pk="{{report.pk}}" data-name="description" data-url="{% url 'incidents:update_partial' report.id %}" data-title="Description">{{report.description|urlize}}</p>
+          {% else %}
 					<p>{{report.description|urlize}}</p>
-					{% if report.sources %}<p>Sources: {{report.sources}}</p>{% endif %}
+          {% endif %}
+					{% if report.sources %}
+          <p>
+            Sources:<br>
+            {{report.sources | markdown}}
+          </p>
+          {% endif %}
 				</div>
 				<div class="span6">
 					<hr>
-					<h2><i class="icon-picture"></i> Evidence</h2>{% get_media_prefix as MEDIA_PREFIX %}
+					<h2><i class="icon-picture"></i> Media Attachments</h2>{% get_media_prefix as MEDIA_PREFIX %}
 					{% if report.media.count %}
 					<ul class="thumbnails">
 						{% for media in report.media.all %}
@@ -70,9 +97,28 @@
 							{% comment %}
 							<a class="thumbnail- fancybox" href="{% if media.is_file %}{{ media.file.url }}{% else %}{{media.url}}{% endif %}" target="_blank" rel="group">
 							{% endcomment %}
-							<a class="thumbnail- fancybox" href="{{media.url}}" target="_blank" rel="group">
-								<img src="{% if media.is_file %}{{ media.file|thumbnail_url:'media' }}{% elif media.is_youtube %}{{media.get_youtube_thumbnail}}{% else %}{{media.url}}{% endif %}" alt="" style="height: 100px; width: auto;" class="img-polaroid">
-							</a>
+              {% comment %}
+              <a class="thumbnail- fancybox" href="{{media.url}}" target="_blank" rel="group">
+                <img src="{% if media.is_file %}{{ media.file|thumbnail_url:'media' }}{% elif media.is_youtube %}{{media.get_youtube_thumbnail_url}}{% else %}{{media.url}}{% endif %}" alt="" style="height: 100px; width: auto;" class="img-polaroid">
+              </a>
+              {% endcomment %}
+              {% if media.is_file %}
+              <a class="thumbnail- fancybox" href="{{ media.url }}" target="_blank" rel="group">
+                <img src="{{ media.file|thumbnail_url:'media' }}" alt="" style="height: 100px; width: auto;" class="img-polaroid">
+              </a>
+              {% elif media.is_youtube %}
+              <a class="thumbnail- fancybox" href="{{ media.url }}" target="_blank" rel="group">
+                <img src="{{ media.get_youtube_thumbnail_url }}" alt="" style="height: 100px; width: auto;" class="img-polaroid">
+              </a>
+              {% elif media.is_facebook %}
+              <a class="thumbnail- fancybox" data-fancybox-type="iframe" href="{{ media.get_facebook_embed_url }}" target="_blank" rel="group">
+                <img src="/" alt="" style="height: 100px; width: auto;" class="img-polaroid">
+              </a>
+              {% else  %}
+              <a class="thumbnail- fancybox" href="{{ media.url }}" target="_blank" rel="group">
+                <img src="{{ media.url }}" alt="" style="height: 100px; width: auto;" class="img-polaroid">
+              </a>
+              {% endif %}
 						</li>
 						{% endfor %}
 					</ul>
@@ -85,8 +131,8 @@
 			<div class="row-fluid">
 				<div class="offset2 span8">
 					<hr>
-					<h2><i class="icon-tags"></i> Features</h2>
-					<ul class="inline">
+					<h2><i class="icon-tags"></i> Features{% if user.is_admin %} <a id="ui-features-edit" href="#" title="Edit" class="btn btn-small"><i class="icon-pencil"></i></a>{% endif %}</h2>
+					<ul id="ui-features" class="inline ui-editable_" data-type="checklist" data-source="{{features|json|force_escape}}" data-value="[{% for feature in report.features.all %}{{feature.id}},{% endfor %}]" data-pk="{{report.pk}}" data-name="features" data-url="{% url 'incidents:update_partial' report.id %}" data-title="Features">
 					{% for feature in report.features.all  %}
 						<li><span class="label">{{feature}}</span></li>
 					{% endfor %}

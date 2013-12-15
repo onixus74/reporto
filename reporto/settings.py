@@ -63,23 +63,26 @@ USE_L10N = False
 # If you set this to False, Django will not use timezone-aware datetimes.
 USE_TZ = False
 
+#from django.conf import global_settings
+#DATETIME_INPUT_FORMATS = ('%Y-%m-%dT%H:%M:%S', '%Y-%m-%dT%H:%M') + global_settings.DATETIME_INPUT_FORMATS
+# print DATETIME_INPUT_FORMATS
 
-DATETIME_INPUT_FORMATS = (
-    '%Y-%m-%dT%H:%M:%S',     # '2006-10-25T14:30:59'
-    '%Y-%m-%dT%H:%M',        # '2006-10-25T14:30'
-    '%Y-%m-%d %H:%M:%S',     # '2006-10-25 14:30:59'
-    '%Y-%m-%d %H:%M:%S.%f',  # '2006-10-25 14:30:59.000200'
-    '%Y-%m-%d %H:%M',        # '2006-10-25 14:30'
-    '%Y-%m-%d',              # '2006-10-25'
-    '%m/%d/%Y %H:%M:%S',     # '10/25/2006 14:30:59'
-    '%m/%d/%Y %H:%M:%S.%f',  # '10/25/2006 14:30:59.000200'
-    '%m/%d/%Y %H:%M',        # '10/25/2006 14:30'
-    '%m/%d/%Y',              # '10/25/2006'
-    '%m/%d/%y %H:%M:%S',     # '10/25/06 14:30:59'
-    '%m/%d/%y %H:%M:%S.%f',  # '10/25/06 14:30:59.000200'
-    '%m/%d/%y %H:%M',        # '10/25/06 14:30'
-    '%m/%d/%y',              # '10/25/06'
-)
+# DATETIME_INPUT_FORMATS = (
+# '%Y-%m-%dT%H:%M:%S',     # '2006-10-25T14:30:59'
+# '%Y-%m-%dT%H:%M',        # '2006-10-25T14:30'
+# '%Y-%m-%d %H:%M:%S',     # '2006-10-25 14:30:59'
+# '%Y-%m-%d %H:%M:%S.%f',  # '2006-10-25 14:30:59.000200'
+# '%Y-%m-%d %H:%M',        # '2006-10-25 14:30'
+# '%Y-%m-%d',              # '2006-10-25'
+# '%m/%d/%Y %H:%M:%S',     # '10/25/2006 14:30:59'
+# '%m/%d/%Y %H:%M:%S.%f',  # '10/25/2006 14:30:59.000200'
+# '%m/%d/%Y %H:%M',        # '10/25/2006 14:30'
+# '%m/%d/%Y',              # '10/25/2006'
+# '%m/%d/%y %H:%M:%S',     # '10/25/06 14:30:59'
+# '%m/%d/%y %H:%M:%S.%f',  # '10/25/06 14:30:59.000200'
+# '%m/%d/%y %H:%M',        # '10/25/06 14:30'
+# '%m/%d/%y',              # '10/25/06'
+# )
 
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
@@ -133,8 +136,8 @@ TEMPLATE_LOADERS = (
 MIDDLEWARE_CLASSES = (
     'django.middleware.gzip.GZipMiddleware',
     'htmlmin.middleware.HtmlMinifyMiddleware',
-    'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -161,6 +164,9 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     #'django.contrib.markup',
+
+    'reversion',
+
     'mptt',
 
     # project components

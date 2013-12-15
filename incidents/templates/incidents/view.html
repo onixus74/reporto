@@ -24,6 +24,9 @@
 	<!-- Lightbox -->
 	<link rel="stylesheet" href="{% static 'components/fancybox/source/jquery.fancybox.css' %}" type="text/css" />
 	<link rel="stylesheet" href="{% static 'components/fancybox/source/helpers/jquery.fancybox-thumbs.css' %}" type="text/css" />
+  <!-- -->
+  <link rel="stylesheet" href="{% static 'components/smalot-bootstrap-datetimepicker/css/bootstrap-datetimepicker.css' %}" />
+  <link rel="stylesheet" href="{% static 'components/x-editable/dist/bootstrap-editable/css/bootstrap-editable.css' %}" />
 	{% endcompress %}
 
 	{% compress css %}
@@ -42,6 +45,10 @@
 	<script type="text/javascript" src="{% static 'components/fancybox/source/jquery.fancybox.js' %}"></script>
 	<script type="text/javascript" src="{% static 'components/fancybox/source/helpers/jquery.fancybox-media.js' %}"></script>
 	<script type="text/javascript" src="{% static 'components/fancybox/source/helpers/jquery.fancybox-thumbs.js' %}"></script>
+  <!-- -->
+  <script src="{% static 'components/momentjs/moment.js' %}"></script>
+  <script src="{% static 'components/smalot-bootstrap-datetimepicker/js/bootstrap-datetimepicker.js' %}"></script>
+  <script src="{% static 'components/x-editable/dist/bootstrap-editable/js/bootstrap-editable.js' %}"></script>
 	{% endcompress %}
 
 	<script type="text/javascript">
@@ -59,47 +66,10 @@
 			}
 		});
 		*/
-		$(function(){
-
-			//$(".fancybox").fancybox();
-
-			$(".fancybox").fancybox({
-				helpers : {
-					media : {},
-					thumbs: {
-						width: 50,
-						height: 50
-					},
-				}
-			});
-
-			$(".fancybox-thumb").fancybox({
-				prevEffect: 'none',
-				nextEffect: 'none',
-				helpers: {
-					/*title: {
-						type: 'outside'
-					},*/
-					thumbs: {
-						width: 50,
-						height: 50
-					}
-				}
-			});
-
-			$('.fancybox-media').fancybox({
-				/*
-				openEffect  : 'none',
-				closeEffect : 'none',
-				*/
-				helpers : {
-					media : {}
-				}
-			});
-		});
 	</script>
 
 	{% compress js %}
+
 	<script src="{% static 'incidents/scripts/view.js' %}"></script>
 	{% endcompress %}
 

@@ -29,7 +29,7 @@ reform.widgets.map.init = function() {
 
   //map.setMaxBounds(map.getBounds());
 
-  //map.scrollWheelZoom.disable();
+  map.scrollWheelZoom.disable();
 
 }
 
@@ -131,3 +131,98 @@ reform.widgets.comment.init = function() {
 }
 
 $(document).ready(reform.widgets.comment.init);
+
+
+$(document).ready(function() {
+
+  //$(".fancybox").fancybox();
+
+  $(".fancybox").fancybox({
+    helpers: {
+      media: {},
+      thumbs: {
+        width: 50,
+        height: 50
+      },
+    }
+  });
+
+  $(".fancybox-thumb").fancybox({
+    prevEffect: 'none',
+    nextEffect: 'none',
+    helpers: {
+      /*title: {
+            type: 'outside'
+          },*/
+      thumbs: {
+        width: 50,
+        height: 50
+      }
+    }
+  });
+
+  $('.fancybox-media').fancybox({
+    /*
+        openEffect  : 'none',
+        closeEffect : 'none',
+        */
+    helpers: {
+      media: {}
+    }
+  });
+});
+
+
+$.fn.editable.defaults.mode = 'inline';
+$.fn.editable.defaults.anim = 'fast';
+$.fn.editable.defaults.ajaxOptions = {
+  headers: {
+    "X-CSRFToken": csrf_token
+  }
+};
+$(document).ready(function() {
+  //$('.ui-editable').editable();
+  $('#id_category').editable();
+  $('#id_datetime').editable();
+  $('#id_location').editable();
+
+  $('#id_description').editable({
+    toggle: 'manual',
+    /*
+    display: function(value) {
+      $('#view').text(value);
+    }
+    */
+  });
+
+  $('#ui-description-edit').on('click', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    $('#ui-description').editable('toggle');
+  });
+
+
+  $('#id_aggressor').editable({
+    toggle: 'manual',
+  });
+
+  $('#ui-aggressor-edit').on('click', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    $('#ui-aggressor').editable('toggle');
+  });
+
+  $('#id_features').editable({
+    toggle: 'manual',
+    select2: {
+      multiple: true
+    }
+  });
+
+  $('#ui-features-edit').on('click', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    $('#ui-features').editable('toggle');
+  });
+
+});

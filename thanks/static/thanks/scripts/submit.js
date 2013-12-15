@@ -79,7 +79,7 @@ Dropzone.autoDiscover = false;
 reform.widgets.dropzone = {};
 reform.widgets.dropzone.init = function() {
   var widget = reform.widgets.dropzone;
-  var dropzone = widget.object = new Dropzone('#ui-evidence-file-upload', {
+  var dropzone = widget.object = new Dropzone('#ui-media-file-upload', {
     url: '/',
     paramName: "files", // The name that will be used to transfer the file
     maxFilesize: 10, // MB
@@ -101,7 +101,7 @@ reform.widgets.dropzone.init = function() {
       return true;
     },
     */
-    dictDefaultMessage: "Drop files or click to upload evidence photos/videos"
+    dictDefaultMessage: "Drop files or click to upload photos"
   });
 };
 
@@ -128,10 +128,10 @@ reform.widgets.wizard.init = function() {
   var sections = widget.sections = {
     'category': $('#ui-wizard-category'),
     'location-datetime': $('#ui-wizard-location-datetime'),
-    'description-evidence': $('#ui-wizard-description-evidence'),
+    'description-media': $('#ui-wizard-description-media'),
     'submit': $('#ui-wizard-submit')
   };
-  var order = widget.order = ['category', 'location-datetime', ['description-evidence', 'submit']];
+  var order = widget.order = ['category', 'location-datetime', ['description-media', 'submit']];
 
   console.log(sections);
 
@@ -282,11 +282,11 @@ reform.widgets.wizard.init = function() {
     });
   });
 
-  /* description-evidence section */
+  /* description-media section */
 
   elements.description = $('#id_description');
 
-  //handleShowNextSection('description-evidence', ['description']);
+  //handleShowNextSection('description-media', ['description']);
 
   $('#thank-form').on('submit', function(e) {
     e.preventDefault();
@@ -355,7 +355,7 @@ reform.widgets.datetime.init = function() {
     var date = dateInput.val();
 
     if (date && time) {
-      datetimeInput.val(date + 'T' + time).trigger('change'); //change();
+      datetimeInput.val(date + ' ' + time).trigger('change'); //change();
     }
   }
 

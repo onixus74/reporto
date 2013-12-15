@@ -9,7 +9,7 @@ from django.template.defaultfilters import slugify
 from django.utils.html import strip_tags
 from django.forms.models import model_to_dict
 from django.core.exceptions import ValidationError
-from urlparse import parse_qs
+from urlparse import urlparse, parse_qs
 from mptt.fields import TreeManyToManyField
 
 
@@ -81,28 +81,42 @@ class Media(models.Model):
     # 		raise ValidationError('URL can not be empty.')
 
     def save(self, *args, **kwargs):
-        if self.file:
+        super(Media, self).save(*args, **kwargs)
+        if self.file and not self.url:
             self.url = self.file.url
+            self.save()
         # else:
         # 	self.external = True
-        super(Media, self).save(*args, **kwargs)
-        # if self.file:
-        # 	self.url = self.file.url
-        # 	super(Media, self).save(*args, **kwargs)
+        #super(Media, self).save(*args, **kwargs)
 
     def get_url(self):
         return self.url or self.file.url
 
     def is_file(self):
-        return self.file
+        return True if self.file else False
 
     def is_youtube(self):
-        return self.url.find('youtube.com') >= 0
+        # return self.url.find('youtube.com') >= 0 or self.url.find('youtu.be') >= 0\
+        url = urlparse(self.url)
+        return url.netloc == 'www.youtube.com' or url.netloc == 'youtu.be'
 
-    def get_youtube_thumbnail(self):
-        qs = self.url.split('?')
-        video_id = parse_qs(qs[1])['v'][0]
+    def get_youtube_thumbnail_url(self):
+        url = urlparse(self.url)
+        if url.netloc == 'www.youtube.com':  # self.url.find('youtube.com') >= 0:
+            video_id = parse_qs(url.query)['v'][0]
+        elif url.netloc == 'youtu.be':  # self.url.find('youtu.be') >= 0:
+            video_id = url.path[1:]
         return "http://img.youtube.com/vi/%s/1.jpg" % video_id
+
+    def is_facebook(self):
+        # return self.url.find('youtube.com') >= 0 or self.url.find('youtu.be') >= 0\
+        url = urlparse(self.url)
+        return url.netloc == 'www.facebook.com'
+
+    def get_facebook_embed_url(self):
+        url = urlparse(self.url)
+        video_id = parse_qs(url.query)['v'][0]
+        return "https://www.facebook.com/video/embed?video_id=%s" % video_id
 
     def serialize(self):
         data = model_to_dict(self)
@@ -186,8 +200,8 @@ class Victim(models.Model):
     have_children = models.NullBooleanField(blank=True, null=True)
     social_class = models.CharField(max_length=2, choices=SOCIAL_CLASS, blank=True, null=True)
 
-    profession = models.CharField(max_length=200, blank=True, null=True)
     education = models.CharField(max_length=2, choices=EDUCATION, blank=True, null=True)
+    profession = models.CharField(max_length=200, blank=True, null=True)
 
     address = models.TextField(null=True, blank=True)
     phone = models.CharField(max_length=20, blank=True, null=True, help_text="Victim's phone address is a private information, it wont be shared or publicly accessible.")
@@ -214,9 +228,12 @@ class Victim(models.Model):
 
         data['education_display'] = self.get_education_display()
         data['user'] = self.user
-        data.pop('email')
-        data.pop('phone')
+
         data.pop('address')
+        data.pop('phone')
+        data.pop('email')
+
+        data.pop('identity_card_number')
         return data
 
     class Meta:
@@ -236,8 +253,7 @@ class Comment(models.Model):
     )
     type = models.CharField(max_length=1, choices=TYPE, default=UPDATE)
     content = models.TextField(null=True, blank=True)
-    attachment = models.FileField(
-        upload_to='reports/comments/', null=True, blank=True)
+    attachment = models.FileField(upload_to='reports/comments/', null=True, blank=True)
     # report     = models.ForeignKey(Report)
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL)
     created_at = models.DateTimeField(auto_now_add=True)

@@ -79,7 +79,7 @@ Dropzone.autoDiscover = false;
 reform.widgets.dropzone = {};
 reform.widgets.dropzone.init = function() {
   var widget = reform.widgets.dropzone;
-  var dropzone = widget.object = new Dropzone('#ui-evidence-file-upload', {
+  var dropzone = widget.object = new Dropzone('#ui-media-file-upload', {
     url: '/',
     paramName: "files", // The name that will be used to transfer the file
     maxFilesize: 10, // MB
@@ -101,7 +101,7 @@ reform.widgets.dropzone.init = function() {
       return true;
     },
     */
-    dictDefaultMessage: "Drop files or click to upload evidence photos/videos"
+    dictDefaultMessage: "Drop files or click to upload photos"
   });
 };
 
@@ -132,13 +132,13 @@ reform.widgets.wizard.init = function() {
     'category': $('#ui-wizard-category'),
     'location-datetime': $('#ui-wizard-location-datetime'),
     'victim-aggressor': $('#ui-wizard-victim-aggressor'),
-    'description-evidence': $('#ui-wizard-description-evidence'),
-    'sources-evidence-links': $('#ui-wizard-sources-evidence-links'),
+    'description-media': $('#ui-wizard-description-media'),
+    'sources-media-links': $('#ui-wizard-sources-media-links'),
     'features': $('#ui-wizard-features'),
     'submit': $('#ui-wizard-submit')
   };
-  //var order = widget.order = ['victim-witness', 'category', 'location-datetime', 'victim-aggressor', 'description-evidence', 'features', 'submit'];
-  var order = widget.order = ['victim-witness', 'category', 'location-datetime', ['victim-aggressor', 'description-evidence', 'sources-evidence-links', 'features', 'submit']];
+  //var order = widget.order = ['victim-witness', 'category', 'location-datetime', 'victim-aggressor', 'description-media', 'features', 'submit'];
+  var order = widget.order = ['victim-witness', 'category', 'location-datetime', ['victim-aggressor', 'description-media', 'sources-media-links', 'features', 'submit']];
 
   console.log(sections);
 
@@ -355,8 +355,8 @@ reform.widgets.wizard.init = function() {
   //handleShowNextSection('victim', ['victim-firstname']);
 
   /*
-  var showDescriptionEvidenceSection = showNextSection('aggressor', ['aggressor']);
-  elements.aggressor.on('change.showNextSection', showDescriptionEvidenceSection);
+  var showDescriptionMediaection = showNextSection('aggressor', ['aggressor']);
+  elements.aggressor.on('change.showNextSection', showDescriptionMediaSection);
   */
   //handleShowNextSection('aggressor', ['aggressor']);
 
@@ -367,11 +367,11 @@ reform.widgets.wizard.init = function() {
   });
   */
 
-  /* description-evidence section */
+  /* description-media section */
 
   elements.description = $('#id_description');
 
-  /* sources-evidence-links section */
+  /* sources-media-links section */
 
   elements.sourcesList = $('#ui-sources-list');
   elements.sourcesSourceInput = $('#ui-sources-source-input');
@@ -433,10 +433,10 @@ reform.widgets.wizard.init = function() {
   });
 
   /*
-  var showFeaturesSection = showNextSection('description-evidence', ['description']);
+  var showFeaturesSection = showNextSection('description-media', ['description']);
   elements.description.on('change.showNextSection', showFeaturesSection);
   */
-  //handleShowNextSection('description-evidence', ['description']);
+  //handleShowNextSection('description-media', ['description']);
 
   elements.features = $('#id_features');
 
@@ -516,7 +516,7 @@ reform.widgets.datetime.init = function() {
     var date = dateInput.val();
 
     if (date && time) {
-      datetimeInput.val(date + 'T' + time).trigger('change'); //change();
+      datetimeInput.val(date + ' ' + time).trigger('change'); //change();
     }
   }
 

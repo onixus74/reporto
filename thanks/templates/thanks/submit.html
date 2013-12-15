@@ -56,7 +56,7 @@
             </div>
             <div class="span6">
               <h2><i class="icon-calendar"></i><i class="icon-time"></i> Date and Time</h2>
-              {% render_field form.datetime type="datetime-local" class+="input-block-level" _required="required" style="display: none;" %}
+              {% render_field form.datetime type="text" _type="datetime-local" class+="input-block-level" _required="required" style="display: none;" %}
               <div id="dateinput" style="height: 300px;">
               <script type="text/template" id="dateinput-template">
                 <div class="controls">
@@ -88,20 +88,37 @@
             </div>
           </div>
 
-          <div class="row-fluid ui-wizard-row" id="ui-wizard-description-evidence" hidden>
+          <div class="row-fluid ui-wizard-row" id="ui-wizard-description-media" hidden>
             <div class="span6">
               <h2><i class="icon-ellipsis-horizontal"></i> Description</h2>
               {% render_field form.description placeholder="Description" required="required" class+="input-block-level input-area" %}
             </div>
             <div class="span6">
-              <h2><i class="icon-picture"></i> Photos</h2>
-              <div id="ui-evidence-file-upload" tabindex="0" class="dropzone input-area" style="background-color: #FFF; border: 1px solid #999;"></div>
+              <h2><i class="icon-picture"></i> Media Attachments</h2>
+              <div id="ui-media-file-upload" tabindex="0" class="dropzone input-area" style="background-color: #FFF; border: 1px solid #999;"></div>
               <!--
               <button type="button" class="input-block-level input-area" style="padding: 0;">
-                <div id="ui-evidence-file-upload" class="dropzone" style="background-color: #FFF; height: 100%">
+                <div id="ui-media-file-upload" class="dropzone" style="background-color: #FFF; height: 100%">
                 </div>
               </button>
               -->
+              <ul id="ui-links-list" class="unstyled">
+                <script id="ui-links-list-item" type="text/template">
+                  <li>
+                    <input type="hidden" name="links[]" value="<%= url %>">
+                    <a href="<%= url %>" target="_blank"><%= url %></a>
+                    <a href="#" class="ui-links-remove-button btn btn-not btn-danger"><i class="icon-minus-sign icon-large"></i></a>
+                  </li>
+                </script>
+              </ul>
+              <div class="row-fluid">
+                <div class="span10">
+                  <input id="ui-links-url-input" type="url" class="input-block-level" placeholder="Media Link">
+                </div>
+                <div class="span2">
+                  <a id="ui-links-add-button" href="#" class="btn btn-block btn-not btn-success"><i class="icon-plus-sign icon-large"></i></a>
+                </div>
+              </div>
             </div>
           </div>
 

@@ -29,7 +29,7 @@ reform.widgets.map.init = function() {
 
   //map.setMaxBounds(map.getBounds());
 
-  //map.scrollWheelZoom.disable();
+  map.scrollWheelZoom.disable();
 
 }
 

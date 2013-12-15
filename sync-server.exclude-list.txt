@@ -22,7 +22,9 @@ sync-server.out
 .sass-cache
 
 /base/static/components
+/reporto/static/CACHE
 /reporto/media
+
 
 /data
 test
