@@ -20,9 +20,9 @@
 {% block layout_styles %}
 	{% compress css inline %}
 
-	<link rel="stylesheet" href="{% static 'components/select2/select2.css' %}">
+	<!--<link rel="stylesheet" href="{% static 'components/select2/select2.css' %}">-->
 	<!--<link rel="stylesheet" href="{% static 'components/select2-bootstrap-css/select2-bootstrap.css' %}">-->
-	<!--<link rel="stylesheet" href="{% static 'components/bootstrap-select/bootstrap-select.css' %}">-->
+	<link rel="stylesheet" href="{% static 'components/bootstrap-select/bootstrap-select.css' %}">
 	<!--<link rel="stylesheet" href="{% static 'components/bootstrap-wysihtml5/dist/bootstrap-wysihtml5-0.0.2.css' %}">-->
 	<link rel="stylesheet" href="{% static 'components/animate.css/animate.css' %}">
 	<link rel="stylesheet" href="{% static 'components/pines-notify/jquery.pnotify.default.css' %}">
@@ -99,17 +99,21 @@
 
 	<div class="navbar-wrapper" style="z-index: 901;">
 		<div class="container">
-			<div class="navbar">
-				<div class="navbar-inner">
-				<div class="container">
-					<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					</button>
-					<a class="brand" href="/"><img src="{% static 'reform-logo.png' %}" width="50" height="35" alt="Tunisian Institutional Reform | جمعية إصلاح المؤسسات"></a>
-					<div class="nav-collapse collapse">
-					<ul class="nav">
+			<nav class="navbar navbar-default" role="navigation">
+
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/"><img src="{% static 'reform-logo.png' %}" _width="50" _height="35" height="26" alt="Tunisian Institutional Reform | جمعية إصلاح المؤسسات"></a>
+        </div>
+
+				<div class="navbar-collapse collapse">
+
+					<ul class="nav navbar-nav">
 						{% if user.is_authenticated %}
             {% url 'home' as url %}
 						<li{% if request.path_info == url %} class="active"{% endif %}><a href="{{url}}">Dashboard</a></li>
@@ -139,7 +143,7 @@
 						{% endif %}
 					</ul>
 
-					<ul class="nav pull-right">
+					<ul class="nav navbar-nav navbar-right">
 
 						<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -157,12 +161,12 @@
 							<form action="{% url 'login' %}" method="post">
 								{% csrf_token %}
 								<input type="hidden" name="next" value="{{ next }}" />
-								<div class="input-prepend">
-									<span class="add-on"><i class="icon-envelope"></i></span>
+								<div class="input-group">
+									<span class="input-group-addon"><i class="icon-envelope"></i></span>
 									{% render_field form.username type="email" placeholder="Email" required="required" %}
 								</div>
-								<div class="input-prepend">
-									<span class="add-on"><i class="icon-key"></i></span>
+								<div class="input-group">
+									<span class="input-group-addon"><i class="icon-key"></i></span>
 									{% render_field form.password placeholder="Password" required="required" %}
 								</div>
 								<div class="clearfix">
@@ -186,10 +190,9 @@
 
 					</ul>
 
-					</div><!--/.nav-collapse -->
-				</div>
-				</div>
-			</div>
+				</div><!--/.navbar-collapse -->
+
+			</nav>
 		</div>
 	</div>
 
@@ -215,7 +218,7 @@
 		<!--<hr style="margin-bottom: 5px;" />-->
 		<div class="container">
 
-			<p class="muted credit pull-left">
+			<p class="text-muted credit pull-left">
 				<a href="http://reform.tn/" target="_blank">reform.tn</a>
 			</p>
 
@@ -231,7 +234,7 @@
 					</option>
 					{% endfor %}
 				</select>
-				<input type="submit" class="btn" value="Go" />
+				<input type="submit" class="btn btn-default" value="Go" />
 			</form>
 
 		</div>

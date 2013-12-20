@@ -177,7 +177,7 @@ def report_submit(request, template_name='incidents/submit.html', *args, **kwarg
         # context['report_submit_id'] = rsid
         # victims = Victim.objects.all()
         # context['victims'] = victims
-        reports = Report.objects.all()[:9]
+        reports = Report.objects.all()[:5]
         context['reports'] = reports
 
     victim_id = request.POST.get('victim', None)
@@ -346,7 +346,9 @@ def similar_reports(request, *args, **kwargs):
 
     exist = len(similars) > 0
 
-    similars = sorted(similars, key=lambda report: report.similarity, reverse=True)[:9]
+    similars = [similar for similar in similars if similar.similarity >= 2]
+
+    similars = sorted(similars, key=lambda report: report.similarity, reverse=True)[:5]
 
     return JSONResponse({
         'success': True,

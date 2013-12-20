@@ -11,19 +11,19 @@
 		<h1 class="text-center">User Registration</h1>
 	</div>
 
-	<div class="well text-center">
+	<div class="row">
+    <div class="col-md-8 col-md-offset-2 well">
 
-			<form action="{% url 'register' %}" class="form-horizontal" style="display: inline-block" method="post">
+			<form action="{% url 'register' %}" class="form-horizontal" role="form" method="post">
 				{% csrf_token %}
-				{{form|crispy}}
+        {{ form|crispy_form_horizontal }}
+        {#{ form|crispy_form_horizontal_|crispy }#}
+        {#{ form|crispy:"bootstrap3,label_class:col-lg-2,field_class:col-lg-8" }#}
 				<input type="hidden" name="next" value="{{ next }}" />
-				<div class="control-group">
-					<div class="controls">
-						<input class="btn btn-primary" name="commit" type="submit" value="Register">
-					</div>
-				</div>
+        <input class="btn btn-primary btn-block" name="commit" type="submit" value="Register">
 			</form>
 
-	</div>
+    </div>
+  </div>
 </div>
 {% endblock %}

@@ -175,7 +175,7 @@ INSTALLED_APPS = (
 
     # 'suit', # theme for admin
     'admin_mod',
-    #'django_admin_bootstrapped.bootstrap3',
+    'django_admin_bootstrapped.bootstrap3',
     'django_admin_bootstrapped',  # theme for admin
     #'grappelli',
     #'filebrowser',
@@ -196,6 +196,8 @@ INSTALLED_APPS = (
     'widget_tweaks',
     'floppyforms',
     'crispy_forms',
+
+    'selenium',
 
 )
 
@@ -355,3 +357,6 @@ SOCIAL_AUTH_PIPELINE = (
     'social_auth.backends.pipeline.social.load_extra_data',
     'social_auth.backends.pipeline.user.update_user_details'
 )
+
+
+CRISPY_TEMPLATE_PACK = 'bootstrap3'

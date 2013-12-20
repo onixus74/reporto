@@ -1,10 +1,13 @@
 
-@import "../../../../base/static/theme/sass-bootstrap/lib/_variables.scss";
-@import "../../../../base/static/theme/sass-bootstrap/lib/_mixins.scss";
+@import "../../../../base/static/theme/new/bootstrap-sass/lib/variables";
+@import "../../../../base/static/theme/new/variables";
+@import "../../../../base/static/theme/new/bootstrap-sass/lib/mixins";
 
+/*
 body {
 	padding-top: 120px;
 }
+*/
 
 #top-bg {
 	height: 100px;
@@ -49,7 +52,7 @@ body {
 /* fix boostrap-select colors in natural language form */
 .boostrap-select-fix {
 	background-color: transparent;
-	color: $grayDarker;
+	color: $gray-darker;
 	text-align: center;
 }
 
@@ -158,37 +161,38 @@ body {
 
 			&.selected
 			{
-				color: $white;
-				background-color: $btnPrimaryBackground;
+				color: white;
+				background-color: $brand-primary;
 				@include box-shadow(inset 0 0 8px #d4d4d4);
 			}
 
       &.adjacent-month {
-        color: $grayLight;
+        color: $gray-light;
       }
 		}
 	}
 
 }
 
+
 .ui-similar-report-candidate {
 	margin: 4px;
 	border: 1px transparent solid;
 	@include transition(border-color .1s linear);
 	&.ui-similar {
-		border-color: $red;
-		@include box-shadow(0 0 5px rgba(lighten($red, 10%), 0.9));
+		border-color: $brand-danger;
+		@include box-shadow(0 0 5px rgba(lighten($brand-danger, 10%), 0.9));
 		&.ui-similar-1 {
-			@include box-shadow(0 0 10px rgba(lighten($red, 5%), 0.8));
+			@include box-shadow(0 0 10px rgba(lighten($brand-danger, 5%), 0.8));
 		}
 		&.ui-similar-2 {
-			@include box-shadow(0 0 20px rgba($red, 0.7));;
+			@include box-shadow(0 0 20px rgba($brand-danger, 0.7));;
 		}
 		&.ui-similar-3 {
-			@include box-shadow(0 0 30px rgba(darken($red, 5%), 0.7));;
+			@include box-shadow(0 0 30px rgba(darken($brand-danger, 5%), 0.7));;
 		}
 		&.ui-similar-4 {
-			@include box-shadow(0 0 40px rgba(darken($red, 10%), 0.7));;
+			@include box-shadow(0 0 40px rgba(darken($brand-danger, 10%), 0.7));;
 		}
 	}
 }
@@ -203,22 +207,22 @@ body {
 
 
 .ui-similar-category .ui-similar-report-category, .ui-similar-category .ui-similar-report-category a {
-	color: darken($red, 5%);
+	color: darken($brand-danger, 5%);
 	font-weight: bold;
 }
 
 .ui-similar-location .ui-similar-report-location, .ui-similar-location .ui-similar-report-location a {
-	color: darken($red, 10%);
+	color: darken($brand-danger, 10%);
 	font-weight: bold;
 }
 
 .ui-similar-datetime .ui-similar-report-datetime, .ui-similar-datetime .ui-similar-report-datetime a {
-	color: darken($red, 15%);
+	color: darken($brand-danger, 15%);
 	font-weight: bold;
 }
 
 .ui-similar-victim .ui-similar-report-victim, .ui-similar-victim .ui-similar-report-victim a {
-	color: $red;
+	color: $brand-danger;
 	font-weight: bold;
 }
 

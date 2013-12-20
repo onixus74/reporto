@@ -14,20 +14,20 @@
 
 	{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
-	<div class="container-fluid">
-		<div class="row-fluid">
-			<div class="offset2 span8">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-offset-2 col-md-8">
 
 				{% comment %}
 					<form>
 						{% for field in form %}
-							<div class="control-group">
+							<div class="form-group">
 								{#% {{ field.label_tag }} %#}
 								<label class="control-label" for="{{ field.id }}">{{ field.label }}</label>
 								<div class="controls">
 									{{ field }}
 									<span class="help-block">
-										<p class="text-error">{{ field.errors }}</p>
+										<p class="text-danger">{{ field.errors }}</p>
 									</span>
 								</div>
 
@@ -43,7 +43,7 @@
 
 					<div class="form-actions">
 						<button type="submit" class="btn btn-primary">Submit</button>
-						<a href="{% url 'thanks:categories:list' %}" class="btn">Cancel</a>
+						<a href="{% url 'thanks:categories:list' %}" class="btn btn-default">Cancel</a>
 					</div>
 
 				</form>

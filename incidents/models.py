@@ -259,7 +259,7 @@ class Comment(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __unicode__(self):
-        return self.content
+        return "%s %s %s" % (self.created_at, self.type, self.content)
 
     def clean(self):
         # logger.debug('MODEL Comment clean %s', [self.content, self.content is None, self.attachment, self.attachment is None])

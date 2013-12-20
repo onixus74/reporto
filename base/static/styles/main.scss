@@ -2,23 +2,18 @@
 | DEPENDENCIES
 \*/
 
-//@import "deps";
+//@import "../theme/new/bootstrap-sass/lib/variables";
+//@import "../theme/new/variables";
+
+//@import "../theme/new/bootstrap-sass/lib/mixins";
+
+@import "../theme/new/bootstrap-sass/lib/bootstrap";
+@import "../theme/new/bootstrap-sass/lib/theme";
 
 
-//@import "../components/sass-bootstrap/lib/bootstrap";
-//@import "../components/sass-bootstrap/lib/responsive";
-//@import "../components/font-awesome/scss/font-awesome";
+@import "../theme/font-awesome/scss/font-awesome";
 
-
-@import "../theme/sass-bootstrap/lib/variables";
-@import "../theme/sass-bootstrap/lib/mixins";
-
-@import "../theme/sass-bootstrap/lib/bootstrap";
-@import "../theme/sass-bootstrap/lib/responsive";
-
-//@import "../theme/font-awesome/scss/font-awesome";
-
-@import "../components/select2-bootstrap-css/lib/select2-bootstrap";
+//@import "../components/select2-bootstrap-css/lib/select2-bootstrap";
 
 /*-------------------------------------------------
 | BOOTSTRAP MOD
@@ -28,14 +23,15 @@
   font-weight: bold;
 }
 
+/*
 ul.list,
 ol.list {
 	margin-left: 0;
-	margin-bottom: $baseLineHeight;
+	margin-bottom: $line-height-base;
 	list-style: none;
 	li {
 		padding: 8px;
-		line-height: $baseLineHeight;
+		line-height: $line-height-base;
 
 		text-align: left;
 		vertical-align: top;
@@ -44,12 +40,16 @@ ol.list {
 
 .list-hover {
 	li:hover {
-		background-color: $tableBackgroundHover;
+		background-color: $table-bg-hover;
 	}
+}
+*/
+.multi-labels-lines-fix {
+  line-height: 1.6;
 }
 
 .btn-quiet {
-	//@include buttonBackground(transparent, $btnPrimaryBackgroundHighlight);
+	//@include buttonBackground(transparent, $btnPrimaryBackground);
 	background-color: transparent;
 }
 
@@ -65,20 +65,20 @@ ol.list {
 	}
 
 	&.btn-success {
-		color: $btnSuccessBackground;
+		color: $btn-success-bg;
 
 		&:hover,
 		&:focus {
-			color: $btnSuccessBackgroundHighlight;
+			color: $btn-success-bg;
 		}
 	}
 
 	&.btn-danger {
-		color: $btnDangerBackground;
+		color: $btn-danger-bg;
 
 		&:hover,
 		&:focus {
-			color: $btnDangerBackgroundHighlight;
+			color: $btn-danger-bg;
 		}
 	}
 
@@ -426,7 +426,7 @@ body {
 | Fixes
 \*/
 
-[hidden] { display: none; }
+[hidden] { display: none none !important; }
 
 .ui-pnotify .alert {
 	margin-bottom: 0;
@@ -483,7 +483,7 @@ body {
 	background-color: #fff;
 	border: 1px solid #ccc;
 	border: 1px solid rgba(0, 0, 0, 0.2);
-	@include border-radius(8px);
+	border-radius: 8px;
 	@include box-shadow(0 5px 10px rgba(0,0,0,.2));
 }
 

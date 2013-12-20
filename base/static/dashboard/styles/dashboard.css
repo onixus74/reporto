@@ -1,42 +1,36 @@
-/* line 5, dashboard.scss */
+/* line 10, dashboard.scss */
 .ui-timeline-map {
   background-color: white;
   border: 1px solid white;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
   border-radius: 5px;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
 
-/* line 12, dashboard.scss */
+/* line 17, dashboard.scss */
 .ui-timeline-list {
   background-color: white;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
   border-radius: 5px;
 }
 
-/* line 17, dashboard.scss */
+/* line 22, dashboard.scss */
 .ui-timeline-story {
   margin: 6px;
   -webkit-box-shadow: 2px 2px 3px rgba(50, 50, 50, 0.6);
-  -moz-box-shadow: 2px 2px 3px rgba(50, 50, 50, 0.6);
   box-shadow: 2px 2px 3px rgba(50, 50, 50, 0.6);
-  border: 1px solid #ecf0f1;
+  border: 1px solid #eeeeee;
   vertical-align: middle !important;
 }
 
-/* line 24, dashboard.scss */
+/* line 29, dashboard.scss */
 .ui-timeline-no-entries {
   text-align: center !important;
 }
 
-/* line 28, dashboard.scss */
+/* line 33, dashboard.scss */
 .section-shadow {
   -webkit-box-shadow: 0px 0px 5px rgba(50, 50, 50, 0.6);
-  -moz-box-shadow: 0px 0px 5px rgba(50, 50, 50, 0.6);
   box-shadow: 0px 0px 5px rgba(50, 50, 50, 0.6);
 }
 

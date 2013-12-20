@@ -116,9 +116,9 @@ reform.widgets.wizard.init = function() {
   // fix for category input's values list
   $('#id_category option[selected]').removeAttr('selected').html('');
 
-  $('.select2').select2()
+  //$('.select2').select2()
 
-  //$('.select2').selectpicker();
+  $('.select2').selectpicker();
 
   var form = widget.form = $('#thank-form');
 

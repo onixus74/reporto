@@ -44,10 +44,17 @@ class UserForm(forms.ModelForm):
         fields = ('email', 'first_name', 'last_name', 'password')
 
 
+from crispy_forms.helper import FormHelper
+
+
 def register_view(request, *args, **kwargs):
     if request.user.is_authenticated():
         return redirect('home')
     form = UserCreationForm(request.POST or None)
+    form.helper = FormHelper(form)
+    form.helper.form_class = "form-horizontal"
+    form.helper.label_class = "col-lg-4"
+    form.helper.field_class = "col-lg-8"
     if form.is_valid():
         user = form.save()
 

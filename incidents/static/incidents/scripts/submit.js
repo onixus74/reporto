@@ -116,9 +116,9 @@ reform.widgets.wizard.init = function() {
   // fix for category input's values list
   $('#id_category option[selected]').removeAttr('selected').html('');
 
-  $('.select2').select2()
+  //$('.select2').select2()
 
-  //$('.select2').selectpicker();
+  $('.select2').selectpicker();
 
   var form = widget.form = $('#report-form');
 
@@ -591,7 +591,7 @@ reform.widgets.similarReports.init = function() {
 
   //noSimilarReportsNotification.addClass('animated');
 
-  noReportsNotification.addClass('animated fadeInUp').show();
+  noReportsNotification.addClass('animated fadeInUp').show().css('display', 'block');
 
   window.similarReports = widget;
 
@@ -626,7 +626,7 @@ reform.widgets.similarReports.init = function() {
         "X-CSRFToken": csrf_token
       }
     }).done(function(data) {
-      reportsList.html(data.html).find('#ui-no-similar-reports').addClass('animated fadeInUp').show();;
+      reportsList.html(data.html).find('#ui-no-similar-reports').addClass('animated fadeInUp').show().css('display', 'block');
       $('#ui-reports-list').unblock();
     }).fail(function(err) {
       console.log(err);

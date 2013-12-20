@@ -1,5 +1,6 @@
 // Core variables and mixins
 @import "variables";
+@import "../../variables";
 @import "mixins";
 
 // Reset
@@ -17,6 +18,7 @@
 
 // Components
 @import "component-animations";
+$icon-font-path:          "../theme/new/bootstrap-sass/fonts/";
 @import "glyphicons";
 @import "dropdowns";
 @import "button-groups";
@@ -47,3 +49,7 @@
 // Utility classes
 @import "utilities";
 @import "responsive-utilities";
+
+
+@import "../../bootswatch";
+

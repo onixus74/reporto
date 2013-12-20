@@ -9,13 +9,13 @@
 		<h1>Report <small>Detail</small></h1>
 	</div>
 
-	<div class="container-fluid">
-		<div class="row-fluid">
-			<div class="offset2 span8">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-offset-2 col-md-8">
 
 				<form class="form-horizontal">
 
-					<div class="control-group">
+					<div class="form-group">
 						<div class="controls">
 							<dl>
 
@@ -70,7 +70,7 @@
 					<div class="form-actions">
 						<a href="{% url 'incidents:crud-edit' report.id %}" class="btn btn-info"><i class="icon-pencil"></i> Edit</a>
 						<a href="{% url 'incidents:crud-delete' report.id %}" class="btn btn-warning"><i class="icon-trash"></i> Delete</a>
-						<a href="{% url 'incidents:crud-list' %}" class="btn"><i class="icon-back"></i> Back</a>
+						<a href="{% url 'incidents:crud-list' %}" class="btn btn-default"><i class="icon-back"></i> Back</a>
 					</div>
 
 				</form>

@@ -9,20 +9,20 @@
 		<h1>User <small>Delete</small></h1>
 	</div>
 
-	<div class="container-fluid">
-		<div class="row-fluid">
-			<div class="offset2 span8">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-offset-2 col-md-8">
 
 				<form class="form-horizontal" action="{% url 'users:delete' user.id %}" method="post">
 					{% csrf_token %}
 
-					<div class="control-group">
+					<div class="form-group">
 						<div class="controls">
 							{{user}}
 						</div>
 					</div>
 
-					<div class="control-group">
+					<div class="form-group">
 						<div class="controls">
 							Are you sure that you want to delete this record?
 						</div>
@@ -30,7 +30,7 @@
 
 					<div class="form-actions">
 						<button type="submit" class="btn btn-danger">Yes</button>
-						<a href="{% url 'users:list' %}" class="btn">Cancel</a>
+						<a href="{% url 'users:list' %}" class="btn btn-default">Cancel</a>
 					</div>
 
 				</form>

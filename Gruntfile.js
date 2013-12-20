@@ -41,7 +41,7 @@ function makeDjangoAppConfig(config, applicationName){
 module.exports = function(grunt) {
 
 
-  var config_ = {
+  var config = {
 
     pkg: grunt.file.readJSON('package.json'),
 
@@ -123,6 +123,7 @@ module.exports = function(grunt) {
 
   };
 
+  /*
   var config = {
     pkg: grunt.file.readJSON('package.json'),
     compass: {},
@@ -131,6 +132,7 @@ module.exports = function(grunt) {
     contact: {},
     watch: {},
   };
+  */
 
   /* base */
 

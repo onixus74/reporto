@@ -12,19 +12,19 @@
       <h1 class="text-center">Incidents/Thanks Dashboard</h1>
     </div>
 
-    <div class="hero-unit clearfix" style="padding: 20px 40px;">
+    <div class="jumbotron clearfix" style="padding: 20px 40px;">
       {% if report_list %}
       <div class="pull-left" style="margin: 0;">
           {% with report=report_list.0 %}
           <div>
               <h2 style="margin-top: 0;">Latest Report</h2>
-              <span class="label victim"><i class="icon-user"></i> {{report.victim}}</span>
+              <span class="label label-default victim"><i class="icon-user"></i> {{report.victim}}</span>
               has been a victim of
-              <span class="label category">{{report.category}}</span>
+              <span class="label label-default category">{{report.category}}</span>
               happened in
-              <span class="label location"><i class="icon-map-marker"></i> {{report.location_text}}</span>
+              <span class="label label-default location"><i class="icon-map-marker"></i> {{report.location_text}}</span>
               on
-              <span class="label datetime"><i class="icon-calendar"></i> {{report.datetime}}</span>
+              <span class="label label-default datetime"><i class="icon-calendar"></i> {{report.datetime}}</span>
               {% if report.is_verified %}<span class="badge badge-success">Verified <i class="icon-ok"></i></span>{% endif %}
               <a class="btn btn-not" href="{% url 'incidents:view' report.id %}" target="_blank" title="Click to view report" _data-toggle="modal" _data-target="#ui-report-view-modal">
                   <i class="icon-external-link icon-large"></i>
@@ -39,153 +39,163 @@
       </div>
       {% endif %}
 
-      <a class="btn btn-danger btn-large pull-right" href="{% url 'incidents:submit' %}"><i class="icon-plus"></i> Report an Incident</a>
-      <a class="btn btn-success btn-large pull-right" href="{% url 'thanks:submit' %}"><i class="icon-plus"></i> Thank a Security Officer</a>
+      <a class="btn btn-danger btn-lg pull-right" href="{% url 'incidents:submit' %}"><i class="icon-plus"></i> Report an Incident</a>
+      <a class="btn btn-success btn-lg pull-right" href="{% url 'thanks:submit' %}"><i class="icon-plus"></i> Thank a Security Officer</a>
     </div>
 
     {% if report_list or thankreport_list %}
     <div class="well">
 
-      <div class="container-fluid">
-
-        <!--
-        <div class="row-fluid">
-          <div class="span12">
-            <div id="ui-incidents-dates-chart" style="height: 300px;"></div>
-          </div>
+      <!--
+      <div class="row">
+        <div class="col-md-12">
+          <div id="ui-incidents-dates-chart" style="height: 300px;"></div>
         </div>
-        -->
-
-        <div class="row-fluid">
-          <div class="span12">
-            <div id="ui-incidents-dates-chart" style="height: 300px;"></div>
-          </div>
-        </div>
-
-
-        <div class="row-fluid">
-          <div class="offset2 span8" style="margin-top: 20px;">
-            <!--<h2>Map</h2>-->
-            <div id="ui-timeline-map" class="ui-timeline-map" style="width:100%; height: 400px"></div>
-          </div>
-        </div>
-
-        <div class="row-fluid">
-          <div class="span6" style="margin-top: 20px;">
-            <h2>Incidents</h2>
-            <div id="ui-incidents-timeline-list" class="ui-timeline-list clearfix">
-
-              <div class="ui-pagination pagination pagination-small pagination-centered">
-                <ul>
-                  <li class="{% if report_pagination.current == 1 %}disabled{% endif %}">
-                    <a class="ui-pagination-control ui-pagination-first" href="{{request.path}}?incidents-page=1"><i class="icon-arrow-left"></i> First</a>
-                  </li>
-
-                  <li class="{% if report_pagination.current == 1 %}disabled{% endif %}">
-                    <a class="ui-pagination-control ui-pagination-previous" href="{{request.path}}?incidents-page={{ report_pagination.current|add:-1 }}"><i class="icon-chevron-left"></i> Previous</a>
-                  </li>
-
-                  <li><span class="ui-pagination-indicator">{{report_pagination.current}} / {{report_pagination.pages}}</span></li>
-
-                  <li class="{% if report_pagination.current == report_pagination.pages %}disabled{% endif %}">
-                    <a class="ui-pagination-control ui-pagination-next" href="{{request.path}}?incidents-page={{ report_pagination.current|add:1 }}">Next <i class="icon-chevron-right"></i></a>
-                  </li>
-
-                  <li class="{% if report_pagination.current == report_pagination.pages %}disabled{% endif %}">
-                    <a class="ui-pagination-control ui-pagination-last" href="{{request.path}}?incidents-page={{ report_pagination.pages }}">Last <i class="icon-arrow-right"></i></a>
-                  </li>
-                </ul>
-              </div>
-
-              <ul id="ui-incidents-list" class="list list-hover">
-                {% include "incidents/dashboard_incidents_list.html" %}
-              </ul>
-
-            </div>
-            {% if report_list %}
-            <div id="ui-stats-features-chart" style="margin-top: 20px;"></div>
-            {% endif %}
-          </div>
-
-          <div class="span6" style="margin-top: 20px;">
-            <h2>Thanks</h2>
-            <div id="ui-thanks-timeline-list" class="ui-timeline-list clearfix">
-
-              <div class="ui-pagination pagination pagination-small pagination-centered">
-                <ul>
-                  <li class="{% if thankreport_pagination.current == 1 %}disabled{% endif %}">
-                    <a class="ui-pagination-control ui-pagination-first" href="{{request.path}}?thanks-page=1"><i class="icon-arrow-left"></i> First</a>
-                  </li>
-
-                  <li class="{% if thankreport_pagination.current == 1 %}disabled{% endif %}">
-                    <a class="ui-pagination-control ui-pagination-previous" href="{{request.path}}?thanks-page={{ thankreport_pagination.current|add:-1 }}"><i class="icon-chevron-left"></i> Previous</a>
-                  </li>
-
-                  <li><span class="ui-pagination-indicator">{{thankreport_pagination.current}} / {{thankreport_pagination.pages}}</span></li>
-
-                  <li class="{% if thankreport_pagination.current == thankreport_pagination.pages %}disabled{% endif %}">
-                    <a class="ui-pagination-control ui-pagination-next" href="{{request.path}}?thanks-page={{ thankreport_pagination.current|add:1 }}">Next <i class="icon-chevron-right"></i></a>
-                  </li>
-
-                  <li class="{% if thankreport_pagination.current == thankreport_pagination.pages %}disabled{% endif %}">
-                    <a class="ui-pagination-control ui-pagination-last" href="{{request.path}}?thanks-page={{ thankreport_pagination.pages }}">Last <i class="icon-arrow-right"></i></a>
-                  </li>
-                </ul>
-              </div>
-
-              <ul id="ui-thanks-list" class="list list-hover">
-                {% include "thanks/dashboard_thanks_list.html" %}
-              </ul>
-
-            </div>
-            <div id="ui-stats-thanks-by-category-chart" style="margin-top: 20px;"></div>
-          </div>
-        </div>
-
-        {% if report_list %}
-
-        <div class="row-fluid">
-          <div class="span4" style="margin-top: 20px;">
-            <!--
-            <div id="ui-stats-categories-chart"></div>
-            <h3 class="text-center">Distribution by incident category</h3>
-            -->
-            <div id="ui-stats-categories-chart"></div>
-          </div>
-          <div class="span4" style="margin-top: 20px;">
-            <!--
-            <div id="ui-stats-victim-gender-chart"></div>
-            <h3 class="text-center">Distribution by victim's gender</h3>
-            -->
-            <div id="ui-stats-victim-gender-chart"></div>
-          </div>
-          <div class="span4" style="margin-top: 20px;">
-            <!--
-            <div id="ui-stats-victim-education-chart"></div>
-            <h3 class="text-center">Distribution by victim's education</h3>
-            -->
-            <div id="ui-stats-victim-education-chart"></div>
-          </div>
-        </div>
-
-        <div class="row-fluid">
-          <div class="span4">
-            <div id="ui-stats-categories-list"></div>
-          </div>
-          <div class="span4">
-            <div id="ui-stats-features-list"></div>
-          </div>
-          <div class="span4">
-            <div id="ui-stats-victim-gender-list"></div>
-          </div>
-        </div>
-
-        {% endif %}
-
       </div>
+      -->
+
+      <div class="row">
+        <div class="col-md-12">
+          <div id="ui-incidents-dates-chart" style="height: 300px;"></div>
+        </div>
+      </div>
+
+
+      <div class="row">
+        <div class="col-md-offset-2 col-md-8" style="margin-top: 20px;">
+          <!--<h2>Map</h2>-->
+          <div id="ui-timeline-map" class="ui-timeline-map" style="width:100%; height: 400px"></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6" style="margin-top: 20px;">
+
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h2 class="panel-title">Incidents</h2>
+            </div>
+            <div class="panel-body">
+              <div id="ui-incidents-timeline-list" class="ui-timeline-list clearfix">
+
+                <div class="ui-pagination text-center">
+                  <ul class="pagination pagination-sm">
+                    <li class="{% if report_pagination.current == 1 %}disabled{% endif %}">
+                      <a class="ui-pagination-control ui-pagination-first" href="{{request.path}}?incidents-page=1"><i class="icon-arrow-left"></i> First</a>
+                    </li>
+
+                    <li class="{% if report_pagination.current == 1 %}disabled{% endif %}">
+                      <a class="ui-pagination-control ui-pagination-previous" href="{{request.path}}?incidents-page={{ report_pagination.current|add:-1 }}"><i class="icon-chevron-left"></i> Previous</a>
+                    </li>
+
+                    <li class="disabled"><span class="ui-pagination-indicator">{{report_pagination.current}} / {{report_pagination.pages}}</span></li>
+
+                    <li class="{% if report_pagination.current == report_pagination.pages %}disabled{% endif %}">
+                      <a class="ui-pagination-control ui-pagination-next" href="{{request.path}}?incidents-page={{ report_pagination.current|add:1 }}">Next <i class="icon-chevron-right"></i></a>
+                    </li>
+
+                    <li class="{% if report_pagination.current == report_pagination.pages %}disabled{% endif %}">
+                      <a class="ui-pagination-control ui-pagination-last" href="{{request.path}}?incidents-page={{ report_pagination.pages }}">Last <i class="icon-arrow-right"></i></a>
+                    </li>
+                  </ul>
+                </div>
+
+                <ul id="ui-incidents-list" class="list_ list-hover_ list-group">
+                  {% include "incidents/dashboard_incidents_list.html" %}
+                </ul>
+
+              </div>
+            </div>
+          </div>
+
+          {% if report_list %}
+          <div id="ui-stats-features-chart" style="margin-top: 20px;"></div>
+          {% endif %}
+        </div>
+
+        <div class="col-md-6" style="margin-top: 20px;">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h2 class="panel-title">Thanks</h2>
+            </div>
+            <div class="panel-body">
+              <div id="ui-thanks-timeline-list" class="ui-timeline-list clearfix">
+
+                <div class="ui-pagination text-center">
+                  <ul class="pagination pagination-sm">
+                    <li class="{% if thankreport_pagination.current == 1 %}disabled{% endif %}">
+                      <a class="ui-pagination-control ui-pagination-first" href="{{request.path}}?thanks-page=1"><i class="icon-arrow-left"></i> First</a>
+                    </li>
+
+                    <li class="{% if thankreport_pagination.current == 1 %}disabled{% endif %}">
+                      <a class="ui-pagination-control ui-pagination-previous" href="{{request.path}}?thanks-page={{ thankreport_pagination.current|add:-1 }}"><i class="icon-chevron-left"></i> Previous</a>
+                    </li>
+
+                    <li class="disabled"><span class="ui-pagination-indicator">{{thankreport_pagination.current}} / {{thankreport_pagination.pages}}</span></li>
+
+                    <li class="{% if thankreport_pagination.current == thankreport_pagination.pages %}disabled{% endif %}">
+                      <a class="ui-pagination-control ui-pagination-next" href="{{request.path}}?thanks-page={{ thankreport_pagination.current|add:1 }}">Next <i class="icon-chevron-right"></i></a>
+                    </li>
+
+                    <li class="{% if thankreport_pagination.current == thankreport_pagination.pages %}disabled{% endif %}">
+                      <a class="ui-pagination-control ui-pagination-last" href="{{request.path}}?thanks-page={{ thankreport_pagination.pages }}">Last <i class="icon-arrow-right"></i></a>
+                    </li>
+                  </ul>
+                </div>
+
+                <ul id="ui-thanks-list" class="list_ list-hover_ list-group">
+                  {% include "thanks/dashboard_thanks_list.html" %}
+                </ul>
+
+              </div>
+            </div>
+          </div>
+          <div id="ui-stats-thanks-by-category-chart" style="margin-top: 20px;"></div>
+        </div>
+      </div>
+
+      {% if report_list %}
+
+      <div class="row">
+        <div class="col-md-4" style="margin-top: 20px;">
+          <!--
+          <div id="ui-stats-categories-chart"></div>
+          <h3 class="text-center">Distribution by incident category</h3>
+          -->
+          <div id="ui-stats-categories-chart"></div>
+        </div>
+        <div class="col-md-4" style="margin-top: 20px;">
+          <!--
+          <div id="ui-stats-victim-gender-chart"></div>
+          <h3 class="text-center">Distribution by victim's gender</h3>
+          -->
+          <div id="ui-stats-victim-gender-chart"></div>
+        </div>
+        <div class="col-md-4" style="margin-top: 20px;">
+          <!--
+          <div id="ui-stats-victim-education-chart"></div>
+          <h3 class="text-center">Distribution by victim's education</h3>
+          -->
+          <div id="ui-stats-victim-education-chart"></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-4">
+          <div id="ui-stats-categories-list"></div>
+        </div>
+        <div class="col-md-4">
+          <div id="ui-stats-features-list"></div>
+        </div>
+        <div class="col-md-4">
+          <div id="ui-stats-victim-gender-list"></div>
+        </div>
+      </div>
+
       {% endif %}
 
     </div>
+    {% endif %}
 
 <!-- Modal -->
 <div id="ui-report-view-modal" class="modal modal-big hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

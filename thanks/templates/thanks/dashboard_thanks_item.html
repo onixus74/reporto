@@ -1,15 +1,15 @@
-                <li class="ui-timeline-story" data-latitude="{{report.latitude}}" data-longitude="{{report.longitude}}">
+                <li class="ui-timeline-story list-group-item multi-labels-lines-fix" data-latitude="{{report.latitude}}" data-longitude="{{report.longitude}}">
                   <a class="btn btn-not ui-timeline-story-locator pull-left" title="Click to locate thanks" href="https://maps.google.com/?q={{report.latitude}},{{report.longitude}}" target="_blank">
                     <i class="icon-map-marker icon-large"></i>
                   </a>
                   <a class="btn btn-not pull-right" href="{% url 'thanks:view' report.id %}" target="_blank" title="Click to view report" _data-toggle="modal" _data-target="#ui-report-view-modal">
                     <i class="icon-external-link icon-large"></i>
                   </a>
-                  <span class="label category">{{report.category}}</span>
+                  <span class="label label-default category">{{report.category}}</span>
                   happened in
-                  <span class="label location"><i class="icon-map-marker"></i> {{report.location_text}}</span>
+                  <span class="label label-default location"><i class="icon-map-marker"></i> {{report.location_text}}</span>
                   on
-                  <span class="label datetime">
+                  <span class="label label-default datetime">
                     <!--<a href="{% url 'thanks:view' report.id %}" target="_blank">{{report.datetime}}</a>-->
                     <i class="icon-calendar"></i> {{report.datetime}}
                   </span>
