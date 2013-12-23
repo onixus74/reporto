@@ -129,12 +129,13 @@ SECRET_KEY = 'g#t3tki%zbnynjn1qlkqn#jlulv9!w*=l0e_n7j^%mm7%5@jr%'
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
+    'base.utils.template.Loader',
     # 'django.template.loaders.eggs.Loader',
 )
 
 MIDDLEWARE_CLASSES = (
     'django.middleware.gzip.GZipMiddleware',
-    'htmlmin.middleware.HtmlMinifyMiddleware',
+    #'htmlmin.middleware.HtmlMinifyMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -163,18 +164,21 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     #'django.contrib.markup',
+
+    'reversion',
     'mptt',
 
     # project components
     'users',
 
-
-    # 'suit', # theme for admin
+    # admin components
     'admin_mod',
-    #'django_admin_bootstrapped.bootstrap3',
-    'django_admin_bootstrapped',  # theme for admin
-    #'grappelli',
+    'report_builder',
     #'filebrowser',
+    'django_admin_bootstrapped.bootstrap3',
+    'django_admin_bootstrapped',  # theme for admin
+    # 'suit',
+    #'grappelli',
     'django.contrib.admin',
     #'django.contrib.admindocs',
 
@@ -192,6 +196,14 @@ INSTALLED_APPS = (
     'widget_tweaks',
     'floppyforms',
     'crispy_forms',
+    'south',
+    'compressor',
+    'easy_thumbnails',
+    'social_auth',
+
+    # dev dependencies
+    #'debug_toolbar',
+
 
 )
 
@@ -273,19 +285,24 @@ LOGGING = {
 
 AUTH_USER_MODEL = 'users.User'
 
-INSTALLED_APPS += ('debug_toolbar',)  # !DEV!
+# APP 'debug_toolbar' !DEV!
 INTERNAL_IPS = ('127.0.0.1', '127.0.1.1')
 # DEBUG_TOOLBAR_CONFIG = {
 #   'INTERCEPT_REDIRECTS': False
 # }
 
-INSTALLED_APPS += ('south',)
-
-INSTALLED_APPS += ('compressor',)
+# APP 'compressor'
 #COMPRESS_ENABLED = True
-#COMPRESS_OFFLINE = True
+COMPRESS_OFFLINE = True
+COMPRESS_CSS_FILTERS = [
+    'compressor.filters.cssmin.CSSMinFilter'
+]
+COMPRESS_JS_FILTERS = [
+    'compressor.filters.jsmin.JSMinFilter'
+]
 
-INSTALLED_APPS += ('easy_thumbnails',)
+
+# APP 'easy_thumbnails'
 THUMBNAIL_ALIASES = {
     '': {
         'media': {'size': (200, 150), 'crop': True, 'quality': 100},
@@ -351,3 +368,12 @@ SOCIAL_AUTH_PIPELINE = (
     'social_auth.backends.pipeline.social.load_extra_data',
     'social_auth.backends.pipeline.user.update_user_details'
 )
+
+
+# APP 'crispy_forms'
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
+
+# APP 'report_builder'
+#REPORT_BUILDER_INCLUDE = []
+REPORT_BUILDER_EXCLUDE = ['user']
+REPORT_BUILDER_GLOBAL_EXPORT = True

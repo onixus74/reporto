@@ -51,10 +51,12 @@ def register_view(request, *args, **kwargs):
     if request.user.is_authenticated():
         return redirect('home')
     form = UserCreationForm(request.POST or None)
-    form.helper = FormHelper(form)
-    form.helper.form_class = "form-horizontal"
-    form.helper.label_class = "col-lg-4"
-    form.helper.field_class = "col-lg-8"
+
+    # form.helper = FormHelper(form)
+    # form.helper.form_class = "form-horizontal"
+    # form.helper.label_class = "col-lg-4"
+    # form.helper.field_class = "col-lg-8"
+
     if form.is_valid():
         user = form.save()
 
@@ -83,7 +85,12 @@ def login_view(request, *args, **kwargs):
             return redirect(request.REQUEST.get('next', '/'))
         else:
             messages.warning(request, 'Sorry, your user account is inactive.')
-    return render(request, "login.html", {'form': form, 'next': request.REQUEST.get('next', '/')})
+    return render(request, "login.html", {
+        'form': form,
+        'next': request.REQUEST.get('next', '/'),
+        'incidents': Report.objects.count(),
+        'thanks': ThankReport.objects.count()
+    })
 
     # if request.method == 'POST':
     # 	username = request.POST['username']

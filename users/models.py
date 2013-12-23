@@ -14,6 +14,8 @@ class User(AbstractUser):
     #REQUIRED_FIELDS = ['first_name', 'last_name']
     #USERNAME_FIELD = 'email'
 
+    report_builder_exclude_fields = ('email', 'password')
+
     REPORTER = "R"
     MODERATOR = "M"
     ADMIN = "A"
@@ -53,10 +55,6 @@ class User(AbstractUser):
 
     def is_reporter(self):
         return self.role == self.REPORTER
-
-    def get_roles(self):
-        # return dict(self.ROLE)
-        return [{'value': v, 'text': t} for v, t in self.ROLE]
 
 
 email = User._meta.get_field_by_name('email')[0]

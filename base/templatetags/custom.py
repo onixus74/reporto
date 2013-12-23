@@ -22,6 +22,11 @@ def times(number):
     return range(number)
 
 
+@register.filter
+def pluck(list, key):
+    return [i.get(key, None) for i in list]
+
+
 from crispy_forms.helper import FormHelper
 
 

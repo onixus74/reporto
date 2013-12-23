@@ -307,7 +307,7 @@ class Report(models.Model):
     is_verified = models.BooleanField()
     is_closed = models.BooleanField()
     comments = models.ManyToManyField(Comment, blank=True, null=True)
-    created_by = models.ForeignKey(settings.AUTH_USER_MODEL)
+    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='created_by_user')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

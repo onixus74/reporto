@@ -19,6 +19,7 @@ from base.utils.views import JSONResponse
 
 from django import forms
 
+from django.contrib.auth.models import Group
 from .models import User
 from incidents.models import Victim
 
@@ -64,12 +65,18 @@ def user_view(request, pk=None, username=None, extension=None):
         user = get_object_or_404(User, username=username)
     else:
         raise Http404()
+    user_roles = [{'value': v, 'text': t} for v, t in User.ROLE]
+    user_groups = [{'value': g.pk, 'text': g.name} for g in Group.objects.all()]
     if user.pk == request.user.pk:
         return redirect('users:profile')
     if extension:
         return JSONResponse({'user': user})
     else:
-        return render(request, "users/view.html", {'profile': user})
+        return render(request, "users/view.html", {
+                      'profile': user,
+                      'user_roles': user_roles,
+                      'user_groups': user_groups,
+                      })
 
 
 # class VictimForm(forms.ModelForm):
@@ -133,10 +140,21 @@ def user_change_password_view(request):
 
 @require_POST
 def user_change_role_view(request):
-    logger.debug("USER PASSWORD CHANGE %s", request.POST)
+    logger.debug("USER ROLE CHANGE %s", request.POST)
     user = get_object_or_404(User, pk=request.POST['pk'])
     user.role = request.POST['value']
     user.save()
+    return HttpResponse("Role changed")
+
+
+@require_POST
+def user_change_groups_view(request):
+    logger.debug("USER PASSWORD CHANGE %s", request.POST)
+    user = get_object_or_404(User, pk=request.POST['pk'])
+    user.groups.clear()
+    values = request.POST.getlist('value[]', [])
+    for value in values:
+        user.groups.add(value)
     return HttpResponse("Role changed")
 
 

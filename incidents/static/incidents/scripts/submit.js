@@ -627,6 +627,7 @@ reform.widgets.similarReports.init = function() {
       }
     }).done(function(data) {
       reportsList.html(data.html).find('#ui-no-similar-reports').addClass('animated fadeInUp').show().css('display', 'block');
+      reportsList.find('#ui-no-reports').hide();
       $('#ui-reports-list').unblock();
     }).fail(function(err) {
       console.log(err);
@@ -696,7 +697,7 @@ reform.widgets.similarReports.init = function() {
 
   var elements = reform.widgets.wizard.elements;
 
-  elements.category.on('change', showSimilarReports);
+  //elements.category.on('change', showSimilarReports);
 
   elements.location.on('change', showSimilarReports);
 

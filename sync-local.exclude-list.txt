@@ -1,5 +1,2 @@
-backups
 cache
-wp-content/cache
-wp-content/plugins/connections/cache
 *.pyc

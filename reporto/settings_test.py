@@ -1,8 +1,7 @@
 # Django settings for reporto project.
 
 import os
-PROJECT_DIR = os.path.dirname(__file__)
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # DEBUG = True # !DEV!
 DEBUG = False  # !PROD!
@@ -65,22 +64,22 @@ USE_L10N = False
 USE_TZ = False
 
 
-DATETIME_INPUT_FORMATS = (
-    '%Y-%m-%dT%H:%M:%S',     # '2006-10-25T14:30:59'
-    '%Y-%m-%dT%H:%M',        # '2006-10-25T14:30'
-    '%Y-%m-%d %H:%M:%S',     # '2006-10-25 14:30:59'
-    '%Y-%m-%d %H:%M:%S.%f',  # '2006-10-25 14:30:59.000200'
-    '%Y-%m-%d %H:%M',        # '2006-10-25 14:30'
-    '%Y-%m-%d',              # '2006-10-25'
-    '%m/%d/%Y %H:%M:%S',     # '10/25/2006 14:30:59'
-    '%m/%d/%Y %H:%M:%S.%f',  # '10/25/2006 14:30:59.000200'
-    '%m/%d/%Y %H:%M',        # '10/25/2006 14:30'
-    '%m/%d/%Y',              # '10/25/2006'
-    '%m/%d/%y %H:%M:%S',     # '10/25/06 14:30:59'
-    '%m/%d/%y %H:%M:%S.%f',  # '10/25/06 14:30:59.000200'
-    '%m/%d/%y %H:%M',        # '10/25/06 14:30'
-    '%m/%d/%y',              # '10/25/06'
-)
+# DATETIME_INPUT_FORMATS = (
+# '%Y-%m-%dT%H:%M:%S',     # '2006-10-25T14:30:59'
+# '%Y-%m-%dT%H:%M',        # '2006-10-25T14:30'
+# '%Y-%m-%d %H:%M:%S',     # '2006-10-25 14:30:59'
+# '%Y-%m-%d %H:%M:%S.%f',  # '2006-10-25 14:30:59.000200'
+# '%Y-%m-%d %H:%M',        # '2006-10-25 14:30'
+# '%Y-%m-%d',              # '2006-10-25'
+# '%m/%d/%Y %H:%M:%S',     # '10/25/2006 14:30:59'
+# '%m/%d/%Y %H:%M:%S.%f',  # '10/25/2006 14:30:59.000200'
+# '%m/%d/%Y %H:%M',        # '10/25/2006 14:30'
+# '%m/%d/%Y',              # '10/25/2006'
+# '%m/%d/%y %H:%M:%S',     # '10/25/06 14:30:59'
+# '%m/%d/%y %H:%M:%S.%f',  # '10/25/06 14:30:59.000200'
+# '%m/%d/%y %H:%M',        # '10/25/06 14:30'
+# '%m/%d/%y',              # '10/25/06'
+# )
 
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
@@ -128,14 +127,15 @@ SECRET_KEY = 'g#t3tki%zbnynjn1qlkqn#jlulv9!w*=l0e_n7j^%mm7%5@jr%'
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
+    'base.utils.template.Loader',
     # 'django.template.loaders.eggs.Loader',
 )
 
 MIDDLEWARE_CLASSES = (
     'django.middleware.gzip.GZipMiddleware',
-    'htmlmin.middleware.HtmlMinifyMiddleware',
-    'django.middleware.common.CommonMiddleware',
+    #'htmlmin.middleware.HtmlMinifyMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -162,18 +162,21 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     #'django.contrib.markup',
+
+    'reversion',
     'mptt',
 
     # project components
     'users',
 
-
-    # 'suit', # theme for admin
+    # admin components
     'admin_mod',
-    #'django_admin_bootstrapped.bootstrap3',
-    'django_admin_bootstrapped',  # theme for admin
-    #'grappelli',
+    'report_builder',
     #'filebrowser',
+    'django_admin_bootstrapped.bootstrap3',
+    'django_admin_bootstrapped',  # theme for admin
+    # 'suit',
+    #'grappelli',
     'django.contrib.admin',
     #'django.contrib.admindocs',
 
@@ -191,6 +194,16 @@ INSTALLED_APPS = (
     'widget_tweaks',
     'floppyforms',
     'crispy_forms',
+    'south',
+    'compressor',
+    'easy_thumbnails',
+    'social_auth',
+
+    # dev dependencies
+    'debug_toolbar',
+
+    # test dependencies
+    'selenium',
 
 )
 
@@ -272,19 +285,24 @@ LOGGING = {
 
 AUTH_USER_MODEL = 'users.User'
 
-INSTALLED_APPS += ('debug_toolbar',)  # !DEV!
+# APP 'debug_toolbar' !DEV!
 INTERNAL_IPS = ('127.0.0.1', '127.0.1.1')
 # DEBUG_TOOLBAR_CONFIG = {
 #   'INTERCEPT_REDIRECTS': False
 # }
 
-INSTALLED_APPS += ('south',)
-
-INSTALLED_APPS += ('compressor',)
+# APP 'compressor'
 #COMPRESS_ENABLED = True
 #COMPRESS_OFFLINE = True
+COMPRESS_CSS_FILTERS = [
+    'compressor.filters.cssmin.CSSMinFilter'
+]
+COMPRESS_JS_FILTERS = [
+    'compressor.filters.jsmin.JSMinFilter'
+]
 
-INSTALLED_APPS += ('easy_thumbnails',)
+
+# APP 'easy_thumbnails'
 THUMBNAIL_ALIASES = {
     '': {
         'media': {'size': (200, 150), 'crop': True, 'quality': 100},
@@ -292,7 +310,7 @@ THUMBNAIL_ALIASES = {
     },
 }
 
-INSTALLED_APPS += ('social_auth',)
+# APP 'social_auth'
 AUTHENTICATION_BACKENDS = (
     'social_auth.backends.twitter.TwitterBackend',
     'social_auth.backends.facebook.FacebookBackend',
@@ -350,3 +368,12 @@ SOCIAL_AUTH_PIPELINE = (
     'social_auth.backends.pipeline.social.load_extra_data',
     'social_auth.backends.pipeline.user.update_user_details'
 )
+
+
+# APP 'crispy_forms'
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
+
+# APP 'report_builder'
+#REPORT_BUILDER_INCLUDE = []
+REPORT_BUILDER_EXCLUDE = ['user']
+REPORT_BUILDER_GLOBAL_EXPORT = True

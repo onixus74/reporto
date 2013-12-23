@@ -20,7 +20,7 @@
 \*/
 
 .navbar .nav > .active > a, .navbar .nav > .active > a:hover, .navbar .nav > .active > a:focus {
-  font-weight: bold;
+  font-weight: normal;
 }
 
 /*
@@ -426,7 +426,7 @@ body {
 | Fixes
 \*/
 
-[hidden] { display: none none !important; }
+*[hidden] { display: none !important; }
 
 .ui-pnotify .alert {
 	margin-bottom: 0;

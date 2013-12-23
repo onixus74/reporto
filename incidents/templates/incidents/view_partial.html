@@ -112,7 +112,7 @@
               </a>
               {% elif media.is_facebook %}
               <a class="thumbnail- fancybox" data-fancybox-type="iframe" href="{{ media.get_facebook_embed_url }}" target="_blank" rel="group">
-                <img src="/" alt="" style="height: 100px; width: auto;" class="img-thumbnail">
+                <img src="{% static 'facebook-video.png' %}" alt="" style="height: 100px; width: auto;" class="img-thumbnail">
               </a>
               {% else  %}
               <a class="thumbnail- fancybox" href="{{ media.url }}" target="_blank" rel="group">

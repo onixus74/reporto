@@ -21,15 +21,24 @@
 						<dt>Full name</dt>
 						<dd>{{profile}}</dd>
 						<dt>Role</dt>
-						{% if user.is_admin and not profile.is_admin %}
-						<dd><a href="#" class="ui-editable" id="user-role" data-type="select" data-pk="{{profile.pk}}" data-name="role" data-value="{{profile.role}}" data-source="{{profile.get_roles|json|force_escape}}" data-url="{% url 'users:change_role' %}" data-title="Change role">{{profile.get_role_display}}</a></dd>
-						{% else %}
 						<dd>
-							{{profile.get_role_display}}
+              {% if user.is_admin and not profile.is_admin %}
+              <a href="#" class="ui-editable" id="user-role" data-type="select" data-pk="{{profile.pk}}" data-name="role" data-value="{{profile.role}}" data-source="{{user_roles|json|force_escape}}" data-url="{% url 'users:change_role' %}" data-title="Change role">{{profile.get_role_display}}</a>
+							{% else %}
+              {{profile.get_role_display}}
+              {% endif %}
 							{% if profile.is_staff %}<span class="label label-info">Staff</span></small>{% endif %}
-							{% if profile.is_superuser %}<span class="label label-warning">Super User</span></small>{% endif %}
+							{% if profile.is_superuser %}<span class="label label-warning">Super User</span></small>
 						</dd>
 						{% endif %}
+            <dt>Groups</dt>
+            <dd>
+              {% if user.is_admin and not profile.is_admin %}
+              <a href="#" class="ui-editable" id="user-groups" data-type="checklist" data-pk="{{profile.pk}}" data-name="groups" data-value="{{profile.groups.values|pluck:'id'|json|force_escape}}" data-source="{{user_groups|json|force_escape}}" data-url="{% url 'users:change_groups' %}" data-title="Change groups">{{profile.groups.all|join:'<br>'}}</a>
+              {% else %}
+              {{profile.groups.all|join:'<br>'}}
+              {% endif %}
+            </dd>
 						<dt>Status</dt>
 						<dd>
 							<span class="label label-{{profile.is_active|yesno:"success,important,"}}">{{profile.is_active|yesno:"Active,Inactive,"}}</span>

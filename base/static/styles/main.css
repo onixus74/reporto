@@ -10788,7 +10788,7 @@ a .icon-rotate-90:before, a .icon-rotate-180:before, a .icon-rotate-270:before, 
 \*/
 /* line 22, main.scss */
 .navbar .nav > .active > a, .navbar .nav > .active > a:hover, .navbar .nav > .active > a:focus {
-  font-weight: bold;
+  font-weight: normal;
 }
 
 /*
@@ -11201,8 +11201,8 @@ body {
 | Fixes
 \*/
 /* line 429, main.scss */
-[hidden] {
-  display: none none !important;
+*[hidden] {
+  display: none !important;
 }
 
 /* line 431, main.scss */

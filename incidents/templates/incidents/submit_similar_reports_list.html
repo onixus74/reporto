@@ -1,14 +1,10 @@
 				{% for report in reports %}
 					{% include "incidents/submit_similar_reports_item.html" %}
 				{% empty %}
-					<!--
-          <li id="ui-no-similar-reports" hidden><div class="text-center text-danger">No similar reports!</div></li>
-					<li id="ui-no-reports" hidden><div class="text-center text-danger">No reports!</div></li>
-          -->
-          <a id="ui-no-similar-reports" href="#" class="list-group-item" hidden>
+          <a id="ui-no-similar-reports" class="list-group-item" hidden>
             <p class="list-group-item-text text-center text-danger">No similar reports!</p>
           </a>
-          <a id="ui-no-reports" href="#" class="list-group-item" hidden>
+          <a id="ui-no-reports" class="list-group-item" hidden>
             <p class="list-group-item-text text-center text-danger">No reports!</p>
           </a>
 				{% endfor %}

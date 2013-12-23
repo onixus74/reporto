@@ -7,13 +7,18 @@
 
 {% block view_content %}
 <div class="container text-center">
-	<div class="well">
+	<div class="well_">
 
-		<div class="panel" style="margin-top: 20px; width: auto; display: inline-block;">
+		<div class="panel_" style="margin-top: 20px; width: auto; display: inline-block;">
 
       <div class="jumbotron">
         <h1>Reform Reporting Platform</h1>
         <p class="lead">a tool to monitor security sector status by tracking violations involving police officers</p>
+      </div>
+
+      <div style="margin: 30px;">
+        <h2><span class="text-muted">{{incidents|add:thanks}}</span> reports</h2>
+        <h3><span class="text-danger">{{incidents}}</span> violations - <span class="text-success">{{thanks}}</span> thanks</h3>
       </div>
 
 			{% comment %}
@@ -35,7 +40,7 @@
 			</div>
 			{% endif %}
 
-			<p class="lead">Start by signing in</p>
+			<p class="lead">contribute by signing in</p>
 
       <div class="row">
         <div class="col-md-8 col-md-offset-2">
@@ -58,7 +63,10 @@
             </div>
 
     				<input type="hidden" name="next" value="{{ next }}" />
-    				<input class="btn btn-default btn-lg btn-block" name="commit" type="submit" value="Login">
+
+            <button class="btn btn-default btn-lg btn-block" name="commit" type="submit">
+              Login <i class="icon-arrow-right"></i>
+            </button>
 
     			</form>
 
@@ -68,16 +76,16 @@
 
       <div class="row" style="margin-top: 20px">
         <div class="col-md-4 col-md-offset-2">
-          <a href="{% url 'socialauth_begin' 'facebook' %}?next={{next}}" class="btn btn-primary btn-block" style="background-color: #3C5A99;"><i class="icon-facebook-sign"></i> Facebook</a>
+          <a href="{% url 'socialauth_begin' 'facebook' %}?next={{next}}" class="btn btn-primary btn-block" style="background-color: #3C5A99; background-image: none;"><i class="icon-facebook-sign"></i> Facebook</a>
         </div>
         <div class="col-md-4">
-          <a href="{% url 'socialauth_begin' 'google' %}?next={{next}}" class="btn btn-primary btn-block" style="background-color: #547DBF;"><i class="icon-google-plus-sign"></i> Google</a>
+          <a href="{% url 'socialauth_begin' 'google' %}?next={{next}}" class="btn btn-primary btn-block" style="background-color: #547DBF; background-image: none;"><i class="icon-google-plus-sign"></i> Google</a>
         </div>
       </div>
 
       <div class="row" style="margin-top: 20px">
         <div class="col-md-8 col-md-offset-2">
-          <p class="lead text-center">or <a href="{% url 'register' %}?next={{next}}">register</a> using your <a href="{% url 'socialauth_begin' 'facebook' %}?next={{next}}"> Facebook</a> / <a href="{% url 'socialauth_begin' 'google' %}?next={{next}}">Google</a> account.</p>
+          <p class="lead text-center"><a href="{% url 'register' %}?next={{next}}">Sign up</a> if you do not have an account.</p>
         </div>
       </div>
 

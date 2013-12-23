@@ -10,6 +10,28 @@
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width">
 
+  <!-- icons & favicons -->
+
+  <link rel="apple-touch-icon" sizes="57x57" href="{{STATIC_URL}}apple-touch-icon-57x57.png" />
+  <link rel="apple-touch-icon" sizes="114x114" href="{{STATIC_URL}}apple-touch-icon-114x114.png" />
+  <link rel="apple-touch-icon" sizes="72x72" href="{{STATIC_URL}}apple-touch-icon-72x72.png" />
+  <link rel="apple-touch-icon" sizes="144x144" href="{{STATIC_URL}}apple-touch-icon-144x144.png" />
+  <link rel="apple-touch-icon" sizes="60x60" href="{{STATIC_URL}}apple-touch-icon-60x60.png" />
+  <link rel="apple-touch-icon" sizes="120x120" href="{{STATIC_URL}}apple-touch-icon-120x120.png" />
+  <link rel="apple-touch-icon" sizes="76x76" href="{{STATIC_URL}}apple-touch-icon-76x76.png" />
+  <link rel="apple-touch-icon" sizes="152x152" href="{{STATIC_URL}}apple-touch-icon-152x152.png" />
+  <link rel="icon" type="image/png" href="{{STATIC_URL}}favicon-16x16.png" sizes="16x16" />
+  <link rel="icon" type="image/png" href="{{STATIC_URL}}favicon-32x32.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="{{STATIC_URL}}favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/png" href="{{STATIC_URL}}favicon-160x160.png" sizes="160x160" />
+  <link rel="icon" type="image/png" href="{{STATIC_URL}}favicon-196x196.png" sizes="196x196" />
+  <meta name="msapplication-TileColor" content="#d40000" />
+  <meta name="msapplication-TileImage" content="{{STATIC_URL}}mstile-144x144.png" />
+
+  <!--<link rel="shortcut icon" href="{{STATIC_URL}}favicon.png">-->
+  <!-- For everything else -->
+  <link rel="shortcut icon" href="{{STATIC_URL}}favicon.ico">
+
 	<!--[if lt IE 9]>
 		<script src="{% static 'components/es5-shim/es5-shim.js' %}"></script>
 		<script src="{% static 'components/json3/lib/json3.min.js' %}"></script>
@@ -18,19 +40,17 @@
 
 <!-- Layout Styles Dependencies -->
 {% block layout_styles %}
-	{% compress css inline %}
-
+	{% compress css %}
+  <link rel="stylesheet" href="{% static 'styles/main.css' %}">
 	<!--<link rel="stylesheet" href="{% static 'components/select2/select2.css' %}">-->
 	<!--<link rel="stylesheet" href="{% static 'components/select2-bootstrap-css/select2-bootstrap.css' %}">-->
 	<link rel="stylesheet" href="{% static 'components/bootstrap-select/bootstrap-select.css' %}">
 	<!--<link rel="stylesheet" href="{% static 'components/bootstrap-wysihtml5/dist/bootstrap-wysihtml5-0.0.2.css' %}">-->
 	<link rel="stylesheet" href="{% static 'components/animate.css/animate.css' %}">
 	<link rel="stylesheet" href="{% static 'components/pines-notify/jquery.pnotify.default.css' %}">
-	<link rel="stylesheet" href="{% static 'styles/main.css' %}">
 	{% endcompress %}
 
 	{% compress js %}
-	{% comment %}<script src="{% static 'components/modernizr/modernizr.js' %}"></script>{% endcomment %}
 	<script src="{% static 'scripts/modernizr.js' %}"></script>
 	{% endcompress %}
 
@@ -117,12 +137,16 @@
 						{% if user.is_authenticated %}
             {% url 'home' as url %}
 						<li{% if request.path_info == url %} class="active"{% endif %}><a href="{{url}}">Dashboard</a></li>
+            {% comment %}
             {% url 'incidents:dashboard' as url %}
             <li{% if request.path_info == url %} class="active"{% endif %}><a href="{{url}}">Incidents</a></li>
+            {% endcomment %}
             {% url 'incidents:submit' as url %}
             <li{% if request.path_info == url %} class="active"{% endif %}><a href="{{url}}"><i class="icon-plus"></i> Report an Incident</a></li>
+            {% comment %}
             {% url 'thanks:dashboard' as url %}
             <li{% if request.path_info == url %} class="active"{% endif %}><a href="{{url}}">Thanks</a></li>
+            {% endcomment %}
             {% url 'thanks:submit' as url %}
             <li{% if request.path_info == url %} class="active"{% endif %}><a href="{{url}}"><i class="icon-plus"></i> Thank a Security Officer</a></li>
 						{% if user.role == "A" %}
