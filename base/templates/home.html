@@ -2,14 +2,14 @@
 
 {% load static custom compress %}
 
-{% block view_title %}Incidents/Thanks Dashboard | {% endblock %}
+{% block view_title %}Violations/Thanks Dashboard | {% endblock %}
 
 {% block view_content %}
 
   <div class="container">
 
     <div class="page-header">
-      <h1 class="text-center">Incidents/Thanks Dashboard</h1>
+      <h1 class="text-center">Violations/Thanks Dashboard</h1>
     </div>
 
     <div class="jumbotron clearfix" style="padding: 20px 40px;">
@@ -39,7 +39,7 @@
       </div>
       {% endif %}
 
-      <a class="btn btn-danger btn-lg pull-right" href="{% url 'incidents:submit' %}"><i class="icon-plus"></i> Report an Incident</a>
+      <a class="btn btn-danger btn-lg pull-right" href="{% url 'incidents:submit' %}"><i class="icon-plus"></i> Report a Violation</a>
       <a class="btn btn-success btn-lg pull-right" href="{% url 'thanks:submit' %}"><i class="icon-plus"></i> Thank a Security Officer</a>
     </div>
 
@@ -73,7 +73,7 @@
 
           <div class="panel panel-default">
             <div class="panel-heading">
-              <h2 class="panel-title">Incidents</h2>
+              <h2 class="panel-title">Violations</h2>
             </div>
             <div class="panel-body">
               <div id="ui-incidents-timeline-list" class="ui-timeline-list clearfix">

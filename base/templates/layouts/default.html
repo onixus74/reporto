@@ -139,10 +139,10 @@
 						<li{% if request.path_info == url %} class="active"{% endif %}><a href="{{url}}">Dashboard</a></li>
             {% comment %}
             {% url 'incidents:dashboard' as url %}
-            <li{% if request.path_info == url %} class="active"{% endif %}><a href="{{url}}">Incidents</a></li>
+            <li{% if request.path_info == url %} class="active"{% endif %}><a href="{{url}}">Violations</a></li>
             {% endcomment %}
             {% url 'incidents:submit' as url %}
-            <li{% if request.path_info == url %} class="active"{% endif %}><a href="{{url}}"><i class="icon-plus"></i> Report an Incident</a></li>
+            <li{% if request.path_info == url %} class="active"{% endif %}><a href="{{url}}"><i class="icon-plus"></i> Report a Violation</a></li>
             {% comment %}
             {% url 'thanks:dashboard' as url %}
             <li{% if request.path_info == url %} class="active"{% endif %}><a href="{{url}}">Thanks</a></li>
@@ -154,9 +154,9 @@
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Administration<b class="caret"></b></a>
 							<ul class="dropdown-menu">
 								<li><a href="{% url 'users:list' %}">Users</a></li>
-								<li><a href="{% url 'incidents:categories:list' %}">Incident Categories</a></li>
-								<li><a href="{% url 'incidents:features:list' %}">Incident Features</a></li>
-								<li><a href="{% url 'incidents:victims:list' %}">Incident Victims</a></li>
+								<li><a href="{% url 'incidents:categories:list' %}">Violation Categories</a></li>
+								<li><a href="{% url 'incidents:features:list' %}">Violation Features</a></li>
+								<li><a href="{% url 'incidents:victims:list' %}">Violation Victims</a></li>
 								<li><a href="{% url 'thanks:categories:list' %}">Thank Categories</a></li>
 								<li class="divider"></li>
 								<!--<li class="nav-header">Nav header</li>-->
