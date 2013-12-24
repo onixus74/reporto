@@ -1,11 +1,11 @@
 from django.conf.urls import patterns, url, include
+from django.contrib.auth.decorators import login_required, user_passes_test, \
+  permission_required
 from django.views.generic import TemplateView
-from django.contrib.auth.decorators import login_required, user_passes_test, permission_required
 
 from base.utils.urls import administrator_required
-
 from base.views import *
-from incidents.views import ReportsDashboard
+from violations.views import ReportsDashboard
 
 
 urlpatterns = patterns('',
@@ -27,7 +27,7 @@ urlpatterns = patterns('',
 
                        url(r'^users/',      include('users.urls', namespace="users")),
 
-                       url(r'^incidents/',    include('incidents.urls',    namespace='incidents')),
+                       url(r'^violations/',    include('violations.urls',    namespace='violations')),
                        url(r'^thanks/',    include('thanks.urls',    namespace='thanks')),
 
                        url(r'^report_builder/', include('report_builder.urls'))

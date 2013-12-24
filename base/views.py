@@ -1,25 +1,30 @@
 import logging
-logger = logging.getLogger(__name__)
 
 from django import forms
-from django.shortcuts import render, redirect, render_to_response, get_object_or_404
-from django.views.decorators.csrf import csrf_exempt
-from django.core.context_processors import csrf
-from django.http import HttpResponse, Http404
-from django.contrib.auth import authenticate, login, logout
-from django.views.decorators.http import require_POST
-from django.contrib.auth.views import redirect_to_login
-from django.contrib.auth.forms import AuthenticationForm
-
-from django.contrib.auth.decorators import login_required, user_passes_test, permission_required
 from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required, user_passes_test, \
+  permission_required
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.views import redirect_to_login
+from django.core.context_processors import csrf
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.http import HttpResponse, Http404
+from django.shortcuts import render, redirect, render_to_response, \
+    get_object_or_404
+from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_POST
+
 from base.utils.views import JSONResponse
-
-from users.models import User
+from thanks.models import Report as ThankReport
 from users.forms import UserCreationForm
+from users.models import User
+from violations.models import Report as ViolationReport
+from violations.views import append_violations_statistics, \
+    append_thanks_statistics
 
-from incidents.models import Report, ThankReport
-from incidents.views import append_incidents_statistics, append_thanks_statistics
+
+logger = logging.getLogger(__name__)
 
 
 @csrf_exempt
@@ -44,7 +49,7 @@ class UserForm(forms.ModelForm):
         fields = ('email', 'first_name', 'last_name', 'password')
 
 
-from crispy_forms.helper import FormHelper
+#from crispy_forms.helper import FormHelper
 
 
 def register_view(request, *args, **kwargs):
@@ -88,7 +93,7 @@ def login_view(request, *args, **kwargs):
     return render(request, "login.html", {
         'form': form,
         'next': request.REQUEST.get('next', '/'),
-        'incidents': Report.objects.count(),
+        'violations': ViolationReport.objects.count(),
         'thanks': ThankReport.objects.count()
     })
 
@@ -116,33 +121,31 @@ def logout_view(request, *args, **kwargs):
 
 paginate_by = 5
 
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-
 
 def home(request, *args, **kwargs):
     # if request.user.is_authenticated():
     template_name = "home.html"
     context = {}
 
-    incidents = Report.objects.all()
-    incidents_paginator = Paginator(incidents, paginate_by)
+    violations = ViolationReport.objects.all()
+    violations_paginator = Paginator(violations, paginate_by)
 
-    incidents_page = request.GET.get('incidents-page')
+    violations_page = request.GET.get('violations-page')
     try:
-        incidents = incidents_paginator.page(incidents_page)
+        violations = violations_paginator.page(violations_page)
     except PageNotAnInteger:
-        incidents_page = 1
-        incidents = incidents_paginator.page(incidents_page)
+        violations_page = 1
+        violations = violations_paginator.page(violations_page)
     except EmptyPage:
-        incidents_page = incidents_paginator.num_pages
-        incidents = incidents_paginator.page(incidents_page)
+        violations_page = violations_paginator.num_pages
+        violations = violations_paginator.page(violations_page)
 
-    context['report_list'] = incidents
-    context['report_pagination'] = {
-        'count': incidents_paginator.count,
-        'pages': incidents_paginator.num_pages,
-        'current': incidents.number,
-        'is_paginated': incidents_paginator.num_pages > 1
+    context['violations_list'] = violations
+    context['violations_pagination'] = {
+        'count': violations_paginator.count,
+        'pages': violations_paginator.num_pages,
+        'current': violations.number,
+        'is_paginated': violations_paginator.num_pages > 1
     }
 
     thanks = ThankReport.objects.all()
@@ -158,18 +161,18 @@ def home(request, *args, **kwargs):
         thanks_page = thanks_paginator.num_pages
         thanks = thanks_paginator.page(thanks_page)
 
-    context['thankreport_list'] = thanks
-    context['thankreport_pagination'] = {
+    context['thanks_list'] = thanks
+    context['thanks_pagination'] = {
         'count': thanks_paginator.count,
         'pages': thanks_paginator.num_pages,
         'current': thanks.number,
         'is_paginated': thanks_paginator.num_pages > 1
     }
 
-    append_incidents_statistics(context)
+    append_violations_statistics(context)
     append_thanks_statistics(context)
 
-    context['incidents_locations'] = Report.objects.values('latitude', 'longitude', 'category__definition', 'pk')
+    context['violations_locations'] = ViolationReport.objects.values('latitude', 'longitude', 'category__definition', 'pk')
     context['thanks_locations'] = ThankReport.objects.values('latitude', 'longitude', 'category__definition', 'pk')
 
     #context = RequestContext(request, context)

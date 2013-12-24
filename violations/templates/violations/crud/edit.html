@@ -1,0 +1,31 @@
+{% extends "layouts/default.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block view_title %}Edit Report | {% endblock %}
+
+{% block view_content %}
+
+	<div class="page-header">
+		<h1>Report <small>Edit</small></h1>
+	</div>
+
+	<div class="row">
+		<div class="col-md-offset-2 col-md-8">
+
+			<form class="form-horizontal" action="{% url 'violations:crud-edit' report.id %}" method="post">
+				{% csrf_token %}
+
+				{{form|crispy}}
+
+				<div class="form-actions">
+					<button type="submit" class="btn btn-primary">Submit</button>
+					<a href="{% url 'violations:crud-list' %}" class="btn btn-default">Cancel</a>
+				</div>
+
+			</form>
+
+		</div>
+	</div>
+
+{% endblock %}

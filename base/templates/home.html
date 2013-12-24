@@ -6,16 +6,14 @@
 
 {% block view_content %}
 
-  <div class="container">
-
     <div class="page-header">
       <h1 class="text-center">Violations/Thanks Dashboard</h1>
     </div>
 
     <div class="jumbotron clearfix" style="padding: 20px 40px;">
-      {% if report_list %}
+      {% if violations_list %}
       <div class="pull-left" style="margin: 0;">
-          {% with report=report_list.0 %}
+          {% with report=violations_list.0 %}
           <div>
               <h2 style="margin-top: 0;">Latest Report</h2>
               <span class="label label-default victim"><i class="icon-user"></i> {{report.victim}}</span>
@@ -26,37 +24,37 @@
               on
               <span class="label label-default datetime"><i class="icon-calendar"></i> {{report.datetime}}</span>
               {% if report.is_verified %}<span class="badge badge-success">Verified <i class="icon-ok"></i></span>{% endif %}
-              <a class="btn btn-not" href="{% url 'incidents:view' report.id %}" target="_blank" title="Click to view report" _data-toggle="modal" _data-target="#ui-report-view-modal">
+              <a class="btn btn-not" href="{% url 'violations:view' report.id %}" target="_blank" title="Click to view report" _data-toggle="modal" _data-target="#ui-report-view-modal">
                   <i class="icon-external-link icon-large"></i>
               </a>
           </div>
           {% endwith %}
       </div>
-      {% elif thankreport_list %}
+      {% elif thanks_list %}
       {% else %}
       <div class="pull-left" style="margin: 0;">
         <h2>There is no reports!</h2>
       </div>
       {% endif %}
 
-      <a class="btn btn-danger btn-lg pull-right" href="{% url 'incidents:submit' %}"><i class="icon-plus"></i> Report a Violation</a>
+      <a class="btn btn-danger btn-lg pull-right" href="{% url 'violations:submit' %}"><i class="icon-plus"></i> Report a Violation</a>
       <a class="btn btn-success btn-lg pull-right" href="{% url 'thanks:submit' %}"><i class="icon-plus"></i> Thank a Security Officer</a>
     </div>
 
-    {% if report_list or thankreport_list %}
+    {% if violations_list or thanks_list %}
     <div class="well">
 
       <!--
       <div class="row">
         <div class="col-md-12">
-          <div id="ui-incidents-dates-chart" style="height: 300px;"></div>
+          <div id="ui-violations-dates-chart" style="height: 300px;"></div>
         </div>
       </div>
       -->
 
       <div class="row">
         <div class="col-md-12">
-          <div id="ui-incidents-dates-chart" style="height: 300px;"></div>
+          <div id="ui-violations-dates-chart" style="height: 300px;"></div>
         </div>
       </div>
 
@@ -76,39 +74,39 @@
               <h2 class="panel-title">Violations</h2>
             </div>
             <div class="panel-body">
-              <div id="ui-incidents-timeline-list" class="ui-timeline-list clearfix">
+              <div id="ui-violations-timeline-list" class="ui-timeline-list clearfix">
 
                 <div class="ui-pagination text-center">
                   <ul class="pagination pagination-sm">
-                    <li class="{% if report_pagination.current == 1 %}disabled{% endif %}">
-                      <a class="ui-pagination-control ui-pagination-first" href="{{request.path}}?incidents-page=1"><i class="icon-arrow-left"></i> First</a>
+                    <li class="{% if violations_pagination.current == 1 %}disabled{% endif %}">
+                      <a class="ui-pagination-control ui-pagination-first" href="{{request.path}}?violations-page=1"><i class="icon-arrow-left"></i> First</a>
                     </li>
 
-                    <li class="{% if report_pagination.current == 1 %}disabled{% endif %}">
-                      <a class="ui-pagination-control ui-pagination-previous" href="{{request.path}}?incidents-page={{ report_pagination.current|add:-1 }}"><i class="icon-chevron-left"></i> Previous</a>
+                    <li class="{% if violations_pagination.current == 1 %}disabled{% endif %}">
+                      <a class="ui-pagination-control ui-pagination-previous" href="{{request.path}}?violations-page={{ violations_pagination.current|add:-1 }}"><i class="icon-chevron-left"></i> Previous</a>
                     </li>
 
-                    <li class="disabled"><span class="ui-pagination-indicator">{{report_pagination.current}} / {{report_pagination.pages}}</span></li>
+                    <li class="disabled"><span class="ui-pagination-indicator">{{violations_pagination.current}} / {{violations_pagination.pages}}</span></li>
 
-                    <li class="{% if report_pagination.current == report_pagination.pages %}disabled{% endif %}">
-                      <a class="ui-pagination-control ui-pagination-next" href="{{request.path}}?incidents-page={{ report_pagination.current|add:1 }}">Next <i class="icon-chevron-right"></i></a>
+                    <li class="{% if violations_pagination.current == violations_pagination.pages %}disabled{% endif %}">
+                      <a class="ui-pagination-control ui-pagination-next" href="{{request.path}}?violations-page={{ violations_pagination.current|add:1 }}">Next <i class="icon-chevron-right"></i></a>
                     </li>
 
-                    <li class="{% if report_pagination.current == report_pagination.pages %}disabled{% endif %}">
-                      <a class="ui-pagination-control ui-pagination-last" href="{{request.path}}?incidents-page={{ report_pagination.pages }}">Last <i class="icon-arrow-right"></i></a>
+                    <li class="{% if violations_pagination.current == violations_pagination.pages %}disabled{% endif %}">
+                      <a class="ui-pagination-control ui-pagination-last" href="{{request.path}}?violations-page={{ violations_pagination.pages }}">Last <i class="icon-arrow-right"></i></a>
                     </li>
                   </ul>
                 </div>
 
-                <ul id="ui-incidents-list" class="list_ list-hover_ list-group">
-                  {% include "incidents/dashboard_incidents_list.html" %}
+                <ul id="ui-violations-list" class="list_ list-hover_ list-group">
+                  {% include "violations/dashboard_violations_list.html" with report_list=violations_list %}
                 </ul>
 
               </div>
             </div>
           </div>
 
-          {% if report_list %}
+          {% if violations_list %}
           <div id="ui-stats-features-chart" style="margin-top: 20px;"></div>
           {% endif %}
         </div>
@@ -123,28 +121,28 @@
 
                 <div class="ui-pagination text-center">
                   <ul class="pagination pagination-sm">
-                    <li class="{% if thankreport_pagination.current == 1 %}disabled{% endif %}">
+                    <li class="{% if thanks_pagination.current == 1 %}disabled{% endif %}">
                       <a class="ui-pagination-control ui-pagination-first" href="{{request.path}}?thanks-page=1"><i class="icon-arrow-left"></i> First</a>
                     </li>
 
-                    <li class="{% if thankreport_pagination.current == 1 %}disabled{% endif %}">
-                      <a class="ui-pagination-control ui-pagination-previous" href="{{request.path}}?thanks-page={{ thankreport_pagination.current|add:-1 }}"><i class="icon-chevron-left"></i> Previous</a>
+                    <li class="{% if thanks_pagination.current == 1 %}disabled{% endif %}">
+                      <a class="ui-pagination-control ui-pagination-previous" href="{{request.path}}?thanks-page={{ thanks_pagination.current|add:-1 }}"><i class="icon-chevron-left"></i> Previous</a>
                     </li>
 
-                    <li class="disabled"><span class="ui-pagination-indicator">{{thankreport_pagination.current}} / {{thankreport_pagination.pages}}</span></li>
+                    <li class="disabled"><span class="ui-pagination-indicator">{{thanks_pagination.current}} / {{thanks_pagination.pages}}</span></li>
 
-                    <li class="{% if thankreport_pagination.current == thankreport_pagination.pages %}disabled{% endif %}">
-                      <a class="ui-pagination-control ui-pagination-next" href="{{request.path}}?thanks-page={{ thankreport_pagination.current|add:1 }}">Next <i class="icon-chevron-right"></i></a>
+                    <li class="{% if thanks_pagination.current == thanks_pagination.pages %}disabled{% endif %}">
+                      <a class="ui-pagination-control ui-pagination-next" href="{{request.path}}?thanks-page={{ thanks_pagination.current|add:1 }}">Next <i class="icon-chevron-right"></i></a>
                     </li>
 
-                    <li class="{% if thankreport_pagination.current == thankreport_pagination.pages %}disabled{% endif %}">
-                      <a class="ui-pagination-control ui-pagination-last" href="{{request.path}}?thanks-page={{ thankreport_pagination.pages }}">Last <i class="icon-arrow-right"></i></a>
+                    <li class="{% if thanks_pagination.current == thanks_pagination.pages %}disabled{% endif %}">
+                      <a class="ui-pagination-control ui-pagination-last" href="{{request.path}}?thanks-page={{ thanks_pagination.pages }}">Last <i class="icon-arrow-right"></i></a>
                     </li>
                   </ul>
                 </div>
 
                 <ul id="ui-thanks-list" class="list_ list-hover_ list-group">
-                  {% include "thanks/dashboard_thanks_list.html" %}
+                  {% include "thanks/dashboard_thanks_list.html" with report_list=thanks_list %}
                 </ul>
 
               </div>
@@ -154,13 +152,13 @@
         </div>
       </div>
 
-      {% if report_list %}
+      {% if violations_list %}
 
       <div class="row">
         <div class="col-md-4" style="margin-top: 20px;">
           <!--
           <div id="ui-stats-categories-chart"></div>
-          <h3 class="text-center">Distribution by incident category</h3>
+          <h3 class="text-center">Distribution by violation category</h3>
           -->
           <div id="ui-stats-categories-chart"></div>
         </div>
@@ -213,7 +211,7 @@
 {% endblock %}
 
 {% block view_styles %}
-  {% if report_list or thankreport_list %}
+  {% if violations_list or thanks_list %}
   {% compress css %}
   <link rel="stylesheet" href="{% static 'components/leaflet/dist/leaflet.css'%}" />
   <link rel="stylesheet" href="{% static 'components/leaflet.markerclusterer/dist/MarkerCluster.Default.css'%}" />
@@ -232,38 +230,38 @@
 {% endblock %}
 
 {% block view_scripts %}
-  {% if report_list or thankreport_list %}
+  {% if violations_list or thanks_list %}
   <script type="text/javascript">
-    reform.urls.incidentView = {% url 'incidents:view' 0 as incident_view_url %}{{incident_view_url|json}};
-    reform.urls.incidentsDashboard = {% url 'incidents:dashboard' as incident_dashboard_url %}{{incident_dashboard_url|json}};
-    reform.urls.thanksDashboard = {% url 'thanks:dashboard' as incident_dashboard_url %}{{incident_dashboard_url|json}};
+    reform.urls.violationView = {% url 'violations:view' 0 as violation_view_url %}{{violation_view_url|json}};
+    reform.urls.violationsDashboard = {% url 'violations:dashboard' as violation_dashboard_url %}{{violation_dashboard_url|json}};
+    reform.urls.thanksDashboard = {% url 'thanks:dashboard' as violation_dashboard_url %}{{violation_dashboard_url|json}};
     reform.urls.thankView = {% url 'thanks:view' 0 as thank_view_url %}{{thank_view_url|json}};
 
-    reform.data.incidentsCategories = {{incidents_categories|json}}
-    reform.data.incidentsFeatures = {{incidents_features|json}}
-    reform.data.incidentsByCategory = {{incidents_by_category|json}}
-    reform.data.incidentsByFeature = {{incidents_by_feature|json}}
-    reform.data.incidentsByVictimGender = {{incidents_by_victim_gender|json}}
-    reform.data.incidentsByVictimEducation = {{incidents_by_victim_education|json}}
-    reform.data.incidentsByDate = {{incidents_by_date|json}}
-    reform.data.incidentsByCategoryByDate = {{incidents_by_category_by_date|json}}
-    reform.data.incidentsLocations = {{incidents_locations|json}}
+    reform.data.violationsCategories = {{violations_categories|json}}
+    reform.data.violationsFeatures = {{violations_features|json}}
+    reform.data.violationsByCategory = {{violations_by_category|json}}
+    reform.data.violationsByFeature = {{violations_by_feature|json}}
+    reform.data.violationsByVictimGender = {{violations_by_victim_gender|json}}
+    reform.data.violationsByVictimEducation = {{violations_by_victim_education|json}}
+    reform.data.violationsByDate = {{violations_by_date|json}}
+    reform.data.violationsByCategoryByDate = {{violations_by_category_by_date|json}}
+    reform.data.violationsLocations = {{violations_locations|json}}
     reform.data.thanksByDate = {{thanks_by_date|json}}
     reform.data.thanksLocations = {{thanks_locations|json}}
     reform.data.timeline = {
-      pages: {{report_pagination.pages|json}},
-      current: {{report_pagination.current|json}},
-      count: {{report_pagination.count|json}},
+      pages: {{violations_pagination.pages|json}},
+      current: {{violations_pagination.current|json}},
+      count: {{violations_pagination.count|json}},
     };
-    reform.data.incidentsPagination = {
-      pages: {{report_pagination.pages|json}},
-      current: {{report_pagination.current|json}},
-      count: {{report_pagination.count|json}},
+    reform.data.violationsPagination = {
+      pages: {{violations_pagination.pages|json}},
+      current: {{violations_pagination.current|json}},
+      count: {{violations_pagination.count|json}},
     };
     reform.data.thanksPagination = {
-      pages: {{thankreport_pagination.pages|json}},
-      current: {{thankreport_pagination.current|json}},
-      count: {{thankreport_pagination.count|json}},
+      pages: {{thanks_pagination.pages|json}},
+      current: {{thanks_pagination.current|json}},
+      count: {{thanks_pagination.count|json}},
     };
   </script>
   {% compress js %}
@@ -274,6 +272,7 @@
   <script src="{% static 'components/Leaflet.awesome-markers/dist/leaflet.awesome-markers.js' %}"></script>
   <script src="{% static 'components/highcharts.com/js/highcharts.src.js' %}"></script>
   <script src="{% static 'components/highcharts.com/js/modules/exporting.src.js' %}"></script>
+  <script src="{% static 'components/jquery.scrollTo/jquery.scrollTo.js' %}"></script>
   <script src="{% static 'utils/pagination.js' %}"></script>
   <script src="{% static 'dashboard/scripts/dashboard.js' %}"></script>
   {% endcompress %}

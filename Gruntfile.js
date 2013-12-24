@@ -98,23 +98,23 @@ module.exports = function(grunt) {
       },
       jsdist: {
         // the files to concatenate
-        src: ['incidents/static/incidents/scripts/**/*.min.js'],
+        src: ['violations/static/violations/scripts/**/*.min.js'],
         // the location of the resulting JS file
-        dest: 'incidents/static/incidents/scripts/incidents-all.dist.js'
+        dest: 'violations/static/violations/scripts/violations-all.dist.js'
       }
     },
 
     watch: {
       scripts: {
-        files: ['incidents/static/incidents/scripts/**/*.js', '!*.min.js', '!*.dist.js'],
-        tasks: ['uglify:incidents'],
+        files: ['violations/static/violations/scripts/**/*.js', '!*.min.js', '!*.dist.js'],
+        tasks: ['uglify:violations'],
         options: {
           nospawn: true
         }
       },
       styles: {
-        files: ['incidents/static/incidents/styles/**/*.css', '!*.min.css', '!*.dist.css'],
-        tasks: ['compass:incidents', 'cssmin:incidents'],
+        files: ['violations/static/violations/styles/**/*.css', '!*.min.css', '!*.dist.css'],
+        tasks: ['compass:violations', 'cssmin:violations'],
         options: {
           nospawn: true
         }
@@ -171,7 +171,7 @@ module.exports = function(grunt) {
   };
 
   makeDjangoAppConfig(config, 'users');
-  makeDjangoAppConfig(config, 'incidents');
+  makeDjangoAppConfig(config, 'violations');
   makeDjangoAppConfig(config, 'thanks');
 
   grunt.initConfig(config);
@@ -188,8 +188,8 @@ module.exports = function(grunt) {
   grunt.registerTask('base', ['compass:base', 'cssmin:base', 'uglify:base']);
   grunt.registerTask('users', ['compass:users', 'cssmin:users', 'uglify:users']);
   //grunt.registerTask('dashboard', ['compass:dashboard', 'cssmin:dashboard', 'uglify:dashboard']);
-  grunt.registerTask('incidents', ['compass:incidents', 'cssmin:incidents', 'uglify:incidents']);
+  grunt.registerTask('violations', ['compass:violations', 'cssmin:violations', 'uglify:violations']);
   grunt.registerTask('thanks', ['compass:thanks', 'cssmin:thanks', 'uglify:thanks']);
-  grunt.registerTask('default', ['base', 'users', 'incidents', 'thanks']);
+  grunt.registerTask('default', ['base', 'users', 'violations', 'thanks']);
 
 };

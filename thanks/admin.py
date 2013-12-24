@@ -1,10 +1,11 @@
 from django.contrib import admin
-from incidents.models import *
 import reversion
+
+from .models import *
 
 
 class VersionModelAdmin(reversion.VersionAdmin):
     pass
 
-admin.site.register(ThankCategory, VersionModelAdmin)
-admin.site.register(ThankReport, VersionModelAdmin)
+admin.site.register(Category, VersionModelAdmin)
+admin.site.register(Report, VersionModelAdmin)

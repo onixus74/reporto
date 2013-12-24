@@ -6,7 +6,6 @@
 {% block view_title %}New Thank Category | {% endblock %}
 
 {% block view_content %}
-<div class="container">
 
 	<div class="page-header">
 		<h1 class="text-center">Thank Category <small>Add</small></h1>
@@ -14,43 +13,40 @@
 
 	{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
-	<div class="container">
-		<div class="row">
-			<div class="col-md-offset-2 col-md-8">
+	<div class="row">
+		<div class="col-md-offset-2 col-md-8">
 
-				{% comment %}
-					<form>
-						{% for field in form %}
-							<div class="form-group">
-								{#% {{ field.label_tag }} %#}
-								<label class="control-label" for="{{ field.id }}">{{ field.label }}</label>
-								<div class="controls">
-									{{ field }}
-									<span class="help-block">
-										<p class="text-danger">{{ field.errors }}</p>
-									</span>
-								</div>
-
+			{% comment %}
+				<form>
+					{% for field in form %}
+						<div class="form-group">
+							{#% {{ field.label_tag }} %#}
+							<label class="control-label" for="{{ field.id }}">{{ field.label }}</label>
+							<div class="controls">
+								{{ field }}
+								<span class="help-block">
+									<p class="text-danger">{{ field.errors }}</p>
+								</span>
 							</div>
-						{% endfor %}
-					</form>
-				{% endcomment %}
 
-				<form class="form-horizontal" action="{% url 'thanks:categories:create' %}" method="post">
-					{% csrf_token %}
-
-					{{form|crispy}}
-
-					<div class="form-actions">
-						<button type="submit" class="btn btn-primary">Submit</button>
-						<a href="{% url 'thanks:categories:list' %}" class="btn btn-default">Cancel</a>
-					</div>
-
+						</div>
+					{% endfor %}
 				</form>
+			{% endcomment %}
 
-			</div>
+			<form class="form-horizontal" action="{% url 'thanks:categories:create' %}" method="post">
+				{% csrf_token %}
+
+				{{form|crispy}}
+
+				<div class="form-actions">
+					<button type="submit" class="btn btn-primary">Submit</button>
+					<a href="{% url 'thanks:categories:list' %}" class="btn btn-default">Cancel</a>
+				</div>
+
+			</form>
+
 		</div>
 	</div>
 
-</div>
 {% endblock %}

@@ -1,6 +1,10 @@
 # Django settings for reporto project.
 
 import os
+
+from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS
+
+
 PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
 
 DEBUG = True  # !DEV!
@@ -174,7 +178,7 @@ INSTALLED_APPS = (
 
     # admin components
     'admin_mod',
-    'report_builder',
+    #'report_builder',
     #'filebrowser',
     'django_admin_bootstrapped.bootstrap3',
     'django_admin_bootstrapped',  # theme for admin
@@ -185,10 +189,10 @@ INSTALLED_APPS = (
 
     # project components
     'base',
-    'incidents',
-    'incidents_categories',
-    'incidents_features',
-    'incidents_victims',
+    'violations',
+    'violations_categories',
+    'violations_features',
+    'violations_victims',
     'thanks',
     'thanks_categories',
 
@@ -275,7 +279,7 @@ LOGGING = {
             'handlers': ['console'],
             'level': 'DEBUG',
         },
-        'incidents': {
+        'violations': {
             'handlers': ['console'],
             'level': 'DEBUG',
         },
@@ -352,7 +356,6 @@ SOCIAL_AUTH_FIELDS_STORED_IN_SESSION = ['next', ]
 
 #SOCIAL_AUTH_REDIRECT_IS_HTTPS = True
 
-from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS
 
 TEMPLATE_CONTEXT_PROCESSORS += (
     'django.core.context_processors.request',

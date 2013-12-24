@@ -5,23 +5,13 @@
 {% block view_title %}Thank a Security Officer | {% endblock %}
 
 {% block view_content %}
-
-  <!--
-  <div id="ui-wizard-progress-bar" style="z-index: 900;">
-    <div class="container progress progress-info progress-striped">
-      <div class="progress-bar animated" id="ui-wizard-progress"></div>
+  
+    <form id="thank-form" action="{% url 'thanks:submit' %}" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+  
+    <div class="page-header">
+      <h1 class="text-center">Thank Submission<small></small></h1>
     </div>
-  </div>
-  -->
-
-  <form id="thank-form" action="{% url 'thanks:submit' %}" method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-
-  <div class="container">
-
-  <div class="page-header">
-    <h1 class="text-center">Thank Submission<small></small></h1>
-  </div>
 
     {% if form.errors %}
     <div class="alert alert-danger">
@@ -34,7 +24,7 @@
 
     <div class="row">
       <div class="col-md-offset-2 col-md-8">
-        <div class="well thank-incident-form">
+        <div class="well thank-violation-form">
 
           <div class="row ui-wizard-row" id="ui-wizard-category">
             <div class="col-md-12">
@@ -122,8 +112,7 @@
             </div>
           </div>
 
-          <div class="row ui-wizard-row" id="ui-wizard-submit" style="margin-top: 20px;"
-} hidden>
+          <div class="row ui-wizard-row" id="ui-wizard-submit" style="margin-top: 20px;" hidden>
             <div class="col-md-12">
               <button class="btn btn-success btn-block btn-lg"><i class="icon-plus"></i> Thank</button>
             </div>
@@ -137,6 +126,16 @@
 
   </form>
 
+{% endblock %}
+
+{% block view_addons %}
+    <!-- 
+    <div id="ui-wizard-progress-bar" style="z-index: 900;">
+      <div class="container progress progress-info progress-striped">
+        <div class="progress-bar animated" id="ui-wizard-progress"></div>
+      </div>
+    </div>
+    -->
 {% endblock %}
 
 {% block view_styles %}

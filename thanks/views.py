@@ -1,41 +1,41 @@
-import logging
-logger = logging.getLogger(__name__)
-
-import uuid
-import os
+from datetime import datetime, date
 import json
 import logging
+import logging
+import os
 import shutil
-from datetime import datetime, date
-
-from django.conf import settings
-from django.shortcuts import render, redirect, render_to_response
-from django.template.loader import render_to_string
-from django.http import HttpResponse
-from django.core import serializers
+import uuid
 
 from django import forms
-from django.forms.models import model_to_dict
-from django.db.models import Count, Min, Sum, Max, Avg
-from django.views.decorators.csrf import csrf_exempt
+from django.conf import settings
 from django.contrib.auth.decorators import login_required, permission_required
-
-from django.views.generic.base import View
-from django.views.generic import FormView, ListView, DetailView
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django.views.decorators.http import require_http_methods
-
-from base.utils.views import JSONResponse, JSONDataView, ListHybridResponseMixin, PaginatedListHybridResponseMixin, DetailHybridResponseMixin, AjaxableResponseMixin
-
+from django.core import serializers
 from django.core.files.storage import default_storage
+from django.db.models import Count, Min, Sum, Max, Avg
+from django.forms.models import model_to_dict
+from django.http import HttpResponse
+from django.shortcuts import render, redirect, render_to_response
+from django.template.loader import render_to_string
+from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_http_methods
+from django.views.generic import FormView, ListView, DetailView
+from django.views.generic.base import View
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
-from incidents.models import *
+from base.utils.views import JSONResponse, JSONDataView, ListHybridResponseMixin, \
+    PaginatedListHybridResponseMixin, DetailHybridResponseMixin, \
+    AjaxableResponseMixin
+
+from .models import *
 
 
-class ThankCreateForm(forms.ModelForm):
+logger = logging.getLogger(__name__)
+
+
+class ReportCreateForm(forms.ModelForm):
 
     class Meta:
-        model = ThankReport
+        model = Report
         exclude = ('created_by',)
 
 
@@ -47,7 +47,7 @@ def thank_submit(request, template_name="thanks/submit.html", *args, **kwargs):
     logger.debug('LINKS %s', links)
 
     context = {}
-    form = ThankCreateForm(request.POST or None, request.FILES or None)
+    form = ReportCreateForm(request.POST or None, request.FILES or None)
     context['form'] = form
 
     if form.is_valid():
@@ -80,7 +80,7 @@ def thank_submit(request, template_name="thanks/submit.html", *args, **kwargs):
 
         thank.save()
 
-        #thank = ThankReport.objects.get(pk=thank.pk)
+        #thank = Report.objects.get(pk=thank.pk)
 
         # logger.debug('THANK %s', thank)
         # logger.debug('THANK %s', model_to_dict(thank))
@@ -108,34 +108,34 @@ def thank_submit(request, template_name="thanks/submit.html", *args, **kwargs):
     return render(request, template_name, context)
 
 
-class ThankView(DetailHybridResponseMixin, DetailView):
+class ReportView(DetailHybridResponseMixin, DetailView):
 
     """ """
-    model = ThankReport
+    model = Report
     template_name = "thanks/view.html"
 
 
-class ThankReportsDashboard(PaginatedListHybridResponseMixin, ListView):
+class ReportsDashboard(PaginatedListHybridResponseMixin, ListView):
 
     """ """
-    model = ThankReport
+    model = Report
     template_name = "thanks/dashboard.html"
     paginate_by = 5
 
     def get_context_data(self, **kwargs):
         """ """
-        context = super(ThankReportsDashboard, self).get_context_data(**kwargs)
+        context = super(ReportsDashboard, self).get_context_data(**kwargs)
 
         if self.is_json():
 
-            reports = context.pop('thankreport_list')
-            context['html'] = render_to_string("thanks/dashboard_thanks_list.html", {'thankreport_list': reports})
+            reports = context.pop('report_list')
+            context['html'] = render_to_string("thanks/dashboard_thanks_list.html", {'report_list': reports})
 
         else:
 
-            thanks_by_date = ThankReport.objects.extra({'date': "date(datetime)"}).values('date').annotate(Count('id')).order_by('date')
+            thanks_by_date = Report.objects.extra({'date': "date(datetime)"}).values('date').annotate(Count('id')).order_by('date')
             context['thanks_by_date'] = [{'date': i['date'], 'count': i['id__count']} for i in thanks_by_date]
 
-            context['thanks_locations'] = ThankReport.objects.values('latitude', 'longitude', 'category__definition')
+            context['thanks_locations'] = Report.objects.values('latitude', 'longitude', 'category__definition')
 
         return context

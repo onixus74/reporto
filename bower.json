@@ -43,7 +43,8 @@
     "Leaflet.awesome-markers": "~2.0.1",
     "bootstrap-datetimepicker": "~0.0.11",
     "smalot-bootstrap-datetimepicker": "~2.2.0",
-    "JVFloat": "*"
+    "JVFloat": "*",
+    "jquery.scrollTo": "~1.4.7"
   },
   "devDependencies": {
     "html-inspector": "~0.3.0"

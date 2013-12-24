@@ -1,6 +1,12 @@
 # Django settings for reporto project.
 
 import os
+
+from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS
+
+import dj_database_url
+
+
 PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
 
 DEBUG = True  # !DEV!
@@ -21,7 +27,6 @@ MANAGERS = ADMINS
 # 	}
 # }
 DATABASES = {}
-import dj_database_url
 DATABASES['default'] = dj_database_url.config()
 
 EMAIL_HOST = 'smtp.webfaction.com'
@@ -181,10 +186,10 @@ INSTALLED_APPS = (
 
     # project components
     'base',
-    'incidents',
-    'incidents_categories',
-    'incidents_features',
-    'incidents_victims',
+    'violations',
+    'violations_categories',
+    'violations_features',
+    'violations_victims',
     'thanks',
     'thanks_categories',
 
@@ -261,7 +266,7 @@ LOGGING = {
             'handlers': ['console'],
             'level': 'DEBUG',
         },
-        'incidents': {
+        'violations': {
             'handlers': ['console'],
             'level': 'DEBUG',
         },
@@ -333,7 +338,6 @@ SOCIAL_AUTH_FIELDS_STORED_IN_SESSION = ['next', ]
 
 #SOCIAL_AUTH_REDIRECT_IS_HTTPS = True
 
-from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS
 
 TEMPLATE_CONTEXT_PROCESSORS += (
     'django.core.context_processors.request',

@@ -426,7 +426,8 @@ body {
 | Fixes
 \*/
 
-*[hidden] { display: none !important; }
+*[hidden] { display: none; }
+input[hidden] { display: none; }
 
 .ui-pnotify .alert {
 	margin-bottom: 0;

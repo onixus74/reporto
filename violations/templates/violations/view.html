@@ -1,0 +1,76 @@
+{% extends "layouts/default.html" %}
+
+{% load static custom thumbnail compress %}
+
+{% block view_title %}Report Details | {% endblock %}
+
+{% block view_content %}
+
+    <div class="page-header">
+      <h1 class="text-center">Violation Report<small></small></h1>
+    </div>
+
+    <div class="well">
+      {% include "violations/view_partial.html" %}
+    </div>
+
+{% endblock %}
+
+{% block view_styles %}
+
+  {% compress css %}
+  <!-- Map -->
+  <link rel="stylesheet" href="{% static 'components/leaflet/dist/leaflet.css' %}" />
+  <!-- Lightbox -->
+  <link rel="stylesheet" href="{% static 'components/fancybox/source/jquery.fancybox.css' %}" type="text/css" />
+  <link rel="stylesheet" href="{% static 'components/fancybox/source/helpers/jquery.fancybox-thumbs.css' %}" type="text/css" />
+  <!-- -->
+  <link rel="stylesheet" href="{% static 'components/smalot-bootstrap-datetimepicker/css/bootstrap-datetimepicker.css' %}" />
+  <link rel="stylesheet" href="{% static 'components/x-editable/dist/bootstrap3-editable/css/bootstrap-editable.css' %}" />
+  {% endcompress %}
+
+  {% compress css %}
+  <link rel="stylesheet" href="{% static 'violations/styles/view.css'%}" />
+  {% endcompress %}
+
+{% endblock %}
+
+{% block view_scripts %}
+
+  {% compress js %}
+  <!-- Map -->
+  <script src="{% static 'components/leaflet/dist/leaflet.js' %}"></script>
+  <script type="text/javascript">L.Icon.Default.imagePath = "{% static 'components/leaflet/dist/images' %}";</script>
+  <!-- Lightbox -->
+  <script type="text/javascript" src="{% static 'components/fancybox/source/jquery.fancybox.js' %}"></script>
+  <script type="text/javascript" src="{% static 'components/fancybox/source/helpers/jquery.fancybox-media.js' %}"></script>
+  <script type="text/javascript" src="{% static 'components/fancybox/source/helpers/jquery.fancybox-thumbs.js' %}"></script>
+  <!-- -->
+  <script src="{% static 'components/momentjs/moment.js' %}"></script>
+  <script src="{% static 'components/smalot-bootstrap-datetimepicker/js/bootstrap-datetimepicker.js' %}"></script>
+  <script src="{% static 'components/x-editable/dist/bootstrap3-editable/js/bootstrap-editable.js' %}"></script>
+  {% endcompress %}
+
+  <script type="text/javascript">
+    reform.urls = {
+      'verify': "{% url 'violations:verify' report.id %}",
+      'close': "{% url 'violations:close' report.id %}",
+      'comment': "{% url 'violations:comment' report.id %}"
+    };
+    reform.data.report = {{report|json}}
+    //$.post(reform.urls.verify, {csrfmiddlewaretoken: csrf_token}).done(function(data){console.log(data)})
+    /*
+    $.ajaxSetup({
+      beforeSend: function(xhr, settings) {
+        xhr.setRequestHeader("X-CSRFToken", csrf_token);
+      }
+    });
+    */
+  </script>
+
+  {% compress js %}
+
+  <script src="{% static 'violations/scripts/view.js' %}"></script>
+  {% endcompress %}
+
+{% endblock %}

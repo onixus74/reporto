@@ -1,25 +1,26 @@
+import json
 import logging
+
+from django.contrib.auth.models import AbstractUser
+from django.core import serializers
+from django.core.exceptions import ImproperlyConfigured, ImproperlyConfigured
+from django.db.models import ManyToManyField
+from django.db.models.base import ModelBase
+from django.http import HttpResponse, Http404, HttpResponseNotAllowed, \
+  HttpResponse
+from django.utils.encoding import force_unicode
+from django.views.generic import ListView, DetailView, View
+from django.views.generic.base import TemplateResponseMixin
+from django.views.generic.detail import BaseDetailView
+from django.views.generic.edit import BaseFormView
+from django.views.generic.list import BaseListView
+
+
 logger = logging.getLogger(__name__)
 
-from django.http import HttpResponse, Http404
-from django.core import serializers
-from django.views.generic.base import TemplateResponseMixin
-from django.core.exceptions import ImproperlyConfigured
 
-import json
 
-from django.views.generic import ListView, DetailView
 
-from django.views.generic import View
-from django.views.generic.detail import BaseDetailView
-from django.views.generic.list import BaseListView
-from django.views.generic.edit import BaseFormView
-from django.utils.encoding import force_unicode
-from django.db.models.base import ModelBase
-from django.contrib.auth.models import AbstractUser
-from django.db.models import ManyToManyField
-from django.http import HttpResponseNotAllowed, HttpResponse
-from django.core.exceptions import ImproperlyConfigured
 
 #from django.core.serializers.json import DjangoJSONEncoder
 

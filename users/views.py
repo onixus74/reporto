@@ -1,27 +1,36 @@
 import logging
-logger = logging.getLogger(__name__)
-
-from django.views.generic import ListView, DetailView
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from base.utils.views import PaginatedListHybridResponseMixin, DetailHybridResponseMixin
-
-from django.shortcuts import render, redirect, render_to_response, get_object_or_404
-from django.views.decorators.csrf import csrf_exempt
-from django.core.context_processors import csrf
-from django.http import HttpResponse, Http404
-from django.contrib.auth import authenticate, login, logout
-from django.views.decorators.http import require_POST
-from django.contrib.auth.views import redirect_to_login
-from django.contrib.auth.forms import AuthenticationForm, ReadOnlyPasswordHashField
-from django.contrib.auth.decorators import login_required, user_passes_test, permission_required
-from django.contrib import messages
-from base.utils.views import JSONResponse
 
 from django import forms
-
+from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required, user_passes_test, \
+  permission_required
+from django.contrib.auth.forms import AuthenticationForm, \
+  ReadOnlyPasswordHashField
 from django.contrib.auth.models import Group
+from django.contrib.auth.views import redirect_to_login
+from django.core.context_processors import csrf
+from django.http import HttpResponse, Http404
+from django.shortcuts import render, redirect, render_to_response, \
+  get_object_or_404
+from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_POST
+from django.views.generic import ListView, DetailView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+
+from base.utils.views import JSONResponse, PaginatedListHybridResponseMixin, \
+  DetailHybridResponseMixin
+from violations.models import Victim
+from violations_victims.views import VictimForm as BaseVictimForm
+
 from .models import User
-from incidents.models import Victim
+
+
+logger = logging.getLogger(__name__)
+
+
+
+
 
 
 class UserListView(ListView):
@@ -89,7 +98,6 @@ def user_view(request, pk=None, username=None, extension=None):
 # 		}
 
 
-from incidents_victims.views import VictimForm as BaseVictimForm
 
 
 class VictimForm(BaseVictimForm):
@@ -174,3 +182,7 @@ def user_activate_view(request, pk):
     user.is_active = True
     user.save()
     return HttpResponse("Status changed")
+
+
+def groups_view(request):
+    return render(request, "users/groups.html")

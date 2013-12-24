@@ -3,40 +3,36 @@
 {% block view_title %}Thank Category Details | {% endblock %}
 
 {% block view_content %}
-<div class="container">
 
 	<div class="page-header">
 		<h1 class="text-center">Thank Category <small>Detail</small></h1>
 	</div>
 
-	<div class="container">
-		<div class="row">
-			<div class="col-md-offset-2 col-md-8">
+	<div class="row">
+		<div class="col-md-offset-2 col-md-8">
 
-				<form class="form-horizontal">
+			<form class="form-horizontal">
 
-					<div class="form-group">
-						<div class="controls">
-							<dl>
-								<dt>Slug</dt>
-								<dd>{{object.slug}}</dd>
-								<dt>Definition</dt>
-								<dd>{{object.definition}}</dd>
-							</dl>
-						</div>
+				<div class="form-group">
+					<div class="controls">
+						<dl>
+							<dt>Slug</dt>
+							<dd>{{object.slug}}</dd>
+							<dt>Definition</dt>
+							<dd>{{object.definition}}</dd>
+						</dl>
 					</div>
+				</div>
 
-					<div class="form-actions">
-						<a href="{% url 'thanks:categories:edit' object.id %}" class="btn btn-info"><i class="icon-pencil"></i> Edit</a>
-						<a href="{% url 'thanks:categories:delete' object.id %}" class="btn btn-warning"><i class="icon-trash"></i> Delete</a>
-						<a href="{% url 'thanks:categories:list' %}" class="btn btn-default"><i class="icon-back"></i> Back</a>
-					</div>
+				<div class="form-actions">
+					<a href="{% url 'thanks:categories:edit' object.id %}" class="btn btn-info"><i class="icon-pencil"></i> Edit</a>
+					<a href="{% url 'thanks:categories:delete' object.id %}" class="btn btn-warning"><i class="icon-trash"></i> Delete</a>
+					<a href="{% url 'thanks:categories:list' %}" class="btn btn-default"><i class="icon-back"></i> Back</a>
+				</div>
 
-				</form>
+			</form>
 
-			</div>
 		</div>
 	</div>
 
-</div>
 {% endblock %}

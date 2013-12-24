@@ -1,12 +1,17 @@
 import logging
-logger = logging.getLogger(__name__)
 
+from django import forms
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from base.utils.views import PaginatedListHybridResponseMixin, DetailHybridResponseMixin
-from django import forms
 
+from base.utils.views import PaginatedListHybridResponseMixin, \
+  DetailHybridResponseMixin
 from reports.models import Entry
+
+
+logger = logging.getLogger(__name__)
+
+
 
 
 TEMPLATE_BASE = 'entries'

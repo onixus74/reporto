@@ -1,0 +1,222 @@
+{% extends "layouts/default.html" %}
+
+{% load static custom compress %}
+
+{% block view_title %}Violations Dashboard | {% endblock %}
+
+{% block view_content %}
+
+    <div class="page-header">
+      <h1 class="text-center">Violations Dashboard</h1>
+    </div>
+
+    <div class="jumbotron clearfix" style="padding: 20px 40px;">
+      {% if report_list %}
+      <div class="pull-left" style="margin: 0;">
+        {% with report=report_list.0 %}
+        <div>
+          <h2 style="margin-top: 0;">Latest Report</h2>
+          <span class="label label-default victim"><i class="icon-user"></i> {{report.victim}}</span>
+          has been a victim of
+          <span class="label label-default category">{{report.category}}</span>
+          happened in
+          <span class="label label-default location"><i class="icon-map-marker"></i> {{report.location_text}}</span>
+          on
+          <span class="label label-default datetime"><i class="icon-calendar"></i> {{report.datetime}}</span>
+          {% if report.is_verified %}<span class="badge badge-success">Verified <i class="icon-ok"></i></span>{% endif %}
+          {% comment %}
+          {% if report.is_closed %}<span class="badge badge-important">Closed <i class="icon-lock"></i></span>{% endif %}
+          {% endcomment %}
+          <a class="btn btn-not" href="{% url 'violations:view' report.id %}" target="_blank" title="Click to view report" _data-toggle="modal" _data-target="#ui-report-view-modal">
+            <i class="icon-external-link icon-large"></i>
+          </a>
+        </div>
+        {% endwith %}
+      </div>
+      {% else %}
+      <div class="pull-left" style="margin: 0;">
+        <h2>There is no reports!</h2>
+      </div>
+      {% endif %}
+      <a class="btn btn-danger btn-lg pull-right" href="{% url 'violations:submit' %}"><i class="icon-plus"></i> Report a Violation</a>
+    </div>
+
+    {% if report_list %}
+    <div class="well">
+
+      <!--
+      <div class="row">
+        <div class="col-md-12">
+          <div id="ui-violations-dates-chart" style="height: 300px;"></div>
+        </div>
+      </div>
+      -->
+
+      <div class="row">
+        <div class="col-md-12">
+          <div id="ui-violations-dates-chart" style="height: 300px;"></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-offset-2 col-md-8" style="margin-top: 20px;">
+          <!--<h2>Map</h2>-->
+          <div id="ui-timeline-map" class="ui-timeline-map" style="width:100%; height: 400px"></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6" style="margin-top: 20px;">
+          <div id="ui-timeline-violations-list" class="ui-timeline-list clearfix">
+
+            <div class="ui-pagination text-center">
+              <ul class="pagination pagination-sm">
+                <li class="{% if current == 1 %}disabled{% endif %}">
+                  <a class="ui-pagination-control ui-pagination-first" href="{{request.path}}?page=1"><i class="icon-arrow-left"></i> First</a>
+                </li>
+
+                <li class="{% if current == 1 %}disabled{% endif %}">
+                  <a class="ui-pagination-control ui-pagination-previous" href="{{request.path}}?page={{ current|add:-1 }}"><i class="icon-chevron-left"></i> Previous</a>
+                </li>
+
+                <li class="disabled"><span class="ui-pagination-indicator">{{current}} / {{pages}}</span></li>
+
+                <li class="{% if current == pages %}disabled{% endif %}">
+                  <a class="ui-pagination-control ui-pagination-next" href="{{request.path}}?page={{ current|add:1 }}">Next <i class="icon-chevron-right"></i></a>
+                </li>
+
+                <li class="{% if current == pages %}disabled{% endif %}">
+                  <a class="ui-pagination-control ui-pagination-last" href="{{request.path}}?page={{ pages }}">Last <i class="icon-arrow-right"></i></a>
+                </li>
+              </ul>
+            </div>
+
+            <ul id="ui-timeline-list" class="list-group">
+              {% include "violations/dashboard_violations_list.html" %}
+            </ul>
+
+          </div>
+        </div>
+        <div class="col-md-6" style="margin-top: 20px;">
+          <div id="ui-stats-features-chart"></div>
+        </div>
+      </div>
+
+      {% if report_list.count > 0 %}
+
+      <div class="row">
+        <div class="col-md-4" style="margin-top: 20px;">
+          <!--
+          <div id="ui-stats-categories-chart"></div>
+          <h3 class="text-center">Distribution by violation category</h3>
+          -->
+          <div id="ui-stats-categories-chart"></div>
+        </div>
+        <div class="col-md-4" style="margin-top: 20px;">
+          <!--
+          <div id="ui-stats-victim-gender-chart"></div>
+          <h3 class="text-center">Distribution by victim's gender</h3>
+          -->
+          <div id="ui-stats-victim-gender-chart"></div>
+        </div>
+        <div class="col-md-4" style="margin-top: 20px;">
+          <!--
+          <div id="ui-stats-victim-education-chart"></div>
+          <h3 class="text-center">Distribution by victim's education</h3>
+          -->
+          <div id="ui-stats-victim-education-chart"></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-4">
+          <div id="ui-stats-categories-list"></div>
+        </div>
+        <div class="col-md-4">
+          <div id="ui-stats-features-list"></div>
+        </div>
+        <div class="col-md-4">
+          <div id="ui-stats-victim-gender-list"></div>
+        </div>
+      </div>
+
+      {% else %}
+      <div class="row">
+        <div class="col-md-12">
+          No statistics either!
+        </div>
+      </div>
+      {% endif %}
+
+    </div>
+    {% endif %}
+
+
+<!-- Modal -->
+<div id="ui-report-view-modal" class="modal modal-big hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">Report View</h3>
+  </div>
+  <div class="modal-body">
+    <p>...</p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-danger" data-dismiss="modal" aria-hidden="true">Close</button>
+  </div>
+</div>
+{% endblock %}
+
+{% block view_styles %}
+  {% if report_list %}
+  {% compress css %}
+  <link rel="stylesheet" href="{% static 'components/leaflet/dist/leaflet.css'%}" />
+  <link rel="stylesheet" href="{% static 'components/leaflet.markerclusterer/dist/MarkerCluster.Default.css'%}" />
+  <link rel="stylesheet" href="{% static 'components/Leaflet.awesome-markers/dist/leaflet.awesome-markers.css'%}" />
+  <link rel="stylesheet" href="{% static 'violations/styles/dashboard.css'%}" />
+  {% endcompress %}
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="{% static 'components/leaflet/dist/leaflet.ie.css'%}" />
+  <![endif]-->
+  {% else %}
+  {% compress css %}
+  <link rel="stylesheet" href="{% static 'violations/styles/dashboard.css'%}" />
+  {% endcompress %}
+  {% endif %}
+{% endblock %}
+
+{% block view_scripts %}
+  {% if report_list %}
+  <script type="text/javascript">
+    reform.urls.violationView = {% url 'violations:view' 0 as violation_view_url %}{{violation_view_url|json}};
+    reform.urls.violationsDashboard = {% url 'violations:dashboard' as violation_dashboard_url %}{{violation_dashboard_url|json}};
+
+    reform.data.violationsCategories = {{violations_categories|json}}
+    reform.data.violationsFeatures = {{violations_features|json}}
+    reform.data.violationsByCategory = {{violations_by_category|json}}
+    reform.data.violationsByFeature = {{violations_by_feature|json}}
+    reform.data.violationsByVictimGender = {{violations_by_victim_gender|json}}
+    reform.data.violationsByVictimEducation = {{violations_by_victim_education|json}}
+    reform.data.violationsByDate = {{violations_by_date|json}}
+    reform.data.violationsByCategoryByDate = {{violations_by_category_by_date|json}}
+    reform.data.violationsLocations = {{violations_locations|json}}
+    reform.data.timeline = {
+      pages: {{pages|json}},
+      current: {{current|json}},
+      count: {{count|json}},
+    };
+  </script>
+  {% compress js %}
+  <script src="{% static 'components/blockui/jquery.blockUI.js' %}"></script>
+  <script src="{% static 'components/leaflet/dist/leaflet.js' %}"></script>
+  <script type="text/javascript">L.Icon.Default.imagePath = "{% static 'components/leaflet/dist/images' %}";</script>
+  <script src="{% static 'components/leaflet.markerclusterer/dist/leaflet.markercluster-src.js' %}"></script>
+  <script src="{% static 'components/Leaflet.awesome-markers/dist/leaflet.awesome-markers.js' %}"></script>
+  <script src="{% static 'components/highcharts.com/js/highcharts.src.js' %}"></script>
+  <script src="{% static 'components/highcharts.com/js/modules/exporting.src.js' %}"></script>
+  <script src="{% static 'utils/pagination.js' %}"></script>
+  <script src="{% static 'violations/scripts/dashboard.js' %}"></script>
+  {% endcompress %}
+  {% endif %}
+
+{% endblock %}

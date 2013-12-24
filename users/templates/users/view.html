@@ -5,85 +5,75 @@
 {% block view_title %}{{profile}} | User Profile | {% endblock %}
 
 {% block view_content %}
-<div class="container">
 
-	<div class="page-header">
-		<h1 class="text-center">User Profile<small></small></h1>
-	</div>
+  <div class="page-header">
+    <h1 class="text-center">User Profile<small></small></h1>
+  </div>
 
-	<div class="well">
+  <div class="row">
+    <div class="col-md-offset-2 col-md-8 well">
+      <dl class="dl-horizontal">
+        <dt>Full name</dt>
+        <dd>{{profile}}</dd>
+        <dt>Role</dt>
+        <dd>
+          {% if user.is_admin and not profile.is_admin %}
+          <a href="#" class="ui-editable" id="user-role" data-type="select" data-pk="{{profile.pk}}" data-name="role" data-value="{{profile.role}}" data-source="{{user_roles|json|force_escape}}" data-url="{% url 'users:change_role' %}" data-title="Change role">{{profile.get_role_display}}</a>
+          {% else %}
+          {{profile.get_role_display}}
+          {% endif %}
+          {% if profile.is_staff %}<span class="label label-info">Staff</span></small>{% endif %}
+          {% if profile.is_superuser %}<span class="label label-warning">Super User</span></small>
+        </dd>
+        {% endif %}
+        <dt>Groups</dt>
+        <dd>
+          {% if user.is_admin and not profile.is_admin %}
+          <a href="#" class="ui-editable" id="user-groups" data-type="checklist" data-pk="{{profile.pk}}" data-name="groups" data-value="{{profile.groups.values|pluck:'id'|json|force_escape}}" data-source="{{user_groups|json|force_escape}}" data-url="{% url 'users:change_groups' %}" data-title="Change groups">{{profile.groups.all|join:'<br>'}}</a>
+          {% else %}
+          {{profile.groups.all|join:'<br>'}}
+          {% endif %}
+        </dd>
+        <dt>Status</dt>
+        <dd>
+          <span class="label label-{{profile.is_active|yesno:"success,important,"}}">{{profile.is_active|yesno:"Active,Inactive,"}}</span>
+        </dd>
+      </dl>
+      {#%<div>{{profile.social_auth.all}}</div> %#}
+    </div>
+  </div>
 
-		<div class="container">
-
-			<div class="row">
-				<div class="col-md-offset-2 col-md-8">
-					<dl>
-						<dt>Full name</dt>
-						<dd>{{profile}}</dd>
-						<dt>Role</dt>
-						<dd>
-              {% if user.is_admin and not profile.is_admin %}
-              <a href="#" class="ui-editable" id="user-role" data-type="select" data-pk="{{profile.pk}}" data-name="role" data-value="{{profile.role}}" data-source="{{user_roles|json|force_escape}}" data-url="{% url 'users:change_role' %}" data-title="Change role">{{profile.get_role_display}}</a>
-							{% else %}
-              {{profile.get_role_display}}
-              {% endif %}
-							{% if profile.is_staff %}<span class="label label-info">Staff</span></small>{% endif %}
-							{% if profile.is_superuser %}<span class="label label-warning">Super User</span></small>
-						</dd>
-						{% endif %}
-            <dt>Groups</dt>
-            <dd>
-              {% if user.is_admin and not profile.is_admin %}
-              <a href="#" class="ui-editable" id="user-groups" data-type="checklist" data-pk="{{profile.pk}}" data-name="groups" data-value="{{profile.groups.values|pluck:'id'|json|force_escape}}" data-source="{{user_groups|json|force_escape}}" data-url="{% url 'users:change_groups' %}" data-title="Change groups">{{profile.groups.all|join:'<br>'}}</a>
-              {% else %}
-              {{profile.groups.all|join:'<br>'}}
-              {% endif %}
-            </dd>
-						<dt>Status</dt>
-						<dd>
-							<span class="label label-{{profile.is_active|yesno:"success,important,"}}">{{profile.is_active|yesno:"Active,Inactive,"}}</span>
-						</dd>
-					</dl>
-					{#%<div>{{profile.social_auth.all}}</div> %#}
-				</div>
-			</div>
-
-		</div>
-
-	</div>
-
-</div>
 {% endblock %}
 
 
 {% block view_styles %}
 
-	{% compress css %}
-	<link rel="stylesheet" href="{% static 'components/x-editable/dist/bootstrap3-editable/css/bootstrap-editable.css' %}" />
-	{% endcompress %}
+  {% compress css %}
+  <link rel="stylesheet" href="{% static 'components/x-editable/dist/bootstrap3-editable/css/bootstrap-editable.css' %}" />
+  {% endcompress %}
 
 {% endblock %}
 
 {% block view_scripts %}
-	{% compress js %}
-	<script src="{% static 'components/x-editable/dist/bootstrap3-editable/js/bootstrap-editable.js' %}"></script>
-	{% endcompress %}
+  {% compress js %}
+  <script src="{% static 'components/x-editable/dist/bootstrap3-editable/js/bootstrap-editable.js' %}"></script>
+  {% endcompress %}
 
-	<script type="text/javascript">
-		reform.urls.submit = {% url 'incidents:submit' as submit_url %}{{submit_url|json}};
-	</script>
+  <script type="text/javascript">
+    reform.urls.submit = {% url 'violations:submit' as submit_url %}{{submit_url|json}};
+  </script>
 
-	<script>
-	$.fn.editable.defaults.mode = 'inline';
-	$.fn.editable.defaults.anim = 'fast';
-	$.fn.editable.defaults.ajaxOptions = {
-		headers: {
-			"X-CSRFToken": csrf_token
-		}
-	};
-	$(document).ready(function() {
-		$('.ui-editable').editable();
-	});
-	</script>
+  <script>
+  $.fn.editable.defaults.mode = 'inline';
+  $.fn.editable.defaults.anim = 'fast';
+  $.fn.editable.defaults.ajaxOptions = {
+    headers: {
+      "X-CSRFToken": csrf_token
+    }
+  };
+  $(document).ready(function() {
+    $('.ui-editable').editable();
+  });
+  </script>
 
 {% endblock %}

@@ -8,11 +8,11 @@ $(document).ready(function() {
         serie, dateMin, dateMax;
 
       serie = {
-        name: 'Incidents',
+        name: 'Violations',
         color: '#c13c2d',
         data: [],
       };
-      statistics.incidents_by_date.forEach(function(report) {
+      statistics.violations_by_date.forEach(function(report) {
         serie.data.push([new Date(report.date).getTime(), report.count]);
       });
       serie.data.push([new Date().getTime(), 0]);
@@ -43,7 +43,7 @@ $(document).ready(function() {
           zoomType: 'x',
         },
         title: {
-          text: 'Incidents/Thanks by date'
+          text: 'Violations/Thanks by date'
         },
         subtitle: {
           text: document.ontouchstart === undefined ?
@@ -58,14 +58,14 @@ $(document).ready(function() {
         },
         yAxis: {
           title: {
-            text: 'Incidents/Thanks Number'
+            text: 'Violations/Thanks Number'
           },
           min: 0
         },
         tooltip: {
           formatter: function() {
             return '<b>' + this.series.name + '</b><br/>' +
-              Highcharts.dateFormat('%e. %b', this.x) + ': ' + this.y + ' incidents';
+              Highcharts.dateFormat('%e. %b', this.x) + ': ' + this.y + ' violations';
           }
         },
         series: series,
@@ -78,7 +78,7 @@ $(document).ready(function() {
 
     !(function() {
 
-      var data = statistics.incidents_by_category.map(function(e) {
+      var data = statistics.violations_by_category.map(function(e) {
         return [e.label, e.count]
       });
 
@@ -90,7 +90,7 @@ $(document).ready(function() {
             plotShadow: false
           },
           title: {
-            text: 'Distribution by incident category'
+            text: 'Distribution by violation category'
           },
           tooltip: {
             pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -122,7 +122,7 @@ $(document).ready(function() {
 
     !(function() {
 
-      var data = statistics.incidents_by_victim_gender.map(function(e) {
+      var data = statistics.violations_by_victim_gender.map(function(e) {
         return [e.label, e.count]
       });
 
@@ -166,7 +166,7 @@ $(document).ready(function() {
 
     !(function() {
 
-      var data = statistics.incidents_by_victim_education.map(function(e) {
+      var data = statistics.violations_by_victim_education.map(function(e) {
         return [e.label, e.count]
       });
 
@@ -211,7 +211,7 @@ $(document).ready(function() {
 
     !(function() {
 
-      var features = statistics.incidents_features.filter(function(e){
+      var features = statistics.violations_features.filter(function(e){
         return e.selectable;
       }).map(function(e){
         return e.definition;
@@ -224,14 +224,14 @@ $(document).ready(function() {
         data[i] = 0;
       });
 
-      statistics.incidents_by_feature.forEach(function(e) {
+      statistics.violations_by_feature.forEach(function(e) {
         var index = features.indexOf(e.label);
         if (index >= 0)
           data[index] = e.count;
       });
 
       features.unshift("All");
-      data.unshift(statistics.incidents_count);
+      data.unshift(statistics.violations_count);
 
       $(document).ready(function() {
         $('#ui-stats-features-chart').highcharts({
@@ -239,7 +239,7 @@ $(document).ready(function() {
             type: 'bar'
           },
           title: {
-            text: 'Incidents by Features'
+            text: 'Violations by Features'
           },
           legend: {
             enabled: false
@@ -253,7 +253,7 @@ $(document).ready(function() {
           yAxis: {
             min: 0,
             title: {
-              text: 'Number of Incidents',
+              text: 'Number of Violations',
               align: 'high'
             },
             labels: {
@@ -261,7 +261,7 @@ $(document).ready(function() {
             }
           },
           tooltip: {
-            valueSuffix: ' incidents'
+            valueSuffix: ' violations'
           },
           plotOptions: {
             bar: {

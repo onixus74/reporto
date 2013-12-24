@@ -1,12 +1,21 @@
 
 import logging
-logger = logging.getLogger(__name__)
 
-
+from crispy_forms.helper import FormHelper
+from crispy_forms.templatetags.crispy_forms_filters import as_crispy_form
 from django import template
+from django.template.defaultfilters import stringfilter
+from django.utils.encoding import force_unicode
 from django.utils.safestring import mark_safe
 
 from base.utils.views import dumps
+import markdown as markdown_lib
+
+
+logger = logging.getLogger(__name__)
+
+
+
 
 
 register = template.Library()
@@ -27,7 +36,6 @@ def pluck(list, key):
     return [i.get(key, None) for i in list]
 
 
-from crispy_forms.helper import FormHelper
 
 
 @register.filter
@@ -41,7 +49,6 @@ def crispy_form_horizontal_(form):
     form.helper.field_class = "col-lg-8"
     return form
 
-from crispy_forms.templatetags.crispy_forms_filters import as_crispy_form
 
 
 @register.filter
@@ -50,10 +57,7 @@ def crispy_form_horizontal(form, config='col-md-4,col-md-8'):
     form = as_crispy_form(form, label_class=label_class, field_class=field_class)
     return form
 
-import markdown as markdown_lib
 
-from django.template.defaultfilters import stringfilter
-from django.utils.encoding import force_unicode
 
 
 @register.filter(is_safe=True)

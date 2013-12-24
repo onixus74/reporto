@@ -1,0 +1,10 @@
+				{% for report in reports %}
+					{% include "violations/submit_similar_reports_item.html" %}
+				{% empty %}
+          <a id="ui-no-similar-reports" class="list-group-item" hidden>
+            <p class="list-group-item-text text-center text-danger">No similar reports!</p>
+          </a>
+          <a id="ui-no-reports" class="list-group-item" hidden>
+            <p class="list-group-item-text text-center text-danger">No reports!</p>
+          </a>
+				{% endfor %}

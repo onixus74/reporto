@@ -19,10 +19,12 @@ reform.widgets.map = function() {
 
   map.setMaxBounds(map.getBounds());
 
+  map.scrollWheelZoom.disable();
+
   // add an OpenStreetMap tile layer
   L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png').addTo(map);
 
-  var incidentMarker = L.AwesomeMarkers.icon({
+  var violationMarker = L.AwesomeMarkers.icon({
     icon: 'flag',
     markerColor: 'red'
   });
@@ -33,12 +35,12 @@ reform.widgets.map = function() {
   });
 
   var markers = new L.MarkerClusterGroup();
-  markers.addLayers(reform.data.incidentsLocations.map(function(loc) {
+  markers.addLayers(reform.data.violationsLocations.map(function(loc) {
     var marker = L.marker(L.latLng(loc.latitude, loc.longitude), {
       title: loc.category__definition,
-      icon: incidentMarker
+      icon: violationMarker
     });
-    marker.bindPopup('<a href="' + reform.urls.incidentView.replace('0', loc.pk) + '" target="_blank">' + loc.category__definition + '</a>');
+    marker.bindPopup('<a href="' + reform.urls.violationView.replace('0', loc.pk) + '" target="_blank">' + loc.category__definition + '</a>');
     return marker;
   }));
   markers.addLayers(reform.data.thanksLocations.map(function(loc) {
@@ -61,9 +63,32 @@ reform.widgets.geosearch = function() {};
 $(document).ready(reform.widgets.geosearch);
 
 
-$(document).ready(function(){
-  reform.widgets.pagination('#ui-incidents-list', reform.data.incidentsPagination, reform.urls.incidentsDashboard)
-  reform.widgets.pagination('#ui-thanks-list', reform.data.thanksPagination, reform.urls.thanksDashboard)
+$(document).ready(function() {
+  function refreshCallback(list) {
+    list.find('.ui-timeline-story-locator').on('click', function(e) {
+      e.stopPropagation();
+      e.preventDefault();
+      //console.log(marker, e.target, e.currentTarget, e.relatedTarget, e.delegateTarget);
+      //var loc = $(e.target).closest('li').data('latlng').split(',');
+      //loc = new L.LatLng(loc[0], loc[1]);
+      var li = $(e.target).closest('li');
+      var loc = new L.LatLng(li.data('latitude'), li.data('longitude'));
+      /*
+      if (!marker) {
+        console.log(loc);
+        marker = L.marker(loc);
+        console.log(marker);
+        marker.addTo(reform.widgets.map);
+      } else {
+        marker.setLatLng(loc);
+      }
+      */
+      reform.widgets.map.setView(loc, 20);
+      $.scrollTo(reform.widgets.map._container, 500, {axis: 'y'});
+    });
+  }
+  reform.widgets.pagination('#ui-violations-list', reform.data.violationsPagination, reform.urls.violationsDashboard, refreshCallback);
+  reform.widgets.pagination('#ui-thanks-list', reform.data.thanksPagination, reform.urls.thanksDashboard, refreshCallback);
 });
 
 
@@ -73,12 +98,12 @@ $(document).ready(function(){
     serie, dateMin, dateMax;
 
   serie = {
-    name: 'Incidents',
+    name: 'Violations',
     color: '#c13c2d',
     data: [],
   };
-  reform.data.incidentsByDate.forEach(function(incident) {
-    serie.data.push([new Date(incident.date).getTime(), incident.count]);
+  reform.data.violationsByDate.forEach(function(violation) {
+    serie.data.push([new Date(violation.date).getTime(), violation.count]);
   });
   serie.data.push([new Date().getTime(), 0]);
   series.push(serie);
@@ -91,8 +116,8 @@ $(document).ready(function(){
     color: '#28b262',
     data: []
   };
-  reform.data.thanksByDate.forEach(function(incident) {
-    serie.data.push([new Date(incident.date).getTime(), incident.count]);
+  reform.data.thanksByDate.forEach(function(violation) {
+    serie.data.push([new Date(violation.date).getTime(), violation.count]);
   });
   if (!serie.data[0] || serie.data[0][0] > dateMin)
     serie.data.unshift([dateMin, 0]);
@@ -100,13 +125,13 @@ $(document).ready(function(){
     serie.data.push([dateMax, 0]);
   series.push(serie);
 
-  /*Object.keys(reform.data.incidentsByCategoryByDate).forEach(function(category) {
+  /*Object.keys(reform.data.violationsByCategoryByDate).forEach(function(category) {
     var serie = {
       name: category,
       data: []
     };
-    reform.data.incidentsByCategoryByDate[category].forEach(function(incident) {
-      serie.data.push([new Date(incident.date).getTime(), incident.count]);
+    reform.data.violationsByCategoryByDate[category].forEach(function(violation) {
+      serie.data.push([new Date(violation.date).getTime(), violation.count]);
     });
     if (!serie.data[0] || serie.data[0][0] > dateMin)
       serie.data.unshift([dateMin, 0]);
@@ -118,13 +143,13 @@ $(document).ready(function(){
   $(document).ready(function() {
     console.log(series);
 
-    $('#ui-incidents-dates-chart').highcharts({
+    $('#ui-violations-dates-chart').highcharts({
       chart: {
         type: 'line', //'spline',
         zoomType: 'x',
       },
       title: {
-        text: 'Incidents/Thanks by date'
+        text: 'Violations/Thanks by date'
       },
       subtitle: {
         text: document.ontouchstart === undefined ?
@@ -139,14 +164,14 @@ $(document).ready(function(){
       },
       yAxis: {
         title: {
-          text: 'Incidents/Thanks Number'
+          text: 'Violations/Thanks Number'
         },
         min: 0
       },
       tooltip: {
         formatter: function() {
           return '<b>' + this.series.name + '</b><br/>' +
-            Highcharts.dateFormat('%e. %b', this.x) + ': ' + this.y + ' incidents/thanks';
+            Highcharts.dateFormat('%e. %b', this.x) + ': ' + this.y + ' violations/thanks';
         }
       },
       series: series,
@@ -161,7 +186,7 @@ $(document).ready(function(){
 
 !(function() {
 
-  var data = reform.data.incidentsByCategory.map(function(e) {
+  var data = reform.data.violationsByCategory.map(function(e) {
     return [e.label, e.count]
   });
 
@@ -173,7 +198,7 @@ $(document).ready(function(){
         plotShadow: false
       },
       title: {
-        text: 'Distribution by incident category'
+        text: 'Distribution by violation category'
       },
       tooltip: {
         pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -207,7 +232,7 @@ $(document).ready(function(){
 
 !(function() {
 
-  var data = reform.data.incidentsByVictimGender.map(function(e) {
+  var data = reform.data.violationsByVictimGender.map(function(e) {
     return [e.label, e.count]
   });
 
@@ -252,7 +277,7 @@ $(document).ready(function(){
 
 !(function() {
 
-  var data = reform.data.incidentsByVictimEducation.map(function(e) {
+  var data = reform.data.violationsByVictimEducation.map(function(e) {
     return [e.label, e.count]
   });
 
@@ -297,9 +322,9 @@ $(document).ready(function(){
 
 !(function() {
 
-  var features = reform.data.incidentsFeatures.filter(function(e){
+  var features = reform.data.violationsFeatures.filter(function(e) {
     return e.selectable;
-  }).map(function(e){
+  }).map(function(e) {
     return e.definition;
   });
 
@@ -310,14 +335,14 @@ $(document).ready(function(){
     data[i] = 0;
   });
 
-  reform.data.incidentsByFeature.forEach(function(e) {
+  reform.data.violationsByFeature.forEach(function(e) {
     var index = features.indexOf(e.label);
     if (index >= 0)
       data[index] = e.count;
   });
 
   features.unshift("All");
-  data.unshift(reform.data.incidentsPagination.count);
+  data.unshift(reform.data.violationsPagination.count);
 
   $(document).ready(function() {
     $('#ui-stats-features-chart').highcharts({
@@ -325,7 +350,7 @@ $(document).ready(function(){
         type: 'bar'
       },
       title: {
-        text: 'Incidents by Features'
+        text: 'Violations by Features'
       },
       legend: {
         enabled: false
@@ -339,7 +364,7 @@ $(document).ready(function(){
       yAxis: {
         min: 0,
         title: {
-          text: 'Number of Incidents',
+          text: 'Number of Violations',
           align: 'high'
         },
         labels: {
@@ -347,7 +372,7 @@ $(document).ready(function(){
         }
       },
       tooltip: {
-        valueSuffix: ' incidents'
+        valueSuffix: ' violations'
       },
       plotOptions: {
         bar: {

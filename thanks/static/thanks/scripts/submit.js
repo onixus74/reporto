@@ -290,7 +290,7 @@ reform.widgets.wizard.init = function() {
 
   $('#thank-form').on('submit', function(e) {
     e.preventDefault();
-    $('.thank-incident-form').block({
+    $('.thank-violation-form').block({
       message: '<h3>Processing ...</h3>'
     });
 
@@ -331,7 +331,7 @@ reform.widgets.wizard.init = function() {
         type: 'error',
         //nonblock: true
       });
-      $('.thank-incident-form').unblock();
+      $('.thank-violation-form').unblock();
     });
     return false;
   })

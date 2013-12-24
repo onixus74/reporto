@@ -1,0 +1,24 @@
+                <li class="ui-timeline-story list-group-item multi-labels-lines-fix clearfix" data-latitude="{{report.latitude}}" data-longitude="{{report.longitude}}">
+                  <div class="btn-group-vertical btn-group-sm pull-right">
+                    <a class="btn btn-not ui-timeline-story-locator" title="Click to locate violation" href="https://maps.google.com/?q={{report.latitude}},{{report.longitude}}" target="_blank">
+                      <i class="icon-map-marker icon-large"></i>
+                    </a>
+                    <a class="btn btn-not" href="{% url 'violations:view' report.id %}" target="_blank" title="Click to view report" _data-toggle="modal" _data-target="#ui-report-view-modal">
+                      <i class="icon-external-link icon-large"></i>
+                    </a>
+                  </div>
+
+                  <span class="label label-default victim"><i class="icon-user"></i> {{report.victim}}</span>
+                  has been a victim of
+                  <span class="label label-default category">{{report.category}}</span>
+                  happened in
+                  <span class="label label-default location"><i class="icon-map-marker"></i> {{report.location_text}}</span>
+                  on
+                  <span class="label label-default datetime">
+                    <i class="icon-calendar"></i> {{report.datetime}}
+                  </span>
+                  {% if report.is_verified %}<span class="badge badge-success">Verified <i class="icon-ok"></i></span>{% endif %}
+                  {% comment %}
+                  {% if report.is_closed %}<span class="badge badge-important">Closed <i class="icon-lock"></i></span>{% endif %}
+                  {% endcomment %}
+                </li>

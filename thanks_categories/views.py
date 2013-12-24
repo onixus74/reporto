@@ -1,54 +1,59 @@
 import logging
-logger = logging.getLogger(__name__)
 
+from django import forms
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from base.utils.views import PaginatedListHybridResponseMixin, DetailHybridResponseMixin
-from django import forms
 
-from incidents.models import ThankCategory
+from base.utils.views import PaginatedListHybridResponseMixin, \
+  DetailHybridResponseMixin
+from thanks.models import Category
+
+
+logger = logging.getLogger(__name__)
+
+
 
 
 TEMPLATE_BASE = 'thanks_categories'
 
 
-class ThankCategoryForm(forms.ModelForm):
+class CategoryForm(forms.ModelForm):
 
     class Meta:
-        model = ThankCategory
+        model = Category
         exclude = ('slug',)
 
 
-class ThankCategoryListView(ListView):
-    model = ThankCategory
+class CategoryListView(ListView):
+    model = Category
     template_name = TEMPLATE_BASE + '/list.html'
 
 
-class ThankCategoryListHybridView(PaginatedListHybridResponseMixin, ThankCategoryListView):
+class CategoryListHybridView(PaginatedListHybridResponseMixin, CategoryListView):
     pass
 
 
-class ThankCategoryDetailView(DetailView):
-    model = ThankCategory
+class CategoryDetailView(DetailView):
+    model = Category
     template_name = TEMPLATE_BASE + '/view.html'
 
 
-class ThankCategoryDetailHybridView(DetailHybridResponseMixin, ThankCategoryDetailView):
+class CategoryDetailHybridView(DetailHybridResponseMixin, CategoryDetailView):
     pass
 
 
-class ThankCategoryCreateView(CreateView):
-    model = ThankCategory
-    form_class = ThankCategoryForm
+class CategoryCreateView(CreateView):
+    model = Category
+    form_class = CategoryForm
     template_name = TEMPLATE_BASE + '/new.html'
 
 
-class ThankCategoryUpdateView(UpdateView):
-    model = ThankCategory
+class CategoryUpdateView(UpdateView):
+    model = Category
     template_name = TEMPLATE_BASE + '/edit.html'
 
 
-class ThankCategoryDeleteView(DeleteView):
-    model = ThankCategory
+class CategoryDeleteView(DeleteView):
+    model = Category
     template_name = TEMPLATE_BASE + '/delete.html'
     success_url = '..'

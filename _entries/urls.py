@@ -1,7 +1,9 @@
 from django.conf.urls import patterns, url
-from .views import *
 
 from base.utils.urls import administrator_required
+
+from .views import *
+
 
 urlpatterns = patterns('',
    url(r'^(\.(?P<extension>(json)))?$',            administrator_required(EntryListHybridView.as_view()),   name='list'),

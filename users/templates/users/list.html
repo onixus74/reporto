@@ -3,70 +3,66 @@
 {% block view_title %}Users | {% endblock %}
 
 {% block view_content %}
-<div class="container">
 
   <div class="page-header">
     <h1 class="text-center">Users <small>management</small></h1>
   </div>
 
-  <div class="container">
-    <div class="row">
-      <div class="col-md-offset-2 col-md-8 text-center">
-        <div style="display: inline-block;">
+  <div class="row">
+    <div class="col-md-offset-2 col-md-8 text-center">
+      <div style="display: inline-block;">
 
-          <table class="table table-hover">
-            <tr>
+        <table class="table table-hover">
+          <tr>
 
-              <th>User</th>
-              <th>Role</th>
-              <th>Status</th>
-              <th>Actions</th>
-            </tr>
-            {% for user in user_list %}
-            <tr>
-              <td><a href="{{ user.get_absolute_url }}">{{user}}</a></td>
-              <td>{{user.get_role_display}}</td>
-              <td>
-                <span class="label label-{{user.is_active|yesno:"success,important,"}}">{{user.is_active|yesno:"Active,Inactive,"}}</span>
-                {% if user.is_staff %}<span class="label label-info">Staff</span></small>{% endif %}
-                {% if user.is_superuser %}<span class="label label-warning">Super User</span></small>{% endif %}
-              </td>
-              <td>
-                <a href="{% url 'users:view' user.id %}" class="btn btn-default"><i class="icon-pencil"></i> View</a>
-              </td>
-            </tr>
-            {% endfor %}
-          </table>
-        </div>
-        <div class="ui-pagination pagination pagination-small pagination-centered">
-          <ul>
-            <li class="{% if current == 1 %}disabled{% endif %}">
-              <a class="ui-pagination-control ui-pagination-first" href="{{request.path}}?page=1"><i class="icon-arrow-left"></i> First</a>
-            </li>
-
-            <li class="{% if current == 1 %}disabled{% endif %}">
-              <a class="ui-pagination-control ui-pagination-previous" href="{{request.path}}?page={{ current|add:-1 }}"><i class="icon-chevron-left"></i> Previous</a>
-            </li>
-
-            <li><span class="ui-pagination-indicator">{{current}} / {{pages}}</span></li>
-
-            <li class="{% if current == pages %}disabled{% endif %}">
-              <a class="ui-pagination-control ui-pagination-next" href="{{request.path}}?page={{ current|add:1 }}">Next <i class="icon-chevron-right"></i></a>
-            </li>
-
-            <li class="{% if current == pages %}disabled{% endif %}">
-              <a class="ui-pagination-control ui-pagination-last" href="{{request.path}}?page={{ pages }}">Last <i class="icon-arrow-right"></i></a>
-            </li>
-          </ul>
-        </div>
+            <th>User</th>
+            <th>Role</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+          {% for user in user_list %}
+          <tr>
+            <td><a href="{{ user.get_absolute_url }}">{{user}}</a></td>
+            <td>{{user.get_role_display}}</td>
+            <td>
+              <span class="label label-{{user.is_active|yesno:"success,important,"}}">{{user.is_active|yesno:"Active,Inactive,"}}</span>
+              {% if user.is_staff %}<span class="label label-info">Staff</span></small>{% endif %}
+              {% if user.is_superuser %}<span class="label label-warning">Super User</span></small>{% endif %}
+            </td>
+            <td>
+              <a href="{% url 'users:view' user.id %}" class="btn btn-default"><i class="icon-pencil"></i> View</a>
+            </td>
+          </tr>
+          {% endfor %}
+        </table>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12 text-center">
-        <a href="{% url 'users:create' %}" class="btn btn-lg btn-primary"><i class="icon-plus icon-large"></i> Add User</a>
+      <div class="ui-pagination text-center">
+        <ul class="pagination pagination-sm">
+          <li class="{% if current == 1 %}disabled{% endif %}">
+            <a class="ui-pagination-control ui-pagination-first" href="{{request.path}}?page=1"><i class="icon-arrow-left"></i> First</a>
+          </li>
+
+          <li class="{% if current == 1 %}disabled{% endif %}">
+            <a class="ui-pagination-control ui-pagination-previous" href="{{request.path}}?page={{ current|add:-1 }}"><i class="icon-chevron-left"></i> Previous</a>
+          </li>
+
+          <li class="disabled"><span class="ui-pagination-indicator">{{current}} / {{pages}}</span></li>
+
+          <li class="{% if current == pages %}disabled{% endif %}">
+            <a class="ui-pagination-control ui-pagination-next" href="{{request.path}}?page={{ current|add:1 }}">Next <i class="icon-chevron-right"></i></a>
+          </li>
+
+          <li class="{% if current == pages %}disabled{% endif %}">
+            <a class="ui-pagination-control ui-pagination-last" href="{{request.path}}?page={{ pages }}">Last <i class="icon-arrow-right"></i></a>
+          </li>
+        </ul>
       </div>
     </div>
   </div>
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <a href="{% url 'users:create' %}" class="btn btn-lg btn-primary"><i class="icon-plus icon-large"></i> Add User</a>
+    </div>
+  </div>
 
-</div>
 {% endblock %}

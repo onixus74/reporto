@@ -1,4 +1,5 @@
-from django.contrib.auth.decorators import login_required, user_passes_test, permission_required
+from django.contrib.auth.decorators import login_required, user_passes_test, \
+  permission_required
 
 
 staff_required = user_passes_test(lambda u: u.is_staff)

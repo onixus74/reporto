@@ -1,0 +1,38 @@
+{% extends "layouts/default.html" %}
+
+{% block view_title %}Feature Details | {% endblock %}
+
+{% block view_content %}
+
+	<div class="page-header">
+		<h1>Feature <small>Detail</small></h1>
+	</div>
+
+	<div class="row">
+		<div class="col-md-offset-2 col-md-8">
+
+			<form class="form-horizontal">
+
+				<div class="form-group">
+					<div class="controls">
+						<dl>
+							<dt>Slug</dt>
+							<dd>{{feature.slug}}</dd>
+							<dt>Definition</dt>
+							<dd>{{feature.definition}}</dd>
+						</dl>
+					</div>
+				</div>
+
+				<div class="form-actions">
+					<a href="{% url 'violations:features:edit' feature.id %}" class="btn btn-info"><i class="icon-pencil"></i> Edit</a>
+					<a href="{% url 'violations:features:delete' feature.id %}" class="btn btn-warning"><i class="icon-trash"></i> Delete</a>
+					<a href="{% url 'violations:features:list' %}" class="btn btn-default"><i class="icon-back"></i> Back</a>
+				</div>
+
+			</form>
+
+		</div>
+	</div>
+
+{% endblock %}

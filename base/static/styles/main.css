@@ -11202,10 +11202,15 @@ body {
 \*/
 /* line 429, main.scss */
 *[hidden] {
-  display: none !important;
+  display: none;
 }
 
-/* line 431, main.scss */
+/* line 430, main.scss */
+input[hidden] {
+  display: none;
+}
+
+/* line 432, main.scss */
 .ui-pnotify .alert {
   margin-bottom: 0;
 }
@@ -11213,7 +11218,7 @@ body {
 /*-------------------------------------------------
 | Leaflet Fixes
 \*/
-/* line 440, main.scss */
+/* line 441, main.scss */
 .leaflet-top, .leaflet-bottom {
   z-index: auto !important;
 }
@@ -11221,7 +11226,7 @@ body {
 /*-------------------------------------------------
 | typeahead.js
 \*/
-/* line 450, main.scss */
+/* line 451, main.scss */
 .typeahead,
 .tt-query,
 .tt-hint {
@@ -11237,28 +11242,28 @@ body {
   outline: none;
 }
 
-/* line 463, main.scss */
+/* line 464, main.scss */
 .typeahead {
   background-color: #fff;
 }
 
-/* line 467, main.scss */
+/* line 468, main.scss */
 .typeahead:focus {
   border: 2px solid #0097cf;
 }
 
-/* line 471, main.scss */
+/* line 472, main.scss */
 .tt-query {
   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
 }
 
-/* line 475, main.scss */
+/* line 476, main.scss */
 .tt-hint {
   color: #999999;
 }
 
-/* line 479, main.scss */
+/* line 480, main.scss */
 .tt-dropdown-menu {
   width: 422px;
   margin-top: 12px;
@@ -11271,35 +11276,35 @@ body {
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
 }
 
-/* line 490, main.scss */
+/* line 491, main.scss */
 .tt-suggestion {
   padding: 3px 20px;
   font-size: 18px;
   line-height: 24px;
 }
 
-/* line 496, main.scss */
+/* line 497, main.scss */
 .tt-suggestion.tt-is-under-cursor {
   color: #fff;
   background-color: #0097cf;
 }
 
-/* line 502, main.scss */
+/* line 503, main.scss */
 .tt-suggestion p {
   margin: 0;
 }
 
-/* line 509, main.scss */
+/* line 510, main.scss */
 .asteriskField {
   color: #D40000;
 }
 
-/* line 513, main.scss */
+/* line 514, main.scss */
 .asteriskField:before {
   content: ' (';
 }
 
-/* line 517, main.scss */
+/* line 518, main.scss */
 .asteriskField:after {
   content: ')';
 }

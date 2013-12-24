@@ -6,19 +6,17 @@
 {% block view_title %}Login | {% endblock %}
 
 {% block view_content %}
-<div class="container text-center">
-	<div class="well_">
+	<div class="panel text-center">
 
 		<div class="panel_" style="margin-top: 20px; width: auto; display: inline-block;">
 
       <div class="jumbotron">
         <h1>Reform Reporting Platform</h1>
         <p class="lead">a tool to monitor security sector status by tracking violations involving police officers</p>
-      </div>
-
-      <div style="margin: 30px;">
-        <h2><span class="text-muted">{{incidents|add:thanks}}</span> reports</h2>
-        <h3><span class="text-danger">{{incidents}}</span> violations - <span class="text-success">{{thanks}}</span> thanks</h3>
+        <p class="lead">
+          <h2><span class="text-muted">{{violations|add:thanks}}</span> reports</h2>
+          <h3><span class="text-danger">{{violations}}</span> violations - <span class="text-success">{{thanks}}</span> thanks</h3>
+        </p>
       </div>
 
 			{% comment %}
@@ -65,8 +63,9 @@
     				<input type="hidden" name="next" value="{{ next }}" />
 
             <button class="btn btn-default btn-lg btn-block" name="commit" type="submit">
-              Login <i class="icon-arrow-right"></i>
+              Sign in <i class="icon-arrow-right"></i>
             </button>
+            <a href="{% url 'password_reset' %}">Reset your password</a>
 
     			</form>
 
@@ -76,16 +75,16 @@
 
       <div class="row" style="margin-top: 20px">
         <div class="col-md-4 col-md-offset-2">
-          <a href="{% url 'socialauth_begin' 'facebook' %}?next={{next}}" class="btn btn-primary btn-block" style="background-color: #3C5A99; background-image: none;"><i class="icon-facebook-sign"></i> Facebook</a>
+          <a href="{% url 'socialauth_begin' 'facebook' %}?next={{next}}" class="btn btn-primary btn-block" style="background-color: #3C5A99; background-image: none;"><i class="icon-facebook-sign"></i> Sign in/up using Facebook</a>
         </div>
         <div class="col-md-4">
-          <a href="{% url 'socialauth_begin' 'google' %}?next={{next}}" class="btn btn-primary btn-block" style="background-color: #547DBF; background-image: none;"><i class="icon-google-plus-sign"></i> Google</a>
+          <a href="{% url 'socialauth_begin' 'google' %}?next={{next}}" class="btn btn-primary btn-block" style="background-color: #547DBF; background-image: none;"><i class="icon-google-plus-sign"></i> Sign in/up using Google</a>
         </div>
       </div>
 
       <div class="row" style="margin-top: 20px">
         <div class="col-md-8 col-md-offset-2">
-          <p class="lead text-center"><a href="{% url 'register' %}?next={{next}}">Sign up</a> if you do not have an account.</p>
+          <p class="lead text-center"><a href="{% url 'register' %}?next={{next}}">Sign up using email</a> if you do not have an account yet.</p>
         </div>
       </div>
 
@@ -115,12 +114,11 @@
 		</div>
 
 	</div>
-</div>
 {% endblock %}
 
 {% block view_scripts %}
 	<script type="text/javascript">
-		reform.urls.statistics = {% url 'incidents:public_statistics' as stats_url %}{{stats_url|json}};
+		reform.urls.statistics = {% url 'violations:public_statistics' as stats_url %}{{stats_url|json}};
 	</script>
 	{% compress js %}
 	<script src="{% static 'components/highcharts.com/js/highcharts.src.js' %}"></script>

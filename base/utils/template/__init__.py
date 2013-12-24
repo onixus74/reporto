@@ -23,8 +23,9 @@ Based on: http://djangosnippets.org/snippets/1376/
 from os.path import dirname, join, abspath
 
 from django.conf import settings
-from django.utils.importlib import import_module
 from django.template.loaders.filesystem import Loader as FilesystemLoader
+from django.utils.importlib import import_module
+
 
 _cache = {}
 

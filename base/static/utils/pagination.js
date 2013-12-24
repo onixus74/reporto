@@ -1,5 +1,4 @@
-
-reform.widgets.pagination = function(id, status, url, refreshCallback){
+reform.widgets.pagination = function(id, status, url , refreshCallback) {
 
   var list = $(id);
 
@@ -78,31 +77,10 @@ reform.widgets.pagination = function(id, status, url, refreshCallback){
 
   var marker;
 
-  function bindReportItemsToMap() {
-    //list.find('.ui-timeline-story').on('mouseover', function(e) {
-    list.find('.ui-timeline-story-locator').on('click', function(e) {
-      e.stopPropagation();
-      e.preventDefault();
-      console.log(marker, e.target, e.currentTarget, e.relatedTarget, e.delegateTarget);
-      //var loc = $(e.target).closest('li').data('latlng').split(',');
-      //loc = new L.LatLng(loc[0], loc[1]);
-      var li = $(e.target).closest('li');
-      var loc = new L.LatLng(li.data('latitude'), li.data('longitude'));
-      /*
-      if (!marker) {
-        console.log(loc);
-        marker = L.marker(loc);
-        console.log(marker);
-        marker.addTo(reform.widgets.map);
-      } else {
-        marker.setLatLng(loc);
-      }
-      */
-      reform.widgets.map.setView(loc, 12);
-    });
+  function callback(){
+    if(refreshCallback)
+      refreshCallback(list);
   }
-
-  bindReportItemsToMap();
 
   function showPage(page) {
     $.get(url + '.json?page=' + page).done(function(data) {
@@ -114,7 +92,7 @@ reform.widgets.pagination = function(id, status, url, refreshCallback){
       .done(function() {
         list.unblock();
       })
-      .done(bindReportItemsToMap);
+      .done(callback);
     //list.html('<li>Loading ...</li>');
     list.block({
       message: 'Loading ...',
@@ -122,10 +100,23 @@ reform.widgets.pagination = function(id, status, url, refreshCallback){
     });
   }
 
+  callback();
+
 };
 /*
-$(document).ready(function(){
-  reform.widgets.pagination('#ui-incidents-list', reform.data.incidentsPagination, reform.urls.incidentsDashboard)
-  reform.widgets.pagination('#ui-thanks-list', reform.data.thanksPagination, reform.urls.thanksDashboard)
+$(document).ready(function() {
+  function refreshCallback(list) {
+    list.find('.ui-timeline-story-locator').on('click', function(e) {
+      e.stopPropagation();
+      e.preventDefault();
+      var li = $(e.target).closest('li');
+      var loc = new L.LatLng(li.data('latitude'), li.data('longitude'));
+      reform.widgets.map.setView(loc, 12);
+      $.scrollTo(reform.widgets.map._container, 500);
+    });
+  }
+  reform.widgets.pagination('#ui-violations-list', reform.data.violationsPagination, reform.urls.violationsDashboard, refreshCallback);
+  reform.widgets.pagination('#ui-thanks-list', reform.data.thanksPagination, reform.urls.thanksDashboard, refreshCallback);
 });
+
 */
