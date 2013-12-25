@@ -12,19 +12,19 @@
 
   <!-- icons & favicons -->
 
-  <link rel="apple-touch-icon" sizes="57x57" href="{{STATIC_URL}}apple-touch-icon-57x57.png" />
-  <link rel="apple-touch-icon" sizes="114x114" href="{{STATIC_URL}}apple-touch-icon-114x114.png" />
-  <link rel="apple-touch-icon" sizes="72x72" href="{{STATIC_URL}}apple-touch-icon-72x72.png" />
-  <link rel="apple-touch-icon" sizes="144x144" href="{{STATIC_URL}}apple-touch-icon-144x144.png" />
-  <link rel="apple-touch-icon" sizes="60x60" href="{{STATIC_URL}}apple-touch-icon-60x60.png" />
-  <link rel="apple-touch-icon" sizes="120x120" href="{{STATIC_URL}}apple-touch-icon-120x120.png" />
-  <link rel="apple-touch-icon" sizes="76x76" href="{{STATIC_URL}}apple-touch-icon-76x76.png" />
-  <link rel="apple-touch-icon" sizes="152x152" href="{{STATIC_URL}}apple-touch-icon-152x152.png" />
-  <link rel="icon" type="image/png" href="{{STATIC_URL}}favicon-16x16.png" sizes="16x16" />
-  <link rel="icon" type="image/png" href="{{STATIC_URL}}favicon-32x32.png" sizes="32x32" />
-  <link rel="icon" type="image/png" href="{{STATIC_URL}}favicon-96x96.png" sizes="96x96" />
-  <link rel="icon" type="image/png" href="{{STATIC_URL}}favicon-160x160.png" sizes="160x160" />
-  <link rel="icon" type="image/png" href="{{STATIC_URL}}favicon-196x196.png" sizes="196x196" />
+  <link rel="apple-touch-icon" sizes="57x57" href="{{STATIC_URL}}apple-touch-fa fa-57x57.png" />
+  <link rel="apple-touch-icon" sizes="114x114" href="{{STATIC_URL}}apple-touch-fa fa-114x114.png" />
+  <link rel="apple-touch-icon" sizes="72x72" href="{{STATIC_URL}}apple-touch-fa fa-72x72.png" />
+  <link rel="apple-touch-icon" sizes="144x144" href="{{STATIC_URL}}apple-touch-fa fa-144x144.png" />
+  <link rel="apple-touch-icon" sizes="60x60" href="{{STATIC_URL}}apple-touch-fa fa-60x60.png" />
+  <link rel="apple-touch-icon" sizes="120x120" href="{{STATIC_URL}}apple-touch-fa fa-120x120.png" />
+  <link rel="apple-touch-icon" sizes="76x76" href="{{STATIC_URL}}apple-touch-fa fa-76x76.png" />
+  <link rel="apple-touch-icon" sizes="152x152" href="{{STATIC_URL}}apple-touch-fa fa-152x152.png" />
+  <link rel="icon" type="image/png" href="{{STATIC_URL}}favfa fa-16x16.png" sizes="16x16" />
+  <link rel="icon" type="image/png" href="{{STATIC_URL}}favfa fa-32x32.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="{{STATIC_URL}}favfa fa-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/png" href="{{STATIC_URL}}favfa fa-160x160.png" sizes="160x160" />
+  <link rel="icon" type="image/png" href="{{STATIC_URL}}favfa fa-196x196.png" sizes="196x196" />
   <meta name="msapplication-TileColor" content="#d40000" />
   <meta name="msapplication-TileImage" content="{{STATIC_URL}}mstile-144x144.png" />
 
@@ -124,9 +124,9 @@
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
             <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
+            <span class="fa fa-bar"></span>
+            <span class="fa fa-bar"></span>
+            <span class="fa fa-bar"></span>
           </button>
           <a class="navbar-brand" href="/"><img src="{% static 'reform-logo.png' %}" _width="50" _height="35" height="26" alt="Tunisian Institutional Reform | جمعية إصلاح المؤسسات"></a>
         </div>
@@ -136,19 +136,19 @@
 					<ul class="nav navbar-nav">
 						{% if user.is_authenticated %}
             {% url 'home' as url %}
-						<li{% if request.path_info == url %} class="active"{% endif %}><a href="{{url}}">Dashboard</a></li>
+						<li{% if request.path_info == url %} class="active"{% endif %}><a href="{{url}}"><i class="fa fa-tachometer"></i> Dashboard</a></li>
             {% comment %}
             {% url 'violations:dashboard' as url %}
             <li{% if request.path_info == url %} class="active"{% endif %}><a href="{{url}}">Violations</a></li>
             {% endcomment %}
             {% url 'violations:submit' as url %}
-            <li{% if request.path_info == url %} class="active"{% endif %}><a href="{{url}}"><i class="icon-plus"></i> Report a Violation</a></li>
+            <li{% if request.path_info == url %} class="active"{% endif %}><a href="{{url}}"><i class="fa fa-plus"></i> Report a Violation</a></li>
             {% comment %}
             {% url 'thanks:dashboard' as url %}
             <li{% if request.path_info == url %} class="active"{% endif %}><a href="{{url}}">Thanks</a></li>
             {% endcomment %}
             {% url 'thanks:submit' as url %}
-            <li{% if request.path_info == url %} class="active"{% endif %}><a href="{{url}}"><i class="icon-plus"></i> Thank a Security Officer</a></li>
+            <li{% if request.path_info == url %} class="active"{% endif %}><a href="{{url}}"><i class="fa fa-plus"></i> Thank a Security Officer</a></li>
 						{% if user.role == "A" %}
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Administration<b class="caret"></b></a>
@@ -172,7 +172,7 @@
 
 						<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-							<i class="icon-user"></i>
+							<i class="fa fa-user"></i>
 							{% if user.is_authenticated %}
 							<span>{{user.get_short_name}}</span>
 							{% else %}
@@ -187,11 +187,11 @@
 								{% csrf_token %}
 								<input type="hidden" name="next" value="{{ next }}" />
 								<div class="input-group">
-									<span class="input-group-addon"><i class="icon-envelope"></i></span>
+									<span class="input-group-addon"><i class="fa fa-envelope"></i></span>
 									{% render_field form.username type="email" placeholder="Email" required="required" %}
 								</div>
 								<div class="input-group">
-									<span class="input-group-addon"><i class="icon-key"></i></span>
+									<span class="input-group-addon"><i class="fa fa-key"></i></span>
 									{% render_field form.password placeholder="Password" required="required" %}
 								</div>
 								<div class="clearfix">
@@ -201,14 +201,14 @@
 						</div>
 						{% endcomment %}
 						<ul class="dropdown-menu">
-							<li><a href="{% url 'login' %}">Login</a></li>
+							<li><a href="{% url 'login' %}"><i class="fa fa-sign-in"></i> Sign in</a></li>
 						</ul>
 						{% else %}
 						<ul class="dropdown-menu">
 							{% if user.is_authenticated %}
-							<li><a href="{% url 'users:profile' %}"><i class="icon-user"></i> Profile</a></li>
+							<li><a href="{% url 'users:profile' %}"><i class="fa fa-user"></i> Profile</a></li>
 							{% endif %}
-							<li><a href="/logout"><i class="icon-off"></i> Logout</a></li>
+							<li><a href="/logout"><i class="fa fa-sign-out"></i> Logout</a></li>
 						</ul>
 						{% endif %}
 						</li>

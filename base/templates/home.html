@@ -16,16 +16,16 @@
           {% with report=violations_list.0 %}
           <div>
               <h2 style="margin-top: 0;">Latest Report</h2>
-              <span class="label label-default victim"><i class="icon-user"></i> {{report.victim}}</span>
+              <span class="label label-default victim"><i class="fa fa-user"></i> {{report.victim}}</span>
               has been a victim of
               <span class="label label-default category">{{report.category}}</span>
               happened in
-              <span class="label label-default location"><i class="icon-map-marker"></i> {{report.location_text}}</span>
+              <span class="label label-default location"><i class="fa fa-map-marker"></i> {{report.location_text}}</span>
               on
-              <span class="label label-default datetime"><i class="icon-calendar"></i> {{report.datetime}}</span>
-              {% if report.is_verified %}<span class="badge badge-success">Verified <i class="icon-ok"></i></span>{% endif %}
+              <span class="label label-default datetime"><i class="fa fa-calendar"></i> {{report.datetime}}</span>
+              {% if report.is_verified %}<span class="badge badge-success">Verified <i class="fa fa-ok"></i></span>{% endif %}
               <a class="btn btn-not" href="{% url 'violations:view' report.id %}" target="_blank" title="Click to view report" _data-toggle="modal" _data-target="#ui-report-view-modal">
-                  <i class="icon-external-link icon-large"></i>
+                  <i class="fa fa-external-link fa-lg"></i>
               </a>
           </div>
           {% endwith %}
@@ -37,8 +37,8 @@
       </div>
       {% endif %}
 
-      <a class="btn btn-danger btn-lg pull-right" href="{% url 'violations:submit' %}"><i class="icon-plus"></i> Report a Violation</a>
-      <a class="btn btn-success btn-lg pull-right" href="{% url 'thanks:submit' %}"><i class="icon-plus"></i> Thank a Security Officer</a>
+      <a class="btn btn-danger btn-lg pull-right" href="{% url 'violations:submit' %}"><i class="fa fa-plus"></i> Report a Violation</a>
+      <a class="btn btn-success btn-lg pull-right" href="{% url 'thanks:submit' %}"><i class="fa fa-plus"></i> Thank a Security Officer</a>
     </div>
 
     {% if violations_list or thanks_list %}
@@ -76,29 +76,41 @@
             <div class="panel-body">
               <div id="ui-violations-timeline-list" class="ui-timeline-list clearfix">
 
+                <div id="ui-violations-search" class="ui-search">
+                  <form action="{% url 'search:search' %}">
+                    <div class="input-group">
+                      <input name="q" value="{{request.GET.q}}" class="form-control" placeholder="Search .. 2013-09, 2013-12-22, Tunis, Ben Ali, ...">
+                      <span class="input-group-btn">
+                        <button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
+                        <button class="btn btn-default" type="button"><i class="fa fa-times"></i></button>
+                      </span>
+                    </div>
+                  </form>
+                </div>
+
                 <div class="ui-pagination text-center">
                   <ul class="pagination pagination-sm">
                     <li class="{% if violations_pagination.current == 1 %}disabled{% endif %}">
-                      <a class="ui-pagination-control ui-pagination-first" href="{{request.path}}?violations-page=1"><i class="icon-arrow-left"></i> First</a>
+                      <a class="ui-pagination-control ui-pagination-first" href="{{request.path}}?violations-page=1"><i class="fa fa-arrow-left"></i> First</a>
                     </li>
 
                     <li class="{% if violations_pagination.current == 1 %}disabled{% endif %}">
-                      <a class="ui-pagination-control ui-pagination-previous" href="{{request.path}}?violations-page={{ violations_pagination.current|add:-1 }}"><i class="icon-chevron-left"></i> Previous</a>
+                      <a class="ui-pagination-control ui-pagination-previous" href="{{request.path}}?violations-page={{ violations_pagination.current|add:-1 }}"><i class="fa fa-chevron-left"></i> Previous</a>
                     </li>
 
                     <li class="disabled"><span class="ui-pagination-indicator">{{violations_pagination.current}} / {{violations_pagination.pages}}</span></li>
 
                     <li class="{% if violations_pagination.current == violations_pagination.pages %}disabled{% endif %}">
-                      <a class="ui-pagination-control ui-pagination-next" href="{{request.path}}?violations-page={{ violations_pagination.current|add:1 }}">Next <i class="icon-chevron-right"></i></a>
+                      <a class="ui-pagination-control ui-pagination-next" href="{{request.path}}?violations-page={{ violations_pagination.current|add:1 }}">Next <i class="fa fa-chevron-right"></i></a>
                     </li>
 
                     <li class="{% if violations_pagination.current == violations_pagination.pages %}disabled{% endif %}">
-                      <a class="ui-pagination-control ui-pagination-last" href="{{request.path}}?violations-page={{ violations_pagination.pages }}">Last <i class="icon-arrow-right"></i></a>
+                      <a class="ui-pagination-control ui-pagination-last" href="{{request.path}}?violations-page={{ violations_pagination.pages }}">Last <i class="fa fa-arrow-right"></i></a>
                     </li>
                   </ul>
                 </div>
 
-                <ul id="ui-violations-list" class="list_ list-hover_ list-group">
+                <ul id="ui-violations-list" class="ui-list list-group">
                   {% include "violations/dashboard_violations_list.html" with report_list=violations_list %}
                 </ul>
 
@@ -119,29 +131,41 @@
             <div class="panel-body">
               <div id="ui-thanks-timeline-list" class="ui-timeline-list clearfix">
 
+                <div id="ui-thanks-search" class="ui-search">
+                  <form action="{% url 'search:search' %}">
+                    <div class="input-group">
+                      <input name="q" value="{{request.GET.q}}" class="form-control" placeholder="Search .. 2013-09, 2013-12-22, Tunis, Ben Ali, ...">
+                      <span class="input-group-btn">
+                        <button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
+                        <button class="btn btn-default" type="button"><i class="fa fa-times"></i></button>
+                      </span>
+                    </div>
+                  </form>
+                </div>
+
                 <div class="ui-pagination text-center">
                   <ul class="pagination pagination-sm">
                     <li class="{% if thanks_pagination.current == 1 %}disabled{% endif %}">
-                      <a class="ui-pagination-control ui-pagination-first" href="{{request.path}}?thanks-page=1"><i class="icon-arrow-left"></i> First</a>
+                      <a class="ui-pagination-control ui-pagination-first" href="{{request.path}}?thanks-page=1"><i class="fa fa-arrow-left"></i> First</a>
                     </li>
 
                     <li class="{% if thanks_pagination.current == 1 %}disabled{% endif %}">
-                      <a class="ui-pagination-control ui-pagination-previous" href="{{request.path}}?thanks-page={{ thanks_pagination.current|add:-1 }}"><i class="icon-chevron-left"></i> Previous</a>
+                      <a class="ui-pagination-control ui-pagination-previous" href="{{request.path}}?thanks-page={{ thanks_pagination.current|add:-1 }}"><i class="fa fa-chevron-left"></i> Previous</a>
                     </li>
 
                     <li class="disabled"><span class="ui-pagination-indicator">{{thanks_pagination.current}} / {{thanks_pagination.pages}}</span></li>
 
                     <li class="{% if thanks_pagination.current == thanks_pagination.pages %}disabled{% endif %}">
-                      <a class="ui-pagination-control ui-pagination-next" href="{{request.path}}?thanks-page={{ thanks_pagination.current|add:1 }}">Next <i class="icon-chevron-right"></i></a>
+                      <a class="ui-pagination-control ui-pagination-next" href="{{request.path}}?thanks-page={{ thanks_pagination.current|add:1 }}">Next <i class="fa fa-chevron-right"></i></a>
                     </li>
 
                     <li class="{% if thanks_pagination.current == thanks_pagination.pages %}disabled{% endif %}">
-                      <a class="ui-pagination-control ui-pagination-last" href="{{request.path}}?thanks-page={{ thanks_pagination.pages }}">Last <i class="icon-arrow-right"></i></a>
+                      <a class="ui-pagination-control ui-pagination-last" href="{{request.path}}?thanks-page={{ thanks_pagination.pages }}">Last <i class="fa fa-arrow-right"></i></a>
                     </li>
                   </ul>
                 </div>
 
-                <ul id="ui-thanks-list" class="list_ list-hover_ list-group">
+                <ul id="ui-thanks-list" class="ui-list list-group">
                   {% include "thanks/dashboard_thanks_list.html" with report_list=thanks_list %}
                 </ul>
 

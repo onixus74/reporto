@@ -5,10 +5,10 @@
 {% block view_title %}Thank a Security Officer | {% endblock %}
 
 {% block view_content %}
-  
+
     <form id="thank-form" action="{% url 'thanks:submit' %}" method="post" enctype="multipart/form-data">
       {% csrf_token %}
-  
+
     <div class="page-header">
       <h1 class="text-center">Thank Submission<small></small></h1>
     </div>
@@ -35,19 +35,19 @@
 
           <div class="row ui-wizard-row" id="ui-wizard-location-datetime" hidden>
             <div class="col-md-6">
-              <h2><i class="icon-map-marker"></i> Location</h2>
+              <h2><i class="fa fa-map-marker"></i> Location</h2>
               <div id="map" style="width:100%; height: 300px"></div>
               {% render_field form.latitude type="hidden" %}
               {% render_field form.longitude type="hidden" %}
               {#% render_field form.location type="hidden" %#}
               <input type="hidden" id="id_location" name="location">
               <div class="input-group" style="margin-top: 10px;">
-                <span class="input-group-addon"> <i class="icon-map-marker icon-large"></i> </span>
+                <span class="input-group-addon"> <i class="fa fa-map-marker fa-lg"></i> </span>
                 {% render_field form.location_text type="text" placeholder="Location" class="form-control" _data-provide="typeahead" _data-source="reform.data.locations" _autocomplete="off" %}
               </div>
             </div>
             <div class="col-md-6">
-              <h2><i class="icon-calendar"></i><i class="icon-time"></i> Date and Time</h2>
+              <h2><i class="fa fa-calendar"></i><i class="fa fa-clock-o"></i> Date and Time</h2>
               {% render_field form.datetime type="text" _type="datetime-local" class+="form-control" _required="required" style="display: none;" %}
               <div id="dateinput" style="height: 300px;">
               <script type="text/template" id="dateinput-template">
@@ -74,7 +74,7 @@
               </div>
               <input id="id_date" name="date" type="hidden">
               <div class="input-group" style="margin-top: 10px;">
-                <span class="input-group-addon"> <i class="icon-time icon-large"></i> </span>
+                <span class="input-group-addon"> <i class="fa fa-clock-o fa-lg"></i> </span>
                 <input id="id_time" name="time" type="time" class="form-control" placeholder="Time" value="12:00">
               </div>
             </div>
@@ -82,11 +82,11 @@
 
           <div class="row ui-wizard-row" id="ui-wizard-description-media" hidden>
             <div class="col-md-6">
-              <h2><i class="icon-ellipsis-horizontal"></i> Description</h2>
+              <h2><i class="fa fa-ellipsis-h"></i> Description</h2>
               {% render_field form.description placeholder="Description" required="required" class+="form-control input-area" %}
             </div>
             <div class="col-md-6">
-              <h2><i class="icon-picture"></i> Media Attachments</h2>
+              <h2><i class="fa fa-picture-o"></i> Media Attachments</h2>
               <div id="ui-media-file-upload" tabindex="0" class="dropzone input-area" style="background-color: #FFF; border: 1px solid #999;"></div>
               <!--
               <button type="button" class="form-control input-area" style="padding: 0;">
@@ -99,14 +99,14 @@
                   <li>
                     <input type="hidden" name="links[]" value="<%= url %>">
                     <a href="<%= url %>" target="_blank"><%= url %></a>
-                    <a href="#" class="ui-links-remove-button btn btn-not btn-danger"><i class="icon-minus-sign icon-large"></i></a>
+                    <a href="#" class="ui-links-remove-button btn btn-not btn-danger"><i class="fa fa-minus-square fa-lg"></i></a>
                   </li>
                 </script>
               </ul>
               <div class="input-group">
                 <input id="ui-links-url-input" type="url" class="form-control" placeholder="Media Link">
                 <span class="input-group-btn">
-                  <a id="ui-links-add-button" href="#" class="btn btn-default"><i class="icon-plus-sign icon-large"></i></a>
+                  <a id="ui-links-add-button" href="#" class="btn btn-default"><i class="fa fa-plus-square fa-lg"></i></a>
                 </span>
               </div>
             </div>
@@ -114,7 +114,7 @@
 
           <div class="row ui-wizard-row" id="ui-wizard-submit" style="margin-top: 20px;" hidden>
             <div class="col-md-12">
-              <button class="btn btn-success btn-block btn-lg"><i class="icon-plus"></i> Thank</button>
+              <button class="btn btn-success btn-block btn-lg"><i class="fa fa-plus"></i> Thank</button>
             </div>
           </div>
 
@@ -129,7 +129,7 @@
 {% endblock %}
 
 {% block view_addons %}
-    <!-- 
+    <!--
     <div id="ui-wizard-progress-bar" style="z-index: 900;">
       <div class="container progress progress-info progress-striped">
         <div class="progress-bar animated" id="ui-wizard-progress"></div>

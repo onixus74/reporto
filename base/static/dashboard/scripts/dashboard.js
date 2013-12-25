@@ -84,7 +84,7 @@ $(document).ready(function() {
       }
       */
       reform.widgets.map.setView(loc, 20);
-      $.scrollTo(reform.widgets.map._container, 500, {axis: 'y'});
+      $.scrollTo(reform.widgets.map._container, 500, {axis: 'y', offset: {y: 100}});
     });
   }
   reform.widgets.pagination('#ui-violations-list', reform.data.violationsPagination, reform.urls.violationsDashboard, refreshCallback);

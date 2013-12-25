@@ -28,8 +28,8 @@
 						<td>{{report.category}}</td>
 						<td><a href="{{ report.victim.get_absolute_url }}">{{report.victim}}</a></td>
 						<td>
-							<a href="{% url 'violations:crud-edit' report.id %}" class="btn btn-info"><i class="icon-pencil"></i> Edit</a>
-							<a href="{% url 'violations:crud-delete' report.id %}" class="btn btn-warning"><i class="icon-trash"></i> Delete</a>
+							<a href="{% url 'violations:crud-edit' report.id %}" class="btn btn-info"><i class="fa fa-pencil"></i> Edit</a>
+							<a href="{% url 'violations:crud-delete' report.id %}" class="btn btn-warning"><i class="fa fa-trash"></i> Delete</a>
 						</td>
 					</tr>
 					{% endfor %}
@@ -39,7 +39,7 @@
 	</div>
 	<div class="row">
 		<div class="col-md-12 text-center">
-			<a href="{% url 'violations:crud-create' %}" class="btn btn-lg btn-primary"><i class="icon-plus icon-large"></i> Add Report</a>
+			<a href="{% url 'violations:crud-create' %}" class="btn btn-lg btn-primary"><i class="fa fa-plus fa-lg"></i> Add Report</a>
 		</div>
 	</div>
 

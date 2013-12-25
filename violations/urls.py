@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, url, include
 from django.contrib.auth.decorators import login_required, user_passes_test, \
-  permission_required
+    permission_required
 
 from base.utils.urls import administrator_required
 
@@ -39,4 +39,5 @@ urlpatterns = patterns('',
                        url(r'^categories/', include('violations_categories.urls', namespace="categories")),
                        url(r'^features/',   include('violations_features.urls', namespace="features")),
                        url(r'^victims/',    include('violations_victims.urls', namespace="victims")),
+
                        )

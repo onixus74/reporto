@@ -2,15 +2,16 @@
 | DEPENDENCIES
 \*/
 
-//@import "../theme/new/bootstrap-sass/lib/variables";
-//@import "../theme/new/variables";
+//@import "../theme/bootstrap-sass/lib/variables";
+//@import "../theme/variables";
 
-//@import "../theme/new/bootstrap-sass/lib/mixins";
+//@import "../theme/bootstrap-sass/lib/mixins";
 
-@import "../theme/new/bootstrap-sass/lib/bootstrap";
-@import "../theme/new/bootstrap-sass/lib/theme";
+$icon-font-path: "../theme/bootstrap-sass/fonts/";
+@import "../theme/bootstrap-sass/lib/bootstrap";
+@import "../theme/bootstrap-sass/lib/theme";
 
-
+$fa-font-path: "../theme/font-awesome/fonts/";
 @import "../theme/font-awesome/scss/font-awesome";
 
 //@import "../components/select2-bootstrap-css/lib/select2-bootstrap";
@@ -45,7 +46,7 @@ ol.list {
 }
 */
 .multi-labels-lines-fix {
-  line-height: 1.6;
+  line-height: 1.8;
 }
 
 .btn-quiet {

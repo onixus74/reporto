@@ -10,7 +10,6 @@ from django.template.defaultfilters import slugify
 logger = logging.getLogger(__name__)
 
 
-
 class Category(models.Model):
     slug = models.SlugField(max_length=100, blank=True, null=True)
     definition = models.CharField(max_length=300)
@@ -62,3 +61,8 @@ class Report(models.Model):
         data['media'] = self.media.all()
         # data['comments'] = self.comments.all()
         return data
+
+
+import watson
+
+watson.register(Report)

@@ -15,11 +15,11 @@
               {{report.category}} on {{report.datetime}} at {{report.location_text}}
             {% endif %}
 
-						{% if report.is_verified %}<span class="badge badge-success">Verified <i class="icon-ok"></i></span>{% endif %}
+						{% if report.is_verified %}<span class="badge badge-success">Verified <i class="fa fa-ok"></i></span>{% endif %}
 						{% comment %}
-						{% if report.is_closed %}<span class="badge badge-important">Closed <i class="icon-lock"></i></span>{% endif %}
+						{% if report.is_closed %}<span class="badge badge-important">Closed <i class="fa fa-lock"></i></span>{% endif %}
 						{% endcomment %}
-						{% if user.is_admin %}<a class="btn btn-warning" href="/admin/violations/report/{{report.id}}" target="_blank"><i class="icon-pencil"></i> Edit</a>{% endif %}
+						{% if user.is_admin %}<a class="btn btn-warning" href="/admin/violations/report/{{report.id}}" target="_blank"><i class="fa fa-pencil"></i> Edit</a>{% endif %}
 					</h2>
 				</div>
 			</div>
@@ -34,7 +34,7 @@
 			<div class="row">
 				<div class="col-md-6">
 					<hr>
-					<h2><i class="icon-user"></i> Victim</h2>
+					<h2><i class="fa fa-user"></i> Victim</h2>
 					<dl class="dl-horizontal">
 						<dt>Category</dt>
 						<dd>{{report.victim.get_category_display}}</dd>
@@ -58,7 +58,7 @@
 				</div>
 				<div class="col-md-6">
 					<hr>
-					<h2><i class="icon-male"></i> Aggressor{% if user.is_admin %} <a id="ui-aggressor-edit" href="#" title="Edit" class="btn btn-sm"><i class="icon-pencil"></i></a>{% endif %}</h2>
+					<h2><i class="fa fa-male"></i> Aggressor{% if user.is_admin %} <a id="ui-aggressor-edit" href="#" title="Edit" class="btn btn-sm"><i class="fa fa-pencil"></i></a>{% endif %}</h2>
 					{% if user.is_admin %}
           <p id="ui-aggressor" class="ui-editable_" data-type="textarea" data-value="{{report.aggressor}}" date-toggle="manual" data-pk="{{report.pk}}" data-name="aggressor" data-url="{% url 'violations:update_partial' report.id %}" data-title="Aggressor">{{report.aggressor|default:"N/A"}}</p>
           {% else %}
@@ -70,7 +70,7 @@
 			<div class="row">
 				<div class="col-md-6">
 					<hr>
-					<h2><i class="icon-ellipsis-horizontal"></i> Description{% if user.is_admin %} <a id="ui-description-edit" href="#" title="Edit" class="btn btn-sm"><i class="icon-pencil"></i></a>{% endif %}</h2>
+					<h2><i class="fa fa-ellipsis-h"></i> Description{% if user.is_admin %} <a id="ui-description-edit" href="#" title="Edit" class="btn btn-sm"><i class="fa fa-pencil"></i></a>{% endif %}</h2>
           {% if user.is_admin %}
           <p id="ui-description" class="ui-editable_" data-type="textarea" data-value="{{report.description}}" date-toggle="manual" data-pk="{{report.pk}}" data-name="description" data-url="{% url 'violations:update_partial' report.id %}" data-title="Description">{{report.description|urlize}}</p>
           {% else %}
@@ -85,7 +85,7 @@
 				</div>
 				<div class="col-md-6">
 					<hr>
-					<h2><i class="icon-picture"></i> Media Attachments</h2>{% get_media_prefix as MEDIA_PREFIX %}
+					<h2><i class="fa fa-picture-o"></i> Media Attachments</h2>{% get_media_prefix as MEDIA_PREFIX %}
 					{% if report.media.count %}
 					<ul class="thumbnails">
 						{% for media in report.media.all %}
@@ -127,7 +127,7 @@
 			<div class="row">
 				<div class="col-md-offset-2 col-md-8">
 					<hr>
-					<h2><i class="icon-tags"></i> Features{% if user.is_admin %} <a id="ui-features-edit" href="#" title="Edit" class="btn btn-sm"><i class="icon-pencil"></i></a>{% endif %}</h2>
+					<h2><i class="fa fa-tags"></i> Features{% if user.is_admin %} <a id="ui-features-edit" href="#" title="Edit" class="btn btn-sm"><i class="fa fa-pencil"></i></a>{% endif %}</h2>
 					<ul id="ui-features" class="list-inline ui-editable_" data-type="checklist" data-source="{{features|json|force_escape}}" data-value="[{% for feature in report.features.all %}{{feature.id}},{% endfor %}]" data-pk="{{report.pk}}" data-name="features" data-url="{% url 'violations:update_partial' report.id %}" data-title="Features">
 					{% for feature in report.features.all  %}
 						<li><span class="label label-default">{{feature}}</span></li>
@@ -139,7 +139,7 @@
 			<div class="row">
 				<div class="col-md-offset-1 col-md-10">
 					<hr>
-					<h2><i class="icon-comments"></i> Comments</h2>
+					<h2><i class="fa fa-comments"></i> Comments</h2>
 
 					<ul id="ui-comments" class="list-group">
 						{% for comment in report.comments.all  %}
@@ -159,13 +159,13 @@
 					</div>
 					<div class="col-md-4">
 						<button class="btn btn-block" id="ui-add-comment-attachment-button">
-							<i id="ui-comment-attachment-icon" class="icon-camera icon-3x"></i>
+							<i id="ui-comment-attachment-icon" class="fa fa-camera fa fa-3x"></i>
 							<img id="ui-comment-attachment-image" style="width: 100%;" hidden>
 						</button>
 					</div>
 					<div class="col-md-2">
-						<button id="ui-add-update-comment-button" class="btn btn-block btn-primary" type="button"><i class="icon-plus"></i> Update</button>
-						<button id="ui-add-correction-comment-button" class="btn btn-block btn-danger" type="button"><i class="icon-plus"></i> Correction</button>
+						<button id="ui-add-update-comment-button" class="btn btn-block btn-primary" type="button"><i class="fa fa-plus"></i> Update</button>
+						<button id="ui-add-correction-comment-button" class="btn btn-block btn-danger" type="button"><i class="fa fa-plus"></i> Correction</button>
 					</div>
 				</fieldset>
 			</div>

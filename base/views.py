@@ -4,7 +4,7 @@ from django import forms
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required, user_passes_test, \
-  permission_required
+    permission_required
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.views import redirect_to_login
 from django.core.context_processors import csrf
@@ -28,7 +28,7 @@ logger = logging.getLogger(__name__)
 
 
 @csrf_exempt
-def test(request, *args, **kwargs):
+def test_view(request, *args, **kwargs):
     logger.debug("session: %s", request.session.items())
     logger.debug("method: %s", request.method)
     #logger.debug("body: %s", request.body)
@@ -122,7 +122,9 @@ def logout_view(request, *args, **kwargs):
 paginate_by = 5
 
 
-def home(request, *args, **kwargs):
+def home_view(request, *args, **kwargs):
+    if not request.user.is_authenticated():
+        return login_view(request, *args, **kwargs)
     # if request.user.is_authenticated():
     template_name = "home.html"
     context = {}

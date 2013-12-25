@@ -21,8 +21,8 @@
           <tr>
             <td><a href="{{ object.get_absolute_url }}">{{object.definition}}</a></td>
             <td>
-              <a href="{% url 'violations:categories:edit' object.id %}" class="btn btn-info"><i class="icon-pencil"></i> Edit</a>
-              <a href="{% url 'violations:categories:delete' object.id %}" class="btn btn-warning"><i class="icon-trash"></i> Delete</a>
+              <a href="{% url 'violations:categories:edit' object.id %}" class="btn btn-info"><i class="fa fa-pencil"></i> Edit</a>
+              <a href="{% url 'violations:categories:delete' object.id %}" class="btn btn-warning"><i class="fa fa-trash"></i> Delete</a>
             </td>
           </tr>
           {% endfor %}
@@ -31,21 +31,21 @@
       <div class="ui-pagination text-center">
         <ul class="pagination pagination-sm">
           <li class="{% if current == 1 %}disabled{% endif %}">
-            <a class="ui-pagination-control ui-pagination-first" href="{{request.path}}?page=1"><i class="icon-arrow-left"></i> First</a>
+            <a class="ui-pagination-control ui-pagination-first" href="{{request.path}}?page=1"><i class="fa fa-arrow-left"></i> First</a>
           </li>
 
           <li class="{% if current == 1 %}disabled{% endif %}">
-            <a class="ui-pagination-control ui-pagination-previous" href="{{request.path}}?page={{ current|add:-1 }}"><i class="icon-chevron-left"></i> Previous</a>
+            <a class="ui-pagination-control ui-pagination-previous" href="{{request.path}}?page={{ current|add:-1 }}"><i class="fa fa-chevron-left"></i> Previous</a>
           </li>
 
           <li class="disabled"><span class="ui-pagination-indicator">{{current}} / {{pages}}</span></li>
 
           <li class="{% if current == pages %}disabled{% endif %}">
-            <a class="ui-pagination-control ui-pagination-next" href="{{request.path}}?page={{ current|add:1 }}">Next <i class="icon-chevron-right"></i></a>
+            <a class="ui-pagination-control ui-pagination-next" href="{{request.path}}?page={{ current|add:1 }}">Next <i class="fa fa-chevron-right"></i></a>
           </li>
 
           <li class="{% if current == pages %}disabled{% endif %}">
-            <a class="ui-pagination-control ui-pagination-last" href="{{request.path}}?page={{ pages }}">Last <i class="icon-arrow-right"></i></a>
+            <a class="ui-pagination-control ui-pagination-last" href="{{request.path}}?page={{ pages }}">Last <i class="fa fa-arrow-right"></i></a>
           </li>
         </ul>
       </div>
@@ -53,7 +53,7 @@
   </div>
   <div class="row">
     <div class="col-md-12 text-center">
-      <a href="{% url 'violations:categories:create' %}" class="btn btn-lg btn-primary"><i class="icon-plus icon-large"></i> Add Category</a>
+      <a href="{% url 'violations:categories:create' %}" class="btn btn-lg btn-primary"><i class="fa fa-plus fa-lg"></i> Add Category</a>
     </div>
   </div>
 

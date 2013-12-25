@@ -1,10 +1,7 @@
 
-//@import "../../../../base/static/theme/sass-bootstrap/lib/_variables.scss";
-//@import "../../../../base/static/theme/sass-bootstrap/lib/_mixins.scss";
-
-@import "../../../../base/static/theme/new/bootstrap-sass/lib/variables";
-@import "../../../../base/static/theme/new/variables";
-@import "../../../../base/static/theme/new/bootstrap-sass/lib/mixins";
+@import "../../../../base/static/theme/bootstrap-sass/lib/variables";
+@import "../../../../base/static/theme/variables";
+@import "../../../../base/static/theme/bootstrap-sass/lib/mixins";
 
 
 .ui-timeline-map {
@@ -48,3 +45,9 @@
   }
 }
 */
+
+.ui-list {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+

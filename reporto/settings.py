@@ -172,6 +172,7 @@ INSTALLED_APPS = (
 
     'reversion',
     'mptt',
+    'watson',
 
     # project components
     'users',

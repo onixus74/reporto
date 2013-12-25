@@ -36,10 +36,10 @@
 
           <div class="row ui-wizard-row" id="ui-wizard-victim-witness-buttons">
             <div class="col-md-6" id="ui-wizard-victim-button-container">
-              <a href="javascript:void(0)" class="btn btn-lg btn-block btn-warning" id="ui-wizard-victim-button" data-value="victim" data-class="text-warning"><i class="icon-user icon-2x"></i> Victim</a>
+              <a href="javascript:void(0)" class="btn btn-lg btn-block btn-warning" id="ui-wizard-victim-button" data-value="victim" data-class="text-warning"><i class="fa fa-user fa fa-2x"></i> Victim</a>
             </div>
             <div class="col-md-6" id="ui-wizard-witness-button-container">
-              <a href="javascript:void(0)" class="btn btn-lg btn-block btn-success" id="ui-wizard-witness-button" data-value="witness" data-class="text-success" tabindex="0"><i class="icon-eye-open icon-2x"></i> Witness</a>
+              <a href="javascript:void(0)" class="btn btn-lg btn-block btn-success" id="ui-wizard-witness-button" data-value="witness" data-class="text-success" tabindex="0"><i class="fa fa-eye fa fa-2x"></i> Witness</a>
             </div>
           </div>
 
@@ -57,19 +57,19 @@
 
           <div class="row ui-wizard-row" id="ui-wizard-location-datetime" hidden>
             <div class="col-md-6">
-              <h2><i class="icon-map-marker"></i> Location</h2>
+              <h2><i class="fa fa-map-marker"></i> Location</h2>
               <div id="map" style="width:100%; height: 300px"></div>
               {% render_field form.latitude type="hidden" %}
               {% render_field form.longitude type="hidden" %}
               {#% render_field form.location type="hidden" %#}
               <input type="hidden" id="id_location" name="location">
               <div class="input-group" style="margin-top: 10px;">
-                <span class="input-group-addon"> <i class="icon-map-marker icon-large"></i> </span>
+                <span class="input-group-addon"> <i class="fa fa-map-marker fa-lg"></i> </span>
                 {% render_field form.location_text type="text" placeholder="Location" class="form-control" _data-provide="typeahead" _data-source="reform.data.locations" _autocomplete="off" %}
               </div>
             </div>
             <div class="col-md-6">
-              <h2><i class="icon-calendar"></i><i class="icon-time"></i> Date and Time</h2>
+              <h2><i class="fa fa-calendar"></i><i class="fa fa-clock-o"></i> Date and Time</h2>
               {% render_field form.datetime type="text" _type="datetime-local" class+="form-control" _required="required" style="display: none;" %}
               <div id="dateinput" style="height: 300px;">
               <script type="text/template" id="dateinput-template">
@@ -96,7 +96,7 @@
               </div>
               <input id="id_date" name="date" type="hidden">
               <div class="input-group" style="margin-top: 10px;">
-                <span class="input-group-addon"> <i class="icon-time icon-large"></i> </span>
+                <span class="input-group-addon"> <i class="fa fa-clock-o fa-lg"></i> </span>
                 <input id="id_time" name="time" type="time" class="form-control" placeholder="Time" value="12:00">
               </div>
             </div>
@@ -105,8 +105,8 @@
           <div class="row ui-wizard-row" id="ui-wizard-victim-aggressor" hidden>
 
             <div class="col-md-6" id="ui-wizard-victim-area">
-              <h2 id="ui-reporter-victim-label"><i class="icon-user"></i> Victim</h2>
-              <h2 id="ui-witness-victim-label" hidden><i class="icon-user"></i> Victim Profile</h2>
+              <h2 id="ui-reporter-victim-label"><i class="fa fa-user"></i> Victim</h2>
+              <h2 id="ui-witness-victim-label" hidden><i class="fa fa-user"></i> Victim Profile</h2>
 
               <fieldset id="ui-reporter-victim-fieldset" class="ui-victim-fieldset form-horizontal input-area clean-empty" style="display: none;" disabled>
 
@@ -126,10 +126,10 @@
 
             <div class="col-md-6" id="ui-wizard-aggressor-area">
               <div>
-                <h2 class="pull-left_"><i class="icon-male"></i> Aggressor</h2>
+                <h2 class="pull-left_"><i class="fa fa-male"></i> Aggressor</h2>
                 <!--
                 <h2 class="pull-right">
-                  <a id="ui-aggressor-next" class="btn btn-quiet" title="Next"><i class="icon-arrow-right icon-large"></i></a>
+                  <a id="ui-aggressor-next" class="btn btn-quiet" title="Next"><i class="fa fa-arrow-right fa-lg"></i></a>
                 </h2>
                 -->
               </div>
@@ -140,11 +140,11 @@
 
           <div class="row ui-wizard-row" id="ui-wizard-description-media" hidden>
             <div class="col-md-6">
-              <h2><i class="icon-ellipsis-horizontal"></i> Description</h2>
+              <h2><i class="fa fa-ellipsis-h"></i> Description</h2>
               {% render_field form.description placeholder="Description" required="required" class+="form-control input-area" %}
             </div>
             <div class="col-md-6">
-              <h2><i class="icon-picture"></i> Media Attachments</h2>
+              <h2><i class="fa fa-picture-o"></i> Media Attachments</h2>
               <!--<input name="files[]" type="file" multiple />-->
               <!--<input type="hidden" name="rsid" value="{{report_submit_id}}">-->
               <div id="ui-media-file-upload" tabindex="0" class="dropzone input-area" style="background-color: #FFF; border: 1px solid #999;"></div>
@@ -159,13 +159,13 @@
 
           <div class="row ui-wizard-row" id="ui-wizard-sources-media-links" hidden>
             <div class="col-md-6">
-              <h2><i class="icon-search"></i> Sources</h2>
+              <h2><i class="fa fa-search"></i> Sources</h2>
               <ul id="ui-sources-list" class="list-unstyled">
                 <script id="ui-sources-list-item" type="text/template">
                   <li>
                     <input type="hidden" name="sources[]" value="<%= value %>">
                     <a href="<%= url %>" target="_blank"><%= source %></a>
-                    <a href="#" class="ui-sources-remove-button btn btn-not"><i class="icon-minus-sign icon-large"></i></a>
+                    <a href="#" class="ui-sources-remove-button btn btn-not"><i class="fa fa-minus-square fa-lg"></i></a>
                   </li>
                 </script>
               </ul>
@@ -177,27 +177,27 @@
                   <div class="input-group">
                     <input id="ui-sources-url-input" type="url" class="form-control" placeholder="URL">
                     <span class="input-group-btn">
-                      <a id="ui-sources-add-button" href="#" class="btn btn-default"><i class="icon-plus-sign icon-large"></i></a>
+                      <a id="ui-sources-add-button" href="#" class="btn btn-default"><i class="fa fa-plus-square fa-lg"></i></a>
                     </span>
                   </div>
                 </div>
               </div>
             </div>
             <div class="col-md-6">
-              <h2><i class="icon-link"></i> Media Links</h2>
+              <h2><i class="fa fa-link"></i> Media Links</h2>
               <ul id="ui-links-list" class="list-unstyled">
                 <script id="ui-links-list-item" type="text/template">
                   <li>
                     <input type="hidden" name="links[]" value="<%= url %>">
                     <a href="<%= url %>" target="_blank"><%= url %></a>
-                    <a href="#" class="ui-links-remove-button btn btn-not"><i class="icon-minus-sign icon-large"></i></a>
+                    <a href="#" class="ui-links-remove-button btn btn-not"><i class="fa fa-minus-square fa-lg"></i></a>
                   </li>
                 </script>
               </ul>
               <div class="input-group">
                 <input id="ui-links-url-input" type="url" class="form-control" placeholder="Media Link">
                 <span class="input-group-btn">
-                  <a id="ui-links-add-button" href="#" class="btn btn-default"><i class="icon-plus-sign icon-large"></i></a>
+                  <a id="ui-links-add-button" href="#" class="btn btn-default"><i class="fa fa-plus-square fa-lg"></i></a>
                 </span>
               </div>
             </div>
@@ -205,7 +205,7 @@
 
           <div class="row ui-wizard-row" id="ui-wizard-features" hidden>
             <div class="col-md-12">
-              <h2><i class="icon-tags"></i> Features</h2>
+              <h2><i class="fa fa-tags"></i> Features</h2>
               <!--<input type="text" class="form-control" placeholder="Features">-->
               {% render_field form.features placeholder="Select applicable features" class+="select2 btn-lg" data-style="form-control btn-lg"  %}
             </div>
@@ -213,7 +213,7 @@
 
           <div class="row ui-wizard-row" id="ui-wizard-submit" hidden>
             <div class="col-md-12">
-              <button class="btn btn-danger btn-block btn-lg"><i class="icon-plus"></i> Report</button>
+              <button class="btn btn-danger btn-block btn-lg"><i class="fa fa-plus"></i> Report</button>
             </div>
           </div>
 

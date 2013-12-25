@@ -17,7 +17,7 @@
           <hr>
           <h2 class="text-center">
             {{report.category}} on {{report.datetime}} at {{report.location_text}}
-            {% if user.is_admin %}<a class="btn btn-warning" href="/admin/violations/report/{{report.id}}" target="_blank"><i class="icon-pencil"></i> Edit</a>{% endif %}
+            {% if user.is_admin %}<a class="btn btn-warning" href="/admin/violations/report/{{report.id}}" target="_blank"><i class="fa fa-pencil"></i> Edit</a>{% endif %}
           </h2>
         </div>
       </div>
@@ -32,12 +32,12 @@
       <div class="row">
         <div class="col-md-6">
           <hr>
-          <h2><i class="icon-ellipsis-horizontal"></i> Description</h2>
+          <h2><i class="fa fa-ellipsis-h"></i> Description</h2>
           <p>{{report.description|urlize}}</p>
         </div>
         <div class="col-md-6">
           <hr>
-          <h2><i class="icon-picture"></i> Photos</h2>{% get_media_prefix as MEDIA_PREFIX %}
+          <h2><i class="fa fa-picture-o"></i> Photos</h2>{% get_media_prefix as MEDIA_PREFIX %}
           {% if report.media.count %}
           <ul class="thumbnails">
             {% for media in report.media.all %}

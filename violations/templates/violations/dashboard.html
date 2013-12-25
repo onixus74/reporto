@@ -16,19 +16,19 @@
         {% with report=report_list.0 %}
         <div>
           <h2 style="margin-top: 0;">Latest Report</h2>
-          <span class="label label-default victim"><i class="icon-user"></i> {{report.victim}}</span>
+          <span class="label label-default victim"><i class="fa fa-user"></i> {{report.victim}}</span>
           has been a victim of
           <span class="label label-default category">{{report.category}}</span>
           happened in
-          <span class="label label-default location"><i class="icon-map-marker"></i> {{report.location_text}}</span>
+          <span class="label label-default location"><i class="fa fa-map-marker"></i> {{report.location_text}}</span>
           on
-          <span class="label label-default datetime"><i class="icon-calendar"></i> {{report.datetime}}</span>
-          {% if report.is_verified %}<span class="badge badge-success">Verified <i class="icon-ok"></i></span>{% endif %}
+          <span class="label label-default datetime"><i class="fa fa-calendar"></i> {{report.datetime}}</span>
+          {% if report.is_verified %}<span class="badge badge-success">Verified <i class="fa fa-ok"></i></span>{% endif %}
           {% comment %}
-          {% if report.is_closed %}<span class="badge badge-important">Closed <i class="icon-lock"></i></span>{% endif %}
+          {% if report.is_closed %}<span class="badge badge-important">Closed <i class="fa fa-lock"></i></span>{% endif %}
           {% endcomment %}
           <a class="btn btn-not" href="{% url 'violations:view' report.id %}" target="_blank" title="Click to view report" _data-toggle="modal" _data-target="#ui-report-view-modal">
-            <i class="icon-external-link icon-large"></i>
+            <i class="fa fa-external-link fa-lg"></i>
           </a>
         </div>
         {% endwith %}
@@ -38,7 +38,7 @@
         <h2>There is no reports!</h2>
       </div>
       {% endif %}
-      <a class="btn btn-danger btn-lg pull-right" href="{% url 'violations:submit' %}"><i class="icon-plus"></i> Report a Violation</a>
+      <a class="btn btn-danger btn-lg pull-right" href="{% url 'violations:submit' %}"><i class="fa fa-plus"></i> Report a Violation</a>
     </div>
 
     {% if report_list %}
@@ -72,21 +72,21 @@
             <div class="ui-pagination text-center">
               <ul class="pagination pagination-sm">
                 <li class="{% if current == 1 %}disabled{% endif %}">
-                  <a class="ui-pagination-control ui-pagination-first" href="{{request.path}}?page=1"><i class="icon-arrow-left"></i> First</a>
+                  <a class="ui-pagination-control ui-pagination-first" href="{{request.path}}?page=1"><i class="fa fa-arrow-left"></i> First</a>
                 </li>
 
                 <li class="{% if current == 1 %}disabled{% endif %}">
-                  <a class="ui-pagination-control ui-pagination-previous" href="{{request.path}}?page={{ current|add:-1 }}"><i class="icon-chevron-left"></i> Previous</a>
+                  <a class="ui-pagination-control ui-pagination-previous" href="{{request.path}}?page={{ current|add:-1 }}"><i class="fa fa-chevron-left"></i> Previous</a>
                 </li>
 
                 <li class="disabled"><span class="ui-pagination-indicator">{{current}} / {{pages}}</span></li>
 
                 <li class="{% if current == pages %}disabled{% endif %}">
-                  <a class="ui-pagination-control ui-pagination-next" href="{{request.path}}?page={{ current|add:1 }}">Next <i class="icon-chevron-right"></i></a>
+                  <a class="ui-pagination-control ui-pagination-next" href="{{request.path}}?page={{ current|add:1 }}">Next <i class="fa fa-chevron-right"></i></a>
                 </li>
 
                 <li class="{% if current == pages %}disabled{% endif %}">
-                  <a class="ui-pagination-control ui-pagination-last" href="{{request.path}}?page={{ pages }}">Last <i class="icon-arrow-right"></i></a>
+                  <a class="ui-pagination-control ui-pagination-last" href="{{request.path}}?page={{ pages }}">Last <i class="fa fa-arrow-right"></i></a>
                 </li>
               </ul>
             </div>

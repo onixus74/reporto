@@ -14,7 +14,6 @@ from mptt.models import MPTTModel, TreeForeignKey
 logger = logging.getLogger(__name__)
 
 
-
 class Category(models.Model):
     slug = models.SlugField(max_length=100, blank=True, null=True)
     definition = models.CharField(max_length=300)
@@ -258,3 +257,8 @@ class Report(models.Model):
         data['comments'] = self.comments.all()
         data['aggressor_category_display'] = self.get_aggressor_category_display()
         return data
+
+
+import watson
+
+watson.register(Report)
