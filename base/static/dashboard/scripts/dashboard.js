@@ -1,5 +1,5 @@
 /* jshint strict: true, browser: true, devel: true */
-/* global angular, $ */
+/* global $, L, Dropzone, reform */
 'use strict';
 
 if (!reform) {
@@ -10,10 +10,18 @@ if (!reform) {
   };
 }
 
+
+Highcharts.themes._defaults.chart.style.fontFamily = 'Open Sans';
+Highcharts.themes._defaults.chart.style.fontWeight = "lighter"
+
+Highcharts.setOptions(Highcharts.themes._defaults);
+Highcharts.setOptions(Highcharts.themes.steel);
+
+
 reform.widgets.map = function() {
 
   // create a map in the "map" div, set the view to a given place and zoom
-  var map = reform.widgets.map = L.map('ui-timeline-map')
+  var map = reform.widgets.map = L.map('ui-timeline-map');
 
   map.setView([34.161818161230386, 9.3603515625], 5);
 
@@ -179,8 +187,7 @@ $(document).ready(function() {
   });*/
 
   $(document).ready(function() {
-    console.log(series);
-
+    //console.log(series);
     $('#ui-violations-dates-chart').highcharts({
       chart: {
         type: 'line', //'spline',
@@ -217,6 +224,7 @@ $(document).ready(function() {
         enabled: false
       }
     });
+
   });
 })();
 

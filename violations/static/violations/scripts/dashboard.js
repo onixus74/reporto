@@ -1,5 +1,5 @@
 /* jshint strict: true, browser: true, devel: true */
-/* global angular, $ */
+/* global $, L, Dropzone, reform */
 'use strict';
 
 if (!reform) {

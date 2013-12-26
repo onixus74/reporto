@@ -44,7 +44,8 @@
     "bootstrap-datetimepicker": "~0.0.11",
     "smalot-bootstrap-datetimepicker": "~2.2.0",
     "JVFloat": "*",
-    "jquery.scrollTo": "~1.4.7"
+    "jquery.scrollTo": "~1.4.7",
+    "highcharts-themes": "~0.1.2"
   },
   "devDependencies": {
     "html-inspector": "~0.3.0"

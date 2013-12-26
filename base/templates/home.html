@@ -30,7 +30,7 @@
               <span class="label label-default datetime"><i class="fa fa-calendar"></i> {{report.datetime}}</span>
               {% if report.is_verified %}<span class="badge badge-success">Verified <i class="fa fa-ok"></i></span>{% endif %}
               <a class="btn btn-not" href="{% url 'violations:view' report.id %}" target="_blank" title="Click to view report" _data-toggle="modal" _data-target="#ui-report-view-modal">
-                  <i class="fa fa-external-link fa-lg"></i>
+                  <i class="fa fa-external-link-square fa-lg"></i>
               </a>
           </div>
           {% endwith %}
@@ -325,6 +325,7 @@
   <script src="{% static 'components/leaflet.markerclusterer/dist/leaflet.markercluster-src.js' %}"></script>
   <script src="{% static 'components/Leaflet.awesome-markers/dist/leaflet.awesome-markers.js' %}"></script>
   <script src="{% static 'components/highcharts.com/js/highcharts.src.js' %}"></script>
+  <script src="{% static 'components/highcharts-themes/dist/highcharts-themes.js' %}"></script>
   <script src="{% static 'components/highcharts.com/js/modules/exporting.src.js' %}"></script>
   <script src="{% static 'components/jquery.scrollTo/jquery.scrollTo.js' %}"></script>
   <script src="{% static 'utils/pagination.js' %}"></script>
