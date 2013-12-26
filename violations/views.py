@@ -19,7 +19,7 @@ from django.views.generic.base import View
 from django.views.generic.edit import CreateView, UpdateView, DeleteView, CreateView, UpdateView, DeleteView
 
 from base.utils.views import JSONResponse, JSONDataView, ListHybridResponseMixin, PaginatedListHybridResponseMixin, DetailHybridResponseMixin, AjaxableResponseMixin, ListHybridResponseMixin, PaginatedListHybridResponseMixin, DetailHybridResponseMixin
-from thanks.models import Category as ThankCategory, Report as ThankReport
+from appreciations.models import Category as AppreciationCategory, Report as AppreciationReport
 from users.views import VictimForm as VictimUpdateForm
 from violations_victims.views import VictimForm as BaseVictimForm
 
@@ -62,7 +62,7 @@ class ReportsDashboard(PaginatedListHybridResponseMixin, ListView):
             append_violations_statistics(context)
 
             context['violations_locations'] = Report.objects.values('latitude', 'longitude', 'category__definition', 'pk')
-            context['thanks_locations'] = ThankReport.objects.values('latitude', 'longitude', 'category__definition', 'pk')
+            context['appreciations_locations'] = AppreciationReport.objects.values('latitude', 'longitude', 'category__definition', 'pk')
 
         return context
 
@@ -633,7 +633,7 @@ def statistics(request, *args, **kwargs):
         response = {}
 
         append_violations_statistics(response)
-        append_thanks_statistics(response)
+        append_appreciations_statistics(response)
 
         response = JSONResponse(response)
 
@@ -676,14 +676,14 @@ def append_violations_statistics(context):
     return context
 
 
-def append_thanks_statistics(context):
+def append_appreciations_statistics(context):
 
-    context['thanks_categories'] = [category.__unicode__() for category in ThankCategory.objects.all()]
+    context['appreciations_categories'] = [category.__unicode__() for category in AppreciationCategory.objects.all()]
 
-    context['thanks_count'] = ThankReport.objects.count()
+    context['appreciations_count'] = AppreciationReport.objects.count()
 
-    thanks_by_date = ThankReport.objects.extra({'date': 'date(datetime)'}).values('date').annotate(Count('id')).order_by('date')
-    context['thanks_by_date'] = [{'date': i['date'], 'count': i['id__count']} for i in thanks_by_date]
+    appreciations_by_date = AppreciationReport.objects.extra({'date': 'date(datetime)'}).values('date').annotate(Count('id')).order_by('date')
+    context['appreciations_by_date'] = [{'date': i['date'], 'count': i['id__count']} for i in appreciations_by_date]
 
     return context
 

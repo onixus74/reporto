@@ -190,8 +190,8 @@ INSTALLED_APPS = (
     'violations_categories',
     'violations_features',
     'violations_victims',
-    'thanks',
-    'thanks_categories',
+    'appreciations',
+    'appreciations_categories',
 
     # project dependencies
     'form_utils',
@@ -270,7 +270,7 @@ LOGGING = {
             'handlers': ['console'],
             'level': 'DEBUG',
         },
-        'thanks': {
+        'appreciations': {
             'handlers': ['console'],
             'level': 'DEBUG',
         }

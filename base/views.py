@@ -14,11 +14,11 @@ from django.views.decorators.csrf import csrf_exempt
 #from django.views.decorators.http import require_POST
 
 #from base.utils.views import JSONResponse
-from thanks.models import Report as ThankReport
+from appreciations.models import Report as AppreciationReport
 from users.forms import UserCreationForm
 from users.models import User
 from violations.models import Report as ViolationReport
-from violations.views import append_violations_statistics, append_thanks_statistics
+from violations.views import append_violations_statistics, append_appreciations_statistics
 
 
 logger = logging.getLogger(__name__)
@@ -91,7 +91,7 @@ def login_view(request, *args, **kwargs):
         'form': form,
         'next': request.REQUEST.get('next', '/'),
         'violations': ViolationReport.objects.count(),
-        'thanks': ThankReport.objects.count()
+        'appreciations': AppreciationReport.objects.count()
     })
 
     # if request.method == 'POST':
@@ -147,32 +147,32 @@ def home_view(request, *args, **kwargs):
         'is_paginated': violations_paginator.num_pages > 1
     }
 
-    thanks = ThankReport.objects.all()
-    thanks_paginator = Paginator(thanks, paginate_by)
+    appreciations = AppreciationReport.objects.all()
+    appreciations_paginator = Paginator(appreciations, paginate_by)
 
-    thanks_page = request.GET.get('thanks-page')
+    appreciations_page = request.GET.get('appreciations-page')
     try:
-        thanks = thanks_paginator.page(thanks_page)
+        appreciations = appreciations_paginator.page(appreciations_page)
     except PageNotAnInteger:
-        thanks_page = 1
-        thanks = thanks_paginator.page(thanks_page)
+        appreciations_page = 1
+        appreciations = appreciations_paginator.page(appreciations_page)
     except EmptyPage:
-        thanks_page = thanks_paginator.num_pages
-        thanks = thanks_paginator.page(thanks_page)
+        appreciations_page = appreciations_paginator.num_pages
+        appreciations = appreciations_paginator.page(appreciations_page)
 
-    context['thanks_list'] = thanks
-    context['thanks_pagination'] = {
-        'count': thanks_paginator.count,
-        'pages': thanks_paginator.num_pages,
-        'current': thanks.number,
-        'is_paginated': thanks_paginator.num_pages > 1
+    context['appreciations_list'] = appreciations
+    context['appreciations_pagination'] = {
+        'count': appreciations_paginator.count,
+        'pages': appreciations_paginator.num_pages,
+        'current': appreciations.number,
+        'is_paginated': appreciations_paginator.num_pages > 1
     }
 
     append_violations_statistics(context)
-    append_thanks_statistics(context)
+    append_appreciations_statistics(context)
 
     context['violations_locations'] = ViolationReport.objects.values('latitude', 'longitude', 'category__definition', 'pk')
-    context['thanks_locations'] = ThankReport.objects.values('latitude', 'longitude', 'category__definition', 'pk')
+    context['appreciations_locations'] = AppreciationReport.objects.values('latitude', 'longitude', 'category__definition', 'pk')
 
     #context = RequestContext(request, context)
     # context.update(csrf(request))

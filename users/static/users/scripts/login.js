@@ -22,11 +22,11 @@ $(document).ready(function() {
       dateMax = serie.data[serie.data.length - 1][0];
 
       serie = {
-        name: 'Thanks',
+        name: 'Appreciations',
         color: '#28b262',
         data: []
       };
-      statistics.thanks_by_date.forEach(function(report) {
+      statistics.appreciations_by_date.forEach(function(report) {
         serie.data.push([new Date(report.date).getTime(), report.count]);
       });
       if (!serie.data[0] || serie.data[0][0] > dateMin)
@@ -43,7 +43,7 @@ $(document).ready(function() {
           zoomType: 'x',
         },
         title: {
-          text: 'Violations/Thanks by date'
+          text: 'Violations/Appreciations by date'
         },
         subtitle: {
           text: document.ontouchstart === undefined ?
@@ -58,7 +58,7 @@ $(document).ready(function() {
         },
         yAxis: {
           title: {
-            text: 'Violations/Thanks Number'
+            text: 'Violations/Appreciations Number'
           },
           min: 0
         },

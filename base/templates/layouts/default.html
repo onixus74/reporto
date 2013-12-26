@@ -144,11 +144,11 @@
             {% url 'violations:submit' as url %}
             <li{% if request.path_info == url %} class="active"{% endif %}><a href="{{url}}"><i class="fa fa-plus"></i> Report a Violation</a></li>
             {% comment %}
-            {% url 'thanks:dashboard' as url %}
-            <li{% if request.path_info == url %} class="active"{% endif %}><a href="{{url}}">Thanks</a></li>
+            {% url 'appreciations:dashboard' as url %}
+            <li{% if request.path_info == url %} class="active"{% endif %}><a href="{{url}}">Appreciations</a></li>
             {% endcomment %}
-            {% url 'thanks:submit' as url %}
-            <li{% if request.path_info == url %} class="active"{% endif %}><a href="{{url}}"><i class="fa fa-plus"></i> Thank a Security Officer</a></li>
+            {% url 'appreciations:submit' as url %}
+            <li{% if request.path_info == url %} class="active"{% endif %}><a href="{{url}}"><i class="fa fa-plus"></i> Appreciate Police Work</a></li>
 						{% if user.role == "A" %}
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Administration<b class="caret"></b></a>
@@ -158,7 +158,7 @@
 								<li><a href="{% url 'violations:categories:list' %}">Violation Categories</a></li>
 								<li><a href="{% url 'violations:features:list' %}">Violation Features</a></li>
 								<li><a href="{% url 'violations:victims:list' %}">Violation Victims</a></li>
-								<li><a href="{% url 'thanks:categories:list' %}">Thank Categories</a></li>
+								<li><a href="{% url 'appreciations:categories:list' %}">Appreciation Categories</a></li>
 								<li class="divider"></li>
 								<li><a href="/admin">Site Administration</a></li>
 							</ul>

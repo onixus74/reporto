@@ -26,7 +26,7 @@ urlpatterns = patterns('',
                        url(r'^users/',      include('users.urls', namespace="users")),
 
                        url(r'^violations/',    include('violations.urls',    namespace='violations')),
-                       url(r'^thanks/',    include('thanks.urls',    namespace='thanks')),
+                       url(r'^appreciations/',    include('appreciations.urls',    namespace='appreciations')),
 
                        url(r"^search/", include("watson.urls", namespace="search"), name='search'),
                        url(r'^report_builder/', include('report_builder.urls'))

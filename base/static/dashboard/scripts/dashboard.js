@@ -29,7 +29,7 @@ reform.widgets.map = function() {
     markerColor: 'red'
   });
 
-  var thankMarker = L.AwesomeMarkers.icon({
+  var appreciationMarker = L.AwesomeMarkers.icon({
     icon: 'star',
     markerColor: 'green'
   });
@@ -43,12 +43,12 @@ reform.widgets.map = function() {
     marker.bindPopup('<a href="' + reform.urls.violationView.replace('0', loc.pk) + '" target="_blank">' + loc.category__definition + '</a>');
     return marker;
   }));
-  markers.addLayers(reform.data.thanksLocations.map(function(loc) {
+  markers.addLayers(reform.data.appreciationsLocations.map(function(loc) {
     var marker = L.marker(L.latLng(loc.latitude, loc.longitude), {
       title: loc.category__definition,
-      icon: thankMarker
+      icon: appreciationMarker
     });
-    marker.bindPopup('<a href="' + reform.urls.thankView.replace('0', loc.pk) + '" target="_blank">' + loc.category__definition + '</a>');
+    marker.bindPopup('<a href="' + reform.urls.appreciationView.replace('0', loc.pk) + '" target="_blank">' + loc.category__definition + '</a>');
     return marker;
   }));
   map.addLayer(markers);
@@ -123,9 +123,9 @@ $(document).ready(function() {
     updateMarkers(list)
     updateReportLinks(list, $('#ui-violation-view-modal'));
   });
-  reform.widgets.pagination('#ui-thanks-list', reform.data.thanksPagination, reform.urls.thanksDashboard, function(list) {
+  reform.widgets.pagination('#ui-appreciations-list', reform.data.appreciationsPagination, reform.urls.appreciationsDashboard, function(list) {
     updateMarkers(list)
-    updateReportLinks(list, $('#ui-thank-view-modal'));
+    updateReportLinks(list, $('#ui-appreciation-view-modal'));
   });
 });
 
@@ -150,11 +150,11 @@ $(document).ready(function() {
   dateMax = serie.data[serie.data.length - 1][0];
 
   serie = {
-    name: 'Thanks',
+    name: 'Appreciations',
     color: '#28b262',
     data: []
   };
-  reform.data.thanksByDate.forEach(function(violation) {
+  reform.data.appreciationsByDate.forEach(function(violation) {
     serie.data.push([new Date(violation.date).getTime(), violation.count]);
   });
   if (!serie.data[0] || serie.data[0][0] > dateMin)
@@ -187,7 +187,7 @@ $(document).ready(function() {
         zoomType: 'x',
       },
       title: {
-        text: 'Violations/Thanks by date'
+        text: 'Violations/Appreciations by date'
       },
       subtitle: {
         text: document.ontouchstart === undefined ?
@@ -202,14 +202,14 @@ $(document).ready(function() {
       },
       yAxis: {
         title: {
-          text: 'Violations/Thanks Number'
+          text: 'Violations/Appreciations Number'
         },
         min: 0
       },
       tooltip: {
         formatter: function() {
           return '<b>' + this.series.name + '</b><br/>' +
-            Highcharts.dateFormat('%e. %b', this.x) + ': ' + this.y + ' violations/thanks';
+            Highcharts.dateFormat('%e. %b', this.x) + ': ' + this.y + ' violations/appreciations';
         }
       },
       series: series,

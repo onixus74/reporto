@@ -10427,16 +10427,21 @@ body {
 /*-------------------------------------------------
 | RESPONSIVE
 \*/
+/* Extra small devices (phones, less than 768px) */
+/* No media query since this is the default in Bootstrap */
+/* Small devices (tablets, 768px and up) */
+/* Medium devices (desktops, 992px and up) */
+/* Large devices (large desktops, 1200px and up) */
 /* Large desktop */
 /* Portrait tablet to landscape and desktop */
 @media (min-width: 768px) and (max-width: 979px) {
-  /* line 245, main.scss */
+  /* line 267, main.scss */
   .container.navbar-wrapper {
     margin-bottom: 0;
     width: auto;
   }
 
-  /* line 250, main.scss */
+  /* line 272, main.scss */
   #footer {
     padding-left: 20px;
     padding-right: 20px;
@@ -10444,29 +10449,29 @@ body {
 }
 /* Landscape phone to portrait tablet */
 @media (max-width: 767px) {
-  /* line 260, main.scss */
+  /* line 282, main.scss */
   body {
     padding-top: 70px;
     padding-bottom: 50px;
   }
 
-  /* line 265, main.scss */
+  /* line 287, main.scss */
   .container.navbar-wrapper {
     margin-bottom: 0;
     width: auto;
   }
 
-  /* line 270, main.scss */
+  /* line 292, main.scss */
   .navbar-inner {
     margin: -20px;
   }
 
-  /* line 274, main.scss */
+  /* line 296, main.scss */
   #top-bg {
     display: none;
   }
 
-  /* line 278, main.scss */
+  /* line 300, main.scss */
   #footer {
     padding-left: 20px;
     padding-right: 20px;
@@ -10474,30 +10479,30 @@ body {
 }
 /* Landscape phones and down */
 @media (max-width: 480px) {
-  /* line 288, main.scss */
+  /* line 310, main.scss */
   body {
     padding-left: 0;
     padding-right: 0;
   }
 
-  /* line 292, main.scss */
+  /* line 314, main.scss */
   .container.navbar-wrapper {
     margin-bottom: 0;
     width: auto;
   }
 
-  /* line 297, main.scss */
+  /* line 319, main.scss */
   #footer {
     padding-left: 20px;
     padding-right: 20px;
   }
 
-  /* line 302, main.scss */
+  /* line 324, main.scss */
   .navbar-inner {
     margin: -20px;
   }
 
-  /* line 306, main.scss */
+  /* line 328, main.scss */
   #footer {
     padding-left: 20px;
     padding-right: 20px;
@@ -10536,7 +10541,7 @@ body {
 
 }
 */
-/* line 349, main.scss */
+/* line 371, main.scss */
 #mainView {
   position: fixed;
   z-index: 99999;
@@ -10614,17 +10619,17 @@ body {
 /*-------------------------------------------------
 | Fixes
 \*/
-/* line 430, main.scss */
+/* line 452, main.scss */
 *[hidden] {
   display: none;
 }
 
-/* line 431, main.scss */
+/* line 453, main.scss */
 input[hidden] {
   display: none;
 }
 
-/* line 433, main.scss */
+/* line 455, main.scss */
 .ui-pnotify .alert {
   margin-bottom: 0;
 }
@@ -10632,7 +10637,7 @@ input[hidden] {
 /*-------------------------------------------------
 | Leaflet Fixes
 \*/
-/* line 442, main.scss */
+/* line 464, main.scss */
 .leaflet-top, .leaflet-bottom {
   z-index: auto !important;
 }
@@ -10640,7 +10645,7 @@ input[hidden] {
 /*-------------------------------------------------
 | typeahead.js
 \*/
-/* line 452, main.scss */
+/* line 474, main.scss */
 .typeahead,
 .tt-query,
 .tt-hint {
@@ -10656,28 +10661,28 @@ input[hidden] {
   outline: none;
 }
 
-/* line 465, main.scss */
+/* line 487, main.scss */
 .typeahead {
   background-color: #fff;
 }
 
-/* line 469, main.scss */
+/* line 491, main.scss */
 .typeahead:focus {
   border: 2px solid #0097cf;
 }
 
-/* line 473, main.scss */
+/* line 495, main.scss */
 .tt-query {
   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
 }
 
-/* line 477, main.scss */
+/* line 499, main.scss */
 .tt-hint {
   color: #999999;
 }
 
-/* line 481, main.scss */
+/* line 503, main.scss */
 .tt-dropdown-menu {
   width: 422px;
   margin-top: 12px;
@@ -10690,35 +10695,35 @@ input[hidden] {
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
 }
 
-/* line 492, main.scss */
+/* line 514, main.scss */
 .tt-suggestion {
   padding: 3px 20px;
   font-size: 18px;
   line-height: 24px;
 }
 
-/* line 498, main.scss */
+/* line 520, main.scss */
 .tt-suggestion.tt-is-under-cursor {
   color: #fff;
   background-color: #0097cf;
 }
 
-/* line 504, main.scss */
+/* line 526, main.scss */
 .tt-suggestion p {
   margin: 0;
 }
 
-/* line 511, main.scss */
+/* line 533, main.scss */
 .asteriskField {
   color: #D40000;
 }
 
-/* line 515, main.scss */
+/* line 537, main.scss */
 .asteriskField:before {
   content: ' (';
 }
 
-/* line 519, main.scss */
+/* line 541, main.scss */
 .asteriskField:after {
   content: ')';
 }

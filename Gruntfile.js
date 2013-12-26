@@ -172,7 +172,7 @@ module.exports = function(grunt) {
 
   makeDjangoAppConfig(config, 'users');
   makeDjangoAppConfig(config, 'violations');
-  makeDjangoAppConfig(config, 'thanks');
+  makeDjangoAppConfig(config, 'appreciations');
 
   grunt.initConfig(config);
 
@@ -189,7 +189,7 @@ module.exports = function(grunt) {
   grunt.registerTask('users', ['compass:users', 'cssmin:users', 'uglify:users']);
   //grunt.registerTask('dashboard', ['compass:dashboard', 'cssmin:dashboard', 'uglify:dashboard']);
   grunt.registerTask('violations', ['compass:violations', 'cssmin:violations', 'uglify:violations']);
-  grunt.registerTask('thanks', ['compass:thanks', 'cssmin:thanks', 'uglify:thanks']);
-  grunt.registerTask('default', ['base', 'users', 'violations', 'thanks']);
+  grunt.registerTask('appreciations', ['compass:appreciations', 'cssmin:appreciations', 'uglify:appreciations']);
+  grunt.registerTask('default', ['base', 'users', 'violations', 'appreciations']);
 
 };

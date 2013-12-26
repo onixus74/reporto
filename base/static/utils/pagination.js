@@ -116,7 +116,7 @@ $(document).ready(function() {
     });
   }
   reform.widgets.pagination('#ui-violations-list', reform.data.violationsPagination, reform.urls.violationsDashboard, refreshCallback);
-  reform.widgets.pagination('#ui-thanks-list', reform.data.thanksPagination, reform.urls.thanksDashboard, refreshCallback);
+  reform.widgets.pagination('#ui-appreciations-list', reform.data.appreciationsPagination, reform.urls.appreciationsDashboard, refreshCallback);
 });
 
 */

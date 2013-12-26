@@ -2,17 +2,22 @@
 
 {% load static custom compress %}
 
-{% block view_title %}Violations/Thanks Dashboard | {% endblock %}
+{% block view_title %}Violations/Appreciations Dashboard | {% endblock %}
 
 {% block view_content %}
 
     <div class="page-header">
-      <h1 class="text-center">Violations/Thanks Dashboard</h1>
+      <h1 class="text-center">Violations/Appreciations Dashboard</h1>
     </div>
 
     <div class="jumbotron clearfix" style="padding: 20px 40px;">
+      <div class="btn-group-vertical pull-right">
+        <a class="btn btn-danger btn-lg" href="{% url 'violations:submit' %}" style="margin: 10px"><i class="fa fa-plus"></i> Report a Violation</a>
+        <a class="btn btn-success btn-lg" href="{% url 'appreciations:submit' %}" style="margin: 10px"><i class="fa fa-plus"></i> Appreciate Police Work</a>
+      </div>
+
       {% if violations_list %}
-      <div class="pull-left" style="margin: 0;">
+      <div style="margin: 0;">
           {% with report=violations_list.0 %}
           <div>
               <h2 style="margin-top: 0;">Latest Report</h2>
@@ -30,18 +35,15 @@
           </div>
           {% endwith %}
       </div>
-      {% elif thanks_list %}
+      {% elif appreciations_list %}
       {% else %}
-      <div class="pull-left" style="margin: 0;">
+      <div style="margin: 0;">
         <h2>There is no reports!</h2>
       </div>
       {% endif %}
-
-      <a class="btn btn-danger btn-lg pull-right" href="{% url 'violations:submit' %}"><i class="fa fa-plus"></i> Report a Violation</a>
-      <a class="btn btn-success btn-lg pull-right" href="{% url 'thanks:submit' %}"><i class="fa fa-plus"></i> Thank a Security Officer</a>
     </div>
 
-    {% if violations_list or thanks_list %}
+    {% if violations_list or appreciations_list %}
     <div class="well">
 
       <!--
@@ -126,12 +128,12 @@
         <div class="col-md-6" style="margin-top: 20px;">
           <div class="panel panel-default">
             <div class="panel-heading">
-              <h2 class="panel-title">Thanks</h2>
+              <h2 class="panel-title">Appreciations</h2>
             </div>
             <div class="panel-body">
-              <div id="ui-thanks-timeline-list" class="ui-timeline-list clearfix">
+              <div id="ui-appreciations-timeline-list" class="ui-timeline-list clearfix">
 
-                <div id="ui-thanks-search" class="ui-search">
+                <div id="ui-appreciations-search" class="ui-search">
                   <form action="{% url 'search:search' %}">
                     <div class="input-group">
                       <input name="q" value="{{request.GET.q}}" class="form-control" placeholder="Type to search ...">
@@ -145,34 +147,34 @@
 
                 <div class="ui-pagination text-center">
                   <ul class="pagination pagination-sm">
-                    <li class="{% if thanks_pagination.current == 1 %}disabled{% endif %}">
-                      <a class="ui-pagination-control ui-pagination-first" href="{{request.path}}?thanks-page=1"><i class="fa fa-arrow-left"></i> First</a>
+                    <li class="{% if appreciations_pagination.current == 1 %}disabled{% endif %}">
+                      <a class="ui-pagination-control ui-pagination-first" href="{{request.path}}?appreciations-page=1"><i class="fa fa-arrow-left"></i> First</a>
                     </li>
 
-                    <li class="{% if thanks_pagination.current == 1 %}disabled{% endif %}">
-                      <a class="ui-pagination-control ui-pagination-previous" href="{{request.path}}?thanks-page={{ thanks_pagination.current|add:-1 }}"><i class="fa fa-chevron-left"></i> Previous</a>
+                    <li class="{% if appreciations_pagination.current == 1 %}disabled{% endif %}">
+                      <a class="ui-pagination-control ui-pagination-previous" href="{{request.path}}?appreciations-page={{ appreciations_pagination.current|add:-1 }}"><i class="fa fa-chevron-left"></i> Previous</a>
                     </li>
 
-                    <li class="disabled"><span class="ui-pagination-indicator">{{thanks_pagination.current}} / {{thanks_pagination.pages}}</span></li>
+                    <li class="disabled"><span class="ui-pagination-indicator">{{appreciations_pagination.current}} / {{appreciations_pagination.pages}}</span></li>
 
-                    <li class="{% if thanks_pagination.current == thanks_pagination.pages %}disabled{% endif %}">
-                      <a class="ui-pagination-control ui-pagination-next" href="{{request.path}}?thanks-page={{ thanks_pagination.current|add:1 }}">Next <i class="fa fa-chevron-right"></i></a>
+                    <li class="{% if appreciations_pagination.current == appreciations_pagination.pages %}disabled{% endif %}">
+                      <a class="ui-pagination-control ui-pagination-next" href="{{request.path}}?appreciations-page={{ appreciations_pagination.current|add:1 }}">Next <i class="fa fa-chevron-right"></i></a>
                     </li>
 
-                    <li class="{% if thanks_pagination.current == thanks_pagination.pages %}disabled{% endif %}">
-                      <a class="ui-pagination-control ui-pagination-last" href="{{request.path}}?thanks-page={{ thanks_pagination.pages }}">Last <i class="fa fa-arrow-right"></i></a>
+                    <li class="{% if appreciations_pagination.current == appreciations_pagination.pages %}disabled{% endif %}">
+                      <a class="ui-pagination-control ui-pagination-last" href="{{request.path}}?appreciations-page={{ appreciations_pagination.pages }}">Last <i class="fa fa-arrow-right"></i></a>
                     </li>
                   </ul>
                 </div>
 
-                <ul id="ui-thanks-list" class="ui-list list-group">
-                  {% include "thanks/dashboard_thanks_list.html" with report_list=thanks_list %}
+                <ul id="ui-appreciations-list" class="ui-list list-group">
+                  {% include "appreciations/dashboard_appreciations_list.html" with report_list=appreciations_list %}
                 </ul>
 
               </div>
             </div>
           </div>
-          <div id="ui-stats-thanks-by-category-chart" style="margin-top: 20px;"></div>
+          <div id="ui-stats-appreciations-by-category-chart" style="margin-top: 20px;"></div>
         </div>
       </div>
 
@@ -241,13 +243,13 @@
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 
-<!-- Thank Modal -->
-<div id="ui-thank-view-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ui-thank-view-modal-label" aria-hidden="true">
+<!-- Appreciation Modal -->
+<div id="ui-appreciation-view-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ui-appreciation-view-modal-label" aria-hidden="true">
   <div class="modal-dialog" style="width: 90%;">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="ui-thank-view-modal-label">Thank Details</h4>
+        <h4 class="modal-title" id="ui-appreciation-view-modal-label">Appreciation Details</h4>
       </div>
       <div class="modal-body">
         ...
@@ -262,7 +264,7 @@
 {% endblock %}
 
 {% block view_styles %}
-  {% if violations_list or thanks_list %}
+  {% if violations_list or appreciations_list %}
   {% compress css %}
   <link rel="stylesheet" href="{% static 'components/leaflet/dist/leaflet.css'%}" />
   <link rel="stylesheet" href="{% static 'components/leaflet.markerclusterer/dist/MarkerCluster.Default.css'%}" />
@@ -282,12 +284,12 @@
 {% endblock %}
 
 {% block view_scripts %}
-  {% if violations_list or thanks_list %}
+  {% if violations_list or appreciations_list %}
   <script type="text/javascript">
     reform.urls.violationView = {% url 'violations:view' 0 as violation_view_url %}{{violation_view_url|json}};
     reform.urls.violationsDashboard = {% url 'violations:dashboard' as violation_dashboard_url %}{{violation_dashboard_url|json}};
-    reform.urls.thanksDashboard = {% url 'thanks:dashboard' as violation_dashboard_url %}{{violation_dashboard_url|json}};
-    reform.urls.thankView = {% url 'thanks:view' 0 as thank_view_url %}{{thank_view_url|json}};
+    reform.urls.appreciationsDashboard = {% url 'appreciations:dashboard' as violation_dashboard_url %}{{violation_dashboard_url|json}};
+    reform.urls.appreciationView = {% url 'appreciations:view' 0 as appreciation_view_url %}{{appreciation_view_url|json}};
 
     reform.data.violationsCategories = {{violations_categories|json}}
     reform.data.violationsFeatures = {{violations_features|json}}
@@ -298,8 +300,8 @@
     reform.data.violationsByDate = {{violations_by_date|json}}
     reform.data.violationsByCategoryByDate = {{violations_by_category_by_date|json}}
     reform.data.violationsLocations = {{violations_locations|json}}
-    reform.data.thanksByDate = {{thanks_by_date|json}}
-    reform.data.thanksLocations = {{thanks_locations|json}}
+    reform.data.appreciationsByDate = {{appreciations_by_date|json}}
+    reform.data.appreciationsLocations = {{appreciations_locations|json}}
     reform.data.timeline = {
       pages: {{violations_pagination.pages|json}},
       current: {{violations_pagination.current|json}},
@@ -310,10 +312,10 @@
       current: {{violations_pagination.current|json}},
       count: {{violations_pagination.count|json}},
     };
-    reform.data.thanksPagination = {
-      pages: {{thanks_pagination.pages|json}},
-      current: {{thanks_pagination.current|json}},
-      count: {{thanks_pagination.count|json}},
+    reform.data.appreciationsPagination = {
+      pages: {{appreciations_pagination.pages|json}},
+      current: {{appreciations_pagination.current|json}},
+      count: {{appreciations_pagination.count|json}},
     };
   </script>
   {% compress js %}

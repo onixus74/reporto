@@ -1,0 +1,52 @@
+{% extends "layouts/default.html" %}
+
+{% load crispy_forms_tags %}
+{% load widget_tweaks %}
+
+{% block view_title %}New Appreciation Category | {% endblock %}
+
+{% block view_content %}
+
+	<div class="page-header">
+		<h1 class="text-center">Appreciation Category <small>Add</small></h1>
+	</div>
+
+	{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+	<div class="row">
+		<div class="col-md-offset-2 col-md-8">
+
+			{% comment %}
+				<form>
+					{% for field in form %}
+						<div class="form-group">
+							{#% {{ field.label_tag }} %#}
+							<label class="control-label" for="{{ field.id }}">{{ field.label }}</label>
+							<div class="controls">
+								{{ field }}
+								<span class="help-block">
+									<p class="text-danger">{{ field.errors }}</p>
+								</span>
+							</div>
+
+						</div>
+					{% endfor %}
+				</form>
+			{% endcomment %}
+
+			<form class="form-horizontal" action="{% url 'appreciations:categories:create' %}" method="post">
+				{% csrf_token %}
+
+				{{form|crispy}}
+
+				<div class="form-actions">
+					<button type="submit" class="btn btn-primary">Submit</button>
+					<a href="{% url 'appreciations:categories:list' %}" class="btn btn-default">Cancel</a>
+				</div>
+
+			</form>
+
+		</div>
+	</div>
+
+{% endblock %}
