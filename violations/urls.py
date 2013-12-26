@@ -1,7 +1,5 @@
 from django.conf.urls import patterns, url, include
-from django.contrib.auth.decorators import login_required, user_passes_test, \
-    permission_required
-
+from django.contrib.auth.decorators import login_required, user_passes_test, permission_required
 from base.utils.urls import administrator_required
 
 from .views import *
@@ -19,7 +17,7 @@ urlpatterns = patterns('',
                        #url(r'^submit/public$',      ReportSubmitPublicView.as_view(), name='submit-public'),
                        #url(r'^submit/upload$',      login_required(submit_upload),                     name='submit-upload'),
                        url(r'^(?P<pk>\d+)(\.(?P<extension>(json)))?$',    login_required(ReportView.as_view()),             name='view'),
-                       url(r'^(?P<pk>\d+)/partial$',    login_required(ReportPartialView.as_view()),             name='view_pupdate'),
+                       url(r'^(?P<pk>\d+)/partial$',    login_required(ReportPartialView.as_view()),             name='view_partial'),
                        #url(r'^(?P<pk>\d+)$',    login_required(ReportView.as_view()),             name='view'),
                        url(r'^(?P<pk>\d+)/update$',  login_required(report_update),                    name='update_partial'),
                        url(r'^(?P<pk>\d+)/verify$',  login_required(report_verify),                    name='verify'),

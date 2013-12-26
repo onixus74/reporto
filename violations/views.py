@@ -1,52 +1,29 @@
-from datetime import datetime, date
+import logging
+logger = logging.getLogger(__name__)
+
+from datetime import datetime
 import difflib
-import json
-import logging
-import logging
 from math import radians, cos, sin, asin, sqrt
-import os
-import shutil
-import uuid
 
 from django import forms
-from django.conf import settings
 from django.contrib.auth.decorators import login_required, permission_required
-from django.core import serializers
-from django.core.files.storage import default_storage
-from django.db.models import Count, Min, Sum, Max, Avg
+from django.views.decorators.http import require_http_methods
+from django.db.models import Count
 from django.forms.models import model_to_dict
 from django.http import HttpResponse
-from django.shortcuts import render, redirect, render_to_response
+from django.shortcuts import render, render_to_response, redirect
 from django.template.loader import render_to_string
 from django.utils.translation import ugettext as _
-from django.views.decorators.csrf import csrf_exempt
-from django.views.decorators.http import require_http_methods
-from django.views.generic import FormView, ListView, DetailView, ListView, \
-  DetailView
+from django.views.generic import FormView, ListView, DetailView, ListView, DetailView
 from django.views.generic.base import View
-from django.views.generic.edit import CreateView, UpdateView, DeleteView, \
-  CreateView, UpdateView, DeleteView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView, CreateView, UpdateView, DeleteView
 
-from base.utils.views import JSONResponse, JSONDataView, ListHybridResponseMixin, \
-  PaginatedListHybridResponseMixin, DetailHybridResponseMixin, \
-  AjaxableResponseMixin, ListHybridResponseMixin, PaginatedListHybridResponseMixin, \
-  DetailHybridResponseMixin
+from base.utils.views import JSONResponse, JSONDataView, ListHybridResponseMixin, PaginatedListHybridResponseMixin, DetailHybridResponseMixin, AjaxableResponseMixin, ListHybridResponseMixin, PaginatedListHybridResponseMixin, DetailHybridResponseMixin
 from thanks.models import Category as ThankCategory, Report as ThankReport
 from users.views import VictimForm as VictimUpdateForm
 from violations_victims.views import VictimForm as BaseVictimForm
 
 from .models import *
-
-
-logger = logging.getLogger(__name__)
-
-
-
-
-
-
-
-
 
 
 def index(request, template_name='violations/index.html', *args, **kwargs):

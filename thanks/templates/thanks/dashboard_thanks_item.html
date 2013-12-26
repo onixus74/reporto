@@ -1,10 +1,10 @@
                 <li class="ui-timeline-story list-group-item multi-labels-lines-fix clearfix" data-latitude="{{report.latitude}}" data-longitude="{{report.longitude}}">
                   <div class="btn-group-vertical btn-group-sm pull-right">
-                    <a class="btn btn-not ui-timeline-story-locator" title="Click to locate thanks" href="https://maps.google.com/?q={{report.latitude}},{{report.longitude}}" target="_blank" style="padding: 2px;">
+                    <a class="btn ui-timeline-story-locator btn-not" title="Click to locate thanks" href="https://maps.google.com/?q={{report.latitude}},{{report.longitude}}" target="_blank" data-toggle="tooltip" style="padding: 2px;">
                       <i class="fa fa-map-marker fa-lg"></i>
                     </a>
-                    <a class="btn btn-not" href="{% url 'thanks:view' report.id %}" target="_blank" title="Click to view report" _data-toggle="modal" _data-target="#ui-report-view-modal" style="padding: 2px;">
-                      <i class="fa fa-external-link fa-lg"></i>
+                    <a class="ui-timeline-story-link btn btn-not" href="{% url 'thanks:view' report.id %}" target="_blank" title="Click to view report" data-toggle="tooltip" style="padding: 2px;">
+                      <i class="fa fa-link fa-lg"></i>
                     </a>
                   </div>
                   <span class="label label-default category">{{report.category}}</span>

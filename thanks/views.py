@@ -1,35 +1,21 @@
-from datetime import datetime, date
-import json
 import logging
-import logging
-import os
-import shutil
-import uuid
+logger = logging.getLogger(__name__)
 
 from django import forms
-from django.conf import settings
 from django.contrib.auth.decorators import login_required, permission_required
-from django.core import serializers
-from django.core.files.storage import default_storage
-from django.db.models import Count, Min, Sum, Max, Avg
+from django.views.decorators.http import require_http_methods
+from django.db.models import Count
 from django.forms.models import model_to_dict
 from django.http import HttpResponse
-from django.shortcuts import render, redirect, render_to_response
+from django.shortcuts import render, render_to_response, redirect
 from django.template.loader import render_to_string
-from django.views.decorators.csrf import csrf_exempt
-from django.views.decorators.http import require_http_methods
 from django.views.generic import FormView, ListView, DetailView
-from django.views.generic.base import View
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 from base.utils.views import JSONResponse, JSONDataView, ListHybridResponseMixin, \
     PaginatedListHybridResponseMixin, DetailHybridResponseMixin, \
     AjaxableResponseMixin
 
 from .models import *
-
-
-logger = logging.getLogger(__name__)
 
 
 class ReportCreateForm(forms.ModelForm):
@@ -113,6 +99,13 @@ class ReportView(DetailHybridResponseMixin, DetailView):
     """ """
     model = Report
     template_name = "thanks/view.html"
+
+
+class ReportPartialView(DetailHybridResponseMixin, DetailView):
+
+    """ """
+    model = Report
+    template_name = 'thanks/view_partial.html'
 
 
 class ReportsDashboard(PaginatedListHybridResponseMixin, ListView):

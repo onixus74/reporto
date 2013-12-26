@@ -79,7 +79,7 @@
                 <div id="ui-violations-search" class="ui-search">
                   <form action="{% url 'search:search' %}">
                     <div class="input-group">
-                      <input name="q" value="{{request.GET.q}}" class="form-control" placeholder="Search .. 2013-09, 2013-12-22, Tunis, Ben Ali, ...">
+                      <input name="q" value="{{request.GET.q}}" class="form-control" placeholder="Type to search ...">
                       <span class="input-group-btn">
                         <button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
                         <button class="btn btn-default" type="button"><i class="fa fa-times"></i></button>
@@ -134,7 +134,7 @@
                 <div id="ui-thanks-search" class="ui-search">
                   <form action="{% url 'search:search' %}">
                     <div class="input-group">
-                      <input name="q" value="{{request.GET.q}}" class="form-control" placeholder="Search .. 2013-09, 2013-12-22, Tunis, Ben Ali, ...">
+                      <input name="q" value="{{request.GET.q}}" class="form-control" placeholder="Type to search ...">
                       <span class="input-group-btn">
                         <button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
                         <button class="btn btn-default" type="button"><i class="fa fa-times"></i></button>
@@ -219,19 +219,46 @@
     </div>
     {% endif %}
 
-<!-- Modal -->
-<div id="ui-report-view-modal" class="modal modal-big hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h3 id="myModalLabel">Report View</h3>
-  </div>
-  <div class="modal-body">
-    <p>...</p>
-  </div>
-  <div class="modal-footer">
-    <button class="btn btn-danger" data-dismiss="modal" aria-hidden="true">Close</button>
-  </div>
-</div>
+{% endblock %}
+
+{% block view_addons %}
+<!-- Violations Modal -->
+<div id="ui-violation-view-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ui-violation-view-modal-label" aria-hidden="true">
+  <div class="modal-dialog" style="width: 90%;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="ui-violation-view-modal-label">Violation Details</h4>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <a class="ui-more btn btn-primary" href="">More</a>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<!-- Thank Modal -->
+<div id="ui-thank-view-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ui-thank-view-modal-label" aria-hidden="true">
+  <div class="modal-dialog" style="width: 90%;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="ui-thank-view-modal-label">Thank Details</h4>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <a class="ui-more btn btn-primary" href="">More</a>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 {% endblock %}
 
 {% block view_styles %}
@@ -240,6 +267,7 @@
   <link rel="stylesheet" href="{% static 'components/leaflet/dist/leaflet.css'%}" />
   <link rel="stylesheet" href="{% static 'components/leaflet.markerclusterer/dist/MarkerCluster.Default.css'%}" />
   <link rel="stylesheet" href="{% static 'components/Leaflet.awesome-markers/dist/leaflet.awesome-markers.css'%}" />
+  <link rel="stylesheet" href="{% static 'components/fancybox/source/jquery.fancybox.css' %}" type="text/css" />
   <link rel="stylesheet" href="{% static 'dashboard/styles/dashboard.css'%}" />
   {% endcompress %}
 

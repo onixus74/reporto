@@ -3,25 +3,22 @@ import logging
 from django import forms
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.decorators import login_required, user_passes_test, \
-    permission_required
+#from django.contrib.auth.decorators import login_required, user_passes_test, permission_required
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth.views import redirect_to_login
-from django.core.context_processors import csrf
+#from django.contrib.auth.views import redirect_to_login
+#from django.core.context_processors import csrf
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.http import HttpResponse, Http404
-from django.shortcuts import render, redirect, render_to_response, \
-    get_object_or_404
+#from django.http import HttpResponse, Http404
+from django.shortcuts import render, redirect, render_to_response, get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
-from django.views.decorators.http import require_POST
+#from django.views.decorators.http import require_POST
 
-from base.utils.views import JSONResponse
+#from base.utils.views import JSONResponse
 from thanks.models import Report as ThankReport
 from users.forms import UserCreationForm
 from users.models import User
 from violations.models import Report as ViolationReport
-from violations.views import append_violations_statistics, \
-    append_thanks_statistics
+from violations.views import append_violations_statistics, append_thanks_statistics
 
 
 logger = logging.getLogger(__name__)

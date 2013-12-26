@@ -1,10 +1,10 @@
                 <li class="ui-timeline-story list-group-item multi-labels-lines-fix clearfix" data-latitude="{{report.latitude}}" data-longitude="{{report.longitude}}">
                   <div class="btn-group-vertical btn-group-sm pull-right">
-                    <a class="btn btn-not ui-timeline-story-locator" title="Click to locate violation" href="https://maps.google.com/?q={{report.latitude}},{{report.longitude}}" target="_blank" style="padding: 2px;">
+                    <a class=" ui-timeline-story-locator btn btn-not" href="https://maps.google.com/?q={{report.latitude}},{{report.longitude}}" target="_blank" title="Click to locate violation" data-toggle="tooltip" style="padding: 2px;">
                       <i class="fa fa-map-marker fa-lg"></i>
                     </a>
-                    <a class="btn btn-not" href="{% url 'violations:view' report.id %}" target="_blank" title="Click to view report" _data-toggle="modal" _data-target="#ui-report-view-modal" style="padding: 2px;">
-                      <i class="fa fa-external-link fa-lg"></i>
+                    <a class="ui-timeline-story-link btn btn-not" href="{% url 'violations:view' report.id %}" target="_blank" title="Click to view report" data-toggle="tooltip" style="padding: 2px;">
+                      <i class="fa fa-link fa-lg"></i>
                     </a>
                   </div>
 
@@ -17,7 +17,12 @@
                   <span class="label label-default datetime">
                     <i class="fa fa-calendar"></i> {{report.datetime}}
                   </span>
-                  {% if report.is_verified %}<span class="badge badge-success">Verified <i class="fa fa-ok"></i></span>{% endif %}
+
+                  <span class="badge">{% if report.media.count or report.is_verified %}
+                  {% if report.media.count %}<i class="fa fa-picture-o" data-toggle="tooltip" title="Have media attachments"></i>{% endif %}
+                  {% if report.is_verified %}<i class="fa fa-check-square text-success" data-toggle="tooltip" title="Verified"></i>{% endif %}
+                  {% endif %}</span>
+
                   {% comment %}
                   {% if report.is_closed %}<span class="badge badge-important">Closed <i class="fa fa-lock"></i></span>{% endif %}
                   {% endcomment %}

@@ -64,7 +64,9 @@ $(document).ready(reform.widgets.geosearch);
 
 
 $(document).ready(function() {
-  function refreshCallback(list) {
+
+  function updateMarkers(list) {
+
     list.find('.ui-timeline-story-locator').on('click', function(e) {
       e.stopPropagation();
       e.preventDefault();
@@ -84,11 +86,47 @@ $(document).ready(function() {
       }
       */
       reform.widgets.map.setView(loc, 20);
-      $.scrollTo(reform.widgets.map._container, 500, {axis: 'y', offset: {y: 100}});
+      $.scrollTo(reform.widgets.map._container, 500, {
+        axis: 'y',
+        offset: {
+          top: -100
+        }
+      });
     });
+
+
+    list.tooltip({
+      selector: "[data-toggle=tooltip]",
+      container: "body"
+    });
+
   }
-  reform.widgets.pagination('#ui-violations-list', reform.data.violationsPagination, reform.urls.violationsDashboard, refreshCallback);
-  reform.widgets.pagination('#ui-thanks-list', reform.data.thanksPagination, reform.urls.thanksDashboard, refreshCallback);
+
+  function updateReportLinks(list, modal) {
+
+    list.find('.ui-timeline-story-link').on('click', function(e) {
+      e.stopPropagation();
+      e.preventDefault();
+      var target = $(e.target).closest('a');
+      var url = target.attr('href');
+      modal.find('.modal-footer .ui-more').attr('href', url);
+      $.get(url + '/partial').done(function(html) {
+        modal.find('.modal-body').html(html);
+        modal.modal('show');
+      })
+
+    });
+
+  }
+
+  reform.widgets.pagination('#ui-violations-list', reform.data.violationsPagination, reform.urls.violationsDashboard, function(list) {
+    updateMarkers(list)
+    updateReportLinks(list, $('#ui-violation-view-modal'));
+  });
+  reform.widgets.pagination('#ui-thanks-list', reform.data.thanksPagination, reform.urls.thanksDashboard, function(list) {
+    updateMarkers(list)
+    updateReportLinks(list, $('#ui-thank-view-modal'));
+  });
 });
 
 

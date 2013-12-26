@@ -1,6 +1,5 @@
 from django.conf.urls import patterns, url, include
-from django.contrib.auth.decorators import login_required, user_passes_test, \
-  permission_required
+from django.contrib.auth.decorators import login_required, user_passes_test, permission_required
 
 from base.utils.urls import administrator_required
 from users.views import *

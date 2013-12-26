@@ -1,11 +1,10 @@
 from django.conf.urls import patterns, url, include
-from django.contrib.auth.decorators import login_required, user_passes_test, \
-    permission_required
-from django.views.generic import TemplateView
+#from django.contrib.auth.decorators import login_required, user_passes_test, permission_required
+#from django.views.generic import TemplateView
 
-from base.utils.urls import administrator_required
+#from base.utils.urls import administrator_required
 from base.views import *
-from violations.views import ReportsDashboard
+#from violations.views import ReportsDashboard
 
 
 urlpatterns = patterns('',
