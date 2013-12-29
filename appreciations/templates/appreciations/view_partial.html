@@ -20,12 +20,12 @@
       <div class="row">
         <div class="col-md-6">
           <hr>
-          <h2><i class="fa fa-ellipsis-h"></i> Description</h2>
+          <h3><i class="fa fa-ellipsis-h"></i> Description</h3>
           <p>{{report.description|urlize}}</p>
         </div>
         <div class="col-md-6">
           <hr>
-          <h2><i class="fa fa-picture-o"></i> Photos</h2>{% get_media_prefix as MEDIA_PREFIX %}
+          <h3><i class="fa fa-picture-o"></i> Photos</h3>{% get_media_prefix as MEDIA_PREFIX %}
           {% if report.media.count %}
           <ul class="thumbnails">
             {% for media in report.media.all %}

@@ -235,7 +235,7 @@ class Report(models.Model):
     # verified_by = models.ManyToManyField('auth.Group', blank=True, null=True)
     is_closed = models.BooleanField()
     comments = models.ManyToManyField(Comment, blank=True, null=True)
-    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='created_by_user')
+    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='violation_created_by_user')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

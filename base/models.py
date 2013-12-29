@@ -8,7 +8,6 @@ from django.forms.models import model_to_dict
 logger = logging.getLogger(__name__)
 
 
-
 class Media(models.Model):
     IMAGE = 'I'
     VIDEO = 'V'

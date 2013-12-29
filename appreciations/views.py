@@ -11,7 +11,7 @@ from django.shortcuts import render, render_to_response, redirect
 from django.template.loader import render_to_string
 from django.views.generic import FormView, ListView, DetailView
 
-from base.utils.views import JSONResponse, JSONDataView, ListHybridResponseMixin, \
+from base.utils.views import JSONResponse, JSONDataView, PaginatedJSONListView, ListHybridResponseMixin, \
     PaginatedListHybridResponseMixin, DetailHybridResponseMixin, \
     AjaxableResponseMixin
 
@@ -106,6 +106,23 @@ class ReportPartialView(DetailHybridResponseMixin, DetailView):
     """ """
     model = Report
     template_name = 'appreciations/view_partial.html'
+
+
+class ReportSearchView(PaginatedJSONListView):
+
+    """ """
+    model = Report
+    paginate_by = 5
+
+    def get_queryset(self):
+        return watson.filter(Report, self.request.GET.get('q', ''))
+
+    def get_context_data(self, **kwargs):
+        context = super(ReportSearchView, self).get_context_data(**kwargs)
+        context['html'] = render_to_string('appreciations/dashboard_appreciations_list.html', {'report_list': context['report_list']})
+        context.pop('report_list')
+        context['q'] = self.request.GET.get('q', '')
+        return context
 
 
 class ReportsDashboard(PaginatedListHybridResponseMixin, ListView):

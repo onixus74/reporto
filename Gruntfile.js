@@ -45,18 +45,7 @@ module.exports = function(grunt) {
 
     pkg: grunt.file.readJSON('package.json'),
 
-    compass: {
-
-      dashboard: {
-        options: {
-          basePath: 'base/static',
-          sassDir: 'dashboard/styles',
-          cssDir: 'dashboard/styles',
-          force: true
-        }
-      },
-
-    },
+    compass: {},
 
     cssmin: {
 
@@ -91,35 +80,9 @@ module.exports = function(grunt) {
 
     },
 
-    concat: {
-      options: {
-        // define a string to put between each file in the concatenated output
-        separator: ';'
-      },
-      jsdist: {
-        // the files to concatenate
-        src: ['violations/static/violations/scripts/**/*.min.js'],
-        // the location of the resulting JS file
-        dest: 'violations/static/violations/scripts/violations-all.dist.js'
-      }
-    },
+    concat: {},
 
-    watch: {
-      scripts: {
-        files: ['violations/static/violations/scripts/**/*.js', '!*.min.js', '!*.dist.js'],
-        tasks: ['uglify:violations'],
-        options: {
-          nospawn: true
-        }
-      },
-      styles: {
-        files: ['violations/static/violations/styles/**/*.css', '!*.min.css', '!*.dist.css'],
-        tasks: ['compass:violations', 'cssmin:violations'],
-        options: {
-          nospawn: true
-        }
-      }
-    }
+    watch: {}
 
   };
 
@@ -170,6 +133,43 @@ module.exports = function(grunt) {
     ext: '.min.js'
   };
 
+
+  /* dashboard */
+
+  config.compass.dashboard = {
+    options: {
+      basePath: 'base/static',
+      sassDir: 'dashboard/styles',
+      cssDir: 'dashboard/styles',
+      force: true
+    }
+  };
+
+  config.cssmin.dashboard = {
+    expand: true,
+    cwd: 'base/static/dashboard/styles',
+    src: ['**/*.css', '!*.min.css', '!*.dist.css'],
+    dest: 'base/static/dashboard/styles',
+    ext: '.min.css'
+  };
+
+  config.uglify.dashboard = {
+    options: {
+      sourceMap: function(dst) {
+        return dst + '.map';
+      },
+      sourceMappingURL: function(dst) {
+        return '/' + dst.substr(dst.indexOf('static')) + '.map';
+      },
+      sourceMapPrefix: 4
+    },
+    expand: true,
+    cwd: 'base/static/dashboard/scripts',
+    src: ['**/*.js', '!*.min.js', '!*.dist.js'],
+    dest: 'base/static/dashboard/scripts',
+    ext: '.min.js'
+  };
+
   makeDjangoAppConfig(config, 'users');
   makeDjangoAppConfig(config, 'violations');
   makeDjangoAppConfig(config, 'appreciations');
@@ -187,9 +187,9 @@ module.exports = function(grunt) {
   //grunt.registerTask('static', ['cssmin:static'], 'uglify:static');
   grunt.registerTask('base', ['compass:base', 'cssmin:base', 'uglify:base']);
   grunt.registerTask('users', ['compass:users', 'cssmin:users', 'uglify:users']);
-  //grunt.registerTask('dashboard', ['compass:dashboard', 'cssmin:dashboard', 'uglify:dashboard']);
+  grunt.registerTask('dashboard', ['compass:dashboard', 'cssmin:dashboard', 'uglify:dashboard']);
   grunt.registerTask('violations', ['compass:violations', 'cssmin:violations', 'uglify:violations']);
   grunt.registerTask('appreciations', ['compass:appreciations', 'cssmin:appreciations', 'uglify:appreciations']);
-  grunt.registerTask('default', ['base', 'users', 'violations', 'appreciations']);
+  grunt.registerTask('default', ['base', 'users', 'violations', 'appreciations', 'dashboard']);
 
 };

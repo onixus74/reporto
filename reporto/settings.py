@@ -6,6 +6,7 @@ from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS
 
 
 PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
+BASE_DIR = os.path.dirname(PROJECT_DIR)
 
 DEBUG = True  # !DEV!
 # DEBUG = False # !PROD!
@@ -114,7 +115,7 @@ STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    #os.path.join(PROJECT_DIR, '../staticfiles'),
+    #os.path.join(BASE_DIR, 'staticfiles'),
     #os.path.join(PROJECT_DIR, 'static'),
 )
 
@@ -179,7 +180,7 @@ INSTALLED_APPS = (
 
     # admin components
     'admin_mod',
-    #'report_builder',
+    'report_builder',
     #'filebrowser',
     'django_admin_bootstrapped.bootstrap3',
     'django_admin_bootstrapped',  # theme for admin
@@ -300,15 +301,21 @@ INTERNAL_IPS = ('127.0.0.1', '127.0.1.1')
 # }
 
 # APP 'compressor'
-#COMPRESS_ENABLED = True
-#COMPRESS_OFFLINE = True
+COMPRESS_ENABLED = True
+COMPRESS_OFFLINE = True
 COMPRESS_CSS_FILTERS = [
-    'compressor.filters.cssmin.CSSMinFilter'
+    'compressor.filters.css_default.CssAbsoluteFilter',
+    'compressor.filters.cssmin.CSSMinFilter',
+    #'compressor.filters.yui.YUICSSFilter'
 ]
 COMPRESS_JS_FILTERS = [
-    'compressor.filters.jsmin.JSMinFilter'
+    'compressor.filters.jsmin.JSMinFilter',
+    # 'compressor.filters.jsmin.SlimItFilter',
+    # 'compressor.filters.yui.YUIJSFilter',
+    # 'compressor.filters.closure.ClosureCompilerFilter',
 ]
-
+COMPRESS_CLOSURE_COMPILER_BINARY = 'java -jar closure-compiler.jar'
+COMPRESS_YUI_BINARY = 'java -jar yuicompressor.jar'
 
 # APP 'easy_thumbnails'
 THUMBNAIL_ALIASES = {

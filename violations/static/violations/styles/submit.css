@@ -234,3 +234,8 @@ body {
 .ui-victim-fieldset .control-group {
   margin-bottom: 10px;
 }
+
+/* line 250, submit.scss */
+.ui-list .label {
+  font-size: 90%;
+}

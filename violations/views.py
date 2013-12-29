@@ -18,7 +18,7 @@ from django.views.generic import FormView, ListView, DetailView, ListView, Detai
 from django.views.generic.base import View
 from django.views.generic.edit import CreateView, UpdateView, DeleteView, CreateView, UpdateView, DeleteView
 
-from base.utils.views import JSONResponse, JSONDataView, ListHybridResponseMixin, PaginatedListHybridResponseMixin, DetailHybridResponseMixin, AjaxableResponseMixin, ListHybridResponseMixin, PaginatedListHybridResponseMixin, DetailHybridResponseMixin
+from base.utils.views import JSONResponse, JSONDataView, PaginatedJSONListView, ListHybridResponseMixin, PaginatedListHybridResponseMixin, DetailHybridResponseMixin, AjaxableResponseMixin, ListHybridResponseMixin, PaginatedListHybridResponseMixin, DetailHybridResponseMixin
 from appreciations.models import Category as AppreciationCategory, Report as AppreciationReport
 from users.views import VictimForm as VictimUpdateForm
 from violations_victims.views import VictimForm as BaseVictimForm
@@ -41,15 +41,7 @@ class ReportsDashboard(PaginatedListHybridResponseMixin, ListView):
     paginate_by = 5
 
     def get_context_data(self, **kwargs):
-        """
-          Prepare context parameter 'violations_by_category' with the following structure
-          violations_by_category = [
-            { 'label': 'Verbal Violence', 'count': 20 },
-            { 'label': 'Violence', 'count': 10 },
-            { 'label': 'Rape', 'count': 20 },
-            { 'label': 'Lack of Investigation and Prosecution', 'count': 50 }
-          ]
-        """
+        """ """
         context = super(ReportsDashboard, self).get_context_data(**kwargs)
 
         if self.is_json():
@@ -117,13 +109,28 @@ class ReportPartialView(DetailHybridResponseMixin, DetailView):
     template_name = 'violations/view_partial.html'
 
 
+class ReportSearchView(PaginatedJSONListView):
+
+    """ """
+    model = Report
+    paginate_by = 5
+
+    def get_queryset(self):
+        return watson.filter(Report, self.request.GET.get('q', ''))
+
+    def get_context_data(self, **kwargs):
+        context = super(ReportSearchView, self).get_context_data(**kwargs)
+        context['html'] = render_to_string('violations/dashboard_violations_list.html', {'report_list': context['report_list']})
+        context.pop('report_list')
+        context['q'] = self.request.GET.get('q', '')
+        return context
+
+
 class ReportCreateForm(forms.ModelForm):
 
     class Meta:
         model = Report
         exclude = ('created_by', 'victim')
-
-
 
 
 class VictimCreateForm(BaseVictimForm):
@@ -348,7 +355,6 @@ def similar_reports(request, *args, **kwargs):
     })
 
 
-
 def locations_distance(lon1, lat1, lon2, lat2):
     """
     Calculate the great circle distance between two points  on the earth (specified in decimal degrees)
@@ -362,7 +368,6 @@ def locations_distance(lon1, lat1, lon2, lat2):
     c = 2 * asin(sqrt(a))
     km = 6367 * c
     return km
-
 
 
 def string_distance(str1, str2):
@@ -688,8 +693,6 @@ def append_appreciations_statistics(context):
     return context
 
 # CRUD
-
-
 
 
 class ReportForm(forms.ModelForm):

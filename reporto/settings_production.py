@@ -6,6 +6,7 @@ from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS
 
 
 PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
+BASE_DIR = os.path.dirname(PROJECT_DIR)
 
 # DEBUG = True # !DEV!
 DEBUG = False  # !PROD!
@@ -171,6 +172,7 @@ INSTALLED_APPS = (
 
     'reversion',
     'mptt',
+    'watson',
 
     # project components
     'users',
@@ -299,12 +301,18 @@ INTERNAL_IPS = ('127.0.0.1', '127.0.1.1')
 #COMPRESS_ENABLED = True
 COMPRESS_OFFLINE = True
 COMPRESS_CSS_FILTERS = [
-    'compressor.filters.cssmin.CSSMinFilter'
+    'compressor.filters.css_default.CssAbsoluteFilter',
+    'compressor.filters.cssmin.CSSMinFilter',
+    #'compressor.filters.yui.YUICSSFilter'
 ]
 COMPRESS_JS_FILTERS = [
-    'compressor.filters.jsmin.JSMinFilter'
+    'compressor.filters.jsmin.JSMinFilter',
+    # 'compressor.filters.jsmin.SlimItFilter',
+    # 'compressor.filters.yui.YUIJSFilter',
+    # 'compressor.filters.closure.ClosureCompilerFilter',
 ]
-
+COMPRESS_CLOSURE_COMPILER_BINARY = 'java -jar closure-compiler.jar'
+COMPRESS_YUI_BINARY = 'java -jar yuicompressor.jar'
 
 # APP 'easy_thumbnails'
 THUMBNAIL_ALIASES = {
@@ -314,7 +322,7 @@ THUMBNAIL_ALIASES = {
     },
 }
 
-INSTALLED_APPS += ('social_auth',)
+# APP 'social_auth'
 AUTHENTICATION_BACKENDS = (
     'social_auth.backends.twitter.TwitterBackend',
     'social_auth.backends.facebook.FacebookBackend',

@@ -57,7 +57,7 @@
 
           <div class="row ui-wizard-row" id="ui-wizard-location-datetime" hidden>
             <div class="col-md-6">
-              <h2><i class="fa fa-map-marker"></i> Location</h2>
+              <h3><i class="fa fa-map-marker"></i> Location</h3>
               <div id="map" style="width:100%; height: 300px"></div>
               {% render_field form.latitude type="hidden" %}
               {% render_field form.longitude type="hidden" %}
@@ -69,7 +69,7 @@
               </div>
             </div>
             <div class="col-md-6">
-              <h2><i class="fa fa-calendar"></i><i class="fa fa-clock-o"></i> Date and Time</h2>
+              <h3><i class="fa fa-calendar"></i><i class="fa fa-clock-o"></i> Date and Time</h3>
               {% render_field form.datetime type="text" _type="datetime-local" class+="form-control" _required="required" style="display: none;" %}
               <div id="dateinput" style="height: 300px;">
               <script type="text/template" id="dateinput-template">
@@ -105,8 +105,8 @@
           <div class="row ui-wizard-row" id="ui-wizard-victim-aggressor" hidden>
 
             <div class="col-md-6" id="ui-wizard-victim-area">
-              <h2 id="ui-reporter-victim-label"><i class="fa fa-user"></i> Victim</h2>
-              <h2 id="ui-witness-victim-label" hidden><i class="fa fa-user"></i> Victim Profile</h2>
+              <h3 id="ui-reporter-victim-label"><i class="fa fa-user"></i> Victim</h3>
+              <h3 id="ui-witness-victim-label" hidden><i class="fa fa-user"></i> Victim Profile</h3>
 
               <fieldset id="ui-reporter-victim-fieldset" class="ui-victim-fieldset form-horizontal input-area clean-empty" style="display: none;" disabled>
 
@@ -126,11 +126,11 @@
 
             <div class="col-md-6" id="ui-wizard-aggressor-area">
               <div>
-                <h2 class="pull-left_"><i class="fa fa-male"></i> Aggressor</h2>
+                <h3 class="pull-left_"><i class="fa fa-male"></i> Aggressor</h3>
                 <!--
-                <h2 class="pull-right">
+                <h3 class="pull-right">
                   <a id="ui-aggressor-next" class="btn btn-quiet" title="Next"><i class="fa fa-arrow-right fa-lg"></i></a>
-                </h2>
+                </h3>
                 -->
               </div>
               {% render_field form.aggressor placeholder="Aggressor" class+="form-control input-area" %}
@@ -140,11 +140,11 @@
 
           <div class="row ui-wizard-row" id="ui-wizard-description-media" hidden>
             <div class="col-md-6">
-              <h2><i class="fa fa-ellipsis-h"></i> Description</h2>
+              <h3><i class="fa fa-ellipsis-h"></i> Description</h3>
               {% render_field form.description placeholder="Description" required="required" class+="form-control input-area" %}
             </div>
             <div class="col-md-6">
-              <h2><i class="fa fa-picture-o"></i> Media Attachments</h2>
+              <h3><i class="fa fa-picture-o"></i> Media Attachments</h3>
               <!--<input name="files[]" type="file" multiple />-->
               <!--<input type="hidden" name="rsid" value="{{report_submit_id}}">-->
               <div id="ui-media-file-upload" tabindex="0" class="dropzone input-area" style="background-color: #FFF; border: 1px solid #999;"></div>
@@ -159,7 +159,7 @@
 
           <div class="row ui-wizard-row" id="ui-wizard-sources-media-links" hidden>
             <div class="col-md-6">
-              <h2><i class="fa fa-search"></i> Sources</h2>
+              <h3><i class="fa fa-search"></i> Sources</h3>
               <ul id="ui-sources-list" class="list-unstyled">
                 <script id="ui-sources-list-item" type="text/template">
                   <li>
@@ -184,7 +184,7 @@
               </div>
             </div>
             <div class="col-md-6">
-              <h2><i class="fa fa-link"></i> Media Links</h2>
+              <h3><i class="fa fa-link"></i> Media Links</h3>
               <ul id="ui-links-list" class="list-unstyled">
                 <script id="ui-links-list-item" type="text/template">
                   <li>
@@ -205,7 +205,7 @@
 
           <div class="row ui-wizard-row" id="ui-wizard-features" hidden>
             <div class="col-md-12">
-              <h2><i class="fa fa-tags"></i> Features</h2>
+              <h3><i class="fa fa-tags"></i> Features</h3>
               <!--<input type="text" class="form-control" placeholder="Features">-->
               {% render_field form.features placeholder="Select applicable features" class+="select2 btn-lg" data-style="form-control btn-lg"  %}
             </div>
@@ -223,7 +223,7 @@
       <div class="col-md-3 ui-latest-reports">
         <h2><span id="ui-latest-reports-label">Latest</span><span id="ui-similar-reports-label" hidden>Similar</span> Reports</h2>
         <hr>
-        <div id="ui-reports-list" class="list-group">
+        <div id="ui-reports-list" class="ui-list list-group">
           {% include "violations/submit_similar_reports_list.html" %}
         <!--</ul>-->
         </div>

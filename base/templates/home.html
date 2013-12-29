@@ -21,13 +21,13 @@
           {% with report=violations_list.0 %}
           <div>
               <h2 style="margin-top: 0;">Latest Report</h2>
-              <span class="label label-default victim"><i class="fa fa-user"></i> {{report.victim}}</span>
+              <span class="label label-info victim"><i class="fa fa-user"></i> {{report.victim}}</span>
               has been a victim of
-              <span class="label label-default category">{{report.category}}</span>
+              <span class="label label-info category">{{report.category}}</span>
               happened in
-              <span class="label label-default location"><i class="fa fa-map-marker"></i> {{report.location_text}}</span>
+              <span class="label label-info location"><i class="fa fa-map-marker"></i> {{report.location_text}}</span>
               on
-              <span class="label label-default datetime"><i class="fa fa-calendar"></i> {{report.datetime}}</span>
+              <span class="label label-info datetime"><i class="fa fa-calendar"></i> {{report.datetime}}</span>
               {% if report.is_verified %}<span class="badge badge-success">Verified <i class="fa fa-ok"></i></span>{% endif %}
               <a class="btn btn-not" href="{% url 'violations:view' report.id %}" target="_blank" title="Click to view report" _data-toggle="modal" _data-target="#ui-report-view-modal">
                   <i class="fa fa-external-link-square fa-lg"></i>
@@ -44,7 +44,7 @@
     </div>
 
     {% if violations_list or appreciations_list %}
-    <div class="well">
+    <div class="well_">
 
       <!--
       <div class="row">
@@ -56,20 +56,27 @@
 
       <div class="row">
         <div class="col-md-12">
-          <div id="ui-violations-dates-chart" style="height: 300px;"></div>
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <div id="ui-reports-by-date-chart" style="height: 300px;"></div>
+            </div>
+          </div>
         </div>
       </div>
 
-
       <div class="row">
-        <div class="col-md-offset-2 col-md-8" style="margin-top: 20px;">
+        <div class="col-md-offset-2 col-md-8">
           <!--<h2>Map</h2>-->
-          <div id="ui-timeline-map" class="ui-timeline-map" style="width:100%; height: 400px"></div>
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <div id="ui-timeline-map" class="ui-timeline-map" style="width:100%; height: 400px"></div>
+            </div>
+          </div>
         </div>
       </div>
 
       <div class="row">
-        <div class="col-md-6" style="margin-top: 20px;">
+        <div class="col-md-6">
 
           <div class="panel panel-default">
             <div class="panel-heading">
@@ -78,13 +85,13 @@
             <div class="panel-body">
               <div id="ui-violations-timeline-list" class="ui-timeline-list clearfix">
 
-                <div id="ui-violations-search" class="ui-search">
+                <div class="ui-search">
                   <form action="{% url 'search:search' %}">
                     <div class="input-group">
-                      <input name="q" value="{{request.GET.q}}" class="form-control" placeholder="Type to search ...">
+                      <input name="q" value="{{request.GET.q}}" class="ui-search-input form-control" placeholder="Type to search ...">
                       <span class="input-group-btn">
-                        <button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
-                        <button class="btn btn-default" type="button"><i class="fa fa-times"></i></button>
+                        <button class="ui-search btn btn-default" type="submit"><i class="fa fa-search"></i></button>
+                        <button class="ui-search-clear btn btn-default" type="button"><i class="fa fa-times"></i></button>
                       </span>
                     </div>
                   </form>
@@ -112,20 +119,16 @@
                   </ul>
                 </div>
 
-                <ul id="ui-violations-list" class="ui-list list-group">
+                <ul class="ui-list list-group">
                   {% include "violations/dashboard_violations_list.html" with report_list=violations_list %}
                 </ul>
 
               </div>
             </div>
           </div>
-
-          {% if violations_list %}
-          <div id="ui-stats-features-chart" style="margin-top: 20px;"></div>
-          {% endif %}
         </div>
 
-        <div class="col-md-6" style="margin-top: 20px;">
+        <div class="col-md-6">
           <div class="panel panel-default">
             <div class="panel-heading">
               <h2 class="panel-title">Appreciations</h2>
@@ -133,13 +136,13 @@
             <div class="panel-body">
               <div id="ui-appreciations-timeline-list" class="ui-timeline-list clearfix">
 
-                <div id="ui-appreciations-search" class="ui-search">
+                <div class="ui-search">
                   <form action="{% url 'search:search' %}">
                     <div class="input-group">
-                      <input name="q" value="{{request.GET.q}}" class="form-control" placeholder="Type to search ...">
+                      <input name="q" value="{{request.GET.q}}" class="ui-search-input form-control" placeholder="Type to search ...">
                       <span class="input-group-btn">
-                        <button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
-                        <button class="btn btn-default" type="button"><i class="fa fa-times"></i></button>
+                        <button class="ui-search btn btn-default" type="submit"><i class="fa fa-search"></i></button>
+                        <button class="ui-search-clear btn btn-default" type="button"><i class="fa fa-times"></i></button>
                       </span>
                     </div>
                   </form>
@@ -170,37 +173,71 @@
                 <ul id="ui-appreciations-list" class="ui-list list-group">
                   {% include "appreciations/dashboard_appreciations_list.html" with report_list=appreciations_list %}
                 </ul>
-
               </div>
             </div>
           </div>
-          <div id="ui-stats-appreciations-by-category-chart" style="margin-top: 20px;"></div>
         </div>
       </div>
+
+
+      {% if violations_list or appreciations_list %}
+      <div class="row">
+        <div class="col-md-6">
+          {% if violations_list %}
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <div id="ui-stats-features-chart"></div>
+            </div>
+          </div>
+          {% endif %}
+        </div>
+        <div class="col-md-6">
+          {% if appreciations_list %}
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <div id="ui-stats-appreciations-by-category-chart"></div>
+            </div>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+      {% endif %}
 
       {% if violations_list %}
 
       <div class="row">
-        <div class="col-md-4" style="margin-top: 20px;">
+        <div class="col-md-4">
           <!--
           <div id="ui-stats-categories-chart"></div>
           <h3 class="text-center">Distribution by violation category</h3>
           -->
-          <div id="ui-stats-categories-chart"></div>
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <div id="ui-stats-categories-chart"></div>
+            </div>
+          </div>
         </div>
-        <div class="col-md-4" style="margin-top: 20px;">
+        <div class="col-md-4">
           <!--
           <div id="ui-stats-victim-gender-chart"></div>
           <h3 class="text-center">Distribution by victim's gender</h3>
           -->
-          <div id="ui-stats-victim-gender-chart"></div>
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <div id="ui-stats-victim-gender-chart"></div>
+            </div>
+          </div>
         </div>
-        <div class="col-md-4" style="margin-top: 20px;">
+        <div class="col-md-4">
           <!--
           <div id="ui-stats-victim-education-chart"></div>
           <h3 class="text-center">Distribution by victim's education</h3>
           -->
-          <div id="ui-stats-victim-education-chart"></div>
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <div id="ui-stats-victim-education-chart"></div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -286,10 +323,13 @@
 {% block view_scripts %}
   {% if violations_list or appreciations_list %}
   <script type="text/javascript">
-    reform.urls.violationView = {% url 'violations:view' 0 as violation_view_url %}{{violation_view_url|json}};
-    reform.urls.violationsDashboard = {% url 'violations:dashboard' as violation_dashboard_url %}{{violation_dashboard_url|json}};
-    reform.urls.appreciationsDashboard = {% url 'appreciations:dashboard' as violation_dashboard_url %}{{violation_dashboard_url|json}};
-    reform.urls.appreciationView = {% url 'appreciations:view' 0 as appreciation_view_url %}{{appreciation_view_url|json}};
+    reform.urls.violationView = {% url 'violations:view' 0 as url %}{{url|json}};
+    reform.urls.violationsDashboard = {% url 'violations:dashboard' as url %}{{url|json}};
+    reform.urls.violationsSearch = {% url 'violations:search' as url %}{{url|json}};
+
+    reform.urls.appreciationView = {% url 'appreciations:view' 0 as url %}{{url|json}};
+    reform.urls.appreciationsDashboard = {% url 'appreciations:dashboard' as url %}{{url|json}};
+    reform.urls.appreciationsSearch = {% url 'appreciations:search' as url %}{{url|json}};
 
     reform.data.violationsCategories = {{violations_categories|json}}
     reform.data.violationsFeatures = {{violations_features|json}}
@@ -300,13 +340,17 @@
     reform.data.violationsByDate = {{violations_by_date|json}}
     reform.data.violationsByCategoryByDate = {{violations_by_category_by_date|json}}
     reform.data.violationsLocations = {{violations_locations|json}}
+
     reform.data.appreciationsByDate = {{appreciations_by_date|json}}
     reform.data.appreciationsLocations = {{appreciations_locations|json}}
+
+    /*
     reform.data.timeline = {
       pages: {{violations_pagination.pages|json}},
       current: {{violations_pagination.current|json}},
       count: {{violations_pagination.count|json}},
     };
+    */
     reform.data.violationsPagination = {
       pages: {{violations_pagination.pages|json}},
       current: {{violations_pagination.current|json}},

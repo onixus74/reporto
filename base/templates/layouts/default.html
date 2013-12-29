@@ -12,19 +12,19 @@
 
   <!-- icons & favicons -->
 
-  <link rel="apple-touch-icon" sizes="57x57" href="{{STATIC_URL}}apple-touch-fa fa-57x57.png" />
-  <link rel="apple-touch-icon" sizes="114x114" href="{{STATIC_URL}}apple-touch-fa fa-114x114.png" />
-  <link rel="apple-touch-icon" sizes="72x72" href="{{STATIC_URL}}apple-touch-fa fa-72x72.png" />
-  <link rel="apple-touch-icon" sizes="144x144" href="{{STATIC_URL}}apple-touch-fa fa-144x144.png" />
-  <link rel="apple-touch-icon" sizes="60x60" href="{{STATIC_URL}}apple-touch-fa fa-60x60.png" />
-  <link rel="apple-touch-icon" sizes="120x120" href="{{STATIC_URL}}apple-touch-fa fa-120x120.png" />
-  <link rel="apple-touch-icon" sizes="76x76" href="{{STATIC_URL}}apple-touch-fa fa-76x76.png" />
-  <link rel="apple-touch-icon" sizes="152x152" href="{{STATIC_URL}}apple-touch-fa fa-152x152.png" />
-  <link rel="icon" type="image/png" href="{{STATIC_URL}}favfa fa-16x16.png" sizes="16x16" />
-  <link rel="icon" type="image/png" href="{{STATIC_URL}}favfa fa-32x32.png" sizes="32x32" />
-  <link rel="icon" type="image/png" href="{{STATIC_URL}}favfa fa-96x96.png" sizes="96x96" />
-  <link rel="icon" type="image/png" href="{{STATIC_URL}}favfa fa-160x160.png" sizes="160x160" />
-  <link rel="icon" type="image/png" href="{{STATIC_URL}}favfa fa-196x196.png" sizes="196x196" />
+  <link rel="apple-touch-icon" sizes="57x57" href="{{STATIC_URL}}apple-touch-icon-57x57.png" />
+  <link rel="apple-touch-icon" sizes="114x114" href="{{STATIC_URL}}apple-touch-icon-114x114.png" />
+  <link rel="apple-touch-icon" sizes="72x72" href="{{STATIC_URL}}apple-touch-icon-72x72.png" />
+  <link rel="apple-touch-icon" sizes="144x144" href="{{STATIC_URL}}apple-touch-icon-144x144.png" />
+  <link rel="apple-touch-icon" sizes="60x60" href="{{STATIC_URL}}apple-touch-icon-60x60.png" />
+  <link rel="apple-touch-icon" sizes="120x120" href="{{STATIC_URL}}apple-touch-icon-120x120.png" />
+  <link rel="apple-touch-icon" sizes="76x76" href="{{STATIC_URL}}apple-touch-icon-76x76.png" />
+  <link rel="apple-touch-icon" sizes="152x152" href="{{STATIC_URL}}apple-touch-icon-152x152.png" />
+  <link rel="icon" type="image/png" href="{{STATIC_URL}}favicon-16x16.png" sizes="16x16" />
+  <link rel="icon" type="image/png" href="{{STATIC_URL}}favicon-32x32.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="{{STATIC_URL}}favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/png" href="{{STATIC_URL}}favicon-160x160.png" sizes="160x160" />
+  <link rel="icon" type="image/png" href="{{STATIC_URL}}favicon-196x196.png" sizes="196x196" />
   <meta name="msapplication-TileColor" content="#d40000" />
   <meta name="msapplication-TileImage" content="{{STATIC_URL}}mstile-144x144.png" />
 
@@ -115,110 +115,112 @@
 	<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 	<![endif]-->
 
-	<div id="top-bg" style="z-index: 900;"></div>
+	<!--
+  <div id="top-bg" style="z-index: 900;"></div>
 
 	<div class="navbar-wrapper" style="z-index: 901;">
 		<div class="container">
-			<nav class="navbar navbar-default" role="navigation">
 
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="fa fa-bar"></span>
-            <span class="fa fa-bar"></span>
-            <span class="fa fa-bar"></span>
-          </button>
-          <a class="navbar-brand" href="/"><img src="{% static 'reform-logo.png' %}" _width="50" _height="35" height="26" alt="Tunisian Institutional Reform | جمعية إصلاح المؤسسات"></a>
-        </div>
-
-				<div class="navbar-collapse collapse">
-
-					<ul class="nav navbar-nav">
-						{% if user.is_authenticated %}
-            {% url 'home' as url %}
-						<li{% if request.path_info == url %} class="active"{% endif %}><a href="{{url}}"><i class="fa fa-tachometer"></i> Dashboard</a></li>
-            {% comment %}
-            {% url 'violations:dashboard' as url %}
-            <li{% if request.path_info == url %} class="active"{% endif %}><a href="{{url}}">Violations</a></li>
-            {% endcomment %}
-            {% url 'violations:submit' as url %}
-            <li{% if request.path_info == url %} class="active"{% endif %}><a href="{{url}}"><i class="fa fa-plus"></i> Report a Violation</a></li>
-            {% comment %}
-            {% url 'appreciations:dashboard' as url %}
-            <li{% if request.path_info == url %} class="active"{% endif %}><a href="{{url}}">Appreciations</a></li>
-            {% endcomment %}
-            {% url 'appreciations:submit' as url %}
-            <li{% if request.path_info == url %} class="active"{% endif %}><a href="{{url}}"><i class="fa fa-plus"></i> Appreciate Police Work</a></li>
-						{% if user.role == "A" %}
-						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Administration<b class="caret"></b></a>
-							<ul class="dropdown-menu">
-								<li><a href="{% url 'users:list' %}">Users</a></li>
-                <li><a href="{% url 'users:groups' %}">Groups</a></li>
-								<li><a href="{% url 'violations:categories:list' %}">Violation Categories</a></li>
-								<li><a href="{% url 'violations:features:list' %}">Violation Features</a></li>
-								<li><a href="{% url 'violations:victims:list' %}">Violation Victims</a></li>
-								<li><a href="{% url 'appreciations:categories:list' %}">Appreciation Categories</a></li>
-								<li class="divider"></li>
-								<li><a href="/admin">Site Administration</a></li>
-							</ul>
-						</li>
-						{% endif %}
-						{% endif %}
-					</ul>
-
-					<ul class="nav navbar-nav navbar-right">
-
-						<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-							<i class="fa fa-user"></i>
-							{% if user.is_authenticated %}
-							<span>{{user.get_short_name}}</span>
-							{% else %}
-							<span>Nobody!</span>
-							{% endif %}
-							<b class="caret"></b>
-						</a>
-						{% if not user.is_authenticated %}
-						{% comment %}
-						<div class="dropdown-menu" style="padding: 15px; padding-bottom: 0px;">
-							<form action="{% url 'login' %}" method="post">
-								{% csrf_token %}
-								<input type="hidden" name="next" value="{{ next }}" />
-								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-									{% render_field form.username type="email" placeholder="Email" required="required" %}
-								</div>
-								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-key"></i></span>
-									{% render_field form.password placeholder="Password" required="required" %}
-								</div>
-								<div class="clearfix">
-									<button class="btn-inverse btn button pull-right" type="submit">Register</button>
-								</div>
-							</form>
-						</div>
-						{% endcomment %}
-						<ul class="dropdown-menu">
-							<li><a href="{% url 'login' %}"><i class="fa fa-sign-in"></i> Sign in</a></li>
-						</ul>
-						{% else %}
-						<ul class="dropdown-menu">
-							{% if user.is_authenticated %}
-							<li><a href="{% url 'users:profile' %}"><i class="fa fa-user"></i> Profile</a></li>
-							{% endif %}
-							<li><a href="/logout"><i class="fa fa-sign-out"></i> Logout</a></li>
-						</ul>
-						{% endif %}
-						</li>
-
-					</ul>
-
-				</div><!--/.navbar-collapse -->
-
-			</nav>
 		</div>
 	</div>
+  -->
+
+  <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="fa fa-bars fa-lg fa-fw fa-inverse"></span>
+        </button>
+        <a class="navbar-brand" href="/"><img src="{% static 'reform-logo.png' %}" _width="50" _height="35" height="26" alt="Tunisian Institutional Reform | جمعية إصلاح المؤسسات"></a>
+      </div>
+
+      <div class="navbar-collapse collapse">
+
+        <ul class="nav navbar-nav">
+          {% if user.is_authenticated %}
+          {% url 'home' as url %}
+          <li{% if request.path_info == url %} class="active"{% endif %}><a href="{{url}}"><i class="fa fa-tachometer"></i> Dashboard</a></li>
+          {% comment %}
+          {% url 'violations:dashboard' as url %}
+          <li{% if request.path_info == url %} class="active"{% endif %}><a href="{{url}}">Violations</a></li>
+          {% endcomment %}
+          {% url 'violations:submit' as url %}
+          <li{% if request.path_info == url %} class="active"{% endif %}><a href="{{url}}"><i class="fa fa-plus"></i> Report a Violation</a></li>
+          {% comment %}
+          {% url 'appreciations:dashboard' as url %}
+          <li{% if request.path_info == url %} class="active"{% endif %}><a href="{{url}}">Appreciations</a></li>
+          {% endcomment %}
+          {% url 'appreciations:submit' as url %}
+          <li{% if request.path_info == url %} class="active"{% endif %}><a href="{{url}}"><i class="fa fa-plus"></i> Appreciate Police Work</a></li>
+          {% if user.role == "A" %}
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Administration<b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><a href="{% url 'users:list' %}">Users</a></li>
+              <li><a href="{% url 'users:groups' %}">Groups</a></li>
+              <li><a href="{% url 'violations:categories:list' %}">Violation Categories</a></li>
+              <li><a href="{% url 'violations:features:list' %}">Violation Features</a></li>
+              <li><a href="{% url 'violations:victims:list' %}">Violation Victims</a></li>
+              <li><a href="{% url 'appreciations:categories:list' %}">Appreciation Categories</a></li>
+              <li class="divider"></li>
+              <li><a href="/admin">Site Administration</a></li>
+            </ul>
+          </li>
+          {% endif %}
+          {% endif %}
+        </ul>
+
+        <ul class="nav navbar-nav navbar-right">
+
+          <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <i class="fa fa-user"></i>
+            {% if user.is_authenticated %}
+            <span>{{user.get_short_name}}</span>
+            {% else %}
+            <span>Nobody!</span>
+            {% endif %}
+            <b class="caret"></b>
+          </a>
+          {% if not user.is_authenticated %}
+          {% comment %}
+          <div class="dropdown-menu" style="padding: 15px; padding-bottom: 0px;">
+            <form action="{% url 'login' %}" method="post">
+              {% csrf_token %}
+              <input type="hidden" name="next" value="{{ next }}" />
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                {% render_field form.username type="email" placeholder="Email" required="required" %}
+              </div>
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-key"></i></span>
+                {% render_field form.password placeholder="Password" required="required" %}
+              </div>
+              <div class="clearfix">
+                <button class="btn-inverse btn button pull-right" type="submit">Register</button>
+              </div>
+            </form>
+          </div>
+          {% endcomment %}
+          <ul class="dropdown-menu">
+            <li><a href="{% url 'login' %}"><i class="fa fa-sign-in"></i> Sign in</a></li>
+          </ul>
+          {% else %}
+          <ul class="dropdown-menu">
+            {% if user.is_authenticated %}
+            <li><a href="{% url 'users:profile' %}"><i class="fa fa-user"></i> Profile</a></li>
+            {% endif %}
+            <li><a href="/logout"><i class="fa fa-sign-out"></i> Logout</a></li>
+          </ul>
+          {% endif %}
+          </li>
+
+        </ul>
+
+      </div><!--/.navbar-collapse -->
+    </nav>
+  </nav>
 
 	{% if messages %}
 	<div class="container">
@@ -236,6 +238,13 @@
 {% block view_content %}{% endblock %}
   </div>
 <!-- View - END -->
+
+  <div id="footer">
+    <div class="container">
+      <p class="text-muted credit pull-right"><a href="email:contact@ipolice.tn">report a bug / suggest a feature</a></p>
+      <p class="text-muted credit">Developed by <a href="http://reform.tn" target="_blank">reform.tn</a>.</p>
+    </div>
+  </div>
 
 {#% <pre>{% debug %}</pre> %#}
 
@@ -307,6 +316,10 @@
   $(document).ready(function(){
     $('.clean-empty option[value=]').remove();
     $('.clean-empty input:radio[value=]').parent().remove();
+    if($.blockUI){
+      $.blockUI.defaults.css.border = 'none';
+      $.blockUI.defaults.message = 'Loading ...';
+    }
   });
   </script>
 
