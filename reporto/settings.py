@@ -301,15 +301,15 @@ INTERNAL_IPS = ('127.0.0.1', '127.0.1.1')
 # }
 
 # APP 'compressor'
-COMPRESS_ENABLED = True
-COMPRESS_OFFLINE = True
+#COMPRESS_ENABLED = True
+#COMPRESS_OFFLINE = True
 COMPRESS_CSS_FILTERS = [
     'compressor.filters.css_default.CssAbsoluteFilter',
     'compressor.filters.cssmin.CSSMinFilter',
     #'compressor.filters.yui.YUICSSFilter'
 ]
 COMPRESS_JS_FILTERS = [
-    'compressor.filters.jsmin.JSMinFilter',
+    # 'compressor.filters.jsmin.JSMinFilter',
     # 'compressor.filters.jsmin.SlimItFilter',
     # 'compressor.filters.yui.YUIJSFilter',
     # 'compressor.filters.closure.ClosureCompilerFilter',
