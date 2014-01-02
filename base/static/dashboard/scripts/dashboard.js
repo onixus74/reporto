@@ -11,16 +11,6 @@
     };
   }
 
-  reform.widgets.styleHighcharts = function() {
-
-    Highcharts.themes.steel.chart.style.fontFamily = 'Open Sans';
-    Highcharts.themes.steel.chart.style.fontWeight = 'lighter';
-
-    //Highcharts.setOptions(Highcharts.themes._defaults);
-    Highcharts.setOptions(Highcharts.themes.steel);
-
-  };
-
   reform.widgets.map = function() {
 
     // create a map in the "map" div, set the view to a given place and zoom
@@ -467,7 +457,6 @@
   };
 
   function main() {
-    reform.widgets.styleHighcharts();
     $(document).ready(reform.widgets.map);
     //$(document).ready(reform.widgets.geosearch);
     $(document).ready(reform.widgets.paginators);

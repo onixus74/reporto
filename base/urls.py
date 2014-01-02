@@ -28,6 +28,9 @@ urlpatterns = patterns('',
                        url(r'^violations/',    include('violations.urls',    namespace='violations')),
                        url(r'^appreciations/',    include('appreciations.urls',    namespace='appreciations')),
 
+                       #url(r'^public/statistics(\.(?P<extension>(json)))$', statistics_view, name='public_statistics'),
+                       url(r'^public/statistics\.json$', statistics_view, name='public_statistics'),
+
                        url(r"^search/", include("watson.urls", namespace="search"), name='search'),
                        url(r'^report_builder/', include('report_builder.urls'))
 

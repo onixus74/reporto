@@ -23,7 +23,7 @@
         <dd>{{profile.get_role_display}}</dd>
 
         <dt>Password</dt>
-        <dd><a href="#" class="ui-editable" id="user-password" data-type="password" data-pk="{{profile.pk}}" data-name="password" data-url="{% url 'users:change_password' %}" data-title="Enter new password" data-placeholder="New password">[change]</a></dd>
+        <dd><a href="#" class="ui-editable" id="user-password" data-type="password" data-pk="{{profile.pk}}" data-name="password" data-url="{% url 'users:change_password' %}" data-display="false" data-title="Enter new password" data-placeholder="New password">[change]</a></dd>
 
         <dt>Connected accounts</dt>
         <dd>

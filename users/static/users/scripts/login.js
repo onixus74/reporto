@@ -1,16 +1,4 @@
 
-reform.widgets.styleHighcharts = function() {
-
-  Highcharts.themes.steel.chart.style.fontFamily = 'Open Sans';
-  Highcharts.themes.steel.chart.style.fontWeight = 'lighter';
-
-  //Highcharts.setOptions(Highcharts.themes._defaults);
-  Highcharts.setOptions(Highcharts.themes.steel);
-
-};
-
-reform.widgets.styleHighcharts();
-
 $(document).ready(function() {
 
   $.getJSON(reform.urls.statistics).done(function(statistics) {

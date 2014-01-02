@@ -10,6 +10,7 @@ $.fn.editable.defaults.ajaxOptions = {
 	}
 };
 $(document).ready(function() {
-	$('.ui-editable').editable();
+	//$('.ui-editable').editable();
+  $('#user-password').editable({display: false});
 });
 

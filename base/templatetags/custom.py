@@ -15,9 +15,6 @@ import markdown as markdown_lib
 logger = logging.getLogger(__name__)
 
 
-
-
-
 register = template.Library()
 
 
@@ -36,8 +33,6 @@ def pluck(list, key):
     return [i.get(key, None) for i in list]
 
 
-
-
 @register.filter
 def crispy_form_horizontal_(form):
     logger.debug('FORM %s', form)
@@ -50,14 +45,11 @@ def crispy_form_horizontal_(form):
     return form
 
 
-
 @register.filter
 def crispy_form_horizontal(form, config='col-md-4,col-md-8'):
     label_class, field_class = config.split(',')
     form = as_crispy_form(form, label_class=label_class, field_class=field_class)
     return form
-
-
 
 
 @register.filter(is_safe=True)

@@ -118,12 +118,12 @@
 
 {% block view_scripts %}
 	<script type="text/javascript">
-		reform.urls.statistics = {% url 'violations:public_statistics' as stats_url %}{{stats_url|json}};
+		reform.urls.statistics = {% url 'public_statistics' as url %}{{url|json}};
 	</script>
 	{% compress js %}
 	<script src="{% static 'components/highcharts.com/js/highcharts.src.js' %}"></script>
 	<script src="{% static 'components/highcharts.com/js/modules/exporting.src.js' %}"></script>
-  <script src="{% static 'components/highcharts-themes/dist/highcharts-themes.js' %}"></script>
+  <script src="{% static 'scripts/highcharts-theme.js' %}"></script>
 	<script src="{% static 'users/scripts/login.js' %}"></script>
 	{% endcompress %}
 {% endblock %}

@@ -14,4 +14,11 @@
                   <span class="label label-info datetime">
                     <i class="fa fa-calendar"></i> {{report.datetime}}
                   </span>
+
+
+                  <span class="badge">{% if report.media.count or report.is_verified %}
+                  {% if report.media.count %}<i class="fa fa-picture-o" data-toggle="tooltip" title="Have media attachments"></i>{% endif %}
+                  {% if report.is_verified %}<i class="fa fa-check-square text-success" data-toggle="tooltip" title="Verified"></i>{% endif %}
+                  {% endif %}</span>
+
                 </li>

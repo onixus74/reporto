@@ -87,32 +87,32 @@
 					<hr>
 					<h3><i class="fa fa-picture-o"></i> Media Attachments</h3>{% get_media_prefix as MEDIA_PREFIX %}
 					{% if report.media.count %}
-					<ul class="thumbnails">
-						{% for media in report.media.all %}
-						<li class="col-md-4_" style="display: inline-block; width: auto;">
+          <ul class="list-unstyled">
+            {% for media in report.media.all %}
+            <li class="col-md-4_" style="display: inline-block; /* width: auto; */">
 							{% comment %}
-							<a class="thumbnail- fancybox" href="{% if media.is_file %}{{ media.file.url }}{% else %}{{media.url}}{% endif %}" target="_blank" rel="group">
+							<a class="fancybox" href="{% if media.is_file %}{{ media.file.url }}{% else %}{{media.url}}{% endif %}" target="_blank" rel="group">
 							{% endcomment %}
               {% comment %}
-              <a class="thumbnail- fancybox" href="{{media.url}}" target="_blank" rel="group">
-                <img src="{% if media.is_file %}{{ media.file|thumbnail_url:'media' }}{% elif media.is_youtube %}{{media.get_youtube_thumbnail_url}}{% else %}{{media.url}}{% endif %}" alt="" style="height: 100px; width: auto;" class="img-thumbnail">
+              <a class="fancybox" href="{{media.url}}" target="_blank" rel="group">
+                <img src="{% if media.is_file %}{{ media.file|thumbnail_url:'media' }}{% elif media.is_youtube %}{{media.get_youtube_thumbnail_url}}{% else %}{{media.url}}{% endif %}" alt="" style="height: 100px; width: auto;" class="thumbnail">
               </a>
               {% endcomment %}
               {% if media.is_file %}
-              <a class="thumbnail- fancybox" href="{{ media.url }}" target="_blank" rel="group">
-                <img src="{{ media.file|thumbnail_url:'media' }}" alt="" style="height: 100px; width: auto;" class="img-thumbnail">
+              <a class="fancybox" href="{{ media.url }}" target="_blank" rel="group">
+                <img src="{{ media.file|thumbnail_url:'media' }}" alt="" style="height: 100px; width: auto;" class="thumbnail">
               </a>
               {% elif media.is_youtube %}
-              <a class="thumbnail- fancybox" href="{{ media.url }}" target="_blank" rel="group">
-                <img src="{{ media.get_youtube_thumbnail_url }}" alt="" style="height: 100px; width: auto;" class="img-thumbnail">
+              <a class="fancybox" href="{{ media.url }}" target="_blank" rel="group">
+                <img src="{{ media.get_youtube_thumbnail_url }}" alt="" style="height: 100px; width: auto;" class="thumbnail">
               </a>
               {% elif media.is_facebook %}
-              <a class="thumbnail- fancybox" data-fancybox-type="iframe" href="{{ media.get_facebook_embed_url }}" target="_blank" rel="group">
-                <img src="{% static 'facebook-video.png' %}" alt="" style="height: 100px; width: auto;" class="img-thumbnail">
+              <a class="fancybox" data-fancybox-type="iframe" href="{{ media.get_facebook_embed_url }}" target="_blank" rel="group">
+                <img src="{% static 'facebook-video.png' %}" alt="" style="height: 100px; width: auto;" class="thumbnail">
               </a>
               {% else  %}
-              <a class="thumbnail- fancybox" href="{{ media.url }}" target="_blank" rel="group">
-                <img src="{{ media.url }}" alt="" style="height: 100px; width: auto;" class="img-thumbnail">
+              <a class="fancybox" href="{{ media.url }}" target="_blank" rel="group">
+                <img src="{{ media.url }}" alt="" style="height: 100px; width: auto;" class="thumbnail">
               </a>
               {% endif %}
 						</li>

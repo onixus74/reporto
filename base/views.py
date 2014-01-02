@@ -4,16 +4,17 @@ from django import forms
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 #from django.contrib.auth.decorators import login_required, user_passes_test, permission_required
+from django.views.decorators.http import require_http_methods
 from django.contrib.auth.forms import AuthenticationForm
 #from django.contrib.auth.views import redirect_to_login
 #from django.core.context_processors import csrf
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-#from django.http import HttpResponse, Http404
+from django.http import HttpResponse, Http404
 from django.shortcuts import render, redirect, render_to_response, get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
 #from django.views.decorators.http import require_POST
 
-#from base.utils.views import JSONResponse
+from base.utils.views import JSONResponse
 from appreciations.models import Report as AppreciationReport
 from users.forms import UserCreationForm
 from users.models import User
@@ -67,7 +68,7 @@ def register_view(request, *args, **kwargs):
             user = authenticate(username=user.username, password=form.cleaned_data["password"])
             #logger.debug('REGISTRATION %s', [user])
             login(request, user)
-            messages.success(request, 'Login succeeded.')
+            #messages.success(request, 'Login succeeded.')
             # return redirect(request.REQUEST.get('next', 'users:profile'))
             return redirect('users:profile')
         else:
@@ -83,7 +84,7 @@ def login_view(request, *args, **kwargs):
         user = form.get_user()
         if user.is_active:
             login(request, user)
-            messages.success(request, 'Login succeeded.')
+            #messages.success(request, 'Login succeeded.')
             return redirect(request.REQUEST.get('next', '/'))
         else:
             messages.warning(request, 'Sorry, your user account is inactive.')
@@ -180,3 +181,19 @@ def home_view(request, *args, **kwargs):
     # else:
     # return redirect_to_login(next[, login_url, redirect_field_name])
     # return redirect_to_login('/')
+
+
+@require_http_methods(['OPTIONS', 'GET'])
+def statistics_view(request, *args, **kwargs):
+    if request.method == 'OPTIONS':
+        response = HttpResponse()
+    else:
+        response = {}
+
+        append_violations_statistics(response)
+        append_appreciations_statistics(response)
+
+        response = JSONResponse(response)
+
+    response['Access-Control-Allow-Origin'] = '*'
+    return response

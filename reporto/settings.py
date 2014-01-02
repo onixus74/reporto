@@ -309,8 +309,7 @@ COMPRESS_CSS_FILTERS = [
     #'compressor.filters.yui.YUICSSFilter'
 ]
 COMPRESS_JS_FILTERS = [
-    # 'compressor.filters.jsmin.JSMinFilter',
-    # 'compressor.filters.jsmin.SlimItFilter',
+    'compressor.filters.jsmin.JSMinFilter',
     # 'compressor.filters.yui.YUIJSFilter',
     # 'compressor.filters.closure.ClosureCompilerFilter',
 ]

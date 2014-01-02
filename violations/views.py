@@ -631,7 +631,7 @@ def report_comment(request, pk, *args, **kwargs):
 
 
 @require_http_methods(['OPTIONS', 'GET'])
-def statistics(request, *args, **kwargs):
+def statistics_view(request, *args, **kwargs):
     if request.method == 'OPTIONS':
         response = HttpResponse()
     else:
