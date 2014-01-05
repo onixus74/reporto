@@ -1,13 +1,13 @@
 import logging
+logger = logging.getLogger(__name__)
+
+from django.utils.translation import ugettext as _
 
 from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.forms.models import model_to_dict
 from django.template.defaultfilters import slugify
-
-
-logger = logging.getLogger(__name__)
 
 
 class Category(models.Model):

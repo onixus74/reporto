@@ -1,4 +1,7 @@
 import logging
+logger = logging.getLogger(__name__)
+
+from django.utils.translation import ugettext as _
 
 from django import forms
 from django.contrib import messages
@@ -8,21 +11,21 @@ from django.views.decorators.http import require_http_methods
 from django.contrib.auth.forms import AuthenticationForm
 #from django.contrib.auth.views import redirect_to_login
 #from django.core.context_processors import csrf
+from django.db.models import Count
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import HttpResponse, Http404
 from django.shortcuts import render, redirect, render_to_response, get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
 #from django.views.decorators.http import require_POST
+from django.utils.translation import ugettext as _
 
 from base.utils.views import JSONResponse
 from appreciations.models import Report as AppreciationReport
 from users.forms import UserCreationForm
 from users.models import User
+from django.contrib.auth.models import Group
 from violations.models import Report as ViolationReport
 from violations.views import append_violations_statistics, append_appreciations_statistics
-
-
-logger = logging.getLogger(__name__)
 
 
 @csrf_exempt
@@ -50,7 +53,15 @@ class UserForm(forms.ModelForm):
 #from crispy_forms.helper import FormHelper
 
 
-def register_view(request, *args, **kwargs):
+class UserCreationForm(UserCreationForm):
+    #email = forms.EmailField(required=True)
+
+    class Meta:
+        model = User
+        fields = ('email', 'first_name', 'last_name')
+
+
+def signup_view(request, *args, **kwargs):
     if request.user.is_authenticated():
         return redirect('home')
     form = UserCreationForm(request.POST or None)
@@ -64,16 +75,16 @@ def register_view(request, *args, **kwargs):
         user = form.save()
 
         if user.is_active:
-            #logger.debug('REGISTRATION %s', [user, user.username, user.password, request.POST["password"], form.cleaned_data["password"]])
+            #logger.debug('SIGNUP %s', [user, user.username, user.password, request.POST["password"], form.cleaned_data["password"]])
             user = authenticate(username=user.username, password=form.cleaned_data["password"])
-            #logger.debug('REGISTRATION %s', [user])
+            #logger.debug('SIGNUP %s', [user])
             login(request, user)
-            #messages.success(request, 'Login succeeded.')
+            #messages.success(request, 'Sign in succeeded.')
             # return redirect(request.REQUEST.get('next', 'users:profile'))
             return redirect('users:profile')
         else:
             messages.warning(request, 'Sorry, your user account is inactive.')
-    return render(request, "register.html", {'form': form, 'next': request.REQUEST.get('next', '/')})
+    return render(request, "signup.html", {'form': form, 'next': request.REQUEST.get('next', '/')})
 
 
 def login_view(request, *args, **kwargs):
@@ -84,16 +95,24 @@ def login_view(request, *args, **kwargs):
         user = form.get_user()
         if user.is_active:
             login(request, user)
-            #messages.success(request, 'Login succeeded.')
+            #messages.success(request, 'Sign in succeeded.')
             return redirect(request.REQUEST.get('next', '/'))
         else:
             messages.warning(request, 'Sorry, your user account is inactive.')
+
     return render(request, "login.html", {
         'form': form,
         'next': request.REQUEST.get('next', '/'),
-        'violations': ViolationReport.objects.count(),
-        'appreciations': AppreciationReport.objects.count()
+        'violations_count': ViolationReport.objects.count(),
+        'violations_latest': ViolationReport.objects.all()[:3],
+        'violations_top_reporters': [{'get_full_name': item['created_by__first_name'] + ' ' + item['created_by__last_name'], 'count': item['count']} for item in ViolationReport.objects.values('created_by__first_name', 'created_by__last_name').annotate(count=Count('id')).order_by('-count')[:3]],
+        'violations_top_reporting_circles': [{'name': item['created_by__groups__name'], 'count': item['count']} for item in ViolationReport.objects.values('created_by__groups__name',).annotate(count=Count('id')).order_by('-count')[:3]],
+        'appreciations_count': AppreciationReport.objects.count(),
+        'appreciations_latest': AppreciationReport.objects.all()[:3],
+        'appreciations_top_reporters': [{'get_full_name': item['created_by__first_name'] + ' ' + item['created_by__last_name'], 'count': item['count']} for item in AppreciationReport.objects.values('created_by__first_name', 'created_by__last_name').annotate(count=Count('id')).order_by('-count')[:3]],
+        'appreciations_top_reporting_circles': [{'name': item['created_by__groups__name'], 'count': item['count']} for item in AppreciationReport.objects.values('created_by__groups__name',).annotate(count=Count('id')).order_by('-count')[:3]],
     })
+
 
     # if request.method == 'POST':
     # 	username = request.POST['username']
@@ -102,7 +121,7 @@ def login_view(request, *args, **kwargs):
     # 	if user is not None:
     # 		if user.is_active:
     # 			login(request, user)
-    # 			messages.success(request, 'Login succeeded.')
+    # 			messages.success(request, 'Sign in succeeded.')
     # 			return redirect('home')
     # 		else:
     # 			return render(request, "login.html", {'form': form})
@@ -111,6 +130,24 @@ def login_view(request, *args, **kwargs):
     # 		return render(request, "login.html", {'form': form})
     # else:
     # 	return render(request, "login.html", {'form': form})
+
+def login_minimal_view(request, *args, **kwargs):
+    if request.user.is_authenticated():
+        return redirect('home')
+    form = AuthenticationForm(data=request.POST or None)
+    if form.is_valid():
+        user = form.get_user()
+        if user.is_active:
+            login(request, user)
+            #messages.success(request, 'Sign in succeeded.')
+            return redirect(request.REQUEST.get('next', '/'))
+        else:
+            messages.warning(request, 'Sorry, your user account is inactive.')
+
+    return render(request, "login-minimal.html", {
+        'form': form,
+        'next': request.REQUEST.get('next', '/')
+    })
 
 
 def logout_view(request, *args, **kwargs):

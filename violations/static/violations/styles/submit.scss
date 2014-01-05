@@ -9,9 +9,11 @@ body {
 }
 */
 
+/*
 #top-bg {
 	height: 100px;
 }
+*/
 
 #ui-wizard-progress-bar {
 	position: fixed;
@@ -59,6 +61,7 @@ body {
 .boostrap-select-fix .filter-option {
 	text-align: center;
 }
+
 
 
 #dateinput
@@ -207,22 +210,22 @@ body {
 
 
 .ui-similar-category .ui-similar-report-category, .ui-similar-category .ui-similar-report-category a {
-	color: darken($brand-danger, 5%);
+	//color: darken($brand-danger, 5%);
 	font-weight: bold;
 }
 
 .ui-similar-location .ui-similar-report-location, .ui-similar-location .ui-similar-report-location a {
-	color: darken($brand-danger, 10%);
+	//color: darken($brand-danger, 10%);
 	font-weight: bold;
 }
 
 .ui-similar-datetime .ui-similar-report-datetime, .ui-similar-datetime .ui-similar-report-datetime a {
-	color: darken($brand-danger, 15%);
+	//color: darken($brand-danger, 15%);
 	font-weight: bold;
 }
 
 .ui-similar-victim .ui-similar-report-victim, .ui-similar-victim .ui-similar-report-victim a {
-	color: $brand-danger;
+	//color: $brand-danger;
 	font-weight: bold;
 }
 

@@ -136,7 +136,7 @@
 				</div>
 			</div>
 
-			{% if show_all %}
+			{% if user.is_authenticated and show_all %}
       <div class="row">
 				<div class="col-md-offset-1 col-md-10">
 					<hr>
@@ -152,6 +152,7 @@
 				</div>
 			</div>
 
+      {% if user.is_authenticated %}
 			<div class="row">
 				<fieldset id="ui-comments-area">
 					<div class="col-md-offset-1 col-md-4">
@@ -170,4 +171,5 @@
 					</div>
 				</fieldset>
 			</div>
+      {% endif %}
       {% endif %}

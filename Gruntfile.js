@@ -1,6 +1,6 @@
 'use strict';
 
-function makeDjangoAppConfig(config, applicationName){
+function makeDjangoAppConfig(config, applicationName) {
 
   config.compass[applicationName] = {
     options: {
@@ -9,6 +9,15 @@ function makeDjangoAppConfig(config, applicationName){
       cssDir: 'styles',
       force: true
     }
+  };
+
+  config.r2[applicationName] = {
+    //compress: false,
+    expand: true,
+    cwd: '{app}/static/{app}/styles'.replace(/{app}/g, applicationName),
+    src: ['**/*.css', '!*.min.css', '!*.dist.css', '!*-rtl.css', '!*-rtl-mod.css'],
+    dest: '{app}/static/{app}/styles'.replace(/{app}/g, applicationName),
+    ext: '-rtl.css'
   };
 
   config.cssmin[applicationName] = {
@@ -46,6 +55,8 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json'),
 
     compass: {},
+
+    r2: {},
 
     cssmin: {
 
@@ -108,6 +119,15 @@ module.exports = function(grunt) {
     }
   };
 
+  config.r2.base = {
+    //compress: false,
+    expand: true,
+    cwd: 'base/static/styles',
+    src: ['**/*.css', '!*.min.css', '!*.dist.css', '!*-rtl.css', '!*-rtl-mod.css'],
+    dest: 'base/static/styles',
+    ext: '-rtl.css'
+  };
+
   config.cssmin.base = {
     expand: true,
     cwd: 'base/static/styles',
@@ -143,6 +163,15 @@ module.exports = function(grunt) {
       cssDir: 'dashboard/styles',
       force: true
     }
+  };
+
+  config.r2.dashboard = {
+    //compress: false,
+    expand: true,
+    cwd: 'base/static/dashboard/styles',
+    src: ['**/*.css', '!*.min.css', '!*.dist.css', '!*-rtl.css', '!*-rtl-mod.css'],
+    dest: 'base/static/dashboard/styles',
+    ext: '-rtl.css'
   };
 
   config.cssmin.dashboard = {
@@ -182,14 +211,15 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-compass');
+  grunt.loadNpmTasks('grunt-r2');
 
   // Register default task
   //grunt.registerTask('static', ['cssmin:static'], 'uglify:static');
-  grunt.registerTask('base', ['compass:base', 'cssmin:base', 'uglify:base']);
-  grunt.registerTask('users', ['compass:users', 'cssmin:users', 'uglify:users']);
-  grunt.registerTask('dashboard', ['compass:dashboard', 'cssmin:dashboard', 'uglify:dashboard']);
-  grunt.registerTask('violations', ['compass:violations', 'cssmin:violations', 'uglify:violations']);
-  grunt.registerTask('appreciations', ['compass:appreciations', 'cssmin:appreciations', 'uglify:appreciations']);
+  grunt.registerTask('base', ['compass:base', 'r2:base', 'cssmin:base', 'uglify:base']);
+  grunt.registerTask('users', ['compass:users', 'r2:users', 'cssmin:users', 'uglify:users']);
+  grunt.registerTask('dashboard', ['compass:dashboard', 'r2:dashboard', 'cssmin:dashboard', 'uglify:dashboard']);
+  grunt.registerTask('violations', ['compass:violations', 'r2:violations', 'cssmin:violations', 'uglify:violations']);
+  grunt.registerTask('appreciations', ['compass:appreciations', 'r2:appreciations', 'cssmin:appreciations', 'uglify:appreciations']);
   grunt.registerTask('default', ['base', 'users', 'violations', 'appreciations', 'dashboard']);
 
 };

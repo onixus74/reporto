@@ -272,16 +272,17 @@
             //allowPointSelect: true,
             cursor: 'pointer',
             dataLabels: {
-              enabled: true,
+              enabled: false,
               color: '#000000',
               connectorColor: '#000000',
               format: '<b>{point.name}</b>: {point.percentage:.1f} %'
-            }
+            },
+            showInLegend: true
           }
         },
         series: [{
           type: 'pie',
-          name: 'Category share',
+          name: 'Victim\'s ategory share',
           data: data
         }],
         credits: {
@@ -317,11 +318,12 @@
             //allowPointSelect: true,
             cursor: 'pointer',
             dataLabels: {
-              enabled: true,
+              enabled: false,
               color: '#000000',
               connectorColor: '#000000',
               format: '<b>{point.name}</b>: {point.percentage:.1f} %'
-            }
+            },
+            showInLegend: true
           }
         },
         series: [{
@@ -361,16 +363,17 @@
             //allowPointSelect: true,
             cursor: 'pointer',
             dataLabels: {
-              enabled: true,
+              enabled: false,
               color: '#000000',
               connectorColor: '#000000',
               format: '<b>{point.name}</b>: {point.percentage:.1f} %'
-            }
+            },
+            showInLegend: true
           }
         },
         series: [{
           type: 'pie',
-          name: 'Victim\'s educqtion share',
+          name: 'Victim\'s education share',
           data: data
         }],
         credits: {

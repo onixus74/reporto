@@ -1,13 +1,13 @@
 {% extends "layouts/default.html" %}
 
-{% load crispy_forms_tags %}
+{% load custom %}
 
 {% block view_title %}New User | {% endblock %}
 
 {% block view_content %}
 
 	<div class="page-header">
-		<h1>User <small>Add</small></h1>
+		<h1 class="text-center">User <small>Add</small></h1>
 	</div>
 
 	<div class="row">
@@ -16,12 +16,10 @@
 			<form class="form-horizontal" action="{% url 'users:create' %}" method="post">
 				{% csrf_token %}
 
-				{{form|crispy}}
+				{{form|crispy_form_horizontal}}
 
-				<div class="form-actions">
-					<button type="submit" class="btn btn-primary">Submit</button>
-					<a href="{% url 'users:list' %}" class="btn btn-default">Cancel</a>
-				</div>
+				<button type="submit" class="btn btn-primary">Submit</button>
+				<a href="{% url 'users:list' %}" class="btn btn-default">Cancel</a>
 
 			</form>
 

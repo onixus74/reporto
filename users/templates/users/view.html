@@ -17,7 +17,7 @@
         <dd>{{profile}}</dd>
         <dt>Role</dt>
         <dd>
-          {% if user.is_admin and not profile.is_admin %}
+          {% if user.is_admin and not profile.is_admin or user.is_superuser %}
           <a href="#" class="ui-editable" id="user-role" data-type="select" data-pk="{{profile.pk}}" data-name="role" data-value="{{profile.role}}" data-source="{{user_roles|json|force_escape}}" data-url="{% url 'users:change_role' %}" data-title="Change role">{{profile.get_role_display}}</a>
           {% else %}
           {{profile.get_role_display}}
@@ -28,7 +28,7 @@
         {% endif %}
         <dt>Groups</dt>
         <dd>
-          {% if user.is_admin and not profile.is_admin %}
+          {% if user.is_admin and not profile.is_admin or user.is_superuser %}
           <a href="#" class="ui-editable" id="user-groups" data-type="checklist" data-pk="{{profile.pk}}" data-name="groups" data-value="{{profile.groups.values|pluck:'id'|json|force_escape}}" data-source="{{user_groups|json|force_escape}}" data-url="{% url 'users:change_groups' %}" data-title="Change groups">{{profile.groups.all|join:'<br>'}}</a>
           {% else %}
           {{profile.groups.all|join:'<br>'}}

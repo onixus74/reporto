@@ -1,4 +1,7 @@
 import logging
+logger = logging.getLogger(__name__)
+
+from django.utils.translation import ugettext as _
 
 from django.conf import settings
 from django.core.exceptions import ValidationError
@@ -9,9 +12,6 @@ from django.template.defaultfilters import slugify
 from django.utils.html import strip_tags
 from mptt.fields import TreeManyToManyField
 from mptt.models import MPTTModel, TreeForeignKey
-
-
-logger = logging.getLogger(__name__)
 
 
 class Category(models.Model):
@@ -170,7 +170,7 @@ class Victim(models.Model):
 class Comment(models.Model):
 
     class Meta:
-        ordering = ["created_at"]
+        ordering = ['created_at']
 
     UPDATE = 'U'
     CORRECTION = 'C'

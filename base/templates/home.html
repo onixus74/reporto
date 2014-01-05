@@ -1,15 +1,18 @@
 {% extends "layouts/default.html" %}
 
-{% load static custom compress %}
+{% load static custom compress i18n %}
 
-{% block view_title %}Violations/Appreciations Dashboard | {% endblock %}
+{#% {% trans "" %} %#}
+
+{% block view_title %}{% trans "Violations/Appreciations Dashboard" %} | {% endblock %}
 
 {% block view_content %}
 
     <div class="page-header">
-      <h1 class="text-center">Violations/Appreciations Dashboard</h1>
+      <h1 class="text-center">{% trans "Violations/Appreciations Dashboard" %}</h1>
     </div>
 
+    {% comment %}
     <div class="jumbotron clearfix" style="padding: 20px 40px;">
       <div class="btn-group-vertical pull-right">
         <a class="btn btn-danger btn-lg" href="{% url 'violations:submit' %}" style="margin: 10px"><i class="fa fa-plus"></i> Report a Violation</a>
@@ -20,28 +23,119 @@
       <div style="margin: 0;">
           {% with report=violations_list.0 %}
           <div>
-              <h2 style="margin-top: 0;">Latest Report</h2>
-              <span class="label label-info victim"><i class="fa fa-user"></i> {{report.victim}}</span>
+              <h2 style="margin-top: 0;">Latest Violation</h2>
+              <span class="text-info" data-toggle="tooltip" title="Victim"><i class="fa fa-user"></i> {{report.victim}}</span>
               has been a victim of
-              <span class="label label-info category">{{report.category}}</span>
+              <span class="text-info">{{report.category}}</span>
               happened in
-              <span class="label label-info location"><i class="fa fa-map-marker"></i> {{report.location_text}}</span>
+              <span class="text-info"><i class="fa fa-map-marker"></i> {{report.location_text}}</span>
               on
-              <span class="label label-info datetime"><i class="fa fa-calendar"></i> {{report.datetime}}</span>
+              <span class="text-info"><i class="fa fa-calendar"></i> {{report.datetime}}</span>
               {% if report.is_verified %}<span class="badge badge-success">Verified <i class="fa fa-ok"></i></span>{% endif %}
-              <a class="btn btn-not" href="{% url 'violations:view' report.id %}" target="_blank" title="Click to view report" _data-toggle="modal" _data-target="#ui-report-view-modal">
+              <a class="btn btn-not" href="{% url 'violations:view' report.id %}" -target="_blank" title="Click to view report" -data-toggle="modal" -data-target="#ui-report-view-modal">
                   <i class="fa fa-external-link-square fa-lg"></i>
               </a>
           </div>
           {% endwith %}
       </div>
-      {% elif appreciations_list %}
       {% else %}
       <div style="margin: 0;">
-        <h2>There is no reports!</h2>
+        <h2>There is no reported violations!</h2>
+      </div>
+      {% endif %}
+
+      {% if appreciations_list %}
+      <div style="margin: 0;">
+          {% with report=appreciations_list.0 %}
+          <div>
+              <h2 style="margin-top: 0;">Latest Appreciation</h2>
+              <span class="text-info">{{report.category}}</span>
+              happened in
+              <span class="text-info"><i class="fa fa-map-marker"></i> {{report.location_text}}</span>
+              on
+              <span class="text-info"><i class="fa fa-calendar"></i> {{report.datetime}}</span>
+              {% if report.is_verified %}<span class="badge badge-success">Verified <i class="fa fa-ok"></i></span>{% endif %}
+              <a class="btn btn-not" href="{% url 'violations:view' report.id %}" -target="_blank" title="Click to view report" -data-toggle="modal" -data-target="#ui-report-view-modal">
+                  <i class="fa fa-external-link-square fa-lg"></i>
+              </a>
+          </div>
+          {% endwith %}
+      </div>
+      {% else %}
+      <div style="margin: 0;">
+        <h2>There is no reported appreciations!</h2>
       </div>
       {% endif %}
     </div>
+    {% endcomment %}
+
+    <div class="row text-center">
+      <div class="col-md-6" style="margin-top: 20px;">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <div>
+              {% if violations_list %}
+              <div style="margin: 0;">
+                  {% with report=violations_list.0 %}
+                  <div>
+                      <h2 style="margin-top: 0;">Latest Violation</h2>
+                      <span class="text-info" data-toggle="tooltip" title="Victim"><i class="fa fa-user"></i> {{report.victim}}</span>
+                      has been a victim of
+                      <span class="text-info">{{report.category}}</span>
+                      happened in
+                      <span class="text-info"><i class="fa fa-map-marker"></i> {{report.location_text}}</span>
+                      on
+                      <span class="text-info"><i class="fa fa-calendar"></i> {{report.datetime}}</span>
+                      {% if report.is_verified %}<span class="badge badge-success">Verified <i class="fa fa-ok"></i></span>{% endif %}
+                      <a class="btn btn-not" href="{% url 'violations:view' report.id %}" -target="_blank" title="Click to view report" -data-toggle="modal" -data-target="#ui-report-view-modal">
+                          <i class="fa fa-external-link-square fa-lg"></i>
+                      </a>
+                  </div>
+                  {% endwith %}
+              </div>
+              {% else %}
+              <div style="margin: 0;">
+                <h2>There is no reported violations!</h2>
+              </div>
+              {% endif %}
+            </div>
+            <a class="btn btn-danger btn-lg" href="{% url 'violations:submit' %}" style="margin: 10px"><i class="fa fa-plus"></i> Report a Violation</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6" style="margin-top: 20px;">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <div>
+              {% if appreciations_list %}
+              <div style="margin: 0;">
+                  {% with report=appreciations_list.0 %}
+                  <div>
+                      <h2 style="margin-top: 0;">Latest Appreciation</h2>
+                      <span class="text-info">{{report.category}}</span> for ...
+                      happened in
+                      <span class="text-info"><i class="fa fa-map-marker"></i> {{report.location_text}}</span>
+                      on
+                      <span class="text-info"><i class="fa fa-calendar"></i> {{report.datetime}}</span>
+                      {% if report.is_verified %}<span class="badge badge-success">Verified <i class="fa fa-ok"></i></span>{% endif %}
+                      <a class="btn btn-not" href="{% url 'appreciations:view' report.id %}" -target="_blank" title="Click to view report" -data-toggle="modal" -data-target="#ui-report-view-modal">
+                          <i class="fa fa-external-link-square fa-lg"></i>
+                      </a>
+                  </div>
+                  {% endwith %}
+              </div>
+              {% else %}
+              <div style="margin: 0;">
+                <h2>There is no reported appreciations!</h2>
+              </div>
+              {% endif %}
+            </div>
+            <a class="btn btn-success btn-lg" href="{% url 'appreciations:submit' %}" style="margin: 10px"><i class="fa fa-plus"></i> Appreciate Police Work</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
 
     {% if violations_list or appreciations_list %}
     <div class="well_">
@@ -293,7 +387,7 @@
       </div>
       <div class="modal-footer">
         <a class="ui-more btn btn-primary" href=""><i class="fa fa-ellipsis-h"></i> More</a>
-        <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></
+        <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->

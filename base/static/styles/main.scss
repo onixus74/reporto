@@ -552,3 +552,27 @@ input[hidden] { display: none; }
 .asteriskField:after {
   content: ')';
 }
+
+
+.animatable {
+  position: relative;
+  display: inline-block;
+}
+
+.text-highlight {
+  color: #47467F;
+  font-size: 120%;
+  text-shadow: 1px 1px 1px #969696;
+}
+
+.text-shadow {
+  text-shadow: 1px 1px 1px #969696;
+}
+
+.text-big {
+  font-size: 110%;
+}
+
+.text-bigger {
+  font-size: 120%;
+}

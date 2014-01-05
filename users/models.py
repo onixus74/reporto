@@ -1,3 +1,8 @@
+import logging
+logger = logging.getLogger(__name__)
+
+from django.utils.translation import ugettext as _
+
 from django.contrib.auth.models import AbstractUser
 from django.core.urlresolvers import reverse
 from django.db import models
@@ -6,8 +11,9 @@ from django.forms.models import model_to_dict
 
 class User(AbstractUser):
 
-    # class Meta:
-    #	unique_together = ('email', )
+    class Meta:
+        #	unique_together = ('email', )
+        ordering = ['date_joined']
 
     REQUIRED_FIELDS = ['email', 'first_name', 'last_name']
     #REQUIRED_FIELDS = ['first_name', 'last_name']

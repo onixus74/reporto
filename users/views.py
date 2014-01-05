@@ -1,6 +1,8 @@
 import logging
 logger = logging.getLogger(__name__)
 
+from django.utils.translation import ugettext as _
+
 #from django import forms
 #from django.contrib import messages
 #from django.contrib.auth import authenticate, login, logout
@@ -16,11 +18,12 @@ from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 from base.utils.views import JSONResponse, PaginatedListHybridResponseMixin, \
-  DetailHybridResponseMixin
+    DetailHybridResponseMixin
 from violations.models import Victim
 from violations_victims.views import VictimForm as BaseVictimForm
 
 from .models import User
+
 
 class UserListView(ListView):
     model = User
@@ -42,11 +45,13 @@ class UserDetailHybridView(DetailHybridResponseMixin, UserDetailView):
 
 class UserCreateView(CreateView):
     model = User
+    fields = ['email', 'first_name', 'last_name', 'password', 'role', 'groups', 'is_active', 'is_staff']
     template_name = "users/new.html"
 
 
 class UserUpdateView(UpdateView):
     model = User
+    fields = ['email', 'first_name', 'last_name', 'password', 'role', 'groups', 'is_active', 'is_staff']
     template_name = "users/edit.html"
 
 
@@ -85,8 +90,6 @@ def user_view(request, pk=None, username=None, extension=None):
 # 			'category': forms.RadioSelect(),
 # 			'gender': forms.RadioSelect(),
 # 		}
-
-
 
 
 class VictimForm(BaseVictimForm):

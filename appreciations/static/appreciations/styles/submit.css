@@ -149,7 +149,7 @@ body {
 /* line 163, submit.scss */
 #dateinput .days .day.selected, #dateinput .days .empty.selected {
   color: white;
-  background-color: #006682;
+  background-color: #7276ff;
   -webkit-box-shadow: inset 0 0 8px #d4d4d4;
   box-shadow: inset 0 0 8px #d4d4d4;
 }

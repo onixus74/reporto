@@ -1,0 +1,314 @@
+/*
+body {
+  padding-top: 120px;
+}
+*/
+
+/* line 12, submit.scss */
+
+#top-bg {
+  height: 100px;
+}
+
+/* line 16, submit.scss */
+
+#ui-wizard-progress-bar {
+  position: fixed;
+  top: 80px;
+  width: 100%;
+  z-index: 100;
+}
+
+/* line 23, submit.scss */
+
+#appreciation-form {
+  margin: 0;
+}
+
+/* line 27, submit.scss */
+
+#appreciation-violation-form {
+  margin: 0;
+}
+
+/* line 31, submit.scss */
+
+.input-area {
+  display: block;
+  width: 100%;
+  min-height: 30px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  height: 180px;
+  overflow: auto;
+}
+
+/* line 43, submit.scss */
+
+.bootstrap-select {
+  margin: 0px;
+}
+
+/* fix boostrap-select width */
+
+/* line 48, submit.scss */
+
+.bootstrap-select:not([class*="span"]) {
+  width: 100%;
+}
+
+/* fix boostrap-select colors in natural language form */
+
+/* line 53, submit.scss */
+
+.boostrap-select-fix {
+  background-color: transparent;
+  color: #222222;
+  text-align: center;
+}
+
+/* line 59, submit.scss */
+
+.boostrap-select-fix .filter-option {
+  text-align: center;
+}
+
+/* line 65, submit.scss */
+
+#dateinput {
+  max-width: 600px;
+  margin: 0 auto;
+  background-color: #f4f4f4;
+  /*
+  -moz-box-shadow: 4px 4px 0 darken(darkGray, 5%);
+  -webkit-box-shadow: 4px 4px 0 darken(darkGray, 5%);
+  box-shadow: 4px 4px 0 darken(darkGray, 5%);
+  */
+  /* padding-bottom: 12px; */
+}
+
+/* line 80, submit.scss */
+
+#dateinput .noselect,
+#dateinput .controls .clndr-previous-button,
+#dateinput .controls .clndr-next-button,
+#dateinput .controls .clndr-previous-year-button,
+#dateinput .controls .clndr-next-year-button {
+  -webkit-user-select: none;
+  /* Chrome/Safari */
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+  /* IE10+ */
+}
+
+/* line 93, submit.scss */
+
+#dateinput .controls {
+  background-color: lightGray;
+  color: white;
+}
+
+/* line 98, submit.scss */
+
+#dateinput .controls .clndr-previous-button,
+#dateinput .controls .clndr-next-button,
+#dateinput .controls .clndr-previous-year-button,
+#dateinput .controls .clndr-next-year-button {
+  width: 10%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  display: inline-block;
+  text-align: center;
+  cursor: pointer;
+  -webkit-transition: background-color 0.5s;
+  transition: background-color 0.5s;
+}
+
+/* line 107, submit.scss */
+
+#dateinput .controls .clndr-previous-button:hover,
+#dateinput .controls .clndr-next-button:hover,
+#dateinput .controls .clndr-previous-year-button:hover,
+#dateinput .controls .clndr-next-year-button:hover {
+  background-color: #b9b9b9;
+}
+
+/* line 112, submit.scss */
+
+#dateinput .controls .month {
+  width: 60%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  display: inline-block;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+/* line 124, submit.scss */
+
+#dateinput .days-of-the-week {
+  width: 100%;
+}
+
+/* line 128, submit.scss */
+
+#dateinput .days-of-the-week .header-day {
+  float: right;
+  width: 14.2857%;
+  padding: 12px 0;
+  text-align: center;
+}
+
+/* line 140, submit.scss */
+
+#dateinput .days .day,
+#dateinput .days .empty {
+  float: right;
+  width: 14.2857%;
+  padding: 12px 0;
+  text-align: center;
+  cursor: pointer;
+}
+
+/* line 148, submit.scss */
+
+#dateinput .days .day.today,
+#dateinput .days .empty.today {
+  font-weight: bold;
+  /*background-color: lightGray;
+  -moz-box-shadow: inset 0 0 8px #d4d4d4;
+  -webkit-box-shadow: inset 0 0 8px #d4d4d4;
+  box-shadow: inset 0 0 8px #d4d4d4;
+  */
+}
+
+/* line 158, submit.scss */
+
+#dateinput .days .day.event,
+#dateinput .days .empty.event {
+  color: blue;
+}
+
+/* line 163, submit.scss */
+
+#dateinput .days .day.selected,
+#dateinput .days .empty.selected {
+  color: white;
+  background-color: #7276ff;
+  -webkit-box-shadow: inset 0 0 8px #d4d4d4;
+  box-shadow: inset 0 0 8px #d4d4d4;
+}
+
+/* line 169, submit.scss */
+
+#dateinput .days .day.adjacent-month,
+#dateinput .days .empty.adjacent-month {
+  color: #999999;
+}
+
+/* line 177, submit.scss */
+
+.ui-similar-appreciation-candidate {
+  margin: 4px;
+  border: 1px transparent solid;
+  -webkit-transition: border-color 0.1s linear;
+  transition: border-color 0.1s linear;
+}
+
+/* line 181, submit.scss */
+
+.ui-similar-appreciation-candidate.ui-similar {
+  border-color: #c0392b;
+  -webkit-box-shadow: 0 0 5px rgba(214, 85, 72, 0.9);
+  box-shadow: 0 0 5px rgba(214, 85, 72, 0.9);
+}
+
+/* line 184, submit.scss */
+
+.ui-similar-appreciation-candidate.ui-similar.ui-similar-1 {
+  -webkit-box-shadow: 0 0 10px rgba(209, 66, 51, 0.8);
+  box-shadow: 0 0 10px rgba(209, 66, 51, 0.8);
+}
+
+/* line 187, submit.scss */
+
+.ui-similar-appreciation-candidate.ui-similar.ui-similar-2 {
+  -webkit-box-shadow: 0 0 20px rgba(192, 57, 43, 0.7);
+  box-shadow: 0 0 20px rgba(192, 57, 43, 0.7);
+}
+
+/* line 190, submit.scss */
+
+.ui-similar-appreciation-candidate.ui-similar.ui-similar-3 {
+  -webkit-box-shadow: 0 0 30px rgba(171, 51, 38, 0.7);
+  box-shadow: 0 0 30px rgba(171, 51, 38, 0.7);
+}
+
+/* line 193, submit.scss */
+
+.ui-similar-appreciation-candidate.ui-similar.ui-similar-4 {
+  -webkit-box-shadow: 0 0 40px rgba(150, 45, 34, 0.7);
+  box-shadow: 0 0 40px rgba(150, 45, 34, 0.7);
+}
+
+/* line 208, submit.scss */
+
+.ui-similar-category .ui-similar-appreciation-category,
+.ui-similar-category .ui-similar-appreciation-category a {
+  color: #ab3326;
+  font-weight: bold;
+}
+
+/* line 213, submit.scss */
+
+.ui-similar-location .ui-similar-appreciation-location,
+.ui-similar-location .ui-similar-appreciation-location a {
+  color: #962d22;
+  font-weight: bold;
+}
+
+/* line 218, submit.scss */
+
+.ui-similar-datetime .ui-similar-appreciation-datetime,
+.ui-similar-datetime .ui-similar-appreciation-datetime a {
+  color: #81261d;
+  font-weight: bold;
+}
+
+/* line 223, submit.scss */
+
+.ui-similar-victim .ui-similar-appreciation-victim,
+.ui-similar-victim .ui-similar-appreciation-victim a {
+  color: #c0392b;
+  font-weight: bold;
+}
+
+@media (max-width: 767px) {
+  /* line 230, submit.scss */
+
+  #ui-wizard-progress-bar {
+    top: 50px;
+  }
+
+  /* line 232, submit.scss */
+
+  #ui-wizard-progress-bar .progress {
+    margin: 0;
+  }
+}
+
+/* line 240, submit.scss */
+
+.ui-victim-fieldset {
+  height: auto;
+}
+
+/* line 242, submit.scss */
+
+.ui-victim-fieldset .control-group {
+  margin-bottom: 10px;
+}

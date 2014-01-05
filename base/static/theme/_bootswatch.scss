@@ -78,18 +78,19 @@
 
 // Buttons ====================================================================
 
+
 .btn {
 	padding: 14px 28px;
 
-	.btn-lg {
+	&.btn-lg {
 		padding: 16px 32px;
 	}
 
-	.btn-sm {
+	&.btn-sm {
 		padding: 8px 16px;
 	}
 
-	.btn-xs {
+	&.btn-xs {
 		padding: 4px 8px;
 	}
 }

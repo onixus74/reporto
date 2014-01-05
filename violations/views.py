@@ -1,6 +1,9 @@
 import logging
 logger = logging.getLogger(__name__)
 
+from django.utils.translation import ugettext as _
+
+
 from datetime import datetime
 import difflib
 from math import radians, cos, sin, asin, sqrt
@@ -13,7 +16,6 @@ from django.forms.models import model_to_dict
 from django.http import HttpResponse
 from django.shortcuts import render, render_to_response, redirect
 from django.template.loader import render_to_string
-from django.utils.translation import ugettext as _
 from django.views.generic import FormView, ListView, DetailView, ListView, DetailView
 from django.views.generic.base import View
 from django.views.generic.edit import CreateView, UpdateView, DeleteView, CreateView, UpdateView, DeleteView

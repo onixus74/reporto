@@ -1,13 +1,16 @@
-import json
 import logging
+logger = logging.getLogger(__name__)
+
+from django.utils.translation import ugettext as _
+
+import json
 
 from django.contrib.auth.models import AbstractUser
 from django.core import serializers
 from django.core.exceptions import ImproperlyConfigured, ImproperlyConfigured
 from django.db.models import ManyToManyField
 from django.db.models.base import ModelBase
-from django.http import HttpResponse, Http404, HttpResponseNotAllowed, \
-  HttpResponse
+from django.http import HttpResponse, Http404, HttpResponseNotAllowed,  HttpResponse
 from django.utils.encoding import force_unicode
 from django.views.generic import ListView, DetailView, View
 from django.views.generic.base import TemplateResponseMixin
@@ -16,15 +19,7 @@ from django.views.generic.edit import BaseFormView
 from django.views.generic.list import BaseListView
 
 
-logger = logging.getLogger(__name__)
-
-
-
-
-
 #from django.core.serializers.json import DjangoJSONEncoder
-
-
 def dumps(content, json_opts={}):
     """
     Replaces json.dumps with our own custom encoder

@@ -4,7 +4,9 @@
   'use strict';
 
   var theme = {
-    colors: ['#484D59', '#aaaaaa', '#4295F3'], // ['#484D59', '#8E8DFF', '#aaaaaa', '#7270CC', '#47467F', '#53527F'],
+    //colors: ['#484D59', '#aaaaaa', '#4295F3'],
+    //colors: ['#484D59', '#8E8DFF', '#aaaaaa', '#7270CC', '#47467F', '#53527F'],
+    colors: ['#484D59', '#7270CC', '#aaaaaa', '#7276FF', '#6D6C7F'],
     plotOptions: {
       line: {
         marker: {

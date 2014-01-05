@@ -1,6 +1,8 @@
 import logging
 logger = logging.getLogger(__name__)
 
+from django.utils.translation import ugettext as _
+
 from django import forms
 from django.contrib.auth.decorators import login_required, permission_required
 from django.views.decorators.http import require_http_methods

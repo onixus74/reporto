@@ -1,11 +1,12 @@
 import logging
+logger = logging.getLogger(__name__)
+
+from django.utils.translation import ugettext as _
+
 from urlparse import urlparse, parse_qs
 
 from django.db import models
 from django.forms.models import model_to_dict
-
-
-logger = logging.getLogger(__name__)
 
 
 class Media(models.Model):

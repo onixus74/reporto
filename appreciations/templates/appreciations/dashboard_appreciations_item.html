@@ -1,24 +1,38 @@
-                <li class="ui-timeline-story list-group-item multi-labels-lines-fix clearfix" data-latitude="{{report.latitude}}" data-longitude="{{report.longitude}}">
-                  <div class="btn-group-vertical btn-group-sm pull-right">
-                    <a class="btn ui-timeline-story-locator btn-not" title="Click to locate appreciation" href="https://maps.google.com/?q={{report.latitude}},{{report.longitude}}" target="_blank" data-toggle="tooltip" style="padding: 2px;">
-                      <i class="fa fa-map-marker fa-lg"></i>
-                    </a>
-                    <a class="ui-timeline-story-link btn btn-not" href="{% url 'appreciations:view' report.id %}" target="_blank" title="Click to view report" data-toggle="tooltip" style="padding: 2px;">
-                      <i class="fa fa-external-link-square fa-lg"></i>
-                    </a>
+                <li class="ui-timeline-story list-group-item -multi-labels-lines-fix clearfix" data-latitude="{{report.latitude}}" data-longitude="{{report.longitude}}">
+
+                  <div class="clearfix">
+                    <span class="text-muted pull-left" style="padding: 2px;">
+                      <i class="fa fa-calendar fa-fw"></i> {{report.datetime}}
+                    </span>
+                    <span class="text-muted pull-right text-right" style="padding: 2px;">
+                      {{report.location_text}}
+                      <a class="ui-timeline-story-locator btn btn-not" href="https://maps.google.com/?q={{report.latitude}},{{report.longitude}}" target="_blank" title="Click to locate violation" data-toggle="tooltip" style="padding: 2px;">
+                        <i class="fa fa-map-marker -fa-lg fa-fw text-muted"></i>
+                      </a>
+                    </span>
                   </div>
-                  <span class="label label-info category">{{report.category}}</span>
-                  at
-                  <span class="label label-info location"><i class="fa fa-map-marker"></i> {{report.location_text}}</span>
-                  on
-                  <span class="label label-info datetime">
-                    <i class="fa fa-calendar"></i> {{report.datetime}}
-                  </span>
 
+                  <div class="btn-group-vertical btn-group-sm pull-right">
+                    <a class="ui-timeline-story-link btn btn-xs btn-not" href="{% url 'appreciations:view' report.id %}" -target="_blank" title="Click to view report" data-toggle="tooltip">
+                      <i class="fa fa-external-link-square fa-lg fa-fw"></i>
+                    </a>
+                    {% if report.media.count %}
+                    <a class="btn btn-xs btn-not" data-toggle="tooltip" title="Have media attachments">
+                      <i class="fa fa-picture-o fa-lg fa-fw text-muted"></i>
+                    </a>
+                    {% endif %}
+                    {% if report.is_verified %}
+                    <a class="btn btn-xs btn-not" data-toggle="tooltip" title="Verified">
+                      <i class="fa fa-check-square fa-lg fa-fw text-success"></i>
+                    </a>
+                    {% endif %}
+                  </div>
 
-                  <span class="badge">{% if report.media.count or report.is_verified %}
-                  {% if report.media.count %}<i class="fa fa-picture-o" data-toggle="tooltip" title="Have media attachments"></i>{% endif %}
-                  {% if report.is_verified %}<i class="fa fa-check-square text-success" data-toggle="tooltip" title="Verified"></i>{% endif %}
-                  {% endif %}</span>
-
+                  <div>
+                    <span class="text-highlight" data-toggle="tooltip" title="Appreciation Category">{{report.category}}</span>
+                    for ...
+                    <span class="text-highlight" data-toggle="tooltip" title="Appriciation Target">{{report.target}}</span>
+                  </div>
                 </li>
+
+

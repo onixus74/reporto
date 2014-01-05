@@ -1,4 +1,4 @@
-{% load static widget_tweaks compress custom %}<!doctype html>
+{% load static widget_tweaks compress custom i18n l10n %}<!doctype html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
@@ -100,7 +100,7 @@
           <span class="sr-only">Toggle navigation</span>
           <span class="fa fa-bars fa-lg fa-fw fa-inverse"></span>
         </button>
-        <a class="navbar-brand" href="/"><img src="{% static 'reform-logo.png' %}" _width="50" _height="35" height="26" alt="Tunisian Institutional Reform | جمعية إصلاح المؤسسات"></a>
+        <a class="navbar-brand" href="/"><img src="{% static 'reform-logo.png' %}" -width="50" -height="35" height="26" alt="Tunisian Institutional Reform | جمعية إصلاح المؤسسات"></a>
       </div>
 
       <div class="navbar-collapse collapse">
@@ -152,25 +152,6 @@
             <b class="caret"></b>
           </a>
           {% if not user.is_authenticated %}
-          {% comment %}
-          <div class="dropdown-menu" style="padding: 15px; padding-bottom: 0px;">
-            <form action="{% url 'login' %}" method="post">
-              {% csrf_token %}
-              <input type="hidden" name="next" value="{{ next }}" />
-              <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-                {% render_field form.username type="email" placeholder="Email" required="required" %}
-              </div>
-              <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-key"></i></span>
-                {% render_field form.password placeholder="Password" required="required" %}
-              </div>
-              <div class="clearfix">
-                <button class="btn-inverse btn button pull-right" type="submit">Register</button>
-              </div>
-            </form>
-          </div>
-          {% endcomment %}
           <ul class="dropdown-menu">
             <li><a href="{% url 'login' %}"><i class="fa fa-sign-in"></i> Sign in</a></li>
           </ul>
@@ -179,7 +160,7 @@
             {% if user.is_authenticated %}
             <li><a href="{% url 'users:profile' %}"><i class="fa fa-user"></i> Profile</a></li>
             {% endif %}
-            <li><a href="/logout"><i class="fa fa-sign-out"></i> Logout</a></li>
+            <li><a href="{% url 'logout' %}"><i class="fa fa-sign-out"></i> Sign out</a></li>
           </ul>
           {% endif %}
           </li>
@@ -209,41 +190,26 @@
 
   <div id="footer">
     <div class="container">
-      <p class="text-muted credit pull-right"><a href="email:contact@ipolice.tn">report a bug / suggest a feature</a></p>
-      <p class="text-muted credit">Developed by <a href="http://reform.tn" target="_blank">reform.tn</a>.</p>
+      <form action="{% url 'set_language' %}" method="post" class="form-inline pull-right" role="form" style="display: inline-block; /* width: 150px; */">
+        {% csrf_token %}
+        <input name="next" type="hidden" value="{{ redirect_to }}" />
+        <div class="form-group">
+          <label class="sr-only">Language</label>
+          <select name="language" class="form-control input-sm">
+          {% get_language_info_list for LANGUAGES as languages %}
+          {% for language in languages %}
+            <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected="selected"{% endif %}>
+            {{ language.name_local }} ({{ language.code }})
+            </option>
+          {% endfor %}
+          </select>
+        </div>
+        <button type="submit" class="btn btn-default btn-xs">Go</button>
+      </form>
+      <p class="text-muted credit pull-left">
+        <a href="email:contact@ipolice.tn" title="report a bug, suggest a feature, ...">Provide Feedback</a>. Developed by <a href="http://reform.tn" target="_blank">reform.tn</a>.</p>
     </div>
   </div>
-
-{#% <pre>{% debug %}</pre> %#}
-
-	{% comment %}
-	<div id="footer">
-		<!--<hr style="margin-bottom: 5px;" />-->
-		<div class="container">
-
-			<p class="text-muted credit pull-left">
-				<a href="http://reform.tn/" target="_blank">reform.tn</a>
-			</p>
-
-			{% load i18n l10n %}
-			<form action="{% url 'set_language' %}" method="post" class="form-inline pull-right" style="margin-top: 6px;">
-				{% csrf_token %}
-				<input name="next" type="hidden" value="{{ redirect_to }}" />
-				<select name="language" class="input-medium">
-					{% get_language_info_list for LANGUAGES as languages %}
-					{% for language in languages %}
-					<option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected="selected"{% endif %}>
-						{{ language.name_local }} ({{ language.code }})
-					</option>
-					{% endfor %}
-				</select>
-				<input type="submit" class="btn btn-default" value="Go" />
-			</form>
-
-		</div>
-	</div>
-	{% endcomment %}
-
 
 <!-- View Addons: dialogs, client-side templates, .... -->
 {% block view_addons %}{% endblock %}

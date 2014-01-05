@@ -8,8 +8,8 @@ from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS
 PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
 BASE_DIR = os.path.dirname(PROJECT_DIR)
 
-# DEBUG = True # !DEV!
-DEBUG = False  # !PROD!
+DEBUG = True  # !DEV!
+# DEBUG = False  # !PROD!
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
@@ -61,14 +61,14 @@ SITE_ID = 3
 
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
-USE_I18N = False
+USE_I18N = True
 
 # If you set this to False, Django will not format dates, numbers and
 # calendars according to the current locale.
-USE_L10N = False
+USE_L10N = True
 
 # If you set this to False, Django will not use timezone-aware datetimes.
-USE_TZ = False
+USE_TZ = True
 
 
 # DATETIME_INPUT_FORMATS = (
@@ -114,7 +114,7 @@ STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    #os.path.join(PROJECT_DIR, '../staticfiles'),
+    #os.path.join(BASE_DIR, 'staticfiles'),
     #os.path.join(PROJECT_DIR, 'static'),
 )
 
@@ -147,7 +147,6 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware',  # !debug_toolbar!
 )
 
 ROOT_URLCONF = 'reporto.urls'
@@ -206,10 +205,6 @@ INSTALLED_APPS = (
     'compressor',
     'easy_thumbnails',
     'social_auth',
-
-    # dev dependencies
-    #'debug_toolbar',
-
 
 )
 
@@ -290,12 +285,6 @@ LOGGING = {
 }
 
 AUTH_USER_MODEL = 'users.User'
-
-# APP 'debug_toolbar' !DEV!
-INTERNAL_IPS = ('127.0.0.1', '127.0.1.1')
-# DEBUG_TOOLBAR_CONFIG = {
-#   'INTERCEPT_REDIRECTS': False
-# }
 
 # APP 'compressor'
 COMPRESS_ENABLED = True

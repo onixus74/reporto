@@ -27,7 +27,7 @@
           {% comment %}
           {% if report.is_closed %}<span class="badge badge-important">Closed <i class="fa fa-lock"></i></span>{% endif %}
           {% endcomment %}
-          <a class="btn btn-not" href="{% url 'appreciations:view' report.id %}" target="_blank" title="Click to view report" _data-toggle="modal" _data-target="#ui-report-view-modal">
+          <a class="btn btn-not" href="{% url 'appreciations:view' report.id %}" target="_blank" title="Click to view report" -data-toggle="modal" -data-target="#ui-report-view-modal">
             <i class="fa fa-external-link fa-lg"></i>
           </a>
         </div>

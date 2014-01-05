@@ -49,7 +49,7 @@
               <p class="lead text text-center" style="margin: 0;">
                 <span id="ui-wizard-victim-text" hidden>I've been a victim of</span>
                 <span id="ui-wizard-witness-text" hidden>I've witnessed a</span>
-                {% render_field form.category placeholder="Select an violation category" class+="select2 _col-md-4 btn-lg" data-style="form-control btn-lg _boostrap-select-fix" %}
+                {% render_field form.category placeholder="Select an violation category" class+="select2 -col-md-4 btn-lg" data-style="form-control btn-lg -boostrap-select-fix" %}
               </p>
 
             </div>
@@ -65,12 +65,12 @@
               <input type="hidden" id="id_location" name="location">
               <div class="input-group" style="margin-top: 10px;">
                 <span class="input-group-addon"> <i class="fa fa-map-marker fa-lg"></i> </span>
-                {% render_field form.location_text type="text" placeholder="Location" class="form-control" _data-provide="typeahead" _data-source="reform.data.locations" _autocomplete="off" %}
+                {% render_field form.location_text type="text" placeholder="Location" class="form-control" -data-provide="typeahead" -data-source="reform.data.locations" -autocomplete="off" %}
               </div>
             </div>
             <div class="col-md-6">
               <h3><i class="fa fa-calendar"></i><i class="fa fa-clock-o"></i> Date and Time</h3>
-              {% render_field form.datetime type="text" _type="datetime-local" class+="form-control" _required="required" style="display: none;" %}
+              {% render_field form.datetime type="text" -type="datetime-local" class+="form-control" -required="required" style="display: none;" %}
               <div id="dateinput" style="height: 300px;">
               <script type="text/template" id="dateinput-template">
                 <div class="controls">

@@ -395,12 +395,12 @@ textarea {
 
 /* line 43, ../theme/bootstrap-sass/lib/_scaffolding.scss */
 a {
-  color: #006682;
+  color: #7276ff;
   text-decoration: none;
 }
 /* line 48, ../theme/bootstrap-sass/lib/_scaffolding.scss */
 a:hover, a:focus {
-  color: #002a35;
+  color: #252cff;
   text-decoration: underline;
 }
 /* line 53, ../theme/bootstrap-sass/lib/_scaffolding.scss */
@@ -503,11 +503,11 @@ cite {
 
 /* line 38, ../theme/bootstrap-sass/lib/_type.scss */
 .text-primary {
-  color: #006682;
+  color: #7276ff;
 }
 /* line 40, ../theme/bootstrap-sass/lib/_type.scss */
 .text-primary:hover {
-  color: #003e4f;
+  color: #3f44ff;
 }
 
 /* line 44, ../theme/bootstrap-sass/lib/_type.scss */
@@ -539,11 +539,11 @@ cite {
 
 /* line 62, ../theme/bootstrap-sass/lib/_type.scss */
 .text-info {
-  color: #a5a5ff;
+  color: #8f8cff;
 }
 /* line 64, ../theme/bootstrap-sass/lib/_type.scss */
 .text-info:hover {
-  color: #7272ff;
+  color: #5d59ff;
 }
 
 /* line 70, ../theme/bootstrap-sass/lib/_type.scss */
@@ -2707,20 +2707,20 @@ textarea.input-lg, .input-group-lg > textarea.form-control,
 /* line 58, ../theme/bootstrap-sass/lib/_buttons.scss */
 .btn-primary {
   color: white;
-  background-color: #006682;
-  border-color: #005269;
+  background-color: #7276ff;
+  border-color: #595dff;
 }
 /* line 470, ../theme/bootstrap-sass/lib/_mixins.scss */
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active {
   color: white;
-  background-color: #004659;
-  border-color: #00222b;
+  background-color: #494eff;
+  border-color: #1b22ff;
 }
 /* line 475, ../theme/bootstrap-sass/lib/_mixins.scss */
 .open .btn-primary.dropdown-toggle {
   color: white;
-  background-color: #004659;
-  border-color: #00222b;
+  background-color: #494eff;
+  border-color: #1b22ff;
 }
 /* line 481, ../theme/bootstrap-sass/lib/_mixins.scss */
 .btn-primary:active, .btn-primary.active {
@@ -2732,8 +2732,8 @@ textarea.input-lg, .input-group-lg > textarea.form-control,
 }
 /* line 494, ../theme/bootstrap-sass/lib/_mixins.scss */
 .btn-primary.disabled, .btn-primary.disabled:hover, .btn-primary.disabled:focus, .btn-primary.disabled:active, .btn-primary.disabled.active, .btn-primary[disabled], .btn-primary[disabled]:hover, .btn-primary[disabled]:focus, .btn-primary[disabled]:active, .btn-primary[disabled].active, fieldset[disabled] .btn-primary, fieldset[disabled] .btn-primary:hover, fieldset[disabled] .btn-primary:focus, fieldset[disabled] .btn-primary:active, fieldset[disabled] .btn-primary.active {
-  background-color: #006682;
-  border-color: #005269;
+  background-color: #7276ff;
+  border-color: #595dff;
 }
 
 /* line 62, ../theme/bootstrap-sass/lib/_buttons.scss */
@@ -2835,20 +2835,20 @@ textarea.input-lg, .input-group-lg > textarea.form-control,
 /* line 74, ../theme/bootstrap-sass/lib/_buttons.scss */
 .btn-info {
   color: white;
-  background-color: #a5a5ff;
-  border-color: #8c8cff;
+  background-color: #8f8cff;
+  border-color: #7672ff;
 }
 /* line 470, ../theme/bootstrap-sass/lib/_mixins.scss */
 .btn-info:hover, .btn-info:focus, .btn-info:active, .btn-info.active {
   color: white;
-  background-color: #7c7cff;
-  border-color: #4e4eff;
+  background-color: #6763ff;
+  border-color: #3b35ff;
 }
 /* line 475, ../theme/bootstrap-sass/lib/_mixins.scss */
 .open .btn-info.dropdown-toggle {
   color: white;
-  background-color: #7c7cff;
-  border-color: #4e4eff;
+  background-color: #6763ff;
+  border-color: #3b35ff;
 }
 /* line 481, ../theme/bootstrap-sass/lib/_mixins.scss */
 .btn-info:active, .btn-info.active {
@@ -2860,13 +2860,13 @@ textarea.input-lg, .input-group-lg > textarea.form-control,
 }
 /* line 494, ../theme/bootstrap-sass/lib/_mixins.scss */
 .btn-info.disabled, .btn-info.disabled:hover, .btn-info.disabled:focus, .btn-info.disabled:active, .btn-info.disabled.active, .btn-info[disabled], .btn-info[disabled]:hover, .btn-info[disabled]:focus, .btn-info[disabled]:active, .btn-info[disabled].active, fieldset[disabled] .btn-info, fieldset[disabled] .btn-info:hover, fieldset[disabled] .btn-info:focus, fieldset[disabled] .btn-info:active, fieldset[disabled] .btn-info.active {
-  background-color: #a5a5ff;
-  border-color: #8c8cff;
+  background-color: #8f8cff;
+  border-color: #7672ff;
 }
 
 /* line 83, ../theme/bootstrap-sass/lib/_buttons.scss */
 .btn-link, .btn-not {
-  color: #006682;
+  color: #7276ff;
   font-weight: normal;
   cursor: pointer;
   border-radius: 0;
@@ -2883,7 +2883,7 @@ textarea.input-lg, .input-group-lg > textarea.form-control,
 }
 /* line 103, ../theme/bootstrap-sass/lib/_buttons.scss */
 .btn-link:hover, .btn-not:hover, .btn-link:focus, .btn-not:focus {
-  color: #002a35;
+  color: #252cff;
   text-decoration: underline;
   background-color: transparent;
 }
@@ -4067,7 +4067,7 @@ input[type="button"].btn-block {
   color: white;
   text-decoration: none;
   outline: 0;
-  background-color: #006682;
+  background-color: #7276ff;
 }
 
 /* line 103, ../theme/bootstrap-sass/lib/_dropdowns.scss */
@@ -4574,12 +4574,12 @@ input[type="button"].btn-block {
 /* line 48, ../theme/bootstrap-sass/lib/_navs.scss */
 .nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
   background-color: #eeeeee;
-  border-color: #006682;
+  border-color: #7276ff;
 }
 /* line 52, ../theme/bootstrap-sass/lib/_navs.scss */
 .nav .open > a .caret, .nav .open > a:hover .caret, .nav .open > a:focus .caret {
-  border-top-color: #002a35;
-  border-bottom-color: #002a35;
+  border-top-color: #252cff;
+  border-bottom-color: #252cff;
 }
 /* line 64, ../theme/bootstrap-sass/lib/_navs.scss */
 .nav .nav-divider {
@@ -4637,7 +4637,7 @@ input[type="button"].btn-block {
 /* line 138, ../theme/bootstrap-sass/lib/_navs.scss */
 .nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
   color: white;
-  background-color: #006682;
+  background-color: #7276ff;
 }
 /* line 142, ../theme/bootstrap-sass/lib/_navs.scss */
 .nav-pills > li.active > a .caret, .nav-pills > li.active > a:hover .caret, .nav-pills > li.active > a:focus .caret {
@@ -4729,14 +4729,14 @@ input[type="button"].btn-block {
 
 /* line 247, ../theme/bootstrap-sass/lib/_navs.scss */
 .nav .caret {
-  border-top-color: #006682;
-  border-bottom-color: #006682;
+  border-top-color: #7276ff;
+  border-bottom-color: #7276ff;
 }
 
 /* line 251, ../theme/bootstrap-sass/lib/_navs.scss */
 .nav a:hover .caret {
-  border-top-color: #002a35;
-  border-bottom-color: #002a35;
+  border-top-color: #252cff;
+  border-bottom-color: #252cff;
 }
 
 /* line 257, ../theme/bootstrap-sass/lib/_navs.scss */
@@ -5192,8 +5192,8 @@ input[type="button"].btn-block {
 
 /* line 496, ../theme/bootstrap-sass/lib/_navbar.scss */
 .navbar-inverse {
-  background-color: #006682;
-  border-color: #003e4f;
+  background-color: #7276ff;
+  border-color: #3f44ff;
 }
 /* line 500, ../theme/bootstrap-sass/lib/_navbar.scss */
 .navbar-inverse .navbar-brand {
@@ -5215,12 +5215,12 @@ input[type="button"].btn-block {
 /* line 518, ../theme/bootstrap-sass/lib/_navbar.scss */
 .navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-nav > li > a:focus {
   color: white;
-  background-color: #003e4f;
+  background-color: #3f44ff;
 }
 /* line 526, ../theme/bootstrap-sass/lib/_navbar.scss */
 .navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:hover, .navbar-inverse .navbar-nav > .active > a:focus {
   color: white;
-  background-color: #003e4f;
+  background-color: #3f44ff;
 }
 /* line 534, ../theme/bootstrap-sass/lib/_navbar.scss */
 .navbar-inverse .navbar-nav > .disabled > a, .navbar-inverse .navbar-nav > .disabled > a:hover, .navbar-inverse .navbar-nav > .disabled > a:focus {
@@ -5242,11 +5242,11 @@ input[type="button"].btn-block {
 /* line 554, ../theme/bootstrap-sass/lib/_navbar.scss */
 .navbar-inverse .navbar-collapse,
 .navbar-inverse .navbar-form {
-  border-color: #004a5e;
+  border-color: #4e53ff;
 }
 /* line 563, ../theme/bootstrap-sass/lib/_navbar.scss */
 .navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus {
-  background-color: #003e4f;
+  background-color: #3f44ff;
   color: white;
 }
 /* line 568, ../theme/bootstrap-sass/lib/_navbar.scss */
@@ -5267,7 +5267,7 @@ input[type="button"].btn-block {
 @media (max-width: 767px) {
   /* line 590, ../theme/bootstrap-sass/lib/_navbar.scss */
   .navbar-inverse .navbar-nav .open .dropdown-menu > .dropdown-header {
-    border-color: #003e4f;
+    border-color: #3f44ff;
   }
   /* line 593, ../theme/bootstrap-sass/lib/_navbar.scss */
   .navbar-inverse .navbar-nav .open .dropdown-menu > li > a {
@@ -5276,12 +5276,12 @@ input[type="button"].btn-block {
   /* line 596, ../theme/bootstrap-sass/lib/_navbar.scss */
   .navbar-inverse .navbar-nav .open .dropdown-menu > li > a:hover, .navbar-inverse .navbar-nav .open .dropdown-menu > li > a:focus {
     color: white;
-    background-color: #003e4f;
+    background-color: #3f44ff;
   }
   /* line 604, ../theme/bootstrap-sass/lib/_navbar.scss */
   .navbar-inverse .navbar-nav .open .dropdown-menu > .active > a, .navbar-inverse .navbar-nav .open .dropdown-menu > .active > a:hover, .navbar-inverse .navbar-nav .open .dropdown-menu > .active > a:focus {
     color: white;
-    background-color: #003e4f;
+    background-color: #3f44ff;
   }
   /* line 612, ../theme/bootstrap-sass/lib/_navbar.scss */
   .navbar-inverse .navbar-nav .open .dropdown-menu > .disabled > a, .navbar-inverse .navbar-nav .open .dropdown-menu > .disabled > a:hover, .navbar-inverse .navbar-nav .open .dropdown-menu > .disabled > a:focus {
@@ -5347,8 +5347,8 @@ input[type="button"].btn-block {
 .pagination > .active > span:focus {
   z-index: 2;
   color: white;
-  background-color: #006682;
-  border-color: #006682;
+  background-color: #7276ff;
+  border-color: #7276ff;
   cursor: default;
 }
 /* line 65, ../theme/bootstrap-sass/lib/_pagination.scss */
@@ -5437,11 +5437,11 @@ input[type="button"].btn-block {
 
 /* line 40, ../theme/bootstrap-sass/lib/_labels.scss */
 .label-primary {
-  background-color: #006682;
+  background-color: #7276ff;
 }
 /* line 540, ../theme/bootstrap-sass/lib/_mixins.scss */
 .label-primary[href]:hover, .label-primary[href]:focus {
-  background-color: #003e4f;
+  background-color: #3f44ff;
 }
 
 /* line 44, ../theme/bootstrap-sass/lib/_labels.scss */
@@ -5455,11 +5455,11 @@ input[type="button"].btn-block {
 
 /* line 48, ../theme/bootstrap-sass/lib/_labels.scss */
 .label-info {
-  background-color: #a5a5ff;
+  background-color: #8f8cff;
 }
 /* line 540, ../theme/bootstrap-sass/lib/_mixins.scss */
 .label-info[href]:hover, .label-info[href]:focus {
-  background-color: #7272ff;
+  background-color: #5d59ff;
 }
 
 /* line 52, ../theme/bootstrap-sass/lib/_labels.scss */
@@ -5516,7 +5516,7 @@ a.badge:hover, a.badge:focus {
 /* line 45, ../theme/bootstrap-sass/lib/_badges.scss */
 a.list-group-item.active > .badge,
 .nav-pills > .active > a > .badge {
-  color: #006682;
+  color: #7276ff;
   background-color: white;
 }
 
@@ -5588,7 +5588,7 @@ a.list-group-item.active > .badge,
 a.thumbnail:hover,
 a.thumbnail:focus,
 a.thumbnail.active {
-  border-color: #006682;
+  border-color: #7276ff;
 }
 
 /* line 9, ../theme/bootstrap-sass/lib/_alerts.scss */
@@ -5646,13 +5646,13 @@ a.thumbnail.active {
 
 /* line 59, ../theme/bootstrap-sass/lib/_alerts.scss */
 .alert-info {
-  background-color: #a5a5ff;
-  border-color: #8181ff;
+  background-color: #8f8cff;
+  border-color: #6c68ff;
   color: white;
 }
 /* line 422, ../theme/bootstrap-sass/lib/_mixins.scss */
 .alert-info hr {
-  border-top-color: #6868ff;
+  border-top-color: #534fff;
 }
 /* line 425, ../theme/bootstrap-sass/lib/_mixins.scss */
 .alert-info .alert-link {
@@ -5784,8 +5784,8 @@ a.list-group-item:hover, a.list-group-item:focus {
 a.list-group-item.active, a.list-group-item.active:hover, a.list-group-item.active:focus {
   z-index: 2;
   color: white;
-  background-color: #006682;
-  border-color: #006682;
+  background-color: #7276ff;
+  border-color: #7276ff;
 }
 /* line 69, ../theme/bootstrap-sass/lib/_list-group.scss */
 a.list-group-item.active .list-group-item-heading, a.list-group-item.active:hover .list-group-item-heading, a.list-group-item.active:focus .list-group-item-heading {
@@ -5793,7 +5793,7 @@ a.list-group-item.active .list-group-item-heading, a.list-group-item.active:hove
 }
 /* line 72, ../theme/bootstrap-sass/lib/_list-group.scss */
 a.list-group-item.active .list-group-item-text, a.list-group-item.active:hover .list-group-item-text, a.list-group-item.active:focus .list-group-item-text {
-  color: #4fd9ff;
+  color: white;
 }
 
 /* line 81, ../theme/bootstrap-sass/lib/_list-group.scss */
@@ -6001,17 +6001,17 @@ a.list-group-item.active .list-group-item-text, a.list-group-item.active:hover .
 
 /* line 158, ../theme/bootstrap-sass/lib/_panels.scss */
 .panel-primary {
-  border-color: #006682;
+  border-color: #7276ff;
 }
 /* line 396, ../theme/bootstrap-sass/lib/_mixins.scss */
 .panel-primary > .panel-heading {
   color: white;
-  background-color: #006682;
-  border-color: #006682;
+  background-color: #7276ff;
+  border-color: #7276ff;
 }
 /* line 401, ../theme/bootstrap-sass/lib/_mixins.scss */
 .panel-primary > .panel-heading + .panel-collapse .panel-body {
-  border-top-color: #006682;
+  border-top-color: #7276ff;
 }
 /* line 404, ../theme/bootstrap-sass/lib/_mixins.scss */
 .panel-primary > .panel-heading > .dropdown .caret {
@@ -6019,7 +6019,7 @@ a.list-group-item.active .list-group-item-text, a.list-group-item.active:hover .
 }
 /* line 409, ../theme/bootstrap-sass/lib/_mixins.scss */
 .panel-primary > .panel-footer + .panel-collapse .panel-body {
-  border-bottom-color: #006682;
+  border-bottom-color: #7276ff;
 }
 
 /* line 161, ../theme/bootstrap-sass/lib/_panels.scss */
@@ -6093,25 +6093,25 @@ a.list-group-item.active .list-group-item-text, a.list-group-item.active:hover .
 
 /* line 170, ../theme/bootstrap-sass/lib/_panels.scss */
 .panel-info {
-  border-color: #8181ff;
+  border-color: #6c68ff;
 }
 /* line 396, ../theme/bootstrap-sass/lib/_mixins.scss */
 .panel-info > .panel-heading {
-  color: #a5a5ff;
+  color: #8f8cff;
   background-color: #d9edf7;
-  border-color: #8181ff;
+  border-color: #6c68ff;
 }
 /* line 401, ../theme/bootstrap-sass/lib/_mixins.scss */
 .panel-info > .panel-heading + .panel-collapse .panel-body {
-  border-top-color: #8181ff;
+  border-top-color: #6c68ff;
 }
 /* line 404, ../theme/bootstrap-sass/lib/_mixins.scss */
 .panel-info > .panel-heading > .dropdown .caret {
-  border-color: #a5a5ff transparent;
+  border-color: #8f8cff transparent;
 }
 /* line 409, ../theme/bootstrap-sass/lib/_mixins.scss */
 .panel-info > .panel-footer + .panel-collapse .panel-body {
-  border-bottom-color: #8181ff;
+  border-bottom-color: #6c68ff;
 }
 
 /* line 7, ../theme/bootstrap-sass/lib/_wells.scss */
@@ -7242,7 +7242,7 @@ td.visible-print {
 }
 /* line 62, ../theme/_bootswatch.scss */
 .navbar .navbar-inverse .dropdown-menu {
-  background-color: #006682;
+  background-color: #7276ff;
 }
 /* line 66, ../theme/_bootswatch.scss */
 .navbar .navbar-inverse .dropdown-menu > li > a,
@@ -7253,158 +7253,158 @@ td.visible-print {
 .navbar .navbar-inverse .dropdown-menu > li > a:hover,
 .navbar .navbar-inverse .dropdown-menu > .active > a,
 .navbar .navbar-inverse .dropdown-menu > .active > a:hover {
-  background-color: #003e4f;
+  background-color: #3f44ff;
 }
 
-/* line 81, ../theme/_bootswatch.scss */
+/* line 82, ../theme/_bootswatch.scss */
 .btn {
   padding: 14px 28px;
 }
-/* line 84, ../theme/_bootswatch.scss */
-.btn .btn-lg, .btn .btn-group-lg > .btn {
+/* line 85, ../theme/_bootswatch.scss */
+.btn.btn-lg, .btn-group-lg > .btn {
   padding: 16px 32px;
 }
-/* line 88, ../theme/_bootswatch.scss */
-.btn .btn-sm, .btn .btn-group-sm > .btn {
+/* line 89, ../theme/_bootswatch.scss */
+.btn.btn-sm, .btn-group-sm > .btn {
   padding: 8px 16px;
 }
-/* line 92, ../theme/_bootswatch.scss */
-.btn .btn-xs, .btn .btn-group-xs > .btn {
+/* line 93, ../theme/_bootswatch.scss */
+.btn.btn-xs, .btn-group-xs > .btn {
   padding: 4px 8px;
 }
 
-/* line 99, ../theme/_bootswatch.scss */
+/* line 100, ../theme/_bootswatch.scss */
 .btn-group .btn ~ .dropdown-toggle {
   padding-left: 16px;
   padding-right: 16px;
 }
-/* line 104, ../theme/_bootswatch.scss */
+/* line 105, ../theme/_bootswatch.scss */
 .btn-group .dropdown-menu {
   border-top-width: 0;
 }
-/* line 108, ../theme/_bootswatch.scss */
+/* line 109, ../theme/_bootswatch.scss */
 .btn-group.dropup .dropdown-menu {
   border-top-width: 1px;
   border-bottom-width: 0;
   margin-bottom: 0;
 }
-/* line 116, ../theme/_bootswatch.scss */
+/* line 117, ../theme/_bootswatch.scss */
 .btn-group .dropdown-toggle.btn-default ~ .dropdown-menu {
   background-color: #e7e7e7;
   border-color: #dadada;
 }
-/* line 120, ../theme/_bootswatch.scss */
+/* line 121, ../theme/_bootswatch.scss */
 .btn-group .dropdown-toggle.btn-default ~ .dropdown-menu > li > a {
   color: #333333;
 }
-/* line 124, ../theme/_bootswatch.scss */
+/* line 125, ../theme/_bootswatch.scss */
 .btn-group .dropdown-toggle.btn-default ~ .dropdown-menu > li > a:hover {
   background-color: lightgrey;
 }
-/* line 129, ../theme/_bootswatch.scss */
+/* line 130, ../theme/_bootswatch.scss */
 .btn-group .dropdown-toggle.btn-primary ~ .dropdown-menu {
-  background-color: #006682;
-  border-color: #005269;
+  background-color: #7276ff;
+  border-color: #595dff;
 }
-/* line 133, ../theme/_bootswatch.scss */
+/* line 134, ../theme/_bootswatch.scss */
 .btn-group .dropdown-toggle.btn-primary ~ .dropdown-menu > li > a {
   color: white;
 }
-/* line 137, ../theme/_bootswatch.scss */
+/* line 138, ../theme/_bootswatch.scss */
 .btn-group .dropdown-toggle.btn-primary ~ .dropdown-menu > li > a:hover {
-  background-color: #004659;
+  background-color: #494eff;
 }
-/* line 142, ../theme/_bootswatch.scss */
+/* line 143, ../theme/_bootswatch.scss */
 .btn-group .dropdown-toggle.btn-success ~ .dropdown-menu {
   background-color: #27ae60;
   border-color: #229955;
 }
-/* line 146, ../theme/_bootswatch.scss */
+/* line 147, ../theme/_bootswatch.scss */
 .btn-group .dropdown-toggle.btn-success ~ .dropdown-menu > li > a {
   color: white;
 }
-/* line 150, ../theme/_bootswatch.scss */
+/* line 151, ../theme/_bootswatch.scss */
 .btn-group .dropdown-toggle.btn-success ~ .dropdown-menu > li > a:hover {
   background-color: #208d4e;
 }
-/* line 155, ../theme/_bootswatch.scss */
+/* line 156, ../theme/_bootswatch.scss */
 .btn-group .dropdown-toggle.btn-info ~ .dropdown-menu {
-  background-color: #a5a5ff;
-  border-color: #8c8cff;
+  background-color: #8f8cff;
+  border-color: #7672ff;
 }
-/* line 159, ../theme/_bootswatch.scss */
+/* line 160, ../theme/_bootswatch.scss */
 .btn-group .dropdown-toggle.btn-info ~ .dropdown-menu > li > a {
   color: white;
 }
-/* line 163, ../theme/_bootswatch.scss */
+/* line 164, ../theme/_bootswatch.scss */
 .btn-group .dropdown-toggle.btn-info ~ .dropdown-menu > li > a:hover {
-  background-color: #7c7cff;
+  background-color: #6763ff;
 }
-/* line 168, ../theme/_bootswatch.scss */
+/* line 169, ../theme/_bootswatch.scss */
 .btn-group .dropdown-toggle.btn-warning ~ .dropdown-menu {
   background-color: #ff750f;
   border-color: #f56800;
 }
-/* line 172, ../theme/_bootswatch.scss */
+/* line 173, ../theme/_bootswatch.scss */
 .btn-group .dropdown-toggle.btn-warning ~ .dropdown-menu > li > a {
   color: white;
 }
-/* line 176, ../theme/_bootswatch.scss */
+/* line 177, ../theme/_bootswatch.scss */
 .btn-group .dropdown-toggle.btn-warning ~ .dropdown-menu > li > a:hover {
   background-color: #e56100;
 }
-/* line 181, ../theme/_bootswatch.scss */
+/* line 182, ../theme/_bootswatch.scss */
 .btn-group .dropdown-toggle.btn-danger ~ .dropdown-menu {
   background-color: #c0392b;
   border-color: #ab3326;
 }
-/* line 185, ../theme/_bootswatch.scss */
+/* line 186, ../theme/_bootswatch.scss */
 .btn-group .dropdown-toggle.btn-danger ~ .dropdown-menu > li > a {
   color: white;
 }
-/* line 189, ../theme/_bootswatch.scss */
+/* line 190, ../theme/_bootswatch.scss */
 .btn-group .dropdown-toggle.btn-danger ~ .dropdown-menu > li > a:hover {
   background-color: #9f2f24;
 }
 
-/* line 198, ../theme/_bootswatch.scss */
+/* line 199, ../theme/_bootswatch.scss */
 .lead {
   color: #6f6f6f;
 }
 
-/* line 202, ../theme/_bootswatch.scss */
+/* line 203, ../theme/_bootswatch.scss */
 cite {
   font-style: italic;
 }
 
-/* line 206, ../theme/_bootswatch.scss */
+/* line 207, ../theme/_bootswatch.scss */
 blockquote {
   border-left-width: 1px;
   color: #6f6f6f;
 }
-/* line 210, ../theme/_bootswatch.scss */
+/* line 211, ../theme/_bootswatch.scss */
 blockquote.pull-right {
   border-right-width: 1px;
 }
-/* line 214, ../theme/_bootswatch.scss */
+/* line 215, ../theme/_bootswatch.scss */
 blockquote small {
   font-size: 12px;
   font-weight: 300;
 }
 
-/* line 222, ../theme/_bootswatch.scss */
+/* line 223, ../theme/_bootswatch.scss */
 table {
   font-size: 12px;
 }
 
-/* line 229, ../theme/_bootswatch.scss */
+/* line 230, ../theme/_bootswatch.scss */
 input,
 .form-control {
   padding: 7px;
   font-size: 12px;
 }
 
-/* line 238, ../theme/_bootswatch.scss */
+/* line 239, ../theme/_bootswatch.scss */
 label,
 .control-label,
 .help-block,
@@ -7414,7 +7414,7 @@ label,
   font-weight: normal;
 }
 
-/* line 245, ../theme/_bootswatch.scss */
+/* line 246, ../theme/_bootswatch.scss */
 .form-group .btn,
 .input-group-addon,
 .input-group-btn .btn {
@@ -7422,30 +7422,30 @@ label,
   font-size: 12px;
 }
 
-/* line 255, ../theme/_bootswatch.scss */
+/* line 256, ../theme/_bootswatch.scss */
 .nav .open > a,
 .nav .open > a:hover,
 .nav .open > a:focus {
   border-color: transparent;
 }
 
-/* line 261, ../theme/_bootswatch.scss */
+/* line 262, ../theme/_bootswatch.scss */
 .nav-tabs > li > a {
   background-color: #e7e7e7;
   color: #222222;
 }
-/* line 266, ../theme/_bootswatch.scss */
+/* line 267, ../theme/_bootswatch.scss */
 .nav-tabs .caret {
   border-top-color: #222222;
   border-bottom-color: #222222;
 }
 
-/* line 272, ../theme/_bootswatch.scss */
+/* line 273, ../theme/_bootswatch.scss */
 .nav-pills {
   font-weight: 300;
 }
 
-/* line 276, ../theme/_bootswatch.scss */
+/* line 277, ../theme/_bootswatch.scss */
 .breadcrumb {
   border: 1px solid #dddddd;
   border-radius: 3px;
@@ -7454,24 +7454,24 @@ label,
   text-transform: uppercase;
 }
 
-/* line 284, ../theme/_bootswatch.scss */
+/* line 285, ../theme/_bootswatch.scss */
 .pagination {
   font-size: 12px;
   font-weight: 300;
   color: #999999;
 }
-/* line 291, ../theme/_bootswatch.scss */
+/* line 292, ../theme/_bootswatch.scss */
 .pagination > li > a,
 .pagination > li > span {
   margin-left: 4px;
   color: #999999;
 }
-/* line 299, ../theme/_bootswatch.scss */
+/* line 300, ../theme/_bootswatch.scss */
 .pagination > .active > a,
 .pagination > .active > span {
   color: #fff;
 }
-/* line 308, ../theme/_bootswatch.scss */
+/* line 309, ../theme/_bootswatch.scss */
 .pagination > li > a,
 .pagination > li > span,
 .pagination > li:first-child > a,
@@ -7480,35 +7480,35 @@ label,
 .pagination > li:last-child > span {
   border-radius: 3px;
 }
-/* line 313, ../theme/_bootswatch.scss */
+/* line 314, ../theme/_bootswatch.scss */
 .pagination .pagination-lg > li > a {
   padding-left: 22px;
   padding-right: 22px;
 }
-/* line 318, ../theme/_bootswatch.scss */
+/* line 319, ../theme/_bootswatch.scss */
 .pagination .pagination-sm > li > a {
   padding: 0 5px;
 }
 
-/* line 323, ../theme/_bootswatch.scss */
+/* line 324, ../theme/_bootswatch.scss */
 .pager {
   font-size: 12px;
   font-weight: 300;
   color: #999999;
 }
 
-/* line 329, ../theme/_bootswatch.scss */
+/* line 330, ../theme/_bootswatch.scss */
 .list-group {
   font-size: 12px;
   font-weight: 300;
 }
 
-/* line 336, ../theme/_bootswatch.scss */
+/* line 337, ../theme/_bootswatch.scss */
 .alert {
   font-size: 12px;
   font-weight: 300;
 }
-/* line 341, ../theme/_bootswatch.scss */
+/* line 342, ../theme/_bootswatch.scss */
 .alert a,
 .alert .alert-link {
   font-weight: normal;
@@ -7516,25 +7516,25 @@ label,
   text-decoration: underline;
 }
 
-/* line 348, ../theme/_bootswatch.scss */
+/* line 349, ../theme/_bootswatch.scss */
 .label {
   padding-left: 1em;
   padding-right: 1em;
   border-radius: 0;
   font-weight: 300;
 }
-/* line 354, ../theme/_bootswatch.scss */
+/* line 355, ../theme/_bootswatch.scss */
 .label .label-default {
   background-color: #e7e7e7;
   color: #333333;
 }
 
-/* line 360, ../theme/_bootswatch.scss */
+/* line 361, ../theme/_bootswatch.scss */
 .badge {
   font-weight: 300;
 }
 
-/* line 366, ../theme/_bootswatch.scss */
+/* line 367, ../theme/_bootswatch.scss */
 .progress {
   height: 22px;
   padding: 2px;
@@ -7544,17 +7544,17 @@ label,
   box-shadow: none;
 }
 
-/* line 378, ../theme/_bootswatch.scss */
+/* line 379, ../theme/_bootswatch.scss */
 .dropdown .dropdown-menu {
   padding: 0;
   margin-top: 0;
   font-size: 12px;
 }
-/* line 383, ../theme/_bootswatch.scss */
+/* line 384, ../theme/_bootswatch.scss */
 .dropdown .dropdown-menu > li > a {
   padding: 12px 15px;
 }
-/* line 388, ../theme/_bootswatch.scss */
+/* line 389, ../theme/_bootswatch.scss */
 .dropdown .dropdown-header {
   padding-left: 15px;
   padding-right: 15px;
@@ -7562,7 +7562,7 @@ label,
   text-transform: uppercase;
 }
 
-/* line 396, ../theme/_bootswatch.scss */
+/* line 397, ../theme/_bootswatch.scss */
 .popover {
   color: #fff;
   font-size: 12px;
@@ -7628,117 +7628,117 @@ label,
 
 /* line 65, ../theme/bootstrap-sass/lib/_theme.scss */
 .btn-primary {
-  background-image: -webkit-gradient(linear, left 0%, left 100%, from(#008cba), to(#005e7d));
-  background-image: -webkit-linear-gradient(top, #008cba 0%, #005e7d 100%);
-  background-image: -moz-linear-gradient(top, #008cba 0%, #005e7d 100%);
-  background-image: linear-gradient(to bottom, #008cba 0%, #005e7d 100%);
+  background-image: -webkit-gradient(linear, left 0%, left 100%, from(#7276ff), to(#353bff));
+  background-image: -webkit-linear-gradient(top, #7276ff 0%, #353bff 100%);
+  background-image: -moz-linear-gradient(top, #7276ff 0%, #353bff 100%);
+  background-image: linear-gradient(to bottom, #7276ff 0%, #353bff 100%);
   background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF008CBA', endColorstr='#FF005E7D', GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF7276FF', endColorstr='#FF353BFF', GradientType=0);
   filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
   background-repeat: repeat-x;
-  border-color: #005673;
+  border-color: #2b31ff;
 }
 /* line 42, ../theme/bootstrap-sass/lib/_theme.scss */
 .btn-primary:hover, .btn-primary:focus {
-  background-color: #005e7d;
+  background-color: #353bff;
   background-position: 0 -15px;
 }
 /* line 48, ../theme/bootstrap-sass/lib/_theme.scss */
 .btn-primary:active, .btn-primary.active {
-  background-color: #005e7d;
-  border-color: #005673;
+  background-color: #353bff;
+  border-color: #2b31ff;
 }
 
 /* line 66, ../theme/bootstrap-sass/lib/_theme.scss */
 .btn-success {
-  background-image: -webkit-gradient(linear, left 0%, left 100%, from(#43ac6a), to(#32804f));
-  background-image: -webkit-linear-gradient(top, #43ac6a 0%, #32804f 100%);
-  background-image: -moz-linear-gradient(top, #43ac6a 0%, #32804f 100%);
-  background-image: linear-gradient(to bottom, #43ac6a 0%, #32804f 100%);
+  background-image: -webkit-gradient(linear, left 0%, left 100%, from(#27ae60), to(#1c7c44));
+  background-image: -webkit-linear-gradient(top, #27ae60 0%, #1c7c44 100%);
+  background-image: -moz-linear-gradient(top, #27ae60 0%, #1c7c44 100%);
+  background-image: linear-gradient(to bottom, #27ae60 0%, #1c7c44 100%);
   background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF43AC6A', endColorstr='#FF32804F', GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF27AE60', endColorstr='#FF1C7C44', GradientType=0);
   filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
   background-repeat: repeat-x;
-  border-color: #2f794a;
+  border-color: #1a7440;
 }
 /* line 42, ../theme/bootstrap-sass/lib/_theme.scss */
 .btn-success:hover, .btn-success:focus {
-  background-color: #32804f;
+  background-color: #1c7c44;
   background-position: 0 -15px;
 }
 /* line 48, ../theme/bootstrap-sass/lib/_theme.scss */
 .btn-success:active, .btn-success.active {
-  background-color: #32804f;
-  border-color: #2f794a;
+  background-color: #1c7c44;
+  border-color: #1a7440;
 }
 
 /* line 67, ../theme/bootstrap-sass/lib/_theme.scss */
 .btn-warning {
-  background-image: -webkit-gradient(linear, left 0%, left 100%, from(#e99002), to(#ac6a01));
-  background-image: -webkit-linear-gradient(top, #e99002 0%, #ac6a01 100%);
-  background-image: -moz-linear-gradient(top, #e99002 0%, #ac6a01 100%);
-  background-image: linear-gradient(to bottom, #e99002 0%, #ac6a01 100%);
+  background-image: -webkit-gradient(linear, left 0%, left 100%, from(#ff750f), to(#d15900));
+  background-image: -webkit-linear-gradient(top, #ff750f 0%, #d15900 100%);
+  background-image: -moz-linear-gradient(top, #ff750f 0%, #d15900 100%);
+  background-image: linear-gradient(to bottom, #ff750f 0%, #d15900 100%);
   background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFE99002', endColorstr='#FFAC6A01', GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFFF750F', endColorstr='#FFD15900', GradientType=0);
   filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
   background-repeat: repeat-x;
-  border-color: #a26401;
+  border-color: #c75400;
 }
 /* line 42, ../theme/bootstrap-sass/lib/_theme.scss */
 .btn-warning:hover, .btn-warning:focus {
-  background-color: #ac6a01;
+  background-color: #d15900;
   background-position: 0 -15px;
 }
 /* line 48, ../theme/bootstrap-sass/lib/_theme.scss */
 .btn-warning:active, .btn-warning.active {
-  background-color: #ac6a01;
-  border-color: #a26401;
+  background-color: #d15900;
+  border-color: #c75400;
 }
 
 /* line 68, ../theme/bootstrap-sass/lib/_theme.scss */
 .btn-danger {
-  background-image: -webkit-gradient(linear, left 0%, left 100%, from(#f04124), to(#c9280e));
-  background-image: -webkit-linear-gradient(top, #f04124 0%, #c9280e 100%);
-  background-image: -moz-linear-gradient(top, #f04124 0%, #c9280e 100%);
-  background-image: linear-gradient(to bottom, #f04124 0%, #c9280e 100%);
+  background-image: -webkit-gradient(linear, left 0%, left 100%, from(#c0392b), to(#8e2a20));
+  background-image: -webkit-linear-gradient(top, #c0392b 0%, #8e2a20 100%);
+  background-image: -moz-linear-gradient(top, #c0392b 0%, #8e2a20 100%);
+  background-image: linear-gradient(to bottom, #c0392b 0%, #8e2a20 100%);
   background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFF04124', endColorstr='#FFC9280E', GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFC0392B', endColorstr='#FF8E2A20', GradientType=0);
   filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
   background-repeat: repeat-x;
-  border-color: #bf260d;
+  border-color: #86281e;
 }
 /* line 42, ../theme/bootstrap-sass/lib/_theme.scss */
 .btn-danger:hover, .btn-danger:focus {
-  background-color: #c9280e;
+  background-color: #8e2a20;
   background-position: 0 -15px;
 }
 /* line 48, ../theme/bootstrap-sass/lib/_theme.scss */
 .btn-danger:active, .btn-danger.active {
-  background-color: #c9280e;
-  border-color: #bf260d;
+  background-color: #8e2a20;
+  border-color: #86281e;
 }
 
 /* line 69, ../theme/bootstrap-sass/lib/_theme.scss */
 .btn-info {
-  background-image: -webkit-gradient(linear, left 0%, left 100%, from(#5bc0de), to(#2aabd2));
-  background-image: -webkit-linear-gradient(top, #5bc0de 0%, #2aabd2 100%);
-  background-image: -moz-linear-gradient(top, #5bc0de 0%, #2aabd2 100%);
-  background-image: linear-gradient(to bottom, #5bc0de 0%, #2aabd2 100%);
+  background-image: -webkit-gradient(linear, left 0%, left 100%, from(#8f8cff), to(#534fff));
+  background-image: -webkit-linear-gradient(top, #8f8cff 0%, #534fff 100%);
+  background-image: -moz-linear-gradient(top, #8f8cff 0%, #534fff 100%);
+  background-image: linear-gradient(to bottom, #8f8cff 0%, #534fff 100%);
   background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF5BC0DE', endColorstr='#FF2AABD2', GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF8F8CFF', endColorstr='#FF534FFF', GradientType=0);
   filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
   background-repeat: repeat-x;
-  border-color: #28a4c9;
+  border-color: #4945ff;
 }
 /* line 42, ../theme/bootstrap-sass/lib/_theme.scss */
 .btn-info:hover, .btn-info:focus {
-  background-color: #2aabd2;
+  background-color: #534fff;
   background-position: 0 -15px;
 }
 /* line 48, ../theme/bootstrap-sass/lib/_theme.scss */
 .btn-info:active, .btn-info.active {
-  background-color: #2aabd2;
-  border-color: #28a4c9;
+  background-color: #534fff;
+  border-color: #4945ff;
 }
 
 /* line 78, ../theme/bootstrap-sass/lib/_theme.scss */
@@ -7765,13 +7765,13 @@ label,
 .dropdown-menu > .active > a,
 .dropdown-menu > .active > a:hover,
 .dropdown-menu > .active > a:focus {
-  background-image: -webkit-gradient(linear, left 0%, left 100%, from(#008cba), to(#0079a1));
-  background-image: -webkit-linear-gradient(top, #008cba 0%, #0079a1 100%);
-  background-image: -moz-linear-gradient(top, #008cba 0%, #0079a1 100%);
-  background-image: linear-gradient(to bottom, #008cba 0%, #0079a1 100%);
+  background-image: -webkit-gradient(linear, left 0%, left 100%, from(#7276ff), to(#595dff));
+  background-image: -webkit-linear-gradient(top, #7276ff 0%, #595dff 100%);
+  background-image: -moz-linear-gradient(top, #7276ff 0%, #595dff 100%);
+  background-image: linear-gradient(to bottom, #7276ff 0%, #595dff 100%);
   background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF008CBA', endColorstr='#FF0079A1', GradientType=0);
-  background-color: #0079a1;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF7276FF', endColorstr='#FF595DFF', GradientType=0);
+  background-color: #595dff;
 }
 
 /* line 107, ../theme/bootstrap-sass/lib/_theme.scss */
@@ -7807,22 +7807,22 @@ label,
 
 /* line 125, ../theme/bootstrap-sass/lib/_theme.scss */
 .navbar-inverse {
-  background-image: -webkit-gradient(linear, left 0%, left 100%, from(#00b2ed), to(#008cba));
-  background-image: -webkit-linear-gradient(top, #00b2ed 0%, #008cba 100%);
-  background-image: -moz-linear-gradient(top, #00b2ed 0%, #008cba 100%);
-  background-image: linear-gradient(to bottom, #00b2ed 0%, #008cba 100%);
+  background-image: -webkit-gradient(linear, left 0%, left 100%, from(#a5a8ff), to(#7276ff));
+  background-image: -webkit-linear-gradient(top, #a5a8ff 0%, #7276ff 100%);
+  background-image: -moz-linear-gradient(top, #a5a8ff 0%, #7276ff 100%);
+  background-image: linear-gradient(to bottom, #a5a8ff 0%, #7276ff 100%);
   background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF00B2ED', endColorstr='#FF008CBA', GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFA5A8FF', endColorstr='#FF7276FF', GradientType=0);
   filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
 }
 /* line 129, ../theme/bootstrap-sass/lib/_theme.scss */
 .navbar-inverse .navbar-nav > .active > a {
-  background-image: -webkit-gradient(linear, left 0%, left 100%, from(#008cba), to(#0096c7));
-  background-image: -webkit-linear-gradient(top, #008cba 0%, #0096c7 100%);
-  background-image: -moz-linear-gradient(top, #008cba 0%, #0096c7 100%);
-  background-image: linear-gradient(to bottom, #008cba 0%, #0096c7 100%);
+  background-image: -webkit-gradient(linear, left 0%, left 100%, from(#7276ff), to(#7f82ff));
+  background-image: -webkit-linear-gradient(top, #7276ff 0%, #7f82ff 100%);
+  background-image: -moz-linear-gradient(top, #7276ff 0%, #7f82ff 100%);
+  background-image: linear-gradient(to bottom, #7276ff 0%, #7f82ff 100%);
   background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF008CBA', endColorstr='#FF0096C7', GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF7276FF', endColorstr='#FF7F82FF', GradientType=0);
   -webkit-box-shadow: inset 0 3px 9px rgba(0, 0, 0, 0.25);
   box-shadow: inset 0 3px 9px rgba(0, 0, 0, 0.25);
 }
@@ -7848,46 +7848,46 @@ label,
 
 /* line 167, ../theme/bootstrap-sass/lib/_theme.scss */
 .alert-success {
-  background-image: -webkit-gradient(linear, left 0%, left 100%, from(#43ac6a), to(#389059));
-  background-image: -webkit-linear-gradient(top, #43ac6a 0%, #389059 100%);
-  background-image: -moz-linear-gradient(top, #43ac6a 0%, #389059 100%);
-  background-image: linear-gradient(to bottom, #43ac6a 0%, #389059 100%);
+  background-image: -webkit-gradient(linear, left 0%, left 100%, from(#27ae60), to(#208f4f));
+  background-image: -webkit-linear-gradient(top, #27ae60 0%, #208f4f 100%);
+  background-image: -moz-linear-gradient(top, #27ae60 0%, #208f4f 100%);
+  background-image: linear-gradient(to bottom, #27ae60 0%, #208f4f 100%);
   background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF43AC6A', endColorstr='#FF389059', GradientType=0);
-  border-color: #2e7548;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF27AE60', endColorstr='#FF208F4F', GradientType=0);
+  border-color: #19703e;
 }
 
 /* line 168, ../theme/bootstrap-sass/lib/_theme.scss */
 .alert-info {
-  background-image: -webkit-gradient(linear, left 0%, left 100%, from(#5bc0de), to(#3bb4d8));
-  background-image: -webkit-linear-gradient(top, #5bc0de 0%, #3bb4d8 100%);
-  background-image: -moz-linear-gradient(top, #5bc0de 0%, #3bb4d8 100%);
-  background-image: linear-gradient(to bottom, #5bc0de 0%, #3bb4d8 100%);
+  background-image: -webkit-gradient(linear, left 0%, left 100%, from(#8f8cff), to(#6a66ff));
+  background-image: -webkit-linear-gradient(top, #8f8cff 0%, #6a66ff 100%);
+  background-image: -moz-linear-gradient(top, #8f8cff 0%, #6a66ff 100%);
+  background-image: linear-gradient(to bottom, #8f8cff 0%, #6a66ff 100%);
   background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF5BC0DE', endColorstr='#FF3BB4D8', GradientType=0);
-  border-color: #28a1c5;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF8F8CFF', endColorstr='#FF6A66FF', GradientType=0);
+  border-color: #4440ff;
 }
 
 /* line 169, ../theme/bootstrap-sass/lib/_theme.scss */
 .alert-warning {
-  background-image: -webkit-gradient(linear, left 0%, left 100%, from(#e99002), to(#c37902));
-  background-image: -webkit-linear-gradient(top, #e99002 0%, #c37902 100%);
-  background-image: -moz-linear-gradient(top, #e99002 0%, #c37902 100%);
-  background-image: linear-gradient(to bottom, #e99002 0%, #c37902 100%);
+  background-image: -webkit-gradient(linear, left 0%, left 100%, from(#ff750f), to(#e86200));
+  background-image: -webkit-linear-gradient(top, #ff750f 0%, #e86200 100%);
+  background-image: -moz-linear-gradient(top, #ff750f 0%, #e86200 100%);
+  background-image: linear-gradient(to bottom, #ff750f 0%, #e86200 100%);
   background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFE99002', endColorstr='#FFC37902', GradientType=0);
-  border-color: #9d6101;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFFF750F', endColorstr='#FFE86200', GradientType=0);
+  border-color: #c25200;
 }
 
 /* line 170, ../theme/bootstrap-sass/lib/_theme.scss */
 .alert-danger {
-  background-image: -webkit-gradient(linear, left 0%, left 100%, from(#f04124), to(#df2d0f));
-  background-image: -webkit-linear-gradient(top, #f04124 0%, #df2d0f 100%);
-  background-image: -moz-linear-gradient(top, #f04124 0%, #df2d0f 100%);
-  background-image: linear-gradient(to bottom, #f04124 0%, #df2d0f 100%);
+  background-image: -webkit-gradient(linear, left 0%, left 100%, from(#c0392b), to(#a13024));
+  background-image: -webkit-linear-gradient(top, #c0392b 0%, #a13024 100%);
+  background-image: -moz-linear-gradient(top, #c0392b 0%, #a13024 100%);
+  background-image: linear-gradient(to bottom, #c0392b 0%, #a13024 100%);
   background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFF04124', endColorstr='#FFDF2D0F', GradientType=0);
-  border-color: #bb260d;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFC0392B', endColorstr='#FFA13024', GradientType=0);
+  border-color: #81261d;
 }
 
 /* line 179, ../theme/bootstrap-sass/lib/_theme.scss */
@@ -7902,52 +7902,52 @@ label,
 
 /* line 189, ../theme/bootstrap-sass/lib/_theme.scss */
 .progress-bar {
-  background-image: -webkit-gradient(linear, left 0%, left 100%, from(#008cba), to(#006687));
-  background-image: -webkit-linear-gradient(top, #008cba 0%, #006687 100%);
-  background-image: -moz-linear-gradient(top, #008cba 0%, #006687 100%);
-  background-image: linear-gradient(to bottom, #008cba 0%, #006687 100%);
+  background-image: -webkit-gradient(linear, left 0%, left 100%, from(#7276ff), to(#3f44ff));
+  background-image: -webkit-linear-gradient(top, #7276ff 0%, #3f44ff 100%);
+  background-image: -moz-linear-gradient(top, #7276ff 0%, #3f44ff 100%);
+  background-image: linear-gradient(to bottom, #7276ff 0%, #3f44ff 100%);
   background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF008CBA', endColorstr='#FF006687', GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF7276FF', endColorstr='#FF3F44FF', GradientType=0);
 }
 
 /* line 190, ../theme/bootstrap-sass/lib/_theme.scss */
 .progress-bar-success {
-  background-image: -webkit-gradient(linear, left 0%, left 100%, from(#43ac6a), to(#358753));
-  background-image: -webkit-linear-gradient(top, #43ac6a 0%, #358753 100%);
-  background-image: -moz-linear-gradient(top, #43ac6a 0%, #358753 100%);
-  background-image: linear-gradient(to bottom, #43ac6a 0%, #358753 100%);
+  background-image: -webkit-gradient(linear, left 0%, left 100%, from(#27ae60), to(#1e8449));
+  background-image: -webkit-linear-gradient(top, #27ae60 0%, #1e8449 100%);
+  background-image: -moz-linear-gradient(top, #27ae60 0%, #1e8449 100%);
+  background-image: linear-gradient(to bottom, #27ae60 0%, #1e8449 100%);
   background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF43AC6A', endColorstr='#FF358753', GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF27AE60', endColorstr='#FF1E8449', GradientType=0);
 }
 
 /* line 191, ../theme/bootstrap-sass/lib/_theme.scss */
 .progress-bar-info {
-  background-image: -webkit-gradient(linear, left 0%, left 100%, from(#5bc0de), to(#31b0d5));
-  background-image: -webkit-linear-gradient(top, #5bc0de 0%, #31b0d5 100%);
-  background-image: -moz-linear-gradient(top, #5bc0de 0%, #31b0d5 100%);
-  background-image: linear-gradient(to bottom, #5bc0de 0%, #31b0d5 100%);
+  background-image: -webkit-gradient(linear, left 0%, left 100%, from(#8f8cff), to(#5d59ff));
+  background-image: -webkit-linear-gradient(top, #8f8cff 0%, #5d59ff 100%);
+  background-image: -moz-linear-gradient(top, #8f8cff 0%, #5d59ff 100%);
+  background-image: linear-gradient(to bottom, #8f8cff 0%, #5d59ff 100%);
   background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF5BC0DE', endColorstr='#FF31B0D5', GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF8F8CFF', endColorstr='#FF5D59FF', GradientType=0);
 }
 
 /* line 192, ../theme/bootstrap-sass/lib/_theme.scss */
 .progress-bar-warning {
-  background-image: -webkit-gradient(linear, left 0%, left 100%, from(#e99002), to(#b67102));
-  background-image: -webkit-linear-gradient(top, #e99002 0%, #b67102 100%);
-  background-image: -moz-linear-gradient(top, #e99002 0%, #b67102 100%);
-  background-image: linear-gradient(to bottom, #e99002 0%, #b67102 100%);
+  background-image: -webkit-gradient(linear, left 0%, left 100%, from(#ff750f), to(#db5d00));
+  background-image: -webkit-linear-gradient(top, #ff750f 0%, #db5d00 100%);
+  background-image: -moz-linear-gradient(top, #ff750f 0%, #db5d00 100%);
+  background-image: linear-gradient(to bottom, #ff750f 0%, #db5d00 100%);
   background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFE99002', endColorstr='#FFB67102', GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFFF750F', endColorstr='#FFDB5D00', GradientType=0);
 }
 
 /* line 193, ../theme/bootstrap-sass/lib/_theme.scss */
 .progress-bar-danger {
-  background-image: -webkit-gradient(linear, left 0%, left 100%, from(#f04124), to(#d32a0e));
-  background-image: -webkit-linear-gradient(top, #f04124 0%, #d32a0e 100%);
-  background-image: -moz-linear-gradient(top, #f04124 0%, #d32a0e 100%);
-  background-image: linear-gradient(to bottom, #f04124 0%, #d32a0e 100%);
+  background-image: -webkit-gradient(linear, left 0%, left 100%, from(#c0392b), to(#962d22));
+  background-image: -webkit-linear-gradient(top, #c0392b 0%, #962d22 100%);
+  background-image: -moz-linear-gradient(top, #c0392b 0%, #962d22 100%);
+  background-image: linear-gradient(to bottom, #c0392b 0%, #962d22 100%);
   background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFF04124', endColorstr='#FFD32A0E', GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFC0392B', endColorstr='#FF962D22', GradientType=0);
 }
 
 /* line 201, ../theme/bootstrap-sass/lib/_theme.scss */
@@ -7961,14 +7961,14 @@ label,
 .list-group-item.active,
 .list-group-item.active:hover,
 .list-group-item.active:focus {
-  text-shadow: 0 -1px 0 #006687;
-  background-image: -webkit-gradient(linear, left 0%, left 100%, from(#008cba), to(#006f94));
-  background-image: -webkit-linear-gradient(top, #008cba 0%, #006f94 100%);
-  background-image: -moz-linear-gradient(top, #008cba 0%, #006f94 100%);
-  background-image: linear-gradient(to bottom, #008cba 0%, #006f94 100%);
+  text-shadow: 0 -1px 0 #3f44ff;
+  background-image: -webkit-gradient(linear, left 0%, left 100%, from(#7276ff), to(#4c51ff));
+  background-image: -webkit-linear-gradient(top, #7276ff 0%, #4c51ff 100%);
+  background-image: -moz-linear-gradient(top, #7276ff 0%, #4c51ff 100%);
+  background-image: linear-gradient(to bottom, #7276ff 0%, #4c51ff 100%);
   background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF008CBA', endColorstr='#FF006F94', GradientType=0);
-  border-color: #006f94;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF7276FF', endColorstr='#FF4C51FF', GradientType=0);
+  border-color: #4c51ff;
 }
 
 /* line 220, ../theme/bootstrap-sass/lib/_theme.scss */
@@ -7989,12 +7989,12 @@ label,
 
 /* line 231, ../theme/bootstrap-sass/lib/_theme.scss */
 .panel-primary > .panel-heading {
-  background-image: -webkit-gradient(linear, left 0%, left 100%, from(#008cba), to(#0079a1));
-  background-image: -webkit-linear-gradient(top, #008cba 0%, #0079a1 100%);
-  background-image: -moz-linear-gradient(top, #008cba 0%, #0079a1 100%);
-  background-image: linear-gradient(to bottom, #008cba 0%, #0079a1 100%);
+  background-image: -webkit-gradient(linear, left 0%, left 100%, from(#7276ff), to(#595dff));
+  background-image: -webkit-linear-gradient(top, #7276ff 0%, #595dff 100%);
+  background-image: -moz-linear-gradient(top, #7276ff 0%, #595dff 100%);
+  background-image: linear-gradient(to bottom, #7276ff 0%, #595dff 100%);
   background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF008CBA', endColorstr='#FF0079A1', GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF7276FF', endColorstr='#FF595DFF', GradientType=0);
 }
 
 /* line 232, ../theme/bootstrap-sass/lib/_theme.scss */
@@ -10247,19 +10247,19 @@ ol.list {
 }
 /* line 68, main.scss */
 .btn-not.btn-success {
-  color: #43ac6a;
+  color: #27ae60;
 }
 /* line 72, main.scss */
 .btn-not.btn-success:hover, .btn-not.btn-success:focus {
-  color: #43ac6a;
+  color: #27ae60;
 }
 /* line 77, main.scss */
 .btn-not.btn-danger {
-  color: #f04124;
+  color: #c0392b;
 }
 /* line 81, main.scss */
 .btn-not.btn-danger:hover, .btn-not.btn-danger:focus {
-  color: #f04124;
+  color: #c0392b;
 }
 
 /* line 89, main.scss */
@@ -10718,4 +10718,32 @@ input[hidden] {
 /* line 552, main.scss */
 .asteriskField:after {
   content: ')';
+}
+
+/* line 557, main.scss */
+.animatable {
+  position: relative;
+  display: inline-block;
+}
+
+/* line 562, main.scss */
+.text-highlight {
+  color: #47467F;
+  font-size: 120%;
+  text-shadow: 1px 1px 1px #969696;
+}
+
+/* line 568, main.scss */
+.text-shadow {
+  text-shadow: 1px 1px 1px #969696;
+}
+
+/* line 572, main.scss */
+.text-big {
+  font-size: 110%;
+}
+
+/* line 576, main.scss */
+.text-bigger {
+  font-size: 120%;
 }

@@ -11,15 +11,16 @@ urlpatterns = patterns('',
                        url(r'^test/$', test_view, name='test'),
 
                       (r'^i18n/', include('django.conf.urls.i18n')),
+                      (r'^jsi18n/(?P<packages>\S+?)/$', 'django.views.i18n.javascript_catalog'),
 
                        #url(r'^$', 'base.views.home', name='home'),
                        url(r'^$', home_view, name='home'),
 
                        # url(r'^$', TemplateView.as_view(template_name="home.html"), name='home'),
 
-                       url(r'^login/$',    login_view,    name='login'),
+                       url(r'^login/$',    login_minimal_view,    name='login'),
                        url(r'^logout/$',   logout_view,   name='logout'),
-                       url(r'^register/$', register_view, name='register'),
+                       url(r'^signup/$', signup_view, name='signup'),
                        url(r'',           include('django.contrib.auth.urls')),
                        url(r'',           include('social_auth.urls')),
 
