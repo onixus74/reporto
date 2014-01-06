@@ -190,7 +190,7 @@
 
   <div id="footer">
     <div class="container">
-      <form action="{% url 'set_language' %}" method="post" class="form-inline pull-right" role="form" style="display: inline-block; /* width: 150px; */">
+      <form action="{% url 'set_language' %}" method="post" class="form-inline pull-right" role="form" style="/* display: inline-block; */ /* width: 150px; */" hidden>
         {% csrf_token %}
         <input name="next" type="hidden" value="{{ redirect_to }}" />
         <div class="form-group">
@@ -207,7 +207,7 @@
         <button type="submit" class="btn btn-default btn-xs">Go</button>
       </form>
       <p class="text-muted credit pull-left">
-        <a href="email:contact@ipolice.tn" title="report a bug, suggest a feature, ...">Provide Feedback</a>. Developed by <a href="http://reform.tn" target="_blank">reform.tn</a>.</p>
+        <a href="email:contact@ipolice.tn" title="report a bug, suggest a feature, ...">Provide Feedback</a>. Developed by <a href="http://reform.tn" target="_blank">Tunisian Institutional Reform</a>.</p>
     </div>
   </div>
 

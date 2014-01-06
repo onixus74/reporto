@@ -6,9 +6,9 @@
 {% block view_title %}Sign in | {% endblock %}
 
 {% block view_content %}
-	<div class="panel text-center">
+  <div class="panel text-center">
 
-		<div class="panel_" style="margin-top: 20px; width: auto; display: inline-block;">
+    <div class="-panel" style="margin-top: 20px; width: auto; display: inline-block;">
 
       <div class="jumbotron">
         <h1>Reform Reporting Platform</h1>
@@ -19,32 +19,32 @@
         </p>
       </div>
 
-			{% comment %}
-			{% if form.errors %}
-			<div class="alert alert-danger">
-				<button type="button" class="close" data-dismiss="alert">&times;</button>
-				Your username and password didn't match. Please try again.</p>
-			</div>
-			{% endif %}
-			{% endcomment %}
+      {% comment %}
+      {% if form.errors %}
+      <div class="alert alert-danger">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        Your username and password didn't match. Please try again.</p>
+      </div>
+      {% endif %}
+      {% endcomment %}
 
 
-			{% if form.errors %}
-			<div class="alert alert-danger">
-				<button type="button" class="close" data-dismiss="alert">&times;</button>
-				{% for field, errors in form.errors.items %}
-					<div class="field-{{field}}">{% for error in errors %} {{error}}{% endfor %}</div>
-				{% endfor %}
-			</div>
-			{% endif %}
+      {% if form.errors %}
+      <div class="alert alert-danger">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        {% for field, errors in form.errors.items %}
+          <div class="field-{{field}}">{% for error in errors %} {{error}}{% endfor %}</div>
+        {% endfor %}
+      </div>
+      {% endif %}
 
-			<p class="lead">contribute by signing in</p>
+      <p class="lead">contribute by signing in</p>
 
       <div class="row">
         <div class="col-md-8 col-md-offset-2">
 
-    			<form class="form-inline_" method="post" role="form">
-    				{% csrf_token %}
+          <form class="-form-inline" method="post" role="form">
+            {% csrf_token %}
 
             <div class="form-group">
               <div class="input-group input-group-lg">
@@ -60,14 +60,14 @@
               </div>
             </div>
 
-    				<input type="hidden" name="next" value="{{ next }}" />
+            <input type="hidden" name="next" value="{{ next }}" />
 
             <button class="btn btn-default btn-lg btn-block" name="commit" type="submit">
               Sign in <i class="fa fa-sign-in"></i>
             </button>
             <a href="{% url 'password_reset' %}" class="btn btn-link">Reset your password</a>
 
-    			</form>
+          </form>
 
         </div>
 
@@ -88,9 +88,9 @@
         </div>
       </div>
 
-			<!--<p class="text-center">or <a href="/signup">create an account</a></p>-->
+      <!--<p class="text-center">or <a href="/signup">create an account</a></p>-->
 
-		</div>
+    </div>
 
 
     <div class="row">
@@ -155,7 +155,7 @@
               <div class="list-group text-left">
               {% for report in appreciations_latest %}
                 <a class="list-group-item" href="{{report.get_absolute_url}}">
-                  {{report.category}} for {{report.target}}, {{report.datetime}} at {{report.location_text}}
+                  {{report.category}} for {{report.subject}}, {{report.datetime}} at {{report.location_text}}
                 </a>
               {% empty %}
                 <a class="list-group-item">None!</a>
@@ -194,39 +194,40 @@
       </div>
     </div>
 
-		<div class="row">
-			<div class="col-md-6" style="margin-top: 20px;">
-				<div id="ui-reports-dates-chart"></div>
-			</div>
-			<div class="col-md-6" style="margin-top: 20px;">
-				<div id="ui-stats-features-chart"></div>
-			</div>
-		</div>
+    <div class="row">
+      <div class="col-md-6" style="margin-top: 20px;">
+        <div id="ui-stats-reports-by-date-chart"></div>
+      </div>
+      <div class="col-md-6" style="margin-top: 20px;">
+        <div id="ui-stats-violations-by-features-chart"></div>
+      </div>
+    </div>
 
-		<div class="row">
-			<div class="col-md-4" style="margin-top: 20px;">
-				<div id="ui-stats-categories-chart"></div>
-			</div>
-			<div class="col-md-4" style="margin-top: 20px;">
-				<div id="ui-stats-victim-gender-chart"></div>
-			</div>
-			<div class="col-md-4" style="margin-top: 20px;">
-				<div id="ui-stats-victim-education-chart"></div>
-			</div>
-		</div>
+    <div class="row">
+      <div class="col-md-4" style="margin-top: 20px;">
+        <div id="ui-stats-violations-by-category-chart"></div>
+      </div>
+      <div class="col-md-4" style="margin-top: 20px;">
+        <div id="ui-stats-violations-by-victim-gender-chart"></div>
+      </div>
+      <div class="col-md-4" style="margin-top: 20px;">
+        <div id="ui-stats-violations-by-victim-education-chart"></div>
+      </div>
+    </div>
 
-	</div>
+  </div>
 {% endblock %}
 
 {% block view_scripts %}
-	<script type="text/javascript">
-		reform.urls.statistics = {% url 'public_statistics' as url %}{{url|json}};
-	</script>
-	{% compress js %}
-	<script src="{% static 'components/highcharts.com/js/highcharts.src.js' %}"></script>
-	<script src="{% static 'components/highcharts.com/js/modules/exporting.src.js' %}"></script>
+  <script type="text/javascript">
+    reform.urls.statistics = {% url 'public_statistics' as url %}{{url|json}};
+  </script>
+  {% compress js %}
+  <script src="{% static 'components/highcharts.com/js/highcharts.src.js' %}"></script>
+  <script src="{% static 'components/highcharts.com/js/modules/exporting.src.js' %}"></script>
   <script src="{% static 'scripts/highcharts-theme.js' %}"></script>
-	<script src="{% static 'users/scripts/login.js' %}"></script>
+  <script src="{% static 'dashboard/scripts/charts.js' %}"></script>
+  <script src="{% static 'users/scripts/login.js' %}"></script>
   <script type="text/javascript">
   $(document).ready(function(){
     $('.jumbotron .animatable').each(function(i, e){
@@ -234,7 +235,7 @@
     });
   });
   </script>
-	{% endcompress %}
+  {% endcompress %}
 {% endblock %}
 
 {% block view_styles %}

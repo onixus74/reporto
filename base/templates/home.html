@@ -4,12 +4,12 @@
 
 {#% {% trans "" %} %#}
 
-{% block view_title %}{% trans "Violations/Appreciations Dashboard" %} | {% endblock %}
+{% block view_title %}{% trans "Reports Dashboard" %} | {% endblock %}
 
 {% block view_content %}
 
     <div class="page-header">
-      <h1 class="text-center">{% trans "Violations/Appreciations Dashboard" %}</h1>
+      <h1 class="text-center">{% trans "Reports Dashboard" %}</h1>
     </div>
 
     {% comment %}
@@ -32,7 +32,7 @@
               on
               <span class="text-info"><i class="fa fa-calendar"></i> {{report.datetime}}</span>
               {% if report.is_verified %}<span class="badge badge-success">Verified <i class="fa fa-ok"></i></span>{% endif %}
-              <a class="btn btn-not" href="{% url 'violations:view' report.id %}" -target="_blank" title="Click to view report" -data-toggle="modal" -data-target="#ui-report-view-modal">
+              <a class="btn btn-link" href="{% url 'violations:view' report.id %}" -target="_blank" title="Click to view report" -data-toggle="modal" -data-target="#ui-report-view-modal">
                   <i class="fa fa-external-link-square fa-lg"></i>
               </a>
           </div>
@@ -55,7 +55,7 @@
               on
               <span class="text-info"><i class="fa fa-calendar"></i> {{report.datetime}}</span>
               {% if report.is_verified %}<span class="badge badge-success">Verified <i class="fa fa-ok"></i></span>{% endif %}
-              <a class="btn btn-not" href="{% url 'violations:view' report.id %}" -target="_blank" title="Click to view report" -data-toggle="modal" -data-target="#ui-report-view-modal">
+              <a class="btn btn-link" href="{% url 'violations:view' report.id %}" -target="_blank" title="Click to view report" -data-toggle="modal" -data-target="#ui-report-view-modal">
                   <i class="fa fa-external-link-square fa-lg"></i>
               </a>
           </div>
@@ -87,7 +87,7 @@
                       on
                       <span class="text-info"><i class="fa fa-calendar"></i> {{report.datetime}}</span>
                       {% if report.is_verified %}<span class="badge badge-success">Verified <i class="fa fa-ok"></i></span>{% endif %}
-                      <a class="btn btn-not" href="{% url 'violations:view' report.id %}" -target="_blank" title="Click to view report" -data-toggle="modal" -data-target="#ui-report-view-modal">
+                      <a class="btn btn-link" href="{% url 'violations:view' report.id %}" -target="_blank" title="Click to view report" -data-toggle="modal" -data-target="#ui-report-view-modal">
                           <i class="fa fa-external-link-square fa-lg"></i>
                       </a>
                   </div>
@@ -112,13 +112,13 @@
                   {% with report=appreciations_list.0 %}
                   <div>
                       <h2 style="margin-top: 0;">Latest Appreciation</h2>
-                      <span class="text-info">{{report.category}}</span> for ...
+                      <span class="text-info">{{report.category}}</span> for <span class="text-info">{{report.subject}}</span>
                       happened in
                       <span class="text-info"><i class="fa fa-map-marker"></i> {{report.location_text}}</span>
                       on
                       <span class="text-info"><i class="fa fa-calendar"></i> {{report.datetime}}</span>
                       {% if report.is_verified %}<span class="badge badge-success">Verified <i class="fa fa-ok"></i></span>{% endif %}
-                      <a class="btn btn-not" href="{% url 'appreciations:view' report.id %}" -target="_blank" title="Click to view report" -data-toggle="modal" -data-target="#ui-report-view-modal">
+                      <a class="btn btn-link" href="{% url 'appreciations:view' report.id %}" -target="_blank" title="Click to view report" -data-toggle="modal" -data-target="#ui-report-view-modal">
                           <i class="fa fa-external-link-square fa-lg"></i>
                       </a>
                   </div>
@@ -138,21 +138,13 @@
 
 
     {% if violations_list or appreciations_list %}
-    <div class="well_">
-
-      <!--
-      <div class="row">
-        <div class="col-md-12">
-          <div id="ui-violations-dates-chart" style="height: 300px;"></div>
-        </div>
-      </div>
-      -->
+    <div class="-well">
 
       <div class="row">
         <div class="col-md-12">
           <div class="panel panel-default">
             <div class="panel-body">
-              <div id="ui-reports-by-date-chart" style="height: 300px;"></div>
+              <div id="ui-stats-reports-by-date-chart" style="height: 300px;"></div>
             </div>
           </div>
         </div>
@@ -280,7 +272,7 @@
           {% if violations_list %}
           <div class="panel panel-default">
             <div class="panel-body">
-              <div id="ui-stats-features-chart"></div>
+              <div id="ui-stats-violations-by-features-chart"></div>
             </div>
           </div>
           {% endif %}
@@ -301,35 +293,23 @@
 
       <div class="row">
         <div class="col-md-4">
-          <!--
-          <div id="ui-stats-categories-chart"></div>
-          <h3 class="text-center">Distribution by violation category</h3>
-          -->
           <div class="panel panel-default">
             <div class="panel-body">
-              <div id="ui-stats-categories-chart"></div>
+              <div id="ui-stats-violations-by-category-chart"></div>
             </div>
           </div>
         </div>
         <div class="col-md-4">
-          <!--
-          <div id="ui-stats-victim-gender-chart"></div>
-          <h3 class="text-center">Distribution by victim's gender</h3>
-          -->
           <div class="panel panel-default">
             <div class="panel-body">
-              <div id="ui-stats-victim-gender-chart"></div>
+              <div id="ui-stats-violations-by-victim-gender-chart"></div>
             </div>
           </div>
         </div>
         <div class="col-md-4">
-          <!--
-          <div id="ui-stats-victim-education-chart"></div>
-          <h3 class="text-center">Distribution by victim's education</h3>
-          -->
           <div class="panel panel-default">
             <div class="panel-body">
-              <div id="ui-stats-victim-education-chart"></div>
+              <div id="ui-stats-violations-by-victim-education-chart"></div>
             </div>
           </div>
         </div>
@@ -425,18 +405,22 @@
     reform.urls.appreciationsDashboard = {% url 'appreciations:dashboard' as url %}{{url|json}};
     reform.urls.appreciationsSearch = {% url 'appreciations:search' as url %}{{url|json}};
 
-    reform.data.violationsCategories = {{violations_categories|json}}
-    reform.data.violationsFeatures = {{violations_features|json}}
-    reform.data.violationsByCategory = {{violations_by_category|json}}
-    reform.data.violationsByFeature = {{violations_by_feature|json}}
-    reform.data.violationsByVictimGender = {{violations_by_victim_gender|json}}
-    reform.data.violationsByVictimEducation = {{violations_by_victim_education|json}}
-    reform.data.violationsByDate = {{violations_by_date|json}}
-    reform.data.violationsByCategoryByDate = {{violations_by_category_by_date|json}}
-    reform.data.violationsLocations = {{violations_locations|json}}
+    reform.data.violationsCount = {{violations_count|json}};
+    reform.data.violationsCategories = {{violations_categories|json}};
+    reform.data.violationsFeatures = {{violations_features|json}};
+    reform.data.violationsByCategory = {{violations_by_category|json}};
+    reform.data.violationsByFeature = {{violations_by_feature|json}};
+    reform.data.violationsByVictimGender = {{violations_by_victim_gender|json}};
+    reform.data.violationsByVictimEducation = {{violations_by_victim_education|json}};
+    reform.data.violationsByDate = {{violations_by_date|json}};
+    reform.data.violationsByCategoryByDate = {{violations_by_category_by_date|json}};
+    reform.data.violationsLocations = {{violations_locations|json}};
 
-    reform.data.appreciationsByDate = {{appreciations_by_date|json}}
-    reform.data.appreciationsLocations = {{appreciations_locations|json}}
+    reform.data.appreciationsCount = {{appreciations_count|json}};
+    reform.data.appreciationsByDate = {{appreciations_by_date|json}};
+    reform.data.appreciationsCategories = {{appreciations_categories|json}};
+    reform.data.appreciationsByCategory = {{appreciations_by_category|json}};
+    reform.data.appreciationsLocations = {{appreciations_locations|json}};
 
     /*
     reform.data.timeline = {
@@ -463,10 +447,11 @@
   <script src="{% static 'components/leaflet.markerclusterer/dist/leaflet.markercluster-src.js' %}"></script>
   <script src="{% static 'components/Leaflet.awesome-markers/dist/leaflet.awesome-markers.js' %}"></script>
   <script src="{% static 'components/highcharts.com/js/highcharts.src.js' %}"></script>
-  <script src="{% static 'scripts/highcharts-theme.js' %}"></script>
   <script src="{% static 'components/highcharts.com/js/modules/exporting.src.js' %}"></script>
+  <script src="{% static 'scripts/highcharts-theme.js' %}"></script>
   <script src="{% static 'components/jquery.scrollTo/jquery.scrollTo.js' %}"></script>
   <script src="{% static 'utils/pagination.js' %}"></script>
+  <script src="{% static 'dashboard/scripts/charts.js' %}"></script>
   <script src="{% static 'dashboard/scripts/dashboard.js' %}"></script>
   {% endcompress %}
   {% endif %}

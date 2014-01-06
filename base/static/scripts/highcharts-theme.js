@@ -1,5 +1,5 @@
 /* jshint strict: true, browser: true, devel: true */
-/* global Highcharts */
+/* global reform, Highcharts */
 (function() {
   'use strict';
 

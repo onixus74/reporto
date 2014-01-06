@@ -198,7 +198,7 @@ body {
 #dateinput .days .day.selected,
 #dateinput .days .empty.selected {
   color: white;
-  background-color: #7276ff;
+  background-color: #3d3b65;
   -webkit-box-shadow: inset 0 0 8px #d4d4d4;
   box-shadow: inset 0 0 8px #d4d4d4;
 }
@@ -210,104 +210,80 @@ body {
   color: #999999;
 }
 
-/* line 177, submit.scss */
-
+/*
 .ui-similar-appreciation-candidate {
-  margin: 4px;
-  border: 1px transparent solid;
-  -webkit-transition: border-color 0.1s linear;
-  transition: border-color 0.1s linear;
+	margin: 4px;
+	border: 1px transparent solid;
+	@include transition(border-color .1s linear);
+	&.ui-similar {
+		border-color: $brand-danger;
+		@include box-shadow(0 0 5px rgba(lighten($brand-danger, 10%), 0.9));
+		&.ui-similar-1 {
+			@include box-shadow(0 0 10px rgba(lighten($brand-danger, 5%), 0.8));
+		}
+		&.ui-similar-2 {
+			@include box-shadow(0 0 20px rgba($brand-danger, 0.7));;
+		}
+		&.ui-similar-3 {
+			@include box-shadow(0 0 30px rgba(darken($brand-danger, 5%), 0.7));;
+		}
+		&.ui-similar-4 {
+			@include box-shadow(0 0 40px rgba(darken($brand-danger, 10%), 0.7));;
+		}
+	}
 }
 
-/* line 181, submit.scss */
+.ui-similar-category {}
 
-.ui-similar-appreciation-candidate.ui-similar {
-  border-color: #c0392b;
-  -webkit-box-shadow: 0 0 5px rgba(214, 85, 72, 0.9);
-  box-shadow: 0 0 5px rgba(214, 85, 72, 0.9);
+.ui-similar-location {}
+
+.ui-similar-datetime {}
+
+.ui-similar-victim {}
+
+
+.ui-similar-category .ui-similar-appreciation-category, .ui-similar-category .ui-similar-appreciation-category a {
+	color: darken($brand-danger, 5%);
+	font-weight: bold;
 }
 
-/* line 184, submit.scss */
-
-.ui-similar-appreciation-candidate.ui-similar.ui-similar-1 {
-  -webkit-box-shadow: 0 0 10px rgba(209, 66, 51, 0.8);
-  box-shadow: 0 0 10px rgba(209, 66, 51, 0.8);
+.ui-similar-location .ui-similar-appreciation-location, .ui-similar-location .ui-similar-appreciation-location a {
+	color: darken($brand-danger, 10%);
+	font-weight: bold;
 }
 
-/* line 187, submit.scss */
-
-.ui-similar-appreciation-candidate.ui-similar.ui-similar-2 {
-  -webkit-box-shadow: 0 0 20px rgba(192, 57, 43, 0.7);
-  box-shadow: 0 0 20px rgba(192, 57, 43, 0.7);
+.ui-similar-datetime .ui-similar-appreciation-datetime, .ui-similar-datetime .ui-similar-appreciation-datetime a {
+	color: darken($brand-danger, 15%);
+	font-weight: bold;
 }
 
-/* line 190, submit.scss */
-
-.ui-similar-appreciation-candidate.ui-similar.ui-similar-3 {
-  -webkit-box-shadow: 0 0 30px rgba(171, 51, 38, 0.7);
-  box-shadow: 0 0 30px rgba(171, 51, 38, 0.7);
+.ui-similar-victim .ui-similar-appreciation-victim, .ui-similar-victim .ui-similar-appreciation-victim a {
+	color: $brand-danger;
+	font-weight: bold;
 }
-
-/* line 193, submit.scss */
-
-.ui-similar-appreciation-candidate.ui-similar.ui-similar-4 {
-  -webkit-box-shadow: 0 0 40px rgba(150, 45, 34, 0.7);
-  box-shadow: 0 0 40px rgba(150, 45, 34, 0.7);
-}
-
-/* line 208, submit.scss */
-
-.ui-similar-category .ui-similar-appreciation-category,
-.ui-similar-category .ui-similar-appreciation-category a {
-  color: #ab3326;
-  font-weight: bold;
-}
-
-/* line 213, submit.scss */
-
-.ui-similar-location .ui-similar-appreciation-location,
-.ui-similar-location .ui-similar-appreciation-location a {
-  color: #962d22;
-  font-weight: bold;
-}
-
-/* line 218, submit.scss */
-
-.ui-similar-datetime .ui-similar-appreciation-datetime,
-.ui-similar-datetime .ui-similar-appreciation-datetime a {
-  color: #81261d;
-  font-weight: bold;
-}
-
-/* line 223, submit.scss */
-
-.ui-similar-victim .ui-similar-appreciation-victim,
-.ui-similar-victim .ui-similar-appreciation-victim a {
-  color: #c0392b;
-  font-weight: bold;
-}
+*/
 
 @media (max-width: 767px) {
-  /* line 230, submit.scss */
+  /* line 232, submit.scss */
 
   #ui-wizard-progress-bar {
     top: 50px;
   }
 
-  /* line 232, submit.scss */
+  /* line 234, submit.scss */
 
   #ui-wizard-progress-bar .progress {
     margin: 0;
   }
 }
 
-/* line 240, submit.scss */
+/* line 242, submit.scss */
 
 .ui-victim-fieldset {
   height: auto;
 }
 
-/* line 242, submit.scss */
+/* line 244, submit.scss */
 
 .ui-victim-fieldset .control-group {
   margin-bottom: 10px;

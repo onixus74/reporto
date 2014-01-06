@@ -692,6 +692,9 @@ def append_appreciations_statistics(context):
     appreciations_by_date = AppreciationReport.objects.extra({'date': 'date(datetime)'}).values('date').annotate(Count('id')).order_by('date')
     context['appreciations_by_date'] = [{'date': i['date'], 'count': i['id__count']} for i in appreciations_by_date]
 
+    appreciations_by_category = AppreciationReport.objects.values('category__definition').annotate(Count('id')).order_by('category__definition')
+    context['appreciations_by_category'] = [{'label': i['category__definition'], 'count': i['id__count']} for i in appreciations_by_category]
+
     return context
 
 # CRUD

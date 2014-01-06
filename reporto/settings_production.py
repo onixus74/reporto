@@ -8,8 +8,8 @@ from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS
 PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
 BASE_DIR = os.path.dirname(PROJECT_DIR)
 
-DEBUG = True  # !DEV!
-# DEBUG = False  # !PROD!
+# DEBUG = True  # !DEV!
+DEBUG = False  # !PROD!
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (

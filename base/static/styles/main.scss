@@ -9,7 +9,7 @@
 
 $icon-font-path: "../theme/bootstrap-sass/fonts/";
 @import "../theme/bootstrap-sass/lib/bootstrap";
-@import "../theme/bootstrap-sass/lib/theme";
+//@import "../theme/bootstrap-sass/lib/theme";
 
 $fa-font-path: "../theme/font-awesome/fonts/";
 @import "../theme/font-awesome/scss/font-awesome";
@@ -52,37 +52,6 @@ ol.list {
 .btn-quiet {
 	//@include buttonBackground(transparent, $btnPrimaryBackground);
 	background-color: transparent;
-}
-
-
-.btn-not {
-	@extend .btn-link;
-
-	@include transition(color .2s linear);
-
-	&:hover,
-	&:focus {
-		text-decoration: none;
-	}
-
-	&.btn-success {
-		color: $btn-success-bg;
-
-		&:hover,
-		&:focus {
-			color: $btn-success-bg;
-		}
-	}
-
-	&.btn-danger {
-		color: $btn-danger-bg;
-
-		&:hover,
-		&:focus {
-			color: $btn-danger-bg;
-		}
-	}
-
 }
 
 .modal-big
@@ -157,7 +126,7 @@ body::-webkit-scrollbar-corner { background-clip: padding-box; background-color:
 body {
   //padding-top: 110px;
   padding-top: 70px;
-	//padding-bottom: 60px;
+	padding-bottom: 60px;
 	color: #5a5a5a;
 	//background: url('../theme/cream_pixels.png');
 }
@@ -173,7 +142,7 @@ body {
 }
 
 #footer {
-	//position: fixed;
+	position: fixed;
 	bottom: 0;
 
 	left: 0;

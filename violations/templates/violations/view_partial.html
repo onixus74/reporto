@@ -5,11 +5,11 @@
 					<hr>
 					<h2 class="text-center">
             {% if user.is_admin and show_all %}
-            <a href="#" id="id_category" class="ui-editable_" data-type="select" data-source="{{categories|json|force_escape}}" data-value="{{report.category.id}}" data-pk="{{report.pk}}" data-name="category" data-url="{% url 'violations:update_partial' report.id %}" data-title="Category">{{report.category}}</a>
+            <a href="#" id="id_category" class="-ui-editable" data-type="select" data-source="{{categories|json|force_escape}}" data-value="{{report.category.id}}" data-pk="{{report.pk}}" data-name="category" data-url="{% url 'violations:update_partial' report.id %}" data-title="Category">{{report.category}}</a>
             on
-            <a href="#" id="id_datetime" class="ui-editable_" data-type="datetime" data-value="{{report.datetime|date:'Y-m-d H:i'}}" data-pk="{{report.pk}}" data-name="datetime" data-url="{% url 'violations:update_partial' report.id %}" data-title="Date and time">{{report.datetime}}</a>
+            <a href="#" id="id_datetime" class="-ui-editable" data-type="datetime" data-value="{{report.datetime|date:'Y-m-d H:i'}}" data-pk="{{report.pk}}" data-name="datetime" data-url="{% url 'violations:update_partial' report.id %}" data-title="Date and time">{{report.datetime}}</a>
             at
-            <a href="#" id="id_location" class="ui-editable_" data-type="text" data-pk="{{report.pk}}" data-name="location_text" data-url="{% url 'violations:update_partial' report.id %}" data-title="Location">{{report.location_text}}</a>
+            <a href="#" id="id_location" class="-ui-editable" data-type="text" data-pk="{{report.pk}}" data-name="location_text" data-url="{% url 'violations:update_partial' report.id %}" data-title="Location">{{report.location_text}}</a>
 
             {% else %}
               {{report.category}} on {{report.datetime}} at {{report.location_text}}
@@ -60,7 +60,7 @@
 					<hr>
 					<h3><i class="fa fa-male"></i> Aggressor{% if user.is_admin and show_all %} <a id="ui-aggressor-edit" href="#" title="Edit" class="btn btn-sm"><i class="fa fa-pencil"></i></a>{% endif %}</h3>
 					{% if user.is_admin and show_all %}
-          <p id="ui-aggressor" class="ui-editable_" data-type="textarea" data-value="{{report.aggressor}}" date-toggle="manual" data-pk="{{report.pk}}" data-name="aggressor" data-url="{% url 'violations:update_partial' report.id %}" data-title="Aggressor">{{report.aggressor|default:"N/A"}}</p>
+          <p id="ui-aggressor" class="-ui-editable" data-type="textarea" data-value="{{report.aggressor}}" date-toggle="manual" data-pk="{{report.pk}}" data-name="aggressor" data-url="{% url 'violations:update_partial' report.id %}" data-title="Aggressor">{{report.aggressor|default:"N/A"}}</p>
           {% else %}
           <p>{{report.aggressor|default:"N/A"}}</p>
           {% endif %}
@@ -72,7 +72,7 @@
 					<hr>
 					<h3><i class="fa fa-ellipsis-h"></i> Description{% if user.is_admin and show_all %} <a id="ui-description-edit" href="#" title="Edit" class="btn btn-sm"><i class="fa fa-pencil"></i></a>{% endif %}</h3>
           {% if user.is_admin and show_all %}
-          <p id="ui-description" class="ui-editable_" data-type="textarea" data-value="{{report.description}}" date-toggle="manual" data-pk="{{report.pk}}" data-name="description" data-url="{% url 'violations:update_partial' report.id %}" data-title="Description">{{report.description|urlize}}</p>
+          <p id="ui-description" class="-ui-editable" data-type="textarea" data-value="{{report.description}}" date-toggle="manual" data-pk="{{report.pk}}" data-name="description" data-url="{% url 'violations:update_partial' report.id %}" data-title="Description">{{report.description|urlize}}</p>
           {% else %}
 					<p>{{report.description|urlize}}</p>
           {% endif %}
@@ -89,7 +89,7 @@
 					{% if report.media.count %}
           <ul class="list-unstyled">
             {% for media in report.media.all %}
-            <li class="col-md-4_" style="display: inline-block; /* width: auto; */">
+            <li class="-col-md-4" style="display: inline-block; /* width: auto; */">
 							{% comment %}
 							<a class="fancybox" href="{% if media.is_file %}{{ media.file.url }}{% else %}{{media.url}}{% endif %}" target="_blank" rel="group">
 							{% endcomment %}
@@ -128,7 +128,7 @@
 				<div class="col-md-offset-2 col-md-8">
 					<hr>
 					<h3><i class="fa fa-tags"></i> Features{% if user.is_admin and show_all %} <a id="ui-features-edit" href="#" title="Edit" class="btn btn-sm"><i class="fa fa-pencil"></i></a>{% endif %}</h3>
-					<ul id="ui-features" class="list-inline ui-editable_" data-type="checklist" data-source="{{features|json|force_escape}}" data-value="[{% for feature in report.features.all %}{{feature.id}},{% endfor %}]" data-pk="{{report.pk}}" data-name="features" data-url="{% url 'violations:update_partial' report.id %}" data-title="Features">
+					<ul id="ui-features" class="list-inline -ui-editable" data-type="checklist" data-source="{{features|json|force_escape}}" data-value="[{% for feature in report.features.all %}{{feature.id}},{% endfor %}]" data-pk="{{report.pk}}" data-name="features" data-url="{% url 'violations:update_partial' report.id %}" data-title="Features">
 					{% for feature in report.features.all  %}
 						<li><span class="label label-default">{{feature}}</span></li>
 					{% endfor %}

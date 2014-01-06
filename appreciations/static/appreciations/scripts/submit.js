@@ -128,10 +128,11 @@ reform.widgets.wizard.init = function() {
   var sections = widget.sections = {
     'category': $('#ui-wizard-category'),
     'location-datetime': $('#ui-wizard-location-datetime'),
+    'subject': $('#ui-wizard-subject'),
     'description-media': $('#ui-wizard-description-media'),
     'submit': $('#ui-wizard-submit')
   };
-  var order = widget.order = ['category', 'location-datetime', ['description-media', 'submit']];
+  var order = widget.order = ['category', 'location-datetime', ['subject', 'description-media', 'submit']];
 
   console.log(sections);
 
@@ -281,6 +282,10 @@ reform.widgets.wizard.init = function() {
       }
     });
   });
+
+  /* description-media section */
+
+  //elements.subject = $('#id_subject');
 
   /* description-media section */
 

@@ -18,6 +18,14 @@
       </div>
 
       <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+          <hr>
+          <h3><i class="fa fa-user"></i> Subject</h3>
+          <p>{{report.subject}}</p>
+        </div>
+      </div>
+
+      <div class="row">
         <div class="col-md-6">
           <hr>
           <h3><i class="fa fa-ellipsis-h"></i> Description</h3>
@@ -29,7 +37,7 @@
           {% if report.media.count %}
           <ul class="list-unstyled">
             {% for media in report.media.all %}
-            <li class="col-md-4_" style="display: inline-block; /* width: auto; */">
+            <li class="-col-md-4" style="display: inline-block; /* width: auto; */">
               {% comment %}
               <a class="fancybox" href="{% if media.is_file %}{{ media.file.url }}{% else %}{{media.url}}{% endif %}" target="_blank" rel="group">
               {% endcomment %}

@@ -6,28 +6,28 @@
 {% block view_title %}Sign in | {% endblock %}
 
 {% block view_content %}
-	<div class="panel text-center">
+  <div class="panel text-center">
 
-		<div class="panel_" style="margin-top: 20px; width: auto; display: inline-block;">
+    <div class="-panel" style="margin-top: 20px; width: auto; display: inline-block;">
 
       <div class="jumbotron">
         <h1>Reform Reporting Platform</h1>
       </div>
 
-			{% if form.errors %}
-			<div class="alert alert-danger">
-				<button type="button" class="close" data-dismiss="alert">&times;</button>
-				{% for field, errors in form.errors.items %}
-					<div class="field-{{field}}">{% for error in errors %} {{error}}{% endfor %}</div>
-				{% endfor %}
-			</div>
-			{% endif %}
+      {% if form.errors %}
+      <div class="alert alert-danger">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        {% for field, errors in form.errors.items %}
+          <div class="field-{{field}}">{% for error in errors %} {{error}}{% endfor %}</div>
+        {% endfor %}
+      </div>
+      {% endif %}
 
       <div class="row">
         <div class="col-md-8 col-md-offset-2">
 
-    			<form action="{% url 'login' %}" class="form-inline_" method="post" role="form">
-    				{% csrf_token %}
+          <form action="{% url 'login' %}" class="-form-inline" method="post" role="form">
+            {% csrf_token %}
 
             <div class="form-group">
               <div class="input-group input-group-lg">
@@ -43,14 +43,14 @@
               </div>
             </div>
 
-    				<input type="hidden" name="next" value="{{ next }}" />
+            <input type="hidden" name="next" value="{{ next }}" />
 
             <button class="btn btn-default btn-lg btn-block" name="commit" type="submit">
               Sign in <i class="fa fa-sign-in"></i>
             </button>
             <a href="{% url 'password_reset' %}" class="btn btn-link">Reset your password</a>
 
-    			</form>
+          </form>
 
         </div>
 
@@ -71,11 +71,11 @@
         </div>
       </div>
 
-			<!--<p class="text-center">or <a href="/signup">create an account</a></p>-->
+      <!--<p class="text-center">or <a href="/signup">create an account</a></p>-->
 
-		</div>
+    </div>
 
-	</div>
+  </div>
 {% endblock %}
 
 

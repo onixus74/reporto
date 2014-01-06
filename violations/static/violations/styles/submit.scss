@@ -184,18 +184,19 @@ body {
 	@include transition(border-color .1s linear);
 	&.ui-similar {
 		border-color: $brand-danger;
-		@include box-shadow(0 0 5px rgba(lighten($brand-danger, 10%), 0.9));
+    // #CD3D2E, #C0392B, #A63125, #80261D
+		@include box-shadow(0 0 5px rgba(#80261D, 0.9));
 		&.ui-similar-1 {
-			@include box-shadow(0 0 10px rgba(lighten($brand-danger, 5%), 0.8));
+			@include box-shadow(0 0 10px rgba(#C0392B, 0.8));
 		}
 		&.ui-similar-2 {
-			@include box-shadow(0 0 20px rgba($brand-danger, 0.7));;
+			@include box-shadow(0 0 20px rgba(#A63125, 0.7));;
 		}
 		&.ui-similar-3 {
-			@include box-shadow(0 0 30px rgba(darken($brand-danger, 5%), 0.7));;
+			@include box-shadow(0 0 30px rgba(#C0392B, 0.7));;
 		}
 		&.ui-similar-4 {
-			@include box-shadow(0 0 40px rgba(darken($brand-danger, 10%), 0.7));;
+			@include box-shadow(0 0 40px rgba(#CD3D2E, 0.7));;
 		}
 	}
 }
@@ -211,22 +212,22 @@ body {
 
 .ui-similar-category .ui-similar-report-category, .ui-similar-category .ui-similar-report-category a {
 	//color: darken($brand-danger, 5%);
-	font-weight: bold;
+	font-weight: normal;
 }
 
 .ui-similar-location .ui-similar-report-location, .ui-similar-location .ui-similar-report-location a {
 	//color: darken($brand-danger, 10%);
-	font-weight: bold;
+	font-weight: normal;
 }
 
 .ui-similar-datetime .ui-similar-report-datetime, .ui-similar-datetime .ui-similar-report-datetime a {
 	//color: darken($brand-danger, 15%);
-	font-weight: bold;
+	font-weight: normal;
 }
 
 .ui-similar-victim .ui-similar-report-victim, .ui-similar-victim .ui-similar-report-victim a {
 	//color: $brand-danger;
-	font-weight: bold;
+	font-weight: normal;
 }
 
 @media (max-width: 767px) {
@@ -249,7 +250,8 @@ body {
 }
 
 
-
+/*
 .ui-list .label {
   font-size: 90%;
 }
+*/
