@@ -1,0 +1,12 @@
+
+@import "../theme/bootstrap-sass/lib/variables";
+@import "../theme/variables";
+@import "../theme/bootstrap-sass/lib/mixins";
+
+.btn-signin-facebook {
+	@include button-variant($btn-primary-color, #3C5A99, $btn-default-border);
+}
+
+.btn-signin-google {
+	@include button-variant($btn-primary-color, #547DBF, $btn-default-border);
+}

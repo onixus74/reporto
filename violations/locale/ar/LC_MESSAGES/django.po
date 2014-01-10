@@ -1,0 +1,87 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# nader <nader.toukabri@gmail.com>, 2014.
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-01-10 17:29+0100\n"
+"PO-Revision-Date: 2014-01-10 17:35+0100\n"
+"Last-Translator: nader <nader.toukabri@gmail.com>\n"
+"Language-Team: reform.tn\n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
+"X-Generator: Virtaal 0.7.0\n"
+
+#: models.py:68 models.py:217
+msgid "Citizen"
+msgstr "مواطن"
+
+#: models.py:69 models.py:218
+msgid "Cop"
+msgstr "عون أمن"
+
+#: models.py:76
+msgid "Male"
+msgstr "ذكر"
+
+#: models.py:77
+msgid "Female"
+msgstr "أنثى"
+
+#: models.py:86 models.py:98 models.py:109
+msgid "Unknown"
+msgstr "مجهول"
+
+#: models.py:87
+msgid "Married"
+msgstr "متزوّج"
+
+#: models.py:88
+msgid "Single"
+msgstr "أعزب"
+
+#: models.py:89
+msgid "Divorced"
+msgstr "مطلّق"
+
+#: models.py:90
+msgid "Widowed"
+msgstr "أرمل"
+
+#: models.py:91
+msgid "Other"
+msgstr "أخرى"
+
+#: models.py:99
+msgid "Lower"
+msgstr ""
+
+#: models.py:100
+msgid "Middle"
+msgstr ""
+
+#: models.py:101
+msgid "Upper"
+msgstr ""
+
+#: models.py:110
+msgid "No Education"
+msgstr ""
+
+#: models.py:111
+msgid "Primary School"
+msgstr ""
+
+#: models.py:112
+msgid "High School"
+msgstr ""
+
+#: models.py:113
+msgid "University"
+msgstr ""

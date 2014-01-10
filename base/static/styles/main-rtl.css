@@ -1,5 +1,7 @@
 @import url("//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,700");
 
+@import url("//fonts.googleapis.com/earlyaccess/droidarabickufi.css");
+
 /*-------------------------------------------------
 | DEPENDENCIES
 \*/
@@ -439,7 +441,7 @@ html {
 /* line 22, ../theme/bootstrap-sass/lib/_scaffolding.scss */
 
 body {
-  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Open Sans", "Droid Arabic Kufi", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 15px;
   line-height: 1.42857;
   color: #222222;
@@ -678,7 +680,7 @@ h6,
 .h4,
 .h5,
 .h6 {
-  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Open Sans", "Droid Arabic Kufi", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 300;
   line-height: 1.1;
   color: inherit;
@@ -9776,7 +9778,7 @@ td.visible-print {
   box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
-/* line 9, ../theme/_bootswatch.scss */
+/* line 10, ../theme/_bootswatch.scss */
 
 .navbar {
   border: none;
@@ -9784,13 +9786,13 @@ td.visible-print {
   font-weight: 300;
 }
 
-/* line 14, ../theme/_bootswatch.scss */
+/* line 15, ../theme/_bootswatch.scss */
 
 .navbar .navbar-toggle:hover .icon-bar {
   background-color: #b3b3b3;
 }
 
-/* line 18, ../theme/_bootswatch.scss */
+/* line 19, ../theme/_bootswatch.scss */
 
 .navbar .navbar-collapse {
   border-top-color: rgba(0, 0, 0, 0.2);
@@ -9798,13 +9800,13 @@ td.visible-print {
   box-shadow: none;
 }
 
-/* line 25, ../theme/_bootswatch.scss */
+/* line 26, ../theme/_bootswatch.scss */
 
 .navbar .dropdown .dropdown-menu {
   border: none;
 }
 
-/* line 29, ../theme/_bootswatch.scss */
+/* line 30, ../theme/_bootswatch.scss */
 
 .navbar .dropdown .dropdown-menu > li > a,
 .navbar .dropdown .dropdown-menu > li > a:focus {
@@ -9813,26 +9815,26 @@ td.visible-print {
   font-weight: 300;
 }
 
-/* line 36, ../theme/_bootswatch.scss */
+/* line 37, ../theme/_bootswatch.scss */
 
 .navbar .dropdown .dropdown-header {
   color: rgba(255, 255, 255, 0.5);
 }
 
-/* line 44, ../theme/_bootswatch.scss */
+/* line 45, ../theme/_bootswatch.scss */
 
 .navbar .navbar-default .dropdown-menu {
   background-color: #333333;
 }
 
-/* line 48, ../theme/_bootswatch.scss */
+/* line 49, ../theme/_bootswatch.scss */
 
 .navbar .navbar-default .dropdown-menu > li > a,
 .navbar .navbar-default .dropdown-menu > li > a:focus {
   color: white;
 }
 
-/* line 54, ../theme/_bootswatch.scss */
+/* line 55, ../theme/_bootswatch.scss */
 
 .navbar .navbar-default .dropdown-menu > li > a:hover,
 .navbar .navbar-default .dropdown-menu > .active > a,
@@ -9840,20 +9842,20 @@ td.visible-print {
   background-color: #272727;
 }
 
-/* line 62, ../theme/_bootswatch.scss */
+/* line 63, ../theme/_bootswatch.scss */
 
 .navbar .navbar-inverse .dropdown-menu {
   background-color: #3d3b65;
 }
 
-/* line 66, ../theme/_bootswatch.scss */
+/* line 67, ../theme/_bootswatch.scss */
 
 .navbar .navbar-inverse .dropdown-menu > li > a,
 .navbar .navbar-inverse .dropdown-menu > li > a:focus {
   color: white;
 }
 
-/* line 72, ../theme/_bootswatch.scss */
+/* line 73, ../theme/_bootswatch.scss */
 
 .navbar .navbar-inverse .dropdown-menu > li > a:hover,
 .navbar .navbar-inverse .dropdown-menu > .active > a,
@@ -9861,47 +9863,47 @@ td.visible-print {
   background-color: #2a2845;
 }
 
-/* line 82, ../theme/_bootswatch.scss */
+/* line 83, ../theme/_bootswatch.scss */
 
 .btn {
   padding: 14px 28px;
 }
 
-/* line 85, ../theme/_bootswatch.scss */
+/* line 86, ../theme/_bootswatch.scss */
 
 .btn.btn-lg,
 .btn-group-lg > .btn {
   padding: 16px 32px;
 }
 
-/* line 89, ../theme/_bootswatch.scss */
+/* line 90, ../theme/_bootswatch.scss */
 
 .btn.btn-sm,
 .btn-group-sm > .btn {
   padding: 8px 16px;
 }
 
-/* line 93, ../theme/_bootswatch.scss */
+/* line 94, ../theme/_bootswatch.scss */
 
 .btn.btn-xs,
 .btn-group-xs > .btn {
   padding: 4px 8px;
 }
 
-/* line 100, ../theme/_bootswatch.scss */
+/* line 101, ../theme/_bootswatch.scss */
 
 .btn-group .btn ~ .dropdown-toggle {
   padding-right: 16px;
   padding-left: 16px;
 }
 
-/* line 105, ../theme/_bootswatch.scss */
+/* line 106, ../theme/_bootswatch.scss */
 
 .btn-group .dropdown-menu {
   border-top-width: 0;
 }
 
-/* line 109, ../theme/_bootswatch.scss */
+/* line 110, ../theme/_bootswatch.scss */
 
 .btn-group.dropup .dropdown-menu {
   border-top-width: 1px;
@@ -9909,159 +9911,159 @@ td.visible-print {
   margin-bottom: 0;
 }
 
-/* line 117, ../theme/_bootswatch.scss */
+/* line 118, ../theme/_bootswatch.scss */
 
 .btn-group .dropdown-toggle.btn-default ~ .dropdown-menu {
   background-color: #e7e7e7;
   border-color: #dadada;
 }
 
-/* line 121, ../theme/_bootswatch.scss */
+/* line 122, ../theme/_bootswatch.scss */
 
 .btn-group .dropdown-toggle.btn-default ~ .dropdown-menu > li > a {
   color: #333333;
 }
 
-/* line 125, ../theme/_bootswatch.scss */
+/* line 126, ../theme/_bootswatch.scss */
 
 .btn-group .dropdown-toggle.btn-default ~ .dropdown-menu > li > a:hover {
   background-color: lightgrey;
 }
 
-/* line 130, ../theme/_bootswatch.scss */
+/* line 131, ../theme/_bootswatch.scss */
 
 .btn-group .dropdown-toggle.btn-primary ~ .dropdown-menu {
   background-color: #3d3b65;
   border-color: #333255;
 }
 
-/* line 134, ../theme/_bootswatch.scss */
+/* line 135, ../theme/_bootswatch.scss */
 
 .btn-group .dropdown-toggle.btn-primary ~ .dropdown-menu > li > a {
   color: white;
 }
 
-/* line 138, ../theme/_bootswatch.scss */
+/* line 139, ../theme/_bootswatch.scss */
 
 .btn-group .dropdown-toggle.btn-primary ~ .dropdown-menu > li > a:hover {
   background-color: #2d2c4b;
 }
 
-/* line 143, ../theme/_bootswatch.scss */
+/* line 144, ../theme/_bootswatch.scss */
 
 .btn-group .dropdown-toggle.btn-success ~ .dropdown-menu {
   background-color: #27ae60;
   border-color: #229955;
 }
 
-/* line 147, ../theme/_bootswatch.scss */
+/* line 148, ../theme/_bootswatch.scss */
 
 .btn-group .dropdown-toggle.btn-success ~ .dropdown-menu > li > a {
   color: white;
 }
 
-/* line 151, ../theme/_bootswatch.scss */
+/* line 152, ../theme/_bootswatch.scss */
 
 .btn-group .dropdown-toggle.btn-success ~ .dropdown-menu > li > a:hover {
   background-color: #208d4e;
 }
 
-/* line 156, ../theme/_bootswatch.scss */
+/* line 157, ../theme/_bootswatch.scss */
 
 .btn-group .dropdown-toggle.btn-info ~ .dropdown-menu {
   background-color: #8f8cff;
   border-color: #7672ff;
 }
 
-/* line 160, ../theme/_bootswatch.scss */
+/* line 161, ../theme/_bootswatch.scss */
 
 .btn-group .dropdown-toggle.btn-info ~ .dropdown-menu > li > a {
   color: white;
 }
 
-/* line 164, ../theme/_bootswatch.scss */
+/* line 165, ../theme/_bootswatch.scss */
 
 .btn-group .dropdown-toggle.btn-info ~ .dropdown-menu > li > a:hover {
   background-color: #6763ff;
 }
 
-/* line 169, ../theme/_bootswatch.scss */
+/* line 170, ../theme/_bootswatch.scss */
 
 .btn-group .dropdown-toggle.btn-warning ~ .dropdown-menu {
   background-color: #ff750f;
   border-color: #f56800;
 }
 
-/* line 173, ../theme/_bootswatch.scss */
+/* line 174, ../theme/_bootswatch.scss */
 
 .btn-group .dropdown-toggle.btn-warning ~ .dropdown-menu > li > a {
   color: white;
 }
 
-/* line 177, ../theme/_bootswatch.scss */
+/* line 178, ../theme/_bootswatch.scss */
 
 .btn-group .dropdown-toggle.btn-warning ~ .dropdown-menu > li > a:hover {
   background-color: #e56100;
 }
 
-/* line 182, ../theme/_bootswatch.scss */
+/* line 183, ../theme/_bootswatch.scss */
 
 .btn-group .dropdown-toggle.btn-danger ~ .dropdown-menu {
   background-color: #c0392b;
   border-color: #ab3326;
 }
 
-/* line 186, ../theme/_bootswatch.scss */
+/* line 187, ../theme/_bootswatch.scss */
 
 .btn-group .dropdown-toggle.btn-danger ~ .dropdown-menu > li > a {
   color: white;
 }
 
-/* line 190, ../theme/_bootswatch.scss */
+/* line 191, ../theme/_bootswatch.scss */
 
 .btn-group .dropdown-toggle.btn-danger ~ .dropdown-menu > li > a:hover {
   background-color: #9f2f24;
 }
 
-/* line 199, ../theme/_bootswatch.scss */
+/* line 200, ../theme/_bootswatch.scss */
 
 .lead {
   color: #6f6f6f;
 }
 
-/* line 203, ../theme/_bootswatch.scss */
+/* line 204, ../theme/_bootswatch.scss */
 
 cite {
   font-style: italic;
 }
 
-/* line 207, ../theme/_bootswatch.scss */
+/* line 208, ../theme/_bootswatch.scss */
 
 blockquote {
   border-right-width: 1px;
   color: #6f6f6f;
 }
 
-/* line 211, ../theme/_bootswatch.scss */
+/* line 212, ../theme/_bootswatch.scss */
 
 blockquote.pull-right {
   border-left-width: 1px;
 }
 
-/* line 215, ../theme/_bootswatch.scss */
+/* line 216, ../theme/_bootswatch.scss */
 
 blockquote small {
   font-size: 12px;
   font-weight: 300;
 }
 
-/* line 223, ../theme/_bootswatch.scss */
+/* line 224, ../theme/_bootswatch.scss */
 
 table {
   font-size: 12px;
 }
 
-/* line 230, ../theme/_bootswatch.scss */
+/* line 231, ../theme/_bootswatch.scss */
 
 input,
 .form-control {
@@ -10069,7 +10071,7 @@ input,
   font-size: 12px;
 }
 
-/* line 239, ../theme/_bootswatch.scss */
+/* line 240, ../theme/_bootswatch.scss */
 
 label,
 .control-label,
@@ -10080,7 +10082,7 @@ label,
   font-weight: normal;
 }
 
-/* line 246, ../theme/_bootswatch.scss */
+/* line 247, ../theme/_bootswatch.scss */
 
 .form-group .btn,
 .input-group-addon,
@@ -10089,7 +10091,7 @@ label,
   font-size: 12px;
 }
 
-/* line 256, ../theme/_bootswatch.scss */
+/* line 257, ../theme/_bootswatch.scss */
 
 .nav .open > a,
 .nav .open > a:hover,
@@ -10097,27 +10099,27 @@ label,
   border-color: transparent;
 }
 
-/* line 262, ../theme/_bootswatch.scss */
+/* line 263, ../theme/_bootswatch.scss */
 
 .nav-tabs > li > a {
   background-color: #e7e7e7;
   color: #222222;
 }
 
-/* line 267, ../theme/_bootswatch.scss */
+/* line 268, ../theme/_bootswatch.scss */
 
 .nav-tabs .caret {
   border-top-color: #222222;
   border-bottom-color: #222222;
 }
 
-/* line 273, ../theme/_bootswatch.scss */
+/* line 274, ../theme/_bootswatch.scss */
 
 .nav-pills {
   font-weight: 300;
 }
 
-/* line 277, ../theme/_bootswatch.scss */
+/* line 278, ../theme/_bootswatch.scss */
 
 .breadcrumb {
   border: 1px solid #dddddd;
@@ -10127,7 +10129,7 @@ label,
   text-transform: uppercase;
 }
 
-/* line 285, ../theme/_bootswatch.scss */
+/* line 286, ../theme/_bootswatch.scss */
 
 .pagination {
   font-size: 12px;
@@ -10135,7 +10137,7 @@ label,
   color: #999999;
 }
 
-/* line 292, ../theme/_bootswatch.scss */
+/* line 293, ../theme/_bootswatch.scss */
 
 .pagination > li > a,
 .pagination > li > span {
@@ -10143,14 +10145,14 @@ label,
   color: #999999;
 }
 
-/* line 300, ../theme/_bootswatch.scss */
+/* line 301, ../theme/_bootswatch.scss */
 
 .pagination > .active > a,
 .pagination > .active > span {
   color: #fff;
 }
 
-/* line 309, ../theme/_bootswatch.scss */
+/* line 310, ../theme/_bootswatch.scss */
 
 .pagination > li > a,
 .pagination > li > span,
@@ -10161,20 +10163,20 @@ label,
   border-radius: 3px;
 }
 
-/* line 314, ../theme/_bootswatch.scss */
+/* line 315, ../theme/_bootswatch.scss */
 
 .pagination .pagination-lg > li > a {
   padding-right: 22px;
   padding-left: 22px;
 }
 
-/* line 319, ../theme/_bootswatch.scss */
+/* line 320, ../theme/_bootswatch.scss */
 
 .pagination .pagination-sm > li > a {
   padding: 0 5px;
 }
 
-/* line 324, ../theme/_bootswatch.scss */
+/* line 325, ../theme/_bootswatch.scss */
 
 .pager {
   font-size: 12px;
@@ -10182,21 +10184,21 @@ label,
   color: #999999;
 }
 
-/* line 330, ../theme/_bootswatch.scss */
+/* line 331, ../theme/_bootswatch.scss */
 
 .list-group {
   font-size: 12px;
   font-weight: 300;
 }
 
-/* line 337, ../theme/_bootswatch.scss */
+/* line 338, ../theme/_bootswatch.scss */
 
 .alert {
   font-size: 12px;
   font-weight: 300;
 }
 
-/* line 342, ../theme/_bootswatch.scss */
+/* line 343, ../theme/_bootswatch.scss */
 
 .alert a,
 .alert .alert-link {
@@ -10205,7 +10207,7 @@ label,
   text-decoration: underline;
 }
 
-/* line 349, ../theme/_bootswatch.scss */
+/* line 350, ../theme/_bootswatch.scss */
 
 .label {
   padding-right: 1em;
@@ -10214,20 +10216,20 @@ label,
   font-weight: 300;
 }
 
-/* line 355, ../theme/_bootswatch.scss */
+/* line 356, ../theme/_bootswatch.scss */
 
 .label .label-default {
   background-color: #e7e7e7;
   color: #333333;
 }
 
-/* line 361, ../theme/_bootswatch.scss */
+/* line 362, ../theme/_bootswatch.scss */
 
 .badge {
   font-weight: 300;
 }
 
-/* line 367, ../theme/_bootswatch.scss */
+/* line 368, ../theme/_bootswatch.scss */
 
 .progress {
   height: 22px;
@@ -10238,7 +10240,7 @@ label,
   box-shadow: none;
 }
 
-/* line 379, ../theme/_bootswatch.scss */
+/* line 380, ../theme/_bootswatch.scss */
 
 .dropdown .dropdown-menu {
   padding: 0;
@@ -10246,13 +10248,13 @@ label,
   font-size: 12px;
 }
 
-/* line 384, ../theme/_bootswatch.scss */
+/* line 385, ../theme/_bootswatch.scss */
 
 .dropdown .dropdown-menu > li > a {
   padding: 12px 15px;
 }
 
-/* line 389, ../theme/_bootswatch.scss */
+/* line 390, ../theme/_bootswatch.scss */
 
 .dropdown .dropdown-header {
   padding-right: 15px;
@@ -10261,7 +10263,7 @@ label,
   text-transform: uppercase;
 }
 
-/* line 397, ../theme/_bootswatch.scss */
+/* line 398, ../theme/_bootswatch.scss */
 
 .popover {
   color: #fff;
@@ -12820,11 +12822,35 @@ label,
   content: "\f196";
 }
 
+/* line 20, main.scss */
+
+body {
+  direction: rtl;
+  unicode-bidi: embed;
+  text-align: right;
+}
+
+/* line 26, main.scss */
+
+.rtl,
+*[dir="rtl"] {
+  direction: rtl;
+  unicode-bidi: embed;
+}
+
+/* line 31, main.scss */
+
+.ltr,
+*[dir="ltr"] {
+  direction: ltr;
+  unicode-bidi: embed;
+}
+
 /*-------------------------------------------------
 | BOOTSTRAP MOD
 \*/
 
-/* line 23, main.scss */
+/* line 40, main.scss */
 
 .navbar .nav > .active > a,
 .navbar .nav > .active > a:hover,
@@ -12854,19 +12880,19 @@ ol.list {
 }
 */
 
-/* line 48, main.scss */
+/* line 65, main.scss */
 
 .multi-labels-lines-fix {
   line-height: 1.8;
 }
 
-/* line 52, main.scss */
+/* line 69, main.scss */
 
 .btn-quiet {
   background-color: transparent;
 }
 
-/* line 58, main.scss */
+/* line 75, main.scss */
 
 .modal-big {
   height: 80%;
@@ -12874,14 +12900,14 @@ ol.list {
   margin-right: -40%;
 }
 
-/* line 62, main.scss */
+/* line 79, main.scss */
 
 .modal-big .modal-body {
   max-height: 80%;
 }
 
 @media (max-width: 768px) {
-  /* line 68, main.scss */
+  /* line 85, main.scss */
 
   .modal-big {
     width: 90%;
@@ -12929,26 +12955,26 @@ body::-webkit-scrollbar-corner { background-clip: padding-box; background-color:
 ::-webkit-scrollbar-thumb:hover { background-color: #999; }
 */
 
-/* line 114, main.scss */
+/* line 131, main.scss */
 
 ::-webkit-scrollbar {
   width: 4px;
 }
 
-/* line 115, main.scss */
+/* line 132, main.scss */
 
 ::-webkit-scrollbar-track {
   background: rgba(0, 0, 0, 0.1);
 }
 
-/* line 116, main.scss */
+/* line 133, main.scss */
 
 ::-webkit-scrollbar-thumb {
   background: rgba(0, 0, 0, 0.6);
   border-radius: 2px;
 }
 
-/* line 117, main.scss */
+/* line 134, main.scss */
 
 ::-webkit-scrollbar:horizontal {
   height: 4px;
@@ -12960,7 +12986,7 @@ body::-webkit-scrollbar-corner { background-clip: padding-box; background-color:
 
 /* Padding below the footer and lighter body text */
 
-/* line 126, main.scss */
+/* line 143, main.scss */
 
 body {
   padding-top: 70px;
@@ -12968,7 +12994,7 @@ body {
   color: #5a5a5a;
 }
 
-/* line 134, main.scss */
+/* line 151, main.scss */
 
 #top-bg {
   position: fixed;
@@ -12981,7 +13007,7 @@ body {
   top: 0;
 }
 
-/* line 144, main.scss */
+/* line 161, main.scss */
 
 #footer {
   position: fixed;
@@ -12995,7 +13021,7 @@ body {
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.25);
 }
 
-/* line 156, main.scss */
+/* line 173, main.scss */
 
 .container .credit {
   margin: 10px 0;
@@ -13007,7 +13033,7 @@ body {
 
 /* Special class on .container surrounding .navbar, used for positioning it into place. */
 
-/* line 166, main.scss */
+/* line 183, main.scss */
 
 .navbar-wrapper {
   position: fixed;
@@ -13022,7 +13048,7 @@ body {
 
 /* Remove border and change up box shadow for more contrast */
 
-/* line 180, main.scss */
+/* line 197, main.scss */
 
 .navbar .navbar-inner {
   border: 0;
@@ -13032,7 +13058,7 @@ body {
 
 /* Downsize the brand/project name a bit */
 
-/* line 186, main.scss */
+/* line 203, main.scss */
 
 .navbar .brand {
   padding: 8px;
@@ -13044,7 +13070,7 @@ body {
 
 /* Navbar links: increase padding for taller navbar */
 
-/* line 194, main.scss */
+/* line 211, main.scss */
 
 .navbar .nav > li > a {
   padding: 15px 20px;
@@ -13185,7 +13211,7 @@ body {
 }
 */
 
-/* line 351, main.scss */
+/* line 368, main.scss */
 
 #mainView {
   position: fixed;
@@ -13267,19 +13293,19 @@ body {
 | Fixes
 \*/
 
-/* line 432, main.scss */
+/* line 449, main.scss */
 
 *[hidden] {
   display: none;
 }
 
-/* line 433, main.scss */
+/* line 450, main.scss */
 
 input[hidden] {
   display: none;
 }
 
-/* line 435, main.scss */
+/* line 452, main.scss */
 
 .ui-pnotify .alert {
   margin-bottom: 0;
@@ -13289,7 +13315,7 @@ input[hidden] {
 | Leaflet Fixes
 \*/
 
-/* line 444, main.scss */
+/* line 461, main.scss */
 
 .leaflet-top,
 .leaflet-bottom {
@@ -13300,7 +13326,7 @@ input[hidden] {
 | typeahead.js
 \*/
 
-/* line 454, main.scss */
+/* line 471, main.scss */
 
 .typeahead,
 .tt-query,
@@ -13317,32 +13343,32 @@ input[hidden] {
   outline: none;
 }
 
-/* line 467, main.scss */
+/* line 484, main.scss */
 
 .typeahead {
   background-color: #fff;
 }
 
-/* line 471, main.scss */
+/* line 488, main.scss */
 
 .typeahead:focus {
   border: 2px solid #0097cf;
 }
 
-/* line 475, main.scss */
+/* line 492, main.scss */
 
 .tt-query {
   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
 }
 
-/* line 479, main.scss */
+/* line 496, main.scss */
 
 .tt-hint {
   color: #999999;
 }
 
-/* line 483, main.scss */
+/* line 500, main.scss */
 
 .tt-dropdown-menu {
   width: 422px;
@@ -13356,7 +13382,7 @@ input[hidden] {
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
 }
 
-/* line 494, main.scss */
+/* line 511, main.scss */
 
 .tt-suggestion {
   padding: 3px 20px;
@@ -13364,45 +13390,45 @@ input[hidden] {
   line-height: 24px;
 }
 
-/* line 500, main.scss */
+/* line 517, main.scss */
 
 .tt-suggestion.tt-is-under-cursor {
   color: #fff;
   background-color: #0097cf;
 }
 
-/* line 506, main.scss */
+/* line 523, main.scss */
 
 .tt-suggestion p {
   margin: 0;
 }
 
-/* line 513, main.scss */
+/* line 530, main.scss */
 
 .asteriskField {
   color: #D40000;
 }
 
-/* line 517, main.scss */
+/* line 534, main.scss */
 
 .asteriskField:before {
   content: ' (';
 }
 
-/* line 521, main.scss */
+/* line 538, main.scss */
 
 .asteriskField:after {
   content: ')';
 }
 
-/* line 526, main.scss */
+/* line 543, main.scss */
 
 .animatable {
   position: relative;
   display: inline-block;
 }
 
-/* line 531, main.scss */
+/* line 548, main.scss */
 
 .text-highlight {
   color: #47467F;
@@ -13410,19 +13436,19 @@ input[hidden] {
   text-shadow: 1px 1px 1px #969696;
 }
 
-/* line 537, main.scss */
+/* line 554, main.scss */
 
 .text-shadow {
   text-shadow: 1px 1px 1px #969696;
 }
 
-/* line 541, main.scss */
+/* line 558, main.scss */
 
 .text-big {
   font-size: 110%;
 }
 
-/* line 545, main.scss */
+/* line 562, main.scss */
 
 .text-bigger {
   font-size: 120%;

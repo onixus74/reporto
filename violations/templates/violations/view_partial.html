@@ -1,9 +1,9 @@
 {% load static l10n thumbnail custom %}
 
-			<div class="row">
-				<div class="col-md-offset-2 col-md-8">
-					<hr>
-					<h2 class="text-center">
+      <div class="row">
+        <div class="col-md-offset-2 col-md-8">
+          <hr>
+          <h2 class="text-center">
             {% if user.is_admin and show_all %}
             <a href="#" id="id_category" class="-ui-editable" data-type="select" data-source="{{categories|json|force_escape}}" data-value="{{report.category.id}}" data-pk="{{report.pk}}" data-name="category" data-url="{% url 'violations:update_partial' report.id %}" data-title="Category">{{report.category}}</a>
             on
@@ -15,84 +15,93 @@
               {{report.category}} on {{report.datetime}} at {{report.location_text}}
             {% endif %}
 
-						{% if report.is_verified %}<span class="badge badge-success">Verified <i class="fa fa-ok"></i></span>{% endif %}
-						{% comment %}
-						{% if report.is_closed %}<span class="badge badge-important">Closed <i class="fa fa-lock"></i></span>{% endif %}
-						{% endcomment %}
-						{% if user.is_admin and show_all %}<a class="btn btn-link" href="/admin/violations/report/{{report.id}}" target="_blank"><i class="fa fa-pencil"></i> Edit</a>{% endif %}
-					</h2>
-				</div>
-			</div>
+            {% if report.is_verified %}<span class="badge badge-success">Verified <i class="fa fa-ok"></i></span>{% endif %}
+            {% comment %}
+            {% if report.is_closed %}<span class="badge badge-important">Closed <i class="fa fa-lock"></i></span>{% endif %}
+            {% endcomment %}
+          </h2>
+          {% if show_all %}
+          <div class="text-center">
+            {% if user.is_admin %}
+            <a class="btn btn-link" href="{% url 'admin:violations_report_change' report.id %}" target="_blank"><i class="fa fa-pencil text-warning"></i> Edit as Super User</a>
+            {% endif %}
+            {% if user.is_moderator %}
+            <a id="ui-verify-button" class="btn btn-link" href="{% url 'violations:verify' report.id %}"><i class="fa fa-check text-success"></i> Verify</a>
+            {% endif %}
+          </div>
+          {% endif %}
+        </div>
+      </div>
 
-			<div class="row">
-				<div class="col-md-offset-2 col-md-8">
-					<div id="map" style="width:100%; height: 300px"></div>
-					<!--<p class="text-center">{{report.location_text}}</p>-->
-				</div>
-			</div>
+      <div class="row">
+        <div class="col-md-offset-2 col-md-8">
+          <div id="map" style="width:100%; height: 300px"></div>
+          <!--<p class="text-center">{{report.location_text}}</p>-->
+        </div>
+      </div>
 
-			<div class="row">
-				<div class="col-md-6">
-					<hr>
-					<h3><i class="fa fa-user"></i> Victim</h3>
-					<dl class="dl-horizontal">
-						<dt>Category</dt>
-						<dd>{{report.victim.get_category_display}}</dd>
-						<dt>First name</dt>
-						<dd>{{report.victim.firstname}}</dd>
-						<dt>Last name</dt>
-						<dd>{{report.victim.lastname}}</dd>
-						<dt>Gender</ddt>
-						<dd>{{report.victim.get_gender_display}}</dd>
+      <div class="row">
+        <div class="col-md-6">
+          <hr>
+          <h3><i class="fa fa-user"></i> Victim</h3>
+          <dl class="dl-horizontal">
+            <dt>Category</dt>
+            <dd>{{report.victim.get_category_display}}</dd>
+            <dt>First name</dt>
+            <dd>{{report.victim.firstname}}</dd>
+            <dt>Last name</dt>
+            <dd>{{report.victim.lastname}}</dd>
+            <dt>Gender</ddt>
+            <dd>{{report.victim.get_gender_display}}</dd>
             <dt>Marital Status</dt>
             <dd>{{report.victim.get_marital_status_display}}</dd>
             <dt>Social Class</dt>
             <dd>{{report.victim.get_social_class_display}}</dd>
-						<dt>Age</dt>
-						<dd>{{report.victim.age|default:"N/A"}}</dd>
-						<dt>Education</dt>
-						<dd>{{report.victim.get_education_display}}</dd>
-						<dt>Profession</dt>
-						<dd>{{report.victim.profession|default:"N/A"}}</dd>
-					</dl>
-				</div>
-				<div class="col-md-6">
-					<hr>
-					<h3><i class="fa fa-male"></i> Aggressor{% if user.is_admin and show_all %} <a id="ui-aggressor-edit" href="#" title="Edit" class="btn btn-sm"><i class="fa fa-pencil"></i></a>{% endif %}</h3>
-					{% if user.is_admin and show_all %}
+            <dt>Age</dt>
+            <dd>{{report.victim.age|default:"N/A"}}</dd>
+            <dt>Education</dt>
+            <dd>{{report.victim.get_education_display}}</dd>
+            <dt>Profession</dt>
+            <dd>{{report.victim.profession|default:"N/A"}}</dd>
+          </dl>
+        </div>
+        <div class="col-md-6">
+          <hr>
+          <h3><i class="fa fa-male"></i> Aggressor{% if user.is_admin and show_all %} <a id="ui-aggressor-edit" href="#" title="Edit" class="btn btn-sm"><i class="fa fa-pencil"></i></a>{% endif %}</h3>
+          {% if user.is_admin and show_all %}
           <p id="ui-aggressor" class="-ui-editable" data-type="textarea" data-value="{{report.aggressor}}" date-toggle="manual" data-pk="{{report.pk}}" data-name="aggressor" data-url="{% url 'violations:update_partial' report.id %}" data-title="Aggressor">{{report.aggressor|default:"N/A"}}</p>
           {% else %}
           <p>{{report.aggressor|default:"N/A"}}</p>
           {% endif %}
-				</div>
-			</div>
+        </div>
+      </div>
 
-			<div class="row">
-				<div class="col-md-6">
-					<hr>
-					<h3><i class="fa fa-ellipsis-h"></i> Description{% if user.is_admin and show_all %} <a id="ui-description-edit" href="#" title="Edit" class="btn btn-sm"><i class="fa fa-pencil"></i></a>{% endif %}</h3>
+      <div class="row">
+        <div class="col-md-6">
+          <hr>
+          <h3><i class="fa fa-ellipsis-h"></i> Description{% if user.is_admin and show_all %} <a id="ui-description-edit" href="#" title="Edit" class="btn btn-sm"><i class="fa fa-pencil"></i></a>{% endif %}</h3>
           {% if user.is_admin and show_all %}
           <p id="ui-description" class="-ui-editable" data-type="textarea" data-value="{{report.description}}" date-toggle="manual" data-pk="{{report.pk}}" data-name="description" data-url="{% url 'violations:update_partial' report.id %}" data-title="Description">{{report.description|urlize}}</p>
           {% else %}
-					<p>{{report.description|urlize}}</p>
+          <p>{{report.description|urlize}}</p>
           {% endif %}
-					{% if report.sources %}
+          {% if report.sources %}
           <p>
             Sources:<br>
             {{report.sources | markdown}}
           </p>
           {% endif %}
-				</div>
-				<div class="col-md-6">
-					<hr>
-					<h3><i class="fa fa-picture-o"></i> Media Attachments</h3>{% get_media_prefix as MEDIA_PREFIX %}
-					{% if report.media.count %}
+        </div>
+        <div class="col-md-6">
+          <hr>
+          <h3><i class="fa fa-picture-o"></i> Media Attachments</h3>{% get_media_prefix as MEDIA_PREFIX %}
+          {% if report.media.count %}
           <ul class="list-unstyled">
             {% for media in report.media.all %}
             <li class="-col-md-4" style="display: inline-block; /* width: auto; */">
-							{% comment %}
-							<a class="fancybox" href="{% if media.is_file %}{{ media.file.url }}{% else %}{{media.url}}{% endif %}" target="_blank" rel="group">
-							{% endcomment %}
+              {% comment %}
+              <a class="fancybox" href="{% if media.is_file %}{{ media.file.url }}{% else %}{{media.url}}{% endif %}" target="_blank" rel="group">
+              {% endcomment %}
               {% comment %}
               <a class="fancybox" href="{{media.url}}" target="_blank" rel="group">
                 <img src="{% if media.is_file %}{{ media.file|thumbnail_url:'media' }}{% elif media.is_youtube %}{{media.get_youtube_thumbnail_url}}{% else %}{{media.url}}{% endif %}" alt="" style="height: 100px; width: auto;" class="thumbnail">
@@ -115,61 +124,61 @@
                 <img src="{{ media.url }}" alt="" style="height: 100px; width: auto;" class="thumbnail">
               </a>
               {% endif %}
-						</li>
-						{% endfor %}
-					</ul>
-					{% else %}
-					<span>No attachments!</span>
-					{% endif %}
-				</div>
-			</div>
+            </li>
+            {% endfor %}
+          </ul>
+          {% else %}
+          <span>No attachments!</span>
+          {% endif %}
+        </div>
+      </div>
 
-			<div class="row">
-				<div class="col-md-offset-2 col-md-8">
-					<hr>
-					<h3><i class="fa fa-tags"></i> Features{% if user.is_admin and show_all %} <a id="ui-features-edit" href="#" title="Edit" class="btn btn-sm"><i class="fa fa-pencil"></i></a>{% endif %}</h3>
-					<ul id="ui-features" class="list-inline -ui-editable" data-type="checklist" data-source="{{features|json|force_escape}}" data-value="[{% for feature in report.features.all %}{{feature.id}},{% endfor %}]" data-pk="{{report.pk}}" data-name="features" data-url="{% url 'violations:update_partial' report.id %}" data-title="Features">
-					{% for feature in report.features.all  %}
-						<li><span class="label label-default">{{feature}}</span></li>
-					{% endfor %}
-					</ul>
-				</div>
-			</div>
-
-			{% if user.is_authenticated and show_all %}
       <div class="row">
-				<div class="col-md-offset-1 col-md-10">
-					<hr>
-					<h3><i class="fa fa-comments"></i> Comments</h3>
+        <div class="col-md-offset-2 col-md-8">
+          <hr>
+          <h3><i class="fa fa-tags"></i> Features{% if user.is_admin and show_all %} <a id="ui-features-edit" href="#" title="Edit" class="btn btn-sm"><i class="fa fa-pencil"></i></a>{% endif %}</h3>
+          <ul id="ui-features" class="list-inline -ui-editable" data-type="checklist" data-source="{{features|json|force_escape}}" data-value="[{% for feature in report.features.all %}{{feature.id}},{% endfor %}]" data-pk="{{report.pk}}" data-name="features" data-url="{% url 'violations:update_partial' report.id %}" data-title="Features">
+          {% for feature in report.features.all  %}
+            <li><span class="label label-default">{{feature}}</span></li>
+          {% endfor %}
+          </ul>
+        </div>
+      </div>
 
-					<ul id="ui-comments" class="list-group">
-						{% for comment in report.comments.all  %}
-							{% include "violations/view_comment.html" %}
-						{% empty %}
-						<li id="ui-no-comments">No comments!</li>
-						{% endfor %}
-					</ul>
-				</div>
-			</div>
+      {% if user.is_authenticated and show_all %}
+      <div class="row">
+        <div class="col-md-offset-1 col-md-10">
+          <hr>
+          <h3><i class="fa fa-comments"></i> Comments</h3>
+
+          <ul id="ui-comments" class="list-group">
+            {% for comment in report.comments.all  %}
+              {% include "violations/view_comment.html" %}
+            {% empty %}
+            <li id="ui-no-comments">No comments!</li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
 
       {% if user.is_authenticated %}
-			<div class="row">
-				<fieldset id="ui-comments-area">
-					<div class="col-md-offset-1 col-md-4">
-						<textarea id="ui-add-comment-content" class="form-control" placeholder="Add new comment" required></textarea>
-						<input id="ui-add-comment-attachment" type="file" accept="image/*" hidden>
-					</div>
-					<div class="col-md-4">
-						<button class="btn btn-block" id="ui-add-comment-attachment-button">
-							<i id="ui-comment-attachment-icon" class="fa fa-camera fa fa-3x"></i>
-							<img id="ui-comment-attachment-image" style="width: 100%;" hidden>
-						</button>
-					</div>
-					<div class="col-md-2">
-						<button id="ui-add-update-comment-button" class="btn btn-block btn-primary" type="button"><i class="fa fa-plus"></i> Update</button>
-						<button id="ui-add-correction-comment-button" class="btn btn-block btn-danger" type="button"><i class="fa fa-plus"></i> Correction</button>
-					</div>
-				</fieldset>
-			</div>
+      <div class="row">
+        <fieldset id="ui-comments-area">
+          <div class="col-md-offset-1 col-md-4">
+            <textarea id="ui-add-comment-content" class="form-control" placeholder="Add new comment" required></textarea>
+            <input id="ui-add-comment-attachment" type="file" accept="image/*" hidden>
+          </div>
+          <div class="col-md-4">
+            <button class="btn btn-block" id="ui-add-comment-attachment-button">
+              <i id="ui-comment-attachment-icon" class="fa fa-camera fa fa-2x"></i>
+              <img id="ui-comment-attachment-image" style="width: 100%;" hidden>
+            </button>
+          </div>
+          <div class="col-md-2">
+            <button id="ui-add-update-comment-button" class="btn btn-block btn-info" type="button"><i class="fa fa-plus"></i> Update</button>
+            <button id="ui-add-correction-comment-button" class="btn btn-block btn-warning" type="button"><i class="fa fa-plus"></i> Correction</button>
+          </div>
+        </fieldset>
+      </div>
       {% endif %}
       {% endif %}

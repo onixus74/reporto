@@ -31,7 +31,7 @@ DATABASES = {
 EMAIL_HOST = 'smtp.webfaction.com'
 EMAIL_HOST_USER = 'reporto'
 EMAIL_HOST_PASSWORD = 'reportopass'
-DEFAULT_FROM_EMAIL = 'contact@reform.tn'
+DEFAULT_FROM_EMAIL = 'REFORM <no-reply@reform.tn>'
 SERVER_EMAIL = 'contact@reform.tn'
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
@@ -70,6 +70,9 @@ USE_L10N = True
 # If you set this to False, Django will not use timezone-aware datetimes.
 USE_TZ = True
 
+#from django.conf import global_settings
+#DATETIME_INPUT_FORMATS = ('%Y-%m-%dT%H:%M:%S', '%Y-%m-%dT%H:%M') + global_settings.DATETIME_INPUT_FORMATS
+# print DATETIME_INPUT_FORMATS
 
 # DATETIME_INPUT_FORMATS = (
 # '%Y-%m-%dT%H:%M:%S',     # '2006-10-25T14:30:59'
@@ -88,6 +91,10 @@ USE_TZ = True
 # '%m/%d/%y',              # '10/25/06'
 # )
 
+
+# LOCALE_PATHS = (
+# os.path.join(BASE_DIR, "locale"),  # Assuming BASE_DIR is where your manage.py file is
+# )
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/var/www/example.com/media/"
@@ -145,6 +152,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
@@ -337,14 +345,15 @@ GOOGLE_OAUTH2_CLIENT_SECRET = 'H4S_8BHCGsEbx5maus_9oZFe'
 LOGIN_URL = '/login/'
 LOGOUT_URL = '/logout/'
 LOGIN_REDIRECT_URL = '/'
-#LOGIN_ERROR_URL    = '/login'
+LOGIN_ERROR_URL = '/login'
+SOCIAL_AUTH_BACKEND_ERROR_URL = LOGIN_ERROR_URL
 
+SOCIAL_AUTH_RAISE_EXCEPTIONS = False
 
 SOCIAL_AUTH_USER_MODEL = AUTH_USER_MODEL
 
 SOCIAL_AUTH_USERNAME_IS_FULL_EMAIL = True
-SOCIAL_AUTH_PROTECTED_USER_FIELDS = [
-    'email', 'username', 'first_name', 'last_name']
+SOCIAL_AUTH_PROTECTED_USER_FIELDS = ['email', 'username', 'first_name', 'last_name']
 SOCIAL_AUTH_FIELDS_STORED_IN_SESSION = ['next', ]
 
 #SOCIAL_AUTH_REDIRECT_IS_HTTPS = True

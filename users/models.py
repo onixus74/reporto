@@ -1,7 +1,7 @@
 import logging
 logger = logging.getLogger(__name__)
 
-from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext_lazy as _
 
 from django.contrib.auth.models import AbstractUser
 from django.core.urlresolvers import reverse
@@ -25,9 +25,9 @@ class User(AbstractUser):
     MODERATOR = "M"
     ADMIN = "A"
     ROLE = (
-        (REPORTER,  "Reporter"),
-        (MODERATOR, "Moderator"),
-        (ADMIN,     "Administrator"),
+        (REPORTER,  _("Reporter")),
+        (MODERATOR, _("Moderator")),
+        (ADMIN,     _("Administrator")),
     )
 
     role = models.CharField(max_length=1, choices=ROLE, default=REPORTER)
@@ -52,14 +52,17 @@ class User(AbstractUser):
         # data.pop('username')
         return data
 
+    # is_superuser
+    # is_staff
+
     def is_admin(self):
         return self.is_superuser or self.role == self.ADMIN
 
     def is_moderator(self):
-        return self.role == self.MODERATOR
+        return self.is_superuser or self.role == self.MODERATOR or self.role == self.ADMIN
 
     def is_reporter(self):
-        return self.role == self.REPORTER
+        return self.is_superuser or self.role == self.REPORTER or self.role == self.MODERATOR or self.role == self.ADMIN
 
 
 email = User._meta.get_field_by_name('email')[0]

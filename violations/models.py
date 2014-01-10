@@ -1,7 +1,7 @@
 import logging
 logger = logging.getLogger(__name__)
 
-from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext_lazy as _
 
 from django.conf import settings
 from django.core.exceptions import ValidationError
@@ -64,41 +64,41 @@ class Victim(models.Model):
     CITIZEN = 'C'
     COP = 'P'
     CATEGORY = (
-        # (UNKNOWN, "Unknown"),
-        (CITIZEN, "Citizen"),
-        (COP, "Cop")
+        # (UNKNOWN, _("Unknown"),
+        (CITIZEN, _("Citizen")),
+        (COP, _("Cop"))
     )
 
     MALE = 'M'
     FEMALE = 'F'
     GENDER = (
-        # (UNKNOWN, "Unknown"),
-        (MALE, "Male"),
-        (FEMALE, "Female"),
+        # (UNKNOWN, _("Unknown")),
+        (MALE, _("Male")),
+        (FEMALE, _("Female")),
     )
 
-    MARRIED = "M"
-    SINGLE = "S"
-    DIVORCED = "D"
-    WIDOWED = "W"
-    OTHER = "O"
+    MARRIED = 'M'
+    SINGLE = 'S'
+    DIVORCED = 'D'
+    WIDOWED = 'W'
+    OTHER = 'O'
     MARITAL_STATUS = (
-        (UNKNOWN, "Unknown"),
-        (MARRIED, "Married"),
-        (SINGLE, "Single"),
-        (DIVORCED, "Divorced"),
-        (WIDOWED, "Widowed"),
-        (OTHER, "Other")
+        (UNKNOWN, _("Unknown")),
+        (MARRIED, _("Married")),
+        (SINGLE, _("Single")),
+        (DIVORCED, _("Divorced")),
+        (WIDOWED, _("Widowed")),
+        (OTHER, _("Other"))
     )
 
     LOWER = 'L'
     MIDDLE = 'M'
     UPPER = 'U'
     SOCIAL_CLASS = (
-        (UNKNOWN, "Unknown"),
-        (LOWER, "Lower"),
-        (MIDDLE, "Middle"),
-        (UPPER, "Upper")
+        (UNKNOWN, _("Unknown")),
+        (LOWER, _("Lower")),
+        (MIDDLE, _("Middle")),
+        (UPPER, _("Upper"))
     )
 
     NO_EDUCATION = 'NO'
@@ -106,11 +106,11 @@ class Victim(models.Model):
     HIGH_SCHOOL = 'HS'
     UNIVERSITY = 'UN'
     EDUCATION = (
-        (UNKNOWN, "Unknown"),
-        (NO_EDUCATION, "No Education"),
-        (PRIMARY_SCHOOL, "Primary School"),
-        (HIGH_SCHOOL, "High School"),
-        (UNIVERSITY, "University")
+        (UNKNOWN, _("Unknown")),
+        (NO_EDUCATION, _("No Education")),
+        (PRIMARY_SCHOOL, _("Primary School")),
+        (HIGH_SCHOOL, _("High School")),
+        (UNIVERSITY, _("University"))
     )
 
     category = models.CharField(max_length=1, choices=CATEGORY, default=CITIZEN, blank=True, null=True)
@@ -191,8 +191,7 @@ class Comment(models.Model):
     def clean(self):
         # logger.debug('MODEL Comment clean %s', [self.content, self.content is None, self.attachment, self.attachment is None])
         if not self.content and not self.attachment:
-            raise ValidationError(
-                'Comment content and attachment can not be both empty.')
+            raise ValidationError("Comment content and attachment can not be both empty.")
 
     def serialize(self):
         data = model_to_dict(self)
@@ -210,13 +209,13 @@ class Comment(models.Model):
 class Report(models.Model):
 
     class Meta:
-        ordering = ["-datetime"]
+        ordering = ['-datetime']
 
     CITIZEN = 'CIT'
     COP = 'COP'
     CATEGORY = (
-        (CITIZEN, "Citizen"),
-        (COP, "Cop"),
+        (CITIZEN, _("Citizen")),
+        (COP, _("Cop")),
     )
 
     datetime = models.DateTimeField('date and time')

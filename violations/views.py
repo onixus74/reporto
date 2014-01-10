@@ -619,6 +619,11 @@ def report_comment(request, pk, *args, **kwargs):
         }, status=400)
 
 
+def report_remove_comment(request, pk, comment_pk, *args, **kwargs):
+    # TODO:
+    pass
+
+
 # def statistics_violations_by_date(request, *args, **kwargs):
 #   response = {}
 

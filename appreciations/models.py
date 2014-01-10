@@ -1,7 +1,7 @@
 import logging
 logger = logging.getLogger(__name__)
 
-from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext_lazy as _
 
 from django.conf import settings
 from django.core.urlresolvers import reverse
@@ -31,7 +31,7 @@ class Category(models.Model):
 class Report(models.Model):
 
     class Meta:
-        ordering = ["-datetime"]
+        ordering = ['-datetime']
 
     datetime = models.DateTimeField('date and time')
     latitude = models.FloatField()

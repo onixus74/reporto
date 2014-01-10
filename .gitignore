@@ -5,6 +5,7 @@
 *.pot
 *.pyc
 *.sqlite3
+*.mo
 
 # Tools
 .env*

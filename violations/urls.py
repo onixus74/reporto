@@ -24,6 +24,7 @@ urlpatterns = patterns('',
                        url(r'^(?P<pk>\d+)/verify$',  login_required(report_verify),                    name='verify'),
                        url(r'^(?P<pk>\d+)/close$',   login_required(report_close),                     name='close'),
                        url(r'^(?P<pk>\d+)/comment$', login_required(report_comment),                   name='comment'),
+                       url(r'^(?P<pk>\d+)/comment/(?P<comment_pk>\d+)/remove$', login_required(report_remove_comment), name='remove_comment'),
 
 
                        #url(r'^public/statistics(\.(?P<extension>(json)))?$', statistics_view,         name='public_statistics_'),

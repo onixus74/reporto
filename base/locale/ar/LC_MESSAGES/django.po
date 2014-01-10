@@ -1,0 +1,249 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# nader <nader.toukabri@gmail.com>, 2014.
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-01-10 14:57+0100\n"
+"PO-Revision-Date: 2014-01-10 15:50+0100\n"
+"Last-Translator: nader <nader.toukabri@gmail.com>\n"
+"Language-Team: reform.tn\n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
+"X-Generator: Virtaal 0.7.0\n"
+"X-Project-Style: drupal\n"
+
+#: models.py:16
+msgid "Image"
+msgstr "صورة"
+
+#: models.py:17
+msgid "Video"
+msgstr "فيديو"
+
+#: templates/home.html:5 templates/home.html.py:10
+#: templates/layouts/default.html:116
+msgid "Reports Dashboard"
+msgstr "التقارير"
+
+#: templates/home.html:78
+msgid "Latest Violation"
+msgstr "أحدث انتهاك"
+
+#: templates/home.html:92
+msgid "There is no reported violations!"
+msgstr "لا يوجد انتهاكات!"
+
+#: templates/home.html:95 templates/login.html:143
+#: templates/layouts/default.html:123
+msgid "Report a Violation"
+msgstr "بلغ عن انتهاك"
+
+#: templates/home.html:106
+msgid "Latest Appreciation"
+msgstr "أحدث شكر"
+
+#: templates/home.html:120
+msgid "There is no reported appreciations!"
+msgstr "لا يوجد شكر!"
+
+#: templates/home.html:124 templates/login.html:191
+#: templates/layouts/default.html:130
+msgid "Appreciate Police Work"
+msgstr "اشكر عمل الشرطة"
+
+#: templates/home.html:159 templates/login.html:100
+msgid "Violations"
+msgstr "انتهاكات"
+
+#: templates/home.html:210 templates/login.html:150
+msgid "Appreciations"
+msgstr "شكر"
+
+#: templates/login-minimal.html:6 templates/login-minimal.html.py:49
+#: templates/login.html:6 templates/login.html.py:69
+#: templates/layouts/default.html:163
+msgid "Sign in"
+msgstr "تسجيل الدخول"
+
+#: templates/login-minimal.html:12 templates/login.html:12
+#: templates/layouts/default.html:9
+msgid "Reform Reporting Platform"
+msgstr "منظومة إصلاح للتوثيق"
+
+#: templates/login-minimal.html:33 templates/login.html:53
+msgid "Email"
+msgstr "البريد الإلكتروني"
+
+#: templates/login-minimal.html:41 templates/login.html:61
+msgid "Password"
+msgstr "كلمة المرور"
+
+#: templates/login-minimal.html:51 templates/login.html:71
+msgid "Reset your password"
+msgstr "أعد ضبط كلمة المرور"
+
+#: templates/login-minimal.html:61 templates/login.html:81
+msgid "Sign in using Facebook"
+msgstr "تسجيل الدخول بإستعمال فيسبوك"
+
+#: templates/login-minimal.html:64 templates/login.html:84
+msgid "Sign in using Google"
+msgstr "تسجيل الدخول بإستعمال جوجل"
+
+#: templates/login-minimal.html:70 templates/login.html:90
+msgid "Sign up using your email address"
+msgstr "انشىء حسابا باستخدام بريدك الالكتروني"
+
+#: templates/login.html:13
+msgid ""
+"a tool to monitor security sector status by tracking violations involving "
+"police officers"
+msgstr ""
+"أداة تهدف لتقيم القطاع الأمني ​​من خلال تتبع انتهاكات أعوان الأمن و تطور "
+"العلاقة مع المواطن"
+
+#: templates/login.html:15
+msgid "reports"
+msgstr "تقرير"
+
+#: templates/login.html:17
+msgid "violations"
+msgstr "انتهاك"
+
+#: templates/login.html:18
+msgid "appreciations"
+msgstr "شكر"
+
+#: templates/login.html:42
+msgid "contribute by reporting incidents, start by signing in"
+msgstr "ساهم في الإبلاغ عن الانتهاكات ، إبدأ بتسجيل الدخول"
+
+#: templates/login.html:104 templates/login.html.py:154
+msgid "Latest Reports"
+msgstr "أحدث التقارير"
+
+#: templates/login.html:113 templates/login.html.py:139
+#: templates/login.html:161 templates/login.html.py:174
+#: templates/login.html:187
+msgid "There is no reports!"
+msgstr "لا يوجد تقارير!"
+
+#: templates/login.html:118 templates/login.html.py:166
+msgid "Top Reporters"
+msgstr "أعلى المبلغين"
+
+#: templates/login.html:131 templates/login.html.py:179
+msgid "Top Reporting Circles"
+msgstr "أعلى الدوائر المبلغة"
+
+#: templates/layouts/default.html:105
+msgid "Toggle navigation"
+msgstr ""
+
+#: templates/layouts/default.html:108 templates/layouts/default.html.py:228
+msgid "Tunisian Institutional Reform"
+msgstr "جمعية إصلاح المؤسسات"
+
+#: templates/layouts/default.html:133
+msgid "Administration"
+msgstr "إدارة"
+
+#: templates/layouts/default.html:135
+msgid "Users"
+msgstr "المستخدمون"
+
+#: templates/layouts/default.html:136
+msgid "Groups"
+msgstr "المجموعات"
+
+#: templates/layouts/default.html:137
+msgid "Violation Categories"
+msgstr "تصنيفات الانتهاكات"
+
+#: templates/layouts/default.html:138
+msgid "Violation Features"
+msgstr "ميزات الانتهاكات"
+
+#: templates/layouts/default.html:139
+msgid "Violation Victims"
+msgstr "ضحايا الانتهاكات"
+
+#: templates/layouts/default.html:140
+msgid "Appreciation Categories"
+msgstr "تصنيفات التقديرات"
+
+#: templates/layouts/default.html:142
+msgid "Site Administration"
+msgstr "إدارة الموقع"
+
+#: templates/layouts/default.html:157
+msgid "Nobody!"
+msgstr "لا أحد!"
+
+#: templates/layouts/default.html:168
+msgid "Profile"
+msgstr "إعدادات المستخدم"
+
+#: templates/layouts/default.html:170
+msgid "Sign out"
+msgstr "تسجيل الخروج"
+
+#: templates/layouts/default.html:214
+msgid "Language"
+msgstr "اللّغة"
+
+#: templates/layouts/default.html:228
+msgid "Developed by"
+msgstr "طور من قبل"
+
+#: templates/layouts/default.html:228
+msgid "report a bug, suggest a feature, ..."
+msgstr "أبلغ عن خطأ، إقترح وظيفة، ..."
+
+#: templates/layouts/default.html:228
+msgid "feedback"
+msgstr "ملاحظات وإقتراحات"
+
+#~ msgid "None!"
+#~ msgstr "لا شيء!"
+
+#~ msgid "Summary Dashboard"
+#~ msgstr "ملخص المعلومات"
+
+#, fuzzy
+#~ msgid "Sign in again"
+#~ msgstr "تسجيل الدخول"
+
+#~ msgid "Password Change"
+#~ msgstr "تغيير كلمة المرور"
+
+#~ msgid "Your password was changed."
+#~ msgstr "تم تغيير كلمة المرور."
+
+#~ msgid "Password Reset Complete"
+#~ msgstr "اكتملت إعادة كلمة المرور"
+
+#~ msgid "Password Reset"
+#~ msgstr "إعادة ضبط كلمة المرور"
+
+#~ msgid "Change my password"
+#~ msgstr "غيّر كلمة المرور"
+
+#~ msgid "Reset password"
+#~ msgstr "أعد ضبط كلمة المرور"
+
+#~ msgid "Facebook"
+#~ msgstr "فيسبوك"
+
+#~ msgid "Google"
+#~ msgstr "جوجل"
+
+#~ msgid "Provide Feedback"
+#~ msgstr "قدم ملاحظاتك"

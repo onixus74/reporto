@@ -15,15 +15,15 @@ function makeDjangoAppConfig(config, applicationName) {
     //compress: false,
     expand: true,
     cwd: '{app}/static/{app}/styles'.replace(/{app}/g, applicationName),
-    src: ['**/*.css', '!*.min.css', '!*.dist.css', '!*-rtl.css', '!*-rtl-mod.css'],
+    src: ['**/*.css', '!*.min.css', '!*.dist.css', '!*-rtl.css', '!*-rtl-generated.css', '!*-rtl-mod.css'],
     dest: '{app}/static/{app}/styles'.replace(/{app}/g, applicationName),
-    ext: '-rtl.css'
+    ext: '-rtl-generated.css'
   };
 
   config.cssmin[applicationName] = {
     expand: true,
     cwd: '{app}/static/{app}/styles'.replace(/{app}/g, applicationName),
-    src: ['**/*.css', '!*.min.css', '!*.dist.css'],
+    src: ['**/*.css', '!*.min.css', '!*.dist.css', '!*-generated.css'],
     dest: '{app}/static/{app}/styles'.replace(/{app}/g, applicationName),
     ext: '.min.css'
   };
@@ -63,7 +63,7 @@ module.exports = function(grunt) {
       components: {
         expand: true,
         cwd: 'base/static/components',
-        src: ['**/*.css', '!*.min.css', '!*.dist.css'],
+        src: ['**/*.css', '!*.min.css', '!*.dist.css', '!*-generated.css'],
         dest: 'base/static/components',
         ext: '.min.css'
       },
@@ -123,15 +123,15 @@ module.exports = function(grunt) {
     //compress: false,
     expand: true,
     cwd: 'base/static/styles',
-    src: ['**/*.css', '!*.min.css', '!*.dist.css', '!*-rtl.css', '!*-rtl-mod.css'],
+    src: ['**/*.css', '!*.min.css', '!*.dist.css', '!*-rtl.css', '!*-rtl-generated.css', '!*-rtl-mod.css'],
     dest: 'base/static/styles',
-    ext: '-rtl.css'
+    ext: '-rtl-generated.css'
   };
 
   config.cssmin.base = {
     expand: true,
     cwd: 'base/static/styles',
-    src: ['**/*.css', '!*.min.css', '!*.dist.css'],
+    src: ['**/*.css', '!*.min.css', '!*.dist.css', '!*-generated.css'],
     dest: 'base/static/styles',
     ext: '.min.css'
   };
@@ -169,15 +169,15 @@ module.exports = function(grunt) {
     //compress: false,
     expand: true,
     cwd: 'base/static/dashboard/styles',
-    src: ['**/*.css', '!*.min.css', '!*.dist.css', '!*-rtl.css', '!*-rtl-mod.css'],
+    src: ['**/*.css', '!*.min.css', '!*.dist.css', '!*-rtl.css', '!*-rtl-generated.css', '!*-rtl-mod.css'],
     dest: 'base/static/dashboard/styles',
-    ext: '-rtl.css'
+    ext: '-rtl-generated.css'
   };
 
   config.cssmin.dashboard = {
     expand: true,
     cwd: 'base/static/dashboard/styles',
-    src: ['**/*.css', '!*.min.css', '!*.dist.css'],
+    src: ['**/*.css', '!*.min.css', '!*.dist.css', '!*-generated.css'],
     dest: 'base/static/dashboard/styles',
     ext: '.min.css'
   };

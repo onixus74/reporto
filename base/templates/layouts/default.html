@@ -1,12 +1,12 @@
-{% load static widget_tweaks compress custom i18n l10n %}<!doctype html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+{% load static compress custom i18n l10n %}<!doctype html>
+<!--[if lt IE 7]>      <html{% if LANGUAGE_CODE == 'ar' %} dir="rtl"{% endif %} lang="{{LANGUAGE_CODE}}" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html{% if LANGUAGE_CODE == 'ar' %} dir="rtl"{% endif %} lang="{{LANGUAGE_CODE}}" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html{% if LANGUAGE_CODE == 'ar' %} dir="rtl"{% endif %} lang="{{LANGUAGE_CODE}}" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html{% if LANGUAGE_CODE == 'ar' %} dir="rtl"{% endif %} lang="{{LANGUAGE_CODE}}" class="no-js"> <!--<![endif]-->
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<title>{% block view_title %}{% endblock %}Reform Reporting Platform</title>
+	<title>{% block view_title %}{% endblock %}{% trans 'Reform Reporting Platform' %}</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width">
 
@@ -41,7 +41,11 @@
 <!-- Layout Styles Dependencies -->
 {% block layout_styles %}
 	{% compress css %}
+  {% if LANGUAGE_CODE == 'ar' %}
+  <link rel="stylesheet" href="{% static 'styles/main-rtl.css' %}">
+  {% else %}
   <link rel="stylesheet" href="{% static 'styles/main.css' %}">
+  {% endif %}
 	<link rel="stylesheet" href="{% static 'components/animate.css/animate.css' %}">
 	{% endcompress %}
 
@@ -97,10 +101,10 @@
     <div class="container">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-          <span class="sr-only">Toggle navigation</span>
+          <span class="sr-only">{% trans 'Toggle navigation' %}</span>
           <span class="fa fa-bars fa-lg fa-fw fa-inverse"></span>
         </button>
-        <a class="navbar-brand" href="/"><img src="{% static 'reform-logo.png' %}" -width="50" -height="35" height="26" alt="Tunisian Institutional Reform | جمعية إصلاح المؤسسات"></a>
+        <a class="navbar-brand" href="/"><img src="{% static 'reform-logo.png' %}" -width="50" -height="35" height="26" alt="{% trans 'Tunisian Institutional Reform' %}"></a>
       </div>
 
       <div class="navbar-collapse collapse">
@@ -108,31 +112,31 @@
         <ul class="nav navbar-nav">
           {% if user.is_authenticated %}
           {% url 'home' as url %}
-          <li{% if request.path_info == url %} class="active"{% endif %}><a href="{{url}}"><i class="fa fa-tachometer"></i> Dashboard</a></li>
+          <li{% if request.path_info == url %} class="active"{% endif %}><a href="{{url}}"><i class="fa fa-tachometer"></i> {% trans 'Reports Dashboard' %}</a></li>
           {% comment %}
           {% url 'violations:dashboard' as url %}
-          <li{% if request.path_info == url %} class="active"{% endif %}><a href="{{url}}">Violations</a></li>
+          <li{% if request.path_info == url %} class="active"{% endif %}><a href="{{url}}">{% trans 'Violations' %}</a></li>
           {% endcomment %}
           {% url 'violations:submit' as url %}
-          <li{% if request.path_info == url %} class="active"{% endif %}><a href="{{url}}"><i class="fa fa-plus"></i> Report a Violation</a></li>
+          <li{% if request.path_info == url %} class="active"{% endif %}><a href="{{url}}"><i class="fa fa-plus"></i> {% trans 'Report a Violation' %}</a></li>
           {% comment %}
           {% url 'appreciations:dashboard' as url %}
-          <li{% if request.path_info == url %} class="active"{% endif %}><a href="{{url}}">Appreciations</a></li>
+          <li{% if request.path_info == url %} class="active"{% endif %}><a href="{{url}}">{% trans 'Appreciations' %}</a></li>
           {% endcomment %}
           {% url 'appreciations:submit' as url %}
-          <li{% if request.path_info == url %} class="active"{% endif %}><a href="{{url}}"><i class="fa fa-plus"></i> Appreciate Police Work</a></li>
+          <li{% if request.path_info == url %} class="active"{% endif %}><a href="{{url}}"><i class="fa fa-plus"></i> {% trans 'Appreciate Police Work' %}</a></li>
           {% if user.role == "A" %}
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Administration<b class="caret"></b></a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-cog"></i> {% trans 'Administration' %}<b class="caret"></b></a>
             <ul class="dropdown-menu">
-              <li><a href="{% url 'users:list' %}">Users</a></li>
-              <li><a href="{% url 'users:groups' %}">Groups</a></li>
-              <li><a href="{% url 'violations:categories:list' %}">Violation Categories</a></li>
-              <li><a href="{% url 'violations:features:list' %}">Violation Features</a></li>
-              <li><a href="{% url 'violations:victims:list' %}">Violation Victims</a></li>
-              <li><a href="{% url 'appreciations:categories:list' %}">Appreciation Categories</a></li>
+              <li><a href="{% url 'users:list' %}">{% trans 'Users' %}</a></li>
+              <li><a href="{% url 'users:groups' %}">{% trans 'Groups' %}</a></li>
+              <li><a href="{% url 'violations:categories:list' %}">{% trans 'Violation Categories' %}</a></li>
+              <li><a href="{% url 'violations:features:list' %}">{% trans 'Violation Features' %}</a></li>
+              <li><a href="{% url 'violations:victims:list' %}">{% trans 'Violation Victims' %}</a></li>
+              <li><a href="{% url 'appreciations:categories:list' %}">{% trans 'Appreciation Categories' %}</a></li>
               <li class="divider"></li>
-              <li><a href="/admin">Site Administration</a></li>
+              <li><a href="/admin">{% trans 'Site Administration' %}</a></li>
             </ul>
           </li>
           {% endif %}
@@ -147,20 +151,20 @@
             {% if user.is_authenticated %}
             <span>{{user.get_short_name}}</span>
             {% else %}
-            <span>Nobody!</span>
+            <span>{% trans 'Nobody!' %}</span>
             {% endif %}
             <b class="caret"></b>
           </a>
           {% if not user.is_authenticated %}
           <ul class="dropdown-menu">
-            <li><a href="{% url 'login' %}"><i class="fa fa-sign-in"></i> Sign in</a></li>
+            <li><a href="{% url 'login' %}"><i class="fa fa-sign-in"></i> {% trans 'Sign in' %}</a></li>
           </ul>
           {% else %}
           <ul class="dropdown-menu">
             {% if user.is_authenticated %}
-            <li><a href="{% url 'users:profile' %}"><i class="fa fa-user"></i> Profile</a></li>
+            <li><a href="{% url 'users:profile' %}"><i class="fa fa-user"></i> {% trans 'Profile' %}</a></li>
             {% endif %}
-            <li><a href="{% url 'logout' %}"><i class="fa fa-sign-out"></i> Sign out</a></li>
+            <li><a href="{% url 'logout' %}"><i class="fa fa-sign-out"></i> {% trans 'Sign out' %}</a></li>
           </ul>
           {% endif %}
           </li>
@@ -190,24 +194,36 @@
 
   <div id="footer">
     <div class="container">
-      <form action="{% url 'set_language' %}" method="post" class="form-inline pull-right" role="form" style="/* display: inline-block; */ /* width: 150px; */" hidden>
+
+      {% comment %}
+      {% for lang_code, lang_name in LANGUAGES %}
+          {% language lang_code %}
+          <a href="{% url 'home' %}">{{ lang_code|language_name_local }}</a>
+          {% endlanguage %}
+      {% endfor %}
+      {% endcomment %}
+      <div class="text-center">
+      <form id="ui-language-slection-form" action="{% url 'set_language' %}" method="post" class="form-inline -pull-right" role="form" style="display: inline-block; /* width: 150px; */">
         {% csrf_token %}
         <input name="next" type="hidden" value="{{ redirect_to }}" />
         <div class="form-group">
-          <label class="sr-only">Language</label>
+          <label class="sr-only">{% trans 'Language' %}</label>
           <select name="language" class="form-control input-sm">
           {% get_language_info_list for LANGUAGES as languages %}
           {% for language in languages %}
-            <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected="selected"{% endif %}>
+            <option value="{{ language.code }}"{% if language.code != 'ar' %} class="ltr"{% endif %}{% if language.code == LANGUAGE_CODE %} selected="selected"{% endif %}>
             {{ language.name_local }} ({{ language.code }})
             </option>
           {% endfor %}
           </select>
         </div>
-        <button type="submit" class="btn btn-default btn-xs">Go</button>
+        <button type="submit" class="btn btn-default btn-xs"><i class="fa fa-check"></i></button>
       </form>
-      <p class="text-muted credit pull-left">
-        <a href="email:contact@ipolice.tn" title="report a bug, suggest a feature, ...">Provide Feedback</a>. Developed by <a href="http://reform.tn" target="_blank">Tunisian Institutional Reform</a>.</p>
+      |
+      <p class="text-muted credit -pull-left" style="display: inline-block;">
+        {% trans 'Developed by' %} <a href="http://reform.tn" target="_blank">{% trans 'Tunisian Institutional Reform' %}</a> (<a href="email:contact@ipolice.tn" title="{% trans 'report a bug, suggest a feature, ...' %}">{% trans 'feedback' %}</a>)
+      </p>
+      </div>
     </div>
   </div>
 
@@ -246,6 +262,12 @@
 	<script src="{% static 'components/jquery/jquery.js' %}"></script>
 	<!--<script src="{% static 'components/sass-bootstrap/bootstrap/js/bootstrap.js' %}"></script>-->
 	<script src="{% static 'scripts/bootstrap.js' %}"></script>
+  <script>
+  $('#ui-language-slection-form select').on('change', function(e){
+    this.form.submit();
+  });
+  $('#ui-language-slection-form button').hide();
+  </script>
 	{% endcompress %}
 
 {% endblock %}

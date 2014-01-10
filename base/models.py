@@ -1,7 +1,7 @@
 import logging
 logger = logging.getLogger(__name__)
 
-from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext_lazy as _
 
 from urlparse import urlparse, parse_qs
 
@@ -13,8 +13,8 @@ class Media(models.Model):
     IMAGE = 'I'
     VIDEO = 'V'
     TYPE = (
-        (IMAGE, "Image"),
-        (VIDEO, "Video"),
+        (IMAGE, _("Image")),
+        (VIDEO, _("Video")),
     )
     # title        = models.CharField(max, blank=True, null=True_length=200)
     # description  = models.TextField()
