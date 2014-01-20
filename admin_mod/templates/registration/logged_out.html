@@ -1,13 +1,17 @@
-{% extends "admin/base_site.html" %}
-{% load url from future %}{% load i18n %}
+{% extends "layouts/default.html" %}
 
-{% block breadcrumbs %}
-{% endblock %}
+{% load i18n %}{% load url from future %}
 
-{% block content %}
+{% block view_title %}{% trans "Sign out" %} | {% endblock %}
 
-<p>{% trans "Thanks for spending some quality time with the Web site today." %}</p>
+{% block view_content %}
 
-<p><a href="{% url 'home' %}" class="btn">{% trans 'Sign in again' %}</a></p>
+  <div class="page-header">
+    <h1 class="text-center">{% trans "Sign out" %}</h1>
+  </div>
+
+  <p class="lead text-center text-success">{% trans "Thanks for spending some quality time with the Web site today." %}</p>
+
+  <p class="text-center"><a href="{% url 'home' %}" class="btn btn-primary">{% trans 'Sign in again' %}</a></p>
 
 {% endblock %}

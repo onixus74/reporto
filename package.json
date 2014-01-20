@@ -9,6 +9,7 @@
     "grunt": "~0.4.1",
     "grunt-contrib-compass": "~0.3.0",
     "R2": "~1.4.1",
-    "grunt-r2": "~0.1.1"
+    "grunt-r2": "~0.1.1",
+    "grunt-contrib-sass": "~0.6.0"
   }
 }

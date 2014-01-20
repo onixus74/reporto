@@ -39,7 +39,9 @@ reform.widgets.map.init = function() {
   map.addControl(geoSearch);
   widget.geoSearch = geoSearch;
 
-  //map.scrollWheelZoom.disable();
+  //if (Modernizr.touch) {
+  map.scrollWheelZoom.disable();
+  //}
 
   var marker;
 
@@ -571,67 +573,67 @@ reform.widgets.datetime.init = function() {
 
 $(document).ready(reform.widgets.datetime.init);
 
-
-reform.widgets.similarReports = {};
-reform.widgets.similarReports.init = function() {
-  var widget = reform.widgets.similarReports;
-  /*
+if (Modernizr.mq('(min-width: 992px)')) {
+  reform.widgets.similarReports = {};
+  reform.widgets.similarReports.init = function() {
+    var widget = reform.widgets.similarReports;
+    /*
   var similarReports =
   widget.object = similarReports;
   widget.element = similarReports;
   */
 
-  var similar = false,
-    latestReportsLabel = $('#ui-latest-reports-label'),
-    similarReportsLabel = $('#ui-similar-reports-label'),
-    noSimilarReportsNotification = $('#ui-no-similar-reports'),
-    noReportsNotification = $('#ui-no-reports'),
-    reportsList = $('#ui-reports-list'),
-    reportsItems = reportsList.find('.ui-similar-report-candidate');
+    var similar = false,
+      latestReportsLabel = $('#ui-latest-reports-label'),
+      similarReportsLabel = $('#ui-similar-reports-label'),
+      noSimilarReportsNotification = $('#ui-no-similar-reports'),
+      noReportsNotification = $('#ui-no-reports'),
+      reportsList = $('#ui-reports-list'),
+      reportsItems = reportsList.find('.ui-similar-report-candidate');
 
-  //noSimilarReportsNotification.addClass('animated');
+    //noSimilarReportsNotification.addClass('animated');
 
-  noReportsNotification.addClass('animated fadeInUp').show().css('display', 'block');
+    noReportsNotification.addClass('animated fadeInUp').show().css('display', 'block');
 
-  window.similarReports = widget;
+    window.similarReports = widget;
 
-  widget.reportsList = reportsList;
-  widget.reportsItems = reportsItems;
+    widget.reportsList = reportsList;
+    widget.reportsItems = reportsItems;
 
-  var elements = reform.widgets.wizard.elements;
+    var elements = reform.widgets.wizard.elements;
 
-  function showSimilarReports(e) {
+    function showSimilarReports(e) {
 
-    if (!similar) {
-      latestReportsLabel.hide();
-      similarReportsLabel.css({
-        'display': 'inline-block'
-      }).addClass('animated pulse').show();
-      similar = true;
-    }
-
-    var formData = new FormData(document.querySelector('#report-form'));
-
-    $('#ui-reports-list').block({
-      message: 'Loading ...',
-    });
-    $.ajax({
-      type: "POST",
-      url: reform.urls.similar,
-      data: formData,
-      processData: false,
-      contentType: false,
-      dataType: 'json',
-      headers: {
-        "X-CSRFToken": csrf_token
+      if (!similar) {
+        latestReportsLabel.hide();
+        similarReportsLabel.css({
+          'display': 'inline-block'
+        }).addClass('animated pulse').show();
+        similar = true;
       }
-    }).done(function(data) {
-      reportsList.html(data.html).find('#ui-no-similar-reports').addClass('animated fadeInUp').show().css('display', 'block');
-      reportsList.find('#ui-no-reports').hide();
-      $('#ui-reports-list').unblock();
-    }).fail(function(err) {
-      console.log(err);
-      /*
+
+      var formData = new FormData(document.querySelector('#report-form'));
+
+      $('#ui-reports-list').block({
+        message: 'Loading ...',
+      });
+      $.ajax({
+        type: "POST",
+        url: reform.urls.similar,
+        data: formData,
+        processData: false,
+        contentType: false,
+        dataType: 'json',
+        headers: {
+          "X-CSRFToken": csrf_token
+        }
+      }).done(function(data) {
+        reportsList.html(data.html).find('#ui-no-similar-reports').addClass('animated fadeInUp').show().css('display', 'block');
+        reportsList.find('#ui-no-reports').hide();
+        $('#ui-reports-list').unblock();
+      }).fail(function(err) {
+        console.log(err);
+        /*
       var data = err.responseJSON;
       $.pnotify({
         title: data.notification.title,
@@ -640,78 +642,78 @@ reform.widgets.similarReports.init = function() {
         //nonblock: true
       });
       */
-    });
-    //reportsList.html('<li><div class="text-center">Loading ...</div></li>')
+      });
+      //reportsList.html('<li><div class="text-center">Loading ...</div></li>')
 
-    return;
+      return;
 
 
-    var any = false;
-    reportsItems.each(function(index, el) {
-      el = $(el);
-      el.addClass('animated');
+      var any = false;
+      reportsItems.each(function(index, el) {
+        el = $(el);
+        el.addClass('animated');
 
-      //if(widget.isSimilarToInput(e, el)) {
-      //var similarities = widget.checkSimilarity(e, el);
-      //if(similarities.length > 0) {
-      if (true) {
-        any = true;
-        //el.removeClass().addClass('ui-similar-report-candidate ui-similar').addClass(similarities.map(function(field){ return 'ui-similar-' + field;}).join(' ')); //.show();
-        /*
+        //if(widget.isSimilarToInput(e, el)) {
+        //var similarities = widget.checkSimilarity(e, el);
+        //if(similarities.length > 0) {
+        if (true) {
+          any = true;
+          //el.removeClass().addClass('ui-similar-report-candidate ui-similar').addClass(similarities.map(function(field){ return 'ui-similar-' + field;}).join(' ')); //.show();
+          /*
         el.removeClass('fadeOutRight')
         if(!el.hasClass('fadeInRight')) {
           el.addClass('fadeInRight').show();
         }
         */
-      } else {
-        //el.removeClass().addClass('ui-similar-report-candidate'); //.hide();
-        /*
+        } else {
+          //el.removeClass().addClass('ui-similar-report-candidate'); //.hide();
+          /*
         el.removeClass('fadeInRight');
         if(!el.hasClass('fadeOutRight')) {
           el.addClass('fadeOutRight').hide();
           //.one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend webkitAnimationEnd oanimationend msAnimationEnd animationend', function(e) { $(this).hide(); });
         }
         */
-      }
-    });
-    if (any) {
-      //noSimilarReportsNotification.hide();
-      /*
+        }
+      });
+      if (any) {
+        //noSimilarReportsNotification.hide();
+        /*
       noSimilarReportsNotification.removeClass('fadeInUp');
       if(!noSimilarReportsNotification.hasClass('fadeOutDown')) {
         noSimilarReportsNotification.addClass('fadeOutDown').hide();
         //.one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend webkitAnimationEnd oanimationend msAnimationEnd animationend', function(e) { $(this).hide(); });
       }
       */
-    } else {
-      //noSimilarReportsNotification.show();
-      /*
+      } else {
+        //noSimilarReportsNotification.show();
+        /*
       noSimilarReportsNotification.removeClass('fadeOutDown');
       if(!noSimilarReportsNotification.hasClass('fadeInUp')) {
         noSimilarReportsNotification.addClass('fadeInUp').show();
       }
       */
+      }
+
     }
 
-  }
+    var elements = reform.widgets.wizard.elements;
 
-  var elements = reform.widgets.wizard.elements;
+    //elements.category.on('change', showSimilarReports);
 
-  //elements.category.on('change', showSimilarReports);
+    elements.location.on('change', showSimilarReports);
 
-  elements.location.on('change', showSimilarReports);
+    //elements.datetime.on('change', showSimilarReports);
+    elements.date.on('change', showSimilarReports);
 
-  //elements.datetime.on('change', showSimilarReports);
-  elements.date.on('change', showSimilarReports);
+    elements['victim-firstname'].on('change', showSimilarReports);
 
-  elements['victim-firstname'].on('change', showSimilarReports);
+    elements['victim-lastname'].on('change', showSimilarReports);
 
-  elements['victim-lastname'].on('change', showSimilarReports);
+  };
 
-};
-
-$(document).ready(reform.widgets.similarReports.init);
-
+  $(document).ready(reform.widgets.similarReports.init);
+}
 
 /*
 reform.widgets.xxx = {};

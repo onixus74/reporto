@@ -15,8 +15,13 @@ from mptt.models import MPTTModel, TreeForeignKey
 
 
 class Category(models.Model):
-    slug = models.SlugField(max_length=100, blank=True, null=True)
-    definition = models.CharField(max_length=300)
+
+    class Meta:
+        verbose_name = _("category")
+        verbose_name_plural = _("categories")
+
+    slug = models.SlugField(_("slug"), max_length=100, blank=True, null=True)
+    definition = models.CharField(_("definition"), max_length=300)
 
     def get_absolute_url(self):
         return reverse('violations:categories:view', kwargs={'pk': self.id})
@@ -28,16 +33,18 @@ class Category(models.Model):
         self.slug = slugify(self.definition)
         super(Category, self).save(*args, **kwargs)
 
-    class Meta:
-        verbose_name_plural = "categories"
-
 
 # class Feature(models.Model):
 class Feature(MPTTModel):
-    parent = TreeForeignKey('self', null=True, blank=True, related_name='children')
-    slug = models.SlugField(max_length=200, blank=True, null=True)
-    definition = models.CharField(max_length=300)
-    selectable = models.BooleanField(default=True)
+
+    class Meta:
+        verbose_name = _("feature")
+        verbose_name_plural = _("features")
+
+    parent = TreeForeignKey('self', related_name='children', verbose_name=_("children features"), null=True, blank=True)
+    slug = models.SlugField(_("slug"), max_length=200, blank=True, null=True)
+    definition = models.CharField(_("definition"), max_length=300)
+    selectable = models.BooleanField(_("is selectable?"), default=True)
 
     def get_absolute_url(self):
         return reverse('violations:features:view', kwargs={'pk': self.id})
@@ -49,14 +56,15 @@ class Feature(MPTTModel):
         self.slug = slugify(self.definition)
         super(Feature, self).save(*args, **kwargs)
 
-    class Meta:
-        pass
-
     class MPTTMeta:
         order_insertion_by = ['definition']
 
 
 class Victim(models.Model):
+
+    class Meta:
+        verbose_name = _("victim")
+        verbose_name_plural = _("victims")
 
     UNKNOWN = '?'
     #UNKNOWN = None
@@ -113,30 +121,30 @@ class Victim(models.Model):
         (UNIVERSITY, _("University"))
     )
 
-    category = models.CharField(max_length=1, choices=CATEGORY, default=CITIZEN, blank=True, null=True)
-    firstname = models.CharField(max_length=100, blank=True, null=True)
-    lastname = models.CharField(max_length=100, blank=True, null=True)
+    category = models.CharField(_("category"), max_length=1, choices=CATEGORY, default=CITIZEN, blank=True, null=True)
+    firstname = models.CharField(_("first name"), max_length=100, blank=True, null=True)
+    lastname = models.CharField(_("last name"), max_length=100, blank=True, null=True)
 
-    gender = models.CharField(max_length=1, choices=GENDER, default=MALE, blank=True, null=True)
-    birthdate = models.DateField(blank=True, null=True)
-    birthplace = models.CharField(max_length=200, blank=True, null=True)
-    identity_card_number = models.CharField(max_length=20, blank=True, null=True)
+    gender = models.CharField(_("gender"), max_length=1, choices=GENDER, default=MALE, blank=True, null=True)
+    birthdate = models.DateField(_("birth date"), blank=True, null=True)
+    birthplace = models.CharField(_("birth place"), max_length=200, blank=True, null=True)
+    identity_card_number = models.CharField(_("identity card number"), max_length=20, blank=True, null=True, help_text=_("Private information."))
 
     # civil_status = models.CharField(max_length=1, choices=..., default=...)
-    marital_status = models.CharField(max_length=1, choices=MARITAL_STATUS, blank=True, null=True)
-    have_children = models.NullBooleanField(blank=True, null=True)
-    social_class = models.CharField(max_length=2, choices=SOCIAL_CLASS, blank=True, null=True)
+    marital_status = models.CharField(_("marital status"), max_length=1, choices=MARITAL_STATUS, blank=True, null=True)
+    have_children = models.NullBooleanField(_("have children?"), blank=True, null=True)
+    social_class = models.CharField(_("social class"), max_length=2, choices=SOCIAL_CLASS, blank=True, null=True)
 
-    education = models.CharField(max_length=2, choices=EDUCATION, blank=True, null=True)
-    profession = models.CharField(max_length=200, blank=True, null=True)
+    education = models.CharField(_("education"), max_length=2, choices=EDUCATION, blank=True, null=True)
+    profession = models.CharField(_("profession"), max_length=200, blank=True, null=True)
 
-    address = models.TextField(null=True, blank=True)
-    phone = models.CharField(max_length=20, blank=True, null=True, help_text="Victim's phone address is a private information, it wont be shared or publicly accessible.")
-    email = models.EmailField(blank=True, null=True, help_text="Victim's email number is a private information, it wont be shared or publicly accessible.")
+    address = models.TextField(_("address"), null=True, blank=True)
+    phone = models.CharField(_("phone"), max_length=20, blank=True, null=True, help_text=_("Private information."))
+    email = models.EmailField(_("email"), blank=True, null=True, help_text=_("Private information."))
 
-    description = models.TextField(blank=True, null=True)
+    description = models.TextField(_("description"), blank=True, null=True)
 
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, blank=True, null=True)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name=_("user"), blank=True, null=True)
 
     def get_absolute_url(self):
         return reverse('violations:victims:view', kwargs={'pk': self.id})
@@ -163,27 +171,26 @@ class Victim(models.Model):
         data.pop('identity_card_number')
         return data
 
-    class Meta:
-        pass
-
 
 class Comment(models.Model):
 
     class Meta:
+        verbose_name = _("comment")
+        verbose_name_plural = _("comments")
         ordering = ['created_at']
 
     UPDATE = 'U'
     CORRECTION = 'C'
     TYPE = (
-        (UPDATE, "Update"),
-        (CORRECTION, "Correction"),
+        (UPDATE, _("Update")),
+        (CORRECTION, _("Correction")),
     )
-    type = models.CharField(max_length=1, choices=TYPE, default=UPDATE)
-    content = models.TextField(null=True, blank=True)
-    attachment = models.FileField(upload_to='reports/comments/', null=True, blank=True)
-    # report     = models.ForeignKey(Report)
-    created_by = models.ForeignKey(settings.AUTH_USER_MODEL)
-    created_at = models.DateTimeField(auto_now_add=True)
+    type = models.CharField(_("type"), max_length=1, choices=TYPE, default=UPDATE)
+    content = models.TextField(_("content"), null=True, blank=True)
+    attachment = models.FileField(_("attachment"), upload_to='reports/comments/', null=True, blank=True)
+    # report     = models.ForeignKey(Report, verbose_name=_("report"))
+    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name=_("created by"))
+    created_at = models.DateTimeField(_("created at"), auto_now_add=True)
 
     def __unicode__(self):
         return "%s %s %s" % (self.created_at, self.type, self.content)
@@ -209,6 +216,8 @@ class Comment(models.Model):
 class Report(models.Model):
 
     class Meta:
+        verbose_name = _("report")
+        verbose_name_plural = _("reports")
         ordering = ['-datetime']
 
     CITIZEN = 'CIT'
@@ -218,25 +227,25 @@ class Report(models.Model):
         (COP, _("Cop")),
     )
 
-    datetime = models.DateTimeField('date and time')
-    latitude = models.FloatField()
-    longitude = models.FloatField()
-    location_text = models.CharField(max_length=300)
-    category = models.ForeignKey(Category)
-    victim = models.ForeignKey(Victim)
-    aggressor = models.TextField(blank=True, null=True)
-    aggressor_category = models.CharField(max_length=3, choices=CATEGORY, default=COP, blank=True)
-    description = models.TextField(blank=True, null=True)
+    datetime = models.DateTimeField(_("date and time"),)
+    latitude = models.FloatField(_("latitude"))
+    longitude = models.FloatField(_("longitude"))
+    location_text = models.CharField(_("location"), max_length=300)
+    category = models.ForeignKey(Category, verbose_name=_("category"))
+    victim = models.ForeignKey(Victim, verbose_name=_("victim"))
+    aggressor = models.TextField(_("aggressor"), blank=True, null=True)
+    aggressor_category = models.CharField(_("aggressor category"), max_length=3, choices=CATEGORY, default=COP, blank=True)
+    description = models.TextField(_("description"), blank=True, null=True)
     media = models.ManyToManyField('base.Media', blank=True, null=True, related_name='violations_media+')
-    sources = models.TextField(blank=True, null=True)
+    sources = models.TextField(_("sources"), blank=True, null=True)
     features = TreeManyToManyField(Feature, blank=True, null=True)
-    is_verified = models.BooleanField()
+    is_verified = models.BooleanField(_("is verified?"))
     # verified_by = models.ManyToManyField('auth.Group', blank=True, null=True)
-    is_closed = models.BooleanField()
+    is_closed = models.BooleanField(_("is closed?"))
     comments = models.ManyToManyField(Comment, blank=True, null=True)
-    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='violation_created_by_user')
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='violation_created_by_user', verbose_name=_("created by"))
+    created_at = models.DateTimeField(_("created at"), auto_now_add=True)
+    updated_at = models.DateTimeField(_("updated at"), auto_now=True)
 
     def get_absolute_url(self):
         return reverse('violations:view', kwargs={'pk': self.id})

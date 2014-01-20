@@ -1,66 +1,73 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
-#, fuzzy
+# nader <nader.toukabri@gmail.com>, 2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-10 17:11+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"POT-Creation-Date: 2014-01-11 09:14+0100\n"
+"PO-Revision-Date: 2014-01-11 09:20+0100\n"
+"Last-Translator: nader <nader.toukabri@gmail.com>\n"
+"Language-Team: reform.tn\n"
+"Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
-"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+"&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
+"X-Generator: Virtaal 0.7.0\n"
+"X-Project-Style: drupal\n"
 
-#: templates/registration/logged_out.html:9
+#: templates/registration/logged_out.html:5
+#: templates/registration/logged_out.html:10
+msgid "Sign out"
+msgstr "تسجيل الخروج"
+
+#: templates/registration/logged_out.html:13
 msgid "Thanks for spending some quality time with the Web site today."
 msgstr ""
 
-#: templates/registration/logged_out.html:11
+#: templates/registration/logged_out.html:15
 msgid "Sign in again"
-msgstr ""
+msgstr "تسجيل الدخول"
 
 #: templates/registration/password_change_done.html:5
 #: templates/registration/password_change_done.html:10
 #: templates/registration/password_change_form.html:7
 #: templates/registration/password_change_form.html:12
 msgid "Password change"
-msgstr ""
+msgstr "تغيير كلمة المرور"
 
 #: templates/registration/password_change_done.html:13
 msgid "Your password was changed."
-msgstr ""
+msgstr "تم تغيير كلمة المرور."
 
 #: templates/registration/password_change_form.html:15
 msgid ""
 "Please enter your old password, for security's sake, and then enter your new "
 "password twice so we can verify you typed it in correctly."
 msgstr ""
+"من فضلك أدخل كلمة المرور القديمة، ثم أدخل كلمة المرور الجديدة مرتين حتى "
+"نتأكد من أنك كتبتها بشكل صحيح."
 
 #: templates/registration/password_change_form.html:24
 #: templates/registration/password_reset_confirm.html:23
 msgid "Change my password"
-msgstr ""
+msgstr "غيّر كلمة المرور"
 
 #: templates/registration/password_reset_complete.html:5
 #: templates/registration/password_reset_complete.html:10
 msgid "Password reset complete"
-msgstr ""
+msgstr "اكتملت إعادة ضبط كلمة المرور"
 
 #: templates/registration/password_reset_complete.html:13
 msgid "Your password has been set.  You may go ahead and log in now."
-msgstr ""
+msgstr "وُضعت كلمة المرور. يمكنك تسجيل الدخول الآن."
 
 #: templates/registration/password_reset_complete.html:15
 msgid "Sign in"
-msgstr ""
+msgstr "تسجيل الدخول"
 
 #: templates/registration/password_reset_confirm.html:5
 #: templates/registration/password_reset_confirm.html:10
@@ -69,36 +76,41 @@ msgstr ""
 #: templates/registration/password_reset_form.html:6
 #: templates/registration/password_reset_form.html:11
 msgid "Password reset"
-msgstr ""
+msgstr "إعادة ضبط كلمة المرور"
 
 #: templates/registration/password_reset_confirm.html:15
 msgid ""
 "Please enter your new password twice so we can verify you typed it in "
 "correctly."
-msgstr ""
+msgstr "من فضلك أدخل كلمة المرور الجديدة مرتين لنتأكد أنك كتبتها بشكل صحيح."
 
 #: templates/registration/password_reset_confirm.html:31
 msgid ""
 "The password reset link was invalid, possibly because it has already been "
 "used. Please request a new password reset."
 msgstr ""
+"وصلة إعادة ضبط كلمة المرور ليست صحيحة، ربما لأنك استخدمتها من قبل.  من فضلك "
+"اطلب إعادة ضبط جديدة لكلمة المرور."
 
 #: templates/registration/password_reset_confirm.html:33
 msgid "Reset password"
-msgstr ""
+msgstr "أعد ضبط كلمة المرور"
 
 #: templates/registration/password_reset_done.html:13
 msgid ""
 "We've emailed you instructions for setting your password to the email "
 "address you submitted. You should be receiving it shortly."
 msgstr ""
+"لقد أرسلنا إلى بريدك تعليمات وضع كلمة المرور. يفترض أن تستلمها بعد قليل."
 
 #: templates/registration/password_reset_form.html:14
 msgid ""
 "Forgotten your password? Enter your email address below, and we'll email "
 "instructions for setting a new one."
 msgstr ""
+"أنسيت كلمة المرور؟ أدخل عنوانك البريدي أسفل وسنرسل إلى بريدك تعليمات وضع "
+"واحدة جديدة."
 
 #: templates/registration/password_reset_form.html:23
 msgid "Reset my password"
-msgstr ""
+msgstr "أعد ضبط كلمة المرور"

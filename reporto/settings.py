@@ -50,7 +50,7 @@ LANGUAGE_CODE = 'en'
 
 LANGUAGES = (
     ('en', 'English'),
-    ('fr', 'French'),
+    #('fr', 'French'),
     ('ar', 'Arabic'),
     #('ar-tn', 'Tounsi'),
 )
@@ -185,6 +185,7 @@ INSTALLED_APPS = (
 
     # admin components
     'admin_mod',
+    'rosetta',
     'report_builder',
     #'filebrowser',
     'django_admin_bootstrapped.bootstrap3',
@@ -353,10 +354,10 @@ GOOGLE_OAUTH2_CLIENT_SECRET = 'H4S_8BHCGsEbx5maus_9oZFe'
 # YAHOO_CONSUMER_KEY           = ''
 # YAHOO_CONSUMER_SECRET        = ''
 
-LOGIN_URL = '/login/'
-LOGOUT_URL = '/logout/'
+LOGIN_URL = '/signin/'
+LOGOUT_URL = '/signout/'
 LOGIN_REDIRECT_URL = '/'
-LOGIN_ERROR_URL = '/login'
+LOGIN_ERROR_URL = '/signin/'
 SOCIAL_AUTH_BACKEND_ERROR_URL = LOGIN_ERROR_URL
 
 SOCIAL_AUTH_RAISE_EXCEPTIONS = False

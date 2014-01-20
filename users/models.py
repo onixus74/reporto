@@ -12,6 +12,8 @@ from django.forms.models import model_to_dict
 class User(AbstractUser):
 
     class Meta:
+        verbose_name = _("user")
+        verbose_name_plural = _("users")
         #	unique_together = ('email', )
         ordering = ['date_joined']
 
@@ -30,7 +32,7 @@ class User(AbstractUser):
         (ADMIN,     _("Administrator")),
     )
 
-    role = models.CharField(max_length=1, choices=ROLE, default=REPORTER)
+    role = models.CharField(_("role"), max_length=1, choices=ROLE, default=REPORTER)
 
     def get_absolute_url(self):
         return reverse('users:view', kwargs={'pk': self.pk})

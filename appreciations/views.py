@@ -80,7 +80,7 @@ def appreciation_submit(request, template_name="appreciations/submit.html", *arg
                 'success': True,
                 #'object': appreciation,
                 'url': appreciation.get_absolute_url(),
-                'notification': {'title': "Adding Report", 'body': "Report added."}
+                'notification': {'title': _("Adding Report"), 'body': _("Report added.")}
             })
         else:
             return redirect(appreciation.get_absolute_url())
@@ -90,7 +90,7 @@ def appreciation_submit(request, template_name="appreciations/submit.html", *arg
             return JSONResponse({
                 'success': False,
                 'errors': form.errors,
-                'notification': {'title': "Adding Appreciation", 'body': form.errors.get('__all__', None) or form.errors.as_ul() or "Failed to add a appreciation"}
+                'notification': {'title': _("Adding Report"), 'body': form.errors.get('__all__', None) or form.errors.as_ul() or _("Failed to add a report")}
             }, status=400)
 
     return render(request, template_name, context)

@@ -45,7 +45,10 @@
     "smalot-bootstrap-datetimepicker": "~2.2.0",
     "JVFloat": "*",
     "jquery.scrollTo": "~1.4.7",
-    "highcharts-themes": "~0.1.2"
+    "highcharts-themes": "~0.1.2",
+    "Hover": "IanLunn/Hover",
+    "fastclick": "~0.6.11",
+    "django-filters-js": "dryan/django-filters-js"
   },
   "devDependencies": {
     "html-inspector": "~0.3.0"

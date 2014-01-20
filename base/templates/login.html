@@ -104,9 +104,8 @@
               <div class="list-group text-left">
               {% for report in violations_latest %}
                 <a class="list-group-item" href="{{report.get_absolute_url}}">
-                  {{report.category}} at {{report.location_text}} on
-                    {{report.datetime}}
-                  {% if report.is_verified %}<span class="label label-success">Verified <i class="fa fa-ok"></i></span>{% endif %}
+                  {{report.category}}{% trans ' at ' %}{{report.location_text}}{% trans ' on ' %}{{report.datetime}}
+                  {% if report.is_verified %}<span class="label label-success">{% trans 'Verified' %} <i class="fa fa-ok"></i></span>{% endif %}
                 </a>
               {% empty %}
                 <a class="list-group-item text-muted" href="#">{% trans 'There is no reports!' %}</a>
@@ -154,7 +153,7 @@
               <div class="list-group text-left">
               {% for report in appreciations_latest %}
                 <a class="list-group-item" href="{{report.get_absolute_url}}">
-                  {{report.category}} for {{report.subject}}, {{report.datetime}} at {{report.location_text}}
+                  {{report.category}}{% trans ' for ' %}{{report.subject}}, {{report.datetime}}{% trans ' at '%}{{report.location_text}}
                 </a>
               {% empty %}
                 <a class="list-group-item text-muted" href"#">{% trans 'There is no reports!' %}</a>
@@ -221,10 +220,12 @@
   <script type="text/javascript">
     reform.urls.statistics = {% url 'public_statistics' as url %}{{url|json}};
   </script>
+  <script type="text/javascript" src="{% url 'i18n_js' 'base' %}"></script>
   {% compress js %}
   <script src="{% static 'components/highcharts.com/js/highcharts.src.js' %}"></script>
   <script src="{% static 'components/highcharts.com/js/modules/exporting.src.js' %}"></script>
   <script src="{% static 'scripts/highcharts-theme.js' %}"></script>
+  <script src="{% static 'scripts/highcharts-lang.js' %}"></script>
   <script src="{% static 'dashboard/scripts/charts.js' %}"></script>
   <script src="{% static 'scripts/login.js' %}"></script>
   <script type="text/javascript">

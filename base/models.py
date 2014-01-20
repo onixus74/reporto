@@ -10,6 +10,11 @@ from django.forms.models import model_to_dict
 
 
 class Media(models.Model):
+
+    class Meta:
+        verbose_name = _("media")
+        verbose_name_plural = _("media")
+
     IMAGE = 'I'
     VIDEO = 'V'
     TYPE = (
@@ -18,8 +23,8 @@ class Media(models.Model):
     )
     # title        = models.CharField(max, blank=True, null=True_length=200)
     # description  = models.TextField()
-    url = models.URLField(max_length=300)
-    file = models.FileField(upload_to='reports/', blank=True, null=True)
+    url = models.URLField(_("URL"), max_length=300)
+    file = models.FileField(_("file"), upload_to='reports/', blank=True, null=True)
     # video_thumbnail = models.ImageField(upload_to='reports/', blank=True, null=True)
     # external = models.BooleanField()
 
@@ -75,6 +80,3 @@ class Media(models.Model):
         data.pop('file')
         data['url'] = self.url
         return data
-
-    class Meta:
-        pass

@@ -17,8 +17,7 @@ from django.views.decorators.http import require_POST
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
-from base.utils.views import JSONResponse, PaginatedListHybridResponseMixin, \
-    DetailHybridResponseMixin
+from base.utils.views import JSONResponse, PaginatedListHybridResponseMixin, DetailHybridResponseMixin
 from violations.models import Victim
 from violations_victims.views import VictimForm as BaseVictimForm
 

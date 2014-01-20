@@ -1,3 +1,4 @@
+{% load i18n %}
                 <li class="ui-timeline-story list-group-item -multi-labels-lines-fix clearfix" data-latitude="{{report.latitude}}" data-longitude="{{report.longitude}}">
 
                   <div class="clearfix">
@@ -6,7 +7,7 @@
                     </span>
                     <span class="text-muted pull-right text-right" style="padding: 2px;">
                       {{report.location_text}}
-                      <a class="ui-timeline-story-locator btn btn-link" href="https://maps.google.com/?q={{report.latitude}},{{report.longitude}}" target="_blank" title="Click to locate violation" data-toggle="tooltip" style="padding: 2px;">
+                      <a class="ui-timeline-story-locator btn btn-link" href="https://maps.google.com/?q={{report.latitude}},{{report.longitude}}" target="_blank" title="{% trans 'Click to locate appreciation' %}" data-toggle="tooltip" style="padding: 2px;">
                         <i class="fa fa-map-marker -fa-lg fa-fw text-muted"></i>
                       </a>
                     </span>
@@ -14,24 +15,27 @@
 
                   <div class="btn-group-vertical btn-group-sm pull-right">
                     {% if report.media.count %}
-                    <a class="btn btn-xs btn-link" data-toggle="tooltip" title="Have media attachments">
+                    <a class="btn btn-xs btn-link" data-toggle="tooltip" title="{% trans 'Have media attachments' %}">
                       <i class="fa fa-picture-o fa-lg fa-fw text-muted"></i>
                     </a>
                     {% endif %}
                     {% if report.is_verified %}
-                    <a class="btn btn-xs btn-link" data-toggle="tooltip" title="Verified">
+                    <a class="btn btn-xs btn-link" data-toggle="tooltip" title="{% trans 'Verified' %}">
                       <i class="fa fa-check-square fa-lg fa-fw text-success"></i>
                     </a>
                     {% endif %}
-                    <a class="ui-timeline-story-link btn btn-xs btn-link" href="{% url 'appreciations:view' report.id %}" -target="_blank" title="Click to view report" data-toggle="tooltip">
-                      <i class="fa fa-external-link-square fa-lg fa-fw text-primary"></i>
+                    <a class="ui-timeline-story-link btn btn-xs btn-link" href="{% url 'appreciations:view' report.id %}" -target="_blank" title="{% trans 'Click to view report' %}" data-toggle="tooltip">
+                      <span class="fa-stack">
+                        <i class="fa fa-circle fa-stack-2x"></i>
+                        <i class="fa fa-external-link-square fa-stack-1x fa-inverse"></i>
+                      </span>
                     </a>
                   </div>
 
                   <div>
-                    <span class="text-info" data-toggle="tooltip" title="Appreciation Category">{{report.category}}</span>
-                    for <span class="text-info" data-toggle="tooltip" title="Appreciation Subject">{{report.subject}}</span>
-                    <span class="text-info" data-toggle="tooltip" title="Appriciation Target">{{report.target}}</span>
+                    <span class="text-info" data-toggle="tooltip" title="{% trans 'Appreciation Category' %}">{{report.category}}</span>
+                    {% trans ' for ' %}
+                    <span class="text-info" data-toggle="tooltip" title="{% trans 'Appreciation Subject' %}">{{report.subject}}</span>
                   </div>
                 </li>
 

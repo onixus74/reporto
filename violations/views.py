@@ -251,7 +251,7 @@ def report_submit(request, template_name='violations/submit.html', *args, **kwar
                 'success': True,
                 #'object': report,
                 'url': report.get_absolute_url(),
-                'notification': {'title': "Adding Report", 'body': "Report added."}
+                'notification': {'title': _("Adding Report"), 'body': _("Report added.")}
             })
         else:
             return redirect(report.get_absolute_url())
@@ -265,7 +265,7 @@ def report_submit(request, template_name='violations/submit.html', *args, **kwar
             return JSONResponse({
                 'success': False,
                 'errors': form.errors,
-                'notification': {'title': "Adding Report", 'body': form.errors.get('__all__', None) or form.errors.as_ul() or "Failed to add a report"}
+                'notification': {'title': _("Adding Report"), 'body': form.errors.get('__all__', None) or form.errors.as_ul() or _("Failed to add a report")}
             }, status=400)
 
     return render(request, template_name, context)
@@ -607,7 +607,7 @@ def report_comment(request, pk, *args, **kwargs):
             'success': True,
             #'object': comment,
             'html': render_to_string('violations/view_comment.html', {'comment': comment}),
-            'notification': {'title': "Adding Comment", 'body': "Comment added."}
+            'notification': {'title': _("Adding Comment"), 'body': _("Comment added.")}
         })
     else:
         return JSONResponse({
@@ -615,7 +615,7 @@ def report_comment(request, pk, *args, **kwargs):
             'errors': form.errors,
             #'notification': { 'title': "Adding Comment", 'body': "Failed to add comment" }
             #'notification': { 'title': "Adding Comment", 'body': form.errors.get('__all__', None) or "<br>".join(["<br>".join(errors) for (field,errors) in form.errors.items()]) }
-            'notification': {'title': "Adding Comment", 'body': form.errors.get('__all__', None) or form.errors.as_ul() or "Failed to add comment"}
+            'notification': {'title': _("Adding Comment"), 'body': form.errors.get('__all__', None) or form.errors.as_ul() or _("Failed to add comment")}
         }, status=400)
 
 
@@ -668,11 +668,11 @@ def append_violations_statistics(context):
 
     victim_gender_display = dict(Victim.GENDER)
     violations_by_victim_gender = Report.objects.values('victim__gender').annotate(Count('id')).order_by('victim__gender')
-    context['violations_by_victim_gender'] = [{'label': victim_gender_display[i['victim__gender']], 'count': i['id__count']} for i in violations_by_victim_gender]
+    context['violations_by_victim_gender'] = [{'label': victim_gender_display[i['victim__gender']].__unicode__(), 'count': i['id__count']} for i in violations_by_victim_gender]
 
     victim_education_display = dict(Victim.EDUCATION)
     violations_by_victim_education = Report.objects.values('victim__education').annotate(Count('id')).order_by('victim__education')
-    context['violations_by_victim_education'] = [{'label': victim_education_display[i['victim__education']], 'count': i['id__count']} for i in violations_by_victim_education]
+    context['violations_by_victim_education'] = [{'label': victim_education_display[i['victim__education']].__unicode__(), 'count': i['id__count']} for i in violations_by_victim_education]
 
     violations_by_feature = Report.objects.values('features__definition').annotate(Count('id')).order_by('features__definition')
     context['violations_by_feature'] = [{'label': i['features__definition'], 'count': i['id__count']} for i in violations_by_feature]

@@ -1,4 +1,4 @@
-{% load static l10n thumbnail custom %}
+{% load static thumbnail custom i18n l10n %}
 
       <div class="row">
         <div class="col-md-offset-2 col-md-8">
@@ -6,27 +6,27 @@
           <h2 class="text-center">
             {% if user.is_admin and show_all %}
             <a href="#" id="id_category" class="-ui-editable" data-type="select" data-source="{{categories|json|force_escape}}" data-value="{{report.category.id}}" data-pk="{{report.pk}}" data-name="category" data-url="{% url 'violations:update_partial' report.id %}" data-title="Category">{{report.category}}</a>
-            on
+            {% trans 'on' %}
             <a href="#" id="id_datetime" class="-ui-editable" data-type="datetime" data-value="{{report.datetime|date:'Y-m-d H:i'}}" data-pk="{{report.pk}}" data-name="datetime" data-url="{% url 'violations:update_partial' report.id %}" data-title="Date and time">{{report.datetime}}</a>
-            at
+            {% trans 'at' %}
             <a href="#" id="id_location" class="-ui-editable" data-type="text" data-pk="{{report.pk}}" data-name="location_text" data-url="{% url 'violations:update_partial' report.id %}" data-title="Location">{{report.location_text}}</a>
 
             {% else %}
-              {{report.category}} on {{report.datetime}} at {{report.location_text}}
+              {{report.category}} {% trans 'on' %} {{report.datetime}} {% trans 'at' %} {{report.location_text}}
             {% endif %}
 
-            {% if report.is_verified %}<span class="badge badge-success">Verified <i class="fa fa-ok"></i></span>{% endif %}
+            {% if report.is_verified %}<span class="badge badge-success">{% trans 'Verified' %} <i class="fa fa-ok"></i></span>{% endif %}
             {% comment %}
-            {% if report.is_closed %}<span class="badge badge-important">Closed <i class="fa fa-lock"></i></span>{% endif %}
+            {% if report.is_closed %}<span class="badge badge-important">{% trans 'Closed' %} <i class="fa fa-lock"></i></span>{% endif %}
             {% endcomment %}
           </h2>
           {% if show_all %}
           <div class="text-center">
             {% if user.is_admin %}
-            <a class="btn btn-link" href="{% url 'admin:violations_report_change' report.id %}" target="_blank"><i class="fa fa-pencil text-warning"></i> Edit as Super User</a>
+            <a class="btn btn-link" href="{% url 'admin:violations_report_change' report.id %}" target="_blank"><i class="fa fa-pencil text-warning"></i> {% trans 'Edit as Super User' %}</a>
             {% endif %}
             {% if user.is_moderator %}
-            <a id="ui-verify-button" class="btn btn-link" href="{% url 'violations:verify' report.id %}"><i class="fa fa-check text-success"></i> Verify</a>
+            <a id="ui-verify-button" class="btn btn-link" href="{% url 'violations:verify' report.id %}"><i class="fa fa-check text-success"></i> {% trans 'Verify' %}</a>
             {% endif %}
           </div>
           {% endif %}
@@ -43,31 +43,31 @@
       <div class="row">
         <div class="col-md-6">
           <hr>
-          <h3><i class="fa fa-user"></i> Victim</h3>
+          <h3><i class="fa fa-user"></i> {% trans 'Victim' %}</h3>
           <dl class="dl-horizontal">
-            <dt>Category</dt>
+            <dt>{% trans 'Category' %}</dt>
             <dd>{{report.victim.get_category_display}}</dd>
-            <dt>First name</dt>
+            <dt>{% trans 'First name' %}</dt>
             <dd>{{report.victim.firstname}}</dd>
-            <dt>Last name</dt>
+            <dt>{% trans 'Last name' %}</dt>
             <dd>{{report.victim.lastname}}</dd>
-            <dt>Gender</ddt>
+            <dt>{% trans 'Gender' %}</ddt>
             <dd>{{report.victim.get_gender_display}}</dd>
-            <dt>Marital Status</dt>
+            <dt>{% trans 'Marital Status' %}</dt>
             <dd>{{report.victim.get_marital_status_display}}</dd>
-            <dt>Social Class</dt>
+            <dt>{% trans 'Social Class' %}</dt>
             <dd>{{report.victim.get_social_class_display}}</dd>
-            <dt>Age</dt>
+            <dt>{% trans 'Age' %}</dt>
             <dd>{{report.victim.age|default:"N/A"}}</dd>
-            <dt>Education</dt>
+            <dt>{% trans 'Education' %}</dt>
             <dd>{{report.victim.get_education_display}}</dd>
-            <dt>Profession</dt>
+            <dt>{% trans 'Profession' %}</dt>
             <dd>{{report.victim.profession|default:"N/A"}}</dd>
           </dl>
         </div>
         <div class="col-md-6">
           <hr>
-          <h3><i class="fa fa-male"></i> Aggressor{% if user.is_admin and show_all %} <a id="ui-aggressor-edit" href="#" title="Edit" class="btn btn-sm"><i class="fa fa-pencil"></i></a>{% endif %}</h3>
+          <h3><i class="fa fa-male"></i> {% trans 'Aggressor' %}{% if user.is_admin and show_all %} <a id="ui-aggressor-edit" href="#" title="Edit" class="btn btn-sm"><i class="fa fa-pencil"></i></a>{% endif %}</h3>
           {% if user.is_admin and show_all %}
           <p id="ui-aggressor" class="-ui-editable" data-type="textarea" data-value="{{report.aggressor}}" date-toggle="manual" data-pk="{{report.pk}}" data-name="aggressor" data-url="{% url 'violations:update_partial' report.id %}" data-title="Aggressor">{{report.aggressor|default:"N/A"}}</p>
           {% else %}
@@ -79,7 +79,7 @@
       <div class="row">
         <div class="col-md-6">
           <hr>
-          <h3><i class="fa fa-ellipsis-h"></i> Description{% if user.is_admin and show_all %} <a id="ui-description-edit" href="#" title="Edit" class="btn btn-sm"><i class="fa fa-pencil"></i></a>{% endif %}</h3>
+          <h3><i class="fa fa-ellipsis-h"></i> {% trans 'Description' %}{% if user.is_admin and show_all %} <a id="ui-description-edit" href="#" title="Edit" class="btn btn-sm"><i class="fa fa-pencil"></i></a>{% endif %}</h3>
           {% if user.is_admin and show_all %}
           <p id="ui-description" class="-ui-editable" data-type="textarea" data-value="{{report.description}}" date-toggle="manual" data-pk="{{report.pk}}" data-name="description" data-url="{% url 'violations:update_partial' report.id %}" data-title="Description">{{report.description|urlize}}</p>
           {% else %}
@@ -94,7 +94,7 @@
         </div>
         <div class="col-md-6">
           <hr>
-          <h3><i class="fa fa-picture-o"></i> Media Attachments</h3>{% get_media_prefix as MEDIA_PREFIX %}
+          <h3><i class="fa fa-picture-o"></i> {% trans 'Media Attachments' %}</h3>{% get_media_prefix as MEDIA_PREFIX %}
           {% if report.media.count %}
           <ul class="list-unstyled">
             {% for media in report.media.all %}
@@ -128,7 +128,7 @@
             {% endfor %}
           </ul>
           {% else %}
-          <span>No attachments!</span>
+          <span>{% trans 'No attachments!' %}</span>
           {% endif %}
         </div>
       </div>
@@ -136,7 +136,7 @@
       <div class="row">
         <div class="col-md-offset-2 col-md-8">
           <hr>
-          <h3><i class="fa fa-tags"></i> Features{% if user.is_admin and show_all %} <a id="ui-features-edit" href="#" title="Edit" class="btn btn-sm"><i class="fa fa-pencil"></i></a>{% endif %}</h3>
+          <h3><i class="fa fa-tags"></i> {% trans 'Features' %}{% if user.is_admin and show_all %} <a id="ui-features-edit" href="#" title="Edit" class="btn btn-sm"><i class="fa fa-pencil"></i></a>{% endif %}</h3>
           <ul id="ui-features" class="list-inline -ui-editable" data-type="checklist" data-source="{{features|json|force_escape}}" data-value="[{% for feature in report.features.all %}{{feature.id}},{% endfor %}]" data-pk="{{report.pk}}" data-name="features" data-url="{% url 'violations:update_partial' report.id %}" data-title="Features">
           {% for feature in report.features.all  %}
             <li><span class="label label-default">{{feature}}</span></li>
@@ -149,13 +149,13 @@
       <div class="row">
         <div class="col-md-offset-1 col-md-10">
           <hr>
-          <h3><i class="fa fa-comments"></i> Comments</h3>
+          <h3><i class="fa fa-comments"></i> {% trans 'Comments' %}</h3>
 
           <ul id="ui-comments" class="list-group">
             {% for comment in report.comments.all  %}
               {% include "violations/view_comment.html" %}
             {% empty %}
-            <li id="ui-no-comments">No comments!</li>
+            <li id="ui-no-comments">{% trans 'No comments!' %}</li>
             {% endfor %}
           </ul>
         </div>
@@ -175,8 +175,8 @@
             </button>
           </div>
           <div class="col-md-2">
-            <button id="ui-add-update-comment-button" class="btn btn-block btn-info" type="button"><i class="fa fa-plus"></i> Update</button>
-            <button id="ui-add-correction-comment-button" class="btn btn-block btn-warning" type="button"><i class="fa fa-plus"></i> Correction</button>
+            <button id="ui-add-update-comment-button" class="btn btn-block btn-info" type="button"><i class="fa fa-plus"></i> {% trans 'Update' %}</button>
+            <button id="ui-add-correction-comment-button" class="btn btn-block btn-warning" type="button"><i class="fa fa-plus"></i> {% trans 'Correction' %}</button>
           </div>
         </fieldset>
       </div>

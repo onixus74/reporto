@@ -71,25 +71,7 @@
           <div id="ui-timeline-appreciations-list" class="ui-timeline-list clearfix">
 
             <div class="ui-pagination text-center">
-              <ul class="pagination pagination-sm">
-                <li class="{% if current == 1 %}disabled{% endif %}">
-                  <a class="ui-pagination-control ui-pagination-first" href="{{request.path}}?page=1"><i class="fa fa-arrow-left"></i> First</a>
-                </li>
-
-                <li class="{% if current == 1 %}disabled{% endif %}">
-                  <a class="ui-pagination-control ui-pagination-previous" href="{{request.path}}?page={{ current|add:-1 }}"><i class="fa fa-chevron-left"></i> Previous</a>
-                </li>
-
-                <li class="disabled"><span class="ui-pagination-indicator">{{current}} / {{pages}}</span></li>
-
-                <li class="{% if current == pages %}disabled{% endif %}">
-                  <a class="ui-pagination-control ui-pagination-next" href="{{request.path}}?page={{ current|add:1 }}">Next <i class="fa fa-chevron-right"></i></a>
-                </li>
-
-                <li class="{% if current == pages %}disabled{% endif %}">
-                  <a class="ui-pagination-control ui-pagination-last" href="{{request.path}}?page={{ pages }}">Last <i class="fa fa-arrow-right"></i></a>
-                </li>
-              </ul>
+              {% include "partials/pagination.html" %}
             </div>
 
             <ul id="ui-timeline-list" class="list-group">

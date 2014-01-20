@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-10 17:18+0100\n"
-"PO-Revision-Date: 2014-01-10 17:26+0100\n"
+"POT-Creation-Date: 2014-01-15 12:44+0100\n"
+"PO-Revision-Date: 2014-01-14 16:38+0100\n"
 "Last-Translator: nader <nader.toukabri@gmail.com>\n"
 "Language-Team: reform.tn\n"
 "Language: ar\n"
@@ -19,14 +19,96 @@ msgstr ""
 "X-Generator: Virtaal 0.7.0\n"
 "X-Project-Style: drupal\n"
 
-#: models.py:28
+#: models.py:15
+msgid "user"
+msgstr "مستخدم"
+
+#: models.py:16
+msgid "users"
+msgstr "مستخدمون"
+
+#: models.py:30
 msgid "Reporter"
 msgstr "مبلغ"
 
-#: models.py:29
+#: models.py:31
 msgid "Moderator"
 msgstr "وسيط"
 
-#: models.py:30
+#: models.py:32
 msgid "Administrator"
 msgstr "مدير"
+
+#: models.py:35
+msgid "role"
+msgstr "الدّور"
+
+#: templates/users/profile.html:10
+msgid "User Profile"
+msgstr "ملف المستخدم"
+
+#: templates/users/profile.html:10
+msgid "Edit as Super User"
+msgstr "عدل كمستعمل متميز"
+
+#: templates/users/profile.html:16
+msgid "Full name"
+msgstr "الاسم الكامل"
+
+#: templates/users/profile.html:19
+msgid "Email"
+msgstr "البريد الإلكتروني"
+
+#: templates/users/profile.html:22
+msgid "Role"
+msgstr "الدور"
+
+#: templates/users/profile.html:25
+msgid "Password"
+msgstr "كلمة المرور"
+
+#: templates/users/profile.html:26
+msgid "Enter new password"
+msgstr "أدخل كلمة مرور جديدة"
+
+#: templates/users/profile.html:26
+msgid "New password"
+msgstr "كلمة مرور جديدة"
+
+#: templates/users/profile.html:26
+msgid "[change]"
+msgstr "[تغير]"
+
+#: templates/users/profile.html:28
+msgid "Social network accounts"
+msgstr "الشبكات الاجتماعية"
+
+#: templates/users/profile.html:32
+msgid "Google"
+msgstr "جوجل"
+
+#: templates/users/profile.html:34 templates/users/profile.html.py:42
+#: templates/users/profile.html:50
+msgid "Disconnect"
+msgstr "افصل"
+
+#: templates/users/profile.html:36 templates/users/profile.html.py:44
+#: templates/users/profile.html:52
+msgid "Connect"
+msgstr "اتصل"
+
+#: templates/users/profile.html:40
+msgid "Facebook"
+msgstr "فيسبوك"
+
+#: templates/users/profile.html:48
+msgid "Twitter"
+msgstr "تويتر"
+
+#: templates/users/profile.html:58
+msgid "Victim Profile"
+msgstr "ملف الضحية"
+
+#: templates/users/profile.html:63
+msgid "Save"
+msgstr "احفظ"

@@ -18,9 +18,12 @@
 
 .ui-timeline-story {
 	margin: 6px;
+  /*
 	@include box-shadow(2px 2px 3px rgba(50, 50, 50, 0.6));
 	border: 1px solid $gray-lighter;
 	vertical-align: middle !important;
+  */
+  background: rgba(5,0,0, 0.02);
 }
 
 .ui-timeline-no-entries {

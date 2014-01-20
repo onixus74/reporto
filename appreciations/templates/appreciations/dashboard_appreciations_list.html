@@ -1,5 +1,6 @@
+{% load i18n %}
                 {% for report in report_list %}
                   {% include "appreciations/dashboard_appreciations_item.html" %}
                 {% empty %}
-                <li class="ui-timeline-no-entries list-group-item">No reports!</li>
+                <li class="ui-timeline-no-entries list-group-item">{% trans 'There is no reports!' %}</li>
                 {% endfor %}

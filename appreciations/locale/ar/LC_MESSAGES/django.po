@@ -1,0 +1,194 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# nader <nader.toukabri@gmail.com>, 2014.
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-01-20 11:35+0100\n"
+"PO-Revision-Date: 2014-01-20 11:35+0100\n"
+"Last-Translator: nader <nader.toukabri@gmail.com>\n"
+"Language-Team: reform.tn\n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
+"X-Generator: Virtaal 0.7.0\n"
+
+#: models.py:16 models.py:44
+msgid "category"
+msgstr "تصنيف"
+
+#: models.py:17
+msgid "categories"
+msgstr "أصناف"
+
+#: models.py:19
+msgid "slug"
+msgstr "الرابط"
+
+#: models.py:20
+msgid "definition"
+msgstr "التعريف"
+
+#: models.py:36
+msgid "report"
+msgstr "تقرير"
+
+#: models.py:37
+msgid "reports"
+msgstr "تقارير"
+
+#: models.py:40
+msgid "date and time"
+msgstr "الزمان"
+
+#: models.py:41
+msgid "latitude"
+msgstr "خط العرض"
+
+#: models.py:42
+msgid "longitude"
+msgstr "خط الطول"
+
+#: models.py:43
+msgid "location"
+msgstr "المكان"
+
+#: models.py:45
+msgid "subject"
+msgstr "الموضوع"
+
+#: models.py:46
+msgid "description"
+msgstr "الوصف"
+
+#: models.py:49
+msgid "created by"
+msgstr "أنشأه"
+
+#: models.py:50
+msgid "created at"
+msgstr "تم الإنشاء في"
+
+#: models.py:51
+msgid "updated at"
+msgstr "حُدّث في"
+
+#: views.py:83 views.py:93
+msgid "Adding Report"
+msgstr "إضافة تقرير"
+
+#: views.py:83
+msgid "Report added."
+msgstr "تمت إضافة التقرير."
+
+#: views.py:93
+msgid "Failed to add a report"
+msgstr "فشل في إضافة التقرير"
+
+#: templates/appreciations/dashboard_appreciations_item.html:10
+msgid "Click to locate appreciation"
+msgstr "انقر لتحدد مكان الشكر"
+
+#: templates/appreciations/dashboard_appreciations_item.html:18
+msgid "Have media attachments"
+msgstr "تحتوي على مرفقات"
+
+#: templates/appreciations/dashboard_appreciations_item.html:23
+msgid "Verified"
+msgstr "متحقّق منه"
+
+#: templates/appreciations/dashboard_appreciations_item.html:27
+msgid "Click to view report"
+msgstr "انقر لتعرض التقرير"
+
+#: templates/appreciations/dashboard_appreciations_item.html:36
+msgid "Appreciation Category"
+msgstr "تصنيف الشكر"
+
+#: templates/appreciations/dashboard_appreciations_item.html:37
+msgid " for "
+msgstr " ل "
+
+#: templates/appreciations/dashboard_appreciations_item.html:38
+msgid "Appreciation Subject"
+msgstr "موضوع الشكر"
+
+#: templates/appreciations/dashboard_appreciations_list.html:5
+msgid "There is no reports!"
+msgstr "لا يوجد تقارير!"
+
+#: templates/appreciations/submit.html:5
+msgid "Appreciate Police Work"
+msgstr "اشكر عمل الشرطة"
+
+#: templates/appreciations/submit.html:13 templates/appreciations/view.html:5
+#: templates/appreciations/view.html:10
+msgid "Appreciation Report"
+msgstr "تقرير الشكر"
+
+#: templates/appreciations/submit.html:31
+msgid "Category"
+msgstr "التصنيف"
+
+#: templates/appreciations/submit.html:32
+msgid "Select a category"
+msgstr "اختر تصنيفًا"
+
+#: templates/appreciations/submit.html:39
+msgid "Location"
+msgstr "المكان"
+
+#: templates/appreciations/submit.html:52
+msgid "Date and Time"
+msgstr "الزمان"
+
+#: templates/appreciations/submit.html:80
+msgid "Time"
+msgstr "الزّمان"
+
+#: templates/appreciations/submit.html:87
+#: templates/appreciations/view_partial.html:23
+msgid "Subject"
+msgstr "الموضوع"
+
+#: templates/appreciations/submit.html:95
+#: templates/appreciations/view_partial.html:31
+msgid "Description"
+msgstr "الوصف"
+
+#: templates/appreciations/submit.html:100
+#: templates/appreciations/view_partial.html:36
+msgid "Photos"
+msgstr "الصور"
+
+#: templates/appreciations/submit.html:128
+msgid "Appreciate"
+msgstr "اشكر"
+
+#: templates/appreciations/view_partial.html:7
+msgid "on"
+msgstr "في"
+
+#: templates/appreciations/view_partial.html:7
+msgid "at"
+msgstr "في"
+
+#: templates/appreciations/view_partial.html:8
+msgid "Edit as Super User"
+msgstr "عدل كمستعمل متميز"
+
+#: templates/appreciations/view_partial.html:52
+msgid "No attachments!"
+msgstr "لا تحتوي على مرفقات"
+
+#, fuzzy
+#~ msgid "Adding Appreciation"
+#~ msgstr "تقرير الشكر"
+
+#~ msgid "Appreciation Report Submission"
+#~ msgstr "اشكر عمل الشرطة"

@@ -21,6 +21,6 @@ def login_required_with_message(view_func):
         return decorated_view_func(request, *args, **kwargs)
     return modified_view_func
 
-administrator_required = user_passes_test(lambda user: user.is_admin())
-moderator_required = user_passes_test(lambda user: user.is_moderator())
-reporter_required = user_passes_test(lambda user: user.is_reporter())
+administrator_required = user_passes_test(lambda user: user.is_authenticated() and user.is_admin())
+moderator_required = user_passes_test(lambda user: user.is_authenticated() and user.is_moderator())
+reporter_required = user_passes_test(lambda user: user.is_authenticated() and user.is_reporter())

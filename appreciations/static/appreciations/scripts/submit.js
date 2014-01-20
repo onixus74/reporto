@@ -39,7 +39,7 @@ reform.widgets.map.init = function() {
   map.addControl(geoSearch);
   widget.geoSearch = geoSearch;
 
-  //map.scrollWheelZoom.disable();
+  map.scrollWheelZoom.disable();
 
   var marker;
 

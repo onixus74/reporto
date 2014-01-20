@@ -3,12 +3,14 @@
 function makeDjangoAppConfig(config, applicationName) {
 
   config.compass[applicationName] = {
+
     options: {
       basePath: '{app}/static/{app}'.replace(/{app}/g, applicationName),
       sassDir: 'styles',
       cssDir: 'styles',
-      force: true
-    }
+      force: true,
+    },
+
   };
 
   config.r2[applicationName] = {

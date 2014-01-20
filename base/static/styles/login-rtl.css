@@ -6,7 +6,7 @@
   border-color: #dadada;
 }
 
-/* line 470, ../../../../base/static/theme/bootstrap-sass/lib/_mixins.scss */
+/* line 470, ../theme/bootstrap-sass/lib/_mixins.scss */
 
 .btn-signin-facebook:hover,
 .btn-signin-facebook:focus,
@@ -17,7 +17,7 @@
   border-color: #bbbbbb;
 }
 
-/* line 475, ../../../../base/static/theme/bootstrap-sass/lib/_mixins.scss */
+/* line 475, ../theme/bootstrap-sass/lib/_mixins.scss */
 
 .open .btn-signin-facebook.dropdown-toggle {
   color: white;
@@ -25,20 +25,20 @@
   border-color: #bbbbbb;
 }
 
-/* line 481, ../../../../base/static/theme/bootstrap-sass/lib/_mixins.scss */
+/* line 481, ../theme/bootstrap-sass/lib/_mixins.scss */
 
 .btn-signin-facebook:active,
 .btn-signin-facebook.active {
   background-image: none;
 }
 
-/* line 484, ../../../../base/static/theme/bootstrap-sass/lib/_mixins.scss */
+/* line 484, ../theme/bootstrap-sass/lib/_mixins.scss */
 
 .open .btn-signin-facebook.dropdown-toggle {
   background-image: none;
 }
 
-/* line 494, ../../../../base/static/theme/bootstrap-sass/lib/_mixins.scss */
+/* line 494, ../theme/bootstrap-sass/lib/_mixins.scss */
 
 .btn-signin-facebook.disabled,
 .btn-signin-facebook.disabled:hover,
@@ -67,7 +67,7 @@ fieldset[disabled] .btn-signin-facebook.active {
   border-color: #dadada;
 }
 
-/* line 470, ../../../../base/static/theme/bootstrap-sass/lib/_mixins.scss */
+/* line 470, ../theme/bootstrap-sass/lib/_mixins.scss */
 
 .btn-signin-google:hover,
 .btn-signin-google:focus,
@@ -78,7 +78,7 @@ fieldset[disabled] .btn-signin-facebook.active {
   border-color: #bbbbbb;
 }
 
-/* line 475, ../../../../base/static/theme/bootstrap-sass/lib/_mixins.scss */
+/* line 475, ../theme/bootstrap-sass/lib/_mixins.scss */
 
 .open .btn-signin-google.dropdown-toggle {
   color: white;
@@ -86,20 +86,20 @@ fieldset[disabled] .btn-signin-facebook.active {
   border-color: #bbbbbb;
 }
 
-/* line 481, ../../../../base/static/theme/bootstrap-sass/lib/_mixins.scss */
+/* line 481, ../theme/bootstrap-sass/lib/_mixins.scss */
 
 .btn-signin-google:active,
 .btn-signin-google.active {
   background-image: none;
 }
 
-/* line 484, ../../../../base/static/theme/bootstrap-sass/lib/_mixins.scss */
+/* line 484, ../theme/bootstrap-sass/lib/_mixins.scss */
 
 .open .btn-signin-google.dropdown-toggle {
   background-image: none;
 }
 
-/* line 494, ../../../../base/static/theme/bootstrap-sass/lib/_mixins.scss */
+/* line 494, ../theme/bootstrap-sass/lib/_mixins.scss */
 
 .btn-signin-google.disabled,
 .btn-signin-google.disabled:hover,

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-10 14:57+0100\n"
+"POT-Creation-Date: 2014-01-20 11:59+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,12 +18,24 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: models.py:16
+#: models.py:15 models.py:16
+msgid "media"
+msgstr ""
+
+#: models.py:21
 msgid "Image"
 msgstr ""
 
-#: models.py:17
+#: models.py:22
 msgid "Video"
+msgstr ""
+
+#: models.py:26
+msgid "URL"
+msgstr ""
+
+#: models.py:27
+msgid "file"
 msgstr ""
 
 #: templates/home.html:5 templates/home.html.py:10
@@ -31,38 +43,82 @@ msgstr ""
 msgid "Reports Dashboard"
 msgstr ""
 
-#: templates/home.html:78
+#: templates/home.html:20
 msgid "Latest Violation"
 msgstr ""
 
-#: templates/home.html:92
+#: templates/home.html:21
+msgid "Victim"
+msgstr ""
+
+#: templates/home.html:22
+msgid " has been a victim of "
+msgstr ""
+
+#: templates/home.html:24 templates/home.html.py:53
+msgid " happened in "
+msgstr ""
+
+#: templates/home.html:26 templates/home.html.py:55 templates/login.html:108
+msgid " on "
+msgstr ""
+
+#: templates/home.html:29 templates/home.html.py:58
+msgid "Click to view report"
+msgstr ""
+
+#: templates/home.html:37
 msgid "There is no reported violations!"
 msgstr ""
 
-#: templates/home.html:95 templates/login.html:143
+#: templates/home.html:40 templates/login.html:142
 #: templates/layouts/default.html:123
 msgid "Report a Violation"
 msgstr ""
 
-#: templates/home.html:106
+#: templates/home.html:51
 msgid "Latest Appreciation"
 msgstr ""
 
-#: templates/home.html:120
+#: templates/home.html:52 templates/login.html:157
+msgid " for "
+msgstr ""
+
+#: templates/home.html:57 templates/login.html:109
+msgid "Verified"
+msgstr ""
+
+#: templates/home.html:68
 msgid "There is no reported appreciations!"
 msgstr ""
 
-#: templates/home.html:124 templates/login.html:191
+#: templates/home.html:72 templates/login.html:190
 #: templates/layouts/default.html:130
 msgid "Appreciate Police Work"
 msgstr ""
 
-#: templates/home.html:159 templates/login.html:100
+#: templates/home.html:107 templates/login.html:100
 msgid "Violations"
 msgstr ""
 
-#: templates/home.html:210 templates/login.html:150
+#: templates/home.html:115 templates/home.html.py:148
+msgid "Type to search..."
+msgstr ""
+
+#: templates/home.html:140 templates/login.html:149
 msgid "Appreciations"
+msgstr ""
+
+#: templates/home.html:246
+msgid "Violation Report"
+msgstr ""
+
+#: templates/home.html:252 templates/home.html.py:270
+msgid "Full report"
+msgstr ""
+
+#: templates/home.html:264
+msgid "Appreciation Report"
 msgstr ""
 
 #: templates/login-minimal.html:6 templates/login-minimal.html.py:49
@@ -122,21 +178,25 @@ msgstr ""
 msgid "contribute by reporting incidents, start by signing in"
 msgstr ""
 
-#: templates/login.html:104 templates/login.html.py:154
+#: templates/login.html:104 templates/login.html.py:153
 msgid "Latest Reports"
 msgstr ""
 
-#: templates/login.html:113 templates/login.html.py:139
-#: templates/login.html:161 templates/login.html.py:174
-#: templates/login.html:187
+#: templates/login.html:108 templates/login.html.py:157
+msgid " at "
+msgstr ""
+
+#: templates/login.html:112 templates/login.html.py:138
+#: templates/login.html:160 templates/login.html.py:173
+#: templates/login.html:186
 msgid "There is no reports!"
 msgstr ""
 
-#: templates/login.html:118 templates/login.html.py:166
+#: templates/login.html:117 templates/login.html.py:165
 msgid "Top Reporters"
 msgstr ""
 
-#: templates/login.html:131 templates/login.html.py:179
+#: templates/login.html:130 templates/login.html.py:178
 msgid "Top Reporting Circles"
 msgstr ""
 
@@ -144,7 +204,7 @@ msgstr ""
 msgid "Toggle navigation"
 msgstr ""
 
-#: templates/layouts/default.html:108 templates/layouts/default.html.py:228
+#: templates/layouts/default.html:108 templates/layouts/default.html.py:240
 msgid "Tunisian Institutional Reform"
 msgstr ""
 
@@ -192,18 +252,52 @@ msgstr ""
 msgid "Sign out"
 msgstr ""
 
-#: templates/layouts/default.html:214
-msgid "Language"
-msgstr ""
-
-#: templates/layouts/default.html:228
+#: templates/layouts/default.html:239
 msgid "Developed by"
 msgstr ""
 
-#: templates/layouts/default.html:228
+#: templates/layouts/default.html:241
+msgid "REFORM Association"
+msgstr ""
+
+#: templates/layouts/default.html:242
 msgid "report a bug, suggest a feature, ..."
 msgstr ""
 
-#: templates/layouts/default.html:228
+#: templates/layouts/default.html:242
 msgid "feedback"
+msgstr ""
+
+#: templates/partials/home-pagination.html:4
+#: templates/partials/home-pagination.html:8
+#: templates/partials/pagination.html:4 templates/partials/pagination.html:8
+msgctxt "css"
+msgid "left"
+msgstr ""
+
+#: templates/partials/home-pagination.html:4
+#: templates/partials/pagination.html:4
+msgid "First"
+msgstr ""
+
+#: templates/partials/home-pagination.html:8
+#: templates/partials/pagination.html:8
+msgid "Previous"
+msgstr ""
+
+#: templates/partials/home-pagination.html:14
+#: templates/partials/pagination.html:14
+msgid "Next"
+msgstr ""
+
+#: templates/partials/home-pagination.html:14
+#: templates/partials/home-pagination.html:18
+#: templates/partials/pagination.html:14 templates/partials/pagination.html:18
+msgctxt "css"
+msgid "right"
+msgstr ""
+
+#: templates/partials/home-pagination.html:18
+#: templates/partials/pagination.html:18
+msgid "Last"
 msgstr ""

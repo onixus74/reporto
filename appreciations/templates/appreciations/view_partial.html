@@ -1,11 +1,11 @@
-{% load static l10n thumbnail %}
+{% load static thumbnail i18n l10n %}
 
       <div class="row">
         <div class="col-md-offset-2 col-md-8">
           <hr>
           <h2 class="text-center">
-            {{report.category}} on {{report.datetime}} at {{report.location_text}}
-            {% if user.is_admin and show_all %}<a class="btn btn-link" href="/admin/appreciations/report/{{report.id}}" target="_blank"><i class="fa fa-pencil"></i> Edit</a>{% endif %}
+            {{report.category}} {% trans 'on'%} {{report.datetime}} {% trans 'at' %} {{report.location_text}}
+            {% if user.is_admin and show_all %}<a class="btn btn-link" href="{% url 'admin:appreciations_report_change' report.id %}" target="_blank"><i class="fa fa-pencil text-warning"></i> {% trans 'Edit as Super User' %}</a>{% endif %}
           </h2>
         </div>
       </div>
@@ -20,7 +20,7 @@
       <div class="row">
         <div class="col-md-10 col-md-offset-1">
           <hr>
-          <h3><i class="fa fa-user"></i> Subject</h3>
+          <h3><i class="fa fa-user"></i> {% trans 'Subject' %}</h3>
           <p>{{report.subject}}</p>
         </div>
       </div>
@@ -28,12 +28,12 @@
       <div class="row">
         <div class="col-md-6">
           <hr>
-          <h3><i class="fa fa-ellipsis-h"></i> Description</h3>
+          <h3><i class="fa fa-ellipsis-h"></i> {% trans 'Description' %}</h3>
           <p>{{report.description|urlize}}</p>
         </div>
         <div class="col-md-6">
           <hr>
-          <h3><i class="fa fa-picture-o"></i> Photos</h3>{% get_media_prefix as MEDIA_PREFIX %}
+          <h3><i class="fa fa-picture-o"></i> {% trans 'Photos' %}</h3>{% get_media_prefix as MEDIA_PREFIX %}
           {% if report.media.count %}
           <ul class="list-unstyled">
             {% for media in report.media.all %}
@@ -48,7 +48,7 @@
             {% endfor %}
           </ul>
           {% else %}
-          <span>No attachments!</span>
+          <span>{% trans 'No attachments!' %}</span>
           {% endif %}
         </div>
       </div>

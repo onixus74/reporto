@@ -1,13 +1,13 @@
 {% extends "layouts/default.html" %}
 
-{% load static custom thumbnail compress %}
+{% load static custom thumbnail compress i18n %}
 
-{% block view_title %}Violation Details | {% endblock %}
+{% block view_title %}{% trans 'Violation Report' %} | {% endblock %}
 
 {% block view_content %}
 
     <div class="page-header">
-      <h1 class="text-center">Violation Report<small></small></h1>
+      <h1 class="text-center">{% trans 'Violation Report' %}<small></small></h1>
     </div>
 
     <div class="well">

@@ -29,6 +29,16 @@ def times(number):
 
 
 @register.filter
+def keys(object):
+    return [key for key in dict(object)]
+
+
+@register.filter
+def values(dict):
+    return [object[key] for key in dict(object)]
+
+
+@register.filter
 def pluck(list, key):
     return [i.get(key, None) for i in list]
 

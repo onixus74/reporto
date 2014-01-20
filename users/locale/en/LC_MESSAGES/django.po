@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-10 17:18+0100\n"
+"POT-Creation-Date: 2014-01-15 12:44+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,14 +17,96 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: models.py:28
-msgid "Reporter"
+#: models.py:15
+msgid "user"
 msgstr ""
 
-#: models.py:29
-msgid "Moderator"
+#: models.py:16
+msgid "users"
 msgstr ""
 
 #: models.py:30
+msgid "Reporter"
+msgstr ""
+
+#: models.py:31
+msgid "Moderator"
+msgstr ""
+
+#: models.py:32
 msgid "Administrator"
+msgstr ""
+
+#: models.py:35
+msgid "role"
+msgstr ""
+
+#: templates/users/profile.html:10
+msgid "User Profile"
+msgstr ""
+
+#: templates/users/profile.html:10
+msgid "Edit as Super User"
+msgstr ""
+
+#: templates/users/profile.html:16
+msgid "Full name"
+msgstr ""
+
+#: templates/users/profile.html:19
+msgid "Email"
+msgstr ""
+
+#: templates/users/profile.html:22
+msgid "Role"
+msgstr ""
+
+#: templates/users/profile.html:25
+msgid "Password"
+msgstr ""
+
+#: templates/users/profile.html:26
+msgid "Enter new password"
+msgstr ""
+
+#: templates/users/profile.html:26
+msgid "New password"
+msgstr ""
+
+#: templates/users/profile.html:26
+msgid "[change]"
+msgstr ""
+
+#: templates/users/profile.html:28
+msgid "Social network accounts"
+msgstr ""
+
+#: templates/users/profile.html:32
+msgid "Google"
+msgstr ""
+
+#: templates/users/profile.html:34 templates/users/profile.html.py:42
+#: templates/users/profile.html:50
+msgid "Disconnect"
+msgstr ""
+
+#: templates/users/profile.html:36 templates/users/profile.html.py:44
+#: templates/users/profile.html:52
+msgid "Connect"
+msgstr ""
+
+#: templates/users/profile.html:40
+msgid "Facebook"
+msgstr ""
+
+#: templates/users/profile.html:48
+msgid "Twitter"
+msgstr ""
+
+#: templates/users/profile.html:58
+msgid "Victim Profile"
+msgstr ""
+
+#: templates/users/profile.html:63
+msgid "Save"
 msgstr ""

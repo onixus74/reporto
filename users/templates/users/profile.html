@@ -1,66 +1,88 @@
 {% extends "layouts/default.html" %}
 
-{% load static custom thumbnail compress crispy_forms_tags %}
+{% load static i18n custom thumbnail compress crispy_forms_tags %}
 
 {% block view_title %}{{profile}} | User Profile | {% endblock %}
 
 {% block view_content %}
 
   <div class="page-header">
-    <h1 class="text-center">User Profile <small><a class="btn btn-link" href="{% url 'admin:users_user_change' profile.id %}" target="_blank"><i class="fa fa-pencil text-warning"></i> Edit as Super User</a></small></small></h1>
+    <h1 class="text-center">{% trans 'User Profile' %} <small><a class="btn btn-link" href="{% url 'admin:users_user_change' profile.id %}" target="_blank"><i class="fa fa-pencil text-warning"></i> {% trans 'Edit as Super User' %}</a></small></small></h1>
   </div>
 
   <div class="row">
     <div class="col-md-offset-2 col-md-8 well">
       <dl class="dl-horizontal">
-        <dt>Full name</dt>
+        <dt>{% trans 'Full name' %}</dt>
         <dd>{{profile}}</dd>
 
-        <dt>Email</dt>
+        <dt>{% trans 'Email' %}</dt>
         <dd>{{profile.email}}</dd>
 
-        <dt>Role</dt>
+        <dt>{% trans 'Role' %}</dt>
         <dd>{{profile.get_role_display}}</dd>
 
-        <dt>Password</dt>
-        <dd><a href="#" class="ui-editable" id="user-password" data-type="password" data-pk="{{profile.pk}}" data-name="password" data-url="{% url 'users:change_password' %}" data-display="false" data-title="Enter new password" data-placeholder="New password">[change]</a></dd>
+        <dt>{% trans 'Password' %}</dt>
+        <dd><a href="#" class="ui-editable" id="user-password" data-type="password" data-pk="{{profile.pk}}" data-name="password" data-url="{% url 'users:change_password' %}" data-display="false" data-title="{% trans 'Enter new password' %}" data-placeholder="{% trans 'New password' %}">{% trans '[change]' %}</a></dd>
 
-        <dt>Connected accounts</dt>
+        <dt>{% trans 'Social network accounts' %}</dt>
         <dd>
+          <div class="btn-group">
+            {% if social_auth.google %}
+            <a class="btn btn-default" href="{% url "socialauth_disconnect_individual" social_auth.google.provider social_auth.google.id %}?next={{request.path}}">{% trans 'Disconnect' %} {% trans 'Google' %}</a>
+            {% else %}
+            <a class="btn btn-default" href="{% url 'socialauth_begin' 'google' %}?next={{request.path}}">{% trans 'Connect' %} {% trans 'Google' %}</a>
+            {% endif %}
+
+            {% if social_auth.facebook %}
+            <a class="btn btn-default" href="{% url "socialauth_disconnect_individual" social_auth.facebook.provider social_auth.facebook.id %}?next={{request.path}}">{% trans 'Disconnect' %} {% trans 'Facebook' %}</a>
+            {% else %}
+            <a class="btn btn-default" href="{% url 'socialauth_begin' 'facebook' %}?next={{request.path}}">{% trans 'Connect' %} {% trans 'Facebook' %}</a>
+            {% endif %}
+
+            {% if social_auth.twitter %}
+            <a class="btn btn-default" href="{% url "socialauth_disconnect_individual" social_auth.twitter.provider social_auth.twitter.id %}?next={{request.path}}">{% trans 'Disconnect' %} {% trans 'Twitter' %}</a>
+            {% else %}
+            <a class="btn btn-default" href="{% url 'socialauth_begin' 'twitter' %}?next={{request.path}}">{% trans 'Connect' %} {% trans 'Twitter' %}</a>
+            {% endif %}
+
+          </div>
+          {% comment %}
           <ul>
             <li>
-              Google
+              {% trans 'Google' %}
               {% if social_auth.google %}
-              <a href="{% url "socialauth_disconnect_individual" social_auth.google.provider social_auth.google.id %}?next={{request.path}}">Disconnect</a>
+              <a href="{% url "socialauth_disconnect_individual" social_auth.google.provider social_auth.google.id %}?next={{request.path}}">{% trans 'Disconnect' %}</a>
               {% else %}
-              <a href="{% url 'socialauth_begin' 'google' %}?next={{request.path}}">Connect</a>
+              <a href="{% url 'socialauth_begin' 'google' %}?next={{request.path}}">{% trans 'Connect' %}</a>
               {% endif %}
             </li>
             <li>
-              Facebook
+              {% trans 'Facebook' %}
               {% if social_auth.facebook %}
-              <a href="{% url "socialauth_disconnect_individual" social_auth.facebook.provider social_auth.facebook.id %}?next={{request.path}}">Disconnect</a>
+              <a href="{% url "socialauth_disconnect_individual" social_auth.facebook.provider social_auth.facebook.id %}?next={{request.path}}">{% trans 'Disconnect' %}</a>
               {% else %}
-              <a href="{% url 'socialauth_begin' 'facebook' %}?next={{request.path}}">Connect</a>
+              <a href="{% url 'socialauth_begin' 'facebook' %}?next={{request.path}}">{% trans 'Connect' %}</a>
               {% endif %}
             </li>
             <li>
-              Twitter
+              {% trans 'Twitter' %}
               {% if social_auth.twitter %}
-              <a href="{% url "socialauth_disconnect_individual" social_auth.twitter.provider social_auth.twitter.id %}?next={{request.path}}">Disconnect</a>
+              <a href="{% url "socialauth_disconnect_individual" social_auth.twitter.provider social_auth.twitter.id %}?next={{request.path}}">{% trans 'Disconnect' %}</a>
               {% else %}
-              <a href="{% url 'socialauth_begin' 'twitter' %}?next={{request.path}}">Connect</a>
+              <a href="{% url 'socialauth_begin' 'twitter' %}?next={{request.path}}">{% trans 'Connect' %}</a>
               {% endif %}
             </li>
           </ul>
+          {% endcomment %}
         </dd>
 
-        <dt>Victim Profile</dt>
+        <dt>{% trans 'Victim Profile' %}</dt>
         <dd>
           <form class="ui-profile-victim form-horizontal clean-empty" method="post">
             {% csrf_token %}
             {{victim_form|crispy_form_horizontal}}
-            <button type="submit" class="btn btn-primary btn-block">Save</button>
+            <button type="submit" class="btn btn-primary btn-block">{% trans 'Save' %}</button>
           </form>
         </dd>
 
