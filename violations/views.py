@@ -55,8 +55,8 @@ class ReportsDashboard(PaginatedListHybridResponseMixin, ListView):
 
             append_violations_statistics(context)
 
-            context['violations_locations'] = Report.objects.values('latitude', 'longitude', 'category__definition', 'pk')
-            context['appreciations_locations'] = AppreciationReport.objects.values('latitude', 'longitude', 'category__definition', 'pk')
+            context['violations_locations'] = Report.objects.values('latitude', 'longitude', 'category__definition_en', 'pk')
+            context['appreciations_locations'] = AppreciationReport.objects.values('latitude', 'longitude', 'category__definition_en', 'pk')
 
         return context
 
@@ -663,8 +663,8 @@ def append_violations_statistics(context):
 
     context['violations_count'] = Report.objects.count()
 
-    violations_by_category = Report.objects.values('category__definition').annotate(Count('id')).order_by('category__definition')
-    context['violations_by_category'] = [{'label': i['category__definition'], 'count': i['id__count']} for i in violations_by_category]
+    violations_by_category = Report.objects.values('category__definition_en').annotate(Count('id')).order_by('category__definition_en')
+    context['violations_by_category'] = [{'label': i['category__definition_en'], 'count': i['id__count']} for i in violations_by_category]
 
     victim_gender_display = dict(Victim.GENDER)
     violations_by_victim_gender = Report.objects.values('victim__gender').annotate(Count('id')).order_by('victim__gender')
@@ -697,52 +697,7 @@ def append_appreciations_statistics(context):
     appreciations_by_date = AppreciationReport.objects.extra({'date': 'date(datetime)'}).values('date').annotate(Count('id')).order_by('date')
     context['appreciations_by_date'] = [{'date': i['date'], 'count': i['id__count']} for i in appreciations_by_date]
 
-    appreciations_by_category = AppreciationReport.objects.values('category__definition').annotate(Count('id')).order_by('category__definition')
-    context['appreciations_by_category'] = [{'label': i['category__definition'], 'count': i['id__count']} for i in appreciations_by_category]
+    appreciations_by_category = AppreciationReport.objects.values('category__definition_en').annotate(Count('id')).order_by('category__definition_en')
+    context['appreciations_by_category'] = [{'label': i['category__definition_en'], 'count': i['id__count']} for i in appreciations_by_category]
 
     return context
-
-# CRUD
-
-
-class ReportForm(forms.ModelForm):
-
-    class Meta:
-        model = Report
-        exclude = ('comments', 'media', 'created_by')
-
-
-class ReportListView(ListView):
-    model = Report
-    template_name = 'violations/crud/list.html'
-
-
-class ReportListHybridView(PaginatedListHybridResponseMixin, ReportListView):
-    pass
-
-
-class ReportDetailView(DetailView):
-    model = Report
-    template_name = 'violations/crud/view.html'
-
-
-class ReportDetailHybridView(DetailHybridResponseMixin, ReportDetailView):
-    pass
-
-
-class ReportCreateView(CreateView):
-    model = Report
-    form_class = ReportForm
-    template_name = 'violations/crud/new.html'
-
-
-class ReportUpdateView(UpdateView):
-    model = Report
-    form_class = ReportForm
-    template_name = 'violations/crud/edit.html'
-
-
-class ReportDeleteView(DeleteView):
-    model = Report
-    template_name = 'violations/crud/delete.html'
-    success_url = '..'

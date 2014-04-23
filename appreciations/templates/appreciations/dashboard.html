@@ -1,6 +1,6 @@
 {% extends "layouts/default.html" %}
 
-{% load static custom compress %}
+{% load static custom compress i18n %}
 
 {% block view_title %}Appreciations Dashboard | {% endblock %}
 
@@ -23,10 +23,6 @@
           <span class="label label-default location"><i class="fa fa-map-marker"></i> {{report.location_text}}</span>
           on
           <span class="label label-default datetime"><i class="fa fa-calendar"></i> {{report.datetime}}</span>
-          {% if report.is_verified %}<span class="badge badge-success">Verified <i class="fa fa-ok"></i></span>{% endif %}
-          {% comment %}
-          {% if report.is_closed %}<span class="badge badge-important">Closed <i class="fa fa-lock"></i></span>{% endif %}
-          {% endcomment %}
           <a class="btn btn-link" href="{% url 'appreciations:view' report.id %}" target="_blank" title="Click to view report" -data-toggle="modal" -data-target="#ui-report-view-modal">
             <i class="fa fa-external-link fa-lg"></i>
           </a>
@@ -35,10 +31,10 @@
       </div>
       {% else %}
       <div class="pull-left" style="margin: 0;">
-        <h2>There is no reports!</h2>
+        <h2>{% trans 'There is no reports!' %}</h2>
       </div>
       {% endif %}
-      <a class="btn btn-success btn-lg pull-right" href="{% url 'appreciations:submit' %}"><i class="fa fa-plus"></i> Appreciate Police Work</a>
+      <a class="btn btn-success btn-lg pull-right" href="{% url 'appreciations:submit' %}"><i class="fa fa-plus"></i> {% trans 'Appreciate Police Work' %}</a>
     </div>
 
     {% if report_list %}

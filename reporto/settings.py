@@ -153,7 +153,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.locale.LocaleMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware',  # !debug_toolbar!
+    # 'debug_toolbar.middleware.DebugToolbarMiddleware',  # !debug_toolbar!
 )
 
 ROOT_URLCONF = 'reporto.urls'
@@ -176,15 +176,16 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     #'django.contrib.markup',
 
-    'reversion',
-    'mptt',
-    'watson',
+    'customization',
+
+    'reversion',  # models versionning
+    'mptt',  # tree models
+    'watson',  # full-text search in models
 
     # project components
     'users',
 
     # admin components
-    'admin_mod',
     'rosetta',
     'report_builder',
     #'filebrowser',
@@ -195,8 +196,13 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     #'django.contrib.admindocs',
 
-    # project components
     'base',
+
+    #'registration',
+    #'registration.contrib.notification',
+
+    # project components
+
     'violations',
     'violations_categories',
     'violations_features',
@@ -329,6 +335,12 @@ THUMBNAIL_ALIASES = {
         'report_comment': {'size': (150, 150), 'crop': False, 'quality': 100},
     },
 }
+
+
+# APP 'registration'
+ACCOUNT_ACTIVATION_DAYS = 7
+REGISTRATION_DEFAULT_PASSWORD_LENGTH = 8
+REGISTRATION_REGISTRATION_EMAIL = False
 
 # APP 'social_auth'
 AUTHENTICATION_BACKENDS = (

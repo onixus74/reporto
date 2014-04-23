@@ -4,8 +4,8 @@
   "dependencies": {
     "font-awesome": "~4.0.3",
     "sass-bootstrap": "~3.0.2",
-    "bootstrap-sass": "~3.0.0",
-    "bootstrap": "~3.0.0",
+    "bootstrap-sass": "twbs/bootstrap-sass#~3.1.0",
+    "bootstrap": "~3.1.0",
     "bootswatch": "~3.0.3",
     "bootswatch-scss": "~3.0.0"
   }

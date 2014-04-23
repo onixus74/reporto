@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-20 11:35+0100\n"
+"POT-Creation-Date: 2014-01-21 20:20+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,63 +17,63 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: models.py:16 models.py:44
+#: models.py:18 models.py:47
 msgid "category"
 msgstr ""
 
-#: models.py:17
+#: models.py:19
 msgid "categories"
 msgstr ""
 
-#: models.py:19
+#: models.py:22
 msgid "slug"
 msgstr ""
 
-#: models.py:20
+#: models.py:23
 msgid "definition"
 msgstr ""
 
-#: models.py:36
+#: models.py:39
 msgid "report"
 msgstr ""
 
-#: models.py:37
+#: models.py:40
 msgid "reports"
 msgstr ""
 
-#: models.py:40
+#: models.py:43
 msgid "date and time"
 msgstr ""
 
-#: models.py:41
+#: models.py:44
 msgid "latitude"
 msgstr ""
 
-#: models.py:42
+#: models.py:45
 msgid "longitude"
 msgstr ""
 
-#: models.py:43
+#: models.py:46
 msgid "location"
 msgstr ""
 
-#: models.py:45
+#: models.py:48
 msgid "subject"
 msgstr ""
 
-#: models.py:46
+#: models.py:49
 msgid "description"
 msgstr ""
 
-#: models.py:49
+#: models.py:52
 msgid "created by"
 msgstr ""
 
-#: models.py:50
+#: models.py:53
 msgid "created at"
 msgstr ""
 
-#: models.py:51
+#: models.py:54
 msgid "updated at"
 msgstr ""
 
@@ -89,6 +89,16 @@ msgstr ""
 msgid "Failed to add a report"
 msgstr ""
 
+#: templates/appreciations/dashboard.html:34
+#: templates/appreciations/dashboard_appreciations_list.html:5
+msgid "There is no reports!"
+msgstr ""
+
+#: templates/appreciations/dashboard.html:37
+#: templates/appreciations/submit.html:5
+msgid "Appreciate Police Work"
+msgstr ""
+
 #: templates/appreciations/dashboard_appreciations_item.html:10
 msgid "Click to locate appreciation"
 msgstr ""
@@ -97,32 +107,20 @@ msgstr ""
 msgid "Have media attachments"
 msgstr ""
 
-#: templates/appreciations/dashboard_appreciations_item.html:23
-msgid "Verified"
-msgstr ""
-
-#: templates/appreciations/dashboard_appreciations_item.html:27
+#: templates/appreciations/dashboard_appreciations_item.html:22
 msgid "Click to view report"
 msgstr ""
 
-#: templates/appreciations/dashboard_appreciations_item.html:36
+#: templates/appreciations/dashboard_appreciations_item.html:31
 msgid "Appreciation Category"
 msgstr ""
 
-#: templates/appreciations/dashboard_appreciations_item.html:37
-msgid " for "
+#: templates/appreciations/dashboard_appreciations_item.html:32
+msgid "for"
 msgstr ""
 
-#: templates/appreciations/dashboard_appreciations_item.html:38
+#: templates/appreciations/dashboard_appreciations_item.html:33
 msgid "Appreciation Subject"
-msgstr ""
-
-#: templates/appreciations/dashboard_appreciations_list.html:5
-msgid "There is no reports!"
-msgstr ""
-
-#: templates/appreciations/submit.html:5
-msgid "Appreciate Police Work"
 msgstr ""
 
 #: templates/appreciations/submit.html:13 templates/appreciations/view.html:5
@@ -151,18 +149,22 @@ msgid "Time"
 msgstr ""
 
 #: templates/appreciations/submit.html:87
-#: templates/appreciations/view_partial.html:23
+#: templates/appreciations/view_partial.html:29
 msgid "Subject"
 msgstr ""
 
 #: templates/appreciations/submit.html:95
-#: templates/appreciations/view_partial.html:31
+#: templates/appreciations/view_partial.html:37
 msgid "Description"
 msgstr ""
 
 #: templates/appreciations/submit.html:100
-#: templates/appreciations/view_partial.html:36
+#: templates/appreciations/view_partial.html:42
 msgid "Photos"
+msgstr ""
+
+#: templates/appreciations/submit.html:118
+msgid "Media Link"
 msgstr ""
 
 #: templates/appreciations/submit.html:128
@@ -177,10 +179,10 @@ msgstr ""
 msgid "at"
 msgstr ""
 
-#: templates/appreciations/view_partial.html:8
+#: templates/appreciations/view_partial.html:12
 msgid "Edit as Super User"
 msgstr ""
 
-#: templates/appreciations/view_partial.html:52
+#: templates/appreciations/view_partial.html:58
 msgid "No attachments!"
 msgstr ""

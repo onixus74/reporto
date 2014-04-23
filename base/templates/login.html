@@ -104,8 +104,10 @@
               <div class="list-group text-left">
               {% for report in violations_latest %}
                 <a class="list-group-item" href="{{report.get_absolute_url}}">
-                  {{report.category}}{% trans ' at ' %}{{report.location_text}}{% trans ' on ' %}{{report.datetime}}
-                  {% if report.is_verified %}<span class="label label-success">{% trans 'Verified' %} <i class="fa fa-ok"></i></span>{% endif %}
+                  {{report.category}} {% trans 'at' %} {{report.location_text}} {% trans 'on' %} {{report.datetime}}
+                  {% if report.is_verified %}
+                  <span class="text-success" title="{% trans 'Verified' %}"><i class="fa fa-check-square"></i></span>
+                  {% endif %}
                 </a>
               {% empty %}
                 <a class="list-group-item text-muted" href="#">{% trans 'There is no reports!' %}</a>
@@ -121,7 +123,7 @@
                   {{user.get_full_name}}
                 </li>
               {% empty %}
-                <li class="list-group-item text-muted">There is no reports!</li>
+                <li class="list-group-item text-muted">{% trans 'There is no reports!' %}</li>
               {% endfor %}
               </ul>
             </div>
@@ -153,7 +155,7 @@
               <div class="list-group text-left">
               {% for report in appreciations_latest %}
                 <a class="list-group-item" href="{{report.get_absolute_url}}">
-                  {{report.category}}{% trans ' for ' %}{{report.subject}}, {{report.datetime}}{% trans ' at '%}{{report.location_text}}
+                  {{report.category}} {% trans 'for' %} {{report.subject}}, {{report.datetime}} {% trans 'at'%} {{report.location_text}}
                 </a>
               {% empty %}
                 <a class="list-group-item text-muted" href"#">{% trans 'There is no reports!' %}</a>

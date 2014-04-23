@@ -1,0 +1,34 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# nader <nader.toukabri@gmail.com>, 2014.
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-01-21 20:20+0100\n"
+"PO-Revision-Date: 2014-01-21 18:12+0100\n"
+"Last-Translator: nader <nader.toukabri@gmail.com>\n"
+"Language-Team: reform.tn\n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
+"X-Generator: Virtaal 0.7.0\n"
+
+#: static/appreciations/scripts/submit.js:37
+#: static/appreciations/scripts/submit.min.js:1
+msgid "search for location ..."
+msgstr "ابحث عن مكان ..."
+
+#: static/appreciations/scripts/submit.js:38
+#: static/appreciations/scripts/submit.min.js:1
+msgid "Location could not be found."
+msgstr "لا يمكن العثور على هذا المكان."
+
+#: static/appreciations/scripts/submit.js:108
+#: static/appreciations/scripts/submit.min.js:1
+msgid "Drop files or click to upload photos"
+msgstr "اسقط ملفات أو انقر هنا لتحميل الصور"

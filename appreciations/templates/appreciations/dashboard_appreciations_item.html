@@ -19,11 +19,6 @@
                       <i class="fa fa-picture-o fa-lg fa-fw text-muted"></i>
                     </a>
                     {% endif %}
-                    {% if report.is_verified %}
-                    <a class="btn btn-xs btn-link" data-toggle="tooltip" title="{% trans 'Verified' %}">
-                      <i class="fa fa-check-square fa-lg fa-fw text-success"></i>
-                    </a>
-                    {% endif %}
                     <a class="ui-timeline-story-link btn btn-xs btn-link" href="{% url 'appreciations:view' report.id %}" -target="_blank" title="{% trans 'Click to view report' %}" data-toggle="tooltip">
                       <span class="fa-stack">
                         <i class="fa fa-circle fa-stack-2x"></i>
@@ -34,7 +29,7 @@
 
                   <div>
                     <span class="text-info" data-toggle="tooltip" title="{% trans 'Appreciation Category' %}">{{report.category}}</span>
-                    {% trans ' for ' %}
+                    {% trans 'for' %}
                     <span class="text-info" data-toggle="tooltip" title="{% trans 'Appreciation Subject' %}">{{report.subject}}</span>
                   </div>
                 </li>

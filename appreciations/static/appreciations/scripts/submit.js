@@ -15,7 +15,6 @@ reform.widgets.map.init = function() {
 
   var widget = reform.widgets.map;
 
-  // create a map in the "map" div, set the view to a given place and zoom
   var map = widget.object = L.map('map');
 
   map.setView([34.161818161230386, 9.3603515625], 5);
@@ -26,20 +25,25 @@ reform.widgets.map.init = function() {
 
   // add an OpenStreetMap tile layer
   L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-    //attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+    attribution: '<a href="http://osm.org/">OpenStreetMap</a>'
   }).addTo(map);
 
   var geoSearch = new L.Control.GeoSearch({
     provider: new L.GeoSearch.Provider.Google({
       region: 'tn'
     }),
-    //country: "tn",
+    showMarker: false,
+    country: "tn",
+    searchLabel: gettext("search for location ..."),
+    notFoundMessage: gettext("Location could not be found."),
     zoomLevel: 16
   });
   map.addControl(geoSearch);
   widget.geoSearch = geoSearch;
 
+  //if (Modernizr.touch) {
   map.scrollWheelZoom.disable();
+  //}
 
   var marker;
 
@@ -101,7 +105,7 @@ reform.widgets.dropzone.init = function() {
       return true;
     },
     */
-    dictDefaultMessage: "Drop files or click to upload photos"
+    dictDefaultMessage: gettext("Drop files or click to upload photos")
   });
 };
 
@@ -116,9 +120,14 @@ reform.widgets.wizard.init = function() {
   // fix for category input's values list
   $('#id_category option[selected]').removeAttr('selected').html('');
 
-  //$('.select2').select2()
-
-  $('.select2').selectpicker();
+  $('.select2').select2()
+  /*
+  if (/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent)) {
+    $('.selectpicker').selectpicker('mobile');
+  } else {
+    $('.select2').selectpicker();
+  }
+  */
 
   var form = widget.form = $('#appreciation-form');
 
@@ -308,14 +317,14 @@ reform.widgets.wizard.init = function() {
       formData.append('files[]', file);
     }
     $.ajax({
-      type: "POST",
+      type: 'POST',
       url: reform.urls.submit,
       data: formData,
       processData: false,
       contentType: false,
       //dataType: dataType
       headers: {
-        "X-CSRFToken": csrf_token
+        'X-CSRFToken': csrf_token
       }
     }).done(function(data) {
       setTimeout(function() {

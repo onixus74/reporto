@@ -1,9 +1,9 @@
-@import url("//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,700");
-@import url("//fonts.googleapis.com/earlyaccess/droidarabickufi.css");
 /*-------------------------------------------------
 | DEPENDENCIES
 \*/
 /*! normalize.css v2.1.3 | MIT License | git.io/normalize */
+@import url("//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,700");
+@import url("//fonts.googleapis.com/earlyaccess/droidarabickufi.css");
 /* line 22, ../theme/bootstrap-sass/lib/_normalize.scss */
 article,
 aside,
@@ -10715,15 +10715,17 @@ body {
   direction: ltr;
   unicode-bidi: embed;
   text-align: left;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
-/* line 26, main.scss */
+/* line 28, main.scss */
 .rtl, *[dir="rtl"] {
   direction: rtl;
   unicode-bidi: embed;
 }
 
-/* line 31, main.scss */
+/* line 33, main.scss */
 .ltr, *[dir="ltr"] {
   direction: ltr;
   unicode-bidi: embed;
@@ -10732,7 +10734,7 @@ body {
 /*-------------------------------------------------
 | BOOTSTRAP MOD
 \*/
-/* line 40, main.scss */
+/* line 42, main.scss */
 .navbar .nav > .active > a, .navbar .nav > .active > a:hover, .navbar .nav > .active > a:focus {
   font-weight: normal;
 }
@@ -10758,29 +10760,29 @@ ol.list {
 	}
 }
 */
-/* line 65, main.scss */
+/* line 67, main.scss */
 .multi-labels-lines-fix {
   line-height: 1.8;
 }
 
-/* line 69, main.scss */
+/* line 71, main.scss */
 .btn-quiet {
   background-color: transparent;
 }
 
-/* line 75, main.scss */
+/* line 77, main.scss */
 .modal-big {
   height: 80%;
   width: 80%;
   margin-left: -40%;
 }
-/* line 79, main.scss */
+/* line 81, main.scss */
 .modal-big .modal-body {
   max-height: 80%;
 }
 
 @media (max-width: 768px) {
-  /* line 85, main.scss */
+  /* line 87, main.scss */
   .modal-big {
     width: 90%;
     margin-left: 2%;
@@ -10822,23 +10824,23 @@ body::-webkit-scrollbar-corner { background-clip: padding-box; background-color:
 ::-webkit-scrollbar-thumb { background-color: #DDD; }
 ::-webkit-scrollbar-thumb:hover { background-color: #999; }
 */
-/* line 131, main.scss */
+/* line 133, main.scss */
 ::-webkit-scrollbar {
   width: 4px;
 }
 
-/* line 132, main.scss */
+/* line 134, main.scss */
 ::-webkit-scrollbar-track {
   background: rgba(0, 0, 0, 0.1);
 }
 
-/* line 133, main.scss */
+/* line 135, main.scss */
 ::-webkit-scrollbar-thumb {
   background: rgba(0, 0, 0, 0.6);
   border-radius: 2px;
 }
 
-/* line 134, main.scss */
+/* line 136, main.scss */
 ::-webkit-scrollbar:horizontal {
   height: 4px;
 }
@@ -10847,13 +10849,13 @@ body::-webkit-scrollbar-corner { background-clip: padding-box; background-color:
 | GLOBAL STYLES
 \*/
 /* Padding below the footer and lighter body text */
-/* line 143, main.scss */
+/* line 145, main.scss */
 body {
   padding-top: 70px;
   color: #5a5a5a;
 }
 
-/* line 151, main.scss */
+/* line 153, main.scss */
 #top-bg {
   position: fixed;
   background-color: #666;
@@ -10865,7 +10867,7 @@ body {
   top: 0;
 }
 
-/* line 161, main.scss */
+/* line 163, main.scss */
 #footer {
   bottom: 0;
   left: 0;
@@ -10877,7 +10879,7 @@ body {
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.25);
 }
 
-/* line 173, main.scss */
+/* line 175, main.scss */
 .container .credit {
   margin: 4px 0;
   font-size: 80%;
@@ -10887,7 +10889,7 @@ body {
 | CUSTOMIZE THE NAVBAR
 \*/
 /* Special class on .container surrounding .navbar, used for positioning it into place. */
-/* line 184, main.scss */
+/* line 186, main.scss */
 .navbar-wrapper {
   position: fixed;
   top: 0;
@@ -10900,7 +10902,7 @@ body {
 }
 
 /* Remove border and change up box shadow for more contrast */
-/* line 198, main.scss */
+/* line 200, main.scss */
 .navbar .navbar-inner {
   border: 0;
   -webkit-box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
@@ -10908,7 +10910,7 @@ body {
 }
 
 /* Downsize the brand/project name a bit */
-/* line 204, main.scss */
+/* line 206, main.scss */
 .navbar .brand {
   padding: 8px;
   /* Increase vertical padding to match navbar links */
@@ -10918,13 +10920,13 @@ body {
 }
 
 /* Navbar links: increase padding for taller navbar */
-/* line 212, main.scss */
+/* line 214, main.scss */
 .navbar .nav > li > a {
   padding: 15px 20px;
 }
 
 /* Offset the responsive button for proper vertical alignment */
-/* line 217, main.scss */
+/* line 219, main.scss */
 .navbar .btn-navbar {
   margin-top: 10px;
 }
@@ -11040,7 +11042,7 @@ body {
 
 }
 */
-/* line 369, main.scss */
+/* line 371, main.scss */
 #mainView {
   position: fixed;
   z-index: 99999;
@@ -11118,17 +11120,17 @@ body {
 /*-------------------------------------------------
 | Fixes
 \*/
-/* line 450, main.scss */
+/* line 452, main.scss */
 *[hidden] {
   display: none;
 }
 
-/* line 451, main.scss */
+/* line 453, main.scss */
 input[hidden] {
   display: none;
 }
 
-/* line 453, main.scss */
+/* line 455, main.scss */
 .ui-pnotify .alert {
   margin-bottom: 0;
 }
@@ -11136,7 +11138,7 @@ input[hidden] {
 /*-------------------------------------------------
 | Leaflet Fixes
 \*/
-/* line 462, main.scss */
+/* line 464, main.scss */
 .leaflet-top, .leaflet-bottom {
   z-index: auto !important;
 }
@@ -11144,7 +11146,7 @@ input[hidden] {
 /*-------------------------------------------------
 | typeahead.js
 \*/
-/* line 472, main.scss */
+/* line 474, main.scss */
 .typeahead,
 .tt-query,
 .tt-hint {
@@ -11160,28 +11162,28 @@ input[hidden] {
   outline: none;
 }
 
-/* line 485, main.scss */
+/* line 487, main.scss */
 .typeahead {
   background-color: #fff;
 }
 
-/* line 489, main.scss */
+/* line 491, main.scss */
 .typeahead:focus {
   border: 2px solid #0097cf;
 }
 
-/* line 493, main.scss */
+/* line 495, main.scss */
 .tt-query {
   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
 }
 
-/* line 497, main.scss */
+/* line 499, main.scss */
 .tt-hint {
   color: #999999;
 }
 
-/* line 501, main.scss */
+/* line 503, main.scss */
 .tt-dropdown-menu {
   width: 422px;
   margin-top: 12px;
@@ -11194,63 +11196,63 @@ input[hidden] {
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
 }
 
-/* line 512, main.scss */
+/* line 514, main.scss */
 .tt-suggestion {
   padding: 3px 20px;
   font-size: 18px;
   line-height: 24px;
 }
 
-/* line 518, main.scss */
+/* line 520, main.scss */
 .tt-suggestion.tt-is-under-cursor {
   color: #fff;
   background-color: #0097cf;
 }
 
-/* line 524, main.scss */
+/* line 526, main.scss */
 .tt-suggestion p {
   margin: 0;
 }
 
-/* line 531, main.scss */
+/* line 533, main.scss */
 .asteriskField {
   color: #D40000;
 }
 
-/* line 535, main.scss */
+/* line 537, main.scss */
 .asteriskField:before {
   content: ' (';
 }
 
-/* line 539, main.scss */
+/* line 541, main.scss */
 .asteriskField:after {
   content: ')';
 }
 
-/* line 544, main.scss */
+/* line 546, main.scss */
 .animatable {
   position: relative;
   display: inline-block;
 }
 
-/* line 549, main.scss */
+/* line 551, main.scss */
 .text-highlight {
   color: #47467F;
   font-size: 120%;
   text-shadow: 1px 1px 1px #969696;
 }
 
-/* line 555, main.scss */
+/* line 557, main.scss */
 .text-shadow {
   text-shadow: 1px 1px 1px #969696;
 }
 
-/* line 559, main.scss */
+/* line 561, main.scss */
 .text-big {
   font-size: 110%;
 }
 
-/* line 563, main.scss */
+/* line 565, main.scss */
 .text-bigger {
   font-size: 120%;
 }

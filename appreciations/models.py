@@ -8,13 +8,16 @@ from django.core.urlresolvers import reverse
 from django.db import models
 from django.forms.models import model_to_dict
 from django.template.defaultfilters import slugify
+from transmeta import TransMeta
 
 
 class Category(models.Model):
+    __metaclass__ = TransMeta
 
     class Meta:
         verbose_name = _("category")
         verbose_name_plural = _("categories")
+        translate = ('definition',)
 
     slug = models.SlugField(_("slug"), max_length=100, blank=True, null=True)
     definition = models.CharField(_("definition"), max_length=300)

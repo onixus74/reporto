@@ -1,13 +1,13 @@
 {% extends "layouts/default.html" %}
 
-{% load widget_tweaks static custom compress crispy_forms_tags %}
+{% load i18n widget_tweaks static custom compress crispy_forms_tags %}
 
 {% block view_title %}Sign up | {% endblock %}
 
 {% block view_content %}
 
 	<div class="page-header">
-		<h1 class="text-center">Sign up</h1>
+		<h1 class="text-center">{% trans 'Sign up' %}</h1>
 	</div>
 
 	<div class="row">
@@ -15,9 +15,9 @@
 
 			<form action="{% url 'signup' %}" class="form-horizontal" role="form" method="post">
 				{% csrf_token %}
-        {{ form|crispy_form_horizontal }}
+				{{ form|crispy_form_horizontal }}
 				<input type="hidden" name="next" value="{{ next }}" />
-        <input class="btn btn-primary btn-block" name="commit" type="submit" value="Sign up">
+				<input class="btn btn-primary btn-block" name="commit" type="submit" value="{% trans 'Sign up' %}">
 			</form>
 
     </div>

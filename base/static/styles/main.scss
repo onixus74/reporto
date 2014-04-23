@@ -21,6 +21,8 @@ body {
   direction: ltr;
   unicode-bidi: embed;
   text-align: left;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .rtl,*[dir="rtl"] {

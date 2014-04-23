@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-20 11:59+0100\n"
-"PO-Revision-Date: 2014-01-16 09:55+0100\n"
+"POT-Creation-Date: 2014-01-21 20:20+0100\n"
+"PO-Revision-Date: 2014-01-21 20:20+0100\n"
 "Last-Translator: nader <nader.toukabri@gmail.com>\n"
 "Language-Team: reform.tn\n"
 "Language: ar\n"
@@ -53,72 +53,72 @@ msgid "Victim"
 msgstr "ضحية"
 
 #: templates/home.html:22
-msgid " has been a victim of "
-msgstr "تعرض(ت) ل "
+msgid "has been a victim of"
+msgstr "تعرض(ت) ل"
 
-#: templates/home.html:24 templates/home.html.py:53
-msgid " happened in "
-msgstr " حدث في "
+#: templates/home.html:24 templates/home.html.py:55
+msgid "happened in"
+msgstr "حدث في"
 
-#: templates/home.html:26 templates/home.html.py:55 templates/login.html:108
-msgid " on "
-msgstr " في "
+#: templates/home.html:26 templates/home.html.py:57 templates/login.html:108
+msgid "on"
+msgstr "في"
 
-#: templates/home.html:29 templates/home.html.py:58
+#: templates/home.html:29 templates/login.html:110
+msgid "Verified"
+msgstr "متحقّق منه"
+
+#: templates/home.html:31 templates/home.html.py:59
 msgid "Click to view report"
 msgstr "انقر لتعرض التقرير"
 
-#: templates/home.html:37
+#: templates/home.html:39
 msgid "There is no reported violations!"
 msgstr "لا يوجد انتهاكات!"
 
-#: templates/home.html:40 templates/login.html:142
+#: templates/home.html:42 templates/login.html:144
 #: templates/layouts/default.html:123
 msgid "Report a Violation"
 msgstr "بلغ عن انتهاك"
 
-#: templates/home.html:51
+#: templates/home.html:53
 msgid "Latest Appreciation"
 msgstr "أحدث شكر"
 
-#: templates/home.html:52 templates/login.html:157
-msgid " for "
-msgstr " ل "
+#: templates/home.html:54 templates/login.html:159
+msgid "for"
+msgstr "ل"
 
-#: templates/home.html:57 templates/login.html:109
-msgid "Verified"
-msgstr "متحقّق منه"
-
-#: templates/home.html:68
+#: templates/home.html:69
 msgid "There is no reported appreciations!"
 msgstr "لا يوجد شكر!"
 
-#: templates/home.html:72 templates/login.html:190
+#: templates/home.html:73 templates/login.html:192
 #: templates/layouts/default.html:130
 msgid "Appreciate Police Work"
 msgstr "اشكر عمل الشرطة"
 
-#: templates/home.html:107 templates/login.html:100
+#: templates/home.html:108 templates/login.html:100
 msgid "Violations"
 msgstr "انتهاكات"
 
-#: templates/home.html:115 templates/home.html.py:148
+#: templates/home.html:116 templates/home.html.py:149
 msgid "Type to search..."
 msgstr "اكتب لتبحث..."
 
-#: templates/home.html:140 templates/login.html:149
+#: templates/home.html:141 templates/login.html:151
 msgid "Appreciations"
 msgstr "شكر"
 
-#: templates/home.html:246
+#: templates/home.html:247
 msgid "Violation Report"
 msgstr "تقرير الانتهاك"
 
-#: templates/home.html:252 templates/home.html.py:270
+#: templates/home.html:253 templates/home.html.py:271
 msgid "Full report"
 msgstr "التقرير"
 
-#: templates/home.html:264
+#: templates/home.html:265
 msgid "Appreciation Report"
 msgstr "تقرير الشكر"
 
@@ -181,25 +181,25 @@ msgstr "شكر"
 msgid "contribute by reporting incidents, start by signing in"
 msgstr "ساهم في الإبلاغ عن الانتهاكات ، إبدأ بتسجيل الدخول"
 
-#: templates/login.html:104 templates/login.html.py:153
+#: templates/login.html:104 templates/login.html.py:155
 msgid "Latest Reports"
 msgstr "أحدث التقارير"
 
-#: templates/login.html:108 templates/login.html.py:157
-msgid " at "
-msgstr " في "
+#: templates/login.html:108 templates/login.html.py:159
+msgid "at"
+msgstr "في"
 
-#: templates/login.html:112 templates/login.html.py:138
-#: templates/login.html:160 templates/login.html.py:173
-#: templates/login.html:186
+#: templates/login.html:114 templates/login.html.py:127
+#: templates/login.html:140 templates/login.html.py:162
+#: templates/login.html:175 templates/login.html.py:188
 msgid "There is no reports!"
 msgstr "لا يوجد تقارير!"
 
-#: templates/login.html:117 templates/login.html.py:165
+#: templates/login.html:119 templates/login.html.py:167
 msgid "Top Reporters"
 msgstr "أعلى المبلغين"
 
-#: templates/login.html:130 templates/login.html.py:178
+#: templates/login.html:132 templates/login.html.py:180
 msgid "Top Reporting Circles"
 msgstr "أعلى الدوائر المبلغة"
 
@@ -304,6 +304,16 @@ msgstr "left"
 #: templates/partials/pagination.html:18
 msgid "Last"
 msgstr "الأخيرة"
+
+#: utils/urls.py:20
+msgid "Sorry, your need to sign in in order to proceed."
+msgstr ""
+
+#~ msgid " on "
+#~ msgstr "في"
+
+#~ msgid " for "
+#~ msgstr "ل"
 
 #~ msgid "Violations/Appreciations by date"
 #~ msgstr "تطور الانتهاكات و التقديرات بمرور الزمن"

@@ -13,7 +13,13 @@
                 <i class="fa fa-calendar"></i>
                 {{report.datetime}}
               </span>
-              {% if report.is_verified %}<span class="badge badge-success">{% trans 'Verified'%} <i class="fa fa-ok"></i></span>{% endif %}
-              {% if report.is_closed %}<span class="badge badge-important">{% trans 'Closed' %} <i class="fa fa-lock"></i></span>{% endif %}
+              {% if report.is_verified %}
+              <span class="text-success" title="{% trans 'Verified' %}"><i class="fa fa-check-square"></i></span>
+              {% endif %}
+              {% comment %}
+              {% if report.is_closed %}
+              <span class="text-danger" title="{% trans 'Closed' %}"><i class="fa fa-lock"></i></span>
+              {% endif %}
+              {% encomment %}
             </p>
           </a>

@@ -12,13 +12,16 @@ from django.template.defaultfilters import slugify
 from django.utils.html import strip_tags
 from mptt.fields import TreeManyToManyField
 from mptt.models import MPTTModel, TreeForeignKey
+from transmeta import TransMeta
 
 
 class Category(models.Model):
+    __metaclass__ = TransMeta
 
     class Meta:
         verbose_name = _("category")
         verbose_name_plural = _("categories")
+        translate = ('definition',)
 
     slug = models.SlugField(_("slug"), max_length=100, blank=True, null=True)
     definition = models.CharField(_("definition"), max_length=300)
@@ -30,16 +33,19 @@ class Category(models.Model):
         return self.definition
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.definition)
+        if not self.slug:
+            self.slug = slugify(self.definition)
         super(Category, self).save(*args, **kwargs)
 
 
 # class Feature(models.Model):
 class Feature(MPTTModel):
+    #__metaclass__ = TransMeta
 
     class Meta:
         verbose_name = _("feature")
         verbose_name_plural = _("features")
+        #translate = ('definition',)
 
     parent = TreeForeignKey('self', related_name='children', verbose_name=_("children features"), null=True, blank=True)
     slug = models.SlugField(_("slug"), max_length=200, blank=True, null=True)

@@ -60,6 +60,15 @@ class UserCreationForm(UserCreationForm):
         model = User
         fields = ('email', 'first_name', 'last_name')
 
+# from registration.backends.default.views import RegistrationView as BaseRegistrationView
+
+
+# class RegistrationView(BaseRegistrationView):
+
+#     def __init__(self, *args, **kwargs):
+#         # ...
+#         super(RegistrationView, self).__init__(*args, **kwargs)
+
 
 def signup_view(request, *args, **kwargs):
     if request.user.is_authenticated():
@@ -209,8 +218,8 @@ def home_view(request, *args, **kwargs):
     append_violations_statistics(context)
     append_appreciations_statistics(context)
 
-    context['violations_locations'] = ViolationReport.objects.values('latitude', 'longitude', 'category__definition', 'pk')
-    context['appreciations_locations'] = AppreciationReport.objects.values('latitude', 'longitude', 'category__definition', 'pk')
+    context['violations_locations'] = ViolationReport.objects.values('latitude', 'longitude', 'category__definition_en', 'pk')
+    context['appreciations_locations'] = AppreciationReport.objects.values('latitude', 'longitude', 'category__definition_en', 'pk')
 
     #context = RequestContext(request, context)
     # context.update(csrf(request))

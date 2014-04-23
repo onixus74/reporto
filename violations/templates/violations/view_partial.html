@@ -1,9 +1,11 @@
 {% load static thumbnail custom i18n l10n %}
 
+{% trans 'N/A' as NOT_AVAILABLE %}
+
       <div class="row">
         <div class="col-md-offset-2 col-md-8">
           <hr>
-          <h2 class="text-center">
+          <h2 class="text-center" style="line-height: 2em;">
             {% if user.is_admin and show_all %}
             <a href="#" id="id_category" class="-ui-editable" data-type="select" data-source="{{categories|json|force_escape}}" data-value="{{report.category.id}}" data-pk="{{report.pk}}" data-name="category" data-url="{% url 'violations:update_partial' report.id %}" data-title="Category">{{report.category}}</a>
             {% trans 'on' %}
@@ -15,9 +17,13 @@
               {{report.category}} {% trans 'on' %} {{report.datetime}} {% trans 'at' %} {{report.location_text}}
             {% endif %}
 
-            {% if report.is_verified %}<span class="badge badge-success">{% trans 'Verified' %} <i class="fa fa-ok"></i></span>{% endif %}
+            {% if report.is_verified %}
+            <span class="text-success" title="{% trans 'Verified' %}"><i class="fa fa-check-square"></i></span>
+            {% endif %}
             {% comment %}
-            {% if report.is_closed %}<span class="badge badge-important">{% trans 'Closed' %} <i class="fa fa-lock"></i></span>{% endif %}
+            {% if report.is_closed %}
+            <span class="text-danger" title="{% trans 'Closed' %}"><i class="fa fa-lock"></i></span>
+            {% endif %}
             {% endcomment %}
           </h2>
           {% if show_all %}
@@ -58,20 +64,20 @@
             <dt>{% trans 'Social Class' %}</dt>
             <dd>{{report.victim.get_social_class_display}}</dd>
             <dt>{% trans 'Age' %}</dt>
-            <dd>{{report.victim.age|default:"N/A"}}</dd>
+            <dd>{{report.victim.age|default:NOT_AVAILABLE}}</dd>
             <dt>{% trans 'Education' %}</dt>
             <dd>{{report.victim.get_education_display}}</dd>
             <dt>{% trans 'Profession' %}</dt>
-            <dd>{{report.victim.profession|default:"N/A"}}</dd>
+            <dd>{{report.victim.profession|default:NOT_AVAILABLE}}</dd>
           </dl>
         </div>
         <div class="col-md-6">
           <hr>
           <h3><i class="fa fa-male"></i> {% trans 'Aggressor' %}{% if user.is_admin and show_all %} <a id="ui-aggressor-edit" href="#" title="Edit" class="btn btn-sm"><i class="fa fa-pencil"></i></a>{% endif %}</h3>
           {% if user.is_admin and show_all %}
-          <p id="ui-aggressor" class="-ui-editable" data-type="textarea" data-value="{{report.aggressor}}" date-toggle="manual" data-pk="{{report.pk}}" data-name="aggressor" data-url="{% url 'violations:update_partial' report.id %}" data-title="Aggressor">{{report.aggressor|default:"N/A"}}</p>
+          <p id="ui-aggressor" class="-ui-editable" data-type="textarea" data-value="{{report.aggressor}}" date-toggle="manual" data-pk="{{report.pk}}" data-name="aggressor" data-url="{% url 'violations:update_partial' report.id %}" data-title="Aggressor">{{report.aggressor|default:NOT_AVAILABLE}}</p>
           {% else %}
-          <p>{{report.aggressor|default:"N/A"}}</p>
+          <p>{{report.aggressor|default:NOT_AVAILABLE}}</p>
           {% endif %}
         </div>
       </div>
@@ -87,7 +93,7 @@
           {% endif %}
           {% if report.sources %}
           <p>
-            Sources:<br>
+            {% trans 'Sources:' %}<br>
             {{report.sources | markdown}}
           </p>
           {% endif %}
@@ -104,12 +110,22 @@
               {% endcomment %}
               {% comment %}
               <a class="fancybox" href="{{media.url}}" target="_blank" rel="group">
-                <img src="{% if media.is_file %}{{ media.file|thumbnail_url:'media' }}{% elif media.is_youtube %}{{media.get_youtube_thumbnail_url}}{% else %}{{media.url}}{% endif %}" alt="" style="height: 100px; width: auto;" class="thumbnail">
+                {% setvar img_url as "" %} 
+                {% if media.is_file %}
+                {% setvar media.file|thumbnail_url:'media' as img_url %}
+                {% elif media.is_youtube %}
+                {% setvar  media.get_youtube_thumbnail_url as img_url %}
+                {% endif %}
+                {% if img_url == "" %}
+                {% setvar media.url as img_url %}
+                {% endif %}
+                {{img_url}}"
+                <img src="{{img_url}}" alt="" style="height: 100px; width: auto;" class="thumbnail">
               </a>
               {% endcomment %}
               {% if media.is_file %}
               <a class="fancybox" href="{{ media.url }}" target="_blank" rel="group">
-                <img src="{{ media.file|thumbnail_url:'media' }}" alt="" style="height: 100px; width: auto;" class="thumbnail">
+                <img src="{{ media.file|thumbnail_url:'media'|default:media.url }}" alt="" style="height: 100px; width: auto;" class="thumbnail">
               </a>
               {% elif media.is_youtube %}
               <a class="fancybox" href="{{ media.url }}" target="_blank" rel="group">

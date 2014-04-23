@@ -30,12 +30,6 @@ urlpatterns = patterns('',
                        #url(r'^public/statistics(\.(?P<extension>(json)))?$', statistics_view,         name='public_statistics_'),
                        #url(r'^public/statistics/by-date$', statistics_reports_by_date,         name='public_statistics_reports_by_date'),
 
-                       url(r'^crud/(\.(?P<extension>(json)))?$',            administrator_required(ReportListHybridView.as_view()),   name='crud-list'),
-                       url(r'^crud/new$',                                   administrator_required(ReportCreateView.as_view()),       name='crud-create'),
-                       url(r'^crud/(?P<pk>\d+)(\.(?P<extension>(json)))?$', administrator_required(ReportDetailHybridView.as_view()), name='crud-view'),
-                       url(r'^crud/(?P<pk>\d+)/edit$',                      administrator_required(ReportUpdateView.as_view()),       name='crud-edit'),
-                       url(r'^crud/(?P<pk>\d+)/delete$',                    administrator_required(ReportDeleteView.as_view()),       name='crud-delete'),
-
                        url(r'^categories/', include('violations_categories.urls', namespace="categories")),
                        url(r'^features/',   include('violations_features.urls', namespace="features")),
                        url(r'^victims/',    include('violations_victims.urls', namespace="victims")),

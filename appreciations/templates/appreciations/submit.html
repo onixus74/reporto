@@ -115,7 +115,7 @@
                 </script>
               </ul>
               <div class="input-group">
-                <input id="ui-links-url-input" type="url" class="form-control" placeholder="Media Link">
+                <input id="ui-links-url-input" type="url" class="form-control" placeholder="{% trans 'Media Link' %}">
                 <span class="input-group-btn">
                   <a id="ui-links-add-button" href="#" class="btn btn-default"><i class="fa fa-plus-square fa-lg"></i></a>
                 </span>
@@ -152,16 +152,16 @@
 {% block view_styles %}
 
   {% compress css %}
-  {#%<link rel="stylesheet" href="{% static 'components/select2/select2.css' %}">%#}
-  {#%<link rel="stylesheet" href="{% static 'components/select2-bootstrap-css/select2-bootstrap.css' %}">%#}
-  <link rel="stylesheet" href="{% static 'components/bootstrap-select/bootstrap-select.css' %}">
+  <link rel="stylesheet" href="{% static 'components/select2/select2.css' %}">
+  <link rel="stylesheet" href="{% static 'components/select2-bootstrap-css/select2-bootstrap.css' %}">
+  {#%<link rel="stylesheet" href="{% static 'components/bootstrap-select/bootstrap-select.css' %}">%#}
   <link rel="stylesheet" href="{% static 'components/pines-notify/jquery.pnotify.default.css' %}">
   <!-- map -->
   <link rel="stylesheet" href="{% static 'components/leaflet/dist/leaflet.css' %}" />
   <!--[if lte IE 8]>
   <link rel="stylesheet" href="{% static 'components/leaflet/dist/leaflet.ie.css' %}" />
   <![endif]-->
-  <link rel="stylesheet" href="{% static 'dependencies/L.GeoSearch/src/css/l.geosearch.css' %}" />
+  <link rel="stylesheet" href="{% static 'components/L.GeoSearch/src/css/l.geosearch.css' %}" />
   <!-- file upload -->
   <link rel="stylesheet" href="{% static 'components/dropzone/downloads/css/basic.css' %}" />
 
@@ -171,22 +171,23 @@
 {% endblock %}
 
 {% block view_scripts %}
+  <script type="text/javascript" src="{% url 'i18n_js' 'appreciations' %}"></script>
   {% compress js %}
-  {#% <script src="{% static 'components/select2/select2.js' %}"></script> %#}
-  <script src="{% static 'components/bootstrap-select/bootstrap-select.js' %}"></script>
+  <script src="{% static 'components/select2/select2.js' %}"></script>
+  {#%<script src="{% static 'components/bootstrap-select/bootstrap-select.js' %}"></script>%#}
   <script src="{% static 'components/pines-notify/jquery.pnotify.js' %}"></script>
   <script src="{% static 'components/blockui/jquery.blockUI.js' %}"></script>
   <!-- Map -->
   <script src="{% static 'components/leaflet/dist/leaflet.js' %}"></script>
   <script type="text/javascript">L.Icon.Default.imagePath = "{% static 'components/leaflet/dist/images' %}";</script>
-  <script src="{% static 'dependencies/L.GeoSearch/src/js/l.control.geosearch.js' %}"></script>
-  <script src="{% static 'dependencies/L.GeoSearch/src/js/l.geosearch.provider.google.js' %}"></script>
+  <script src="{% static 'components/L.GeoSearch/src/js/l.control.geosearch.js' %}"></script>
+  <script src="{% static 'components/L.GeoSearch/src/js/l.geosearch.provider.google.js' %}"></script>
   <!-- file upload -->
   <script src="{% static 'components/dropzone/downloads/dropzone.js' %}"></script>
   {#%<script src="{% static 'components/typeahead.js/dist/typeahead.js' %}"></script>%#}
   <!-- date input -->
   <script src="{% static 'components/lodash/dist/lodash.js' %}"></script>
-  <script src="{% static 'components/CLNDR/clndr.js' %}"></script>
+  <script src="{% static 'components/CLNDR/src/clndr.js' %}"></script>
   {% endcompress %}
 
   <script type="text/javascript">

@@ -1,17 +1,1 @@
-/* line 6, view.scss */
-
-#ui-comments {
-  margin-right: 20px;
-}
-
-/* line 10, view.scss */
-
-.ui-comment {
-  padding: 4px;
-}
-
-/* line 14, view.scss */
-
-.ui-comment blockquote {
-  margin-bottom: 0;
-}
+#ui-comments{margin-right:20px;}.ui-comment{padding:4px;}.ui-comment blockquote{margin-bottom:0;}

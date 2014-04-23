@@ -51,7 +51,7 @@ $(document).ready(reform.widgets.geosearch);
 
 
 $(document).ready(function(){
-  reform.widgets.pagination('#ui-timeline-list', reform.data.timeline, reform.urls.violationsDashboard)
+  reform.widgets.paginate('#ui-timeline-list', reform.data.timeline, reform.urls.violationsDashboard)
 });
 
 

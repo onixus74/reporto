@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-20 11:59+0100\n"
+"POT-Creation-Date: 2014-01-21 20:20+0100\n"
 "PO-Revision-Date: 2014-01-20 12:08+0100\n"
 "Last-Translator: nader <nader.toukabri@gmail.com>\n"
 "Language-Team: reform.tn\n"
@@ -39,7 +39,6 @@ msgid "Click and drag in the plot area to zoom in"
 msgstr "انقر واسحب للتكبير"
 
 #: static/dashboard/scripts/charts.js:62
-#: static/dashboard/scripts/charts.min.js:1
 msgid "Pinch the chart to zoom in"
 msgstr "اقرص الرسم البياني للتكبير"
 

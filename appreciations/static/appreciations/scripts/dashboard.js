@@ -46,7 +46,7 @@ $(document).ready(reform.widgets.map);
 
 
 $(document).ready(function() {
-  reform.widgets.pagination('#ui-timeline-list', reform.data.timeline, reform.urls.appreciationsDashboard, function refreshCallback(list) {
+  reform.widgets.paginate('#ui-timeline-list', reform.data.timeline, reform.urls.appreciationsDashboard, function refreshCallback(list) {
     list.find('.ui-timeline-story-locator').on('click', function(e) {
       e.stopPropagation();
       e.preventDefault();

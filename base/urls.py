@@ -8,7 +8,6 @@ from base.views import *
 
 from users.views import user_profile_view
 
-
 urlpatterns = patterns('',
                        url(r'^test/$', test_view, name='test'),
 
@@ -24,6 +23,13 @@ urlpatterns = patterns('',
                        url(r'^signout/$', 'django.contrib.auth.views.logout', name='logout'),
                        #url(r'^signout/$', logout_view, name='logout'),
                        url(r'^signup/$', signup_view, name='signup'),
+                       #url(r'^signup/1$', RegistrationView.as_view(), name='signup1'),
+
+                       #(r'^accounts/', include('registration.backends.default.urls')),
+
+                       #url(r'^activate/complete/$', ActivationView.as_view(), name='registration_activation_complete'),
+                       #url(r'^activate/(?P<activation_key>\w+)/$', ActivationView.as_view(), name='registration_activate'),
+
 
                        url(r'^user/password/change/$', 'django.contrib.auth.views.password_change', name='password_change'),
                        url(r'^user/password/change/done/$', 'django.contrib.auth.views.password_change_done', name='password_change_done'),

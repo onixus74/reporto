@@ -148,6 +148,6 @@ class ReportsDashboard(PaginatedListHybridResponseMixin, ListView):
             appreciations_by_date = Report.objects.extra({'date': "date(datetime)"}).values('date').annotate(Count('id')).order_by('date')
             context['appreciations_by_date'] = [{'date': i['date'], 'count': i['id__count']} for i in appreciations_by_date]
 
-            context['appreciations_locations'] = Report.objects.values('latitude', 'longitude', 'category__definition')
+            context['appreciations_locations'] = Report.objects.values('latitude', 'longitude', 'category__definition_en')
 
         return context

@@ -67,20 +67,20 @@ class User(AbstractUser):
         return self.is_superuser or self.role == self.REPORTER or self.role == self.MODERATOR or self.role == self.ADMIN
 
 
-email = User._meta.get_field_by_name('email')[0]
-email.null = False
-email.blank = False
-email._unique = True
+# email = User._meta.get_field_by_name('email')[0]
+# email.null = False
+# email.blank = False
+# email._unique = True
 
-username = User._meta.get_field_by_name('username')[0]
-username.null = True
-username.blank = True
-#username._unique = False
+# username = User._meta.get_field_by_name('username')[0]
+# username.null = True
+# username.blank = True
+# #username._unique = False
 
-first_name = User._meta.get_field_by_name('first_name')[0]
-first_name.null = False
-first_name.blank = False
+# first_name = User._meta.get_field_by_name('first_name')[0]
+# first_name.null = False
+# first_name.blank = False
 
-last_name = User._meta.get_field_by_name('last_name')[0]
-last_name.null = False
-last_name.blank = False
+# last_name = User._meta.get_field_by_name('last_name')[0]
+# last_name.null = False
+# last_name.blank = False

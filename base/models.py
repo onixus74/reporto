@@ -80,3 +80,13 @@ class Media(models.Model):
         data.pop('file')
         data['url'] = self.url
         return data
+
+
+# from registration.backends import get_backend
+# from registration.signals import user_registered
+
+
+# def automatically_accept_registration_reciver(sender, user, profile, request, **kwargs):
+#     backend = get_backend()
+#     backend.accept(profile, request=request)
+# user_registered.connect(automatically_accept_registration_reciver)
