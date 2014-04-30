@@ -1,7 +1,7 @@
 
-@import "../theme/bootstrap-sass/lib/variables";
+@import "../theme/bootstrap-sass-twbs/vendor/assets/stylesheets/bootstrap/variables";
 @import "../theme/variables";
-@import "../theme/bootstrap-sass/lib/mixins";
+@import "../theme/bootstrap-sass-twbs/vendor/assets/stylesheets/bootstrap/mixins";
 
 .btn-signin-facebook {
 	@include button-variant($btn-primary-color, #3C5A99, $btn-default-border);

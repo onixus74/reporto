@@ -14,7 +14,7 @@ function makeDjangoAppConfig(config, applicationName) {
   };
 
   config.r2[applicationName] = {
-    //compress: false,
+    compress: false,
     expand: true,
     cwd: '{app}/static/{app}/styles'.replace(/{app}/g, applicationName),
     src: ['**/*.css', '!*.min.css', '!*.dist.css', '!*-rtl.css', '!*-rtl-generated.css', '!*-rtl-mod.css'],

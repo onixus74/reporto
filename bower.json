@@ -12,13 +12,12 @@
     "animate.css": "~2.1.1",
     "select2": "*",
     "sass-bootstrap": "~3.0.2",
-    "select2-bootstrap-css": "fk/select2-bootstrap-css#~1.2.0",
     "L.GeoSearch": "smeijer/L.GeoSearch",
     "html-inspector": "~0.7.0",
     "typeahead.js": "~0.9.3",
     "dropzone": "~3.6.2",
     "jquery-file-upload": "~8.7.1",
-    "bootstrap": "~3.0.0",
+    "bootstrap": "~3.1.1",
     "fancybox": "~2.1.5",
     "momentjs": "~2.4.0",
     "nprogress": "~0.1.2",
@@ -42,13 +41,10 @@
     "Hover": "IanLunn/Hover",
     "fastclick": "~0.6.11",
     "django-filters-js": "dryan/django-filters-js",
-    "clndr": "~1.1.3"
+    "clndr": "~1.1.3",
+    "select2-bootstrap-css": "~1.3.0"
   },
   "devDependencies": {
     "html-inspector": "~0.3.0"
-  },
-  "resolutions": {
-    "jquery": "2.0.3",
-    "bootstrap": "~3.0.0"
   }
 }

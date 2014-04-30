@@ -32,10 +32,10 @@ reform.widgets.map = function() {
   var markers = new L.MarkerClusterGroup();
   markers.addLayers(reform.data.appreciationsLocations.map(function(loc) {
     var marker = L.marker(L.latLng(loc.latitude, loc.longitude), {
-      title: loc.category__definition,
+      title: loc['category__definition_' + reform.i18n.language],
       icon: appreciationMarker
     });
-    marker.bindPopup('<a href="' + reform.urls.appreciationView.replace('0', loc.pk) + '" target="_blank">' + loc.category__definition + '</a>');
+    marker.bindPopup('<a href="' + reform.urls.appreciationView.replace('0', loc.pk) + '" target="_blank">' + loc['category__definition_' + reform.i18n.language] + '</a>');
     return marker;
   }));
   map.addLayer(markers);

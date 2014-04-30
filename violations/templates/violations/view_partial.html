@@ -31,7 +31,7 @@
             {% if user.is_admin %}
             <a class="btn btn-link" href="{% url 'admin:violations_report_change' report.id %}" target="_blank"><i class="fa fa-pencil text-warning"></i> {% trans 'Edit as Super User' %}</a>
             {% endif %}
-            {% if user.is_moderator %}
+            {% if user.is_moderator and not report.is_verified %}
             <a id="ui-verify-button" class="btn btn-link" href="{% url 'violations:verify' report.id %}"><i class="fa fa-check text-success"></i> {% trans 'Verify' %}</a>
             {% endif %}
           </div>
@@ -110,7 +110,7 @@
               {% endcomment %}
               {% comment %}
               <a class="fancybox" href="{{media.url}}" target="_blank" rel="group">
-                {% setvar img_url as "" %} 
+                {% setvar img_url as "" %}
                 {% if media.is_file %}
                 {% setvar media.file|thumbnail_url:'media' as img_url %}
                 {% elif media.is_youtube %}

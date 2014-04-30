@@ -57,7 +57,7 @@
                 <span id="ui-wizard-victim-text" hidden>{% trans "I've been a victim of" %}</span>
                 <span id="ui-wizard-witness-text" hidden>{% trans "I've witnessed a" %}</span>
                 {% trans 'Select an violation category' as str %}
-                {% render_field form.category placeholder=str class+="select2 -col-md-4 btn-lg" data-style="form-control btn-lg -boostrap-select-fix" %}
+                {% render_field form.category placeholder=str class+="form-control input-lg select2" %}
               </p>
 
             </div>
@@ -158,7 +158,7 @@
               <h3><i class="fa fa-picture-o"></i> {% trans 'Media Attachments' %}</h3>
               <!--<input name="files[]" type="file" multiple />-->
               <!--<input type="hidden" name="rsid" value="{{report_submit_id}}">-->
-              <div id="ui-media-file-upload" tabindex="0" class="dropzone input-area" style="background-color: #FFF; border: 1px solid #999;"></div>
+              <div id="ui-media-file-upload" tabindex="0" class="dropzone input-area form-control" style="background-color: #FFF; border: 1px solid #cccccc"></div>
               <!--
               <button type="button" class="form-control input-area" style="padding: 0;">
                 <div id="ui-media-file-upload" class="dropzone" style="background-color: #FFF; height: 100%">
@@ -220,11 +220,11 @@
               <h3><i class="fa fa-tags"></i> {{str}}</h3>
               <!--<input type="text" class="form-control" placeholder="{{str}}">-->
               {% trans 'Select applicable features' as str %}
-              {% render_field form.features placeholder=str class+="select2 btn-lg" data-style="form-control btn-lg"  %}
+              {% render_field form.features placeholder=str class+="form-control select2" %}
             </div>
           </div>
 
-          <div class="row ui-wizard-row" id="ui-wizard-submit" hidden>
+          <div class="row ui-wizard-row" id="ui-wizard-submit" style="margin-top: 20px;" hidden>
             <div class="col-md-12">
               <button class="btn btn-danger btn-block btn-lg"><i class="fa fa-plus"></i> {% trans 'Report' %}</button>
             </div>
@@ -298,7 +298,7 @@
   {#%<script src="{% static 'components/typeahead.js/dist/typeahead.js' %}"></script>%#}
   <!-- date input -->
   <script src="{% static 'components/lodash/dist/lodash.js' %}"></script>
-  <script src="{% static 'components/CLNDR/src/clndr.js' %}"></script>
+  <script src="{% static 'components/clndr/src/clndr.js' %}"></script>
   {% endcompress %}
 
   <script type="text/javascript">

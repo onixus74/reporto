@@ -48,3 +48,14 @@ foreman start # run application in staging environment
 
 git push heroku heroku:master # push to staging
 ```
+
+
+
+
+## Deployment
+
+```
+python manage.py collectstatic
+python manage.py compress --force
+./sync-server.sh
+```

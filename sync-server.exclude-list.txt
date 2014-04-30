@@ -19,6 +19,7 @@ sync-server.out
 .pydevproject
 .checkstyle
 .settings
+
 .sass-cache
 
 /base/static/components

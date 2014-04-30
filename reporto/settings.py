@@ -68,6 +68,11 @@ USE_L10N = True
 # If you set this to False, Django will not use timezone-aware datetimes.
 USE_TZ = True
 
+from django.utils.translation import ugettext_lazy as _
+
+SITE_NAME = _("Reform Reporting Platform")
+SITE_DESCRIPTION = _("a tool to monitor security sector status by tracking violations involving police officers")
+
 #from django.conf import global_settings
 #DATETIME_INPUT_FORMATS = ('%Y-%m-%dT%H:%M:%S', '%Y-%m-%dT%H:%M') + global_settings.DATETIME_INPUT_FORMATS
 # print DATETIME_INPUT_FORMATS
@@ -153,7 +158,9 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.locale.LocaleMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    # 'debug_toolbar.middleware.DebugToolbarMiddleware',  # !debug_toolbar!
+    # 'base.middleware.RedirectOnCancelMiddleware',
+    'social_auth.middleware.SocialAuthExceptionMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',  # !debug_toolbar!
 )
 
 ROOT_URLCONF = 'reporto.urls'
@@ -175,12 +182,19 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     #'django.contrib.markup',
+    'django.contrib.comments',
 
     'customization',
 
     'reversion',  # models versionning
     'mptt',  # tree models
     'watson',  # full-text search in models
+
+    'tagging',
+    # 'mptt',
+    'zinnia_bootstrap',
+    # 'customization',
+    'zinnia',  # blog app
 
     # project components
     'users',
@@ -343,6 +357,10 @@ REGISTRATION_DEFAULT_PASSWORD_LENGTH = 8
 REGISTRATION_REGISTRATION_EMAIL = False
 
 # APP 'social_auth'
+
+SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
+
+
 AUTHENTICATION_BACKENDS = (
     'social_auth.backends.twitter.TwitterBackend',
     'social_auth.backends.facebook.FacebookBackend',
@@ -386,8 +404,16 @@ SOCIAL_AUTH_FIELDS_STORED_IN_SESSION = ['next', ]
 TEMPLATE_CONTEXT_PROCESSORS += (
     'django.core.context_processors.request',
     'social_auth.context_processors.social_auth_by_name_backends',
-    # 'social_auth.context_processors.social_auth_backends',
+    'social_auth.context_processors.social_auth_backends',
+    'social_auth.context_processors.social_auth_by_type_backends',
     'social_auth.context_processors.social_auth_login_redirect',
+)
+
+TEMPLATE_CONTEXT_PROCESSORS += (
+    'django.contrib.auth.context_processors.auth',
+    'django.core.context_processors.i18n',
+    # 'django.core.context_processors.request',
+    'zinnia.context_processors.version',  # Optional
 )
 
 SOCIAL_AUTH_PIPELINE = (

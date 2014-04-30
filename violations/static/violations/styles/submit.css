@@ -97,6 +97,7 @@ body {
   text-align: center;
   cursor: pointer;
   -webkit-transition: background-color 0.5s;
+  -o-transition: background-color 0.5s;
   transition: background-color 0.5s;
 }
 /* line 110, submit.scss */
@@ -163,6 +164,7 @@ body {
   margin: 4px;
   border: 1px transparent solid;
   -webkit-transition: border-color 0.1s linear;
+  -o-transition: border-color 0.1s linear;
   transition: border-color 0.1s linear;
 }
 /* line 185, submit.scss */

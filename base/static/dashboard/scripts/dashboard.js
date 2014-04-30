@@ -38,18 +38,18 @@
     var markers = new L.MarkerClusterGroup();
     markers.addLayers(reform.data.violationsLocations.map(function(loc) {
       var marker = L.marker(L.latLng(loc.latitude, loc.longitude), {
-        title: loc.category__definition,
+        title: loc['category__definition_' + reform.i18n.language],
         icon: violationMarker
       });
-      marker.bindPopup('<a href="' + reform.urls.violationView.replace('0', loc.pk) + '" target="_blank">' + loc.category__definition + '</a>');
+      marker.bindPopup('<a href="' + reform.urls.violationView.replace('0', loc.pk) + '" target="_blank">' + loc['category__definition_' + reform.i18n.language] + '</a>');
       return marker;
     }));
     markers.addLayers(reform.data.appreciationsLocations.map(function(loc) {
       var marker = L.marker(L.latLng(loc.latitude, loc.longitude), {
-        title: loc.category__definition,
+        title: loc['category__definition_' + reform.i18n.language],
         icon: appreciationMarker
       });
-      marker.bindPopup('<a href="' + reform.urls.appreciationView.replace('0', loc.pk) + '" target="_blank">' + loc.category__definition + '</a>');
+      marker.bindPopup('<a href="' + reform.urls.appreciationView.replace('0', loc.pk) + '" target="_blank">' + loc['category__definition_' + reform.i18n.language] + '</a>');
       return marker;
     }));
     map.addLayer(markers);
@@ -128,7 +128,7 @@
     function ListResetHandlerFactory($list, updateHandler, url) {
       return function() {
         $list.block();
-        $.getJSON(url + '.json').done(function(response) {
+        $.getJSON(url).done(function(response) {
           console.log(response);
           $list.html(response.html);
           updateHandler(response, url);

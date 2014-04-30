@@ -53,10 +53,10 @@ class ReportsDashboard(PaginatedListHybridResponseMixin, ListView):
 
         else:
 
-            append_violations_statistics(context)
+            append_violations_statistics(self.request, context)
 
-            context['violations_locations'] = Report.objects.values('latitude', 'longitude', 'category__definition_en', 'pk')
-            context['appreciations_locations'] = AppreciationReport.objects.values('latitude', 'longitude', 'category__definition_en', 'pk')
+            context['violations_locations'] = Report.objects.values('latitude', 'longitude', 'category__definition_' + self.request.LANGUAGE_CODE, 'pk')
+            context['appreciations_locations'] = AppreciationReport.objects.values('latitude', 'longitude', 'category__definition_' + self.request.LANGUAGE_CODE, 'pk')
 
         return context
 
@@ -644,8 +644,8 @@ def statistics_view(request, *args, **kwargs):
     else:
         response = {}
 
-        append_violations_statistics(response)
-        append_appreciations_statistics(response)
+        append_violations_statistics(request, response)
+        append_appreciations_statistics(request, response)
 
         response = JSONResponse(response)
 
@@ -653,7 +653,7 @@ def statistics_view(request, *args, **kwargs):
     return response
 
 
-def append_violations_statistics(context):
+def append_violations_statistics(request, context):
 
     # context['violations_categories'] = [category.__unicode__() for category in Category.objects.all()]
     # context['violations_features'] = [feature.__unicode__() for feature in Feature.objects.all()]
@@ -663,8 +663,8 @@ def append_violations_statistics(context):
 
     context['violations_count'] = Report.objects.count()
 
-    violations_by_category = Report.objects.values('category__definition_en').annotate(Count('id')).order_by('category__definition_en')
-    context['violations_by_category'] = [{'label': i['category__definition_en'], 'count': i['id__count']} for i in violations_by_category]
+    violations_by_category = Report.objects.values('category__definition_' + request.LANGUAGE_CODE).annotate(Count('id')).order_by('category__definition_' + request.LANGUAGE_CODE)
+    context['violations_by_category'] = [{'label': i['category__definition_' + request.LANGUAGE_CODE], 'count': i['id__count']} for i in violations_by_category]
 
     victim_gender_display = dict(Victim.GENDER)
     violations_by_victim_gender = Report.objects.values('victim__gender').annotate(Count('id')).order_by('victim__gender')
@@ -688,7 +688,7 @@ def append_violations_statistics(context):
     return context
 
 
-def append_appreciations_statistics(context):
+def append_appreciations_statistics(request, context):
 
     context['appreciations_categories'] = [category.__unicode__() for category in AppreciationCategory.objects.all()]
 
@@ -697,7 +697,7 @@ def append_appreciations_statistics(context):
     appreciations_by_date = AppreciationReport.objects.extra({'date': 'date(datetime)'}).values('date').annotate(Count('id')).order_by('date')
     context['appreciations_by_date'] = [{'date': i['date'], 'count': i['id__count']} for i in appreciations_by_date]
 
-    appreciations_by_category = AppreciationReport.objects.values('category__definition_en').annotate(Count('id')).order_by('category__definition_en')
-    context['appreciations_by_category'] = [{'label': i['category__definition_en'], 'count': i['id__count']} for i in appreciations_by_category]
+    appreciations_by_category = AppreciationReport.objects.values('category__definition_' + request.LANGUAGE_CODE).annotate(Count('id')).order_by('category__definition_' + request.LANGUAGE_CODE)
+    context['appreciations_by_category'] = [{'label': i['category__definition_' + request.LANGUAGE_CODE], 'count': i['id__count']} for i in appreciations_by_category]
 
     return context

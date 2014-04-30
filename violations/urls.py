@@ -9,7 +9,9 @@ urlpatterns = patterns('',
 
                        #url(r'^$', 'violations.views.index', name='reports'),
 
-                       url(r'^(\.(?P<extension>(json)))?$',       administrator_required(ReportsDashboard.as_view()),       name='dashboard'),
+                       # url(r'^(\.(?P<extension>(json)))?$',       administrator_required(ReportsDashboard.as_view()),       name='dashboard'),
+                       url(r'^(\.(?P<extension>(json)))?$',       ReportsDashboard.as_view(),       name='dashboard'),
+
                        url(r'^search(\.(?P<extension>(json)))?$', ReportSearchView.as_view(),       name='search'),
                        #url(r'^submit$',             login_required_with_message(ReportSubmitView.as_view()),       name='submit'),
                        url(r'^submit$',              login_required_with_message(report_submit),                    name='submit'),

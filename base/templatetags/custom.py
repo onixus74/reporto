@@ -73,17 +73,20 @@ def markdown(value):
 
 
 class SetVarNode(template.Node):
+
     def __init__(self, new_val, var_name):
         self.new_val = new_val
         self.var_name = var_name
+
     def render(self, context):
         context[self.var_name] = self.new_val
         return ''
 
 import re
 
+
 @register.tag
-def setvar(parser,token): # {% setvar "a string" as new_template_var %}
+def setvar(parser, token):  # {% setvar "a string" as new_template_var %}
     # This version uses a regular expression to parse tag contents.
     try:
         # Splitting by None == splitting by spaces.
@@ -98,3 +101,10 @@ def setvar(parser,token): # {% setvar "a string" as new_template_var %}
         raise template.TemplateSyntaxError, "%r tag's argument should be in quotes" % tag_name
     return SetVarNode(new_val[1:-1], var_name)
 
+
+from django.conf import settings
+
+
+@register.simple_tag
+def settings_value(name):
+    return getattr(settings, name, '')

@@ -66,7 +66,7 @@ class UserCreationForm(UserCreationForm):
 # class RegistrationView(BaseRegistrationView):
 
 #     def __init__(self, *args, **kwargs):
-#         # ...
+# ...
 #         super(RegistrationView, self).__init__(*args, **kwargs)
 
 
@@ -85,7 +85,8 @@ def signup_view(request, *args, **kwargs):
 
         if user.is_active:
             #logger.debug('SIGNUP %s', [user, user.username, user.password, request.POST["password"], form.cleaned_data["password"]])
-            user = authenticate(username=user.username, password=form.cleaned_data["password"])
+            user = authenticate(
+                username=user.username, password=form.cleaned_data["password"])
             #logger.debug('SIGNUP %s', [user])
             login(request, user)
             #messages.success(request, 'Sign in succeeded.')
@@ -99,6 +100,7 @@ def signup_view(request, *args, **kwargs):
 def login_view(request, *args, **kwargs):
     if request.user.is_authenticated():
         return redirect('home')
+
     form = AuthenticationForm(data=request.POST or None)
     if form.is_valid():
         user = form.get_user()
@@ -167,11 +169,24 @@ paginate_by = 5
 
 
 def home_view(request, *args, **kwargs):
-    if not request.user.is_authenticated():
-        return login_view(request, *args, **kwargs)
+    # if not request.user.is_authenticated():
+    #     return login_view(request, *args, **kwargs)
     # if request.user.is_authenticated():
     template_name = "home.html"
     context = {}
+
+    form = AuthenticationForm(data=request.POST or None)
+    if form.is_valid():
+        user = form.get_user()
+        if user.is_active:
+            login(request, user)
+            #messages.success(request, 'Sign in succeeded.')
+            return redirect(request.REQUEST.get('next', '/'))
+        else:
+            messages.warning(request, 'Sorry, your user account is inactive.')
+
+    context['form'] = form
+    context['next'] = request.REQUEST.get('next', '/')
 
     violations = ViolationReport.objects.all()
     violations_paginator = Paginator(violations, paginate_by)
@@ -215,11 +230,13 @@ def home_view(request, *args, **kwargs):
         'is_paginated': appreciations_paginator.num_pages > 1
     }
 
-    append_violations_statistics(context)
-    append_appreciations_statistics(context)
+    append_violations_statistics(request, context)
+    append_appreciations_statistics(request, context)
 
-    context['violations_locations'] = ViolationReport.objects.values('latitude', 'longitude', 'category__definition_en', 'pk')
-    context['appreciations_locations'] = AppreciationReport.objects.values('latitude', 'longitude', 'category__definition_en', 'pk')
+    context['violations_locations'] = ViolationReport.objects.values(
+        'latitude', 'longitude', 'category__definition_' + request.LANGUAGE_CODE, 'pk')
+    context['appreciations_locations'] = AppreciationReport.objects.values(
+        'latitude', 'longitude', 'category__definition_' + request.LANGUAGE_CODE, 'pk')
 
     #context = RequestContext(request, context)
     # context.update(csrf(request))
@@ -236,8 +253,8 @@ def statistics_view(request, *args, **kwargs):
     else:
         response = {}
 
-        append_violations_statistics(response)
-        append_appreciations_statistics(response)
+        append_violations_statistics(request, response)
+        append_appreciations_statistics(request, response)
 
         response = JSONResponse(response)
 

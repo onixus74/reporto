@@ -13,7 +13,7 @@ reform_member_required = user_passes_test(lambda u: u.groups.filter(name='REFORM
 
 
 def login_required_with_message(view_func):
-    decorated_view_func = login_required(view_func, login_url='home')
+    decorated_view_func = login_required(view_func)
 
     def modified_view_func(request, *args, **kwargs):
         if not request.user.is_authenticated():

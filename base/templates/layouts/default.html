@@ -5,11 +5,20 @@
 <!--[if gt IE 8]><!--> <html{% if LANGUAGE_BIDI %} dir="rtl"{% endif %} lang="{{LANGUAGE_CODE}}" class="no-js"> <!--<![endif]-->
 <head>
 	<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <meta name="language" content="{{LANGUAGE_CODE}}" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<title>{% block view_title %}{% endblock %}{% trans 'Reform Reporting Platform' %}</title>
-	<meta name="description" content="">
-	<meta name="viewport" content="width=device-width">
-
+	<meta name="description" content="{% settings_value 'SITE_DESCRIPTION' %}">
+  {% block view_meta %}{% endblock %}
+  <meta property="og:title" content="{% settings_value 'SITE_NAME' %}">
+  <meta property="og:image" content="{% static 'favicon-160x160.png' %}">
+  <meta property="og:description" content="{% settings_value 'SITE_DESCRIPTION' %}">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@tnreform">
+  <meta name="twitter:title" content="{% settings_value 'SITE_NAME' %}">
+  <meta name="twitter:description" content="{% settings_value 'SITE_DESCRIPTION' %}">
+  <meta name="twitter:image" content="{% static 'favicon-160x160.png' %}">
   <!-- icons & favicons -->
 
   <link rel="apple-touch-icon" sizes="57x57" href="{{STATIC_URL}}apple-touch-icon-57x57.png" />
@@ -115,16 +124,27 @@
           <li{% if request.path_info == url %} class="active"{% endif %}><a href="{{url}}"><i class="fa fa-tachometer"></i> {% trans 'Reports Dashboard' %}</a></li>
           {% comment %}
           {% url 'violations:dashboard' as url %}
-          <li{% if request.path_info == url %} class="active"{% endif %}><a href="{{url}}">{% trans 'Violations' %}</a></li>
+          <li{% if request.path_info == url %} class="active"{% endif %}><a href="{{url}}"><i class="fa fa-exclamation-triangle"></i> {% trans 'Violations' %}</a></li>
           {% endcomment %}
           {% url 'violations:submit' as url %}
           <li{% if request.path_info == url %} class="active"{% endif %}><a href="{{url}}"><i class="fa fa-plus"></i> {% trans 'Report a Violation' %}</a></li>
           {% comment %}
           {% url 'appreciations:dashboard' as url %}
-          <li{% if request.path_info == url %} class="active"{% endif %}><a href="{{url}}">{% trans 'Appreciations' %}</a></li>
+          <li{% if request.path_info == url %} class="active"{% endif %}><a href="{{url}}"><i class="fa fa-thumbs-up"></i> {% trans 'Appreciations' %}</a></li>
           {% endcomment %}
           {% url 'appreciations:submit' as url %}
           <li{% if request.path_info == url %} class="active"{% endif %}><a href="{{url}}"><i class="fa fa-plus"></i> {% trans 'Appreciate Police Work' %}</a></li>
+          {% else %}
+          {% url 'home' as url %}
+          <li{% if request.path_info == url %} class="active"{% endif %}><a href="{{url}}"><i class="fa fa-home"></i> {% trans 'Home Page' %}</a></li>
+          {% url 'violations:dashboard' as url %}
+          <li{% if request.path_info == url %} class="active"{% endif %}><a href="{{url}}"><i class="fa fa-exclamation-triangle"></i> {% trans 'Violations' %}</a></li>
+          {% url 'appreciations:dashboard' as url %}
+          <li{% if request.path_info == url %} class="active"{% endif %}><a href="{{url}}"><i class="fa fa-thumbs-up"></i> {% trans 'Appreciations' %}</a></li>
+          {% endif %}
+          {% url 'zinnia_entry_archive_index' as url %}
+          <li{% if request.path_info == url %} class="active"{% endif %}><a href="{{url}}"><i class="fa fa-book"></i> {% trans 'Reports' %}</a></li>
+          {% if user.is_authenticated %}
           {% if user.role == "A" %}
           <li class="dropdown">
             <a href="#" class="dropdown-toggle needsclick" data-toggle="dropdown"><i class="fa fa-cog"></i> {% trans 'Administration' %}<b class="caret"></b></a>
@@ -274,6 +294,9 @@
 	<!--<script src="{% static 'components/sass-bootstrap/bootstrap/js/bootstrap.js' %}"></script>-->
 	<script src="{% static 'scripts/bootstrap.js' %}"></script>
   <script src="{% static 'components/momentjs/moment.js' %}"></script>
+  <script src="{% static 'components/fastclick/lib/fastclick.js' %}"></script>
+	{% endcompress %}
+
   {% if LANGUAGE_CODE != 'en' %}
   {% if LANGUAGE_CODE == 'ar' %}
   <script src="{% static 'dependencies/momentjs/lang/ar-tn.js' %}"></script>
@@ -281,10 +304,6 @@
   <script src="{% static 'components/momentjs/lang/' %}{{LANGUAGE_CODE}}.js"></script>
   {% endif %}
   {% endif %}
-  <script src="{% static 'components/fastclick/lib/fastclick.js' %}"></script>
-	{% endcompress %}
-
-
 
 {% endblock %}
 <!-- Layout Scripts Dependencies - END -->
