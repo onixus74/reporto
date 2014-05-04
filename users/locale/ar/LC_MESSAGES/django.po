@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-15 12:44+0100\n"
+"POT-Creation-Date: 2014-05-04 09:57+0100\n"
 "PO-Revision-Date: 2014-01-14 16:38+0100\n"
 "Last-Translator: nader <nader.toukabri@gmail.com>\n"
 "Language-Team: reform.tn\n"
@@ -83,32 +83,32 @@ msgstr "[تغير]"
 msgid "Social network accounts"
 msgstr "الشبكات الاجتماعية"
 
-#: templates/users/profile.html:32
-msgid "Google"
-msgstr "جوجل"
-
-#: templates/users/profile.html:34 templates/users/profile.html.py:42
-#: templates/users/profile.html:50
+#: templates/users/profile.html:32 templates/users/profile.html.py:38
+#: templates/users/profile.html:44
 msgid "Disconnect"
 msgstr "افصل"
 
-#: templates/users/profile.html:36 templates/users/profile.html.py:44
-#: templates/users/profile.html:52
+#: templates/users/profile.html:32 templates/users/profile.html.py:34
+msgid "Google"
+msgstr "جوجل"
+
+#: templates/users/profile.html:34 templates/users/profile.html.py:40
+#: templates/users/profile.html:46
 msgid "Connect"
 msgstr "اتصل"
 
-#: templates/users/profile.html:40
+#: templates/users/profile.html:38 templates/users/profile.html.py:40
 msgid "Facebook"
 msgstr "فيسبوك"
 
-#: templates/users/profile.html:48
+#: templates/users/profile.html:44 templates/users/profile.html.py:46
 msgid "Twitter"
 msgstr "تويتر"
 
-#: templates/users/profile.html:58
+#: templates/users/profile.html:81
 msgid "Victim Profile"
 msgstr "ملف الضحية"
 
-#: templates/users/profile.html:63
+#: templates/users/profile.html:86
 msgid "Save"
 msgstr "احفظ"

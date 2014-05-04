@@ -26,6 +26,7 @@ DATABASES = {
     }
 }
 
+#- Email Settings
 EMAIL_HOST = 'smtp.webfaction.com'
 EMAIL_HOST_USER = 'reporto'
 EMAIL_HOST_PASSWORD = 'reportopass'
@@ -34,7 +35,7 @@ SERVER_EMAIL = 'contact@reform.tn'
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
-# ALLOWED_HOSTS = ['localhost', 'nader-laptop.local', 'reform.tn', 'www.reform.tn', 'tunpixel.webfactional.com', 'reporting.reform.tn', 'reform-tn-platform.herokuapp.com']
+# ALLOWED_HOSTS = ['localhost', 'ipolice.tn', 'www.ipolice.tn', reform.tn', 'www.reform.tn', 'reporting.reform.tn']
 ALLOWED_HOSTS = ['*']
 #SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
@@ -435,3 +436,7 @@ CRISPY_TEMPLATE_PACK = 'bootstrap3'
 #REPORT_BUILDER_INCLUDE = []
 REPORT_BUILDER_EXCLUDE = ['user']
 REPORT_BUILDER_GLOBAL_EXPORT = True
+
+
+#- Security
+X_FRAME_OPTIONS = 'DENY'

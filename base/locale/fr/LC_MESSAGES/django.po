@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-21 20:20+0100\n"
+"POT-Creation-Date: 2014-05-04 09:51+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -38,98 +38,127 @@ msgstr ""
 msgid "file"
 msgstr ""
 
-#: templates/home.html:5 templates/home.html.py:10
-#: templates/layouts/default.html:116
+#: templates/home.html:5 templates/home.html.py:11
+#: templates/layouts/default.html:125
 msgid "Reports Dashboard"
 msgstr ""
 
-#: templates/home.html:20
+#: templates/home.html:17 templates/login-minimal.html:12
+#: templates/login.html:12 templates/layouts/default.html:11
+msgid "Reform Reporting Platform"
+msgstr ""
+
+#: templates/home.html:18 templates/login.html:13
+msgid ""
+"a tool to monitor security sector status by tracking violations involving "
+"police officers"
+msgstr ""
+
+#: templates/home.html:20 templates/login.html:15
+msgid "reports"
+msgstr ""
+
+#: templates/home.html:22 templates/login.html:17
+msgid "violations"
+msgstr ""
+
+#: templates/home.html:23 templates/login.html:18
+msgid "appreciations"
+msgstr ""
+
+#: templates/home.html:112
 msgid "Latest Violation"
 msgstr ""
 
-#: templates/home.html:21
+#: templates/home.html:113
 msgid "Victim"
 msgstr ""
 
-#: templates/home.html:22
+#: templates/home.html:114
 msgid "has been a victim of"
 msgstr ""
 
-#: templates/home.html:24 templates/home.html.py:55
+#: templates/home.html:116 templates/home.html.py:185
 msgid "happened in"
 msgstr ""
 
-#: templates/home.html:26 templates/home.html.py:57 templates/login.html:108
+#: templates/home.html:118 templates/home.html.py:187 templates/login.html:108
 msgid "on"
 msgstr ""
 
-#: templates/home.html:29 templates/login.html:110
+#: templates/home.html:121 templates/login.html:110
 msgid "Verified"
 msgstr ""
 
-#: templates/home.html:31 templates/home.html.py:59
+#: templates/home.html:123 templates/home.html.py:189
 msgid "Click to view report"
 msgstr ""
 
-#: templates/home.html:39
+#: templates/home.html:131
 msgid "There is no reported violations!"
 msgstr ""
 
-#: templates/home.html:42 templates/login.html:144
-#: templates/layouts/default.html:123
+#: templates/home.html:134 templates/login.html:144
+#: templates/layouts/default.html:132
 msgid "Report a Violation"
 msgstr ""
 
-#: templates/home.html:53
+#: templates/home.html:143 templates/login.html:104
+#: templates/login.html.py:155
+msgid "Latest Reports"
+msgstr ""
+
+#: templates/home.html:171
+msgid "See All"
+msgstr ""
+
+#: templates/home.html:183
 msgid "Latest Appreciation"
 msgstr ""
 
-#: templates/home.html:54 templates/login.html:159
+#: templates/home.html:184 templates/login.html:159
 msgid "for"
 msgstr ""
 
-#: templates/home.html:69
+#: templates/home.html:199
 msgid "There is no reported appreciations!"
 msgstr ""
 
-#: templates/home.html:73 templates/login.html:192
-#: templates/layouts/default.html:130
+#: templates/home.html:203 templates/login.html:192
+#: templates/layouts/default.html:139
 msgid "Appreciate Police Work"
 msgstr ""
 
-#: templates/home.html:108 templates/login.html:100
+#: templates/home.html:238 templates/login.html:100
+#: templates/layouts/default.html:144
 msgid "Violations"
 msgstr ""
 
-#: templates/home.html:116 templates/home.html.py:149
+#: templates/home.html:246 templates/home.html.py:279
 msgid "Type to search..."
 msgstr ""
 
-#: templates/home.html:141 templates/login.html:151
+#: templates/home.html:271 templates/login.html:151
+#: templates/layouts/default.html:146
 msgid "Appreciations"
 msgstr ""
 
-#: templates/home.html:247
+#: templates/home.html:377
 msgid "Violation Report"
 msgstr ""
 
-#: templates/home.html:253 templates/home.html.py:271
+#: templates/home.html:383 templates/home.html.py:401
 msgid "Full report"
 msgstr ""
 
-#: templates/home.html:265
+#: templates/home.html:395
 msgid "Appreciation Report"
 msgstr ""
 
 #: templates/login-minimal.html:6 templates/login-minimal.html.py:49
 #: templates/login.html:6 templates/login.html.py:69
-#: templates/layouts/default.html:163
+#: templates/layouts/default.html:183
 msgid "Sign in"
-msgstr ""
-
-#: templates/login-minimal.html:12 templates/login.html:12
-#: templates/layouts/default.html:9
-msgid "Reform Reporting Platform"
 msgstr ""
 
 #: templates/login-minimal.html:33 templates/login.html:53
@@ -156,30 +185,8 @@ msgstr ""
 msgid "Sign up using your email address"
 msgstr ""
 
-#: templates/login.html:13
-msgid ""
-"a tool to monitor security sector status by tracking violations involving "
-"police officers"
-msgstr ""
-
-#: templates/login.html:15
-msgid "reports"
-msgstr ""
-
-#: templates/login.html:17
-msgid "violations"
-msgstr ""
-
-#: templates/login.html:18
-msgid "appreciations"
-msgstr ""
-
 #: templates/login.html:42
 msgid "contribute by reporting incidents, start by signing in"
-msgstr ""
-
-#: templates/login.html:104 templates/login.html.py:155
-msgid "Latest Reports"
 msgstr ""
 
 #: templates/login.html:108 templates/login.html.py:159
@@ -200,71 +207,83 @@ msgstr ""
 msgid "Top Reporting Circles"
 msgstr ""
 
-#: templates/layouts/default.html:105
+#: templates/signup.html:10 templates/signup.html.py:20
+msgid "Sign up"
+msgstr ""
+
+#: templates/layouts/default.html:114
 msgid "Toggle navigation"
 msgstr ""
 
-#: templates/layouts/default.html:108 templates/layouts/default.html.py:240
+#: templates/layouts/default.html:117 templates/layouts/default.html.py:260
 msgid "Tunisian Institutional Reform"
 msgstr ""
 
-#: templates/layouts/default.html:133
+#: templates/layouts/default.html:142
+msgid "Home Page"
+msgstr ""
+
+#: templates/layouts/default.html:149
+msgid "Reports"
+msgstr ""
+
+#: templates/layouts/default.html:153
 msgid "Administration"
 msgstr ""
 
-#: templates/layouts/default.html:135
+#: templates/layouts/default.html:155
 msgid "Users"
 msgstr ""
 
-#: templates/layouts/default.html:136
+#: templates/layouts/default.html:156
 msgid "Groups"
 msgstr ""
 
-#: templates/layouts/default.html:137
+#: templates/layouts/default.html:157
 msgid "Violation Categories"
 msgstr ""
 
-#: templates/layouts/default.html:138
+#: templates/layouts/default.html:158
 msgid "Violation Features"
 msgstr ""
 
-#: templates/layouts/default.html:139
+#: templates/layouts/default.html:159
 msgid "Violation Victims"
 msgstr ""
 
-#: templates/layouts/default.html:140
+#: templates/layouts/default.html:160
 msgid "Appreciation Categories"
 msgstr ""
 
-#: templates/layouts/default.html:142
+#: templates/layouts/default.html:162
 msgid "Site Administration"
 msgstr ""
 
-#: templates/layouts/default.html:157
+#: templates/layouts/default.html:177
 msgid "Nobody!"
 msgstr ""
 
-#: templates/layouts/default.html:168
+#: templates/layouts/default.html:188
 msgid "Profile"
 msgstr ""
 
-#: templates/layouts/default.html:170
+#: templates/layouts/default.html:190
 msgid "Sign out"
 msgstr ""
 
-#: templates/layouts/default.html:239
+#: templates/layouts/default.html:259
 msgid "Developed by"
 msgstr ""
 
-#: templates/layouts/default.html:241
+#: templates/layouts/default.html:261
 msgid "REFORM Association"
 msgstr ""
 
-#: templates/layouts/default.html:242
+#: templates/layouts/default.html:262
 msgid "report a bug, suggest a feature, ..."
 msgstr ""
 
-#: templates/layouts/default.html:242
+#: templates/layouts/default.html:262
 msgid "feedback"
 msgstr ""
 

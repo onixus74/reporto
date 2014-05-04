@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-21 20:20+0100\n"
+"POT-Creation-Date: 2014-05-04 09:56+0100\n"
 "PO-Revision-Date: 2014-01-21 19:13+0100\n"
 "Last-Translator: nader <nader.toukabri@gmail.com>\n"
 "Language-Team: reform.tn\n"
@@ -184,7 +184,7 @@ msgstr "في"
 msgid "Edit as Super User"
 msgstr "عدل كمستعمل متميز"
 
-#: templates/appreciations/view_partial.html:58
+#: templates/appreciations/view_partial.html:54
 msgid "No attachments!"
 msgstr "لا تحتوي على مرفقات"
 

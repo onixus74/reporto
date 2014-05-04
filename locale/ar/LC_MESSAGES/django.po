@@ -1,32 +1,12 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
-#, fuzzy
-msgid ""
-msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-30 14:04+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
-"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
-
 #: appreciations/models.py:18 appreciations/models.py:47
 #: violations/models.py:22 violations/models.py:130 violations/models.py:240
 msgid "category"
 msgstr ""
 
 #: appreciations/models.py:19 violations/models.py:23
+#, fuzzy
 msgid "categories"
-msgstr ""
+msgstr " "
 
 #: appreciations/models.py:22 violations/models.py:26 violations/models.py:51
 msgid "slug"
@@ -86,8 +66,9 @@ msgstr ""
 
 #: appreciations/views.py:83 appreciations/views.py:93 violations/views.py:254
 #: violations/views.py:268
+#, fuzzy
 msgid "Adding Report"
-msgstr ""
+msgstr " "
 
 #: appreciations/views.py:83 violations/views.py:254
 msgid "Report added."
@@ -106,18 +87,19 @@ msgstr ""
 #: violations/templates/violations/dashboard_violations_list.html:5
 #: violations/templates/violations/submit_similar_reports_list.html:9
 msgid "There is no reports!"
-msgstr ""
+msgstr "  !"
 
 #: appreciations/templates/appreciations/dashboard.html:37
 #: appreciations/templates/appreciations/submit.html:5
 #: base/templates/home.html:203 base/templates/login.html:192
 #: base/templates/layouts/default.html:139
 msgid "Appreciate Police Work"
-msgstr ""
+msgstr "  "
 
 #: appreciations/templates/appreciations/dashboard_appreciations_item.html:10
+#, fuzzy
 msgid "Click to locate appreciation"
-msgstr ""
+msgstr "/"
 
 #: appreciations/templates/appreciations/dashboard_appreciations_item.html:18
 #: violations/templates/violations/dashboard_violations_item.html:18
@@ -128,11 +110,12 @@ msgstr ""
 #: base/templates/home.html:123 base/templates/home.html.py:189
 #: violations/templates/violations/dashboard_violations_item.html:27
 msgid "Click to view report"
-msgstr ""
+msgstr "  "
 
 #: appreciations/templates/appreciations/dashboard_appreciations_item.html:31
+#, fuzzy
 msgid "Appreciation Category"
-msgstr ""
+msgstr "   "
 
 #: appreciations/templates/appreciations/dashboard_appreciations_item.html:32
 #: base/templates/home.html:184 base/templates/login.html:159
@@ -140,15 +123,16 @@ msgid "for"
 msgstr ""
 
 #: appreciations/templates/appreciations/dashboard_appreciations_item.html:33
+#, fuzzy
 msgid "Appreciation Subject"
-msgstr ""
+msgstr " "
 
 #: appreciations/templates/appreciations/submit.html:13
 #: appreciations/templates/appreciations/view.html:5
 #: appreciations/templates/appreciations/view.html:10
 #: base/templates/home.html:395
 msgid "Appreciation Report"
-msgstr ""
+msgstr " "
 
 #: appreciations/templates/appreciations/submit.html:31
 #: customization/templates/zinnia/entry_list.html:21
@@ -199,8 +183,9 @@ msgid "Media Link"
 msgstr ""
 
 #: appreciations/templates/appreciations/submit.html:128
+#, fuzzy
 msgid "Appreciate"
-msgstr ""
+msgstr " "
 
 #: appreciations/templates/appreciations/view_partial.html:7
 #: base/templates/home.html:118 base/templates/home.html.py:187
@@ -246,7 +231,7 @@ msgstr ""
 
 #: base/models.py:26 violations/templates/violations/submit.html:189
 msgid "URL"
-msgstr ""
+msgstr " (URL)"
 
 #: base/models.py:27
 msgid "file"
@@ -261,13 +246,13 @@ msgstr ""
 #: base/templates/login.html:12 base/templates/layouts/default.html:11
 #: customization/templates/registration/login.html:12
 msgid "Reform Reporting Platform"
-msgstr ""
+msgstr "  "
 
 #: base/templates/home.html:18 base/templates/login.html:13
 msgid ""
 "a tool to monitor security sector status by tracking violations involving "
 "police officers"
-msgstr ""
+msgstr "               "
 
 #: base/templates/home.html:22 base/templates/login.html:17
 msgid "violations"
@@ -279,7 +264,7 @@ msgstr ""
 
 #: base/templates/home.html:112
 msgid "Latest Violation"
-msgstr ""
+msgstr " "
 
 #: base/templates/home.html:113
 #: violations/templates/violations/dashboard_violations_item.html:37
@@ -292,12 +277,12 @@ msgstr ""
 #: violations/templates/violations/dashboard_violations_item.html:40
 #: violations/templates/violations/submit_similar_reports_item.html:6
 msgid "has been a victim of"
-msgstr ""
+msgstr "() "
 
 #: base/templates/home.html:116 base/templates/home.html.py:185
 #: violations/templates/violations/submit_similar_reports_item.html:8
 msgid "happened in"
-msgstr ""
+msgstr " "
 
 #: base/templates/home.html:121 base/templates/login.html:110
 #: violations/templates/violations/dashboard.html:27
@@ -305,24 +290,24 @@ msgstr ""
 #: violations/templates/violations/submit_similar_reports_item.html:17
 #: violations/templates/violations/view_partial.html:21
 msgid "Verified"
-msgstr ""
+msgstr " "
 
 #: base/templates/home.html:131
 msgid "There is no reported violations!"
-msgstr ""
+msgstr "  !"
 
 #: base/templates/home.html:134 base/templates/login.html:144
 #: base/templates/layouts/default.html:132
 #: violations/templates/violations/dashboard.html:46
 #: violations/templates/violations/submit.html:5
 msgid "Report a Violation"
-msgstr ""
+msgstr "  "
 
 #: base/templates/home.html:143 base/templates/login.html:104
 #: base/templates/login.html.py:155
 #: violations/templates/violations/submit.html:238
 msgid "Latest Reports"
-msgstr ""
+msgstr " "
 
 #: base/templates/home.html:171
 msgid "See All"
@@ -330,11 +315,11 @@ msgstr ""
 
 #: base/templates/home.html:183
 msgid "Latest Appreciation"
-msgstr ""
+msgstr " "
 
 #: base/templates/home.html:199
 msgid "There is no reported appreciations!"
-msgstr ""
+msgstr "  !"
 
 #: base/templates/home.html:238 base/templates/login.html:100
 #: base/templates/layouts/default.html:144
@@ -343,7 +328,7 @@ msgstr ""
 
 #: base/templates/home.html:246 base/templates/home.html.py:279
 msgid "Type to search..."
-msgstr ""
+msgstr " ..."
 
 #: base/templates/home.html:271 base/templates/login.html:151
 #: base/templates/layouts/default.html:146
@@ -354,7 +339,7 @@ msgstr ""
 #: violations/templates/violations/view.html:5
 #: violations/templates/violations/view.html:10
 msgid "Violation Report"
-msgstr ""
+msgstr " "
 
 #: base/templates/home.html:383 base/templates/home.html.py:401
 msgid "Full report"
@@ -367,56 +352,57 @@ msgstr ""
 #: customization/templates/registration/login.html:49
 #: customization/templates/registration/password_reset_complete.html:15
 msgid "Sign in"
-msgstr ""
+msgstr " "
 
 #: base/templates/login-minimal.html:33 base/templates/login.html:53
 #: customization/templates/registration/login.html:33
 #: users/templates/users/profile.html:19
 msgid "Email"
-msgstr ""
+msgstr " "
 
 #: base/templates/login-minimal.html:41 base/templates/login.html:61
 #: customization/templates/registration/login.html:41
 #: customization/templates/zinnia/password.html:24
 #: users/templates/users/profile.html:25
 msgid "Password"
-msgstr ""
+msgstr " "
 
 #: base/templates/login-minimal.html:51 base/templates/login.html:71
 #: customization/templates/registration/login.html:51
 msgid "Reset your password"
-msgstr ""
+msgstr "   "
 
 #: base/templates/login-minimal.html:61 base/templates/login.html:81
 #: customization/templates/registration/login.html:61
 msgid "Sign in using Facebook"
-msgstr ""
+msgstr "   "
 
 #: base/templates/login-minimal.html:64 base/templates/login.html:84
 #: customization/templates/registration/login.html:64
 msgid "Sign in using Google"
-msgstr ""
+msgstr "   "
 
 #: base/templates/login-minimal.html:70 base/templates/login.html:90
 #: customization/templates/registration/login.html:70
 msgid "Sign up using your email address"
-msgstr ""
+msgstr "    "
 
 #: base/templates/login.html:42
 msgid "contribute by reporting incidents, start by signing in"
-msgstr ""
+msgstr "        "
 
 #: base/templates/login.html:119 base/templates/login.html.py:167
 msgid "Top Reporters"
-msgstr ""
+msgstr " "
 
 #: base/templates/login.html:132 base/templates/login.html.py:180
 msgid "Top Reporting Circles"
-msgstr ""
+msgstr "  "
 
 #: base/templates/signup.html:10 base/templates/signup.html.py:20
+#, fuzzy
 msgid "Sign up"
-msgstr ""
+msgstr " "
 
 #: base/templates/layouts/default.html:114
 msgid "Toggle navigation"
@@ -425,7 +411,7 @@ msgstr ""
 #: base/templates/layouts/default.html:117
 #: base/templates/layouts/default.html:260
 msgid "Tunisian Institutional Reform"
-msgstr ""
+msgstr "  "
 
 #: base/templates/layouts/default.html:142
 msgid "Home Page"
@@ -433,8 +419,9 @@ msgstr ""
 
 #: base/templates/layouts/default.html:149
 #: customization/templates/zinnia/skeleton.html:5
+#, fuzzy
 msgid "Reports"
-msgstr ""
+msgstr " "
 
 #: base/templates/layouts/default.html:153
 msgid "Administration"
@@ -450,49 +437,49 @@ msgstr ""
 
 #: base/templates/layouts/default.html:157
 msgid "Violation Categories"
-msgstr ""
+msgstr " "
 
 #: base/templates/layouts/default.html:158
 msgid "Violation Features"
-msgstr ""
+msgstr " "
 
 #: base/templates/layouts/default.html:159
 msgid "Violation Victims"
-msgstr ""
+msgstr " "
 
 #: base/templates/layouts/default.html:160
 msgid "Appreciation Categories"
-msgstr ""
+msgstr " "
 
 #: base/templates/layouts/default.html:162
 msgid "Site Administration"
-msgstr ""
+msgstr " "
 
 #: base/templates/layouts/default.html:177
 msgid "Nobody!"
-msgstr ""
+msgstr " !"
 
 #: base/templates/layouts/default.html:188
 msgid "Profile"
-msgstr ""
+msgstr " "
 
 #: base/templates/layouts/default.html:190
 #: customization/templates/registration/logged_out.html:5
 #: customization/templates/registration/logged_out.html:10
 msgid "Sign out"
-msgstr ""
+msgstr " "
 
 #: base/templates/layouts/default.html:259
 msgid "Developed by"
-msgstr ""
+msgstr "  "
 
 #: base/templates/layouts/default.html:261
 msgid "REFORM Association"
-msgstr ""
+msgstr " "
 
 #: base/templates/layouts/default.html:262
 msgid "report a bug, suggest a feature, ..."
-msgstr ""
+msgstr "     ..."
 
 #: base/templates/layouts/default.html:262
 msgid "feedback"
@@ -504,7 +491,7 @@ msgstr ""
 #: base/templates/partials/pagination.html:8
 msgctxt "css"
 msgid "left"
-msgstr ""
+msgstr "right"
 
 #: base/templates/partials/home-pagination.html:4
 #: base/templates/partials/pagination.html:4
@@ -527,7 +514,7 @@ msgstr ""
 #: base/templates/partials/pagination.html:18
 msgctxt "css"
 msgid "right"
-msgstr ""
+msgstr "left"
 
 #: base/templates/partials/home-pagination.html:18
 #: base/templates/partials/pagination.html:18
@@ -551,8 +538,9 @@ msgstr ""
 #: customization/templates/zinnia/base.html:77
 #: customization/templates/zinnia/skeleton.html:107
 #: customization/templates/zinnia/skeleton.html:109
+#, fuzzy
 msgid "Log out"
-msgstr ""
+msgstr " "
 
 #: customization/templates/comments/zinnia/entry/form.html:32
 msgid "Post"
@@ -567,19 +555,21 @@ msgid "Thanks for spending some quality time with the Web site today."
 msgstr ""
 
 #: customization/templates/registration/logged_out.html:15
+#, fuzzy
 msgid "Sign in again"
-msgstr ""
+msgstr " "
 
 #: customization/templates/registration/password_change_done.html:5
 #: customization/templates/registration/password_change_done.html:10
 #: customization/templates/registration/password_change_form.html:7
 #: customization/templates/registration/password_change_form.html:12
+#, fuzzy
 msgid "Password change"
-msgstr ""
+msgstr "  "
 
 #: customization/templates/registration/password_change_done.html:13
 msgid "Your password was changed."
-msgstr ""
+msgstr "   ."
 
 #: customization/templates/registration/password_change_form.html:15
 msgid ""
@@ -590,12 +580,13 @@ msgstr ""
 #: customization/templates/registration/password_change_form.html:24
 #: customization/templates/registration/password_reset_confirm.html:23
 msgid "Change my password"
-msgstr ""
+msgstr "  "
 
 #: customization/templates/registration/password_reset_complete.html:5
 #: customization/templates/registration/password_reset_complete.html:10
+#, fuzzy
 msgid "Password reset complete"
-msgstr ""
+msgstr "   "
 
 #: customization/templates/registration/password_reset_complete.html:13
 msgid "Your password has been set.  You may go ahead and log in now."
@@ -607,8 +598,9 @@ msgstr ""
 #: customization/templates/registration/password_reset_done.html:10
 #: customization/templates/registration/password_reset_form.html:6
 #: customization/templates/registration/password_reset_form.html:11
+#, fuzzy
 msgid "Password reset"
-msgstr ""
+msgstr "   "
 
 #: customization/templates/registration/password_reset_confirm.html:15
 msgid ""
@@ -624,7 +616,7 @@ msgstr ""
 
 #: customization/templates/registration/password_reset_confirm.html:33
 msgid "Reset password"
-msgstr ""
+msgstr "   "
 
 #: customization/templates/registration/password_reset_done.html:13
 msgid ""
@@ -639,8 +631,9 @@ msgid ""
 msgstr ""
 
 #: customization/templates/registration/password_reset_form.html:23
+#, fuzzy
 msgid "Reset my password"
-msgstr ""
+msgstr "   "
 
 #: customization/templates/zinnia/_entry_detail_base.html:28
 msgid "Written on"
@@ -710,10 +703,6 @@ msgid "%(comment_count)s comment"
 msgid_plural "%(comment_count)s comments"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
 
 #: customization/templates/zinnia/_entry_detail_base.html:128
 #: customization/templates/zinnia/entry_detail_base.html:98
@@ -746,10 +735,6 @@ msgid "%(pingback_count)s pingback"
 msgid_plural "%(pingback_count)s pingbacks"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
 
 #: customization/templates/zinnia/_entry_detail_base.html:151
 #, python-format
@@ -762,10 +747,6 @@ msgid "%(trackback_count)s trackback"
 msgid_plural "%(trackback_count)s trackbacks"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
 
 #: customization/templates/zinnia/author_list.html:5
 msgid "Author list"
@@ -788,10 +769,6 @@ msgid "%(entry_count)s entry"
 msgid_plural "%(entry_count)s entries"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
 
 #: customization/templates/zinnia/author_list.html:19
 #: customization/templates/zinnia/tags/authors.html:15
@@ -804,8 +781,9 @@ msgstr ""
 
 #: customization/templates/zinnia/base.html:14
 #: customization/templates/zinnia/sitemap.html:52
+#, fuzzy
 msgid "Categories"
-msgstr ""
+msgstr " "
 
 #: customization/templates/zinnia/base.html:53
 #: customization/templates/zinnia/skeleton.html:85
@@ -816,8 +794,9 @@ msgstr ""
 #: customization/templates/zinnia/base.html:60
 #: customization/templates/zinnia/skeleton.html:90
 #: customization/templates/zinnia/skeleton.html:92
+#, fuzzy
 msgid "Dashboard"
-msgstr ""
+msgstr " "
 
 #: customization/templates/zinnia/base.html:66
 #: customization/templates/zinnia/base.html:68
@@ -837,12 +816,14 @@ msgid "No categories yet."
 msgstr ""
 
 #: customization/templates/zinnia/entry_archive.html:4
+#, fuzzy
 msgid "Latest entries"
-msgstr ""
+msgstr " "
 
 #: customization/templates/zinnia/entry_archive.html:6
+#, fuzzy
 msgid "Latest"
-msgstr ""
+msgstr " "
 
 #: customization/templates/zinnia/entry_archive_day.html:4
 #: customization/templates/zinnia/entry_archive_day.html:6
@@ -970,8 +951,9 @@ msgid "Edit the entry"
 msgstr ""
 
 #: customization/templates/zinnia/entry_list.html:4
+#, fuzzy
 msgid "Latest entries for"
-msgstr ""
+msgstr " "
 
 #: customization/templates/zinnia/entry_list.html:4
 msgid "the category"
@@ -1056,10 +1038,6 @@ msgid "%(entry_count)s entry found"
 msgid_plural "%(entry_count)s entries found"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
 
 #: customization/templates/zinnia/entry_search.html:23
 msgid "Nothing found."
@@ -1084,8 +1062,9 @@ msgstr ""
 
 #: customization/templates/zinnia/password.html:4
 #: customization/templates/zinnia/password.html:9
+#, fuzzy
 msgid "Password required"
-msgstr ""
+msgstr "   "
 
 #: customization/templates/zinnia/password.html:13
 msgid "The password provided is not valid. Please try again."
@@ -1186,24 +1165,27 @@ msgid "users"
 msgstr ""
 
 #: users/models.py:30
+#, fuzzy
 msgid "Reporter"
-msgstr ""
+msgstr " "
 
 #: users/models.py:31
 msgid "Moderator"
 msgstr ""
 
 #: users/models.py:32
+#, fuzzy
 msgid "Administrator"
-msgstr ""
+msgstr " "
 
 #: users/models.py:35
 msgid "role"
 msgstr ""
 
 #: users/templates/users/profile.html:10
+#, fuzzy
 msgid "User Profile"
-msgstr ""
+msgstr " "
 
 #: users/templates/users/profile.html:16
 msgid "Full name"
@@ -1214,12 +1196,14 @@ msgid "Role"
 msgstr ""
 
 #: users/templates/users/profile.html:26
+#, fuzzy
 msgid "Enter new password"
-msgstr ""
+msgstr "   "
 
 #: users/templates/users/profile.html:26
+#, fuzzy
 msgid "New password"
-msgstr ""
+msgstr "   "
 
 #: users/templates/users/profile.html:26
 msgid "[change]"
@@ -1253,8 +1237,9 @@ msgstr ""
 
 #: users/templates/users/profile.html:81
 #: violations/templates/violations/submit.html:118
+#, fuzzy
 msgid "Victim Profile"
-msgstr ""
+msgstr " "
 
 #: users/templates/users/profile.html:86
 msgid "Save"
@@ -1269,8 +1254,9 @@ msgid "features"
 msgstr ""
 
 #: violations/models.py:50
+#, fuzzy
 msgid "children features"
-msgstr ""
+msgstr " "
 
 #: violations/models.py:53
 msgid "is selectable?"
@@ -1379,8 +1365,9 @@ msgid "identity card number"
 msgstr ""
 
 #: violations/models.py:137 violations/models.py:148 violations/models.py:149
+#, fuzzy
 msgid "Private information."
-msgstr ""
+msgstr " "
 
 #: violations/models.py:140
 msgid "marital status"
@@ -1411,8 +1398,9 @@ msgid "phone"
 msgstr ""
 
 #: violations/models.py:149
+#, fuzzy
 msgid "email"
-msgstr ""
+msgstr " "
 
 #: violations/models.py:185
 msgid "comments"
@@ -1453,8 +1441,9 @@ msgid "sources"
 msgstr ""
 
 #: violations/models.py:248
+#, fuzzy
 msgid "is verified?"
-msgstr ""
+msgstr " "
 
 #: violations/models.py:250
 msgid "is closed?"
@@ -1477,8 +1466,9 @@ msgid "Click to locate violation"
 msgstr ""
 
 #: violations/templates/violations/dashboard_violations_item.html:41
+#, fuzzy
 msgid "Violation Category"
-msgstr ""
+msgstr "   "
 
 #: violations/templates/violations/submit.html:33
 msgid "I'm a"
@@ -1494,16 +1484,18 @@ msgid "Witness"
 msgstr ""
 
 #: violations/templates/violations/submit.html:57
+#, fuzzy
 msgid "I've been a victim of"
-msgstr ""
+msgstr "() "
 
 #: violations/templates/violations/submit.html:58
 msgid "I've witnessed a"
 msgstr ""
 
 #: violations/templates/violations/submit.html:59
+#, fuzzy
 msgid "Select an violation category"
-msgstr ""
+msgstr "   "
 
 #: violations/templates/violations/submit.html:138
 #: violations/templates/violations/view_partial.html:77
@@ -1529,20 +1521,23 @@ msgstr ""
 
 #: violations/templates/violations/submit.html:219
 #: violations/templates/violations/view_partial.html:158
+#, fuzzy
 msgid "Features"
-msgstr ""
+msgstr " "
 
 #: violations/templates/violations/submit.html:222
 msgid "Select applicable features"
 msgstr ""
 
 #: violations/templates/violations/submit.html:229
+#, fuzzy
 msgid "Report"
-msgstr ""
+msgstr " "
 
 #: violations/templates/violations/submit.html:239
+#, fuzzy
 msgid "Similar Reports"
-msgstr ""
+msgstr " "
 
 #: violations/templates/violations/submit_similar_reports_list.html:6
 msgid "No similar reports!"
@@ -1562,8 +1557,9 @@ msgid "N/A"
 msgstr ""
 
 #: violations/templates/violations/view_partial.html:36
+#, fuzzy
 msgid "Verify"
-msgstr ""
+msgstr " "
 
 #: violations/templates/violations/view_partial.html:57
 msgid "First name"
@@ -1606,8 +1602,9 @@ msgid "No comments!"
 msgstr ""
 
 #: violations_categories/templates/violations_categories/delete.html:5
+#, fuzzy
 msgid "Delete Category"
-msgstr ""
+msgstr "   "
 
 #: violations_categories/templates/violations_categories/delete.html:10
 msgid "Delete"
@@ -1624,3 +1621,30 @@ msgstr ""
 #: violations_categories/templates/violations_categories/delete.html:33
 msgid "Cancel"
 msgstr ""
+
+#~ msgid "Violations/Appreciations by date"
+#~ msgstr "     "
+
+#~ msgid "Click and drag in the plot area to zoom in"
+#~ msgstr "  "
+
+#~ msgid "Pinch the chart to zoom in"
+#~ msgstr "   "
+
+#~ msgid "Number of Violations/Appreciations"
+#~ msgstr "  / "
+
+#~ msgid "Violations by Features"
+#~ msgstr "   "
+
+#~ msgid "Violation by Victim's Gender"
+#~ msgstr "    "
+
+#~ msgid "Violations by Victim's Education"
+#~ msgstr "    "
+
+#~ msgid "None!"
+#~ msgstr " !"
+
+#~ msgid "Provide Feedback"
+#~ msgstr " "
