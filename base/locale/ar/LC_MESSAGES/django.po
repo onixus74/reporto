@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-04 09:51+0100\n"
-"PO-Revision-Date: 2014-05-04 10:09+0100\n"
+"POT-Creation-Date: 2014-05-04 10:13+0100\n"
+"PO-Revision-Date: 2014-05-04 10:16+0100\n"
 "Last-Translator: Nader Toukabri <nader.toukabri@gmail.com>\n"
 "Language-Team: REFORM\n"
 "Language: ar\n"
@@ -114,7 +114,7 @@ msgstr "أحدث التقارير"
 
 #: templates/home.html:171
 msgid "See All"
-msgstr ""
+msgstr "انظر الجميع"
 
 #: templates/home.html:183
 msgid "Latest Appreciation"
@@ -326,8 +326,8 @@ msgid "Last"
 msgstr "الأخيرة"
 
 #: utils/urls.py:20
-msgid "Sorry, your need to sign in in order to proceed."
-msgstr ""
+msgid "Sorry, you need to sign in in order to proceed."
+msgstr "عذرا، تحتاج لتسجيل الدخول من أجل المضي قدما."
 
 #~ msgid " on "
 #~ msgstr "في"

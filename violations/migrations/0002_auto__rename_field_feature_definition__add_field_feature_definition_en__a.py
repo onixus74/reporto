@@ -8,30 +8,32 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        # Deleting field 'Category.definition'
-        db.delete_column(u'violations_category', 'definition')
+        # Deleting field 'Feature.definition'
+        # db.delete_column(u'violations_feature', 'definition')
 
-        # Adding field 'Category.definition_en'
-        db.add_column(u'violations_category', 'definition_en',
-                      self.gf('django.db.models.fields.CharField')(default='...', max_length=300),
-                      keep_default=False)
+        # Adding field 'Feature.definition_en'
+        # db.add_column(u'violations_feature', 'definition_en',
+        #               self.gf('django.db.models.fields.CharField')(default=None, max_length=300),
+        #               keep_default=False)
+        db.rename_column('violations_feature', 'definition', 'definition_en')
 
-        # Adding field 'Category.definition_ar'
-        db.add_column(u'violations_category', 'definition_ar',
+        # Adding field 'Feature.definition_ar'
+        db.add_column(u'violations_feature', 'definition_ar',
                       self.gf('django.db.models.fields.CharField')(max_length=300, null=True, blank=True),
                       keep_default=False)
 
     def backwards(self, orm):
-        # Adding field 'Category.definition'
-        db.add_column(u'violations_category', 'definition',
-                      self.gf('django.db.models.fields.CharField')(default='...', max_length=300),
-                      keep_default=False)
+        # Adding field 'Feature.definition'
+        # db.add_column(u'violations_feature', 'definition',
+        #               self.gf('django.db.models.fields.CharField')(default=None, max_length=300),
+        #               keep_default=False)
 
-        # Deleting field 'Category.definition_en'
-        db.delete_column(u'violations_category', 'definition_en')
+        # Deleting field 'Feature.definition_en'
+        # db.delete_column(u'violations_feature', 'definition_en')
+        db.rename_column('violations_feature', 'definition_en', 'definition')
 
-        # Deleting field 'Category.definition_ar'
-        db.delete_column(u'violations_category', 'definition_ar')
+        # Deleting field 'Feature.definition_ar'
+        db.delete_column(u'violations_feature', 'definition_ar')
 
     models = {
         u'auth.group': {
@@ -63,19 +65,19 @@ class Migration(SchemaMigration):
         u'users.user': {
             'Meta': {'ordering': "['date_joined']", 'object_name': 'User'},
             'date_joined': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
-            'email': ('django.db.models.fields.EmailField', [], {'unique': 'True', 'max_length': '75'}),
-            'first_name': ('django.db.models.fields.CharField', [], {'max_length': '30'}),
+            'email': ('django.db.models.fields.EmailField', [], {'max_length': '75', 'blank': 'True'}),
+            'first_name': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
             'groups': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'related_name': "u'user_set'", 'blank': 'True', 'to': u"orm['auth.Group']"}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'is_active': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             'is_staff': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'is_superuser': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'last_login': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
-            'last_name': ('django.db.models.fields.CharField', [], {'max_length': '30'}),
+            'last_name': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
             'password': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
             'role': ('django.db.models.fields.CharField', [], {'default': "'R'", 'max_length': '1'}),
             'user_permissions': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'related_name': "u'user_set'", 'blank': 'True', 'to': u"orm['auth.Permission']"}),
-            'username': ('django.db.models.fields.CharField', [], {'max_length': '30', 'unique': 'True', 'null': 'True', 'blank': 'True'})
+            'username': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '30'})
         },
         u'violations.category': {
             'Meta': {'object_name': 'Category'},
@@ -95,7 +97,8 @@ class Migration(SchemaMigration):
         },
         u'violations.feature': {
             'Meta': {'object_name': 'Feature'},
-            'definition': ('django.db.models.fields.CharField', [], {'max_length': '300'}),
+            'definition_ar': ('django.db.models.fields.CharField', [], {'max_length': '300', 'null': 'True', 'blank': 'True'}),
+            'definition_en': ('django.db.models.fields.CharField', [], {'max_length': '300'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             u'level': ('django.db.models.fields.PositiveIntegerField', [], {'db_index': 'True'}),
             u'lft': ('django.db.models.fields.PositiveIntegerField', [], {'db_index': 'True'}),

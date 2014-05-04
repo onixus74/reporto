@@ -17,7 +17,7 @@ def login_required_with_message(view_func):
 
     def modified_view_func(request, *args, **kwargs):
         if not request.user.is_authenticated():
-            messages.warning(request, _("Sorry, your need to sign in in order to proceed."))
+            messages.warning(request, _("Sorry, you need to sign in in order to proceed."))
         return decorated_view_func(request, *args, **kwargs)
     return modified_view_func
 

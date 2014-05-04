@@ -11,7 +11,7 @@ from django.forms.models import model_to_dict
 from django.template.defaultfilters import slugify
 from django.utils.html import strip_tags
 from mptt.fields import TreeManyToManyField
-from mptt.models import MPTTModel, TreeForeignKey
+from mptt.models import MPTTModel, MPTTModelBase, TreeForeignKey
 from transmeta import TransMeta
 
 
@@ -38,14 +38,18 @@ class Category(models.Model):
         super(Category, self).save(*args, **kwargs)
 
 
-# class Feature(models.Model):
+class CombinedMeta(MPTTModelBase, TransMeta):
+    pass
+
+
 class Feature(MPTTModel):
-    #__metaclass__ = TransMeta
+    # __metaclass__ = TransMeta
+    __metaclass__ = CombinedMeta
 
     class Meta:
         verbose_name = _("feature")
         verbose_name_plural = _("features")
-        #translate = ('definition',)
+        translate = ('definition',)
 
     parent = TreeForeignKey('self', related_name='children', verbose_name=_("children features"), null=True, blank=True)
     slug = models.SlugField(_("slug"), max_length=200, blank=True, null=True)
@@ -59,11 +63,13 @@ class Feature(MPTTModel):
         return self.definition
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.definition)
+        if not self.slug:
+            self.slug = slugify(self.definition)
         super(Feature, self).save(*args, **kwargs)
 
     class MPTTMeta:
-        order_insertion_by = ['definition']
+        # order_insertion_by = ['definition']
+        pass
 
 
 class Victim(models.Model):

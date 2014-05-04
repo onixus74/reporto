@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-04 09:51+0100\n"
+"POT-Creation-Date: 2014-05-04 10:13+0100\n"
 "PO-Revision-Date: 2014-01-20 11:31+0009\n"
 "Last-Translator: Administrator  <admin@reform.tn>\n"
 "Language-Team: reform.tn\n"
@@ -323,7 +323,7 @@ msgid "Last"
 msgstr ""
 
 #: utils/urls.py:20
-msgid "Sorry, your need to sign in in order to proceed."
+msgid "Sorry, you need to sign in in order to proceed."
 msgstr ""
 
 #~ msgid "Summary Dashboard"

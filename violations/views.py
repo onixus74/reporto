@@ -674,8 +674,8 @@ def append_violations_statistics(request, context):
     violations_by_victim_education = Report.objects.values('victim__education').annotate(Count('id')).order_by('victim__education')
     context['violations_by_victim_education'] = [{'label': victim_education_display[i['victim__education']].__unicode__(), 'count': i['id__count']} for i in violations_by_victim_education]
 
-    violations_by_feature = Report.objects.values('features__definition').annotate(Count('id')).order_by('features__definition')
-    context['violations_by_feature'] = [{'label': i['features__definition'], 'count': i['id__count']} for i in violations_by_feature]
+    violations_by_feature = Report.objects.values('features__definition_' + request.LANGUAGE_CODE).annotate(Count('id')).order_by('features__definition_' + request.LANGUAGE_CODE)
+    context['violations_by_feature'] = [{'label': i['features__definition_' + request.LANGUAGE_CODE], 'count': i['id__count']} for i in violations_by_feature]
 
     violations_by_date = Report.objects.extra({'date': 'date(datetime)'}).values('date').annotate(Count('id')).order_by('date')
     context['violations_by_date'] = [{'date': i['date'], 'count': i['id__count']} for i in violations_by_date]

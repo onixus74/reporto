@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-03-07 19:30+0100\n"
-"PO-Revision-Date: 2014-05-04 10:00+0100\n"
+"PO-Revision-Date: 2014-05-04 10:41+0100\n"
 "Last-Translator: Nader Toukabri <nader.toukabri@gmail.com>\n"
 "Language-Team: REFORM\n"
 "Language: ar\n"
@@ -24,17 +24,17 @@ msgstr ""
 #: templates/zinnia/_entry_detail_base.html:92 templates/zinnia/base.html:48
 #: templates/zinnia/tag_list.html:6
 msgid "Tags"
-msgstr ""
+msgstr "الوسوم"
 
 #: breadcrumbs.py:71 templates/zinnia/author_list.html:6
 #: templates/zinnia/base.html:40
 msgid "Authors"
-msgstr ""
+msgstr "المؤلفين"
 
 #: breadcrumbs.py:75 admin/forms.py:57 templates/zinnia/base.html:36
 #: templates/zinnia/category_list.html:6 templates/zinnia/sitemap.html:52
 msgid "Categories"
-msgstr ""
+msgstr "التصنيفات"
 
 #: breadcrumbs.py:100
 #, python-format
@@ -958,7 +958,7 @@ msgstr ""
 
 #: templates/zinnia/_entry_detail_base.html:25
 msgid "Written on"
-msgstr ""
+msgstr "كتب في"
 
 #: templates/zinnia/_entry_detail_base.html:38
 #: templates/zinnia/category_list.html:16
@@ -1660,7 +1660,7 @@ msgstr ""
 
 #: xmlrpc/pingback.py:114
 msgid "No title"
-msgstr ""
+msgstr "بدون عنوان"
 
 #~ msgid "Sign out"
 #~ msgstr "تسجيل الخروج"
