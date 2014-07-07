@@ -142,8 +142,10 @@
           {% url 'appreciations:dashboard' as url %}
           <li{% if request.path_info == url %} class="active"{% endif %}><a href="{{url}}"><i class="fa fa-thumbs-up"></i> {% trans 'Appreciations' %}</a></li>
           {% endif %}
+          {% comment %}
           {% url 'zinnia_entry_archive_index' as url %}
-          <li{% if request.path_info == url %} class="active"{% endif %}><a href="{{url}}"><i class="fa fa-book"></i> {% trans 'Reports' %}</a></li>
+          <li{% if request.path_info == url %} class="active"{% endif %}><a href="{{url}}"><i class="fa fa-book"></i> {% trans 'Investigations' %}</a></li>
+          {% endcomment %}
           {% if user.is_authenticated %}
           {% if user.role == "A" %}
           <li class="dropdown">
@@ -252,10 +254,18 @@
         {% endif %}
       {% endfor %}
 
-        {% trans 'Developed by' %} <a href="http://reform.tn" target="_blank" class="">
-          <span class="inline-hidden-xs inline-hidden-sm">{% trans 'Tunisian Institutional Reform' %}</span>
-          <span class="inline-hidden-md inline-hidden-lg">{% trans 'REFORM Association' %}</span>
-        </a> (<a href="email:contact@ipolice.tn" title="{% trans 'report a bug, suggest a feature, ...' %}">{% trans 'feedback' %}</a>)
+        {% trans 'Developed by' %} <a href="http://reform.tn/" target="_blank" title="{% trans 'Tunisian Institutional Reform' %}">
+          <img src="{% static 'reform-logo.png' %}" -width="50" -height="35" height="26" alt="{% trans 'Tunisian Institutional Reform' %}">
+        </a>
+          <!-- <span class="inline-hidden-xs inline-hidden-sm">{% trans 'Tunisian Institutional Reform' %}</span>
+          <span class="inline-hidden-md inline-hidden-lg">{% trans 'REFORM Association' %}</span> -->
+        |
+        {% trans 'Sponsored by' %} <a href="http://mepi.state.gov/" target="_blank" title="{% trans 'MEPI' %}">
+          <img src="{% static 'mepi-logo.jpg' %}" -width="50" -height="35" height="26" alt="{% trans 'MEPI' %}">
+        </a>
+
+        |
+        <a href="email:contact@ipolice.tn" title="{% trans 'report a bug, suggest a feature, ...' %}">{% trans 'Feedback' %}</a>
 
     </div>
   </div>

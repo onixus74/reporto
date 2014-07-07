@@ -61,6 +61,9 @@
         subtitle: {
           text: Modernizr.touch ? gettext("Click and drag in the plot area to zoom in") : gettext("Pinch the chart to zoom in"), // document.ontouchstart === undefined
         },
+        legend: {
+          rtl: reform.i18n.bidi
+        },
         xAxis: {
           type: 'datetime',
           dateTimeLabelFormats: { // don't display the dummy year
@@ -72,7 +75,8 @@
           title: {
             text: gettext("Number of Violations/Appreciations")
           },
-          min: 0
+          min: 0,
+          opposite: reform.i18n.bidi
         },
         tooltip: {
           formatter: function() {
@@ -81,7 +85,8 @@
               Highcharts.dateFormat('%e. %b', this.x) + ': ' + this.y + ' ' + gettext("violations/appreciations");
             */
             return this.series.name + ': <b>' + this.y + '</b> ' + gettext("reports on") + ' <b>' + moment(this.x).format('LL') + '</b>';
-          }
+          },
+          useHTML: true
         },
         series: series,
         credits: {
@@ -114,7 +119,7 @@
         data[index] = e.count;
     });
 
-    features.unshift("All");
+    features.unshift(gettext("All Features"));
     data.unshift(reform.data.violationsCount);
 
     $(document).ready(function() {
@@ -127,13 +132,13 @@
         },
         legend: {
           enabled: false,
-          rtl: reform.i18n.bidi
         },
         xAxis: {
           categories: features,
           title: {
-            text: null
-          }
+            text: null,
+          },
+          opposite: reform.i18n.bidi
         },
         yAxis: {
           min: 0,
@@ -142,11 +147,18 @@
             align: 'high'
           },
           labels: {
-            overflow: 'justify'
-          }
+            overflow: 'justify',
+            maxStaggerLines: 1,
+            // staggerLines: 1,
+            step: 1,
+            // useHTML: true
+          },
+          // opposite: reform.i18n.bidi
+          reversed: reform.i18n.bidi
         },
         tooltip: {
-          valueSuffix: gettext(" violations")
+          valueSuffix: gettext(" violations"),
+          useHTML: true
         },
         plotOptions: {
           bar: {
@@ -185,8 +197,12 @@
         title: {
           text: gettext("Violation by Category")
         },
+        legend: {
+          rtl: reform.i18n.bidi
+        },
         tooltip: {
-          pointFormat: '{series.name}: {point.percentage:.1f}%'
+          pointFormat: '{series.name}: {point.percentage:.1f}%',
+          useHTML: true
         },
         plotOptions: {
           pie: {
@@ -231,8 +247,12 @@
         title: {
           text: gettext("Violation by Victim's Gender")
         },
+        legend: {
+          rtl: reform.i18n.bidi
+        },
         tooltip: {
-          pointFormat: '{series.name}: {point.percentage:.1f}%'
+          pointFormat: '{series.name}: {point.percentage:.1f}%',
+          useHTML: true
         },
         plotOptions: {
           pie: {
@@ -276,8 +296,12 @@
         title: {
           text: gettext("Violations by Victim's Education")
         },
+        legend: {
+          rtl: reform.i18n.bidi
+        },
         tooltip: {
-          pointFormat: '{series.name}: {point.percentage:.1f}%'
+          pointFormat: '{series.name}: {point.percentage:.1f}%',
+          useHTML: true
         },
         plotOptions: {
           pie: {
@@ -322,8 +346,12 @@
         title: {
           text: gettext("Appreciations by Category")
         },
+        legend: {
+          rtl: reform.i18n.bidi
+        },
         tooltip: {
-          pointFormat: '{series.name}: {point.percentage:.1f}%'
+          pointFormat: '{series.name}: {point.percentage:.1f}%',
+          useHTML: true
         },
         plotOptions: {
           pie: {

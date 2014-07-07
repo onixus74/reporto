@@ -62,7 +62,7 @@ urlpatterns = patterns('',
                        url(r"^search/", include("watson.urls", namespace="search"), name='search'),
                        url(r'^report_builder/', include('report_builder.urls')),
 
-                       url(r'^reports/', include('zinnia.urls')),
+                       url(r'^investigations/', include('zinnia.urls')),
                        url(r'^comments/', include('django.contrib.comments.urls')),
 
                        )

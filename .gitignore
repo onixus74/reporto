@@ -29,3 +29,5 @@ sync-server.out
 /reporto/static
 /data
 
+.DS_Store
+.idea

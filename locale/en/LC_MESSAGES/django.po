@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-04 09:48+0100\n"
+"POT-Creation-Date: 2014-07-07 11:41+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: appreciations/models.py:18 appreciations/models.py:47
-#: violations/models.py:22 violations/models.py:130 violations/models.py:240
+#: violations/models.py:22 violations/models.py:136 violations/models.py:246
 msgid "category"
 msgstr ""
 
@@ -26,36 +26,36 @@ msgstr ""
 msgid "categories"
 msgstr ""
 
-#: appreciations/models.py:22 violations/models.py:26 violations/models.py:51
+#: appreciations/models.py:22 violations/models.py:26 violations/models.py:55
 msgid "slug"
 msgstr ""
 
-#: appreciations/models.py:23 violations/models.py:27 violations/models.py:52
+#: appreciations/models.py:23 violations/models.py:27 violations/models.py:56
 msgid "definition"
 msgstr ""
 
-#: appreciations/models.py:39 violations/models.py:225
+#: appreciations/models.py:39 violations/models.py:231
 msgid "report"
 msgstr ""
 
 #: appreciations/models.py:40 base/templates/home.html:20
-#: base/templates/login.html:15 violations/models.py:226
+#: base/templates/login.html:15 violations/models.py:232
 msgid "reports"
 msgstr ""
 
-#: appreciations/models.py:43 violations/models.py:236
+#: appreciations/models.py:43 violations/models.py:242
 msgid "date and time"
 msgstr ""
 
-#: appreciations/models.py:44 violations/models.py:237
+#: appreciations/models.py:44 violations/models.py:243
 msgid "latitude"
 msgstr ""
 
-#: appreciations/models.py:45 violations/models.py:238
+#: appreciations/models.py:45 violations/models.py:244
 msgid "longitude"
 msgstr ""
 
-#: appreciations/models.py:46 violations/models.py:239
+#: appreciations/models.py:46 violations/models.py:245
 msgid "location"
 msgstr ""
 
@@ -63,22 +63,22 @@ msgstr ""
 msgid "subject"
 msgstr ""
 
-#: appreciations/models.py:49 violations/models.py:151
-#: violations/models.py:244
+#: appreciations/models.py:49 violations/models.py:157
+#: violations/models.py:250
 msgid "description"
 msgstr ""
 
-#: appreciations/models.py:52 violations/models.py:198
-#: violations/models.py:252
+#: appreciations/models.py:52 violations/models.py:204
+#: violations/models.py:258
 msgid "created by"
 msgstr ""
 
-#: appreciations/models.py:53 violations/models.py:199
-#: violations/models.py:253
+#: appreciations/models.py:53 violations/models.py:205
+#: violations/models.py:259
 msgid "created at"
 msgstr ""
 
-#: appreciations/models.py:54 violations/models.py:254
+#: appreciations/models.py:54 violations/models.py:260
 msgid "updated at"
 msgstr ""
 
@@ -360,7 +360,7 @@ msgstr ""
 
 #: base/templates/login-minimal.html:6 base/templates/login-minimal.html:49
 #: base/templates/login.html:6 base/templates/login.html.py:69
-#: base/templates/layouts/default.html:183
+#: base/templates/layouts/default.html:186
 #: customization/templates/registration/login.html:6
 #: customization/templates/registration/login.html:49
 #: customization/templates/registration/password_reset_complete.html:15
@@ -421,7 +421,9 @@ msgid "Toggle navigation"
 msgstr ""
 
 #: base/templates/layouts/default.html:117
-#: base/templates/layouts/default.html:260
+#: base/templates/layouts/default.html:262
+#: base/templates/layouts/default.html:263
+#: base/templates/layouts/default.html:265
 msgid "Tunisian Institutional Reform"
 msgstr ""
 
@@ -429,71 +431,75 @@ msgstr ""
 msgid "Home Page"
 msgstr ""
 
-#: base/templates/layouts/default.html:149
-#: customization/templates/zinnia/skeleton.html:5
-msgid "Reports"
-msgstr ""
-
-#: base/templates/layouts/default.html:153
+#: base/templates/layouts/default.html:156
 msgid "Administration"
 msgstr ""
 
-#: base/templates/layouts/default.html:155
+#: base/templates/layouts/default.html:158
 msgid "Users"
 msgstr ""
 
-#: base/templates/layouts/default.html:156
+#: base/templates/layouts/default.html:159
 msgid "Groups"
 msgstr ""
 
-#: base/templates/layouts/default.html:157
+#: base/templates/layouts/default.html:160
 msgid "Violation Categories"
 msgstr ""
 
-#: base/templates/layouts/default.html:158
+#: base/templates/layouts/default.html:161
 msgid "Violation Features"
 msgstr ""
 
-#: base/templates/layouts/default.html:159
+#: base/templates/layouts/default.html:162
 msgid "Violation Victims"
 msgstr ""
 
-#: base/templates/layouts/default.html:160
+#: base/templates/layouts/default.html:163
 msgid "Appreciation Categories"
 msgstr ""
 
-#: base/templates/layouts/default.html:162
+#: base/templates/layouts/default.html:165
 msgid "Site Administration"
 msgstr ""
 
-#: base/templates/layouts/default.html:177
+#: base/templates/layouts/default.html:180
 msgid "Nobody!"
 msgstr ""
 
-#: base/templates/layouts/default.html:188
+#: base/templates/layouts/default.html:191
 msgid "Profile"
 msgstr ""
 
-#: base/templates/layouts/default.html:190
+#: base/templates/layouts/default.html:193
 #: customization/templates/registration/logged_out.html:5
 #: customization/templates/registration/logged_out.html:10
 msgid "Sign out"
 msgstr ""
 
-#: base/templates/layouts/default.html:259
+#: base/templates/layouts/default.html:262
 msgid "Developed by"
 msgstr ""
 
-#: base/templates/layouts/default.html:261
+#: base/templates/layouts/default.html:266
 msgid "REFORM Association"
 msgstr ""
 
-#: base/templates/layouts/default.html:262
+#: base/templates/layouts/default.html:268
+msgid "Sponsored by"
+msgstr ""
+
+#: base/templates/layouts/default.html:268
+#: base/templates/layouts/default.html:269
+msgid "MEPI"
+msgstr ""
+
+#: base/templates/layouts/default.html:273
 msgid "report a bug, suggest a feature, ..."
 msgstr ""
 
-#: base/templates/layouts/default.html:262
-msgid "feedback"
+#: base/templates/layouts/default.html:273
+msgid "Feedback"
 msgstr ""
 
 #: base/templates/partials/home-pagination.html:4
@@ -533,7 +539,7 @@ msgid "Last"
 msgstr ""
 
 #: base/utils/urls.py:20
-msgid "Sorry, your need to sign in in order to proceed."
+msgid "Sorry, you need to sign in in order to proceed."
 msgstr ""
 
 #: customization/templates/comments/zinnia/entry/form.html:5
@@ -1088,12 +1094,16 @@ msgid "Entries per categories"
 msgstr ""
 
 #: customization/templates/zinnia/sitemap.html:17
-#: customization/templates/zinnia/sitemap.html:39 violations/models.py:184
+#: customization/templates/zinnia/sitemap.html:39 violations/models.py:190
 msgid "comment"
 msgstr ""
 
 #: customization/templates/zinnia/sitemap.html:31
 msgid "All the entries"
+msgstr ""
+
+#: customization/templates/zinnia/skeleton.html:5
+msgid "Reports"
 msgstr ""
 
 #: customization/templates/zinnia/skeleton.html:46
@@ -1155,7 +1165,7 @@ msgstr ""
 msgid "No similar entries."
 msgstr ""
 
-#: users/models.py:15 violations/models.py:153
+#: users/models.py:15 violations/models.py:159
 msgid "user"
 msgstr ""
 
@@ -1238,203 +1248,203 @@ msgstr ""
 msgid "Save"
 msgstr ""
 
-#: violations/models.py:46
+#: violations/models.py:50
 msgid "feature"
 msgstr ""
 
-#: violations/models.py:47
+#: violations/models.py:51
 msgid "features"
 msgstr ""
 
-#: violations/models.py:50
+#: violations/models.py:54
 msgid "children features"
 msgstr ""
 
-#: violations/models.py:53
+#: violations/models.py:57
 msgid "is selectable?"
 msgstr ""
 
-#: violations/models.py:72 violations/models.py:241
+#: violations/models.py:78 violations/models.py:247
 #: violations/templates/violations/submit.html:36
 #: violations/templates/violations/submit.html:46
 msgid "victim"
 msgstr ""
 
-#: violations/models.py:73
+#: violations/models.py:79
 msgid "victims"
 msgstr ""
 
-#: violations/models.py:82 violations/models.py:232
+#: violations/models.py:88 violations/models.py:238
 msgid "Citizen"
 msgstr ""
 
-#: violations/models.py:83 violations/models.py:233
+#: violations/models.py:89 violations/models.py:239
 msgid "Cop"
 msgstr ""
 
-#: violations/models.py:90
+#: violations/models.py:96
 msgid "Male"
 msgstr ""
 
-#: violations/models.py:91
+#: violations/models.py:97
 msgid "Female"
 msgstr ""
 
-#: violations/models.py:100 violations/models.py:112 violations/models.py:123
+#: violations/models.py:106 violations/models.py:118 violations/models.py:129
 msgid "Unknown"
 msgstr ""
 
-#: violations/models.py:101
+#: violations/models.py:107
 msgid "Married"
 msgstr ""
 
-#: violations/models.py:102
+#: violations/models.py:108
 msgid "Single"
 msgstr ""
 
-#: violations/models.py:103
+#: violations/models.py:109
 msgid "Divorced"
 msgstr ""
 
-#: violations/models.py:104
+#: violations/models.py:110
 msgid "Widowed"
 msgstr ""
 
-#: violations/models.py:105
+#: violations/models.py:111
 msgid "Other"
 msgstr ""
 
-#: violations/models.py:113
+#: violations/models.py:119
 msgid "Lower"
 msgstr ""
 
-#: violations/models.py:114
+#: violations/models.py:120
 msgid "Middle"
 msgstr ""
 
-#: violations/models.py:115
+#: violations/models.py:121
 msgid "Upper"
 msgstr ""
 
-#: violations/models.py:124
+#: violations/models.py:130
 msgid "No Education"
 msgstr ""
 
-#: violations/models.py:125
+#: violations/models.py:131
 msgid "Primary School"
 msgstr ""
 
-#: violations/models.py:126
+#: violations/models.py:132
 msgid "High School"
 msgstr ""
 
-#: violations/models.py:127
+#: violations/models.py:133
 msgid "University"
 msgstr ""
 
-#: violations/models.py:131
+#: violations/models.py:137
 msgid "first name"
 msgstr ""
 
-#: violations/models.py:132
+#: violations/models.py:138
 msgid "last name"
 msgstr ""
 
-#: violations/models.py:134
+#: violations/models.py:140
 msgid "gender"
 msgstr ""
 
-#: violations/models.py:135
+#: violations/models.py:141
 msgid "birth date"
 msgstr ""
 
-#: violations/models.py:136
+#: violations/models.py:142
 msgid "birth place"
 msgstr ""
 
-#: violations/models.py:137
+#: violations/models.py:143
 msgid "identity card number"
 msgstr ""
 
-#: violations/models.py:137 violations/models.py:148 violations/models.py:149
+#: violations/models.py:143 violations/models.py:154 violations/models.py:155
 msgid "Private information."
 msgstr ""
 
-#: violations/models.py:140
+#: violations/models.py:146
 msgid "marital status"
 msgstr ""
 
-#: violations/models.py:141
+#: violations/models.py:147
 msgid "have children?"
 msgstr ""
 
-#: violations/models.py:142
+#: violations/models.py:148
 msgid "social class"
 msgstr ""
 
-#: violations/models.py:144
+#: violations/models.py:150
 msgid "education"
 msgstr ""
 
-#: violations/models.py:145
+#: violations/models.py:151
 msgid "profession"
 msgstr ""
 
-#: violations/models.py:147
+#: violations/models.py:153
 msgid "address"
 msgstr ""
 
-#: violations/models.py:148
+#: violations/models.py:154
 msgid "phone"
 msgstr ""
 
-#: violations/models.py:149
+#: violations/models.py:155
 msgid "email"
 msgstr ""
 
-#: violations/models.py:185
+#: violations/models.py:191
 msgid "comments"
 msgstr ""
 
-#: violations/models.py:191
+#: violations/models.py:197
 #: violations/templates/violations/view_partial.html:197
 msgid "Update"
 msgstr ""
 
-#: violations/models.py:192
+#: violations/models.py:198
 #: violations/templates/violations/view_partial.html:198
 msgid "Correction"
 msgstr ""
 
-#: violations/models.py:194
+#: violations/models.py:200
 msgid "type"
 msgstr ""
 
-#: violations/models.py:195
+#: violations/models.py:201
 msgid "content"
 msgstr ""
 
-#: violations/models.py:196
+#: violations/models.py:202
 msgid "attachment"
 msgstr ""
 
-#: violations/models.py:242
+#: violations/models.py:248
 msgid "aggressor"
 msgstr ""
 
-#: violations/models.py:243
+#: violations/models.py:249
 msgid "aggressor category"
 msgstr ""
 
-#: violations/models.py:246
+#: violations/models.py:252
 msgid "sources"
 msgstr ""
 
-#: violations/models.py:248
+#: violations/models.py:254
 msgid "is verified?"
 msgstr ""
 
-#: violations/models.py:250
+#: violations/models.py:256
 msgid "is closed?"
 msgstr ""
 

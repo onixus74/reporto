@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-04 10:13+0100\n"
+"POT-Creation-Date: 2014-07-07 11:41+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -42,68 +42,73 @@ msgstr ""
 msgid "Pinch the chart to zoom in"
 msgstr ""
 
-#: static/dashboard/scripts/charts.js:73
+#: static/dashboard/scripts/charts.js:76
 #: static/dashboard/scripts/charts.min.js:1
 msgid "Number of Violations/Appreciations"
 msgstr ""
 
-#: static/dashboard/scripts/charts.js:83
+#: static/dashboard/scripts/charts.js:87
 #: static/dashboard/scripts/charts.min.js:1
 msgid "reports on"
 msgstr ""
 
-#: static/dashboard/scripts/charts.js:126
+#: static/dashboard/scripts/charts.js:122
+#: static/dashboard/scripts/charts.min.js:1
+msgid "All Features"
+msgstr ""
+
+#: static/dashboard/scripts/charts.js:131
 #: static/dashboard/scripts/charts.min.js:1
 msgid "Violations by Features"
 msgstr ""
 
-#: static/dashboard/scripts/charts.js:141
-#: static/dashboard/scripts/charts.js:159
+#: static/dashboard/scripts/charts.js:146
+#: static/dashboard/scripts/charts.js:171
 #: static/dashboard/scripts/charts.min.js:1
 msgid "Number of Violations"
 msgstr ""
 
-#: static/dashboard/scripts/charts.js:149
+#: static/dashboard/scripts/charts.js:160
 #: static/dashboard/scripts/charts.min.js:1
 msgid " violations"
 msgstr ""
 
-#: static/dashboard/scripts/charts.js:186
+#: static/dashboard/scripts/charts.js:198
 #: static/dashboard/scripts/charts.min.js:1
 msgid "Violation by Category"
 msgstr ""
 
-#: static/dashboard/scripts/charts.js:206
+#: static/dashboard/scripts/charts.js:222
 #: static/dashboard/scripts/charts.min.js:1
 msgid "Victim's category share"
 msgstr ""
 
-#: static/dashboard/scripts/charts.js:232
+#: static/dashboard/scripts/charts.js:248
 #: static/dashboard/scripts/charts.min.js:1
 msgid "Violation by Victim's Gender"
 msgstr ""
 
-#: static/dashboard/scripts/charts.js:252
+#: static/dashboard/scripts/charts.js:272
 #: static/dashboard/scripts/charts.min.js:1
 msgid "Victim's gender share"
 msgstr ""
 
-#: static/dashboard/scripts/charts.js:277
+#: static/dashboard/scripts/charts.js:297
 #: static/dashboard/scripts/charts.min.js:1
 msgid "Violations by Victim's Education"
 msgstr ""
 
-#: static/dashboard/scripts/charts.js:297
+#: static/dashboard/scripts/charts.js:321
 #: static/dashboard/scripts/charts.min.js:1
 msgid "Victim's education share"
 msgstr ""
 
-#: static/dashboard/scripts/charts.js:323
+#: static/dashboard/scripts/charts.js:347
 #: static/dashboard/scripts/charts.min.js:1
 msgid "Appreciations by Category"
 msgstr ""
 
-#: static/dashboard/scripts/charts.js:343
+#: static/dashboard/scripts/charts.js:371
 #: static/dashboard/scripts/charts.min.js:1
 msgid "Appreciation's category share"
 msgstr ""
