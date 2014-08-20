@@ -1,0 +1,20 @@
+{% load i18n %}
+<ul class="pagination pagination-sm">
+  <li class="{% if current == 1 %}disabled{% endif %}">
+    <a class="ui-pagination-control ui-pagination-first" href="{{request.path}}?page=1"><i class="fa fa-arrow-{% trans 'left' context 'css' %}"></i> {% trans 'First' %}</a>
+  </li>
+
+  <li class="{% if current == 1 %}disabled{% endif %}">
+    <a class="ui-pagination-control ui-pagination-previous" href="{{request.path}}?page={{ current|add:-1 }}"><i class="fa fa-chevron-{% trans 'left' context 'css' %}"></i> {% trans 'Previous' %}</a>
+  </li>
+
+  <li class="disabled"><span class="ui-pagination-indicator">{{current}} / {{pages}}</span></li>
+
+  <li class="{% if current == pages %}disabled{% endif %}">
+    <a class="ui-pagination-control ui-pagination-next" href="{{request.path}}?page={{ current|add:1 }}">{% trans 'Next' %} <i class="fa fa-chevron-{% trans 'right' context 'css' %}"></i></a>
+  </li>
+
+  <li class="{% if current == pages %}disabled{% endif %}">
+    <a class="ui-pagination-control ui-pagination-last" href="{{request.path}}?page={{ pages }}">{% trans 'Last' %} <i class="fa fa-arrow-{% trans 'right' context 'css' %}"></i></a>
+  </li>
+</ul>

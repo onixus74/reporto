@@ -1,0 +1,42 @@
+{% extends "layouts/default.html" %}
+
+{% block view_title %}Appreciation Categories | {% endblock %}
+
+{% block view_content %}
+
+  <div class="page-header">
+    <h1 class="text-center">Appreciation Categories <small>management</small></h1>
+  </div>
+
+  <div class="row">
+    <div class="col-md-offset-2 col-md-8 text-center">
+      <div style="display: inline-block;">
+
+        <table class="table table-hover">
+          <tr>
+            <th>Category</th>
+            <th>Actions</th>
+          </tr>
+          {% for object in object_list %}
+          <tr>
+            <td><a href="{{ object.get_absolute_url }}">{{object.definition}}</a></td>
+            <td>
+              <a href="{% url 'appreciations:categories:edit' object.id %}" class="btn btn-info"><i class="fa fa-pencil"></i> Edit</a>
+              <a href="{% url 'appreciations:categories:delete' object.id %}" class="btn btn-warning"><i class="fa fa-trash"></i> Delete</a>
+            </td>
+          </tr>
+          {% endfor %}
+        </table>
+      </div>
+      <div class="ui-pagination text-center">
+        {% include "partials/pagination.html" %}
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <a href="{% url 'appreciations:categories:create' %}" class="btn btn-lg btn-primary"><i class="fa fa-plus fa-lg"></i> Add Category</a>
+    </div>
+  </div>
+
+{% endblock %}

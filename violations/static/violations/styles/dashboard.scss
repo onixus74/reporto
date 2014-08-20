@@ -1,0 +1,41 @@
+
+@import "../../../../base/static/theme/bootstrap-sass-twbs/vendor/assets/stylesheets/bootstrap/variables";
+@import "../../../../base/static/theme/variables";
+@import "../../../../base/static/theme/bootstrap-sass-twbs/vendor/assets/stylesheets/bootstrap/mixins";
+
+.ui-timeline-map {
+	background-color: white;
+	border: 1px solid white;
+	border-radius: 5px;
+	@include box-sizing(border-box);
+}
+
+.ui-timeline-list {
+	background-color: white;
+	border-radius: 5px;
+}
+
+.ui-timeline-story {
+	margin: 6px;
+	@include box-shadow(2px 2px 3px rgba(50, 50, 50, 0.6));
+	border: 1px solid $gray-lighter;
+	vertical-align: middle !important;
+}
+
+.section-shadow {
+	@include box-shadow(0px 0px 5px rgba(50, 50, 50, 0.6));
+}
+
+/*
+#ui-report-view-modal {
+  max-height: 80%;
+  overflow-y: auto;
+   width:70%;
+   margin-left: -35%;
+
+  .modal-body {
+    max-height: none;
+    text-align: center;
+  }
+}
+*/

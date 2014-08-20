@@ -1,0 +1,38 @@
+[
+{
+  "pk": 1,
+  "model": "violations.category",
+  "fields": {
+    "definition_en": "Verbal Violence",
+    "definition_ar": "عنف لفظي",
+    "slug": "verbal-violence"
+  }
+},
+{
+  "pk": 2,
+  "model": "violations.category",
+  "fields": {
+    "definition_en": "Violence",
+    "definition_ar": "عنف جسدي",
+    "slug": "violence"
+  }
+},
+{
+  "pk": 3,
+  "model": "violations.category",
+  "fields": {
+    "definition_en": "Rape",
+    "definition_ar": "إغتصاب",
+    "slug": "rape"
+  }
+},
+{
+  "pk": 4,
+  "model": "violations.category",
+  "fields": {
+    "definition_en": "Lack of Investigation and Prosecution",
+    "definition_ar": "تهاون في التحقيق والمحاسبة",
+    "slug": "lack-of-investigation-and-prosecution"
+  }
+}
+]

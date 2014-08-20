@@ -1,0 +1,82 @@
+{% extends "layouts/default.html" %}
+
+{% load widget_tweaks static custom compress i18n %}
+
+
+{% block view_title %}{% trans 'Sign in' %} | {% endblock %}
+
+{% block view_content %}
+  <div class="panel text-center">
+
+    <div class="jumbotron">
+      <h1>{% trans 'Reform Reporting Platform' %}</h1>
+    </div>
+
+    {% if form.errors %}
+    <div class="alert alert-danger">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      {% for field, errors in form.errors.items %}
+        <div class="field-{{field}}">{% for error in errors %} {{error}}{% endfor %}</div>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+
+        <form action="{% url 'login' %}" class="-form-inline" method="post" role="form">
+          {% csrf_token %}
+
+          <div class="form-group">
+            <div class="input-group input-group-lg">
+              <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+              {% trans 'Email' as email %}
+              {% render_field form.username type="email" placeholder=email required="required" autofocus="autofocus" class="form-control" %}
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="input-group input-group-lg">
+              <span class="input-group-addon"><i class="fa fa-key"></i></span>
+              {% trans 'Password' as password %}
+              {% render_field form.password placeholder=password required="required" class="form-control" %}
+            </div>
+          </div>
+
+          <input type="hidden" name="next" value="{{ next }}" />
+
+          <button class="btn btn-default btn-lg btn-block" -name="commit" type="submit">
+            {% trans 'Sign in' %} <i class="fa fa-sign-in"></i>
+          </button>
+          <a href="{% url 'password_reset' %}" class="btn btn-link">{% trans 'Reset your password' %}</a>
+
+        </form>
+
+      </div>
+
+    </div>
+
+    <div class="row" style="margin-top: 20px">
+      <div class="col-md-4 col-md-offset-2">
+        <a href="{% url 'socialauth_begin' 'facebook' %}?next={{next}}" class="btn btn-signin-facebook btn-block"><i class="fa fa-facebook-square"></i> {% trans 'Sign in using Facebook' %}</a>
+      </div>
+      <div class="col-md-4">
+        <a href="{% url 'socialauth_begin' 'google' %}?next={{next}}" class="btn btn-signin-google btn-block"><i class="fa fa-google-plus-square"></i> {% trans 'Sign in using Google' %}</a>
+      </div>
+    </div>
+
+    <div class="row" style="margin-top: 20px">
+      <div class="col-md-8 col-md-offset-2">
+        <p class="lead text-center"><a href="{% url 'signup' %}?next={{next}}">{% trans 'Sign up using your email address' %}</a></p>
+      </div>
+    </div>
+
+  </div>
+{% endblock %}
+
+
+{% block view_styles %}
+  {% compress css %}
+  <link rel="stylesheet" href="{% static 'styles/login.css'%}" />
+  {% endcompress %}
+{% endblock %}

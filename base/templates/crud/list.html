@@ -1,0 +1,60 @@
+{% extends "layouts/default.html" %}
+
+{% block view_title %}Entries | {% endblock %}
+
+{% block view_content %}
+
+  <div class="page-header">
+    <h1 class="text-center">Entries <small>management</small></h1>
+  </div>
+
+  <div class="row">
+    <div class="col-md-offset-2 col-md-8 text-center">
+      <div style="display: inline-block;">
+
+        <table class="table table-hover">
+          <tr>
+            <th>Entry</th>
+            <th>Actions</th>
+          </tr>
+          {% for object in object_list %}
+          <tr>
+            <td><a href="{{ object.get_absolute_url }}">{{object.definition}}</a></td>
+            <td>
+              <a href="{% url 'entries:edit' object.id %}" class="btn btn-info"><i class="fa fa-pencil"></i> Edit</a>
+              <a href="{% url 'entries:delete' object.id %}" class="btn btn-warning"><i class="fa fa-trash"></i> Delete</a>
+            </td>
+          </tr>
+          {% endfor %}
+        </table>
+      </div>
+      <div class="ui-pagination text-center">
+        <ul class="pagination pagination-sm">
+          <li class="{% if current == 1 %}disabled{% endif %}">
+            <a class="ui-pagination-control ui-pagination-first" href="{{request.path}}?page=1"><i class="fa fa-arrow-left"></i> First</a>
+          </li>
+
+          <li class="{% if current == 1 %}disabled{% endif %}">
+            <a class="ui-pagination-control ui-pagination-previous" href="{{request.path}}?page={{ current|add:-1 }}"><i class="fa fa-chevron-left"></i> Previous</a>
+          </li>
+
+          <li class="disabled"><span class="ui-pagination-indicator">{{current}} / {{pages}}</span></li>
+
+          <li class="{% if current == pages %}disabled{% endif %}">
+            <a class="ui-pagination-control ui-pagination-next" href="{{request.path}}?page={{ current|add:1 }}">Next <i class="fa fa-chevron-right"></i></a>
+          </li>
+
+          <li class="{% if current == pages %}disabled{% endif %}">
+            <a class="ui-pagination-control ui-pagination-last" href="{{request.path}}?page={{ pages }}">Last <i class="fa fa-arrow-right"></i></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <a href="{% url 'entries:create' %}" class="btn btn-lg btn-primary"><i class="fa fa-plus fa-lg"></i> Add Entry</a>
+    </div>
+  </div>
+
+{% endblock %}

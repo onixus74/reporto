@@ -1,9 +1,0 @@
-{
-  "name": "theme",
-  "version": "0.0.0",
-  "dependencies": {
-    "font-awesome": "~3.2.1",
-    "sass-bootstrap": "~2.3.2",
-    "bootstrap-sass": "~2.3.2"
-  }
-}

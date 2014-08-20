@@ -1,0 +1,13 @@
+{% load thumbnail i18n %}
+              <li class="list-group-item ui-comment{% if comment.type = 'C' %} text-danger{% endif%}">
+                <blockquote>
+                  <p>{{comment.content}}</p>
+                  {% if comment.attachment %}
+                  <p><a href="{{comment.attachment.url}}" target="_blank" class="fancybox"><img src="{{ comment.attachment|thumbnail_url:'report_comment' }}" class="img-thumbnail"></a></p>
+                  {% endif %}
+                  <small>
+                    {% comment %}{{comment.get_type_display}} {% trans 'on' %} {{comment.created_at}} {% trans 'by' %}{% endcomment %}
+                    {% blocktrans with type=comment.get_type_display created_at=comment.created_at %}{{type}} on {{created_at}} by{% endblocktrans %}
+                    <cite title="{% trans 'User' %}"><a href="{{comment.created_by.get_absolute_url}}">{{comment.created_by}}</a></cite>, {{comment.created_by.get_role_display|lower}}.</small>
+                </blockquote>
+              </li>

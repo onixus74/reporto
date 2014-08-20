@@ -1,5 +1,5 @@
-REFORM Platform
-===============
+REFORM Reporting Platform
+=========================
 
 ...
 
@@ -13,7 +13,11 @@ pip install -r requirements.txt # install requirements including Django, ...
 
 pip freeze --local > requirements.txt # dump installed requirements
 
-python manage.py syncdb # sync database
+bower install # install front-end dependencies
+
+npm install # install grunt build tool dependencies
+
+python manage.py syncdb --all # sync database and run migrations
 
 python manage.py runserver # run development server
 
@@ -43,4 +47,15 @@ foreman run python manage.py compress
 foreman start # run application in staging environment
 
 git push heroku heroku:master # push to staging
+```
+
+
+
+
+## Deployment
+
+```
+python manage.py collectstatic
+python manage.py compress --force
+./sync-server.sh
 ```

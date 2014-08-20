@@ -1,0 +1,317 @@
+{% extends "layouts/default.html" %}
+
+{% load static custom crispy_forms_tags widget_tweaks compress i18n l10n %}
+
+{% block view_title %}{% trans 'Report a Violation' %} | {% endblock %}
+
+{% block view_content %}
+
+    <form id="report-form" action="{% url 'violations:submit' %}" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+
+    <div class="page-header">
+    <h1 class="text-center">{% trans 'Violation Report' %}<small></small></h1>
+  </div>
+
+    {% if form.errors %}
+    <div class="alert alert-danger">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      {% for field, errors in form.errors.items %}
+        <div>{{field}}:{% for error in errors %} {{error}}{% endfor %}</div>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    <div class="row">
+      <div class="col-md-9">
+
+        <div class="well report-violation-form">
+
+          <div class="row">
+            <div class="col-md-12">
+              <h1 id="wizard-1-header" class="text-center animated">
+                {% trans "I'm a" %}
+                <span id="ui-wizard-reporter-state" style="display: inline-block;">...</span>
+                <!--
+                <span id="ui-wizard-reporter-is-victim" hidden>{% trans 'victim' %}</span>
+                <span id="ui-wizard-reporter-is-witness" hidden>{% trans 'witness' %}</span>
+                -->
+              </h1>
+              <input id="id_victim" name="victim" type="hidden" value="0">
+            </div>
+          </div>
+
+          <div class="row ui-wizard-row" id="ui-wizard-victim-witness-buttons">
+            <div class="col-md-6" id="ui-wizard-victim-button-container">
+              <a href="javascript:void(0)" class="btn btn-lg btn-block btn-warning" id="ui-wizard-victim-button" data-value="{% trans 'victim' %}" data-class="text-warning"><i class="fa fa-user fa fa-2x"></i> {% trans 'Victim' %}</a>
+            </div>
+            <div class="col-md-6" id="ui-wizard-witness-button-container">
+              <a href="javascript:void(0)" class="btn btn-lg btn-block btn-success" id="ui-wizard-witness-button" data-value="{% trans 'witness' %}" data-class="text-success" tabindex="0"><i class="fa fa-eye fa fa-2x"></i> {% trans 'Witness' %}</a>
+            </div>
+          </div>
+
+          <div class="row ui-wizard-row" id="ui-wizard-category" hidden>
+            <div class="col-md-offset-2 col-md-8 natural-language-form">
+
+              <p class="lead text text-center" style="margin: 0;">
+                <span id="ui-wizard-victim-text" hidden>{% trans "I've been a victim of" %}</span>
+                <span id="ui-wizard-witness-text" hidden>{% trans "I've witnessed a" %}</span>
+                {% trans 'Select an violation category' as str %}
+                {% render_field form.category placeholder=str class+="form-control input-lg select2" %}
+              </p>
+
+            </div>
+          </div>
+
+          <div class="row ui-wizard-row" id="ui-wizard-location-datetime" hidden>
+            <div class="col-md-6">
+              {% trans 'Location' as str %}
+              <h3><i class="fa fa-map-marker"></i> {{str}}</h3>
+              <div id="map" style="width:100%; height: 300px"></div>
+              {% render_field form.latitude type="hidden" %}
+              {% render_field form.longitude type="hidden" %}
+              {#% render_field form.location type="hidden" %#}
+              <input type="hidden" id="id_location" name="location">
+              <div class="input-group" style="margin-top: 10px;">
+                <span class="input-group-addon"> <i class="fa fa-map-marker fa-lg"></i> </span>
+                {% render_field form.location_text type="text" placeholder=str class="form-control" -data-provide="typeahead" -data-source="reform.data.locations" -autocomplete="off" %}
+              </div>
+            </div>
+            <div class="col-md-6">
+              <h3><i class="fa fa-calendar"></i> {% trans 'Date and Time' %}</h3>
+              {% render_field form.datetime type="text" -type="datetime-local" class+="form-control" -required="required" style="display: none;" %}
+              <div id="dateinput" style="height: 300px;">
+              <script type="text/template" id="dateinput-template">
+                <div class="controls">
+                  <div class="clndr-previous-year-button">&lsaquo;&lsaquo;</div>
+                  <div class="clndr-previous-button">&lsaquo;</div>
+                  <div class="month"><%= month %> <%= year %></div>
+                  <div class="clndr-next-button">&rsaquo;</div>
+                  <div class="clndr-next-year-button">&rsaquo;&rsaquo;</div>
+                </div>
+                <div class="clndr-grid">
+                  <div class="days-of-the-week clearfix">
+                    <% _.each(daysOfTheWeek, function(day) { %>
+                      <div class="header-day text-muted"><strong><%= day %></strong></div>
+                    <% }); %>
+                  </div>
+                  <div class="days clearfix">
+                    <% _.each(days, function(day) { %>
+                      <div class="<%= day.classes %>" id="<%= day.id %>"><span class="day-number"><%= day.day %></span></div>
+                    <% }); %>
+                  </div>
+                </div>
+              </script>
+              </div>
+              <input id="id_date" name="date" type="hidden">
+              <div class="input-group" style="margin-top: 10px;">
+                <span class="input-group-addon"> <i class="fa fa-clock-o fa-lg"></i> </span>
+                <input id="id_time" name="time" type="time" class="form-control" placeholder="{% trans 'Time' %}" value="12:00">
+              </div>
+            </div>
+          </div>
+
+          <div class="row ui-wizard-row" id="ui-wizard-victim-aggressor" hidden>
+
+            <div class="col-md-6" id="ui-wizard-victim-area">
+              <h3 id="ui-reporter-victim-label"><i class="fa fa-user"></i> Victim</h3>
+              <h3 id="ui-witness-victim-label" hidden><i class="fa fa-user"></i> {% trans 'Victim Profile' %}</h3>
+
+              <fieldset id="ui-reporter-victim-fieldset" class="ui-victim-fieldset form-horizontal input-area clean-empty" style="display: none;" disabled>
+
+                {{victim_profile_form|crispy_form_horizontal}}
+
+              </fieldset>
+
+              <fieldset id="ui-witness-victim-fieldset" class="ui-victim-fieldset form-horizontal input-area clean-empty" style="display: none;" disabled>
+
+                <!--{% render_field form.victim placeholder="Victim" class+="select2 form-control" %}-->
+
+                {{victim_form|crispy_form_horizontal}}
+
+              </fieldset>
+
+            </div>
+
+            <div class="col-md-6" id="ui-wizard-aggressor-area">
+              <div>
+                {% trans 'Aggressor' as str %}
+                <h3 class="-pull-left"><i class="fa fa-male"></i> {{str}}</h3>
+                <!--
+                <h3 class="pull-right">
+                  <a id="ui-aggressor-next" class="btn btn-quiet" title="Next"><i class="fa fa-arrow-right fa-lg"></i></a>
+                </h3>
+                -->
+              </div>
+              {% render_field form.aggressor placeholder=str class+="form-control input-area" %}
+            </div>
+
+          </div>
+
+          <div class="row ui-wizard-row" id="ui-wizard-description-media" hidden>
+            <div class="col-md-6">
+              {% trans 'Description' as str %}
+              <h3><i class="fa fa-ellipsis-h"></i> {{str}}</h3>
+              {% render_field form.description placeholder=str required="required" class+="form-control input-area" %}
+            </div>
+            <div class="col-md-6">
+              <h3><i class="fa fa-picture-o"></i> {% trans 'Media Attachments' %}</h3>
+              <!--<input name="files[]" type="file" multiple />-->
+              <!--<input type="hidden" name="rsid" value="{{report_submit_id}}">-->
+              <div id="ui-media-file-upload" tabindex="0" class="dropzone input-area form-control" style="background-color: #FFF; border: 1px solid #cccccc"></div>
+              <!--
+              <button type="button" class="form-control input-area" style="padding: 0;">
+                <div id="ui-media-file-upload" class="dropzone" style="background-color: #FFF; height: 100%">
+                </div>
+              </button>
+              -->
+            </div>
+          </div>
+
+          <div class="row ui-wizard-row" id="ui-wizard-sources-media-links" hidden>
+            <div class="col-md-6">
+              <h3><i class="fa fa-search"></i> {% trans 'Sources' %}</h3>
+              <ul id="ui-sources-list" class="list-unstyled">
+                <script id="ui-sources-list-item" type="text/template">
+                  <li>
+                    <input type="hidden" name="sources[]" value="<%= value %>">
+                    <a href="<%= url %>" target="_blank"><%= source %></a>
+                    <a href="#" class="ui-sources-remove-button btn btn-link"><i class="fa fa-minus-square fa-lg"></i></a>
+                  </li>
+                </script>
+              </ul>
+              <div class="row">
+                <div class="col-xs-5">
+                  <input id="ui-sources-source-input" type="text" class="form-control" placeholder="{% trans 'Source' %}">
+                </div>
+                <div class="col-xs-7">
+                  <div class="input-group">
+                    <input id="ui-sources-url-input" type="url" class="form-control" placeholder="{% trans 'URL' %}">
+                    <span class="input-group-btn">
+                      <a id="ui-sources-add-button" href="#" class="btn btn-default"><i class="fa fa-plus-square fa-lg"></i></a>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <h3><i class="fa fa-link"></i> {% trans 'Media Links' %}</h3>
+              <ul id="ui-links-list" class="list-unstyled">
+                <script id="ui-links-list-item" type="text/template">
+                  <li>
+                    <input type="hidden" name="links[]" value="<%= url %>">
+                    <a href="<%= url %>" target="_blank"><%= url %></a>
+                    <a href="#" class="ui-links-remove-button btn btn-link"><i class="fa fa-minus-square fa-lg"></i></a>
+                  </li>
+                </script>
+              </ul>
+              <div class="input-group">
+                <input id="ui-links-url-input" type="url" class="form-control" placeholder="{% trans 'Media Link' %}">
+                <span class="input-group-btn">
+                  <a id="ui-links-add-button" href="#" class="btn btn-default"><i class="fa fa-plus-square fa-lg"></i></a>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="row ui-wizard-row" id="ui-wizard-features" hidden>
+            <div class="col-md-12">
+              {% trans 'Features' as str %}
+              <h3><i class="fa fa-tags"></i> {{str}}</h3>
+              <!--<input type="text" class="form-control" placeholder="{{str}}">-->
+              {% trans 'Select applicable features' as str %}
+              {% render_field form.features placeholder=str class+="form-control select2" %}
+            </div>
+          </div>
+
+          <div class="row ui-wizard-row" id="ui-wizard-submit" style="margin-top: 20px;" hidden>
+            <div class="col-md-12">
+              <button class="btn btn-danger btn-block btn-lg"><i class="fa fa-plus"></i> {% trans 'Report' %}</button>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+      <div class="col-md-3 hidden-sm hidden-xs ui-latest-reports">
+        <h2>
+          <span id="ui-latest-reports-label">{% trans 'Latest Reports' %}</span>
+          <span id="ui-similar-reports-label" hidden>{% trans 'Similar Reports' %}</span>
+        </h2>
+        <hr>
+        <div id="ui-reports-list" class="ui-list list-group">
+          {% include "violations/submit_similar_reports_list.html" %}
+        <!--</ul>-->
+        </div>
+      </div>
+    </div>
+
+    </form>
+
+{% endblock %}
+
+{% block view_addons %}
+    <!--
+    <div id="ui-wizard-progress-bar" style="z-index: 900;">
+      <div class="container progress progress-info progress-striped">
+        <div class="progress-bar animated" id="ui-wizard-progress"></div>
+      </div>
+    </div>
+    -->
+{% endblock %}
+
+{% block view_styles %}
+
+  {% compress css %}
+  <link rel="stylesheet" href="{% static 'components/select2/select2.css' %}">
+  <link rel="stylesheet" href="{% static 'components/select2-bootstrap-css/select2-bootstrap.css' %}">
+  {#%<link rel="stylesheet" href="{% static 'components/bootstrap-select/bootstrap-select.css' %}">%#}
+  <link rel="stylesheet" href="{% static 'components/pines-notify/jquery.pnotify.default.css' %}">
+  <!-- map -->
+  <link rel="stylesheet" href="{% static 'components/leaflet/dist/leaflet.css' %}" />
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="{% static 'components/leaflet/dist/leaflet.ie.css' %}" />
+  <![endif]-->
+  <link rel="stylesheet" href="{% static 'components/L.GeoSearch/src/css/l.geosearch.css' %}" />
+  <!-- file upload -->
+  <link rel="stylesheet" href="{% static 'components/dropzone/downloads/css/basic.css' %}" />
+
+  <link rel="stylesheet" href="{% static 'violations/styles/submit.css'%}" />
+  {% endcompress %}
+
+{% endblock %}
+
+{% block view_scripts %}
+<script type="text/javascript" src="{% url 'i18n_js' 'violations' %}"></script>
+  {% compress js %}
+  <script src="{% static 'components/select2/select2.js' %}"></script>
+  {#%<script src="{% static 'components/bootstrap-select/bootstrap-select.js' %}"></script>%#}
+  <script src="{% static 'components/pines-notify/jquery.pnotify.js' %}"></script>
+  <script src="{% static 'components/blockui/jquery.blockUI.js' %}"></script>
+  <!-- Map -->
+  <script src="{% static 'components/leaflet/dist/leaflet.js' %}"></script>
+  <script type="text/javascript">L.Icon.Default.imagePath = "{% static 'components/leaflet/dist/images' %}";</script>
+  <script src="{% static 'components/L.GeoSearch/src/js/l.control.geosearch.js' %}"></script>
+  <script src="{% static 'components/L.GeoSearch/src/js/l.geosearch.provider.google.js' %}"></script>
+  <!-- file upload -->
+  <script src="{% static 'components/dropzone/downloads/dropzone.js' %}"></script>
+  {#%<script src="{% static 'components/typeahead.js/dist/typeahead.js' %}"></script>%#}
+  <!-- date input -->
+  <script src="{% static 'components/lodash/dist/lodash.js' %}"></script>
+  <script src="{% static 'components/clndr/src/clndr.js' %}"></script>
+  {% endcompress %}
+
+  <script type="text/javascript">
+    //var report_submit_id = {{report_submit_id|json}};
+    //reform.data.victims = {{victims|json}};
+    //reform.data.reports = {{reports|json}};
+    reform.urls.submit = {% url 'violations:submit' as submit_url %}{{submit_url|json}};
+    reform.urls.similar = {% url 'violations:similar_reports' as submit_url %}{{submit_url|json}};
+    reform.urls.upload = {% url 'violations:submit-upload' as upload_url %}{{upload_url|json}};
+  </script>
+
+  {% compress js %}
+  <script src="{% static 'violations/scripts/submit.js' %}"></script>
+  {% endcompress %}
+
+{% endblock %}

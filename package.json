@@ -1,5 +1,5 @@
 {
-  "name": "reform-platform",
+  "name": "reporto",
   "version": "0.0.0",
   "devDependencies": {
     "grunt-contrib-concat": "~0.3.0",
@@ -7,6 +7,19 @@
     "grunt-contrib-watch": "~0.4.4",
     "grunt-contrib-uglify": "~0.2.2",
     "grunt": "~0.4.1",
-    "grunt-contrib-compass": "~0.3.0"
+    "grunt-contrib-compass": "~0.3.0",
+    "R2": "~1.4.1",
+    "grunt-r2": "~0.1.1",
+    "grunt-contrib-sass": "~0.6.0",
+    "browserify": "~3.20.0",
+    "browserify-shim": "~3.1.5"
+  },
+  "dependencies": {
+    "grunt-contrib-compass": "~0.3.0",
+    "grunt-contrib-cssmin": "~0.6.2",
+    "grunt": "~0.4.2",
+    "grunt-contrib-watch": "~0.4.4",
+    "grunt-contrib-uglify": "~0.2.7",
+    "browserify": "~3.20.2"
   }
 }

@@ -1,22 +1,33 @@
 
+# Build and Temporary files
 *.log
 *.old
 *.pot
 *.pyc
-local_settings.py
-
-# Virtual environment
-.env*
+*.sqlite3
+*.mo
 
 # Tools
+.env*
 node_modules
 *.sublime-*
-/reform_tn/development.sqlite3
-/reform_tn/static
-/reform_tn/media
-components
+sync-local.err
+sync-local.out
+sync-server.err
+sync-server.out
+.project
+.pydevproject
+.checkstyle
+.settings
 .sass-cache
-/.project
-/.pydevproject
-/.checkstyle
-/.settings
+
+/base/static/components
+/base/static/theme/components
+/base/static/theme/new/components
+
+/reporto/media
+/reporto/static
+/data
+
+.DS_Store
+.idea

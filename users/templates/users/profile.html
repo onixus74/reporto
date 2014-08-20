@@ -1,119 +1,117 @@
 {% extends "layouts/default.html" %}
 
-{% load static json thumbnail compress %}
+{% load static i18n custom thumbnail compress crispy_forms_tags %}
 
 {% block view_title %}{{profile}} | User Profile | {% endblock %}
 
 {% block view_content %}
-<div class="container">
 
-	<div class="page-header">
-		<h1>User Profile<small></small></h1>
-	</div>
+  <div class="page-header">
+    <h1 class="text-center">{% trans 'User Profile' %} <small><a class="btn btn-link" href="{% url 'admin:users_user_change' profile.id %}" target="_blank"><i class="fa fa-pencil text-warning"></i> {% trans 'Edit as Super User' %}</a></small></small></h1>
+  </div>
 
-	<div class="well">
+  <div class="row">
+    <div class="col-md-offset-2 col-md-8 well">
+      <dl class="dl-horizontal">
+        <dt>{% trans 'Full name' %}</dt>
+        <dd>{{profile}}</dd>
 
-		<div class="container-fluid">
+        <dt>{% trans 'Email' %}</dt>
+        <dd>{{profile.email}}</dd>
 
-			<div class="row-fluid">
-				<div class="offset2 span8">
-					<dl>
-						<dt>Full name</dt>
-						<dd>{{profile}}</dd>
+        <dt>{% trans 'Role' %}</dt>
+        <dd>{{profile.get_role_display}}</dd>
 
-						<dt>Email</dt>
-						<dd>{{profile.email}}</dd>
+        <dt>{% trans 'Password' %}</dt>
+        <dd><a href="#" class="ui-editable" id="user-password" data-type="password" data-pk="{{profile.pk}}" data-name="password" data-url="{% url 'users:change_password' %}" data-display="false" data-title="{% trans 'Enter new password' %}" data-placeholder="{% trans 'New password' %}">{% trans '[change]' %}</a></dd>
 
-						<dt>Role</dt>
-						<dd>{{profile.get_role_display}}</dd>
+        <dt>{% trans 'Social network accounts' %}</dt>
+        <dd>
+          <div class="btn-group">
+            {% if social_auth.google %}
+            <a class="btn btn-default" href="{% url "socialauth_disconnect_individual" social_auth.google.provider social_auth.google.id %}?next={{request.path}}">{% trans 'Disconnect' %} {% trans 'Google' %}</a>
+            {% else %}
+            <a class="btn btn-default" href="{% url 'socialauth_begin' 'google' %}?next={{request.path}}">{% trans 'Connect' %} {% trans 'Google' %}</a>
+            {% endif %}
 
-						<dt>Password</dt>
-						<dd><a href="#" class="ui-editable" id="user-password" data-type="password" data-pk="{{profile.pk}}" data-name="password" data-url="{% url 'users:change_password' %}" data-title="Enter new password" data-placeholder="New password">[change]</a></dd>
+            {% if social_auth.facebook %}
+            <a class="btn btn-default" href="{% url "socialauth_disconnect_individual" social_auth.facebook.provider social_auth.facebook.id %}?next={{request.path}}">{% trans 'Disconnect' %} {% trans 'Facebook' %}</a>
+            {% else %}
+            <a class="btn btn-default" href="{% url 'socialauth_begin' 'facebook' %}?next={{request.path}}">{% trans 'Connect' %} {% trans 'Facebook' %}</a>
+            {% endif %}
 
-						<dt>Connected accounts</dt>
-						<dd>
-							<ul>
-								<li>
-									Google
-									{% if social_auth.google %}
-									<a href="{% url "socialauth_disconnect_individual" social_auth.google.provider social_auth.google.id %}?next={{request.path}}">Disconnect</a></li>
-									{% else %}
-									<a href="{% url 'socialauth_begin' 'google' %}?next={{request.path}}">Connect</a></li>
-									{% endif %}
-								</li>
-								<li>
-									Facebook
-									{% if social_auth.facebook %}
-									<a href="{% url "socialauth_disconnect_individual" social_auth.facebook.provider social_auth.facebook.id %}?next={{request.path}}">Disconnect</a></li>
-									{% else %}
-									<a href="{% url 'socialauth_begin' 'facebook' %}?next={{request.path}}">Connect</a></li>
-									{% endif %}
-								</li>
-								<li>
-									Twitter
-									{% if social_auth.twitter %}
-									<a href="{% url "socialauth_disconnect_individual" social_auth.twitter.provider social_auth.twitter.id %}?next={{request.path}}">Disconnect</a></li>
-									{% else %}
-									<a href="{% url 'socialauth_begin' 'twitter' %}?next={{request.path}}">Connect</a></li>
-									{% endif %}
-								</li>
-							</ul>
-						</dd>
+            {% if social_auth.twitter %}
+            <a class="btn btn-default" href="{% url "socialauth_disconnect_individual" social_auth.twitter.provider social_auth.twitter.id %}?next={{request.path}}">{% trans 'Disconnect' %} {% trans 'Twitter' %}</a>
+            {% else %}
+            <a class="btn btn-default" href="{% url 'socialauth_begin' 'twitter' %}?next={{request.path}}">{% trans 'Connect' %} {% trans 'Twitter' %}</a>
+            {% endif %}
 
-						<dt>Victim Profile</dt>
-						<dd>
+          </div>
+          {% comment %}
+          <ul>
+            <li>
+              {% trans 'Google' %}
+              {% if social_auth.google %}
+              <a href="{% url "socialauth_disconnect_individual" social_auth.google.provider social_auth.google.id %}?next={{request.path}}">{% trans 'Disconnect' %}</a>
+              {% else %}
+              <a href="{% url 'socialauth_begin' 'google' %}?next={{request.path}}">{% trans 'Connect' %}</a>
+              {% endif %}
+            </li>
+            <li>
+              {% trans 'Facebook' %}
+              {% if social_auth.facebook %}
+              <a href="{% url "socialauth_disconnect_individual" social_auth.facebook.provider social_auth.facebook.id %}?next={{request.path}}">{% trans 'Disconnect' %}</a>
+              {% else %}
+              <a href="{% url 'socialauth_begin' 'facebook' %}?next={{request.path}}">{% trans 'Connect' %}</a>
+              {% endif %}
+            </li>
+            <li>
+              {% trans 'Twitter' %}
+              {% if social_auth.twitter %}
+              <a href="{% url "socialauth_disconnect_individual" social_auth.twitter.provider social_auth.twitter.id %}?next={{request.path}}">{% trans 'Disconnect' %}</a>
+              {% else %}
+              <a href="{% url 'socialauth_begin' 'twitter' %}?next={{request.path}}">{% trans 'Connect' %}</a>
+              {% endif %}
+            </li>
+          </ul>
+          {% endcomment %}
+        </dd>
 
-							{{victim_profile}}
+        <dt>{% trans 'Victim Profile' %}</dt>
+        <dd>
+          <form class="ui-profile-victim form-horizontal clean-empty" method="post">
+            {% csrf_token %}
+            {{victim_form|crispy_form_horizontal}}
+            <button type="submit" class="btn btn-primary btn-block">{% trans 'Save' %}</button>
+          </form>
+        </dd>
 
-						</dd>
+      </dl>
+    </div>
+  </div>
 
-					</dl>
-				</div>
-			</div>
 
-		</div>
-
-	</div>
-
-</div>
 {% endblock %}
 
 
 {% block view_styles %}
 
-	{% compress css %}
-	<link rel="stylesheet" href="{% static 'dependencies/x-editable/dist/bootstrap-editable/css/bootstrap-editable.css' %}" />
-	{% endcompress %}
-
-	<link rel="stylesheet" href="{% static '.css'%}" />
+  {% compress css %}
+  <link rel="stylesheet" href="{% static 'components/x-editable/dist/bootstrap3-editable/css/bootstrap-editable.css' %}" />
+  <link rel="stylesheet" href="{% static 'users/styles/profile.css'%}" />
+  {% endcompress %}
 
 {% endblock %}
 
 {% block view_scripts %}
-	{% compress js %}
-	<script src="{% static 'dependencies/x-editable/dist/bootstrap-editable/js/bootstrap-editable.js' %}"></script>
-	{% endcompress %}
 
-	<script type="text/javascript">
-		//var report_submit_id = {{report_submit_id|json}};
-		//reform.data.victims = {{victims|json}};
-		//reform.data.reports = {{reports|json}};
-		reform.urls.submit = {% url 'reports:submit' as submit_url %}{{submit_url|json}};
-	</script>
+  {% compress js %}
+  <script src="{% static 'components/x-editable/dist/bootstrap3-editable/js/bootstrap-editable.js' %}"></script>
+  <script src="{% static 'users/scripts/profile.js' %}"></script>
+  {% endcompress %}
 
-	<script src="{% static '.js' %}"></script>
-
-	<script>
-	$.fn.editable.defaults.mode = 'inline';
-	$.fn.editable.defaults.anim = 'fast';
-	$.fn.editable.defaults.ajaxOptions = {
-		headers: {
-			"X-CSRFToken": csrf_token
-		}
-	};
-	$(document).ready(function() {
-		$('.ui-editable').editable();
-	});
-	</script>
+  <script type="text/javascript">
+    reform.urls.submit = {% url 'violations:submit' as submit_url %}{{submit_url|json}};
+  </script>
 
 {% endblock %}

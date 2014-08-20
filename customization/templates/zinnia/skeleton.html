@@ -1,0 +1,149 @@
+{% extends "layouts/default.html" %}
+
+{% load static custom compress i18n %}
+
+{% block view_title %}{% block title %}{% endblock title %} | {% trans 'Reports' %} | {% block title-page %}{% endblock title-page %}{% endblock %}
+
+{% block view_content %}
+
+      {% comment %}<!--
+      <div id="header">
+        <ul class="top-navigation">
+          <li>
+            <a href="{% url 'zinnia_sitemap' %}" title="{% trans "Sitemap" %}" class="sitemap">
+              {% trans "Sitemap" %}
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'zinnia_entry_latest_feed' %}" title="{% trans "RSS Feed of latest entries" %}" class="feeds">
+              {% trans "RSS Feed" %}
+            </a>
+          </li>
+        </ul>
+        <form method="get" action="{% url 'zinnia_entry_search' %}">
+          <p>
+            <input type="text" name="pattern" placeholder="{% trans "Keywords..." %}" {% if pattern %}value="{{ pattern }}"{% endif %} />
+            <input type="submit" class="submitbutton" value="OK" />
+          </p>
+        </form>
+        <h1>
+          <a href="{% url 'zinnia_entry_archive_index' %}" title="Zinnia's Weblog" rel="home">
+            Zinnia's Weblog
+          </a>
+        </h1>
+        <blockquote>
+          <p>{% trans "Just another Zinnia weblog." %}</p>
+        </blockquote>
+        {% block breadcrumbs %}{% endblock breadcrumbs %}
+      </div>
+      -->{% endcomment %}
+
+      {% block slider %}{% endblock slider %}
+      <div id="content" class="hfeed col-md-8 col-md-offset-2">
+        {% block content %}
+        <div class="links">
+          <h3>{% trans "Useful links" %}</h3>
+          <ul>
+            <li>
+              <a href="{% url 'zinnia_entry_archive_index' %}" title="{% trans "Weblog index" %}">
+                {% trans "Weblog index" %}
+              </a>
+            </li>
+            <li>
+              <a href="{% url 'zinnia_sitemap' %}" title="{% trans "Sitemap" %}">
+                {% trans "Sitemap" %}
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="search">
+          <h3>{% trans "Search" %}</h3>
+          {% include "zinnia/tags/search_form.html" %}
+        </div>
+        {% endblock content %}
+      </div>
+      {% comment %}<!--<div id="sidebar" class="col-md-4">
+        {% block sidebar %}
+        {% endblock sidebar %}
+      </div>
+      -->{% endcomment %}
+
+      {% comment %}<!--
+      <div id="footer">
+        <p>{% blocktrans %}Powered by <a href="http://www.djangoproject.com">Django</a> and <a href="https://github.com/Fantomas42/django-blog-zinnia">Zinnia {{ ZINNIA_VERSION }}</a>.{% endblocktrans %}</p>
+      </div>
+      -->{% endcomment %}
+
+
+{% if user.is_authenticated %}
+<div class="col-md-8 col-md-offset-2">
+<div class="panel panel-danger">
+  <div class="panel-heading">
+    {% trans "Tools" %}
+  </div>
+  <ul class="list-group">
+    {% if perms.zinnia %}
+    <li class="list-group-item">
+      <a href="{% url 'admin:app_list' 'zinnia' %}" title="{% trans "Dashboard" %}">
+        <span class="glyphicon glyphicon-book"></span>
+        {% trans "Dashboard" %}
+      </a>
+    </li>
+    {% endif %}
+    {% if perms.zinnia.add_entry %}
+    <li class="list-group-item">
+      <a href="{% url 'admin:zinnia_entry_add' %}" title="{% trans "Post an entry" %}">
+        <span class="glyphicon glyphicon-pencil"></span>
+        {% trans "Post an entry" %}
+      </a>
+    </li>
+    {% endif %}
+    {% block admin-tools %}
+    {% endblock admin-tools %}
+    <li class="list-group-item">
+      <a href="{% url 'admin:logout' %}" title="{% trans "Log out" %}">
+        <span class="glyphicon glyphicon-off"></span>
+        {% trans "Log out" %}
+      </a>
+    </li>
+  </ul>
+</div>
+</div>
+{% endif %}
+
+{% endblock %}
+
+{% block view_meta %}
+  <meta name="robots" content="follow, all" />
+  <meta name="description" content="{% block meta-description %}{% settings_value 'SITE_DESCRIPTION' %}{% endblock meta-description %}{% block meta-description-page %}{% endblock meta-description-page %}" />
+  <meta name="keywords" content="{% block meta-keywords %}police, Tunisia, Tunisie{% endblock meta-keywords %}" />
+  <meta name="author" content="reform.tn" />
+  {% block meta %}{% endblock meta %}
+  <link rel="pingback" href="/xmlrpc/" />
+  <link rel="home" href="{% url 'zinnia_entry_archive_index' %}" />
+{% endblock %}
+
+{% block view_styles %}
+  <!-- <link rel="stylesheet" href="{% static "zinnia_bootstrap/bootstrap/css/bootstrap.min.css" %}" /> -->
+  <!-- <style type="text/css">
+    body {
+      padding-top: 70px;
+    }
+    body > nav img {
+      margin-top: 5px;
+      margin-left: 10px;
+    }
+    p.entry-discussions {
+      margin-bottom: 0px;
+    }
+  </style> -->
+  {% block link %}{% endblock link %}
+{% endblock %}
+
+{% block view_scripts %}
+  <!--[if lt IE 9]>
+      <script src="{% static "zinnia_bootstrap/assets/js/html5shiv.js" %}"></script>
+      <script src="{% static "zinnia_bootstrap/assets/js/respond.min.js" %}"></script>
+  <![endif]-->
+  {% block script %}{% endblock script %}
+{% endblock %}

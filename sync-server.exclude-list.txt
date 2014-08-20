@@ -1,0 +1,31 @@
+.git
+
+# Build and Temporary files
+*.log
+*.old
+*.pot
+*.pyc
+*.sqlite3
+
+# Tools
+.env*
+node_modules
+*.sublime-*
+sync-local.err
+sync-local.out
+sync-server.err
+sync-server.out
+.project
+.pydevproject
+.checkstyle
+.settings
+
+.sass-cache
+
+/base/static/components
+/reporto/static/CACHE
+/reporto/media
+
+
+/data
+test

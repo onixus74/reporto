@@ -1,0 +1,222 @@
+[{
+  "pk": 1,
+  "model": "violations.feature",
+  "fields": {
+    "definition": "Got help with NGO",
+    "parent": 13,
+    "rght": 3,
+    "level": 1,
+    "lft": 2,
+    "tree_id": 10,
+    "selectable": true,
+    "slug": "got-help-with-ngo"
+  }
+}, {
+  "pk": 2,
+  "model": "violations.feature",
+  "fields": {
+    "definition": "Hired a lawyer",
+    "parent": 13,
+    "rght": 5,
+    "level": 1,
+    "lft": 4,
+    "tree_id": 10,
+    "selectable": true,
+    "slug": "hired-a-lawyer"
+  }
+}, {
+  "pk": 3,
+  "model": "violations.feature",
+  "fields": {
+    "definition": "Incident during protest",
+    "parent": 9,
+    "rght": 7,
+    "level": 1,
+    "lft": 6,
+    "tree_id": 6,
+    "selectable": true,
+    "slug": "incident-during-protest"
+  }
+}, {
+  "pk": 4,
+  "model": "violations.feature",
+  "fields": {
+    "definition": "Incident in police station",
+    "parent": 9,
+    "rght": 9,
+    "level": 1,
+    "lft": 8,
+    "tree_id": 6,
+    "selectable": true,
+    "slug": "incident-in-police-station"
+  }
+}, {
+  "pk": 5,
+  "model": "violations.feature",
+  "fields": {
+    "definition": "Policeman wearing uniform",
+    "parent": 8,
+    "rght": 5,
+    "level": 1,
+    "lft": 4,
+    "tree_id": 2,
+    "selectable": true,
+    "slug": "policeman-wearing-uniform"
+  }
+}, {
+  "pk": 6,
+  "model": "violations.feature",
+  "fields": {
+    "definition": "Reported and satisfied",
+    "parent": 10,
+    "rght": 5,
+    "level": 1,
+    "lft": 4,
+    "tree_id": 11,
+    "selectable": true,
+    "slug": "reported-and-satisfied"
+  }
+}, {
+  "pk": 7,
+  "model": "violations.feature",
+  "fields": {
+    "definition": "Report to authorities",
+    "parent": 10,
+    "rght": 3,
+    "level": 1,
+    "lft": 2,
+    "tree_id": 11,
+    "selectable": true,
+    "slug": "report-to-authorities"
+  }
+}, {
+  "pk": 8,
+  "model": "violations.feature",
+  "fields": {
+    "definition": "Aggressor",
+    "parent": null,
+    "rght": 6,
+    "level": 0,
+    "lft": 1,
+    "tree_id": 2,
+    "selectable": false,
+    "slug": "aggressor"
+  }
+}, {
+  "pk": 9,
+  "model": "violations.feature",
+  "fields": {
+    "definition": "Incident Environment",
+    "parent": null,
+    "rght": 10,
+    "level": 0,
+    "lft": 1,
+    "tree_id": 6,
+    "selectable": false,
+    "slug": "incident-environment"
+  }
+}, {
+  "pk": 10,
+  "model": "violations.feature",
+  "fields": {
+    "definition": "Report Status",
+    "parent": null,
+    "rght": 6,
+    "level": 0,
+    "lft": 1,
+    "tree_id": 11,
+    "selectable": false,
+    "slug": "report-status"
+  }
+}, {
+  "pk": 11,
+  "model": "violations.feature",
+  "fields": {
+    "definition": "Aggression",
+    "parent": null,
+    "rght": 6,
+    "level": 0,
+    "lft": 1,
+    "tree_id": 1,
+    "selectable": false,
+    "slug": "aggression"
+  }
+}, {
+  "pk": 12,
+  "model": "violations.feature",
+  "fields": {
+    "definition": "Torture",
+    "parent": 11,
+    "rght": 5,
+    "level": 1,
+    "lft": 4,
+    "tree_id": 1,
+    "selectable": true,
+    "slug": "torture"
+  }
+}, {
+  "pk": 13,
+  "model": "violations.feature",
+  "fields": {
+    "definition": "Legal / Help",
+    "parent": null,
+    "rght": 6,
+    "level": 0,
+    "lft": 1,
+    "tree_id": 10,
+    "selectable": false,
+    "slug": "legal-help"
+  }
+}, {
+  "pk": 14,
+  "model": "violations.feature",
+  "fields": {
+    "definition": "Policeman in civilian outfit",
+    "parent": 8,
+    "rght": 3,
+    "level": 1,
+    "lft": 2,
+    "tree_id": 2,
+    "selectable": true,
+    "slug": "policeman-in-civilian-outfit"
+  }
+}, {
+  "pk": 15,
+  "model": "violations.feature",
+  "fields": {
+    "definition": "Incident during arrest",
+    "parent": 9,
+    "rght": 5,
+    "level": 1,
+    "lft": 4,
+    "tree_id": 6,
+    "selectable": true,
+    "slug": "incident-during-arrest"
+  }
+}, {
+  "pk": 16,
+  "model": "violations.feature",
+  "fields": {
+    "definition": "Incident at victim's place",
+    "parent": 9,
+    "rght": 3,
+    "level": 1,
+    "lft": 2,
+    "tree_id": 6,
+    "selectable": true,
+    "slug": "incident-at-victims-place"
+  }
+}, {
+  "pk": 17,
+  "model": "violations.feature",
+  "fields": {
+    "definition": "Mistreatment",
+    "parent": 11,
+    "rght": 3,
+    "level": 1,
+    "lft": 2,
+    "tree_id": 1,
+    "selectable": true,
+    "slug": "mistreatment"
+  }
+}]

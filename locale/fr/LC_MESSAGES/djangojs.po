@@ -1,0 +1,336 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-07-07 11:41+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: appreciations/static/appreciations/scripts/submit.js:37
+#: appreciations/static/appreciations/scripts/submit.min.js:1
+#: violations/static/violations/scripts/submit.js:37
+#: violations/static/violations/scripts/submit.min.js:1
+msgid "search for location ..."
+msgstr ""
+
+#: appreciations/static/appreciations/scripts/submit.js:38
+#: appreciations/static/appreciations/scripts/submit.min.js:1
+#: violations/static/violations/scripts/submit.js:38
+#: violations/static/violations/scripts/submit.min.js:1
+msgid "Location could not be found."
+msgstr ""
+
+#: appreciations/static/appreciations/scripts/submit.js:108
+#: appreciations/static/appreciations/scripts/submit.min.js:1
+#: violations/static/violations/scripts/submit.js:108
+#: violations/static/violations/scripts/submit.min.js:1
+msgid "Drop files or click to upload photos"
+msgstr ""
+
+#: base/static/dashboard/scripts/charts.js:24
+#: base/static/dashboard/scripts/charts.min.js:1
+msgid "Violations"
+msgstr ""
+
+#: base/static/dashboard/scripts/charts.js:38
+#: base/static/dashboard/scripts/charts.min.js:1
+msgid "Appreciations"
+msgstr ""
+
+#: base/static/dashboard/scripts/charts.js:59
+#: base/static/dashboard/scripts/charts.min.js:1
+msgid "Violations/Appreciations by date"
+msgstr ""
+
+#: base/static/dashboard/scripts/charts.js:62
+#: base/static/dashboard/scripts/charts.min.js:1
+msgid "Click and drag in the plot area to zoom in"
+msgstr ""
+
+#: base/static/dashboard/scripts/charts.js:62
+msgid "Pinch the chart to zoom in"
+msgstr ""
+
+#: base/static/dashboard/scripts/charts.js:76
+#: base/static/dashboard/scripts/charts.min.js:1
+msgid "Number of Violations/Appreciations"
+msgstr ""
+
+#: base/static/dashboard/scripts/charts.js:87
+#: base/static/dashboard/scripts/charts.min.js:1
+msgid "reports on"
+msgstr ""
+
+#: base/static/dashboard/scripts/charts.js:122
+#: base/static/dashboard/scripts/charts.min.js:1
+msgid "All Features"
+msgstr ""
+
+#: base/static/dashboard/scripts/charts.js:131
+#: base/static/dashboard/scripts/charts.min.js:1
+msgid "Violations by Features"
+msgstr ""
+
+#: base/static/dashboard/scripts/charts.js:146
+#: base/static/dashboard/scripts/charts.js:171
+#: base/static/dashboard/scripts/charts.min.js:1
+msgid "Number of Violations"
+msgstr ""
+
+#: base/static/dashboard/scripts/charts.js:160
+#: base/static/dashboard/scripts/charts.min.js:1
+msgid " violations"
+msgstr ""
+
+#: base/static/dashboard/scripts/charts.js:198
+#: base/static/dashboard/scripts/charts.min.js:1
+msgid "Violation by Category"
+msgstr ""
+
+#: base/static/dashboard/scripts/charts.js:222
+#: base/static/dashboard/scripts/charts.min.js:1
+msgid "Victim's category share"
+msgstr ""
+
+#: base/static/dashboard/scripts/charts.js:248
+#: base/static/dashboard/scripts/charts.min.js:1
+msgid "Violation by Victim's Gender"
+msgstr ""
+
+#: base/static/dashboard/scripts/charts.js:272
+#: base/static/dashboard/scripts/charts.min.js:1
+msgid "Victim's gender share"
+msgstr ""
+
+#: base/static/dashboard/scripts/charts.js:297
+#: base/static/dashboard/scripts/charts.min.js:1
+msgid "Violations by Victim's Education"
+msgstr ""
+
+#: base/static/dashboard/scripts/charts.js:321
+#: base/static/dashboard/scripts/charts.min.js:1
+msgid "Victim's education share"
+msgstr ""
+
+#: base/static/dashboard/scripts/charts.js:347
+#: base/static/dashboard/scripts/charts.min.js:1
+msgid "Appreciations by Category"
+msgstr ""
+
+#: base/static/dashboard/scripts/charts.js:371
+#: base/static/dashboard/scripts/charts.min.js:1
+msgid "Appreciation's category share"
+msgstr ""
+
+#: base/static/scripts/highcharts-lang.js:8
+#: base/static/scripts/highcharts-lang.min.js:1
+msgid "Loading..."
+msgstr ""
+
+#: base/static/scripts/highcharts-lang.js:10
+#: base/static/scripts/highcharts-lang.min.js:1
+msgid "January"
+msgstr ""
+
+#: base/static/scripts/highcharts-lang.js:11
+#: base/static/scripts/highcharts-lang.min.js:1
+msgid "February"
+msgstr ""
+
+#: base/static/scripts/highcharts-lang.js:12
+#: base/static/scripts/highcharts-lang.min.js:1
+msgid "March"
+msgstr ""
+
+#: base/static/scripts/highcharts-lang.js:13
+#: base/static/scripts/highcharts-lang.min.js:1
+msgid "April"
+msgstr ""
+
+#: base/static/scripts/highcharts-lang.js:14
+#: base/static/scripts/highcharts-lang.js:28
+#: base/static/scripts/highcharts-lang.min.js:1
+msgid "May"
+msgstr ""
+
+#: base/static/scripts/highcharts-lang.js:15
+#: base/static/scripts/highcharts-lang.min.js:1
+msgid "June"
+msgstr ""
+
+#: base/static/scripts/highcharts-lang.js:16
+#: base/static/scripts/highcharts-lang.min.js:1
+msgid "July"
+msgstr ""
+
+#: base/static/scripts/highcharts-lang.js:17
+#: base/static/scripts/highcharts-lang.min.js:1
+msgid "August"
+msgstr ""
+
+#: base/static/scripts/highcharts-lang.js:18
+#: base/static/scripts/highcharts-lang.min.js:1
+msgid "September"
+msgstr ""
+
+#: base/static/scripts/highcharts-lang.js:19
+#: base/static/scripts/highcharts-lang.min.js:1
+msgid "October"
+msgstr ""
+
+#: base/static/scripts/highcharts-lang.js:20
+#: base/static/scripts/highcharts-lang.min.js:1
+msgid "November"
+msgstr ""
+
+#: base/static/scripts/highcharts-lang.js:21
+#: base/static/scripts/highcharts-lang.min.js:1
+msgid "December"
+msgstr ""
+
+#: base/static/scripts/highcharts-lang.js:24
+#: base/static/scripts/highcharts-lang.min.js:1
+msgid "Jan"
+msgstr ""
+
+#: base/static/scripts/highcharts-lang.js:25
+#: base/static/scripts/highcharts-lang.min.js:1
+msgid "Feb"
+msgstr ""
+
+#: base/static/scripts/highcharts-lang.js:26
+#: base/static/scripts/highcharts-lang.min.js:1
+msgid "Mar"
+msgstr ""
+
+#: base/static/scripts/highcharts-lang.js:27
+#: base/static/scripts/highcharts-lang.min.js:1
+msgid "Apr"
+msgstr ""
+
+#: base/static/scripts/highcharts-lang.js:29
+#: base/static/scripts/highcharts-lang.min.js:1
+msgid "Jun"
+msgstr ""
+
+#: base/static/scripts/highcharts-lang.js:30
+#: base/static/scripts/highcharts-lang.min.js:1
+msgid "Jul"
+msgstr ""
+
+#: base/static/scripts/highcharts-lang.js:31
+#: base/static/scripts/highcharts-lang.min.js:1
+msgid "Aug"
+msgstr ""
+
+#: base/static/scripts/highcharts-lang.js:32
+#: base/static/scripts/highcharts-lang.min.js:1
+msgid "Sep"
+msgstr ""
+
+#: base/static/scripts/highcharts-lang.js:33
+#: base/static/scripts/highcharts-lang.min.js:1
+msgid "Oct"
+msgstr ""
+
+#: base/static/scripts/highcharts-lang.js:34
+#: base/static/scripts/highcharts-lang.min.js:1
+msgid "Nov"
+msgstr ""
+
+#: base/static/scripts/highcharts-lang.js:35
+#: base/static/scripts/highcharts-lang.min.js:1
+msgid "Dec"
+msgstr ""
+
+#: base/static/scripts/highcharts-lang.js:38
+#: base/static/scripts/highcharts-lang.min.js:1
+msgid "Sunday"
+msgstr ""
+
+#: base/static/scripts/highcharts-lang.js:39
+#: base/static/scripts/highcharts-lang.min.js:1
+msgid "Monday"
+msgstr ""
+
+#: base/static/scripts/highcharts-lang.js:40
+#: base/static/scripts/highcharts-lang.min.js:1
+msgid "Tuesday"
+msgstr ""
+
+#: base/static/scripts/highcharts-lang.js:41
+#: base/static/scripts/highcharts-lang.min.js:1
+msgid "Wednesday"
+msgstr ""
+
+#: base/static/scripts/highcharts-lang.js:42
+#: base/static/scripts/highcharts-lang.min.js:1
+msgid "Thursday"
+msgstr ""
+
+#: base/static/scripts/highcharts-lang.js:43
+#: base/static/scripts/highcharts-lang.min.js:1
+msgid "Friday"
+msgstr ""
+
+#: base/static/scripts/highcharts-lang.js:44
+#: base/static/scripts/highcharts-lang.min.js:1
+msgid "Saturday"
+msgstr ""
+
+#: base/static/scripts/highcharts-lang.js:48
+#: base/static/scripts/highcharts-lang.min.js:1
+msgid "Reset zoom"
+msgstr ""
+
+#: base/static/scripts/highcharts-lang.js:49
+#: base/static/scripts/highcharts-lang.min.js:1
+msgid "Reset zoom level 1:1"
+msgstr ""
+
+#: base/static/scripts/highcharts-lang.js:50
+#: base/static/scripts/highcharts-lang.min.js:1
+msgid ","
+msgstr ""
+
+#: base/static/scripts/highcharts-lang.js:51
+#: base/static/scripts/highcharts-lang.min.js:1
+msgid "Print chart"
+msgstr ""
+
+#: base/static/scripts/highcharts-lang.js:52
+#: base/static/scripts/highcharts-lang.min.js:1
+msgid "Download PNG image"
+msgstr ""
+
+#: base/static/scripts/highcharts-lang.js:53
+#: base/static/scripts/highcharts-lang.min.js:1
+msgid "Download JPEG image"
+msgstr ""
+
+#: base/static/scripts/highcharts-lang.js:54
+#: base/static/scripts/highcharts-lang.min.js:1
+msgid "Download PDF document"
+msgstr ""
+
+#: base/static/scripts/highcharts-lang.js:55
+#: base/static/scripts/highcharts-lang.min.js:1
+msgid "Download SVG vector image"
+msgstr ""
+
+#: base/static/scripts/highcharts-lang.js:56
+#: base/static/scripts/highcharts-lang.min.js:1
+msgid "Chart context menu"
+msgstr ""

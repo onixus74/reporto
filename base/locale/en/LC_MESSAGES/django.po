@@ -1,0 +1,335 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# nader <nader.toukabri@gmail.com>, 2014.
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-07-07 11:41+0100\n"
+"PO-Revision-Date: 2014-01-20 11:31+0009\n"
+"Last-Translator: Administrator  <admin@reform.tn>\n"
+"Language-Team: reform.tn\n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
+"X-Generator: Virtaal 0.7.0\n"
+"X-Translated-Using: django-rosetta 0.7.3\n"
+
+#: models.py:15 models.py:16
+msgid "media"
+msgstr ""
+
+#: models.py:21
+msgid "Image"
+msgstr ""
+
+#: models.py:22
+msgid "Video"
+msgstr ""
+
+#: models.py:26
+msgid "URL"
+msgstr ""
+
+#: models.py:27
+msgid "file"
+msgstr ""
+
+#: templates/home.html:5 templates/home.html.py:11
+#: templates/layouts/default.html:125
+msgid "Reports Dashboard"
+msgstr ""
+
+#: templates/home.html:17 templates/login-minimal.html:12
+#: templates/login.html:12 templates/layouts/default.html:11
+msgid "Reform Reporting Platform"
+msgstr ""
+
+#: templates/home.html:18 templates/login.html:13
+msgid ""
+"a tool to monitor security sector status by tracking violations involving "
+"police officers"
+msgstr ""
+
+#: templates/home.html:20 templates/login.html:15
+msgid "reports"
+msgstr ""
+
+#: templates/home.html:22 templates/login.html:17
+msgid "violations"
+msgstr ""
+
+#: templates/home.html:23 templates/login.html:18
+msgid "appreciations"
+msgstr ""
+
+#: templates/home.html:112
+msgid "Latest Violation"
+msgstr ""
+
+#: templates/home.html:113
+msgid "Victim"
+msgstr ""
+
+#: templates/home.html:114
+msgid "has been a victim of"
+msgstr ""
+
+#: templates/home.html:116 templates/home.html.py:185
+msgid "happened in"
+msgstr ""
+
+#: templates/home.html:118 templates/home.html.py:187 templates/login.html:108
+msgid "on"
+msgstr ""
+
+#: templates/home.html:121 templates/login.html:110
+msgid "Verified"
+msgstr ""
+
+#: templates/home.html:123 templates/home.html.py:189
+msgid "Click to view report"
+msgstr ""
+
+#: templates/home.html:131
+msgid "There is no reported violations!"
+msgstr ""
+
+#: templates/home.html:134 templates/login.html:144
+#: templates/layouts/default.html:132
+msgid "Report a Violation"
+msgstr ""
+
+#: templates/home.html:143 templates/login.html:104
+#: templates/login.html.py:155
+msgid "Latest Reports"
+msgstr ""
+
+#: templates/home.html:171
+msgid "See All"
+msgstr ""
+
+#: templates/home.html:183
+msgid "Latest Appreciation"
+msgstr ""
+
+#: templates/home.html:184 templates/login.html:159
+msgid "for"
+msgstr ""
+
+#: templates/home.html:199
+msgid "There is no reported appreciations!"
+msgstr ""
+
+#: templates/home.html:203 templates/login.html:192
+#: templates/layouts/default.html:139
+msgid "Appreciate Police Work"
+msgstr ""
+
+#: templates/home.html:238 templates/login.html:100
+#: templates/layouts/default.html:144
+msgid "Violations"
+msgstr ""
+
+#: templates/home.html:246 templates/home.html.py:279
+msgid "Type to search..."
+msgstr ""
+
+#: templates/home.html:271 templates/login.html:151
+#: templates/layouts/default.html:146
+msgid "Appreciations"
+msgstr ""
+
+#: templates/home.html:377
+msgid "Violation Report"
+msgstr ""
+
+#: templates/home.html:383 templates/home.html.py:401
+msgid "Full report"
+msgstr ""
+
+#: templates/home.html:395
+msgid "Appreciation Report"
+msgstr ""
+
+#: templates/login-minimal.html:6 templates/login-minimal.html.py:49
+#: templates/login.html:6 templates/login.html.py:69
+#: templates/layouts/default.html:186
+msgid "Sign in"
+msgstr ""
+
+#: templates/login-minimal.html:33 templates/login.html:53
+msgid "Email"
+msgstr ""
+
+#: templates/login-minimal.html:41 templates/login.html:61
+msgid "Password"
+msgstr ""
+
+#: templates/login-minimal.html:51 templates/login.html:71
+msgid "Reset your password"
+msgstr ""
+
+#: templates/login-minimal.html:61 templates/login.html:81
+msgid "Sign in using Facebook"
+msgstr ""
+
+#: templates/login-minimal.html:64 templates/login.html:84
+msgid "Sign in using Google"
+msgstr ""
+
+#: templates/login-minimal.html:70 templates/login.html:90
+msgid "Sign up using your email address"
+msgstr ""
+
+#: templates/login.html:42
+msgid "contribute by reporting incidents, start by signing in"
+msgstr ""
+
+#: templates/login.html:108 templates/login.html.py:159
+msgid "at"
+msgstr ""
+
+#: templates/login.html:114 templates/login.html.py:127
+#: templates/login.html:140 templates/login.html.py:162
+#: templates/login.html:175 templates/login.html.py:188
+msgid "There is no reports!"
+msgstr ""
+
+#: templates/login.html:119 templates/login.html.py:167
+msgid "Top Reporters"
+msgstr ""
+
+#: templates/login.html:132 templates/login.html.py:180
+msgid "Top Reporting Circles"
+msgstr ""
+
+#: templates/signup.html:10 templates/signup.html.py:20
+msgid "Sign up"
+msgstr ""
+
+#: templates/layouts/default.html:114
+msgid "Toggle navigation"
+msgstr ""
+
+#: templates/layouts/default.html:117 templates/layouts/default.html.py:262
+#: templates/layouts/default.html:263 templates/layouts/default.html.py:265
+msgid "Tunisian Institutional Reform"
+msgstr ""
+
+#: templates/layouts/default.html:142
+msgid "Home Page"
+msgstr ""
+
+#: templates/layouts/default.html:156
+msgid "Administration"
+msgstr ""
+
+#: templates/layouts/default.html:158
+msgid "Users"
+msgstr ""
+
+#: templates/layouts/default.html:159
+msgid "Groups"
+msgstr ""
+
+#: templates/layouts/default.html:160
+msgid "Violation Categories"
+msgstr ""
+
+#: templates/layouts/default.html:161
+msgid "Violation Features"
+msgstr ""
+
+#: templates/layouts/default.html:162
+msgid "Violation Victims"
+msgstr ""
+
+#: templates/layouts/default.html:163
+msgid "Appreciation Categories"
+msgstr ""
+
+#: templates/layouts/default.html:165
+msgid "Site Administration"
+msgstr ""
+
+#: templates/layouts/default.html:180
+msgid "Nobody!"
+msgstr ""
+
+#: templates/layouts/default.html:191
+msgid "Profile"
+msgstr ""
+
+#: templates/layouts/default.html:193
+msgid "Sign out"
+msgstr ""
+
+#: templates/layouts/default.html:262
+msgid "Developed by"
+msgstr ""
+
+#: templates/layouts/default.html:266
+msgid "REFORM Association"
+msgstr ""
+
+#: templates/layouts/default.html:268
+msgid "Sponsored by"
+msgstr ""
+
+#: templates/layouts/default.html:268 templates/layouts/default.html.py:269
+msgid "MEPI"
+msgstr ""
+
+#: templates/layouts/default.html:273
+msgid "report a bug, suggest a feature, ..."
+msgstr ""
+
+#: templates/layouts/default.html:273
+msgid "Feedback"
+msgstr ""
+
+#: templates/partials/home-pagination.html:4
+#: templates/partials/home-pagination.html:8
+#: templates/partials/pagination.html:4 templates/partials/pagination.html:8
+msgctxt "css"
+msgid "left"
+msgstr ""
+
+#: templates/partials/home-pagination.html:4
+#: templates/partials/pagination.html:4
+msgid "First"
+msgstr ""
+
+#: templates/partials/home-pagination.html:8
+#: templates/partials/pagination.html:8
+msgid "Previous"
+msgstr ""
+
+#: templates/partials/home-pagination.html:14
+#: templates/partials/pagination.html:14
+msgid "Next"
+msgstr ""
+
+#: templates/partials/home-pagination.html:14
+#: templates/partials/home-pagination.html:18
+#: templates/partials/pagination.html:14 templates/partials/pagination.html:18
+msgctxt "css"
+msgid "right"
+msgstr ""
+
+#: templates/partials/home-pagination.html:18
+#: templates/partials/pagination.html:18
+msgid "Last"
+msgstr ""
+
+#: utils/urls.py:20
+msgid "Sorry, you need to sign in in order to proceed."
+msgstr ""
+
+#~ msgid "Summary Dashboard"
+#~ msgstr "Reports Dashboard"

@@ -1,9 +1,0 @@
-{
-  "name": "L.GeoSearch",
-  "version": "0.0.0",
-  "commit": "09ca67ccc3ecb6cf0532b2942863ce1d28717945",
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/smeijer/L.GeoSearch.git"
-  }
-}

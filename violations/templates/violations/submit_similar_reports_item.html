@@ -1,0 +1,25 @@
+{% load i18n l10n %}
+          <a href="{% url 'violations:view' report.id %}" target="_blank" class="list-group-item ui-similar-report-candidate{% if report.similarity %} ui-similar ui-similar-{{report.similarity}} {% for similarity in report.similarities %} ui-similar-{{similarity}}{% endfor %}{% endif %}">
+            <p class="list-group-item-text -multi-labels-lines-fix">
+
+              <span class="text-info ui-similar-report-victim"><i class="fa fa-user"></i> {{report.victim}}</span>
+              {% trans 'has been a victim of' %}
+              <span class="text-info ui-similar-report-category">{{report.category}}</span>
+              {% trans 'happened in' %}
+              <span class="text-info ui-similar-report-location"><i class="fa fa-map-marker"></i> {{report.location_text}}
+              </span>
+              {% trans 'on' %}
+              <span class="text-info ui-similar-report-datetime">
+                <i class="fa fa-calendar"></i>
+                {{report.datetime}}
+              </span>
+              {% if report.is_verified %}
+              <span class="text-success" title="{% trans 'Verified' %}"><i class="fa fa-check-square"></i></span>
+              {% endif %}
+              {% comment %}
+              {% if report.is_closed %}
+              <span class="text-danger" title="{% trans 'Closed' %}"><i class="fa fa-lock"></i></span>
+              {% endif %}
+              {% endcomment %}
+            </p>
+          </a>

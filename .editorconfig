@@ -7,7 +7,7 @@ root = true
 [*]
 
 # Change these settings to your own preference
-indent_style = tab
+indent_style = space
 indent_size = 2
 
 # We recommend you to keep these unchanged
@@ -19,3 +19,19 @@ insert_final_newline = true
 
 [*.md]
 trim_trailing_whitespace = false
+
+[*.py]
+indent_style = space
+indent_size = 2
+
+[*.js]
+indent_style = space
+indent_size = 2
+
+[*.html]
+indent_style = space
+indent_size = 2
+
+[*.s?css]
+indent_style = space
+indent_size = 2

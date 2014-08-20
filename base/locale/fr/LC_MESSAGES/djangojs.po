@@ -1,0 +1,313 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-07-07 11:41+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: static/dashboard/scripts/charts.js:24
+#: static/dashboard/scripts/charts.min.js:1
+msgid "Violations"
+msgstr ""
+
+#: static/dashboard/scripts/charts.js:38
+#: static/dashboard/scripts/charts.min.js:1
+msgid "Appreciations"
+msgstr ""
+
+#: static/dashboard/scripts/charts.js:59
+#: static/dashboard/scripts/charts.min.js:1
+msgid "Violations/Appreciations by date"
+msgstr ""
+
+#: static/dashboard/scripts/charts.js:62
+#: static/dashboard/scripts/charts.min.js:1
+msgid "Click and drag in the plot area to zoom in"
+msgstr ""
+
+#: static/dashboard/scripts/charts.js:62
+msgid "Pinch the chart to zoom in"
+msgstr ""
+
+#: static/dashboard/scripts/charts.js:76
+#: static/dashboard/scripts/charts.min.js:1
+msgid "Number of Violations/Appreciations"
+msgstr ""
+
+#: static/dashboard/scripts/charts.js:87
+#: static/dashboard/scripts/charts.min.js:1
+msgid "reports on"
+msgstr ""
+
+#: static/dashboard/scripts/charts.js:122
+#: static/dashboard/scripts/charts.min.js:1
+msgid "All Features"
+msgstr ""
+
+#: static/dashboard/scripts/charts.js:131
+#: static/dashboard/scripts/charts.min.js:1
+msgid "Violations by Features"
+msgstr ""
+
+#: static/dashboard/scripts/charts.js:146
+#: static/dashboard/scripts/charts.js:171
+#: static/dashboard/scripts/charts.min.js:1
+msgid "Number of Violations"
+msgstr ""
+
+#: static/dashboard/scripts/charts.js:160
+#: static/dashboard/scripts/charts.min.js:1
+msgid " violations"
+msgstr ""
+
+#: static/dashboard/scripts/charts.js:198
+#: static/dashboard/scripts/charts.min.js:1
+msgid "Violation by Category"
+msgstr ""
+
+#: static/dashboard/scripts/charts.js:222
+#: static/dashboard/scripts/charts.min.js:1
+msgid "Victim's category share"
+msgstr ""
+
+#: static/dashboard/scripts/charts.js:248
+#: static/dashboard/scripts/charts.min.js:1
+msgid "Violation by Victim's Gender"
+msgstr ""
+
+#: static/dashboard/scripts/charts.js:272
+#: static/dashboard/scripts/charts.min.js:1
+msgid "Victim's gender share"
+msgstr ""
+
+#: static/dashboard/scripts/charts.js:297
+#: static/dashboard/scripts/charts.min.js:1
+msgid "Violations by Victim's Education"
+msgstr ""
+
+#: static/dashboard/scripts/charts.js:321
+#: static/dashboard/scripts/charts.min.js:1
+msgid "Victim's education share"
+msgstr ""
+
+#: static/dashboard/scripts/charts.js:347
+#: static/dashboard/scripts/charts.min.js:1
+msgid "Appreciations by Category"
+msgstr ""
+
+#: static/dashboard/scripts/charts.js:371
+#: static/dashboard/scripts/charts.min.js:1
+msgid "Appreciation's category share"
+msgstr ""
+
+#: static/scripts/highcharts-lang.js:8 static/scripts/highcharts-lang.min.js:1
+msgid "Loading..."
+msgstr ""
+
+#: static/scripts/highcharts-lang.js:10
+#: static/scripts/highcharts-lang.min.js:1
+msgid "January"
+msgstr ""
+
+#: static/scripts/highcharts-lang.js:11
+#: static/scripts/highcharts-lang.min.js:1
+msgid "February"
+msgstr ""
+
+#: static/scripts/highcharts-lang.js:12
+#: static/scripts/highcharts-lang.min.js:1
+msgid "March"
+msgstr ""
+
+#: static/scripts/highcharts-lang.js:13
+#: static/scripts/highcharts-lang.min.js:1
+msgid "April"
+msgstr ""
+
+#: static/scripts/highcharts-lang.js:14 static/scripts/highcharts-lang.js:28
+#: static/scripts/highcharts-lang.min.js:1
+msgid "May"
+msgstr ""
+
+#: static/scripts/highcharts-lang.js:15
+#: static/scripts/highcharts-lang.min.js:1
+msgid "June"
+msgstr ""
+
+#: static/scripts/highcharts-lang.js:16
+#: static/scripts/highcharts-lang.min.js:1
+msgid "July"
+msgstr ""
+
+#: static/scripts/highcharts-lang.js:17
+#: static/scripts/highcharts-lang.min.js:1
+msgid "August"
+msgstr ""
+
+#: static/scripts/highcharts-lang.js:18
+#: static/scripts/highcharts-lang.min.js:1
+msgid "September"
+msgstr ""
+
+#: static/scripts/highcharts-lang.js:19
+#: static/scripts/highcharts-lang.min.js:1
+msgid "October"
+msgstr ""
+
+#: static/scripts/highcharts-lang.js:20
+#: static/scripts/highcharts-lang.min.js:1
+msgid "November"
+msgstr ""
+
+#: static/scripts/highcharts-lang.js:21
+#: static/scripts/highcharts-lang.min.js:1
+msgid "December"
+msgstr ""
+
+#: static/scripts/highcharts-lang.js:24
+#: static/scripts/highcharts-lang.min.js:1
+msgid "Jan"
+msgstr ""
+
+#: static/scripts/highcharts-lang.js:25
+#: static/scripts/highcharts-lang.min.js:1
+msgid "Feb"
+msgstr ""
+
+#: static/scripts/highcharts-lang.js:26
+#: static/scripts/highcharts-lang.min.js:1
+msgid "Mar"
+msgstr ""
+
+#: static/scripts/highcharts-lang.js:27
+#: static/scripts/highcharts-lang.min.js:1
+msgid "Apr"
+msgstr ""
+
+#: static/scripts/highcharts-lang.js:29
+#: static/scripts/highcharts-lang.min.js:1
+msgid "Jun"
+msgstr ""
+
+#: static/scripts/highcharts-lang.js:30
+#: static/scripts/highcharts-lang.min.js:1
+msgid "Jul"
+msgstr ""
+
+#: static/scripts/highcharts-lang.js:31
+#: static/scripts/highcharts-lang.min.js:1
+msgid "Aug"
+msgstr ""
+
+#: static/scripts/highcharts-lang.js:32
+#: static/scripts/highcharts-lang.min.js:1
+msgid "Sep"
+msgstr ""
+
+#: static/scripts/highcharts-lang.js:33
+#: static/scripts/highcharts-lang.min.js:1
+msgid "Oct"
+msgstr ""
+
+#: static/scripts/highcharts-lang.js:34
+#: static/scripts/highcharts-lang.min.js:1
+msgid "Nov"
+msgstr ""
+
+#: static/scripts/highcharts-lang.js:35
+#: static/scripts/highcharts-lang.min.js:1
+msgid "Dec"
+msgstr ""
+
+#: static/scripts/highcharts-lang.js:38
+#: static/scripts/highcharts-lang.min.js:1
+msgid "Sunday"
+msgstr ""
+
+#: static/scripts/highcharts-lang.js:39
+#: static/scripts/highcharts-lang.min.js:1
+msgid "Monday"
+msgstr ""
+
+#: static/scripts/highcharts-lang.js:40
+#: static/scripts/highcharts-lang.min.js:1
+msgid "Tuesday"
+msgstr ""
+
+#: static/scripts/highcharts-lang.js:41
+#: static/scripts/highcharts-lang.min.js:1
+msgid "Wednesday"
+msgstr ""
+
+#: static/scripts/highcharts-lang.js:42
+#: static/scripts/highcharts-lang.min.js:1
+msgid "Thursday"
+msgstr ""
+
+#: static/scripts/highcharts-lang.js:43
+#: static/scripts/highcharts-lang.min.js:1
+msgid "Friday"
+msgstr ""
+
+#: static/scripts/highcharts-lang.js:44
+#: static/scripts/highcharts-lang.min.js:1
+msgid "Saturday"
+msgstr ""
+
+#: static/scripts/highcharts-lang.js:48
+#: static/scripts/highcharts-lang.min.js:1
+msgid "Reset zoom"
+msgstr ""
+
+#: static/scripts/highcharts-lang.js:49
+#: static/scripts/highcharts-lang.min.js:1
+msgid "Reset zoom level 1:1"
+msgstr ""
+
+#: static/scripts/highcharts-lang.js:50
+#: static/scripts/highcharts-lang.min.js:1
+msgid ","
+msgstr ""
+
+#: static/scripts/highcharts-lang.js:51
+#: static/scripts/highcharts-lang.min.js:1
+msgid "Print chart"
+msgstr ""
+
+#: static/scripts/highcharts-lang.js:52
+#: static/scripts/highcharts-lang.min.js:1
+msgid "Download PNG image"
+msgstr ""
+
+#: static/scripts/highcharts-lang.js:53
+#: static/scripts/highcharts-lang.min.js:1
+msgid "Download JPEG image"
+msgstr ""
+
+#: static/scripts/highcharts-lang.js:54
+#: static/scripts/highcharts-lang.min.js:1
+msgid "Download PDF document"
+msgstr ""
+
+#: static/scripts/highcharts-lang.js:55
+#: static/scripts/highcharts-lang.min.js:1
+msgid "Download SVG vector image"
+msgstr ""
+
+#: static/scripts/highcharts-lang.js:56
+#: static/scripts/highcharts-lang.min.js:1
+msgid "Chart context menu"
+msgstr ""

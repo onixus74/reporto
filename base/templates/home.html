@@ -1,21 +1,490 @@
 {% extends "layouts/default.html" %}
 
-{% block view_title %}Home | {% endblock %}
+{% load static custom compress i18n widget_tweaks %}
+
+{% block view_title %}{% trans 'Reports Dashboard' %} | {% endblock %}
 
 {% block view_content %}
-<div class="container">
-	<div class="well">
-		<ul>
-			<li><a href="/admin">Administration</a></li>
-			<li><a href="/reports/dashboard">Reports Dashboard</a></li>
-			<li><a href="/reports/submit">Reports Submission</a></li>
-			<li><a href="/reports">Reports Dashboard (experimental SPA)</a></li>
-			<li><a href="/reports/manage">Reports</a></li>
-			<li><a href="/categories">Categories</a></li>
-			<li><a href="/features">Features</a></li>
-			<li><a href="/victims">Victims</a></li>
-			<li>...</li>
-		</ul>
-	</div>
-</div>
+
+    {% if user.is_authenticated %}
+    <div class="page-header">
+      <h1 class="text-center">{% trans 'Reports Dashboard' %}</h1>
+    </div>
+    {% else %}
+    <div class="text-center">
+
+      <div class="jumbotron">
+        <h1>{% trans 'Reform Reporting Platform' %}</h1>
+        <p class="lead">{% trans 'a tool to monitor security sector status by tracking violations involving police officers' %}</p>
+        <p class="lead">
+          <h2><span class="text-muted animatable animated">{{violations_count|add:appreciations_count}}</span> {% trans 'reports' %}</h2>
+          <h3>
+            <div style="display: inline-block; margin: 0 10px;"><span class="text-danger animatable animated">{{violations_count}}</span> {% trans 'violations' %}</div>
+            <div style="display: inline-block; margin: 0 10px;"><span class="text-success animatable animated">{{appreciations_count}}</span> {% trans 'appreciations' %}</div>
+          </h3>
+        </p>
+      </div>
+
+      {% comment %}
+      {% if form.errors %}
+      <div class="alert alert-danger">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        Your username and password didn't match. Please try again.</p>
+      </div>
+      {% endif %}
+      {% endcomment %}
+
+      {% if form.errors %}
+      <div class="alert alert-danger">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        {% for field, errors in form.errors.items %}
+          <div class="field-{{field}}">{% for error in errors %} {{error}}{% endfor %}</div>
+        {% endfor %}
+      </div>
+      {% endif %}
+
+      {% comment %}
+      <p class="lead">{% trans 'contribute by reporting incidents, start by signing in' %}</p>
+
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+
+          <form class="-form-inline" method="post" role="form">
+            {% csrf_token %}
+
+            <div class="form-group">
+              <div class="input-group input-group-lg">
+                <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                {% trans 'Email' as email %}
+                {% render_field form.username type="email" placeholder=email required="required" -autofocus="autofocus" class="form-control" %}
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="input-group input-group-lg">
+                <span class="input-group-addon"><i class="fa fa-key"></i></span>
+                {% trans 'Password' as password %}
+                {% render_field form.password placeholder=password required="required" class="form-control" %}
+              </div>
+            </div>
+
+            <input type="hidden" name="next" value="{{ next }}" />
+
+            <button class="btn btn-default btn-lg btn-block" -name="commit" type="submit">
+              {% trans 'Sign in' %} <i class="fa fa-sign-in"></i>
+            </button>
+            <a href="{% url 'password_reset' %}" class="btn btn-link">{% trans 'Reset your password' %}</a>
+
+          </form>
+
+        </div>
+
+      </div>
+
+      <div class="row" style="margin-top: 20px">
+        <div class="col-md-4 col-md-offset-2">
+          <a href="{% url 'socialauth_begin' 'facebook' %}?next={{next}}" class="btn btn-signin-facebook btn-block"><i class="fa fa-facebook-square"></i> {% trans 'Sign in using Facebook' %}</a>
+        </div>
+        <div class="col-md-4">
+          <a href="{% url 'socialauth_begin' 'google' %}?next={{next}}" class="btn btn-signin-google btn-block"><i class="fa fa-google-plus-square"></i> {% trans 'Sign in using Google' %}</a>
+        </div>
+      </div>
+
+      <div class="row" style="margin-top: 20px">
+        <div class="col-md-8 col-md-offset-2">
+          <p class="lead text-center"><a href="{% url 'signup' %}?next={{next}}">{% trans 'Sign up using your email address' %}</a></p>
+        </div>
+      </div>
+      {% endcomment %}
+
+    </div>
+    {% endif %}
+
+    <div class="row text-center">
+      <div class="col-md-6" style="margin-top: 20px;">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <div>
+              {% if violations_list %}
+              {% with report=violations_list.0 %}
+              <h2 style="margin-top: 0;">{% trans 'Latest Violation' %}</h2>
+              <span class="text-info" data-toggle="tooltip" title="{% trans 'Victim' %}"><i class="fa fa-user"></i> {{report.victim}}</span>
+              {% trans 'has been a victim of' %}
+              <span class="text-info">{{report.category}}</span>
+              {% trans 'happened in' %}
+              <span class="text-info"><i class="fa fa-map-marker"></i> {{report.location_text}}</span>
+              {% trans 'on' %}
+              <span class="text-info"><i class="fa fa-calendar"></i> {{report.datetime}}</span>
+              {% if report.is_verified %}
+              <span class="text-success" title="{% trans 'Verified' %}"><i class="fa fa-check-square"></i></span>
+              {% endif %}
+              <a class="btn btn-link" href="{% url 'violations:view' report.id %}" -target="_blank" title="{% trans 'Click to view report' %}" -data-toggle="modal" -data-target="#ui-report-view-modal">
+                <span class="fa-stack fa-lg">
+                  <i class="fa fa-circle fa-stack-2x"></i>
+                  <i class="fa fa-external-link-square fa-stack-1x fa-inverse"></i>
+                </span>
+              </a>
+              {% endwith %}
+              {% else %}
+              <h2>{% trans 'There is no reported violations!' %}</h2>
+              {% endif %}
+            </div>
+            <a class="btn btn-danger btn-lg" href="{% url 'violations:submit' %}" style="white-space: normal; margin: 10px"><i class="fa fa-plus"></i> {% trans 'Report a Violation' %}</a>
+          </div>
+        </div>
+      </div>
+      <!--
+      <div class="col-md-4" style="margin-top: 20px;">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <div>
+              <h2 style="margin-top: 0;">{% trans 'Latest Reports' %}</h2>
+              ...
+              {% comment %}
+              {% if appreciations_list %}
+
+              {% with report=appreciations_list.0 %}
+              <h2 style="margin-top: 0;">{% trans 'Latest Appreciation' %}</h2>
+              <span class="text-info">{{report.category}}</span> {% trans 'for' %} <span class="text-info">{{report.subject}}</span>
+              {% trans 'happened in' %}
+              <span class="text-info"><i class="fa fa-map-marker"></i> {{report.location_text}}</span>
+              {% trans 'on' %}
+              <span class="text-info"><i class="fa fa-calendar"></i> {{report.datetime}}</span>
+              <a class="btn btn-link" href="{% url 'appreciations:view' report.id %}" -target="_blank" title="{% trans 'Click to view report' %}" -data-toggle="modal" -data-target="#ui-report-view-modal">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-external-link-square fa-stack-1x fa-inverse"></i>
+              </span>
+              </a>
+              {% endwith %}
+
+              {% else %}
+              <div style="margin: 0;">
+                <h2>{% trans 'There is no reports!' %}</h2>
+              </div>
+              {% endif %}
+              {% endcomment %}
+            </div>
+            <a class="btn btn-default btn-lg" href="{% url 'zinnia_entry_archive_index' %}" style="white-space: normal; margin: 10px;"><i class="fa fa-plus"></i> {% trans 'See All' %}</a>
+          </div>
+        </div>
+      </div>
+      -->
+      <div class="col-md-6" style="margin-top: 20px;">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <div>
+              {% if appreciations_list %}
+
+              {% with report=appreciations_list.0 %}
+              <h2 style="margin-top: 0;">{% trans 'Latest Appreciation' %}</h2>
+              <span class="text-info">{{report.category}}</span> {% trans 'for' %} <span class="text-info">{{report.subject}}</span>
+              {% trans 'happened in' %}
+              <span class="text-info"><i class="fa fa-map-marker"></i> {{report.location_text}}</span>
+              {% trans 'on' %}
+              <span class="text-info"><i class="fa fa-calendar"></i> {{report.datetime}}</span>
+              <a class="btn btn-link" href="{% url 'appreciations:view' report.id %}" -target="_blank" title="{% trans 'Click to view report' %}" -data-toggle="modal" -data-target="#ui-report-view-modal">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-external-link-square fa-stack-1x fa-inverse"></i>
+              </span>
+              </a>
+              {% endwith %}
+
+              {% else %}
+              <div style="margin: 0;">
+                <h2>{% trans 'There is no reported appreciations!' %}</h2>
+              </div>
+              {% endif %}
+            </div>
+            <a class="btn btn-success btn-lg" href="{% url 'appreciations:submit' %}" style="white-space: normal; margin: 10px;"><i class="fa fa-plus"></i> {% trans 'Appreciate Police Work' %}</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    {% if violations_list or appreciations_list %}
+    <div class="-well">
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <div id="ui-stats-reports-by-date-chart" class="ltr" style="height: 300px;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-offset-2 col-md-8">
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <div id="ui-timeline-map" class="ui-timeline-map ltr" style="width:100%; height: 400px"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h2 class="panel-title">{% trans 'Violations' %}</h2>
+            </div>
+            <div class="panel-body">
+              <div id="ui-violations-timeline-list" class="ui-timeline-list clearfix">
+
+                <div class="ui-search">
+                  <form action="{% url 'search:search' %}">
+                    <div class="input-group">
+                      <input name="q" value="{{request.GET.q}}" class="ui-search-input form-control" placeholder="{% trans 'Type to search...' %}">
+                      <span class="input-group-btn">
+                        <button class="ui-search btn btn-default" type="submit"><i class="fa fa-search"></i></button>
+                        <button class="ui-search-clear btn btn-default" type="button"><i class="fa fa-times"></i></button>
+                      </span>
+                    </div>
+                  </form>
+                </div>
+
+                <div class="ui-pagination text-center">
+                  {% include "partials/home-pagination.html" with pagination=violations_pagination page_param_prefix="violations-" %}
+                </div>
+
+                <ul class="ui-list list-group">
+                  {% include "violations/dashboard_violations_list.html" with report_list=violations_list %}
+                </ul>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h2 class="panel-title">{% trans 'Appreciations' %}</h2>
+            </div>
+            <div class="panel-body">
+              <div id="ui-appreciations-timeline-list" class="ui-timeline-list clearfix">
+
+                <div class="ui-search">
+                  <form action="{% url 'search:search' %}">
+                    <div class="input-group">
+                      <input name="q" value="{{request.GET.q}}" class="ui-search-input form-control" placeholder="{% trans 'Type to search...' %}">
+                      <span class="input-group-btn">
+                        <button class="ui-search btn btn-default" type="submit"><i class="fa fa-search"></i></button>
+                        <button class="ui-search-clear btn btn-default" type="button"><i class="fa fa-times"></i></button>
+                      </span>
+                    </div>
+                  </form>
+                </div>
+
+                <div class="ui-pagination text-center">
+                  {% include "partials/home-pagination.html" with pagination=appreciations_pagination page_param_prefix="appreciations-" %}
+                </div>
+
+                <ul id="ui-appreciations-list" class="ui-list list-group">
+                  {% include "appreciations/dashboard_appreciations_list.html" with report_list=appreciations_list %}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      {% if violations_list or appreciations_list %}
+      <div class="row">
+        <div class="col-md-6">
+          {% if violations_list %}
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <div id="ui-stats-violations-by-features-chart" class="ltr"></div>
+            </div>
+          </div>
+          {% endif %}
+        </div>
+        <div class="col-md-6">
+          {% if appreciations_list %}
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <div id="ui-stats-appreciations-by-category-chart" class="ltr"></div>
+            </div>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+      {% endif %}
+
+      {% if violations_list %}
+
+      <div class="row">
+        <div class="col-md-4">
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <div id="ui-stats-violations-by-category-chart" class="ltr"></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <div id="ui-stats-violations-by-victim-gender-chart" class="ltr"></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <div id="ui-stats-violations-by-victim-education-chart" class="ltr"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-4">
+          <div id="ui-stats-categories-list"></div>
+        </div>
+        <div class="col-md-4">
+          <div id="ui-stats-features-list"></div>
+        </div>
+        <div class="col-md-4">
+          <div id="ui-stats-victim-gender-list"></div>
+        </div>
+      </div>
+
+      {% endif %}
+
+    </div>
+    {% endif %}
+
+{% endblock %}
+
+{% block view_addons %}
+<!-- Violations Modal -->
+<div id="ui-violation-view-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ui-violation-view-modal-label" aria-hidden="true">
+  <div class="modal-dialog" style="width: 90%;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="ui-violation-view-modal-label">{% trans 'Violation Report' %}</h4>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <a class="ui-more btn btn-default" href=""><i class="fa fa-ellipsis-h"></i> {% trans 'Full report' %}</a>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<!-- Appreciation Modal -->
+<div id="ui-appreciation-view-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ui-appreciation-view-modal-label" aria-hidden="true">
+  <div class="modal-dialog" style="width: 90%;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="ui-appreciation-view-modal-label">{% trans 'Appreciation Report' %}</h4>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <a class="ui-more btn btn-default" href=""><i class="fa fa-ellipsis-h"></i> {% trans 'Full report' %}</a>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+{% endblock %}
+
+{% block view_styles %}
+  {% if violations_list or appreciations_list %}
+  {% compress css %}
+  <link rel="stylesheet" href="{% static 'components/leaflet/dist/leaflet.css'%}" />
+  <link rel="stylesheet" href="{% static 'components/leaflet.markerclusterer/dist/MarkerCluster.Default.css'%}" />
+  <link rel="stylesheet" href="{% static 'components/Leaflet.awesome-markers/dist/leaflet.awesome-markers.css'%}" />
+  <link rel="stylesheet" href="{% static 'components/fancybox/source/jquery.fancybox.css' %}" type="text/css" />
+  <link rel="stylesheet" href="{% static 'dashboard/styles/dashboard.css'%}" />
+  {% endcompress %}
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="{% static 'components/leaflet/dist/leaflet.ie.css'%}" />
+  <![endif]-->
+  {% else %}
+  {% compress css %}
+  <link rel="stylesheet" href="{% static 'dashboard/styles/dashboard.css'%}" />
+  {% endcompress %}
+  {% endif %}
+{% endblock %}
+
+{% block view_scripts %}
+  {% if violations_list or appreciations_list %}
+  <script type="text/javascript">
+    reform.urls.violationView = {% url 'violations:view' 0 as url %}{{url|json}};
+    reform.urls.violationsDashboard = {% url 'violations:dashboard' as url %}{{url|json}};
+    reform.urls.violationsSearch = {% url 'violations:search' as url %}{{url|json}};
+
+    reform.urls.appreciationView = {% url 'appreciations:view' 0 as url %}{{url|json}};
+    reform.urls.appreciationsDashboard = {% url 'appreciations:dashboard' as url %}{{url|json}};
+    reform.urls.appreciationsSearch = {% url 'appreciations:search' as url %}{{url|json}};
+
+    reform.data.violationsCount = {{violations_count|json}};
+    reform.data.violationsCategories = {{violations_categories|json}};
+    reform.data.violationsFeatures = {{violations_features|json}};
+    reform.data.violationsByCategory = {{violations_by_category|json}};
+    reform.data.violationsByFeature = {{violations_by_feature|json}};
+    reform.data.violationsByVictimGender = {{violations_by_victim_gender|json}};
+    reform.data.violationsByVictimEducation = {{violations_by_victim_education|json}};
+    reform.data.violationsByDate = {{violations_by_date|json}};
+    reform.data.violationsByCategoryByDate = {{violations_by_category_by_date|json}};
+    reform.data.violationsLocations = {{violations_locations|json}};
+
+    reform.data.appreciationsCount = {{appreciations_count|json}};
+    reform.data.appreciationsByDate = {{appreciations_by_date|json}};
+    reform.data.appreciationsCategories = {{appreciations_categories|json}};
+    reform.data.appreciationsByCategory = {{appreciations_by_category|json}};
+    reform.data.appreciationsLocations = {{appreciations_locations|json}};
+
+    /*
+    reform.data.timeline = {
+      pages: {{violations_pagination.pages|json}},
+      current: {{violations_pagination.current|json}},
+      count: {{violations_pagination.count|json}},
+    };
+    */
+    reform.data.violationsPagination = {
+      pages: {{violations_pagination.pages|json}},
+      current: {{violations_pagination.current|json}},
+      count: {{violations_pagination.count|json}},
+    };
+    reform.data.appreciationsPagination = {
+      pages: {{appreciations_pagination.pages|json}},
+      current: {{appreciations_pagination.current|json}},
+      count: {{appreciations_pagination.count|json}},
+    };
+  </script>
+  <script type="text/javascript" src="{% url 'i18n_js' 'base' %}"></script>
+  {% compress js %}
+  <script src="{% static 'components/blockui/jquery.blockUI.js' %}"></script>
+  <script src="{% static 'components/leaflet/dist/leaflet.js' %}"></script>
+  <script type="text/javascript">L.Icon.Default.imagePath = "{% static 'components/leaflet/dist/images' %}";</script>
+  <script src="{% static 'components/leaflet.markerclusterer/dist/leaflet.markercluster-src.js' %}"></script>
+  <script src="{% static 'components/Leaflet.awesome-markers/dist/leaflet.awesome-markers.js' %}"></script>
+  <script src="{% static 'components/highcharts.com/js/highcharts.src.js' %}"></script>
+  <script src="{% static 'components/highcharts.com/js/modules/exporting.src.js' %}"></script>
+  <script src="{% static 'scripts/highcharts-theme.js' %}"></script>
+  <script src="{% static 'scripts/highcharts-lang.js' %}"></script>
+  {#%<script src="{% static 'components/django-filters-js/django-filters.js' %}"></script>%#}
+  <script src="{% static 'components/jquery.scrollTo/jquery.scrollTo.js' %}"></script>
+  <script src="{% static 'utils/pagination.js' %}"></script>
+  <script src="{% static 'dashboard/scripts/charts.js' %}"></script>
+  <script src="{% static 'dashboard/scripts/dashboard.js' %}"></script>
+  {% endcompress %}
+  {% endif %}
+
 {% endblock %}
